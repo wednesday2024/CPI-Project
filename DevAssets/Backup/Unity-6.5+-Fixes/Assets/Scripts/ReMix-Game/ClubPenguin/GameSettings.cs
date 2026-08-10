@@ -631,7 +631,7 @@ namespace ClubPenguin
 
         [Invokable("PartySwitcher.Parties", Description = "Force a specific party on.")]
         [PublicTweak]
-        public void AnnualParties_Switch([NamedToggleValue(typeof(AnnualEventKeyGenerator), 0u)] string partyKey)
+        public void AnnualParties_Switch([NamedToggleValue(typeof(AnnualEventKeyGenerator), 0u)] string Party)
         {
             var controllerType = Type.GetType("AnnualEventsController3000");
             if (controllerType != null)
@@ -643,7 +643,7 @@ namespace ClubPenguin
                     var endMethod = controllerType.GetMethod("ForceEndParty", BindingFlags.Public | BindingFlags.Instance);
                     endMethod?.Invoke(instance, null);
                     var method = controllerType.GetMethod("ForcePartyKey", BindingFlags.Public | BindingFlags.Instance);
-                    method?.Invoke(instance, new object[] { partyKey });
+                    method?.Invoke(instance, new object[] { Party });
                     PlayerPrefs.Save();
                 }
                 else
