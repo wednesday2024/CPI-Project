@@ -186,13 +186,13 @@ public static class DiscordRPCEditor
         string details = "";
 
         if (EditorPrefs.GetBool(ShowProjectNameKey))
-            details += $"Project: {projectName}";
+            details += $"{projectName}";
 
         if (EditorPrefs.GetBool(ShowSceneNameKey))
         {
             if (!string.IsNullOrEmpty(details))
                 details += " | ";
-            details += $"Scene: {sceneName}.unity";
+            details += $"{sceneName}.unity";
         }
 
         string state = "";
