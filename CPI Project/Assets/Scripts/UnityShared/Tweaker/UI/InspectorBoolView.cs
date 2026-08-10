@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Tweaker.UI
 	{
 		public Toggle Toggle;
 
-		public Text ToggleText;
+		public TextMeshProUGUI ToggleText;
 
 		public event Action<bool> ValueChanged;
 

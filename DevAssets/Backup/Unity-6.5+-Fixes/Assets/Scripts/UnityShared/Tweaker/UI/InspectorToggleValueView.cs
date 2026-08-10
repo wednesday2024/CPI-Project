@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,39 +9,76 @@ namespace Tweaker.UI
 	{
 		public Toggle Toggle;
 
-		public Text ToggleText;
+		public TextMeshProUGUI ToggleText;
 
 		public event Action<bool> ValueChanged;
 
 		public event Action Destroyed;
 
+		public bool Value
+		{
+			get => Toggle != null && Toggle.isOn;
+			private set => SetValue(value, notify: false);
+		}
+
 		public void Awake()
 		{
-			Toggle.onValueChanged.AddListener(OnValueChanged);
+			if (Toggle != null)
+			{
+				Toggle.onValueChanged.AddListener(OnValueChanged);
+			}
+		}
+
+		public void SetValue(bool value, bool notify = true)
+		{
+			if (Toggle == null)
+			{
+				return;
+			}
+
+			if (Toggle.isOn != value)
+			{
+				Toggle.isOn = value;
+			}
+
+			if (notify)
+			{
+				OnValueChanged(value);
+			}
+		}
+
+		public void SetLabel(string label)
+		{
+			if (ToggleText != null)
+			{
+				ToggleText.text = label;
+			}
 		}
 
 		public void DestroySelf()
 		{
-			UnityEngine.Object.Destroy(base.gameObject);
+			Destroy(gameObject);
 		}
 
 		public void OnDestroy()
 		{
-			if (this.Destroyed != null)
+			if (Destroyed != null)
 			{
-				this.Destroyed();
-				this.Destroyed = null;
+				Destroyed();
+				Destroyed = null;
 			}
-			Toggle.onValueChanged.RemoveAllListeners();
-			this.ValueChanged = null;
+
+			if (Toggle != null)
+			{
+				Toggle.onValueChanged.RemoveAllListeners();
+			}
+
+			ValueChanged = null;
 		}
 
 		private void OnValueChanged(bool value)
 		{
-			if (this.ValueChanged != null)
-			{
-				this.ValueChanged(value);
-			}
+			ValueChanged?.Invoke(value);
 		}
 	}
 }

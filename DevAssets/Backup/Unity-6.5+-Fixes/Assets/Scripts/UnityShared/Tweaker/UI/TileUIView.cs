@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Tweaker.UI
 {
 	public class TileUIView : MonoBehaviour
 	{
-		public Text NameText;
+		public TextMeshProUGUI NameText;
 
 		public string Name
 		{

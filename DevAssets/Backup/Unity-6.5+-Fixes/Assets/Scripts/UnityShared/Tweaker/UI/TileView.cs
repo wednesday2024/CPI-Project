@@ -1,7 +1,7 @@
 using System;
 using Tweaker.Core;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Tweaker.UI
 {
@@ -63,7 +63,7 @@ namespace Tweaker.UI
 			}
 		}
 
-		public Text NameText
+		public TextMeshProUGUI NameText
 		{
 			get
 			{

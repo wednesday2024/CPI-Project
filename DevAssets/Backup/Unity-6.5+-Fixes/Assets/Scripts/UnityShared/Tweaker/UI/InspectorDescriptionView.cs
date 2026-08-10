@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Tweaker.UI
 {
 	public class InspectorDescriptionView : MonoBehaviour, IInspectorContentView
 	{
-		public Text DescriptionText;
+		public TextMeshProUGUI DescriptionText;
 
 		public event Action Destroyed;
 

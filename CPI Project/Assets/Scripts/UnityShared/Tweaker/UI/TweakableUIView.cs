@@ -1,9 +1,9 @@
-using UnityEngine.UI;
+using TMPro;
 
 namespace Tweaker.UI
 {
 	public class TweakableUIView : TileUIView
 	{
-		public Text ValueText;
+		public TextMeshProUGUI ValueText;
 	}
 }
