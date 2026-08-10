@@ -123,6 +123,7 @@ namespace ClubPenguin
 				if (component != null && component.Position != Vector3.zero)
 				{
 					playerGameObject.transform.position = dataEntityCollection.GetComponent<PositionData>(playerdataHandle).Position;
+					Physics.SyncTransforms();
 				}
 			}
 		}

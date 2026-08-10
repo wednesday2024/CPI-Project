@@ -235,6 +235,7 @@ namespace ClubPenguin
 					component3.Position = vector;
 					localPlayerSpawnPostion = vector;
 					base.transform.SetPositionAndRotation(vector, rotation);
+					Physics.SyncTransforms();
 					if (actionOnSpawned != null && (actionOnSpawned.Action != 0 || actionOnSpawned.Reward != null))
 					{
 						eventDispatcher.AddListener<HudEvents.HudInitComplete>(onHudInitCompleted);
@@ -314,6 +315,7 @@ namespace ClubPenguin
 			if (!playerDataHandle.Handle.IsNull)
 			{
 				base.transform.position = evt.Location;
+				Physics.SyncTransforms();
 				LocomotionActionEvent action = default(LocomotionActionEvent);
 				action.Type = LocomotionAction.Move;
 				action.Position = base.transform.position;
