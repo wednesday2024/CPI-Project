@@ -16,7 +16,9 @@ namespace ClubPenguin.Adventure
 				Transform transform = gameObject.transform.Find("DialogSpot");
 				base.Owner.transform.position = transform.position;
 				base.Owner.transform.rotation = transform.rotation;
-			}
+
+                Physics.SyncTransforms();
+            }
 			Finish();
 		}
 	}

@@ -21,7 +21,10 @@ namespace ClubPenguin.Adventure
 			{
 				localPlayerGameObject.transform.rotation = Quaternion.LookRotation(Direction.Value);
 			}
-			Finish();
+
+            Physics.SyncTransforms();
+
+            Finish();
 		}
 	}
 }
