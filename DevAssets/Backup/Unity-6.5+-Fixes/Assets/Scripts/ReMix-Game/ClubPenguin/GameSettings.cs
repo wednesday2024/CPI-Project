@@ -631,7 +631,7 @@ namespace ClubPenguin
 
         [Invokable("PartySwitcher.Parties", Description = "Force a specific party on.")]
         [PublicTweak]
-        public void AnnualParties_Switch([NamedToggleValue(typeof(AnnualEventKeyGenerator), 0u)] string Party)
+        public void AnnualParties_Switch([NamedToggleValue(typeof(AnnualEventKeyGenerator), 0u)][ArgDescription("Change rooms for this setting to take effect.")] string Party)
         {
             var controllerType = Type.GetType("AnnualEventsController3000");
             if (controllerType != null)
