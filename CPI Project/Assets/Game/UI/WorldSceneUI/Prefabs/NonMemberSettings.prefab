@@ -2578,6 +2578,7 @@ GameObject:
   - component: {fileID: 114142019995159330}
   - component: {fileID: 114716326680118751}
   - component: {fileID: 114908366719282327}
+  - component: {fileID: 5243755656185214557}
   m_Layer: 5
   m_Name: RestoreSubscriptionButton
   m_TagString: Untagged
@@ -2815,6 +2816,25 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5243755656185214557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521350676614287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7db261650549d3bd2b344299096ed65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runtimeSettings:
+  - SettingsType: 1
+    IsActive: 0
+  - SettingsType: 2
+    IsActive: 0
+  - SettingsType: 3
+    IsActive: 0
 --- !u!1 &1540801610505525
 GameObject:
   m_ObjectHideFlags: 0
