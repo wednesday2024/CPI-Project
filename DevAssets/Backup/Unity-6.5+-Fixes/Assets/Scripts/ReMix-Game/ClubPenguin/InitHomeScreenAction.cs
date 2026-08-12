@@ -86,13 +86,24 @@ namespace ClubPenguin
 			Service.Get<SceneTransitionService>().LoadScene(AutoLoadScene, "Loading");
 		}
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void checkPreferredTextSize()
 		{
-			float @float = PlayerPrefs.GetFloat("accessibility_scale");
+			float @float = PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale"));
 			if (@float == 0f)
 			{
 				float num = 1f;
-				PlayerPrefs.SetFloat("accessibility_scale", num);
+				PlayerPrefs.SetFloat(GetPlatformKey("accessibility_scale"), num);
 				Service.Get<EventDispatcher>().DispatchEvent(new AccessibilityEvents.AccessibilityScaleUpdated(num));
 			}
 		}

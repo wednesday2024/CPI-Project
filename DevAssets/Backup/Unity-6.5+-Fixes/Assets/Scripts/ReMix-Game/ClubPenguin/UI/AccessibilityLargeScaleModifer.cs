@@ -22,9 +22,20 @@ namespace ClubPenguin.UI
 			return false;
 		}
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void modifyCanvasAccessibilityScale()
 		{
-			if (scaler != null && PlayerPrefs.HasKey("accessibility_scale") && PlayerPrefs.GetFloat("accessibility_scale") == 1.2f)
+			if (scaler != null && PlayerPrefs.HasKey(GetPlatformKey("accessibility_scale")) && PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale")) == 1.2f)
 			{
 				scaler.SetScaleAccessibilityModifier(1f);
 			}
@@ -34,7 +45,7 @@ namespace ClubPenguin.UI
 		{
 			if (scaler != null)
 			{
-				scaler.SetScaleAccessibilityModifier(PlayerPrefs.GetFloat("accessibility_scale"));
+				scaler.SetScaleAccessibilityModifier(PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale")));
 			}
 			Service.Get<EventDispatcher>().RemoveListener<AccessibilityEvents.AccessibilityScaleModifierRemoved>(onAccessibilityModifierRemoved);
 			Service.Get<EventDispatcher>().DispatchEvent(default(AccessibilityEvents.AccessibilityScaleModifierRemoved));

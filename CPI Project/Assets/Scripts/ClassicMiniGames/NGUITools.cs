@@ -14,6 +14,17 @@ public static class NGUITools
 
     private static Vector3[] mSides = new Vector3[4];
 
+    private static string GetPlatformKey(string key)
+    {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+        if (UnityEngine.Application.isEditor)
+        {
+            return "Editor_" + key;
+        }
+#endif
+        return key;
+    }
+
     public static float soundVolume
     {
         get
@@ -21,7 +32,7 @@ public static class NGUITools
             if (!mLoaded)
             {
                 mLoaded = true;
-                mGlobalVolume = PlayerPrefs.GetFloat("Sound", 1f);
+                mGlobalVolume = PlayerPrefs.GetFloat(GetPlatformKey("Sound"), 1f);
             }
             return mGlobalVolume;
         }
@@ -31,7 +42,7 @@ public static class NGUITools
             {
                 mLoaded = true;
                 mGlobalVolume = value;
-                PlayerPrefs.SetFloat("Sound", value);
+                PlayerPrefs.SetFloat(GetPlatformKey("Sound"), value);
             }
         }
     }

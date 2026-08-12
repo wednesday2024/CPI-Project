@@ -17,12 +17,23 @@ namespace ClubPenguin.UI
 
 		public SCALE_TYPE ToggleScaleType;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void Start()
 		{
 			Toggle component = GetComponent<Toggle>();
 			if (component != null)
 			{
-				float @float = PlayerPrefs.GetFloat("accessibility_scale");
+				float @float = PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale"));
 				if (ToggleScaleType == SCALE_TYPE.SMALL)
 				{
 					component.isOn = (@float == 0.8f);
@@ -41,21 +52,21 @@ namespace ClubPenguin.UI
 		public void OnSmallButtonClick()
 		{
 			float num = 0.8f;
-			PlayerPrefs.SetFloat("accessibility_scale", num);
+			PlayerPrefs.SetFloat(GetPlatformKey("accessibility_scale"), num);
 			Service.Get<EventDispatcher>().DispatchEvent(new AccessibilityEvents.AccessibilityScaleUpdated(num));
 		}
 
 		public void OnLargeButtonClick()
 		{
 			float num = 1.2f;
-			PlayerPrefs.SetFloat("accessibility_scale", num);
+			PlayerPrefs.SetFloat(GetPlatformKey("accessibility_scale"), num);
 			Service.Get<EventDispatcher>().DispatchEvent(new AccessibilityEvents.AccessibilityScaleUpdated(num));
 		}
 
 		public void OnMediumButtonClick()
 		{
 			float num = 1f;
-			PlayerPrefs.SetFloat("accessibility_scale", num);
+			PlayerPrefs.SetFloat(GetPlatformKey("accessibility_scale"), num);
 			Service.Get<EventDispatcher>().DispatchEvent(new AccessibilityEvents.AccessibilityScaleUpdated(num));
 		}
 	}

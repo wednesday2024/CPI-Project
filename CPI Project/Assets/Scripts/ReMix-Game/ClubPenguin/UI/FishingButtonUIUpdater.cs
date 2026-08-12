@@ -156,13 +156,13 @@ namespace ClubPenguin.UI
 				}
 				long num = DateTime.UtcNow.Date.GetTimeInMilliseconds();
 				long storedDay = 0L;
-				string storedDayStr = PlayerPrefs.GetString("OfflineMinigameProgress_Day_" + username, "0");
+				string storedDayStr = PlayerPrefs.GetString(GetPlatformKey("OfflineMinigameProgress_Day_" + username), "0");
 				long.TryParse(storedDayStr, out storedDay);
 				if (storedDay != num)
 				{
 					return 0;
 				}
-				return PlayerPrefs.GetInt("OfflineMinigameProgress_fishing_" + username, 0);
+				return PlayerPrefs.GetInt(GetPlatformKey("OfflineMinigameProgress_fishing_" + username), 0);
 			}
 			else
 			{
@@ -245,6 +245,10 @@ namespace ClubPenguin.UI
 		{
 			if (baitCount == 0 && tooltipInputButton.TooltipEnabled && tooltipInputButton.IsOpen && timerText != null)
 			{
+				tooltipInputButton.CloseTooltip();
+			}
+			else if (networkServiceManager != null)
+			{
 				TimeSpan time = resetDailyDateTime - networkServiceManager.ServerDateTime;
 				if (time.TotalSeconds > 0.0)
 				{
@@ -258,6 +262,17 @@ namespace ClubPenguin.UI
 					tooltipInputButton.TooltipEnabled = false;
 				}
 			}
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 
 		private void OnDestroy()

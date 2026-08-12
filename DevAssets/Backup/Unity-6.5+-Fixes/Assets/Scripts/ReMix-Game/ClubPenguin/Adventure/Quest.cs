@@ -274,14 +274,14 @@ namespace ClubPenguin.Adventure
 			{
 				if (Definition.Prototyped)
 				{
-					PlayerPrefs.DeleteKey(questKey);
+					PlayerPrefs.DeleteKey(GetPlatformKey(questKey));
 				}
 				TimesCompleted++;
 				CurrentObjectiveName = null;
 			}
 			else if (Definition.Prototyped)
 			{
-				PlayerPrefs.SetString(questKey, CurrentObjectiveName);
+				PlayerPrefs.SetString(GetPlatformKey(questKey), CurrentObjectiveName);
 			}
 			State = state;
 			removePlayMakerFsm();
@@ -549,6 +549,17 @@ namespace ClubPenguin.Adventure
 			}
 		}
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public void RestartFSM(string startState = null)
 		{
 			if (playMakerFsm != null)
@@ -610,9 +621,9 @@ namespace ClubPenguin.Adventure
 			if (Definition.Prototyped)
 			{
 				string questKey = getQuestKey();
-				if (PlayerPrefs.HasKey(questKey))
+				if (PlayerPrefs.HasKey(GetPlatformKey(questKey)))
 				{
-					CurrentObjectiveName = PlayerPrefs.GetString(questKey);
+					CurrentObjectiveName = PlayerPrefs.GetString(GetPlatformKey(questKey));
 					trace("Getting saved state {0} from playerprefs", CurrentObjectiveName);
 				}
 			}

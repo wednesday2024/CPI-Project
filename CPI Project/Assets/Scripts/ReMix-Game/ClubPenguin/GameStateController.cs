@@ -529,10 +529,21 @@ namespace ClubPenguin
 			}
 		}
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void logAccessibilityActions()
 		{
 			string text = "";
-			float @float = PlayerPrefs.GetFloat("accessibility_scale");
+			float @float = PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale"));
 			if (@float >= 1.2f)
 			{
 				if (!string.IsNullOrEmpty(text))

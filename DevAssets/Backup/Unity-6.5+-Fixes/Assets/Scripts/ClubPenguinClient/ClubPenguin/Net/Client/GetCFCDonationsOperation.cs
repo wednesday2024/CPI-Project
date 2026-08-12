@@ -33,12 +33,23 @@ namespace ClubPenguin.Net.Client
 
 		private static long GetDeviceWideCFCTotal()
 		{
-			string storedValue = PlayerPrefs.GetString("ol.CFCDonationTotal.device", "0");
+			string storedValue = PlayerPrefs.GetString(GetPlatformKey("ol.CFCDonationTotal.device"), "0");
 			if (long.TryParse(storedValue, out long total))
 			{
 				return total;
 			}
 			return 0;
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 	}
 }

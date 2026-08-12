@@ -54,13 +54,13 @@ namespace Assets.Game.MiniGames.Scripts.Fishing.FsmActions
                 }
                 long num = DateTime.UtcNow.Date.GetTimeInMilliseconds();
                 long storedDay = 0L;
-                string storedDayStr = PlayerPrefs.GetString("OfflineMinigameProgress_Day_" + username, "0");
+                string storedDayStr = PlayerPrefs.GetString(GetPlatformKey("OfflineMinigameProgress_Day_" + username), "0");
                 long.TryParse(storedDayStr, out storedDay);
                 if (storedDay != num)
                 {
                     return 0;
                 }
-                return PlayerPrefs.GetInt("OfflineMinigameProgress_fishing_" + username, 0);
+                return PlayerPrefs.GetInt(GetPlatformKey("OfflineMinigameProgress_fishing_" + username), 0);
             }
             else
             {
@@ -80,6 +80,17 @@ namespace Assets.Game.MiniGames.Scripts.Fishing.FsmActions
                 }
             }
             return 0;
+        }
+
+        private static string GetPlatformKey(string key)
+        {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            if (UnityEngine.Application.isEditor)
+            {
+                return "Editor_" + key;
+            }
+#endif
+            return key;
         }
     }
 }

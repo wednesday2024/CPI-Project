@@ -14,20 +14,31 @@ namespace JetpackReboot
 		public void SaveGoalProgressFor(mg_jr_Goal _goal)
 		{
 			Assert.NotNull(_goal, "Can't save a null object");
-			PlayerPrefs.SetInt("mg_jr_" + _goal.GoalName + "_level", _goal.CurrentLevel);
-			PlayerPrefs.SetFloat("mg_jr_" + _goal.GoalName + "_progress", _goal.Progress);
+			PlayerPrefs.SetInt(GetPlatformKey("mg_jr_" + _goal.GoalName + "_level"), _goal.CurrentLevel);
+			PlayerPrefs.SetFloat(GetPlatformKey("mg_jr_" + _goal.GoalName + "_progress"), _goal.Progress);
 		}
 
 		public int LoadLevelFor(mg_jr_Goal _goal)
 		{
 			Assert.NotNull(_goal, "Can't load data for a null object");
-			return PlayerPrefs.GetInt("mg_jr_" + _goal.GoalName + "_level");
+			return PlayerPrefs.GetInt(GetPlatformKey("mg_jr_" + _goal.GoalName + "_level"));
 		}
 
 		public float LoadProgresFor(mg_jr_Goal _goal)
 		{
 			Assert.NotNull(_goal, "Can't save a null object");
-			return PlayerPrefs.GetFloat("mg_jr_" + _goal.GoalName + "_progress");
+			return PlayerPrefs.GetFloat(GetPlatformKey("mg_jr_" + _goal.GoalName + "_progress"));
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 	}
 }

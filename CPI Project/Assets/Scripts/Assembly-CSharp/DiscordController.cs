@@ -68,14 +68,25 @@ public class DiscordController : MonoBehaviour
     public static string LastLoadedSceneName { get; private set; }
     public static string LastLoadedAdditiveSceneName { get; private set; }
 
+    private static string GetPlatformKey(string key)
+    {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+        if (UnityEngine.Application.isEditor)
+        {
+            return "Editor_" + key;
+        }
+#endif
+        return key;
+    }
+
     public static bool IsRpcEnabledInPrefs()
     {
-        return PlayerPrefs.GetInt(DiscordRpcPlayerPrefsKey, 1) == 1;
+        return PlayerPrefs.GetInt(GetPlatformKey(DiscordRpcPlayerPrefsKey), 1) == 1;
     }
 
     public static void SetRpcEnabledInPrefs(bool enabled)
     {
-        PlayerPrefs.SetInt(DiscordRpcPlayerPrefsKey, enabled ? 1 : 0);
+        PlayerPrefs.SetInt(GetPlatformKey(DiscordRpcPlayerPrefsKey), enabled ? 1 : 0);
         PlayerPrefs.Save();
     }
 

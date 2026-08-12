@@ -31,6 +31,17 @@ namespace ClubPenguin.Mix
 
 		private ICoroutine retryCoroutine;
 
+		private string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public override bool NetworkConfigIsNotSet
 		{
 			get
@@ -135,7 +146,7 @@ namespace ClubPenguin.Mix
 		private IEnumerator restoreLastSession()
 		{
 			yield return null;
-			string userName = PlayerPrefs.GetString("ol.lastLoginUserName");
+			string userName = PlayerPrefs.GetString(GetPlatformKey(LAST_LOGIN_USER));
 			if (!string.IsNullOrEmpty(userName))
 			{
 				onSoftLoginCompleteSuccess(0);
@@ -174,7 +185,7 @@ namespace ClubPenguin.Mix
 			{
 				getUpdateAgeBand(1, Service.Get<Localizer>().LanguageString);
 			}
-			PlayerPrefs.SetString("ol.lastLoginUserName", username);
+			PlayerPrefs.SetString(GetPlatformKey(LAST_LOGIN_USER), username);
 			onLoginSuccess(new OfflineSession(username));
 		}
 
@@ -195,7 +206,7 @@ namespace ClubPenguin.Mix
 		private IEnumerator delayLogoutLastSession(AsynchOnFinishedManifold asynchOnFinishedManifold)
 		{
 			yield return null;
-			PlayerPrefs.DeleteKey("ol.lastLoginUserName");
+			PlayerPrefs.DeleteKey(GetPlatformKey(LAST_LOGIN_USER));
 			if (asynchOnFinishedManifold != null)
 			{
 				asynchOnFinishedManifold.AsynchFinished();

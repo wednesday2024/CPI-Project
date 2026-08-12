@@ -141,18 +141,29 @@ namespace ClubPenguin.UI
 		{
 			CoroutineRunner.StopAllForOwner(this);
 			Service.Get<EventDispatcher>().RemoveListener<CollectibleEvents.CollectibleAdd>(onAddCollectible);
-			PlayerPrefs.SetInt("CollectiblesTutorialCount", numCollectiblesSinceTutorial);
-			PlayerPrefs.SetInt("CollectiblesTutorialsShown", numTutorialsShown);
-			PlayerPrefs.SetInt("CollectiblesShowTutorial", ShouldShowCollectibleTutorial ? 1 : 0);
-		}
+		PlayerPrefs.SetInt(GetPlatformKey("CollectiblesTutorialCount"), numCollectiblesSinceTutorial);
+		PlayerPrefs.SetInt(GetPlatformKey("CollectiblesTutorialsShown"), numTutorialsShown);
+		PlayerPrefs.SetInt(GetPlatformKey("CollectiblesShowTutorial"), ShouldShowCollectibleTutorial ? 1 : 0);
+	}
 
-		public void OnCoinIntroAnimationComplete()
+	public void OnCoinIntroAnimationComplete()
+	{
+		if (!coroutineActive)
 		{
-			if (!coroutineActive)
-			{
-				CoroutineRunner.Start(updateCollectibleDisplay(), this, "updateCollectibleDisplay");
-			}
+			CoroutineRunner.Start(updateCollectibleDisplay(), this, "updateCollectibleDisplay");
 		}
+	}
+
+	private static string GetPlatformKey(string key)
+	{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+		if (UnityEngine.Application.isEditor)
+		{
+			return "Editor_" + key;
+		}
+#endif
+		return key;
+	}
 
 		public void OnCoinOutroAnimationComplete()
 		{

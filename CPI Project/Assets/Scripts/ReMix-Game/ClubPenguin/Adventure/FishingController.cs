@@ -515,16 +515,16 @@ namespace ClubPenguin.Adventure
 				long storedDay = 0L;
 				string dayKey = "OfflineMinigameProgress_Day_" + username;
 				string countKey = "OfflineMinigameProgress_fishing_" + username;
-				string storedDayStr = PlayerPrefs.GetString(dayKey, "0");
+				string storedDayStr = PlayerPrefs.GetString(GetPlatformKey(dayKey), "0");
 				long.TryParse(storedDayStr, out storedDay);
 				if (storedDay != num)
 				{
-					PlayerPrefs.SetString(dayKey, num.ToString());
-					PlayerPrefs.DeleteKey(countKey);
+					PlayerPrefs.SetString(GetPlatformKey(dayKey), num.ToString());
+					PlayerPrefs.DeleteKey(GetPlatformKey(countKey));
 				}
-				int currentCount = PlayerPrefs.GetInt(countKey, 0);
+				int currentCount = PlayerPrefs.GetInt(GetPlatformKey(countKey), 0);
 				int newCount = currentCount + 1;
-				PlayerPrefs.SetInt(countKey, newCount);
+				PlayerPrefs.SetInt(GetPlatformKey(countKey), newCount);
 				PlayerPrefs.Save();
 			}
 			else
@@ -1226,6 +1226,17 @@ namespace ClubPenguin.Adventure
 				}
 			}
 			return null;
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 	}
 }

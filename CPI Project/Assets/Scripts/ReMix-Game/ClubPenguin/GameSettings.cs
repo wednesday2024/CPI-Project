@@ -34,12 +34,23 @@ namespace ClubPenguin
         private const string DIVING_UNLIMITED_AIR_KEY = "cp.DivingUnlimitedAir";
         private const string MEMBERSHIP_OVERRIDE_KEY = "cp.MembershipOverride";
 
+        private static string GetPlatformKey(string key)
+        {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            if (UnityEngine.Application.isEditor)
+            {
+                return "Editor_" + key;
+            }
+#endif
+            return key;
+        }
+
         public static bool DivingUnlimitedAirSetting
         {
-            get => PlayerPrefs.GetInt(DIVING_UNLIMITED_AIR_KEY, 0) == 1;
+            get => PlayerPrefs.GetInt(GetPlatformKey(DIVING_UNLIMITED_AIR_KEY), 0) == 1;
             set
             {
-                PlayerPrefs.SetInt(DIVING_UNLIMITED_AIR_KEY, value ? 1 : 0);
+                PlayerPrefs.SetInt(GetPlatformKey(DIVING_UNLIMITED_AIR_KEY), value ? 1 : 0);
                 PlayerPrefs.Save();
             }
         }
@@ -457,7 +468,7 @@ namespace ClubPenguin
         [Invokable("Settings.InactivityService.Enable", Description = "Enables the inactivity service.")]
         public void EnableInactivityService()
         {
-            PlayerPrefs.SetInt(InitInactivityServiceAction.InactivityServiceEnabledPlayerPrefsKey, 1);
+            PlayerPrefs.SetInt(GetPlatformKey(InitInactivityServiceAction.InactivityServiceEnabledPlayerPrefsKey), 1);
             PlayerPrefs.Save();
             if (Service.IsSet<InactivityService>())
             {
@@ -469,7 +480,7 @@ namespace ClubPenguin
         [Invokable("Settings.InactivityService.Disable", Description = "Disables the inactivity service.")]
         public void DisableInactivityService()
         {
-            PlayerPrefs.SetInt(InitInactivityServiceAction.InactivityServiceEnabledPlayerPrefsKey, 0);
+            PlayerPrefs.SetInt(GetPlatformKey(InitInactivityServiceAction.InactivityServiceEnabledPlayerPrefsKey), 0);
             PlayerPrefs.Save();
             if (Service.IsSet<InactivityService>())
             {
@@ -674,7 +685,7 @@ namespace ClubPenguin
         [Invokable("Avatar.DivingAir.ForceOn", Description = "Forces unlimited air for the local player in diving.")]
         public void ForceDivingAirOn()
         {
-            PlayerPrefs.SetInt(DIVING_UNLIMITED_AIR_KEY, 1);
+            PlayerPrefs.SetInt(GetPlatformKey(DIVING_UNLIMITED_AIR_KEY), 1);
             PlayerPrefs.Save();
 
             ClubPenguin.World.Activities.Diving.DivingGameController.DivingUnlimitedAir = true;
@@ -686,7 +697,7 @@ namespace ClubPenguin
         [Invokable("Avatar.DivingAir.ForceDefault", Description = "Restores normal air depletion behavior.")]
         public void ForceDivingAirDefault()
         {
-            PlayerPrefs.SetInt(DIVING_UNLIMITED_AIR_KEY, 0);
+            PlayerPrefs.SetInt(GetPlatformKey(DIVING_UNLIMITED_AIR_KEY), 0);
             PlayerPrefs.Save();
 
             ClubPenguin.World.Activities.Diving.DivingGameController.DivingUnlimitedAir = false;
@@ -703,7 +714,7 @@ namespace ClubPenguin
             {
                 cfc.ResetCoinCount();
             }
-            PlayerPrefs.DeleteKey("ol.CFCDonationTotal.device");
+            PlayerPrefs.DeleteKey(GetPlatformKey("ol.CFCDonationTotal.device"));
             PlayerPrefs.Save();
             Service.Get<INetworkServicesManager>().ScheduledEventService.GetCFCDonations();
         }
@@ -712,7 +723,7 @@ namespace ClubPenguin
         [Invokable("CFC.SetMaxTotal", Description = "Sets the PlayerPrefs for the Coins for Change total to max value of 999999999.")]
         public void SetCFCTotalToMax()
         {
-            PlayerPrefs.SetString("ol.CFCDonationTotal.device", "999999999");
+            PlayerPrefs.SetString(GetPlatformKey("ol.CFCDonationTotal.device"), "999999999");
             PlayerPrefs.Save();
             CoinsForChangeTracker cfc = UnityEngine.Object.FindFirstObjectByType<CoinsForChangeTracker>();
             if (cfc != null)

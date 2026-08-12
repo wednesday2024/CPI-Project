@@ -17,6 +17,17 @@ namespace ClubPenguin.ClothingDesigner.Inventory
 
 		private List<long> nonmemberInventory;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public DataEntityHandle LocalPlayerInfo
 		{
 			get
@@ -255,7 +266,7 @@ namespace ClubPenguin.ClothingDesigner.Inventory
 		private void getHiddenItems()
 		{
 			HiddenItems = new List<long>();
-			string @string = PlayerPrefs.GetString("inventory_equipment_hidden_items");
+			string @string = PlayerPrefs.GetString(GetPlatformKey(INVENTORY_EQUIPMENT_HIDDEN_ITEMS_KEY));
 			if (string.IsNullOrEmpty(@string) || InventoryData.Inventory.Count <= 0)
 			{
 				return;
@@ -300,7 +311,7 @@ namespace ClubPenguin.ClothingDesigner.Inventory
 					text += ",";
 				}
 			}
-			PlayerPrefs.SetString("inventory_equipment_hidden_items", text);
+			PlayerPrefs.SetString(GetPlatformKey(INVENTORY_EQUIPMENT_HIDDEN_ITEMS_KEY), text);
 		}
 
 		private long getEquipmentIdByTemplateName(string templateName)

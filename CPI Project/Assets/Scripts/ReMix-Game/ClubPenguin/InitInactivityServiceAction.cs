@@ -11,6 +11,17 @@ namespace ClubPenguin
 	{
 		public const string InactivityServiceEnabledPlayerPrefsKey = "inactivity_service_enabled";
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public int InactivityTimeoutSeconds;
 
 		public override bool HasSecondPass
@@ -33,7 +44,7 @@ namespace ClubPenguin
 		{
 			InactivityService inactivityService = Service.Get<GameObject>().AddComponent<InactivityService>();
 			inactivityService.InactivityTimeoutSeconds = InactivityTimeoutSeconds;
-			inactivityService.SetTrackingEnabled(PlayerPrefs.GetInt(InactivityServiceEnabledPlayerPrefsKey, 1) == 1);
+			inactivityService.SetTrackingEnabled(PlayerPrefs.GetInt(GetPlatformKey(InactivityServiceEnabledPlayerPrefsKey), 1) == 1);
 			Service.Set(inactivityService);
 			yield break;
 		}

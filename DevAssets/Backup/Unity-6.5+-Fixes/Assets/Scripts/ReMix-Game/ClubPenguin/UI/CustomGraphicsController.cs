@@ -185,7 +185,7 @@ namespace ClubPenguin.UI
             if (discordRpcToggle == null)
                 return;
 
-            bool enabled = PlayerPrefs.GetInt(discordRpcPlayerPrefsKey, 1) == 1;
+            bool enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
             discordRpcToggle.isOn = enabled;
         }
 
@@ -194,7 +194,7 @@ namespace ClubPenguin.UI
             if (discordRpcOnText == null)
                 return;
 
-            bool enabled = PlayerPrefs.GetInt(discordRpcPlayerPrefsKey, 1) == 1;
+            bool enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
 
             if (discordRpcToggle != null)
                 enabled = discordRpcToggle.isOn;
@@ -207,7 +207,7 @@ namespace ClubPenguin.UI
             if (inactivityServiceToggle == null)
                 return;
 
-            inactivityServiceToggle.isOn = PlayerPrefs.GetInt(inactivityServicePlayerPrefsKey, 1) == 1;
+            inactivityServiceToggle.isOn = PlayerPrefs.GetInt(GetPlatformKey(inactivityServicePlayerPrefsKey), 1) == 1;
         }
 
         private bool GetInactivityServiceEnabled()
@@ -215,7 +215,7 @@ namespace ClubPenguin.UI
             if (inactivityServiceToggle != null)
                 return inactivityServiceToggle.isOn;
 
-            return PlayerPrefs.GetInt(inactivityServicePlayerPrefsKey, 1) == 1;
+            return PlayerPrefs.GetInt(GetPlatformKey(inactivityServicePlayerPrefsKey), 1) == 1;
         }
 
         private void RefreshInactivityServiceOnText()
@@ -253,7 +253,7 @@ namespace ClubPenguin.UI
         {
             if (saveToPrefs)
             {
-                PlayerPrefs.SetInt(inactivityServicePlayerPrefsKey, enabled ? 1 : 0);
+                PlayerPrefs.SetInt(GetPlatformKey(inactivityServicePlayerPrefsKey), enabled ? 1 : 0);
                 PlayerPrefs.Save();
             }
 
@@ -273,9 +273,9 @@ namespace ClubPenguin.UI
             if (discordRpcToggle != null)
                 enabled = discordRpcToggle.isOn;
             else
-                enabled = PlayerPrefs.GetInt(discordRpcPlayerPrefsKey, 1) == 1;
+                enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
 
-            PlayerPrefs.SetInt(discordRpcPlayerPrefsKey, enabled ? 1 : 0);
+            PlayerPrefs.SetInt(GetPlatformKey(discordRpcPlayerPrefsKey), enabled ? 1 : 0);
             PlayerPrefs.Save();
 
             RefreshDiscordRpcOnText();
@@ -285,6 +285,17 @@ namespace ClubPenguin.UI
         public void ToggleInactivityService()
         {
             ApplyInactivityServiceSetting(GetInactivityServiceEnabled(), true);
+        }
+
+        private static string GetPlatformKey(string key)
+        {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            if (UnityEngine.Application.isEditor)
+            {
+                return "Editor_" + key;
+            }
+#endif
+            return key;
         }
 
         private void CallDiscordControllerSetEnabledGlobal(bool enabled)

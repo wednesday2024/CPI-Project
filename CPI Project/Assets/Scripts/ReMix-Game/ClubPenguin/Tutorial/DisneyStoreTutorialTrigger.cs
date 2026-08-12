@@ -18,11 +18,22 @@ namespace ClubPenguin.Tutorial
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag("Player") && Service.Get<QuestService>().ActiveQuest == null && (!PlayerPrefs.HasKey("DisneyStoreShowTutorial") || PlayerPrefs.GetInt("DisneyStoreShowTutorial") == 1) && Service.Get<TutorialManager>().TryStartTutorial(TutorialDefinition.Id))
+			if (other.CompareTag("Player") && Service.Get<QuestService>().ActiveQuest == null && (!PlayerPrefs.HasKey(GetPlatformKey("DisneyStoreShowTutorial")) || PlayerPrefs.GetInt(GetPlatformKey("DisneyStoreShowTutorial")) == 1) && Service.Get<TutorialManager>().TryStartTutorial(TutorialDefinition.Id))
 			{
-				PlayerPrefs.SetInt("DisneyStoreShowTutorial", 0);
+				PlayerPrefs.SetInt(GetPlatformKey("DisneyStoreShowTutorial"), 0);
 				Service.Get<TutorialManager>().SetTutorial(TutorialDefinition.Id, true);
 			}
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 	}
 }

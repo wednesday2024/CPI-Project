@@ -18,46 +18,57 @@ namespace ClubPenguin.Tutorial
 
 		public static void SetAvailableAdventureTimestamp(string mascotName)
 		{
-			if (Service.Get<GameStateController>().IsFTUEComplete && !PlayerPrefs.HasKey("available_adventure_timestamp_" + mascotName) && PlayerPrefs.GetInt("adventure_reminder_tutorial_shown_" + mascotName) != 1)
-			{
-				PlayerPrefs.SetString("available_adventure_timestamp_" + mascotName, GetCurrentTimeInEpoch().ToString());
-			}
-		}
-
-		public static void SetNumPlayingDaysWithAvailableAdventure(string mascotName)
+		if (Service.Get<GameStateController>().IsFTUEComplete && !PlayerPrefs.HasKey(GetPlatformKey("available_adventure_timestamp_" + mascotName)) && PlayerPrefs.GetInt(GetPlatformKey("adventure_reminder_tutorial_shown_" + mascotName)) != 1)
 		{
-			long result;
-			if (Service.Get<GameStateController>().IsFTUEComplete && PlayerPrefs.GetInt("adventure_reminder_tutorial_shown_" + mascotName) != 1 && PlayerPrefs.HasKey("available_adventure_timestamp_" + mascotName) && long.TryParse(PlayerPrefs.GetString("available_adventure_timestamp_" + mascotName), out result))
-			{
-				float value = (float)(GetCurrentTimeInEpoch() - result) / 86400f;
-				PlayerPrefs.SetFloat("num_playing_days_with_available_adventure_" + mascotName, value);
-			}
-		}
-
-		public static void SetReminderTutorialShown(string mascotName)
-		{
-			PlayerPrefs.SetInt("adventure_reminder_tutorial_shown_" + mascotName, 1);
-		}
-
-		public static bool IsReminderTutorialShown(string mascotName)
-		{
-			return PlayerPrefs.GetInt("adventure_reminder_tutorial_shown_" + mascotName) == 1;
-		}
-
-		public static bool IsReminderOn(string mascotName)
-		{
-			return PlayerPrefs.GetFloat("num_playing_days_with_available_adventure_" + mascotName) >= 3f;
-		}
-
-		public static void ClearReminderCount(string mascotName)
-		{
-			PlayerPrefs.DeleteKey("available_adventure_timestamp_" + mascotName);
-			PlayerPrefs.DeleteKey("num_playing_days_with_available_adventure_" + mascotName);
-		}
-
-		public static long GetCurrentTimeInEpoch()
-		{
-			return Service.Get<ContentSchedulerService>().ScheduledEventDate().GetTimeInSeconds();
+			PlayerPrefs.SetString(GetPlatformKey("available_adventure_timestamp_" + mascotName), GetCurrentTimeInEpoch().ToString());
 		}
 	}
+
+	public static void SetNumPlayingDaysWithAvailableAdventure(string mascotName)
+	{
+		long result;
+		if (Service.Get<GameStateController>().IsFTUEComplete && PlayerPrefs.GetInt(GetPlatformKey("adventure_reminder_tutorial_shown_" + mascotName)) != 1 && PlayerPrefs.HasKey(GetPlatformKey("available_adventure_timestamp_" + mascotName)) && long.TryParse(PlayerPrefs.GetString(GetPlatformKey("available_adventure_timestamp_" + mascotName)), out result))
+		{
+			float value = (float)(GetCurrentTimeInEpoch() - result) / 86400f;
+			PlayerPrefs.SetFloat(GetPlatformKey("num_playing_days_with_available_adventure_" + mascotName), value);
+		}
+	}
+
+	public static void SetReminderTutorialShown(string mascotName)
+	{
+		PlayerPrefs.SetInt(GetPlatformKey("adventure_reminder_tutorial_shown_" + mascotName), 1);
+	}
+
+	public static bool IsReminderTutorialShown(string mascotName)
+	{
+		return PlayerPrefs.GetInt(GetPlatformKey("adventure_reminder_tutorial_shown_" + mascotName)) == 1;
+	}
+
+	public static bool IsReminderOn(string mascotName)
+	{
+		return PlayerPrefs.GetFloat(GetPlatformKey("num_playing_days_with_available_adventure_" + mascotName)) >= 3f;
+	}
+
+	public static void ClearReminderCount(string mascotName)
+	{
+		PlayerPrefs.DeleteKey(GetPlatformKey("available_adventure_timestamp_" + mascotName));
+		PlayerPrefs.DeleteKey(GetPlatformKey("num_playing_days_with_available_adventure_" + mascotName));
+	}
+
+	public static long GetCurrentTimeInEpoch()
+	{
+		return Service.Get<ContentSchedulerService>().ScheduledEventDate().GetTimeInSeconds();
+	}
+
+	private static string GetPlatformKey(string key)
+	{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+		if (UnityEngine.Application.isEditor)
+		{
+			return "Editor_" + key;
+		}
+#endif
+		return key;
+	}
+}
 }

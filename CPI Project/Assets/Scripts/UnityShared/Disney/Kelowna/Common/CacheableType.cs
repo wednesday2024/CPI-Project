@@ -25,6 +25,17 @@ namespace Disney.Kelowna.Common
 			}
 		}
 
+		protected string GetPlatformKey(string keyName)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (UnityEngine.Application.isEditor)
+			{
+				return "Editor_" + keyName;
+			}
+#endif
+			return keyName;
+		}
+
 		public event Action<T> EChanged;
 
 		public CacheableType(string playerPrefsKey, T defaultValue)
@@ -86,28 +97,29 @@ namespace Disney.Kelowna.Common
 		{
 			if (!isPersisted)
 			{
-				if (PlayerPrefs.HasKey(key))
+				string platformKey = GetPlatformKey(key);
+				if (PlayerPrefs.HasKey(platformKey))
 				{
 					Type typeFromHandle = typeof(T);
 					if (typeFromHandle == typeof(short) || typeFromHandle == typeof(int))
 					{
-						data = (T)Convert.ChangeType(PlayerPrefs.GetInt(key), typeFromHandle);
+						data = (T)Convert.ChangeType(PlayerPrefs.GetInt(platformKey), typeFromHandle);
 					}
 					else if (typeFromHandle == typeof(bool))
 					{
-						data = (T)Convert.ChangeType(PlayerPrefs.GetInt(key), typeFromHandle);
+						data = (T)Convert.ChangeType(PlayerPrefs.GetInt(platformKey), typeFromHandle);
 					}
 					else if (typeFromHandle == typeof(float))
 					{
-						data = (T)Convert.ChangeType(PlayerPrefs.GetFloat(key), typeFromHandle);
+						data = (T)Convert.ChangeType(PlayerPrefs.GetFloat(platformKey), typeFromHandle);
 					}
 					else if (typeFromHandle.IsEnum)
 					{
-						data = (T)Enum.ToObject(typeof(T), PlayerPrefs.GetInt(key));
+						data = (T)Enum.ToObject(typeof(T), PlayerPrefs.GetInt(platformKey));
 					}
 					else
 					{
-						data = (T)Convert.ChangeType(PlayerPrefs.GetString(key), typeFromHandle);
+						data = (T)Convert.ChangeType(PlayerPrefs.GetString(platformKey), typeFromHandle);
 					}
 					isPersisted = true;
 				}
@@ -123,25 +135,26 @@ namespace Disney.Kelowna.Common
 		{
 			T val = data;
 			Type typeFromHandle = typeof(T);
+			string platformKey = GetPlatformKey(key);
 			if (typeFromHandle == typeof(short) || typeFromHandle == typeof(int) || typeFromHandle.IsEnum)
 			{
-				PlayerPrefs.SetInt(key, Convert.ToInt32(value));
+				PlayerPrefs.SetInt(platformKey, Convert.ToInt32(value));
 			}
 			else if (typeFromHandle == typeof(bool))
 			{
-				PlayerPrefs.SetInt(key, Convert.ToInt32(value));
+				PlayerPrefs.SetInt(platformKey, Convert.ToInt32(value));
 			}
 			else if (typeFromHandle == typeof(float))
 			{
-				PlayerPrefs.SetFloat(key, Convert.ToSingle(value));
+				PlayerPrefs.SetFloat(platformKey, Convert.ToSingle(value));
 			}
 			else if (typeFromHandle.IsEnum)
 			{
-				PlayerPrefs.SetInt(key, (int)(object)value);
+				PlayerPrefs.SetInt(platformKey, (int)(object)value);
 			}
 			else
 			{
-				PlayerPrefs.SetString(key, Convert.ToString(value));
+				PlayerPrefs.SetString(platformKey, Convert.ToString(value));
 			}
 			data = value;
 			isPersisted = true;
@@ -153,7 +166,7 @@ namespace Disney.Kelowna.Common
 
 		public void Remove()
 		{
-			PlayerPrefs.DeleteKey(key);
+			PlayerPrefs.DeleteKey(GetPlatformKey(key));
 		}
 
 		public void Reset()
