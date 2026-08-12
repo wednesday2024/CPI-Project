@@ -26,6 +26,17 @@ namespace ClubPenguin.CellPhone
 
 		private float openPosition;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void Awake()
 		{
 			rect = GetComponent<RectTransform>();
@@ -104,9 +115,9 @@ namespace ClubPenguin.CellPhone
 		private bool wasCellPhoneAutoOpened()
 		{
 			bool result = false;
-			if (PlayerPrefs.HasKey("DailyChallengesLastOpen"))
+			if (PlayerPrefs.HasKey(GetPlatformKey("DailyChallengesLastOpen")))
 			{
-				long num = long.Parse(PlayerPrefs.GetString("DailyChallengesLastOpen"));
+				long num = long.Parse(PlayerPrefs.GetString(GetPlatformKey("DailyChallengesLastOpen")));
 				long timeInMilliseconds = Service.Get<ContentSchedulerService>().PresentTime().GetTimeInMilliseconds();
 				long num2 = timeInMilliseconds - num;
 				if (num2 <= 3000)

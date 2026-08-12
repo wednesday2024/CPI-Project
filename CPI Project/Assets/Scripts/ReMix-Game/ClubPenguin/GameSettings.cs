@@ -492,14 +492,14 @@ namespace ClubPenguin
         [Invokable("Avatar.Membership.SetOverride", Description = "Sets the local player's membership status. This is really for experimental reasons. It shouldn't be used for daily gameplay.")]
         public void SetMembershipOverride(MembershipOverrideOption option)
         {
-            PlayerPrefs.SetInt(MEMBERSHIP_OVERRIDE_KEY, (int)option);
+            PlayerPrefs.SetInt(GetPlatformKey(MEMBERSHIP_OVERRIDE_KEY), (int)option);
             PlayerPrefs.Save();
             ApplyMembershipOverride(option);
         }
 
         public MembershipOverrideOption GetMembershipOverrideSetting()
         {
-            return (MembershipOverrideOption)PlayerPrefs.GetInt(MEMBERSHIP_OVERRIDE_KEY, (int)MembershipOverrideOption.Member);
+            return (MembershipOverrideOption)PlayerPrefs.GetInt(GetPlatformKey(MEMBERSHIP_OVERRIDE_KEY), (int)MembershipOverrideOption.Member);
         }
 
         private void ApplySavedMembershipOverride()

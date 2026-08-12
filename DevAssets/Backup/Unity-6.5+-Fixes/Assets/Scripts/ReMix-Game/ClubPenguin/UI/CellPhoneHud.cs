@@ -56,6 +56,17 @@ namespace ClubPenguin.UI
 
 		private CellPhoneNotificationHandler notificationHandler;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void Start()
 		{
 			eventDispatcher = Service.Get<EventDispatcher>();
@@ -79,11 +90,11 @@ namespace ClubPenguin.UI
 				if (shouldPreventPhoneFromOpening())
 				{
 					flag = false;
-					PlayerPrefs.SetString("DailyChallengesLastOpen", dateTime.GetTimeInMilliseconds().ToString());
+					PlayerPrefs.SetString(GetPlatformKey("DailyChallengesLastOpen"), dateTime.GetTimeInMilliseconds().ToString());
 				}
-				else if (PlayerPrefs.HasKey("DailyChallengesLastOpen"))
+				else if (PlayerPrefs.HasKey(GetPlatformKey("DailyChallengesLastOpen")))
 				{
-					string @string = PlayerPrefs.GetString("DailyChallengesLastOpen");
+					string @string = PlayerPrefs.GetString(GetPlatformKey("DailyChallengesLastOpen"));
 					if (!string.IsNullOrEmpty(@string))
 					{
 						DateTime dateTime2 = Convert.ToInt64(@string).MsToDateTime();
@@ -105,7 +116,7 @@ namespace ClubPenguin.UI
 						eventDispatcher.AddListener<LoadingController.LoadingScreenHiddenEvent>(onLoadingScreenHidden);
 					}
 					logOpenPhoneBi();
-					PlayerPrefs.SetString("DailyChallengesLastOpen", dateTime.GetTimeInMilliseconds().ToString());
+					PlayerPrefs.SetString(GetPlatformKey("DailyChallengesLastOpen"), dateTime.GetTimeInMilliseconds().ToString());
 				}
 			}
 		}

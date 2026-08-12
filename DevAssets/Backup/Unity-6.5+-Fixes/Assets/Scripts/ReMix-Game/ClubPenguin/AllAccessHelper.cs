@@ -26,37 +26,42 @@ namespace ClubPenguin
 
 		private const string SHOW_ALL_ACCESS_OVER_KEY = "SeenAllAccessOverFlow";
 
-		public static bool HasSeenAllAccessFlow(string allAccessEventKey, string displayName)
+	private static string GetPlatformKey(string key)
+	{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+		if (Application.isEditor)
 		{
-			string key = "SeenAllAccessFlow_" + allAccessEventKey + "_" + displayName;
-			return PlayerPrefs.HasKey(key);
+			return "Editor_" + key;
 		}
+#endif
+		return key;
+	}
 
-		public static void SetHasSeenAllAccessFlow(string allAccessEventKey, string displayName)
-		{
-			string key = "SeenAllAccessFlow_" + allAccessEventKey + "_" + displayName;
-			PlayerPrefs.SetString(key, "");
-			PlayerPrefs.SetString("SeenAllAccessOverFlow", "");
-		}
+	public static bool HasSeenAllAccessFlow(string allAccessEventKey, string displayName)
+	{
+		string key = GetPlatformKey("SeenAllAccessFlow_" + allAccessEventKey + "_" + displayName);
+		return PlayerPrefs.HasKey(key);
+	}
 
-		public static bool ShowAccessEndedFlow()
-		{
-			return PlayerPrefs.HasKey("SeenAllAccessOverFlow");
-		}
+	public static void SetHasSeenAllAccessFlow(string allAccessEventKey, string displayName)
+	{
+		string key = GetPlatformKey("SeenAllAccessFlow_" + allAccessEventKey + "_" + displayName);
+		PlayerPrefs.SetString(key, "");
+		PlayerPrefs.SetString(GetPlatformKey("SeenAllAccessOverFlow"), "");
+	}
 
-		public static void SetHasSeenAllAccessEndedFlow()
-		{
-			PlayerPrefs.DeleteKey("SeenAllAccessOverFlow");
-		}
+	public static bool ShowAccessEndedFlow()
+	{
+		return PlayerPrefs.HasKey(GetPlatformKey("SeenAllAccessOverFlow"));
+	}
 
-		[Invokable("Tests.AllAccess.DoNotShowMeAccessEndedFlow")]
-		public static void DoNotShowMeAccessEndedFlow()
-		{
-			SetHasSeenAllAccessEndedFlow();
-		}
+	public static void SetHasSeenAllAccessEndedFlow()
+	{
+		PlayerPrefs.DeleteKey(GetPlatformKey("SeenAllAccessOverFlow"));
+	}
 
-		[Invokable("Tests.AllAccess.ShowMeAccessEndedFlow")]
-		public static void ShowMeAccessEndedFlow()
+	[Invokable("Tests.AllAccess.ShowMeAccessEndedFlow")]
+	public static void ShowMeAccessEndedFlow()
 		{
 			PlayerPrefs.SetString("SeenAllAccessOverFlow", "");
 		}

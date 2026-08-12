@@ -123,17 +123,17 @@ namespace ClubPenguin.UI
 			base.gameObject.SetActive(false);
 			Service.Get<EventDispatcher>().AddListener<CollectibleEvents.CollectibleAdd>(onAddCollectible);
 			localPlayerHandle = Service.Get<CPDataEntityCollection>().LocalPlayerHandle;
-			if (PlayerPrefs.HasKey("CollectiblesTutorialCount"))
+			if (PlayerPrefs.HasKey(GetPlatformKey("CollectiblesTutorialCount")))
 			{
-				numCollectiblesSinceTutorial = PlayerPrefs.GetInt("CollectiblesTutorialCount");
+				numCollectiblesSinceTutorial = PlayerPrefs.GetInt(GetPlatformKey("CollectiblesTutorialCount"));
 			}
-			if (PlayerPrefs.HasKey("CollectiblesTutorialsShown"))
+			if (PlayerPrefs.HasKey(GetPlatformKey("CollectiblesTutorialsShown")))
 			{
-				numTutorialsShown = PlayerPrefs.GetInt("CollectiblesTutorialsShown");
+				numTutorialsShown = PlayerPrefs.GetInt(GetPlatformKey("CollectiblesTutorialsShown"));
 			}
-			if (PlayerPrefs.HasKey("CollectiblesShowTutorial"))
+			if (PlayerPrefs.HasKey(GetPlatformKey("CollectiblesShowTutorial")))
 			{
-				ShouldShowCollectibleTutorial = (PlayerPrefs.GetInt("CollectiblesShowTutorial") == 1);
+				ShouldShowCollectibleTutorial = (PlayerPrefs.GetInt(GetPlatformKey("CollectiblesShowTutorial")) == 1);
 			}
 		}
 

@@ -221,9 +221,20 @@ namespace ClubPenguin.UI
             }
         }
 
+        private static string GetPlatformKey(string key)
+        {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            if (Application.isEditor)
+            {
+                return "Editor_" + key;
+            }
+#endif
+            return key;
+        }
+
         public void SetPurchasedPartyGame()
         {
-            PlayerPrefs.SetInt("purchased_party_game", 1);
+            PlayerPrefs.SetInt(GetPlatformKey("purchased_party_game"), 1);
         }
 
         private void loadInStockItems()
@@ -467,7 +478,7 @@ namespace ClubPenguin.UI
 
         private void tryStartPartyGamesTutorial()
         {
-            if (PlayerPrefs.GetInt("purchased_party_game") != 1)
+            if (PlayerPrefs.GetInt(GetPlatformKey("purchased_party_game")) != 1)
             {
                 Service.Get<TutorialManager>().TryStartTutorial(PartyGamesTutorialDefinition.Id);
             }

@@ -28,13 +28,24 @@ namespace ClubPenguin.Adventure
 
 		private EventDispatcher dispatcher;
 
-		private float hintTimer = 0f;
+		private EventChannel eventChannel;
 
-		private bool loadedHintTime = false;
+		private float hintTimer;
 
 		private QuestHintState hintState;
 
-		private EventChannel eventChannel;
+		private bool loadedHintTime;
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
 
 		private StateMachine trayFSM;
 
@@ -43,25 +54,29 @@ namespace ClubPenguin.Adventure
 			eventChannel = new EventChannel(Service.Get<EventDispatcher>());
 			eventChannel.AddListener<QuestEvents.SetQuestHint>(setHint);
 			eventChannel.AddListener<QuestEvents.CancelQuestHint>(cancelHint);
-			if (PlayerPrefs.HasKey("QUEST_HINT_TIME"))
+			if (PlayerPrefs.HasKey(GetPlatformKey("QUEST_HINT_TIME")))
 			{
-				float @float = PlayerPrefs.GetFloat("QUEST_HINT_TIME");
+				float @float = PlayerPrefs.GetFloat(GetPlatformKey("QUEST_HINT_TIME"));
 				if (@float != 0f)
 				{
 					hintTimer = Mathf.Max(@float, 2.5f);
 					hintState = QuestHintState.Waiting;
 					loadedHintTime = true;
 				}
-				PlayerPrefs.DeleteKey("QUEST_HINT_TIME");
+				PlayerPrefs.DeleteKey(GetPlatformKey("QUEST_HINT_TIME"));
 			}
 		}
 
 		private void OnDestroy()
 		{
-			eventChannel.RemoveAllListeners();
+			if (Service.IsSet<EventDispatcher>())
+			{
+				Service.Get<EventDispatcher>().RemoveListener<QuestEvents.SetQuestHint>(setHint);
+				Service.Get<EventDispatcher>().RemoveListener<QuestEvents.CancelQuestHint>(cancelHint);
+			}
 			if (hintState == QuestHintState.Waiting)
 			{
-				PlayerPrefs.SetFloat("QUEST_HINT_TIME", hintTimer);
+				PlayerPrefs.SetFloat(GetPlatformKey("QUEST_HINT_TIME"), hintTimer);
 			}
 		}
 

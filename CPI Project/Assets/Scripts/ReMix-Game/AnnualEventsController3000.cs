@@ -21,6 +21,17 @@ public class AnnualEventsController3000 : MonoBehaviour
     private OverrideMode overrideMode = OverrideMode.Automatic;
     private string forcedEventKey = null;
 
+    private static string GetPlatformKey(string key)
+    {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+        if (Application.isEditor)
+        {
+            return "Editor_" + key;
+        }
+#endif
+        return key;
+    }
+
     [Serializable]
     public class EventInfo
     {
@@ -252,14 +263,14 @@ public class AnnualEventsController3000 : MonoBehaviour
 
     private void LoadOverrideState()
     {
-        int mode = PlayerPrefs.GetInt(PLAYERPREFS_OVERRIDE_MODE_KEY, 0);
+        int mode = PlayerPrefs.GetInt(GetPlatformKey(PLAYERPREFS_OVERRIDE_MODE_KEY), 0);
         if (mode < 0 || mode > 2)
         {
             mode = 0;
         }
         overrideMode = (OverrideMode)mode;
 
-        forcedEventKey = PlayerPrefs.GetString(PLAYERPREFS_FORCED_EVENT_KEY, null);
+        forcedEventKey = PlayerPrefs.GetString(GetPlatformKey(PLAYERPREFS_FORCED_EVENT_KEY), null);
         if (string.IsNullOrEmpty(forcedEventKey))
         {
             forcedEventKey = null;
@@ -268,15 +279,15 @@ public class AnnualEventsController3000 : MonoBehaviour
 
     private void SaveOverrideState()
     {
-        PlayerPrefs.SetInt(PLAYERPREFS_OVERRIDE_MODE_KEY, (int)overrideMode);
+        PlayerPrefs.SetInt(GetPlatformKey(PLAYERPREFS_OVERRIDE_MODE_KEY), (int)overrideMode);
 
         if (string.IsNullOrEmpty(forcedEventKey))
         {
-            PlayerPrefs.DeleteKey(PLAYERPREFS_FORCED_EVENT_KEY);
+            PlayerPrefs.DeleteKey(GetPlatformKey(PLAYERPREFS_FORCED_EVENT_KEY));
         }
         else
         {
-            PlayerPrefs.SetString(PLAYERPREFS_FORCED_EVENT_KEY, forcedEventKey);
+            PlayerPrefs.SetString(GetPlatformKey(PLAYERPREFS_FORCED_EVENT_KEY), forcedEventKey);
         }
 
         PlayerPrefs.Save();

@@ -16,6 +16,17 @@ namespace ClubPenguin.Configuration
 			protected set;
 		}
 
+		protected static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public abstract string ValueToString();
 	}
 	public class ConditionalProperty<T> : ConditionalProperty
@@ -56,9 +67,9 @@ namespace ClubPenguin.Configuration
 				}
 			}
 			string key = string.Format("cp.ConditionalPropertyLogged.{0}", base.Key);
-			if (PlayerPrefs.GetInt(key, 0) == 0 && definition.SendAnalytics)
+			if (PlayerPrefs.GetInt(GetPlatformKey(key), 0) == 0 && definition.SendAnalytics)
 			{
-				PlayerPrefs.SetInt(key, 1);
+				PlayerPrefs.SetInt(GetPlatformKey(key), 1);
 				if (Service.IsSet<ICPSwrveService>())
 				{
 					string str = base.Key.ToLower();

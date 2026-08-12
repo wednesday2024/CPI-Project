@@ -74,6 +74,17 @@ namespace ClubPenguin.SpecialEvents
 
 		private Dictionary<int, ScheduledEventDateDefinition> dateDefinitions;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public virtual void Awake()
 		{
 			eventChannel = new EventChannel(Service.Get<EventDispatcher>());
@@ -186,7 +197,7 @@ namespace ClubPenguin.SpecialEvents
 			if (!string.IsNullOrEmpty(currentCutsceneEvent.CutsceneData.CutSceneAdditiveScene))
 			{
 				string text = createLocalKey(cutsceneData.PlayedKeyName);
-				if (string.IsNullOrEmpty(text) || (!string.IsNullOrEmpty(text) && !PlayerPrefs.HasKey(text)))
+				if (string.IsNullOrEmpty(text) || (!string.IsNullOrEmpty(text) && !PlayerPrefs.HasKey(GetPlatformKey(text))))
 				{
 					incrementLoadCount(cutsceneData.CutSceneAdditiveScene, false);
 					CoroutineRunner.Start(loadAdditiveScene(cutsceneData.CutSceneAdditiveScene, onLoadCallBack, onCompleteCallBack), this, "loadAdditiveScene");
@@ -345,7 +356,7 @@ namespace ClubPenguin.SpecialEvents
 		{
 			if (!string.IsNullOrEmpty(cutsceneData.PlayedKeyName))
 			{
-				return PlayerPrefs.HasKey(createLocalKey(cutsceneData.PlayedKeyName));
+				return PlayerPrefs.HasKey(GetPlatformKey(createLocalKey(cutsceneData.PlayedKeyName)));
 			}
 			Log.LogError(this, string.Format("Error: an Object Data field has a null PlayedKeyName entry"));
 			return false;
@@ -357,9 +368,9 @@ namespace ClubPenguin.SpecialEvents
 			for (int i = 0; i < num; i++)
 			{
 				string text = createLocalKey(Events[i].CutsceneData.PlayedKeyName);
-				if (!string.IsNullOrEmpty(text) && PlayerPrefs.HasKey(text))
+				if (!string.IsNullOrEmpty(text) && PlayerPrefs.HasKey(GetPlatformKey(text)))
 				{
-					PlayerPrefs.DeleteKey(text);
+					PlayerPrefs.DeleteKey(GetPlatformKey(text));
 				}
 			}
 		}

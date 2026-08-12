@@ -190,7 +190,16 @@ namespace ClubPenguin.IslandTargets
 		private Animator animatorFloatingClock;
 
 		private GameObject normalScarecrowObj;
-
+	private static string GetPlatformKey(string key)
+	{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+		if (Application.isEditor)
+		{
+			return "Editor_" + key;
+		}
+#endif
+		return key;
+	}
 		private void Awake()
 		{
 			dispatcher = playgroundController.EventDispatcher;
@@ -675,7 +684,7 @@ namespace ClubPenguin.IslandTargets
 		{
 			if (!string.IsNullOrEmpty(ParticipationPlayerPrefName))
 			{
-				PlayerPrefs.SetInt(ParticipationPlayerPrefName, 1);
+				PlayerPrefs.SetInt(GetPlatformKey(ParticipationPlayerPrefName), 1);
 			}
 			Service.Get<EventDispatcher>().DispatchEvent(default(IslandTargetsEvents.LocalPlayerParticipated));
 		}

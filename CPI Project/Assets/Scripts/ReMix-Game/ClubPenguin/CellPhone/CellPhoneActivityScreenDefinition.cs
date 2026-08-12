@@ -37,11 +37,22 @@ namespace ClubPenguin.CellPhone
 				Widgets = new List<string>();
 			}
 
+			private static string GetPlatformKey(string key)
+			{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+				if (Application.isEditor)
+				{
+					return "Editor_" + key;
+				}
+#endif
+				return key;
+			}
+
 			public static AccessedWidgets GetAccessedWidgets()
 			{
-				if (PlayerPrefs.HasKey("CellPhone_Accessed_Widgets"))
+				if (PlayerPrefs.HasKey(GetPlatformKey("CellPhone_Accessed_Widgets")))
 				{
-					string @string = PlayerPrefs.GetString("CellPhone_Accessed_Widgets");
+					string @string = PlayerPrefs.GetString(GetPlatformKey("CellPhone_Accessed_Widgets"));
 					try
 					{
 						return Service.Get<JsonService>().Deserialize<AccessedWidgets>(@string);
@@ -57,7 +68,7 @@ namespace ClubPenguin.CellPhone
 			public static void SaveAccessedWidgets(AccessedWidgets widgets)
 			{
 				string value = Service.Get<JsonService>().Serialize(widgets);
-				PlayerPrefs.SetString("CellPhone_Accessed_Widgets", value);
+				PlayerPrefs.SetString(GetPlatformKey("CellPhone_Accessed_Widgets"), value);
 			}
 		}
 

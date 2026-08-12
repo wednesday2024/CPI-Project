@@ -23,6 +23,17 @@ namespace ClubPenguin.Newsfeed
         [SerializeField]
         private bool waitForReadyToShow = false;
 
+        private static string GetPlatformKey(string key)
+        {
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            if (Application.isEditor)
+            {
+                return "Editor_" + key;
+            }
+#endif
+            return key;
+        }
+
         public event System.Action NewsfeedClosed;
 
         public event System.Action NewsfeedLoaded;
@@ -66,7 +77,7 @@ namespace ClubPenguin.Newsfeed
             NewPostData component;
             if (!dataEntityCollection.TryGetComponent(dataEntityCollection.LocalPlayerHandle, out component))
             {
-                if (PlayerPrefs.GetInt(NEWSFEED_LOGIN_TIMESTAMP_PLAYERPREFS_KEY) <= 0)
+                if (PlayerPrefs.GetInt(GetPlatformKey(NEWSFEED_LOGIN_TIMESTAMP_PLAYERPREFS_KEY)) <= 0)
                 {
                     dataEntityCollection.AddComponent<NewPostData>(dataEntityCollection.LocalPlayerHandle);
                 }
@@ -79,7 +90,7 @@ namespace ClubPenguin.Newsfeed
 
         private bool onLatestPostTime(NewsfeedServiceEvents.LatestPostTime evt)
         {
-            if (evt.Timestamp > PlayerPrefs.GetInt(NEWSFEED_LOGIN_TIMESTAMP_PLAYERPREFS_KEY))
+            if (evt.Timestamp > PlayerPrefs.GetInt(GetPlatformKey(NEWSFEED_LOGIN_TIMESTAMP_PLAYERPREFS_KEY)))
             {
                 dataEntityCollection.AddComponent<NewPostData>(dataEntityCollection.LocalPlayerHandle);
             }

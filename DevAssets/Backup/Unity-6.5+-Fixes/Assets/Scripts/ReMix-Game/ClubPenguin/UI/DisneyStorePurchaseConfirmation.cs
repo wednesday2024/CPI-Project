@@ -243,12 +243,23 @@ namespace ClubPenguin.UI
 			showPurchaseModal();
 		}
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private bool onPurchaseComplete(DisneyStoreServiceEvents.DisneyStorePurchaseComplete evt)
 		{
 			Service.Get<EventDispatcher>().RemoveListener<DisneyStoreServiceEvents.DisneyStorePurchaseComplete>(onPurchaseComplete);
 			if (evt.Result == DisneyStoreServiceEvents.DisneyStorePurchaseResult.Success)
 			{
-				PlayerPrefs.SetInt("DisneyStoreShowTutorial", 0);
+				PlayerPrefs.SetInt(GetPlatformKey("DisneyStoreShowTutorial"), 0);
 				setState(ConfirmationState.Complete);
 				if (DisneyStoreUtils.DoesItemContainEquipmentInstance(item))
 				{

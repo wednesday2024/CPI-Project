@@ -12,6 +12,17 @@ namespace ClubPenguin
 
 		public PrefabContentKey[] ContentKeys;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		private void Awake()
 		{
 			if (ContentKeys == null || ContentKeys.Length == 0)
@@ -27,9 +38,9 @@ namespace ClubPenguin
 			else
 			{
 				int num2 = 0;
-				if (PlayerPrefs.HasKey("MembershipOfferOrderABTestCurrentScreen"))
+				if (PlayerPrefs.HasKey(GetPlatformKey("MembershipOfferOrderABTestCurrentScreen")))
 				{
-					num2 = PlayerPrefs.GetInt("MembershipOfferOrderABTestCurrentScreen");
+					num2 = PlayerPrefs.GetInt(GetPlatformKey("MembershipOfferOrderABTestCurrentScreen"));
 					if (num2 >= ContentKeys.Length)
 					{
 						num2 = 0;
@@ -37,7 +48,7 @@ namespace ClubPenguin
 				}
 				key = ContentKeys[num2];
 				int value = (num2 + 1) % ContentKeys.Length;
-				PlayerPrefs.SetInt("MembershipOfferOrderABTestCurrentScreen", value);
+				PlayerPrefs.SetInt(GetPlatformKey("MembershipOfferOrderABTestCurrentScreen"), value);
 			}
 			Content.LoadAsync(onPrefabLoaded, key);
 		}

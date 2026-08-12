@@ -22,6 +22,17 @@ namespace ClubPenguin
 
 		private ScreenController[] siblings;
 
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
+		}
+
 		public ScreenController Previous
 		{
 			get;
@@ -220,7 +231,7 @@ namespace ClubPenguin
 						}
 						if (!string.IsNullOrEmpty(evt.SubScreenName))
 						{
-							PlayerPrefs.SetString("SelectTrayScreen_SubScene", evt.SubScreenName);
+							PlayerPrefs.SetString(GetPlatformKey("SelectTrayScreen_SubScene"), evt.SubScreenName);
 						}
 					}
 				}

@@ -21,7 +21,16 @@ namespace ClubPenguin.TutorialUI
 		private EventChannel eventChannel;
 
 		private int defaultSortOrder;
-
+	private static string GetPlatformKey(string key)
+	{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+		if (Application.isEditor)
+		{
+			return "Editor_" + key;
+		}
+#endif
+		return key;
+	}
 		private void Start()
 		{
 			defaultSortOrder = GetComponent<Canvas>().sortingOrder;
@@ -71,12 +80,9 @@ namespace ClubPenguin.TutorialUI
 		private void updateAccessibilityMultiplier()
 		{
 			float num = 1f;
-			if (PlayerPrefs.HasKey("accessibility_scale"))
-			{
-				num = PlayerPrefs.GetFloat("accessibility_scale");
-			}
-			if (num > 1f)
-			{
+		if (PlayerPrefs.HasKey(GetPlatformKey("accessibility_scale")))
+		{
+			num = PlayerPrefs.GetFloat(GetPlatformKey("accessibility_scale"));
 				GetComponent<CanvasScalerExt>().AccessibilityMultiplier = 0f;
 			}
 			else
