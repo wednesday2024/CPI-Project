@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > ### Unity Version
-> - **Unity 6000.3.21f1 LTS**
+> - **Unity 6000.3.22f1 LTS**
 
 > [!CAUTION]
 > - We do NOT recommend upgrading to Unity 6.5 or newer from this Unity 6.3 branch because it is known to break Fabric Audio completely and many core functions of Club Penguin Island. However, we do have an experimental Unity 6.5 branch that can be found [here](DevAssets/Backup/Unity-6.5+-Fixes).
