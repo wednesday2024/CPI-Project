@@ -18,8 +18,8 @@ namespace HutongGames.PlayMakerEditor
     public class PlayMakerWelcomeWindow : EditorWindow
     {
         // Remember to update version info since it's used by export scripts!
-        public const string InstallCurrentVersion = "1.9.10";
-        public const string InstallAssemblyVersion = "1.9.10f1";
+        public const string InstallCurrentVersion = "1.9.11";
+        public const string InstallAssemblyVersion = "1.9.11f1";
         public const string InstallBetaVersion = "";
         public const string Version = InstallCurrentVersion + " " + InstallBetaVersion;
 
@@ -78,7 +78,7 @@ namespace HutongGames.PlayMakerEditor
 
         private static bool stylesInitialized;
 
-#if PLAYMAKER_1_9_10
+#if PLAYMAKER_1_9_11
         [MenuItem("PlayMaker/Welcome Screen", false, 500)]
 #elif PLAYMAKER
         [MenuItem("PlayMaker/Update PlayMaker", false, 500)]
