@@ -38,7 +38,7 @@
  - **The Penguin data gets stored here in the Windows Registry:**  
   - **Built .exe client:** `HKEY_CURRENT_USER\SOFTWARE\OpenCPI\CP Island`  
   - **Unity Editor:** `HKEY_CURRENT_USER\SOFTWARE\Unity\UnityEditor\OpenCPI\CP Island`
- - **The Penguin data gets stored here on Linux for the Editor and built client:**
+ - **The Penguin data gets stored here on Linux for the built client but the Editor path is currently unknown because we had to rewrite the data paths to play more nicely with Linux:**
   - `/home/your_username/.config/unity3d/OpenCPI/CP Island/prefs`
  - To launch the game in the Unity editor:
    - Open `Assets/Game/Core/Scenes/Boot.unity`
