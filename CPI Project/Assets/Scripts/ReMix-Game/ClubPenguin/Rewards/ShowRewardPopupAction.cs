@@ -18,6 +18,15 @@ namespace ClubPenguin.Rewards
 
 		public override void OnEnter()
 		{
+			// The FINISHED state of DJC001Q005Concert has no reward assigned, and a
+			// reference that has gone missing deserializes to null as well. The NRE
+			// takes Finish() with it, so the quest FSM never moves on
+			if (Reward == null)
+			{
+				Disney.LaunchPadFramework.Log.LogError(this, "Cannot show the reward popup, no Reward is set on the action");
+				Finish();
+				return;
+			}
 			ShowRewardPopup showRewardPopup = new ShowRewardPopup.Builder(PopupType, Reward.ToReward()).setHeaderText(PopupSplashText).setShowXpAndCoinsUI(ShowXpAndCoinsUI).Build();
 			showRewardPopup.Execute();
 			Service.Get<EventDispatcher>().AddListener<RewardEvents.RewardPopupComplete>(onRewardPopupComplete);
