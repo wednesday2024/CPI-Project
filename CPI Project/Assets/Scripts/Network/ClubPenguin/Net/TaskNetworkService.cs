@@ -20,12 +20,26 @@ namespace ClubPenguin.Net
 			clubPenguinClient.GameServer.Pickup(path, tag, position);
 		}
 
+		// Offline the game server never reports a counter change, so progress is
+		// pushed here by whoever moved it - see DailyChallengeService.
+		public void SetProgress(string taskId, int counter)
+		{
+			TaskProgress taskProgress = default(TaskProgress);
+			taskProgress.taskId = taskId;
+			taskProgress.counter = counter;
+			SignedResponse<TaskProgress> signedResponse = new SignedResponse<TaskProgress>();
+			signedResponse.Data = taskProgress;
+			APICall<SetTaskProgressOperation> aPICall = clubPenguinClient.TaskApi.SetProgress(signedResponse);
+			aPICall.OnError += handleCPResponseError;
+			aPICall.Execute();
+		}
+
 		public void ClaimReward(string taskId)
 		{
 			APICall<ClaimTaskRewardOperation> aPICall = clubPenguinClient.TaskApi.ClaimTaskReward(taskId);
 			aPICall.OnResponse += delegate(ClaimTaskRewardOperation op, HttpResponse httpResponse)
 			{
-				Reward reward = op.ResponseBody.reward.ToReward();
+				Reward reward = (op.ResponseBody.reward != null) ? op.ResponseBody.reward.ToReward() : null;
 				if (reward != null)
 				{
 					Service.Get<EventDispatcher>().DispatchEvent(new RewardServiceEvents.MyRewardEarned(RewardSource.TASK, taskId, reward));

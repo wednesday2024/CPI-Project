@@ -10,6 +10,8 @@ namespace ClubPenguin.Net.Client
 
         QuestRewardsCollection QuestRewards(string questId);
 
+        Reward GetTaskReward(string taskId);
+
         void AddReward(Reward reward, CPResponse responseBody);
 
         void SetReward(Reward reward, CPResponse responseBody);

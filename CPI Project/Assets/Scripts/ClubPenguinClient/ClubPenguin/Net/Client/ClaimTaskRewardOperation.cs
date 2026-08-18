@@ -1,5 +1,8 @@
 using ClubPenguin.Net.Client.Mappers;
 using ClubPenguin.Net.Domain;
+using ClubPenguin.Net.Offline;
+using Disney.Kelowna.Common;
+using Disney.MobileNetwork;
 using hg.ApiWebKit.core.attributes;
 using hg.ApiWebKit.mappers;
 using System;
@@ -27,7 +30,35 @@ namespace ClubPenguin.Net.Client
 
 		protected override void PerformOfflineAction(OfflineDatabase offlineDatabase, IOfflineDefinitionLoader offlineDefinitions)
 		{
-			throw new NotImplementedException();
+			ResponseBody = new ClaimTaskRewardResponse();
+			DailyTaskProgress dailyTaskProgress = SetTaskProgressOperation.ReadCurrentDay(offlineDatabase);
+			TaskProgress taskProgress = default(TaskProgress);
+			taskProgress.taskId = RequestBody;
+			bool alreadyClaimed = false;
+			for (int i = 0; i < dailyTaskProgress.Tasks.Count; i++)
+			{
+				if (dailyTaskProgress.Tasks[i].taskId == RequestBody)
+				{
+					taskProgress = dailyTaskProgress.Tasks[i];
+					alreadyClaimed = taskProgress.claimed;
+					break;
+				}
+			}
+			if (alreadyClaimed)
+			{
+				// Answered without a reward: the task was already paid out, and the
+				// caller treats an empty reward as "nothing more to give".
+				return;
+			}
+			Reward reward = offlineDefinitions.GetTaskReward(RequestBody);
+			if (reward != null && !reward.isEmpty())
+			{
+				offlineDefinitions.AddReward(reward, ResponseBody);
+				JsonService jsonService = Service.Get<JsonService>();
+				ResponseBody.reward = jsonService.Deserialize<RewardJsonReader>(jsonService.Serialize(RewardJsonWritter.FromReward(reward)));
+			}
+			taskProgress.claimed = true;
+			SetTaskProgressOperation.SaveProgress(offlineDatabase, taskProgress);
 		}
 	}
 }
