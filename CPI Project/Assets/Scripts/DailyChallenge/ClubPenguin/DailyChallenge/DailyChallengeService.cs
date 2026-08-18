@@ -78,12 +78,12 @@ namespace ClubPenguin.DailyChallenge
 		{
 			loadedDailies.Clear();
 			savedTaskCounters.Clear();
+			UnityEngine.Object manifest;
+			DailyChallengeScheduleDefinition dailies = null;
 			if (day != default(DateTime))
 			// The map only holds the days that have a schedule, and it is keyed on the date
 			// alone, so Map[day] throws for anything else rather than coming back empty.
 			// TryGetValue lets the "nothing today" branch below deal with it.
-			UnityEngine.Object manifest;
-			DailyChallengeScheduleDefinition dailies = null;
 			if (day != default(DateTime) && datedManifestMap.Map.TryGetValue(day.Date, out manifest))
 			{
 				dailies = manifest as DailyChallengeScheduleDefinition;
