@@ -50,6 +50,13 @@ namespace ClubPenguin.Net.Client
 				// caller treats an empty reward as "nothing more to give".
 				return;
 			}
+			if (!offlineDefinitions.IsTaskComplete(RequestBody))
+			{
+				// Same empty answer for a task that is not finished. The button that
+				// asks for this is greyed out until it is, but that is the interface
+				// being polite rather than a rule anybody is holding to.
+				return;
+			}
 			Reward reward = offlineDefinitions.GetTaskReward(RequestBody);
 			if (reward != null && !reward.isEmpty())
 			{

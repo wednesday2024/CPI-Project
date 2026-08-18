@@ -12,6 +12,12 @@ namespace ClubPenguin.Net.Client
 
         Reward GetTaskReward(string taskId);
 
+        // Whether the task has actually been finished. Offline there is nobody
+        // else to ask: the reward is handed out by the same machine that claims
+        // it, so without this the only thing standing between a player and an
+        // unearned reward is the button being greyed out.
+        bool IsTaskComplete(string taskId);
+
         // The day daily challenges belong to. Not the calendar day: the game picks
         // the set of challenges by its own content date, so counters have to be
         // filed against the same day or they reset while the tasks stay put.

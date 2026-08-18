@@ -567,6 +567,22 @@ namespace ClubPenguin
             return Service.Get<ContentSchedulerService>().CurrentContentDate().Date.GetTimeInMilliseconds();
         }
 
+        public bool IsTaskComplete(string taskId)
+        {
+            if (!Service.IsSet<ClubPenguin.Task.TaskService>())
+            {
+                return false;
+            }
+            foreach (ClubPenguin.Task.Task task in Service.Get<ClubPenguin.Task.TaskService>().Tasks)
+            {
+                if (task.Id == taskId)
+                {
+                    return task.IsComplete;
+                }
+            }
+            return false;
+        }
+
         public Reward GetTaskReward(string taskId)
         {
             if (!Service.IsSet<ClubPenguin.Task.TaskService>())
