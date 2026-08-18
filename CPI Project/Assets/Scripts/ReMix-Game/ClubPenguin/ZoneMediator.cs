@@ -24,7 +24,11 @@ namespace ClubPenguin
 
 		private bool onContentDateChanged(WorldServiceEvents.ContentDateChanged evt)
 		{
-			dailyChallengeService.ReloadChallenges(evt.ContentDate);
+			// evt.ContentDate is whatever date the room identifier carried, and offline that
+			// is just today's real date - there is no schedule for it, so the reload finds
+			// nothing. The scheduler already maps today onto a day we do have content for,
+			// which is what onZoneTransition below passes.
+			dailyChallengeService.ReloadChallenges(contentSchedulerService.CurrentContentDate());
 			return false;
 		}
 
