@@ -70,12 +70,20 @@ namespace ClubPenguin.SpecialEvents
 				Service.Get<LoadingController>().AddLoadingSystem(this);
 				spawnPrefabsLoadTimer = new Stopwatch();
 				spawnPrefabsLoadTimer.Start();
-				foreach (ScheduledSpawnData item in prefabsToSpawn)
+				try
 				{
-					onSpawnPrefabLoaded(Content.LoadImmediate(item.SpawnPrefabKey), item);
+					foreach (ScheduledSpawnData item in prefabsToSpawn)
+					{
+						onSpawnPrefabLoaded(Content.LoadImmediate(item.SpawnPrefabKey), item);
+					}
 				}
-				Service.Get<LoadingController>().RemoveLoadingSystem(this);
-				spawnPrefabsLoadTimer.Stop();
+				finally
+				{
+					// A throwing load used to leave the loading system registered, and the
+					// loading screen then hung until the transition timed out.
+					Service.Get<LoadingController>().RemoveLoadingSystem(this);
+					spawnPrefabsLoadTimer.Stop();
+				}
 			}
 		}
 
@@ -129,22 +137,30 @@ namespace ClubPenguin.SpecialEvents
 				Service.Get<LoadingController>().AddLoadingSystem(this);
 				swapMaterialsLoadTimer = new Stopwatch();
 				swapMaterialsLoadTimer.Start();
-				foreach (ScheduledSwapMaterialData item in materialsToSwap)
+				try
 				{
-					Renderer component = item.SwapTarget.GetComponent<Renderer>();
-					Material material = component.material;
-					Texture mainTexture = component.material.mainTexture;
-					component.material.mainTexture = null;
-					component.material = null;
-					if (item.DestroyTexture)
+					foreach (ScheduledSwapMaterialData item in materialsToSwap)
 					{
-						ComponentExtensions.DestroyResource(mainTexture);
+						Renderer component = item.SwapTarget.GetComponent<Renderer>();
+						Material material = component.material;
+						Texture mainTexture = component.material.mainTexture;
+						component.material.mainTexture = null;
+						component.material = null;
+						if (item.DestroyTexture)
+						{
+							ComponentExtensions.DestroyResource(mainTexture);
+						}
+						ComponentExtensions.DestroyResource(material);
+						component.material = Content.LoadImmediate(item.SwapMaterialKey);
 					}
-					ComponentExtensions.DestroyResource(material);
-					component.material = Content.LoadImmediate(item.SwapMaterialKey);
 				}
-				Service.Get<LoadingController>().RemoveLoadingSystem(this);
-				swapMaterialsLoadTimer.Stop();
+				finally
+				{
+					// Same as above: the loading screen must come down even if a material
+					// fails to load, or the zone never finishes loading.
+					Service.Get<LoadingController>().RemoveLoadingSystem(this);
+					swapMaterialsLoadTimer.Stop();
+				}
 			}
 		}
 	}
