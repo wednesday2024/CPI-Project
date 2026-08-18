@@ -218,6 +218,8 @@
 
 > [Thunder](https://github.com/Ivorplayz)
 
+> [Maksim](https://github.com/loozmax)
+
 > miraculizado (Discord)
 
 > approt (Discord)
