@@ -12,6 +12,11 @@ namespace ClubPenguin.Net.Client
 
         Reward GetTaskReward(string taskId);
 
+        // The day daily challenges belong to. Not the calendar day: the game picks
+        // the set of challenges by its own content date, so counters have to be
+        // filed against the same day or they reset while the tasks stay put.
+        long GetCurrentDay();
+
         void AddReward(Reward reward, CPResponse responseBody);
 
         void SetReward(Reward reward, CPResponse responseBody);

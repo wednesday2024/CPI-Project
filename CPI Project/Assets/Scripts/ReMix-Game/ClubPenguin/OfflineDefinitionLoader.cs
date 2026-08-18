@@ -558,6 +558,15 @@ namespace ClubPenguin
         // Only today's challenges can be claimed, and those are exactly the ones
         // TaskService has loaded — so the definition is taken from there rather
         // than from a separate lookup table.
+        public long GetCurrentDay()
+        {
+            if (!Service.IsSet<ContentSchedulerService>())
+            {
+                return DateTime.UtcNow.Date.GetTimeInMilliseconds();
+            }
+            return Service.Get<ContentSchedulerService>().CurrentContentDate().Date.GetTimeInMilliseconds();
+        }
+
         public Reward GetTaskReward(string taskId)
         {
             if (!Service.IsSet<ClubPenguin.Task.TaskService>())

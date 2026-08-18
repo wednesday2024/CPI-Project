@@ -28,21 +28,16 @@ namespace ClubPenguin.Net.Client
 		{
 			if (RequestBody != null)
 			{
-				SaveProgress(offlineDatabase, RequestBody.Data);
+				SaveProgress(offlineDatabase, offlineDefinitions, RequestBody.Data);
 			}
-		}
-
-		public static long GetCurrentDay()
-		{
-			return DateTime.UtcNow.Date.GetTimeInMilliseconds();
 		}
 
 		// Progress of an earlier day is dropped rather than returned: the challenge
 		// list is picked per day, so old counters belong to tasks that are gone.
-		public static DailyTaskProgress ReadCurrentDay(OfflineDatabase offlineDatabase)
+		public static DailyTaskProgress ReadCurrentDay(OfflineDatabase offlineDatabase, IOfflineDefinitionLoader offlineDefinitions)
 		{
 			DailyTaskProgress dailyTaskProgress = offlineDatabase.Read<DailyTaskProgress>();
-			long currentDay = GetCurrentDay();
+			long currentDay = offlineDefinitions.GetCurrentDay();
 			if (dailyTaskProgress.Tasks == null || dailyTaskProgress.Day != currentDay)
 			{
 				dailyTaskProgress.Init();
@@ -51,20 +46,20 @@ namespace ClubPenguin.Net.Client
 			return dailyTaskProgress;
 		}
 
-		public static TaskProgressList GetProgressList(OfflineDatabase offlineDatabase)
+		public static TaskProgressList GetProgressList(OfflineDatabase offlineDatabase, IOfflineDefinitionLoader offlineDefinitions)
 		{
 			TaskProgressList taskProgressList = new TaskProgressList();
-			taskProgressList.AddRange(ReadCurrentDay(offlineDatabase).Tasks);
+			taskProgressList.AddRange(ReadCurrentDay(offlineDatabase, offlineDefinitions).Tasks);
 			return taskProgressList;
 		}
 
-		public static void SaveProgress(OfflineDatabase offlineDatabase, TaskProgress progress)
+		public static void SaveProgress(OfflineDatabase offlineDatabase, IOfflineDefinitionLoader offlineDefinitions, TaskProgress progress)
 		{
 			if (string.IsNullOrEmpty(progress.taskId))
 			{
 				return;
 			}
-			DailyTaskProgress dailyTaskProgress = ReadCurrentDay(offlineDatabase);
+			DailyTaskProgress dailyTaskProgress = ReadCurrentDay(offlineDatabase, offlineDefinitions);
 			progress.day = dailyTaskProgress.Day;
 			for (int i = 0; i < dailyTaskProgress.Tasks.Count; i++)
 			{

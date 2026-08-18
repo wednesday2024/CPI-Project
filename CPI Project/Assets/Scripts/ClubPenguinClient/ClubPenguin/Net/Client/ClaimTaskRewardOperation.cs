@@ -31,7 +31,7 @@ namespace ClubPenguin.Net.Client
 		protected override void PerformOfflineAction(OfflineDatabase offlineDatabase, IOfflineDefinitionLoader offlineDefinitions)
 		{
 			ResponseBody = new ClaimTaskRewardResponse();
-			DailyTaskProgress dailyTaskProgress = SetTaskProgressOperation.ReadCurrentDay(offlineDatabase);
+			DailyTaskProgress dailyTaskProgress = SetTaskProgressOperation.ReadCurrentDay(offlineDatabase, offlineDefinitions);
 			TaskProgress taskProgress = default(TaskProgress);
 			taskProgress.taskId = RequestBody;
 			bool alreadyClaimed = false;
@@ -58,7 +58,7 @@ namespace ClubPenguin.Net.Client
 				ResponseBody.reward = jsonService.Deserialize<RewardJsonReader>(jsonService.Serialize(RewardJsonWritter.FromReward(reward)));
 			}
 			taskProgress.claimed = true;
-			SetTaskProgressOperation.SaveProgress(offlineDatabase, taskProgress);
+			SetTaskProgressOperation.SaveProgress(offlineDatabase, offlineDefinitions, taskProgress);
 		}
 	}
 }
