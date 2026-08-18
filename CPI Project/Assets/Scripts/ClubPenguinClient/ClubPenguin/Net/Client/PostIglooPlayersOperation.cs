@@ -49,7 +49,7 @@ namespace ClubPenguin.Net.Client
 				break;
 			}
 			SignedJoinRoomData = PostRoomPlayersOperation.JoinRoom(world, Language, IglooId, offlineDatabase, offlineDefinitions);
-			SignedJoinRoomData.Data.extraLayoutData = offlineDatabase.Read<IglooEntity>().Data.activeLayout;
+			SignedJoinRoomData.Data.extraLayoutData = GetActiveIglooLayoutOperation.ReadActiveLayout(offlineDatabase);
 			if (SignedJoinRoomData.Data.extraLayoutData == null)
 			{
 				SignedJoinRoomData.Data.extraLayoutData = new SceneLayout
