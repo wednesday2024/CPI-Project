@@ -312,7 +312,7 @@ MonoBehaviour:
   QuestStepText: {fileID: 114057380887661465}
 --- !u!95 &95325056239669644
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -326,6 +326,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1447,7 +1448,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cf44ff803624e1448b0c3b473729ba04, type: 2}
+  m_Sprite: {fileID: 21300000, guid: fe15d9d8468b7d6418f5d09f24215fb8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1482,10 +1483,10 @@ MonoBehaviour:
   - 
   - 
   Sprites:
-  - {fileID: 21300000, guid: fb6f6f9960ef19344b44efaa9ff4cf9b, type: 2}
-  - {fileID: 21300000, guid: 90112548a6b232143b92e50bff9b0852, type: 2}
-  - {fileID: 21300000, guid: cf44ff803624e1448b0c3b473729ba04, type: 2}
-  - {fileID: 21300000, guid: 36aa87c7fe67b064296ad25617f34bc9, type: 2}
+  - {fileID: 21300000, guid: fb7330df0f4ba7c4b994ab0f6527fd1e, type: 3}
+  - {fileID: 21300000, guid: 8ec043d526dd6024d9bf0557672d9778, type: 3}
+  - {fileID: 21300000, guid: fe15d9d8468b7d6418f5d09f24215fb8, type: 3}
+  - {fileID: 21300000, guid: 5839407a73af4ed47a2f235a38c4ffcb, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
