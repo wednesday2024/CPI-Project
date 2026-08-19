@@ -39,7 +39,13 @@ namespace ClubPenguin
 			{
 				clearParentNodes();
 			}
-			ZoneNode item = nodeGraph[startZoneName];
+			ZoneNode item;
+			if (!nodeGraph.TryGetValue(startZoneName, out item))
+			{
+				// Quest-only zones like MtBlizzardSummit are not in ZonePathingData
+				// Throwing here took the objective's sub-FSM down with it
+				return "";
+			}
 			List<string> list = new List<string>();
 			Queue<ZoneNode> queue = new Queue<ZoneNode>();
 			queue.Enqueue(item);
