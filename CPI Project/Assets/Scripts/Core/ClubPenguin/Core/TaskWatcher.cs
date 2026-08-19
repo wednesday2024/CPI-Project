@@ -24,6 +24,15 @@ namespace ClubPenguin.Core
 			private set;
 		}
 
+		// True for a watcher that has nothing to do with the scene it is in
+		public virtual bool SurvivesSceneChange
+		{
+			get
+			{
+				return false;
+			}
+		}
+
 		public void Init(ITask task)
 		{
 			this.task = task;
