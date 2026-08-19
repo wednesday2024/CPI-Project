@@ -1,4 +1,5 @@
 using ClubPenguin.Core;
+using ClubPenguin.Net;
 using ClubPenguin.Tags;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,34 @@ namespace ClubPenguin.Adventure
 
 		[Tooltip("Leave empty to match all themes")]
 		public CatalogThemeDefinition[] MatchingThemes;
+
+		// The clothing designer is a scene of its own
+		public override bool SurvivesSceneChange
+		{
+			get
+			{
+				return true;
+			}
+		}
+
+		public override void OnActivate()
+		{
+			base.OnActivate();
+			base.dispatcher.AddListener<CatalogServiceEvents.ItemSubmissionCompleteEvent>(onItemSubmitted);
+		}
+
+		public override void OnDeactivate()
+		{
+			base.OnDeactivate();
+			base.dispatcher.RemoveListener<CatalogServiceEvents.ItemSubmissionCompleteEvent>(onItemSubmitted);
+		}
+
+		// Only an accepted submission raises this, a refusal comes back as an error
+		private bool onItemSubmitted(CatalogServiceEvents.ItemSubmissionCompleteEvent evt)
+		{
+			taskIncrement();
+			return false;
+		}
 
 		public override object GetExportParameters()
 		{
