@@ -44815,7 +44815,8 @@ GameObject:
   - component: {fileID: 9635}
   - component: {fileID: 14803}
   - component: {fileID: 12430}
-  m_Layer: 0
+  - component: {fileID: 14804}
+  m_Layer: 30
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51204,7 +51205,8 @@ GameObject:
   - component: {fileID: 10247}
   - component: {fileID: 15077}
   - component: {fileID: 12702}
-  m_Layer: 0
+  - component: {fileID: 15080}
+  m_Layer: 30
   m_Name: Mesh (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90991,7 +90993,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1056763236}
   - {fileID: 10247}
   m_Father: {fileID: 9506}
   m_LocalEulerAnglesHint: {x: -61.43159, y: 27.591072, z: -70.94529}
@@ -168225,6 +168226,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4485}
   m_Mesh: {fileID: 8764085726649189632, guid: 9f480ada10ff4184dbd14164880b7768, type: 3}
+--- !u!65 &14804
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1364182, y: 0.37278032, z: 0.40830466}
+  m_Center: {x: 0.026529562, y: 0.13910756, z: -0.027913466}
 --- !u!33 &14805
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -169383,6 +169405,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5117}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &15080
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.087582685, y: 0.42617792, z: 0.22349347}
+  m_Center: {x: -0.0043092016, y: 0.12819052, z: 0.22658052}
 --- !u!33 &15081
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -554151,61 +554194,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2083576753}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1056763235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1056763236}
-  - component: {fileID: 1056763237}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1056763236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056763235}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901161, y: -0, z: -0.000000014901161, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1703576555}
-  m_Father: {fileID: 9635}
-  m_LocalEulerAnglesHint: {x: -61.43159, y: 27.591072, z: -70.94529}
---- !u!64 &1056763237
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056763235}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8764085726649189632, guid: 9f480ada10ff4184dbd14164880b7768, type: 3}
 --- !u!4 &1065491380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6287130801039353798, guid: e2a1f29af795f7f4a880c862794a2a56,
@@ -559182,61 +559170,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a1f29af795f7f4a880c862794a2a56, type: 3}
---- !u!1 &1703576554
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1703576555}
-  - component: {fileID: 1703576556}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1703576555
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703576554}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901159, y: 0.000000029802319, z: 0.000000013038514,
-    w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1056763236}
-  m_LocalEulerAnglesHint: {x: -0.0000017075471, y: -0.0000034150942, z: -0.0000014941036}
---- !u!64 &1703576556
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703576554}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -537357156418542823, guid: 41ecc3d3a572c5849938f94e96b91d46, type: 3}
 --- !u!4 &1707342730 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6287130801039353798, guid: e2a1f29af795f7f4a880c862794a2a56,
