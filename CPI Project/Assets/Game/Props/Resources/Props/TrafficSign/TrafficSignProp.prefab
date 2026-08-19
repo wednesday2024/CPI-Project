@@ -3406,7 +3406,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -3423,7 +3423,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -5940,7 +5940,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 97a7e866cbae7a149bfd1e95d8f95070, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5987,7 +5986,7 @@ ParticleSystemRenderer:
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: -3527312603120198326, guid: d05bb58c15429a047880757e9b109da3, type: 3}
-  m_Mesh1: {fileID: 4300000, guid: cf38aa1074cdccb4c83a4b909b61131e, type: 2}
+  m_Mesh1: {fileID: 4875320958950245953, guid: bb18b31ee6913484e8708984a220f949, type: 3}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MeshWeighting: 1
