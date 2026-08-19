@@ -2953,7 +2953,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &199391885428951786
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2999,6 +2999,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -3023,14 +3024,13 @@ ParticleSystemRenderer:
   m_UseCustomTrailVertexStreams: 0
   m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: -1542976799724280424, guid: 4a1e8727ce2f379448ac3cecf39978b3, type: 3}
-  m_Mesh1: {fileID: 4300000, guid: cf38aa1074cdccb4c83a4b909b61131e, type: 2}
+  m_Mesh1: {fileID: 4875320958950245953, guid: bb18b31ee6913484e8708984a220f949, type: 3}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MeshWeighting: 1
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!114 &114428689087307359
 MonoBehaviour:
   m_ObjectHideFlags: 0
