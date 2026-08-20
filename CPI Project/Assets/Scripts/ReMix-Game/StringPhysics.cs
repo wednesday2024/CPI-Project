@@ -59,7 +59,7 @@ public class StringPhysics : MonoBehaviour
 		}
 		elapsedTime += Time.fixedDeltaTime;
 		Vector3 a = EndEffector.position - prevEndEffectorPos - (anchorPos - prevAnchorPos) + impulse;
-		Vector3 vector = EndEffector.position + a * Stiffness;
+		Vector3 vector = EndEffector.position + a * Mathf.Pow(Stiffness, Time.fixedDeltaTime * 30f);
 		impulse = Vector3.zero;
 		vector.y += Gravity * (Time.fixedDeltaTime * Time.fixedDeltaTime);
 		for (int i = 0; i < Iterations; i++)
@@ -97,6 +97,6 @@ public class StringPhysics : MonoBehaviour
 		{
 			curTwist -= (float)(int)(curTwist / 360f) * 360f;
 		}
-		impulse = impulseDir.normalized * (MinImpulse + normalizedImpulseMag * (MaxImpulse - MinImpulse));
+		impulse = impulseDir.normalized * (MinImpulse + normalizedImpulseMag * (MaxImpulse - MinImpulse)) * (Time.fixedDeltaTime * 30f);
 	}
 }
