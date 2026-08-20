@@ -28,6 +28,8 @@ public class StringPhysics : MonoBehaviour
 
 	private Vector3 prevEndEffectorPos = Vector3.zero;
 
+	private Vector3 prevAnchorPos;
+
 	private Vector3 anchorPos;
 
 	private float desiredLen;
@@ -52,11 +54,12 @@ public class StringPhysics : MonoBehaviour
 		if (elapsedTime <= SimDelay)
 		{
 			prevEndEffectorPos = EndEffector.position;
+			prevAnchorPos = anchorPos;
 			curTwist = EndEffector.rotation.eulerAngles.y;
 		}
 		elapsedTime += Time.fixedDeltaTime;
-		Vector3 a = EndEffector.position - prevEndEffectorPos + impulse;
-		Vector3 vector = EndEffector.position + a * Stiffness;
+		Vector3 a = EndEffector.position - prevEndEffectorPos - (anchorPos - prevAnchorPos) + impulse;
+		Vector3 vector = EndEffector.position + a * Mathf.Pow(Stiffness, Time.fixedDeltaTime * 30f);
 		impulse = Vector3.zero;
 		vector.y += Gravity * (Time.fixedDeltaTime * Time.fixedDeltaTime);
 		for (int i = 0; i < Iterations; i++)
@@ -71,6 +74,7 @@ public class StringPhysics : MonoBehaviour
 			}
 		}
 		prevEndEffectorPos = EndEffector.position;
+		prevAnchorPos = anchorPos;
 		EndEffector.position = vector;
 		curTwist += twistVel * Time.fixedDeltaTime;
 		twistVel = Mathf.Lerp(twistVel, 0f, TwistSmoothness * Time.fixedDeltaTime);
@@ -93,6 +97,6 @@ public class StringPhysics : MonoBehaviour
 		{
 			curTwist -= (float)(int)(curTwist / 360f) * 360f;
 		}
-		impulse = impulseDir.normalized * (MinImpulse + normalizedImpulseMag * (MaxImpulse - MinImpulse));
+		impulse = impulseDir.normalized * (MinImpulse + normalizedImpulseMag * (MaxImpulse - MinImpulse)) * (Time.fixedDeltaTime * 30f);
 	}
 }
