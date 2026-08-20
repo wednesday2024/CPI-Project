@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33776760723417951}
   - component: {fileID: 23034721092864076}
   - component: {fileID: 1675180565769070445}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: DugeonProgressTracker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,6 +91,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &1675180565769070445
 MeshCollider:
@@ -111,7 +112,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: dc3e18e0eb1a4e7469b4ef27e53c95dd, type: 2}
 --- !u!1 &1143153907830277
@@ -126,7 +127,7 @@ GameObject:
   - component: {fileID: 33999445115572555}
   - component: {fileID: 23061977777739261}
   - component: {fileID: 2103930311344188965}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: DugeonProgressTracker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +206,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &2103930311344188965
 MeshCollider:
@@ -225,7 +227,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: dc3e18e0eb1a4e7469b4ef27e53c95dd, type: 2}
 --- !u!1 &1190044557019909
@@ -239,8 +241,7 @@ GameObject:
   - component: {fileID: 4622282660093184}
   - component: {fileID: 33841911217520268}
   - component: {fileID: 23927746842890070}
-  - component: {fileID: 70549396933146457}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,29 +318,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &70549396933146457
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190044557019909}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1191333372134062
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,8 +331,7 @@ GameObject:
   - component: {fileID: 4356324944889235}
   - component: {fileID: 33934481079420030}
   - component: {fileID: 23334038797188619}
-  - component: {fileID: 4778214706734045776}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,29 +408,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4778214706734045776
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191333372134062}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1253479192896497
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,8 +493,7 @@ GameObject:
   - component: {fileID: 4934970345795667}
   - component: {fileID: 33813184215268394}
   - component: {fileID: 23730275869431073}
-  - component: {fileID: 3533937730526912847}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,29 +570,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3533937730526912847
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262159097157375}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1268054926236170
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,8 +583,7 @@ GameObject:
   - component: {fileID: 4322647208418114}
   - component: {fileID: 33318596406411382}
   - component: {fileID: 23568189261406498}
-  - component: {fileID: 705762446350382363}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -725,29 +660,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &705762446350382363
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268054926236170}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1281966055044390
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,8 +673,7 @@ GameObject:
   - component: {fileID: 4272706345690633}
   - component: {fileID: 33097996017570109}
   - component: {fileID: 23352423933124997}
-  - component: {fileID: 914350869097800885}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,29 +750,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &914350869097800885
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281966055044390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1397499548326370
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,8 +763,7 @@ GameObject:
   - component: {fileID: 4088494488500937}
   - component: {fileID: 33040214123452331}
   - component: {fileID: 23552837897582455}
-  - component: {fileID: 8818922442224058518}
-  m_Layer: 29
+  m_Layer: 0
   m_Name: CrystalEyeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,29 +840,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8818922442224058518
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397499548326370}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6725539731432230780, guid: ac20fc0008b6f734a94cfc4efa064ccb, type: 3}
 --- !u!1 &1779358390462441
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +854,7 @@ GameObject:
   - component: {fileID: 33954450781117689}
   - component: {fileID: 23159334887507909}
   - component: {fileID: 8896045914699050092}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: DugeonProgressTracker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,6 +933,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &8896045914699050092
 MeshCollider:
@@ -1083,6 +954,6 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: dc3e18e0eb1a4e7469b4ef27e53c95dd, type: 2}
