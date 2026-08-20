@@ -2,10 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &1986606350948613
 GameObject:
-  serializedVersion: 5
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 224793006983085166}
   - component: {fileID: 222967662819173315}
@@ -21,15 +22,16 @@ GameObject:
 --- !u!224 &224793006983085166
 RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986606350948613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39,50 +41,43 @@ RectTransform:
 --- !u!222 &222967662819173315
 CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986606350948613}
+  m_CullTransparentMesh: 1
 --- !u!114 &114361283708603579
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986606350948613}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86d4e600c4f8db8d4990cc4f08daf37d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Action: 3
 --- !u!114 &114519415444967685
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986606350948613}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8e331f60aec053637b53167a4305351, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   RedSprites:
-  - {fileID: 21300000, guid: 690dafca4ba7acf45af5054402b77040, type: 2}
-  - {fileID: 21300000, guid: 690dafca4ba7acf45af5054402b77040, type: 2}
-  - {fileID: 21300000, guid: 4e21cff1ed54f7148836685b9e4019b7, type: 2}
-  - {fileID: 21300000, guid: 4e21cff1ed54f7148836685b9e4019b7, type: 2}
+  - {fileID: 21300000, guid: 31bf549bc06d84e428fb3b82a1f54a96, type: 3}
+  - {fileID: 21300000, guid: 31bf549bc06d84e428fb3b82a1f54a96, type: 3}
+  - {fileID: 21300000, guid: 314f29ddcf6740f43b79a287b5017143, type: 3}
+  - {fileID: 21300000, guid: 314f29ddcf6740f43b79a287b5017143, type: 3}
   BlueSprites:
-  - {fileID: 21300000, guid: e8bfcf842daf9b8459061864d0e69236, type: 2}
-  - {fileID: 21300000, guid: e8bfcf842daf9b8459061864d0e69236, type: 2}
-  - {fileID: 21300000, guid: 21e2aaea60e58124995161a783af4635, type: 2}
-  - {fileID: 21300000, guid: 21e2aaea60e58124995161a783af4635, type: 2}
---- !u!1001 &100100000
-Prefab:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1986606350948613}
-  m_IsPrefabParent: 1
+  - {fileID: 21300000, guid: a2c807110c854e44ebbbc0a28006d004, type: 3}
+  - {fileID: 21300000, guid: a2c807110c854e44ebbbc0a28006d004, type: 3}
+  - {fileID: 21300000, guid: deb72856ad9c01548bf5d064b2fb1f82, type: 3}
+  - {fileID: 21300000, guid: deb72856ad9c01548bf5d064b2fb1f82, type: 3}
