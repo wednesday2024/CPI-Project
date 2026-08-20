@@ -679,7 +679,7 @@ namespace ClubPenguin.Locomotion
 				else
 				{
 					accumulatedVarTime += Time.deltaTime;
-					extrapPilotOffset += pilotBody.linearVelocity * accumulatedVarTime;
+					extrapPilotOffset = pilotBody.linearVelocity * accumulatedVarTime;
 					position += pilotBody.linearVelocity * accumulatedVarTime;
 				}
 				Vector3 position2 = position;
