@@ -14,6 +14,8 @@ namespace PuffleRoundup
 
 		public mg_PuffleRoundup Minigame;
 
+		private bool m_holdCancelled;
+
 		private void Awake()
 		{
 			Minigame = MinigameManager.GetActive<mg_PuffleRoundup>();
@@ -22,6 +24,17 @@ namespace PuffleRoundup
 		private void Start()
 		{
 			m_PuffleContainer = Minigame.transform.Find("mg_pr_GameContainer/mg_pr_PuffleContainer").gameObject;
+		}
+
+		private void OnApplicationFocus(bool hasFocus)
+		{
+			// focus leaving mid hold takes the release with it, and the cursor can still be
+			// inside the window where the check below never fires. a constant isFocused test
+			// in FixedUpdate would kill input for good if it ever stuck at false
+			if (!hasFocus)
+			{
+				m_holdCancelled = true;
+			}
 		}
 
 		private void FixedUpdate()
@@ -39,6 +52,26 @@ namespace PuffleRoundup
 					pointerPosition = mouse.position.ReadValue();
 					mouseDown = mouse.leftButton.wasPressedThisFrame;
 					mouseHeld = mouse.leftButton.isPressed;
+
+					// a button released outside the window never reaches the game, so the hold
+					// sticks and the puffles run from the cursor until they cross the boundary
+					// and count as escaped. no hold counts while the pointer is outside, and it
+					// counts again once the button is seen released inside
+					bool pointerInsideWindow = pointerPosition.x >= 0f && pointerPosition.y >= 0f
+						&& pointerPosition.x <= Screen.width && pointerPosition.y <= Screen.height;
+					if (!pointerInsideWindow)
+					{
+						m_holdCancelled = true;
+					}
+					else if (!mouseHeld)
+					{
+						m_holdCancelled = false;
+					}
+					if (m_holdCancelled)
+					{
+						mouseDown = false;
+						mouseHeld = false;
+					}
 				}
 #if UNITY_ANDROID || UNITY_IOS
 				// Optional: add touch support
