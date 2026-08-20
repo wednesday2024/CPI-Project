@@ -22,6 +22,12 @@ namespace JetpackReboot
 			{
 				return;
 			}
+			// same story as the collector, a second destroyer reaches the obstacle in the same
+			// physics step and blows it up again, paying its coins and goal progress twice
+			if (!other.gameObject.activeSelf)
+			{
+				return;
+			}
 			mg_jr_Obstacle component = other.GetComponent<mg_jr_Obstacle>();
 			if (component != null)
 			{
