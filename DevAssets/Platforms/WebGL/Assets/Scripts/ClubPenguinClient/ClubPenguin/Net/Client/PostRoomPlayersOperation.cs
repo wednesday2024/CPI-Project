@@ -67,7 +67,7 @@ namespace ClubPenguin.Net.Client
 			{
 				inventoryMap = offlineDatabase.Read<ClubPenguin.Net.Offline.ConsumableInventory>().Inventory
 			};
-			playerRoomData.dailyTaskProgress = new TaskProgressList();
+			playerRoomData.dailyTaskProgress = SetTaskProgressOperation.GetProgressList(offlineDatabase, offlineDefinitions);
 			playerRoomData.member = true;
 			playerRoomData.outfit = new ClubPenguin.Net.Domain.PlayerOutfitDetails
 			{
