@@ -421,12 +421,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -461,19 +465,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Wait 2.5 seconds
       description: 
       colorIndex: 6
@@ -2448,12 +2455,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -2488,19 +2499,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Player Look At Orb 2
       description: 
       colorIndex: 0
@@ -2649,12 +2663,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -2689,19 +2707,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Player Look At Orb 3
       description: 
       colorIndex: 0
@@ -2850,12 +2871,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -2890,19 +2915,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Player Look At Orb 4
       description: 
       colorIndex: 0
@@ -3051,12 +3079,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -3091,19 +3123,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Player Look At Orb 5
       description: 
       colorIndex: 0
@@ -3252,12 +3287,16 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.Adventure.AnimatorTriggerAction
+        - ClubPenguin.UI.DisableUIElementAction
+        - HutongGames.PlayMaker.Actions.StopPenguinLocomotionAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 0e92ab01
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000005000000
+        actionHashCodes: 0e92ab016350530100000000
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -3292,19 +3331,22 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00
+        stringParams:
+        - Joystick
+        byteData: 0000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 010000001300000012000000
+        paramDataType: 0100000013000000120000000300000001000000
         paramName:
         - UseOwnerGameObject
         - Target
         - Parameter
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 010000000000000000000000
+        - UIElementID
+        - HideElement
+        paramDataPos: 0000000000000000000000000000000001000000
+        paramByteDataSize: 0100000000000000000000000000000001000000
     - name: Player Look At Orb 6
       description: 
       colorIndex: 0
@@ -3588,12 +3630,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3622,17 +3666,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Write PlayerPref_Orb2
       description: '--- Player Pref ---
 
@@ -3660,12 +3706,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3694,17 +3742,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Write PlayerPref_Orb3
       description: '--- Player Pref ---
 
@@ -3732,12 +3782,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3766,17 +3818,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Write PlayerPref_Orb4
       description: '--- Player Pref ---
 
@@ -3804,12 +3858,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3838,17 +3894,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Write PlayerPref_Orb5
       description: '--- Player Pref ---
 
@@ -3876,12 +3934,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3910,17 +3970,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Write PlayerPref_Orb6
       description: '--- Player Pref ---
 
@@ -3948,12 +4010,14 @@ MonoBehaviour:
       actionData:
         actionNames:
         - ClubPenguin.LocalAccountPlayerPrefsSetKey
+        - ClubPenguin.UI.EnableUIElementAction
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 13227100
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000001000000
+        actionHashCodes: 1322710078c53001
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3982,17 +4046,19 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - Joystick
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000
+        paramDataType: 1200000003000000
         paramName:
         - key
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        - UIElementID
+        paramDataPos: 0000000000000000
+        paramByteDataSize: 0000000000000000
     - name: Has Player Activated Orb1?
       description: 
       colorIndex: 3
