@@ -10,7 +10,7 @@ using System.Diagnostics;
 public class DiscordInviteOpener : MonoBehaviour
 {
     [Header("Invite")]
-    [SerializeField] private string inviteUrl = "https://discord.gg/yFJZnUtKRK";
+    [SerializeField] private string inviteUrl = "https://discord.gg/jkWbd3uqTS";
 
     [Header("App first behavior")]
     [Tooltip("If Discord appears installed, try opening the invite in the Discord app first.")]
