@@ -1502,6 +1502,7 @@ GameObject:
   - component: {fileID: 5329042901102742472}
   - component: {fileID: 4462238065181578270}
   - component: {fileID: 1101601917136621701}
+  - component: {fileID: 4939927597014874845}
   m_Layer: 11
   m_Name: Dot
   m_TagString: NPC
@@ -1883,6 +1884,20 @@ MonoBehaviour:
       Key: Costumes/Dot/Dot_Halloween_Cat
       type: UnityEngine.Material, UnityEngine.CoreModule
     DestroyTexture: 0
+--- !u!114 &4939927597014874845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613639899519227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Audio::ClubPenguin.Audio.AnimToFabricEvents
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!1 &1613961691822620
 GameObject:
   m_ObjectHideFlags: 0
