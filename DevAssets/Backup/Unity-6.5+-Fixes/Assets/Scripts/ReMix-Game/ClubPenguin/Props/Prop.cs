@@ -242,11 +242,6 @@ namespace ClubPenguin.Props
 					{
 					}
 
-					if (string.IsNullOrEmpty(soundEventName))
-					{
-						soundEventName = fsm.FsmVariables.GetFsmString("CurrentSoundEventName")?.Value;
-					}
-
 					if (!string.IsNullOrEmpty(soundEventName))
 					{
 						break;

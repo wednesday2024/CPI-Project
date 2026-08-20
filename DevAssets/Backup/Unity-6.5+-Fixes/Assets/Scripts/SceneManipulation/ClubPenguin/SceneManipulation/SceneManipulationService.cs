@@ -38,6 +38,12 @@ namespace ClubPenguin.SceneManipulation
 
 		private string selectedObjectStartingId;
 
+		// Set the moment a held object leaves the player's hands, put down or
+		// deleted, and cleared when the next one is picked up
+		// Without it a starting id of null reads as "carrying something new"
+		// both ways, and the button keeps one back for nothing
+		private bool selectedObjectReleased;
+
 		private bool isNewObject = false;
 
 		private Transform sceneLayoutContainer = null;
@@ -60,7 +66,7 @@ namespace ClubPenguin.SceneManipulation
 		{
 			get
 			{
-				return selectedObjectStartingId == null;
+				return selectedObjectStartingId == null && !selectedObjectReleased;
 			}
 		}
 
@@ -206,39 +212,41 @@ namespace ClubPenguin.SceneManipulation
 		public List<KeyValuePair<DecorationDefinition, int>> GetAvailableDecorations()
 		{
 			List<KeyValuePair<DecorationDefinition, int>> availableDecorations = decorationInventoryService.GetAvailableDecorations();
-			if (IsObjectSelectedForAdd)
+			int selectedDefinitionId = (!IsObjectSelectedForAdd) ? (-1) : getSelectedDefinitionId();
+			// A copy, because the inventory service hands out its cache directly
+			// and an edit in place stays there for every later reader
+			List<KeyValuePair<DecorationDefinition, int>> list = new List<KeyValuePair<DecorationDefinition, int>>(availableDecorations.Count);
+			for (int i = 0; i < availableDecorations.Count; i++)
 			{
-				int selectedDefinitionId = getSelectedDefinitionId();
-				for (int i = 0; i < availableDecorations.Count; i++)
+				KeyValuePair<DecorationDefinition, int> keyValuePair = availableDecorations[i];
+				int num = keyValuePair.Value;
+				if (keyValuePair.Key.Id == selectedDefinitionId)
 				{
-					KeyValuePair<DecorationDefinition, int> keyValuePair = availableDecorations[i];
-					if (keyValuePair.Key.Id == selectedDefinitionId)
-					{
-						availableDecorations.RemoveAt(i);
-						availableDecorations.Insert(i, new KeyValuePair<DecorationDefinition, int>(keyValuePair.Key, keyValuePair.Value - 1));
-					}
+					num--;
 				}
+				list.Add(new KeyValuePair<DecorationDefinition, int>(keyValuePair.Key, clampAvailable(num)));
 			}
-			return availableDecorations;
+			return list;
 		}
 
 		public List<KeyValuePair<StructureDefinition, int>> GetAvailableStructures()
 		{
 			List<KeyValuePair<StructureDefinition, int>> availableStructures = decorationInventoryService.GetAvailableStructures();
-			if (IsObjectSelectedForAdd)
+			int selectedDefinitionId = (!IsObjectSelectedForAdd) ? (-1) : getSelectedDefinitionId();
+			// A copy, because the inventory service hands out its cache directly
+			// and an edit in place stays there for every later reader
+			List<KeyValuePair<StructureDefinition, int>> list = new List<KeyValuePair<StructureDefinition, int>>(availableStructures.Count);
+			for (int i = 0; i < availableStructures.Count; i++)
 			{
-				int selectedDefinitionId = getSelectedDefinitionId();
-				for (int i = 0; i < availableStructures.Count; i++)
+				KeyValuePair<StructureDefinition, int> keyValuePair = availableStructures[i];
+				int num = keyValuePair.Value;
+				if (keyValuePair.Key.Id == selectedDefinitionId)
 				{
-					KeyValuePair<StructureDefinition, int> keyValuePair = availableStructures[i];
-					if (keyValuePair.Key.Id == selectedDefinitionId)
-					{
-						availableStructures.RemoveAt(i);
-						availableStructures.Insert(i, new KeyValuePair<StructureDefinition, int>(keyValuePair.Key, keyValuePair.Value - 1));
-					}
+					num--;
 				}
+				list.Add(new KeyValuePair<StructureDefinition, int>(keyValuePair.Key, clampAvailable(num)));
 			}
-			return availableStructures;
+			return list;
 		}
 
 		public int GetAvailableDecorationCount(int id)
@@ -252,7 +260,7 @@ namespace ClubPenguin.SceneManipulation
 					num--;
 				}
 			}
-			return num;
+			return clampAvailable(num);
 		}
 
 		public int GetAvailableStructureCount(int id)
@@ -266,7 +274,16 @@ namespace ClubPenguin.SceneManipulation
 					num--;
 				}
 			}
-			return num;
+			return clampAvailable(num);
+		}
+
+		// Splitting a paired decoration leaves the parent and both halves in the
+		// layout at once, so a count taken mid-split can come out below zero
+		// A negative number sticks, because IglooCustomizationButton.SetItemCount
+		// tests the count it already has rather than the one coming in
+		private static int clampAvailable(int count)
+		{
+			return (count < 0) ? 0 : count;
 		}
 
 		private int getSelectedDefinitionId()
@@ -344,6 +361,7 @@ namespace ClubPenguin.SceneManipulation
 				}
 			}
 			selectedObjectStartingId = null;
+			selectedObjectReleased = false;
 			this.NewObjectCreated.InvokeSafe(arg);
 		}
 
@@ -425,6 +443,14 @@ namespace ClubPenguin.SceneManipulation
 			decorationLayoutData.Id = DecorationLayoutData.ID.FromFullPath(GetRelativeGameObjectPath(obj));
 			DecorationLayoutData decoration = decorationLayoutData;
 			SceneLayoutData.RemoveDecoration(decoration, deleteChildren);
+			// The object is gone, so the carry is over, whether it came in from
+			// the inventory or up off the floor
+			// Otherwise the delete goes out while the service still thinks
+			// something is in hand, and every later count holds one back for it
+			if (selectedObjectStartingId == decoration.Id.GetFullPath() || (ObjectManipulationInputController != null && ObjectManipulationInputController.CurrentlySelectedObject == obj))
+			{
+				selectedObjectReleased = true;
+			}
 			if (selectedObjectStartingId == decoration.Id.GetFullPath())
 			{
 				selectedObjectStartingId = null;
@@ -589,6 +615,7 @@ namespace ClubPenguin.SceneManipulation
 				}
 			}
 			selectedObjectStartingId = null;
+			selectedObjectReleased = true;
 			if ((bool)component2)
 			{
 				component2.ClearObjectManipulator();
@@ -634,6 +661,7 @@ namespace ClubPenguin.SceneManipulation
 				sceneModifiers[i].AfterObjectSelected(obj, isNewObject);
 			}
 			isNewObject = false;
+			selectedObjectReleased = false;
 			selectedObjectStartingId = GetRelativeGameObjectPath(obj.gameObject);
 			ManipulatableObject[] componentsInChildren = obj.GetComponentsInChildren<ManipulatableObject>();
 			foreach (ManipulatableObject manipulatableObject in componentsInChildren)

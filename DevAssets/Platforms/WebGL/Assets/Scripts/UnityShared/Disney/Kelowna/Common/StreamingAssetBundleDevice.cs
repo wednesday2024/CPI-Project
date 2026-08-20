@@ -68,7 +68,24 @@ namespace Disney.Kelowna.Common
 
         public override TAsset LoadImmediate<TAsset>(string deviceList, ref ContentManifest.AssetEntry entry)
         {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            // In a browser StreamingAssets is an http URL, so there is nothing to read
+            // synchronously. Callers have to go through LoadAsync
             throw new InvalidOperationException("Streaming asset bundles must be loaded asynchronously.");
+#else
+            // On a desktop player StreamingAssets is a plain directory, so a bundle that
+            // is not mounted yet can be read right here. Refusing to do so is what makes
+            // Content.LoadImmediate fail for anything living in a bundle: whether it
+            // worked depended on the zone the player happened to be standing in.
+            // BundleDevice mounts whatever comes back, so the file is opened once
+            string path = Path.Combine(Application.streamingAssetsPath, entry.Key + ".txt");
+            AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
+            if (assetBundle == null)
+            {
+                throw new InvalidOperationException("Could not read streaming asset bundle '" + path + "' synchronously.");
+            }
+            return (TAsset)(object)assetBundle;
+#endif
         }
     }
 }
@@ -138,7 +155,24 @@ namespace Disney.Kelowna.Common
 
         public override TAsset LoadImmediate<TAsset>(string deviceList, ref ContentManifest.AssetEntry entry)
         {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            // In a browser StreamingAssets is an http URL, so there is nothing to read
+            // synchronously. Callers have to go through LoadAsync
             throw new InvalidOperationException("Streaming asset bundles must be loaded asynchronously.");
+#else
+            // On a desktop player StreamingAssets is a plain directory, so a bundle that
+            // is not mounted yet can be read right here. Refusing to do so is what makes
+            // Content.LoadImmediate fail for anything living in a bundle: whether it
+            // worked depended on the zone the player happened to be standing in.
+            // BundleDevice mounts whatever comes back, so the file is opened once
+            string path = Path.Combine(Application.streamingAssetsPath, entry.Key + ".txt");
+            AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
+            if (assetBundle == null)
+            {
+                throw new InvalidOperationException("Could not read streaming asset bundle '" + path + "' synchronously.");
+            }
+            return (TAsset)(object)assetBundle;
+#endif
         }
     }
 }
@@ -260,7 +294,24 @@ namespace Disney.Kelowna.Common
 
         public override TAsset LoadImmediate<TAsset>(string deviceList, ref ContentManifest.AssetEntry entry)
         {
+            #if UNITY_WEBGL && !UNITY_EDITOR
+            // In a browser StreamingAssets is an http URL, so there is nothing to read
+            // synchronously. Callers have to go through LoadAsync
             throw new InvalidOperationException("Streaming asset bundles must be loaded asynchronously.");
+#else
+            // On a desktop player StreamingAssets is a plain directory, so a bundle that
+            // is not mounted yet can be read right here. Refusing to do so is what makes
+            // Content.LoadImmediate fail for anything living in a bundle: whether it
+            // worked depended on the zone the player happened to be standing in.
+            // BundleDevice mounts whatever comes back, so the file is opened once
+            string path = Path.Combine(Application.streamingAssetsPath, entry.Key + ".txt");
+            AssetBundle assetBundle = AssetBundle.LoadFromFile(path);
+            if (assetBundle == null)
+            {
+                throw new InvalidOperationException("Could not read streaming asset bundle '" + path + "' synchronously.");
+            }
+            return (TAsset)(object)assetBundle;
+#endif
         }
     }
 }

@@ -129,6 +129,15 @@ namespace HutongGames.PlayMaker
                     }
                 }
 
+                // Scenes built from templates carry FSMs whose name came out as the
+                // default "FSM", so looking one up by name misses. A single FSM on the
+                // object leaves nothing to be ambiguous about, and it is what the
+                // fallback below hands back anyway
+                if (fsmComponents.Length == 1)
+                {
+                    return fsmComponents[0];
+                }
+
                 Debug.LogWarning("Could not find FSM: " + fsmName + " on GameObject: " + go.name);
             }
 

@@ -373,6 +373,11 @@ namespace ClubPenguin
 					Service.Get<ICPSwrveService>().StartTimer("igloo", "visit", "player");
 					return;
 				}
+				if (string.IsNullOrEmpty(evt.RoomOwnerName))
+				{
+					Service.Get<ICPSwrveService>().StartTimer("igloo", "visit", "unknown");
+					return;
+				}
 				Service.Get<EventDispatcher>().AddListener<FriendsServiceEvents.FindUserSent>(onFindUserResponse);
 				Service.Get<INetworkServicesManager>().FriendsService.FindUser(evt.RoomOwnerName, Service.Get<SessionManager>().LocalUser);
 			}

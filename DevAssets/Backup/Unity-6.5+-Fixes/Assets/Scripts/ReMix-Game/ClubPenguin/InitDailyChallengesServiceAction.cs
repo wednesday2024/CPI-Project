@@ -1,3 +1,4 @@
+using ClubPenguin.Adventure;
 using ClubPenguin.DailyChallenge;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
@@ -33,6 +34,8 @@ namespace ClubPenguin
 			AssetRequest<DatedManifestMap> scheduleAssetRequest = Content.LoadAsync<DatedManifestMap>(dailyChallengesScheduleManifestPath);
 			yield return scheduleAssetRequest;
 			Service.Set(new DailyChallengeService(scheduleAssetRequest.Asset));
+			// Second, so saved progress loads before any watcher counts
+			Service.Set(new TaskWatcherService());
 		}
 	}
 }

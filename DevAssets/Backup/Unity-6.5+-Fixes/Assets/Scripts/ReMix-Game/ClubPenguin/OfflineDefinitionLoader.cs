@@ -555,6 +555,50 @@ namespace ClubPenguin
             return null;
         }
 
+        // Only today's challenges can be claimed, and those are exactly the ones
+        // TaskService has loaded — so the definition is taken from there rather
+        // than from a separate lookup table.
+        public long GetCurrentDay()
+        {
+            if (!Service.IsSet<ContentSchedulerService>())
+            {
+                return DateTime.UtcNow.Date.GetTimeInMilliseconds();
+            }
+            return Service.Get<ContentSchedulerService>().CurrentContentDate().Date.GetTimeInMilliseconds();
+        }
+
+        public bool IsTaskComplete(string taskId)
+        {
+            if (!Service.IsSet<ClubPenguin.Task.TaskService>())
+            {
+                return false;
+            }
+            foreach (ClubPenguin.Task.Task task in Service.Get<ClubPenguin.Task.TaskService>().Tasks)
+            {
+                if (task.Id == taskId)
+                {
+                    return task.IsComplete;
+                }
+            }
+            return false;
+        }
+
+        public Reward GetTaskReward(string taskId)
+        {
+            if (!Service.IsSet<ClubPenguin.Task.TaskService>())
+            {
+                return null;
+            }
+            foreach (ClubPenguin.Task.Task task in Service.Get<ClubPenguin.Task.TaskService>().Tasks)
+            {
+                if (task.Id == taskId && (bool)task.Definition.Reward)
+                {
+                    return task.Definition.Reward.ToReward();
+                }
+            }
+            return null;
+        }
+
         public QuestRewardsCollection QuestRewards(string questId)
         {
             QuestRewardsCollection result = default(QuestRewardsCollection);

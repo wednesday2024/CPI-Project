@@ -21,6 +21,13 @@ namespace JetpackReboot
 			{
 				return;
 			}
+			// the player and a following robot penguin both carry a rigidbody2d, so both get
+			// OnTriggerEnter2D on the same item in one physics step. the first one takes it and
+			// deactivates it, and without this the second one pays it out again
+			if (!other.gameObject.activeSelf)
+			{
+				return;
+			}
 			bool flag = false;
 			if (component is mg_jr_Coin)
 			{

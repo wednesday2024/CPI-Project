@@ -30,14 +30,18 @@ namespace ClubPenguin.Adventure
 		public override void OnActivate()
 		{
 			base.OnActivate();
-			if (SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject != null)
+			if (SceneRefs.ZoneLocalPlayerManager != null && SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject != null)
 			{
 				propUser = SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<PropUser>();
+				if (propUser == null)
+				{
+					return;
+				}
 				if (Event == ConsumableEvent.COMPLETE)
 				{
 					propUser.EPropRemoved += onPropUseCompleted;
 				}
-				else
+				else if (propUser.Prop != null)
 				{
 					onPropUseCompleted(propUser.Prop);
 				}
@@ -47,13 +51,19 @@ namespace ClubPenguin.Adventure
 		public override void OnDeactivate()
 		{
 			base.OnDeactivate();
+			// Has to come off here too, or it keeps counting after the task is gone
+			if (propUser != null)
+			{
+				propUser.EPropRemoved -= onPropUseCompleted;
+				propUser = null;
+			}
 		}
 
 		public void OnDestroy()
 		{
 			if (propUser != null)
 			{
-				propUser.EPropUseCompleted -= onPropUseCompleted;
+				propUser.EPropRemoved -= onPropUseCompleted;
 			}
 		}
 
