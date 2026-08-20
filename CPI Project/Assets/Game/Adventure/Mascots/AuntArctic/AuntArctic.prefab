@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 701203593918247378}
   - component: {fileID: 3314705934988243000}
   - component: {fileID: 4196412405676057176}
+  - component: {fileID: 3162977880420732834}
   m_Layer: 11
   m_Name: AuntArctic
   m_TagString: NPC
@@ -864,6 +865,20 @@ MonoBehaviour:
       Key: Costumes/AuntArctic/AuntArctic_Halloween_Witch
       type: UnityEngine.Material, UnityEngine
     DestroyTexture: 0
+--- !u!114 &3162977880420732834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192207417954897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Audio::ClubPenguin.Audio.AnimToFabricEvents
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!1 &1220715704677298
 GameObject:
   m_ObjectHideFlags: 0
