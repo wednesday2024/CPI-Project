@@ -1,5 +1,6 @@
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using System;
 using UnityEngine;
 
 namespace ClubPenguin.Core
@@ -20,6 +21,11 @@ namespace ClubPenguin.Core
 			get;
 			private set;
 		}
+
+		// Switches inside a group never reach the dispatcher, they pass their
+		// state up to the parent and only the root dispatches, so this is the
+		// only way to hear the parts on their own
+		public event Action<Switch, bool> StateChanged;
 
 		public void Awake()
 		{
@@ -49,6 +55,10 @@ namespace ClubPenguin.Core
 					dispatcher.DispatchEvent(new SwitchEvents.SwitchChange(base.transform, onoff));
 				}
 				firstTime = false;
+				if (StateChanged != null)
+				{
+					StateChanged(this, onoff);
+				}
 			}
 		}
 
