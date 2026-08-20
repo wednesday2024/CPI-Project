@@ -34,6 +34,9 @@ namespace ClubPenguin.Net.Client
 			string key = getKey(token, typeFromHandle.Name);
 			key = GetPlatformKey(key);
 			PlayerPrefs.SetString(key, value2);
+			// Flushed on every write: without this the whole session lives in memory
+			// until a clean OnApplicationQuit, so a crash loses all progress since launch.
+			PlayerPrefs.Save();
 		}
 
 		public T Read<T>() where T : struct, IOfflineData
