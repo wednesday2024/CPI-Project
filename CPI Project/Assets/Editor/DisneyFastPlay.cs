@@ -8,6 +8,8 @@ using System.Reflection;
 public static class DisneyFastPlay
 {
     private const string BootScenePath = "Assets/Game/Core/Scenes/Boot.unity";
+    private const string PreviousSceneKey = "DisneyFastPlay.PreviousScene";
+
     private const int TargetWidth = 1920;
     private const int TargetHeight = 1080;
 
@@ -27,9 +29,24 @@ public static class DisneyFastPlay
             return;
         }
 
+        string currentScenePath =
+            EditorSceneManager.GetActiveScene().path;
+
+        if (!string.IsNullOrEmpty(currentScenePath) &&
+            currentScenePath != BootScenePath)
+        {
+            EditorPrefs.SetString(
+                PreviousSceneKey,
+                currentScenePath
+            );
+        }
+
         if (!System.IO.File.Exists(BootScenePath))
         {
-            Debug.LogError($"Boot scene not found: {BootScenePath}");
+            Debug.LogError(
+                $"Boot scene not found: {BootScenePath}"
+            );
+
             return;
         }
 
@@ -41,13 +58,20 @@ public static class DisneyFastPlay
             SetFastPlaySettings(gameView);
         }
 
-        EditorSceneManager.OpenScene(BootScenePath, OpenSceneMode.Single);
+        EditorSceneManager.OpenScene(
+            BootScenePath,
+            OpenSceneMode.Single
+        );
+
         EditorApplication.isPlaying = true;
     }
 
     private static EditorWindow GetGameView()
     {
-        Type gameViewType = typeof(Editor).Assembly.GetType("UnityEditor.GameView");
+        Type gameViewType =
+            typeof(Editor).Assembly.GetType(
+                "UnityEditor.GameView"
+            );
 
         if (gameViewType == null)
             return null;
@@ -55,46 +79,70 @@ public static class DisneyFastPlay
         return EditorWindow.GetWindow(gameViewType);
     }
 
-    private static void SaveGameViewSettings(EditorWindow gameView)
+    private static void SaveGameViewSettings(
+        EditorWindow gameView)
     {
-        Type gameViewType = gameView.GetType();
+        Type gameViewType =
+            gameView.GetType();
 
-        PropertyInfo enterPlayModeBehavior = gameViewType.GetProperty(
-            "enterPlayModeBehavior",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-        );
-
-        if (enterPlayModeBehavior != null)
-            previousPlayModeBehavior = enterPlayModeBehavior.GetValue(gameView);
-    }
-
-    private static void SetFastPlaySettings(EditorWindow gameView)
-    {
-        Type gameViewType = gameView.GetType();
-
-        SelectFullHD(gameView, gameViewType);
-
-        PropertyInfo vSyncEnabled = gameViewType.GetProperty(
-            "vSyncEnabled",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-        );
-
-        if (vSyncEnabled != null)
-            vSyncEnabled.SetValue(gameView, true);
-
-        PropertyInfo enterPlayModeBehavior = gameViewType.GetProperty(
-            "enterPlayModeBehavior",
-            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
-        );
+        PropertyInfo enterPlayModeBehavior =
+            gameViewType.GetProperty(
+                "enterPlayModeBehavior",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
         if (enterPlayModeBehavior != null)
         {
-            Type behaviorType = enterPlayModeBehavior.PropertyType;
+            previousPlayModeBehavior =
+                enterPlayModeBehavior.GetValue(gameView);
+        }
+    }
 
-            object playMaximized = Enum.Parse(
-                behaviorType,
-                "PlayMaximized"
+    private static void SetFastPlaySettings(
+        EditorWindow gameView)
+    {
+        Type gameViewType =
+            gameView.GetType();
+
+        SelectFullHD(
+            gameView,
+            gameViewType
+        );
+
+        PropertyInfo vSyncEnabled =
+            gameViewType.GetProperty(
+                "vSyncEnabled",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
             );
+
+        if (vSyncEnabled != null)
+            vSyncEnabled.SetValue(
+                gameView,
+                true
+            );
+
+        PropertyInfo enterPlayModeBehavior =
+            gameViewType.GetProperty(
+                "enterPlayModeBehavior",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
+
+        if (enterPlayModeBehavior != null)
+        {
+            Type behaviorType =
+                enterPlayModeBehavior.PropertyType;
+
+            object playMaximized =
+                Enum.Parse(
+                    behaviorType,
+                    "PlayMaximized"
+                );
 
             enterPlayModeBehavior.SetValue(
                 gameView,
@@ -109,7 +157,10 @@ public static class DisneyFastPlay
         EditorWindow gameView,
         Type gameViewType)
     {
-        Type gameViewSizesType = typeof(Editor).Assembly.GetType("UnityEditor.GameViewSizes");
+        Type gameViewSizesType =
+            typeof(Editor).Assembly.GetType(
+                "UnityEditor.GameViewSizes"
+            );
 
         if (gameViewSizesType == null)
         {
@@ -121,16 +172,20 @@ public static class DisneyFastPlay
         }
 
         Type scriptableSingletonType =
-            typeof(ScriptableSingleton<>).MakeGenericType(gameViewSizesType);
+            typeof(ScriptableSingleton<>).MakeGenericType(
+                gameViewSizesType
+            );
 
-        PropertyInfo instanceProperty = scriptableSingletonType.GetProperty(
-            "instance",
-            BindingFlags.Static |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        PropertyInfo instanceProperty =
+            scriptableSingletonType.GetProperty(
+                "instance",
+                BindingFlags.Static |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
-        object gameViewSizes = instanceProperty?.GetValue(null);
+        object gameViewSizes =
+            instanceProperty?.GetValue(null);
 
         if (gameViewSizes == null)
         {
@@ -141,15 +196,18 @@ public static class DisneyFastPlay
             return;
         }
 
-        PropertyInfo currentGroupTypeProperty = gameViewSizesType.GetProperty(
-            "currentGroupType",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        PropertyInfo currentGroupTypeProperty =
+            gameViewSizesType.GetProperty(
+                "currentGroupType",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
         object currentGroupTypeValue =
-            currentGroupTypeProperty?.GetValue(gameViewSizes);
+            currentGroupTypeProperty?.GetValue(
+                gameViewSizes
+            );
 
         if (currentGroupTypeValue == null)
         {
@@ -160,17 +218,21 @@ public static class DisneyFastPlay
             return;
         }
 
-        MethodInfo getGroupMethod = gameViewSizesType.GetMethod(
-            "GetGroup",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        MethodInfo getGroupMethod =
+            gameViewSizesType.GetMethod(
+                "GetGroup",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
         object currentGroup =
             getGroupMethod?.Invoke(
                 gameViewSizes,
-                new object[] { currentGroupTypeValue }
+                new object[]
+                {
+                    currentGroupTypeValue
+                }
             );
 
         if (currentGroup == null)
@@ -183,28 +245,32 @@ public static class DisneyFastPlay
             return;
         }
 
-        Type groupType = currentGroup.GetType();
+        Type groupType =
+            currentGroup.GetType();
 
-        MethodInfo getTotalCount = groupType.GetMethod(
-            "GetTotalCount",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        MethodInfo getTotalCount =
+            groupType.GetMethod(
+                "GetTotalCount",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
-        MethodInfo getGameViewSize = groupType.GetMethod(
-            "GetGameViewSize",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        MethodInfo getGameViewSize =
+            groupType.GetMethod(
+                "GetGameViewSize",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
-        PropertyInfo selectedSizeIndex = gameViewType.GetProperty(
-            "selectedSizeIndex",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        PropertyInfo selectedSizeIndex =
+            gameViewType.GetProperty(
+                "selectedSizeIndex",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
         if (getTotalCount == null ||
             getGameViewSize == null ||
@@ -218,37 +284,49 @@ public static class DisneyFastPlay
         }
 
         int totalCount =
-            (int)getTotalCount.Invoke(currentGroup, null);
+            (int)getTotalCount.Invoke(
+                currentGroup,
+                null
+            );
 
         for (int i = 0; i < totalCount; i++)
         {
             object size =
                 getGameViewSize.Invoke(
                     currentGroup,
-                    new object[] { i }
+                    new object[]
+                    {
+                        i
+                    }
                 );
 
             if (size == null)
                 continue;
 
-            Type sizeType = size.GetType();
+            Type sizeType =
+                size.GetType();
 
-            PropertyInfo widthProperty = sizeType.GetProperty(
-                "width",
-                BindingFlags.Instance |
-                BindingFlags.Public |
-                BindingFlags.NonPublic
-            );
+            PropertyInfo widthProperty =
+                sizeType.GetProperty(
+                    "width",
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.NonPublic
+                );
 
-            PropertyInfo heightProperty = sizeType.GetProperty(
-                "height",
-                BindingFlags.Instance |
-                BindingFlags.Public |
-                BindingFlags.NonPublic
-            );
+            PropertyInfo heightProperty =
+                sizeType.GetProperty(
+                    "height",
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.NonPublic
+                );
 
-            if (widthProperty == null || heightProperty == null)
+            if (widthProperty == null ||
+                heightProperty == null)
+            {
                 continue;
+            }
 
             int width =
                 (int)widthProperty.GetValue(size);
@@ -259,20 +337,28 @@ public static class DisneyFastPlay
             if (width == TargetWidth &&
                 height == TargetHeight)
             {
-                selectedSizeIndex.SetValue(gameView, i);
+                selectedSizeIndex.SetValue(
+                    gameView,
+                    i
+                );
+
                 return;
             }
         }
 
-        MethodInfo getDisplayTexts = groupType.GetMethod(
-            "GetDisplayTexts",
-            BindingFlags.Instance |
-            BindingFlags.Public |
-            BindingFlags.NonPublic
-        );
+        MethodInfo getDisplayTexts =
+            groupType.GetMethod(
+                "GetDisplayTexts",
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.NonPublic
+            );
 
         string[] displayTexts =
-            getDisplayTexts?.Invoke(currentGroup, null) as string[];
+            getDisplayTexts?.Invoke(
+                currentGroup,
+                null
+            ) as string[];
 
         Debug.LogWarning(
             $"Disney Fast Play could not find a {TargetWidth}x{TargetHeight} size in group {currentGroupTypeValue}. Available: " +
@@ -284,21 +370,24 @@ public static class DisneyFastPlay
 
     private static void RestoreGameViewSettings()
     {
-        EditorWindow gameView = GetGameView();
+        EditorWindow gameView =
+            GetGameView();
 
         if (gameView == null)
             return;
 
-        Type gameViewType = gameView.GetType();
+        Type gameViewType =
+            gameView.GetType();
 
         if (previousPlayModeBehavior != null)
         {
-            PropertyInfo enterPlayModeBehavior = gameViewType.GetProperty(
-                "enterPlayModeBehavior",
-                BindingFlags.Instance |
-                BindingFlags.Public |
-                BindingFlags.NonPublic
-            );
+            PropertyInfo enterPlayModeBehavior =
+                gameViewType.GetProperty(
+                    "enterPlayModeBehavior",
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.NonPublic
+                );
 
             if (enterPlayModeBehavior != null)
             {
@@ -312,12 +401,45 @@ public static class DisneyFastPlay
         gameView.Repaint();
     }
 
+    private static void RestorePreviousScene()
+    {
+        string previousScenePath =
+            EditorPrefs.GetString(
+                PreviousSceneKey,
+                string.Empty
+            );
+
+        if (string.IsNullOrEmpty(previousScenePath))
+            return;
+
+        EditorPrefs.DeleteKey(
+            PreviousSceneKey
+        );
+
+        if (!System.IO.File.Exists(previousScenePath))
+        {
+            Debug.LogWarning(
+                $"Disney Fast Play: previous scene no longer exists: {previousScenePath}"
+            );
+
+            return;
+        }
+
+        EditorSceneManager.OpenScene(
+            previousScenePath,
+            OpenSceneMode.Single
+        );
+    }
+
     private static void OnPlayModeStateChanged(
         PlayModeStateChange state)
     {
         if (state == PlayModeStateChange.EnteredEditMode)
         {
             RestoreGameViewSettings();
+            RestorePreviousScene();
+            RestoreGameViewSettings();
+
             EditorWindow.FocusWindowIfItsOpen<SceneView>();
         }
     }
