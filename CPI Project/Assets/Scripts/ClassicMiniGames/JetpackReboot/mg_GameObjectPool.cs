@@ -29,6 +29,13 @@ namespace JetpackReboot
 			mg_jr_Pooled component = _objectToAddToPool.GetComponent<mg_jr_Pooled>();
 			Assert.NotNull(component, "Can't add an object to a pool it didn't come from: mg_jr_Pooled component missing");
 			Assert.AreSame(this, component.ManagingPool, "Can't add an object to a pool it didn't come from: Managing pool is not this pool");
+			// unity still delivers OnTriggerEnter2D to a second collector after the first one
+			// deactivated the object, so Return can come in twice for the same one. pushing it
+			// twice hands it to two levels at once and it vanishes from the first one on screen
+			if (m_collection.Contains(_objectToAddToPool))
+			{
+				return;
+			}
 			_objectToAddToPool.transform.parent = base.transform;
 			_objectToAddToPool.SetActive(false);
 			m_collection.Push(_objectToAddToPool);
