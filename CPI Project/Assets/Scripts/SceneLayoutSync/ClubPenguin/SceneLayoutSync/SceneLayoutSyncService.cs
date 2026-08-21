@@ -79,8 +79,11 @@ namespace ClubPenguin.SceneLayoutSync
 					SceneLayoutSyncService.ConvertToMutableSceneLayout(mutableSceneLayout, sceneLayoutData);
 					foreach (SceneLayoutSyncService.ExtraLayoutInfoLoader extraLayoutInfoLoader in this.extraLayoutInfoLoaders)
 					{
-						ExtraLayoutInfo extraLayoutInfo = extraLayoutInfoLoader();
-						mutableSceneLayout.extraInfo[extraLayoutInfo.Key] = extraLayoutInfo.Value;
+						ExtraLayoutInfo extraLayoutInfo = extraLayoutInfoLoader(sceneLayoutData);
+						if (extraLayoutInfo != null && !string.IsNullOrEmpty(extraLayoutInfo.Key))
+						{
+							mutableSceneLayout.extraInfo[extraLayoutInfo.Key] = extraLayoutInfo.Value;
+						}
 					}
 					EventHandlerDelegate<IglooServiceEvents.IglooLayoutUpdated> successHandler = null;
 					successHandler = delegate (IglooServiceEvents.IglooLayoutUpdated evt)
@@ -138,7 +141,7 @@ namespace ClubPenguin.SceneLayoutSync
 
 		// Token: 0x02000003 RID: 3
 		// (Invoke) Token: 0x0600000B RID: 11
-		public delegate ExtraLayoutInfo ExtraLayoutInfoLoader();
+		public delegate ExtraLayoutInfo ExtraLayoutInfoLoader(SceneLayoutData sceneLayoutData);
 
 		// Token: 0x02000004 RID: 4
 		private class IIglooUpdateLayoutErrorHandlerWrapper : IIglooUpdateLayoutErrorHandler
@@ -154,7 +157,10 @@ namespace ClubPenguin.SceneLayoutSync
 			public void OnUpdateLayoutError()
 			{
 				Service.Get<EventDispatcher>().RemoveListener<IglooServiceEvents.IglooLayoutUpdated>(this.successHandler);
-				this.errorHandler.OnUpdateLayoutError();
+				if (this.errorHandler != null)
+				{
+					this.errorHandler.OnUpdateLayoutError();
+				}
 			}
 
 			// Token: 0x04000004 RID: 4
