@@ -28,11 +28,11 @@ namespace ClubPenguin.UI
 		public void OnClearButtonClicked()
 		{
 			ClearCacheButton.interactable = false;
-			ButtonImage.SetActive(false);
-			ButtonText.SetActive(false);
-			Preloader.SetActive(true);
-			DoneImage.SetActive(false);
-			DoneText.SetActive(false);
+			setActiveSafe(ButtonImage, false);
+			setActiveSafe(ButtonText, false);
+			setActiveSafe(Preloader, true);
+			setActiveSafe(DoneImage, false);
+			setActiveSafe(DoneText, false);
 			clearImageCache();
 			clearContentCache();
 			CoroutineRunner.Start(waitForAnimationPreloader(), this, "waitForAnimationPreloader");
@@ -41,27 +41,39 @@ namespace ClubPenguin.UI
 		private IEnumerator waitForAnimationPreloader()
 		{
 			yield return new WaitForSeconds(2f);
-			ButtonImage.SetActive(false);
-			ButtonText.SetActive(false);
-			Preloader.SetActive(false);
-			DoneImage.SetActive(true);
-			DoneText.SetActive(true);
+			setActiveSafe(ButtonImage, false);
+			setActiveSafe(ButtonText, false);
+			setActiveSafe(Preloader, false);
+			setActiveSafe(DoneImage, true);
+			setActiveSafe(DoneText, true);
 			CoroutineRunner.Start(waitForAnimationDone(), this, "waitForAnimationDone");
 			if (MonoSingleton<NativeAccessibilityManager>.Instance.IsEnabled)
 			{
-				MonoSingleton<NativeAccessibilityManager>.Instance.Native.Speak(ClearCacheButton.GetComponentInChildren<Text>().text);
+				Text label = ClearCacheButton.GetComponentInChildren<Text>();
+				if (label != null)
+				{
+					MonoSingleton<NativeAccessibilityManager>.Instance.Native.Speak(label.text);
+				}
 			}
 		}
 
 		private IEnumerator waitForAnimationDone()
 		{
 			yield return new WaitForSeconds(2f);
-			ButtonImage.SetActive(true);
-			ButtonText.SetActive(true);
-			Preloader.SetActive(false);
-			DoneImage.SetActive(false);
-			DoneText.SetActive(false);
+			setActiveSafe(ButtonImage, true);
+			setActiveSafe(ButtonText, true);
+			setActiveSafe(Preloader, false);
+			setActiveSafe(DoneImage, false);
+			setActiveSafe(DoneText, false);
 			ClearCacheButton.interactable = true;
+		}
+
+		private static void setActiveSafe(GameObject target, bool active)
+		{
+			if (target != null)
+			{
+				target.SetActive(active);
+			}
 		}
 
 		private void clearImageCache()
