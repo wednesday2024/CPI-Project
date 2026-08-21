@@ -83,6 +83,7 @@ namespace ClubPenguin.Net
 		{
 			PurchaseConsumableResponse response = operation.Response;
 			Service.Get<EventDispatcher>().DispatchEvent(new RewardServiceEvents.MyAssetsReceived(response.assets));
+			Service.Get<EventDispatcher>().DispatchEvent(new ConsumableServiceEvents.ConsumablePurchased(operation.Type, operation.Count));
 			inventoryDataReturned(response.inventory);
 			handleCPResponse(response);
 		}

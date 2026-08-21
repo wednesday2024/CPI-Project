@@ -72,6 +72,7 @@ namespace ClubPenguin.MiniGames
 			{
 				Service.Get<INetworkServicesManager>().MinigameService.CatchFish(fishingResultFromCast, winningRewardName);
 				fishingResultFromCast = null;
+				Service.Get<EventDispatcher>().DispatchEvent(new MinigameServiceEvents.FishCaught(winningRewardName));
 				return;
 			}
 			throw new InvalidOperationException("There is nothing to catch!");
