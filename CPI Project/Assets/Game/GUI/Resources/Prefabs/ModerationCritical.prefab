@@ -1164,6 +1164,7 @@ GameObject:
   - component: {fileID: 114950084234772764}
   - component: {fileID: 114214545184142480}
   - component: {fileID: 114297109107550626}
+  - component: {fileID: 3093086048233732859}
   m_Layer: 5
   m_Name: ModerationCritical
   m_TagString: Untagged
@@ -1325,6 +1326,20 @@ MonoBehaviour:
   inputMap: {fileID: 11400000, guid: b74d49d8042d13d44836cebe93805266, type: 2}
   btnAccept: {fileID: 0}
   btnCancel: {fileID: 0}
+--- !u!114 &3093086048233732859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737788690571091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!1 &1816235223760739
 GameObject:
   m_ObjectHideFlags: 0
