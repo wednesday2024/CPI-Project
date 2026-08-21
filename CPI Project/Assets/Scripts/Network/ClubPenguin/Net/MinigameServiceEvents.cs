@@ -13,5 +13,15 @@ namespace ClubPenguin.Net
 				Result = result;
 			}
 		}
+
+		public struct FishCaught
+		{
+			public readonly string WinningRewardName;
+
+			public FishCaught(string winningRewardName)
+			{
+				WinningRewardName = winningRewardName;
+			}
+		}
 	}
 }

@@ -173,7 +173,7 @@ namespace ClubPenguin.Adventure
 				{
 					int count = list.Count;
 					collectParts(child, list);
-					if (list.Count == count)
+					if (list.Count == count && sticksOn(component))
 					{
 						list.Add(component);
 					}

@@ -52,5 +52,18 @@ namespace ClubPenguin.Net
 				ExperienceId = experienceId;
 			}
 		}
+
+		public struct ConsumablePurchased
+		{
+			public readonly string Type;
+
+			public readonly int Count;
+
+			public ConsumablePurchased(string type, int count)
+			{
+				Type = type;
+				Count = count;
+			}
+		}
 	}
 }
