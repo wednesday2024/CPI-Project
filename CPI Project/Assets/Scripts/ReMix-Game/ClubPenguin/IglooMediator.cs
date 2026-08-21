@@ -325,6 +325,8 @@ namespace ClubPenguin
 			sceneLayoutData.DecorationAdded -= onDecorationAdded;
 			sceneLayoutData.DecorationRemoved -= onDecorationRemoved;
 			sceneLayoutData.MaxLayoutItemsReached -= onMaxLayoutItemsReached;
+
+			layoutSyncService.StopSyncingSceneLayoutData(sceneLayoutData, null, null);
 		}
 
 		private void onMaxLayoutItemsReached()
@@ -407,8 +409,12 @@ namespace ClubPenguin
 			}
 		}
 
-		private ExtraLayoutInfo loadSittingLocations()
+		private ExtraLayoutInfo loadSittingLocations(SceneLayoutData sceneLayoutData)
 		{
+			if (sceneLayoutData != layoutManager.GetActiveSceneLayoutData())
+			{
+				return null;
+			}
 			RuntimeSittingLocationsExporter runtimeSittingLocationsExporter = new RuntimeSittingLocationsExporter();
 			IList<ExportedSittingLocation> objectToSerialize = runtimeSittingLocationsExporter.ExportCurrentScene();
 			string value = Service.Get<JsonService>().Serialize(objectToSerialize);
