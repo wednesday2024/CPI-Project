@@ -249,7 +249,7 @@ namespace ClubPenguin.Igloo.UI
 		public void OnBeginDrag(PointerEventData eventData)
 		{
 			didDropItem = false;
-			didDrag = (checkDidDrag(eventData.delta) && base.CanDrag);
+			didDrag = (checkDidDrag(eventData) && base.CanDrag);
 			if (didDrag)
 			{
 				handoffToDragContainer(eventData);
@@ -300,7 +300,7 @@ namespace ClubPenguin.Igloo.UI
 			}
 			else
 			{
-				didDrag = (checkDidDrag(eventData.delta) && base.CanDrag);
+				didDrag = (checkDidDrag(eventData) && base.CanDrag);
 				if (didDrag)
 				{
 					handoffToDragContainer(eventData);
@@ -324,8 +324,9 @@ namespace ClubPenguin.Igloo.UI
 			Service.Get<EventDispatcher>().DispatchEvent(default(ObjectManipulationEvents.EndDragInventoryItem));
 		}
 
-		private bool checkDidDrag(Vector2 dragDelta)
+		private bool checkDidDrag(PointerEventData eventData)
 		{
+			Vector2 dragDelta = eventData.position - eventData.pressPosition;
 			float num = dragDelta.y;
 			if (num < 0f)
 			{
