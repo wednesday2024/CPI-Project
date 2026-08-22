@@ -57,6 +57,12 @@ namespace ClubPenguin.Adventure
 
 		private PlayMakerFSM playMakerFsm;
 
+		private List<string> pendingEvents = new List<string>();
+
+		private bool pendingEventsFull = false;
+
+		private const int MAX_PENDING_EVENTS = 64;
+
 		private FsmTemplate fsmTemplate;
 
 		private Dictionary<string, Fsm> QuestSubFsms;
@@ -485,6 +491,22 @@ namespace ClubPenguin.Adventure
 			}
 			rebootScheduledEvents();
 			IsRestoringAsync = false;
+			sendPendingEvents();
+		}
+
+		private void sendPendingEvents()
+		{
+			if (pendingEvents.Count == 0)
+			{
+				return;
+			}
+			List<string> list = new List<string>(pendingEvents);
+			pendingEvents.Clear();
+			pendingEventsFull = false;
+			for (int i = 0; i < list.Count; i++)
+			{
+				SendEvent(list[i]);
+			}
 		}
 
 		private void restoreFromCompletedObjectives()
@@ -547,6 +569,8 @@ namespace ClubPenguin.Adventure
 				ObjectiveRewardIndexes.Clear();
 				CurrentObjectiveName = null;
 			}
+			pendingEvents.Clear();
+			pendingEventsFull = false;
 		}
 
 		private static string GetPlatformKey(string key)
@@ -656,6 +680,23 @@ namespace ClubPenguin.Adventure
 
 		public void SendEvent(string evt)
 		{
+			if (playMakerFsm == null)
+			{
+				if (pendingEvents.Count >= MAX_PENDING_EVENTS)
+				{
+					if (!pendingEventsFull)
+					{
+						pendingEventsFull = true;
+						Log.LogErrorFormatted(this, "Quest {0} has queued {1} events with no FSM to send them to; dropping the rest.", Id, MAX_PENDING_EVENTS);
+					}
+					return;
+				}
+				if (pendingEvents.Count == 0 || pendingEvents[pendingEvents.Count - 1] != evt)
+				{
+					pendingEvents.Add(evt);
+				}
+				return;
+			}
 			List<Fsm> subFsmList = playMakerFsm.Fsm.SubFsmList;
 			if (subFsmList != null)
 			{

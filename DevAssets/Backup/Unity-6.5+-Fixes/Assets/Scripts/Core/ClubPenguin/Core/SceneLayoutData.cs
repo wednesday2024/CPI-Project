@@ -456,9 +456,25 @@ namespace ClubPenguin.Core
 		private void setLayout(List<DecorationLayoutData> layout)
 		{
 			this.layout = new ParentedSet<string, DecorationLayoutData>();
+			int repeated = 0;
+			string firstRepeat = null;
 			for (int i = 0; i < layout.Count; i++)
 			{
-				this.layout.Add(layout[i].Id.ParentPath, layout[i].Id.GetFullPath(), layout[i]);
+				string fullPath = layout[i].Id.GetFullPath();
+				if (this.layout.Contains(fullPath))
+				{
+					repeated++;
+					if (firstRepeat == null)
+					{
+						firstRepeat = fullPath;
+					}
+					continue;
+				}
+				this.layout.Add(layout[i].Id.ParentPath, fullPath, layout[i]);
+			}
+			if (repeated > 0)
+			{
+				Disney.LaunchPadFramework.Log.LogErrorFormatted(this, "Layout {0} lists {1} decoration(s) more than once, starting with '{2}'; the first copy of each was kept.", LayoutId, repeated, firstRepeat);
 			}
 		}
 

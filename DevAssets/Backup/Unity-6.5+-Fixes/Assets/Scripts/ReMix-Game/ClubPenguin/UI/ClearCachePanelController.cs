@@ -3,75 +3,104 @@ using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
 using Disney.Native;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ClubPenguin.UI
 {
-	public class ClearCachePanelController : MonoBehaviour
-	{
-		public Button ClearCacheButton;
+    public class ClearCachePanelController : MonoBehaviour
+    {
+        public Button ClearCacheButton;
 
-		[Header("Default state")]
-		public GameObject ButtonImage;
+        [Header("Default state")]
+        public GameObject ButtonImage;
 
-		public GameObject ButtonText;
+        public GameObject ButtonText;
 
-		[Header("Cache Clearing")]
-		public GameObject Preloader;
+        [Header("Cache Clearing")]
+        public GameObject Preloader;
 
-		[Header("Done")]
-		public GameObject DoneImage;
+        [Header("Done")]
+        public GameObject DoneImage;
 
-		public GameObject DoneText;
+        public GameObject DoneText;
 
-		public void OnClearButtonClicked()
-		{
-			ClearCacheButton.interactable = false;
-			ButtonImage.SetActive(false);
-			ButtonText.SetActive(false);
-			Preloader.SetActive(true);
-			DoneImage.SetActive(false);
-			DoneText.SetActive(false);
-			clearImageCache();
-			clearContentCache();
-			CoroutineRunner.Start(waitForAnimationPreloader(), this, "waitForAnimationPreloader");
-		}
+        public void OnClearButtonClicked()
+        {
+            ClearCacheButton.interactable = false;
+            setActiveSafe(ButtonImage, false);
+            setActiveSafe(ButtonText, false);
+            setActiveSafe(Preloader, true);
+            setActiveSafe(DoneImage, false);
+            setActiveSafe(DoneText, false);
+            clearImageCache();
+            clearContentCache();
+            CoroutineRunner.Start(waitForAnimationPreloader(), this, "waitForAnimationPreloader");
+        }
 
-		private IEnumerator waitForAnimationPreloader()
-		{
-			yield return new WaitForSeconds(2f);
-			ButtonImage.SetActive(false);
-			ButtonText.SetActive(false);
-			Preloader.SetActive(false);
-			DoneImage.SetActive(true);
-			DoneText.SetActive(true);
-			CoroutineRunner.Start(waitForAnimationDone(), this, "waitForAnimationDone");
-			if (MonoSingleton<NativeAccessibilityManager>.Instance.IsEnabled)
-			{
-				MonoSingleton<NativeAccessibilityManager>.Instance.Native.Speak(ClearCacheButton.GetComponentInChildren<Text>().text);
-			}
-		}
+        private IEnumerator waitForAnimationPreloader()
+        {
+            yield return new WaitForSeconds(2f);
 
-		private IEnumerator waitForAnimationDone()
-		{
-			yield return new WaitForSeconds(2f);
-			ButtonImage.SetActive(true);
-			ButtonText.SetActive(true);
-			Preloader.SetActive(false);
-			DoneImage.SetActive(false);
-			DoneText.SetActive(false);
-			ClearCacheButton.interactable = true;
-		}
+            setActiveSafe(ButtonImage, false);
+            setActiveSafe(ButtonText, false);
+            setActiveSafe(Preloader, false);
+            setActiveSafe(DoneImage, true);
+            setActiveSafe(DoneText, true);
 
-		private void clearImageCache()
-		{
-			Service.Get<ImageCache>().ClearImageCache();
-		}
+            CoroutineRunner.Start(waitForAnimationDone(), this, "waitForAnimationDone");
 
-		private void clearContentCache()
-		{
-			Caching.ClearCache();
-		}
-	}
+            if (MonoSingleton<NativeAccessibilityManager>.Instance.IsEnabled)
+            {
+                TMP_Text label = DoneText != null ? DoneText.GetComponentInChildren<TMP_Text>(true) : null;
+
+                if (label != null)
+                {
+                    MonoSingleton<NativeAccessibilityManager>.Instance.Native.Speak(label.text);
+                }
+            }
+        }
+
+        private IEnumerator waitForAnimationDone()
+        {
+            yield return new WaitForSeconds(2f);
+
+            setActiveSafe(ButtonImage, true);
+            setActiveSafe(ButtonText, true);
+            setActiveSafe(Preloader, false);
+            setActiveSafe(DoneImage, false);
+            setActiveSafe(DoneText, false);
+
+            ClearCacheButton.interactable = true;
+        }
+
+        private static void setActiveSafe(GameObject target, bool active)
+        {
+            if (target != null)
+            {
+                target.SetActive(active);
+            }
+        }
+
+        private static TMP_Text getTMPText(GameObject target)
+        {
+            if (target == null)
+            {
+                return null;
+            }
+
+            return target.GetComponentInChildren<TMP_Text>(true);
+        }
+
+        private void clearImageCache()
+        {
+            Service.Get<ImageCache>().ClearImageCache();
+        }
+
+        private void clearContentCache()
+        {
+            Caching.ClearCache();
+        }
+    }
 }
