@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f658ebe5904fc43cd009c645ba1bb87, type: 3}
   m_Name: FoodtrekkerEat
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   isMemberOnly: 0
   Category: 12
   Difficulty: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
   Title: 'DailyChallenges.Title.FoodtrekkerEat '
   Description: 'DailyChallenges.Description.FoodtrekkerEat '
   Threshold: 1
-  Group: 0
+  Group: 1
   CounterMax: 1
   Comparison: 1
   Reward: {fileID: 11400000, guid: 78e0c18356997434c8101a8950a97a2d, type: 2}
@@ -28,6 +29,6 @@ MonoBehaviour:
     Key: Prefabs/Quest/QuestTaskItems/RHPanel
     type: UnityEngine.GameObject, UnityEngine
   DailyChallengeItemContentKey:
-    Key:
+    Key: 
     type: UnityEngine.GameObject, UnityEngine.CoreModule
   Zone: {fileID: 11400000, guid: 83bc2426b72073b4180fb136b0bb16d2, type: 2}
