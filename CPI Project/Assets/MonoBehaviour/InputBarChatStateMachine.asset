@@ -39,8 +39,6 @@ MonoBehaviour:
       TargetState: EmoteInstant
     - Event: emote_instant
       TargetState: EmoteInstant
-    - Event: instant
-      TargetState: Default
     - Event: keyboardOpen
       TargetState: Default
     OnExitEvents: []
@@ -69,8 +67,6 @@ MonoBehaviour:
       TargetState: EmoteInput
     - Event: instant
       TargetState: Instant
-    - Event: emote_instant
-      TargetState: Default
     - Event: keyboardOpen
       TargetState: Default
     OnExitEvents: []
