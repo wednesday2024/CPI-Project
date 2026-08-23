@@ -100,9 +100,6 @@ public class TownLightingBake : MonoBehaviour
                 Gol.StaticObject4.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject4, false);
 
-                Gol.StaticObject5.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject5, false);
-
                 Gol.StaticObject6.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject6, false);
 
@@ -168,9 +165,6 @@ public class TownLightingBake : MonoBehaviour
 
                     Gol.StaticObject4.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject4, true);
-
-                    Gol.StaticObject5.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject5, true);
 
                     Gol.StaticObject6.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject6, true);
