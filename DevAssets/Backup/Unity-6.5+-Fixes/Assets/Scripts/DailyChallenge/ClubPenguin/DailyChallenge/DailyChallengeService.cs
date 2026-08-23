@@ -28,6 +28,12 @@ namespace ClubPenguin.DailyChallenge
 
         private Dictionary<string, int> savedTaskCounters = new Dictionary<string, int>();
 
+        private const string PREFS_RECENT_TASKS_KEY = "DailyChallenge_RecentTasksHistory";
+
+        private const string PREFS_LAST_ASSIGNED_DATE_KEY = "DailyChallenge_LastAssignedDate";
+
+        private const string PREFS_ACTIVE_TASKS_KEY = "DailyChallenge_ActiveTasks";
+
         public bool HasUpdates
         {
             get
@@ -128,6 +134,24 @@ namespace ClubPenguin.DailyChallenge
         private void setupTasks()
         {
             int targetCount = DAILY_CHALLENGE_TOTAL;
+            string currentDateString = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            string storedDateString = PlayerPrefs.GetString(PREFS_LAST_ASSIGNED_DATE_KEY, string.Empty);
+            string storedActiveTasks = PlayerPrefs.GetString(PREFS_ACTIVE_TASKS_KEY, string.Empty);
+
+            if (storedDateString == currentDateString && !string.IsNullOrEmpty(storedActiveTasks))
+            {
+                string[] activeTaskArray = storedActiveTasks.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (activeTaskArray.Length == targetCount)
+                {
+                    NumberOfUpdates = activeTaskArray.Length;
+                    taskService.LoadTasks(activeTaskArray);
+                    return;
+                }
+            }
+
+            Queue<string> recentTasksQueue = loadRecentTasksHistory();
+            HashSet<string> recentTasksSet = new HashSet<string>(recentTasksQueue);
+
             List<string> finalTaskNames = new List<string>();
             HashSet<string> usedTaskNames = new HashSet<string>();
 
@@ -166,13 +190,95 @@ namespace ClubPenguin.DailyChallenge
             if (finalTaskNames.Count < targetCount)
             {
                 int shortfall = targetCount - finalTaskNames.Count;
-                List<string> replacements = taskService.GetTaskNamesByGroup(TaskDefinition.TaskGroup.Individual, usedTaskNames, shortfall);
-                finalTaskNames.AddRange(replacements);
+
+                HashSet<string> exclusionSet = new HashSet<string>(usedTaskNames);
+                foreach (string recentTask in recentTasksSet)
+                {
+                    exclusionSet.Add(recentTask);
+                }
+
+                List<string> candidates = taskService.GetTaskNamesByGroup(TaskDefinition.TaskGroup.Individual, exclusionSet, int.MaxValue);
+
+                if (candidates.Count < shortfall)
+                {
+                    List<string> fallbackCandidates = taskService.GetTaskNamesByGroup(TaskDefinition.TaskGroup.Individual, usedTaskNames, int.MaxValue);
+                    List<string> additionalCandidates = new List<string>();
+                    for (int i = 0; i < fallbackCandidates.Count; i++)
+                    {
+                        if (!candidates.Contains(fallbackCandidates[i]))
+                        {
+                            additionalCandidates.Add(fallbackCandidates[i]);
+                        }
+                    }
+                    shuffleList(additionalCandidates);
+                    for (int i = 0; i < additionalCandidates.Count && candidates.Count < shortfall; i++)
+                    {
+                        candidates.Add(additionalCandidates[i]);
+                    }
+                }
+
+                shuffleList(candidates);
+
+                for (int i = 0; i < shortfall && i < candidates.Count; i++)
+                {
+                    finalTaskNames.Add(candidates[i]);
+                    usedTaskNames.Add(candidates[i]);
+                }
             }
+
+            for (int i = 0; i < finalTaskNames.Count; i++)
+            {
+                recentTasksQueue.Enqueue(finalTaskNames[i]);
+            }
+
+            while (recentTasksQueue.Count > 42)
+            {
+                recentTasksQueue.Dequeue();
+            }
+
+            saveRecentTasksHistory(recentTasksQueue);
+            PlayerPrefs.SetString(PREFS_LAST_ASSIGNED_DATE_KEY, currentDateString);
+            PlayerPrefs.SetString(PREFS_ACTIVE_TASKS_KEY, string.Join(",", finalTaskNames.ToArray()));
+            PlayerPrefs.Save();
 
             string[] array = finalTaskNames.ToArray();
             NumberOfUpdates = array.Length;
             taskService.LoadTasks(array);
+        }
+
+        private Queue<string> loadRecentTasksHistory()
+        {
+            Queue<string> queue = new Queue<string>();
+            string savedData = PlayerPrefs.GetString(PREFS_RECENT_TASKS_KEY, string.Empty);
+            if (!string.IsNullOrEmpty(savedData))
+            {
+                string[] entries = savedData.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < entries.Length; i++)
+                {
+                    queue.Enqueue(entries[i]);
+                }
+            }
+            return queue;
+        }
+
+        private void saveRecentTasksHistory(Queue<string> queue)
+        {
+            string savedData = string.Join(",", queue.ToArray());
+            PlayerPrefs.SetString(PREFS_RECENT_TASKS_KEY, savedData);
+        }
+
+        private void shuffleList<T>(List<T> list)
+        {
+            System.Random rng = new System.Random();
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
 
         private bool onTasksLoaded(TaskServiceEvents.TasksLoaded evt)
