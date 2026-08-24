@@ -17,76 +17,15 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 11400000}
     name: Halloween2017_Scene2
-    startState: Start
+    startState: Find Local Player
     states:
-    - name: Start
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 60.226562
-        y: 190.96094
-        width: 100
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Find Local Player
-        linkStyle: 0
-        linkConstraint: 0
-        linkTarget: 0
-        colorIndex: 0
-      actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
     - name: Wait for Player to Enter Trigger
       description: 
       colorIndex: 1
       position:
         serializedVersion: 2
-        x: 54.90625
-        y: 394.0625
+        x: 198.90625
+        y: 346.0625
         width: 229
         height: 32
       isBreakpoint: 0
@@ -174,8 +113,8 @@ MonoBehaviour:
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 54.945312
-        y: 588.6797
+        x: 198.94531
+        y: 540.6797
         width: 100
         height: 32
       isBreakpoint: 0
@@ -235,8 +174,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 352.14062
-        y: 270.35938
+        x: 496.14062
+        y: 222.35938
         width: 328
         height: 32
       isBreakpoint: 0
@@ -322,8 +261,8 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 352.10938
-        y: 310.58594
+        x: 496.10938
+        y: 262.58594
         width: 127
         height: 32
       isBreakpoint: 0
@@ -395,8 +334,8 @@ MonoBehaviour:
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 352.10156
-        y: 349.71875
+        x: 496.10156
+        y: 301.71875
         width: 100
         height: 32
       isBreakpoint: 0
@@ -460,8 +399,8 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 350.3203
-        y: 392.76562
+        x: 494.3203
+        y: 344.76562
         width: 142
         height: 32
       isBreakpoint: 0
@@ -533,8 +472,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 348.84375
-        y: 435.89062
+        x: 492.84375
+        y: 387.89062
         width: 346
         height: 32
       isBreakpoint: 0
@@ -685,8 +624,8 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 347.21875
-        y: 523.21875
+        x: 491.21875
+        y: 475.21875
         width: 100
         height: 32
       isBreakpoint: 0
@@ -758,8 +697,8 @@ MonoBehaviour:
       colorIndex: 7
       position:
         serializedVersion: 2
-        x: 345.1328
-        y: 615.5469
+        x: 489.1328
+        y: 567.5469
         width: 100
         height: 32
       isBreakpoint: 0
@@ -823,8 +762,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 343.21875
-        y: 657.2344
+        x: 487.21875
+        y: 609.2344
         width: 329
         height: 32
       isBreakpoint: 0
@@ -910,8 +849,8 @@ MonoBehaviour:
       colorIndex: 5
       position:
         serializedVersion: 2
-        x: 378
-        y: 100
+        x: 522
+        y: 52
         width: 249
         height: 32
       isBreakpoint: 0
@@ -980,8 +919,8 @@ MonoBehaviour:
       colorIndex: 5
       position:
         serializedVersion: 2
-        x: 341
-        y: 834
+        x: 485
+        y: 786
         width: 240
         height: 32
       isBreakpoint: 0
@@ -1050,8 +989,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 57
-        y: 272
+        x: 201
+        y: 224
         width: 228
         height: 32
       isBreakpoint: 0
@@ -1136,8 +1075,8 @@ MonoBehaviour:
       colorIndex: 1
       position:
         serializedVersion: 2
-        x: 58
-        y: 233
+        x: 202
+        y: 185
         width: 134
         height: 32
       isBreakpoint: 0
@@ -1220,8 +1159,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 56.320312
-        y: 311.53906
+        x: 200.32031
+        y: 263.53906
         width: 231
         height: 32
       isBreakpoint: 0
@@ -1395,8 +1334,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 55.320312
-        y: 352.53906
+        x: 199.32031
+        y: 304.53906
         width: 229
         height: 32
       isBreakpoint: 0
@@ -1481,8 +1420,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 348
-        y: 476
+        x: 492
+        y: 428
         width: 118
         height: 32
       isBreakpoint: 0
@@ -1568,8 +1507,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 456
-        y: 152
+        x: 600
+        y: 104
         width: 100
         height: 48
       isBreakpoint: 0
@@ -1644,8 +1583,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 518
-        y: 214
+        x: 662
+        y: 166
         width: 118
         height: 32
       isBreakpoint: 0
@@ -1710,8 +1649,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 343
-        y: 213
+        x: 487
+        y: 165
         width: 140
         height: 32
       isBreakpoint: 0
@@ -1782,8 +1721,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 454
-        y: 710
+        x: 598
+        y: 662
         width: 118
         height: 48
       isBreakpoint: 0
@@ -1858,8 +1797,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 347
-        y: 782
+        x: 491
+        y: 734
         width: 152
         height: 32
       isBreakpoint: 0
@@ -1930,8 +1869,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 522
-        y: 783
+        x: 666
+        y: 735
         width: 130
         height: 32
       isBreakpoint: 0
@@ -2089,10 +2028,10 @@ MonoBehaviour:
     handleCollisionEnter2D: 0
     handleCollisionExit2D: 0
     handleCollisionStay2D: 0
-    handleTriggerEnter: 1
+    handleTriggerEnter: 0
     handleTriggerExit: 0
     handleTriggerStay: 0
-    handleCollisionEnter: 1
+    handleCollisionEnter: 0
     handleCollisionExit: 0
     handleCollisionStay: 0
     handleParticleCollision: 0
