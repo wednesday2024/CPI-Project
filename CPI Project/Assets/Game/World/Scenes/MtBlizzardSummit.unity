@@ -70457,7 +70457,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.82
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -70466,7 +70466,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.116
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -70499,7 +70499,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0.96
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -92301,8 +92301,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92896,8 +92896,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93343,8 +93343,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93734,8 +93734,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94306,8 +94306,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94768,8 +94768,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95296,8 +95296,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96537,8 +96537,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97139,8 +97139,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &4832
 MonoBehaviour:
   m_ObjectHideFlags: 0
