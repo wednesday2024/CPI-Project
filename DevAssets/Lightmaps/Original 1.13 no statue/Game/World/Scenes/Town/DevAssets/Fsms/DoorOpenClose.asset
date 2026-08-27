@@ -17,76 +17,15 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 11400000}
     name: Halloween2017_Scene2
-    startState: Start
+    startState: Wait for Player to Enter Trigger
     states:
-    - name: Start
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 347.22656
-        y: 110.96094
-        width: 100
-        height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Wait for Player to Enter Trigger
-        linkStyle: 0
-        linkConstraint: 0
-        linkTarget: 0
-        colorIndex: 0
-      actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
-        fsmIntParams: []
-        fsmBoolParams: []
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
     - name: Wait for Player to Enter Trigger
       description: 
       colorIndex: 1
       position:
         serializedVersion: 2
-        x: 282.90625
-        y: 218.0625
+        x: 293.90625
+        y: 101.0625
         width: 229
         height: 48
       isBreakpoint: 0
@@ -212,7 +151,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 588
-        y: 111
+        y: 175
         width: 169
         height: 32
       isBreakpoint: 0
@@ -290,7 +229,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 54.242188
-        y: 115
+        y: 179
         width: 162
         height: 32
       isBreakpoint: 0
@@ -425,10 +364,10 @@ MonoBehaviour:
     handleCollisionEnter2D: 0
     handleCollisionExit2D: 0
     handleCollisionStay2D: 0
-    handleTriggerEnter: 1
-    handleTriggerExit: 1
+    handleTriggerEnter: 0
+    handleTriggerExit: 0
     handleTriggerStay: 0
-    handleCollisionEnter: 1
+    handleCollisionEnter: 0
     handleCollisionExit: 0
     handleCollisionStay: 0
     handleParticleCollision: 0
