@@ -23919,11 +23919,11 @@ MonoBehaviour:
     _eventList: []
   profiler:
     totalMS: 19.999992
-    recordedMS: 0.0035092235
-    percent: 0.017546125
-    msPerFrame: 0.0017546117
+    recordedMS: 0.44459105
+    percent: 2.2229562
+    msPerFrame: 0.22229552
     maxMsPerFrame: 1.5487671
-    msPerCall: 0.0017546117
+    msPerCall: 0.22229552
     timesPerFrame: 1
   _eventMenuListFoldout: 1
   _eventListFoldout: 1
@@ -29740,6 +29740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1163505730}
   - component: {fileID: 1163505731}
+  - component: {fileID: 1163505732}
   m_Layer: 0
   m_Name: SmartFoxFramePump
   m_TagString: Untagged
@@ -29774,6 +29775,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa9e95dbbd535645ba90ed4bfea9456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ClubPenguinClient::ClubPenguin.Net.Client.SmartFoxFramePump
+--- !u!114 &1163505732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163505729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37790e32abed0e041ad5ef65366c1672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ClubPenguinClient::ClubPenguin.Net.Offline.ClipboardBridge
 --- !u!1 &1866246504
 GameObject:
   m_ObjectHideFlags: 0
