@@ -9,7 +9,7 @@ namespace ClubPenguin.Avatar
 {
 	public class AvatarViewCombined : AvatarView
 	{
-		public int MaxAtlasDimension = 2048;
+		public int MaxAtlasDimension = 4096;
 
 		public bool UseGpuSkinning;
 

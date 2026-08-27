@@ -8,7 +8,7 @@ namespace ClubPenguin.DCE
 {
 	public class DceViewCombined : DceView
 	{
-		public int MaxAtlasDimension = 512;
+		public int MaxAtlasDimension = 4096;
 
 		public bool UseGpuSkinning;
 

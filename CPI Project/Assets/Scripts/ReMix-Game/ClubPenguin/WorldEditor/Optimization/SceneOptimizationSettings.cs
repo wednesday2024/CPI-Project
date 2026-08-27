@@ -6,11 +6,11 @@ namespace ClubPenguin.WorldEditor.Optimization
 	public class SceneOptimizationSettings : MonoBehaviour
 	{
 		[Header("Texture Atlas")]
-		public int MinTextureSize = 2048;
+		public int MinTextureSize = 4096;
 
-		public int MaxTextureSize = 2048;
+		public int MaxTextureSize = 4096;
 
-		public int MaxAtlasDimension = 2048;
+		public int MaxAtlasDimension = 4096;
 
 		[Header("Texture Atlas Preview")]
 		public Texture2D[] TextureAtlasPreviewButtons;

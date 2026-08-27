@@ -8,9 +8,9 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 	[RequireComponent(typeof(AvatarViewDistinct))]
 	public class ClothingDesignerOutliner : MonoBehaviour
 	{
-		private const int MAX_MOBILE_RENDER_SIZE = 2048;
+		private const int MAX_MOBILE_RENDER_SIZE = 4096;
 
-		private const int MAX_STANDALONE_RENDER_SIZE = 2048;
+		private const int MAX_STANDALONE_RENDER_SIZE = 4096;
 
 		private const int ANTI_ALIASING_2 = 8;
 
@@ -105,7 +105,7 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 			outlineCamera.clearFlags = CameraClearFlags.Color;
 			outlineCamera.backgroundColor = Color.black;
 			bool flag = PlatformUtils.GetPlatformType() == PlatformType.Standalone;
-			MaxRenderTextureSize = (flag ? 2048 : 2048);
+			MaxRenderTextureSize = (flag ? 4096 : 4096);
 			int num2 = MaxRenderTextureSize;
 			int num3 = MaxRenderTextureSize;
 			if (referenceCamera.aspect > 1f)
@@ -116,7 +116,7 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 			{
 				num2 = Mathf.RoundToInt((float)num3 * referenceCamera.aspect);
 			}
-			outlineRtt = new RenderTexture(num2, num3, 2048);
+			outlineRtt = new RenderTexture(num2, num3, 4096);
 			if (flag)
 			{
 				outlineRtt.antiAliasing = 8;

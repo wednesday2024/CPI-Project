@@ -79,7 +79,7 @@ namespace MixAvatar
 			return skinnedMeshRenderer2;
 		}
 
-		public static CombinedMeshAtlasData CreateCombinedMeshTextureAtlas(SkinnedMeshRenderer combinedSkinnedMeshRenderer, List<Texture2D> subMeshTextures, int[] numVerticesPerSubMesh, Shader combinedMeshShader, bool useMipMaps, int maxAtlasDimension = 512)
+		public static CombinedMeshAtlasData CreateCombinedMeshTextureAtlas(SkinnedMeshRenderer combinedSkinnedMeshRenderer, List<Texture2D> subMeshTextures, int[] numVerticesPerSubMesh, Shader combinedMeshShader, bool useMipMaps, int maxAtlasDimension = 4096)
 		{
 			Texture2D texture2D = new Texture2D(maxAtlasDimension, maxAtlasDimension, TextureFormat.ARGB32, useMipMaps);
 			Rect[] atlasUVOffsets = texture2D.PackTextures(subMeshTextures.ToArray(), 0, maxAtlasDimension, true);

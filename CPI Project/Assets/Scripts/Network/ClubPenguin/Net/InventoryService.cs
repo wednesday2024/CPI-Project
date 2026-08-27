@@ -27,6 +27,7 @@ namespace ClubPenguin.Net
 			APICall<GetInventoryOperation> inventory = clubPenguinClient.InventoryApi.GetInventory();
 			inventory.OnResponse += inventoryLoaded;
 			inventory.OnError += handleCPResponseError;
+			inventory.OnError += inventoryLoadFailed;
 			inventory.Execute();
 		}
 
@@ -53,8 +54,13 @@ namespace ClubPenguin.Net
 
 		private void inventoryLoaded(GetInventoryOperation operation, HttpResponse httpResponse)
 		{
-			List<CustomEquipment> customEquipmentResponses = operation.CustomEquipmentResponses;
+			List<CustomEquipment> customEquipmentResponses = operation.CustomEquipmentResponses ?? new List<CustomEquipment>();
 			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(customEquipmentResponses));
+		}
+
+		private void inventoryLoadFailed(GetInventoryOperation operation, HttpResponse httpResponse)
+		{
+			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(new List<CustomEquipment>()));
 		}
 
 		private void equipmentDeleted(DeleteCustomEquipmentOperation operation, HttpResponse httpResponse)

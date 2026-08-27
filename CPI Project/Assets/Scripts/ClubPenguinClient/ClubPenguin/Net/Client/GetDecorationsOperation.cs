@@ -22,31 +22,32 @@ namespace ClubPenguin.Net.Client
 			DecorationInventory = new DecorationInventory();
 			DecorationInventory.items = new List<DecorationInventoryItem>();
 			DecorationInventoryEntity decorationInventoryEntity = offlineDatabase.Read<DecorationInventoryEntity>();
+			Dictionary<string, int> inventory = new Dictionary<string, int>();
 			if (decorationInventoryEntity.inventory != null)
 			{
 				foreach (KeyValuePair<string, int> item in decorationInventoryEntity.inventory)
 				{
-					DecorationInventory.items.Add(new DecorationInventoryItem
-					{
-						decorationId = DecorationId.FromString(item.Key),
-						count = item.Value
-					});
+					inventory[item.Key] = item.Value;
 				}
 			}
-			if (DecorationInventory.items.Count == 0)
+			AddPlacedDecorations(inventory, offlineDatabase);
+			foreach (KeyValuePair<string, int> item in inventory)
 			{
-				RebuildInventoryFromLayouts(offlineDatabase);
+				DecorationInventory.items.Add(new DecorationInventoryItem
+				{
+					decorationId = DecorationId.FromString(item.Key),
+					count = item.Value
+				});
 			}
 		}
 
-		private void RebuildInventoryFromLayouts(OfflineDatabase offlineDatabase)
+		private void AddPlacedDecorations(Dictionary<string, int> inventory, OfflineDatabase offlineDatabase)
 		{
 			SceneLayoutEntity sceneLayoutEntity = offlineDatabase.Read<SceneLayoutEntity>();
 			if (sceneLayoutEntity.Layouts == null)
 			{
 				return;
 			}
-			Dictionary<string, int> rebuiltInventory = new Dictionary<string, int>();
 			foreach (SavedSceneLayout layout in sceneLayoutEntity.Layouts)
 			{
 				if (layout.decorationsLayout == null)
@@ -57,29 +58,15 @@ namespace ClubPenguin.Net.Client
 				{
 					DecorationId decorationId = new DecorationId((int)decoration.definitionId, decoration.type);
 					string key = decorationId.ToString();
-					if (rebuiltInventory.ContainsKey(key))
+					if (inventory.ContainsKey(key))
 					{
-						rebuiltInventory[key]++;
+						inventory[key]++;
 					}
 					else
 					{
-						rebuiltInventory[key] = 1;
+						inventory[key] = 1;
 					}
 				}
-			}
-			foreach (KeyValuePair<string, int> item in rebuiltInventory)
-			{
-				DecorationInventory.items.Add(new DecorationInventoryItem
-				{
-					decorationId = DecorationId.FromString(item.Key),
-					count = item.Value
-				});
-			}
-			if (rebuiltInventory.Count > 0)
-			{
-				DecorationInventoryEntity value = offlineDatabase.Read<DecorationInventoryEntity>();
-				value.inventory = rebuiltInventory;
-				offlineDatabase.Write(value);
 			}
 		}
 

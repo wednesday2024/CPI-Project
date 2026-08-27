@@ -313,8 +313,8 @@ namespace ClubPenguin.Igloo
 			if (EditCameraTarget != null)
 			{
 				Vector3 position = EditCameraTarget.transform.position;
-				float t = Time.deltaTime * (SwipeSpeedModifier * zoomFactor);
-				Vector3 b = EditCameraTarget.transform.position + new Vector3(deltaPosition.x, 0f, deltaPosition.y);
+				float t = Time.deltaTime * SwipeSpeedModifier;
+				Vector3 b = EditCameraTarget.transform.position + new Vector3(deltaPosition.x * 4f, 0f, deltaPosition.y * 4f);
 				Vector3 adjustedPosition = Vector3.Lerp(position, b, t);
 				updateEditCameraTargetPosition(adjustedPosition);
 			}
@@ -509,7 +509,7 @@ namespace ClubPenguin.Igloo
 		{
 			if (bandSpeed > 0f)
 			{
-				float num = bandSpeed * Time.deltaTime;
+				float num = bandSpeed * Time.deltaTime * 2f;
 				Vector3 normalized = (obj.transform.position - EditCameraTarget.transform.position).normalized;
 				normalized.Scale(new Vector3(num, 0f, num));
 				updateEditCameraTargetPosition(EditCameraTarget.transform.position + normalized);

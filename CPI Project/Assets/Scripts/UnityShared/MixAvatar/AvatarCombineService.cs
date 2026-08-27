@@ -12,7 +12,7 @@ namespace MixAvatar
 	{
 		public const float TimeSliceMs = 10f;
 
-		public int AtlasMaxDimension = 512;
+		public int AtlasMaxDimension = 4096;
 
 		private readonly Queue<CombineRequest> combineRequests = new Queue<CombineRequest>();
 

@@ -123,10 +123,10 @@ namespace ClubPenguin
 				base.gameObject.SetActive(false);
 				AvatarViewCombined avatarViewCombined = base.gameObject.AddComponent<AvatarViewCombined>();
 				avatarViewCombined.UseGpuSkinning = UseGpuSkinning;
-				avatarViewCombined.MaxAtlasDimension = conditionalConfiguration.Get("AvatarSystem.MaxAtlasDimension.property", 2048);
+				avatarViewCombined.MaxAtlasDimension = conditionalConfiguration.Get("AvatarSystem.MaxAtlasDimension.property", 4096);
 				if (PlatformUtils.IsWebGL())
 				{
-					avatarViewCombined.MaxAtlasDimension = Mathf.Max(avatarViewCombined.MaxAtlasDimension, 2048);
+					avatarViewCombined.MaxAtlasDimension = Mathf.Max(avatarViewCombined.MaxAtlasDimension, 4096);
 				}
 				base.gameObject.SetActive(true);
 				avatarView = avatarViewCombined;
