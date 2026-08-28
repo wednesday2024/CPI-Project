@@ -3,6 +3,11 @@ Shader "CpRemix/Combined Avatar Depth"
     Properties
     {
         _MainTex ("Diffuse Texture", 2D) = "white" {}
+        _Diffuse ("Diffuse", 2D) = "black" {}
+        _BodyColorsMaskTex ("Body Color Mask", 2D) = "black" {}
+        _BodyRedChannelColor ("Body Red Channel Color", Color) = (1,0,0,1)
+        _BodyGreenChannelColor ("Body Green Channel Color", Color) = (1,1,0,1)
+        _BodyBlueChannelColor ("Body Blue Channel Color", Color) = (1,0,1,1)
     }
 
     SubShader
@@ -21,7 +26,13 @@ Shader "CpRemix/Combined Avatar Depth"
             #include "Lighting.cginc"
 
             sampler2D _MainTex;
+            sampler2D _Diffuse;
+            sampler2D _BodyColorsMaskTex;
             sampler2D _DetailAndMatcapMaskAndEmissive;
+
+            float3 _BodyRedChannelColor;
+            float3 _BodyGreenChannelColor;
+            float3 _BodyBlueChannelColor;
 
             float  _SurfaceYCoord;
             float  _DeepestYCoord;
@@ -106,14 +117,34 @@ Shader "CpRemix/Combined Avatar Depth"
             {
                 float4 main   = tex2D(_MainTex,                      i.uvMain);
                 float4 surf   = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvSurface);
+                float4 bodyDetail = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvMain);
+                float4 bodyMask = tex2D(_BodyColorsMaskTex, i.uvMain);
+                float4 bodyDiff = tex2D(_Diffuse, i.uvMain);
 
-                float  blend     = mad(main.w, 2.0, -1.0);
+                float3 bodyColorFromMask;
+                bodyColorFromMask.x = mad(bodyMask.z, _BodyBlueChannelColor.x, mad(bodyMask.x, _BodyRedChannelColor.x, bodyMask.y * _BodyGreenChannelColor.x));
+                bodyColorFromMask.y = mad(bodyMask.z, _BodyBlueChannelColor.y, mad(bodyMask.x, _BodyRedChannelColor.y, bodyMask.y * _BodyGreenChannelColor.y));
+                bodyColorFromMask.z = mad(bodyMask.z, _BodyBlueChannelColor.z, mad(bodyMask.x, _BodyRedChannelColor.z, bodyMask.y * _BodyGreenChannelColor.z));
+                float bodyMaskMax = max(bodyMask.z, max(bodyMask.y, bodyMask.x));
+                float3 bodyColor = bodyDiff.rgb * (1.0 - bodyMaskMax) + bodyMaskMax * bodyColorFromMask;
+                float3 sourceColor = (bodyMaskMax > 0.0) ? bodyColor : main.rgb;
+                float sourceAlpha = (bodyMaskMax > 0.0) ? bodyDiff.a : main.a;
+
+                if (bodyMaskMax > 0.0)
+                {
+                    float3 previewColor = bodyColor * bodyDetail.x * i.lighting * 2;
+                    float3 depthTint = lerp(1.0.xxx, i.depthColor, 0.1);
+                    previewColor *= depthTint;
+                    return float4(previewColor, 1.0);
+                }
+
+                float  blend     = mad(sourceAlpha, 2.0, -1.0);
                 float  mask      = (blend >= 0.0) ? 1.0 : 0.0;
                 float  litBlend  = blend * mask;
                 float  rawBlend  = mad(-blend, mask, 1.0);
 
-                float3 litColor  = main.xyz * litBlend;
-                float3 rawColor  = main.xyz * i.lighting * rawBlend;
+                float3 litColor  = sourceColor * litBlend;
+                float3 rawColor  = sourceColor * i.lighting * rawBlend;
                 float3 combined  = rawColor + litColor;
 
                 float  surfRed   = surf.x;

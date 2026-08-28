@@ -118,6 +118,11 @@ namespace CpRemixShaders
             if (avatarView == null)
                 return;
 
+            if (!(avatarView is AvatarViewCombined) && !(avatarView is AvatarViewDistinct))
+            {
+                return;
+            }
+
             SkinnedMeshRenderer renderer = avatarView.GetComponentInChildren<SkinnedMeshRenderer>(true);
 
             if (renderer == null)
@@ -126,7 +131,16 @@ namespace CpRemixShaders
             if (renderer.sharedMaterial == null)
                 return;
 
-            renderer.sharedMaterial.shader = combinedAvatarDepthShader;
+            if (!renderer.sharedMaterial.HasProperty("_MainTex") && !renderer.sharedMaterial.HasProperty("_Diffuse"))
+            {
+                return;
+            }
+
+            Texture mainTexture = renderer.sharedMaterial.HasProperty("_MainTex") ? renderer.sharedMaterial.mainTexture : null;
+            Material material = renderer.material;
+            material.shader = combinedAvatarDepthShader;
+            if (mainTexture != null)
+                material.mainTexture = mainTexture;
         }
 
         private void Update()
