@@ -1,4 +1,5 @@
 using ClubPenguin.Core;
+using ClubPenguin.Locomotion;
 using ClubPenguin.Net.Domain;
 using Disney.LaunchPadFramework;
 using System;
@@ -15,6 +16,8 @@ namespace ClubPenguin.Adventure
 		public InputEvents.Actions[] Actions;
 
 		private HashSet<InputEvents.Actions> actionsSet;
+
+		private LocomotionEventBroadcaster locomotionBroadcaster;
 
 		public override object GetExportParameters()
 		{
@@ -63,22 +66,56 @@ namespace ClubPenguin.Adventure
 		{
 			base.OnActivate();
 			actionsSet = new HashSet<InputEvents.Actions>(Actions);
-			base.dispatcher.AddListener<InputEvents.ActionEvent>(onActionEvent);
+			locomotionBroadcaster = SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<LocomotionEventBroadcaster>();
+			if (locomotionBroadcaster != null)
+			{
+				locomotionBroadcaster.OnDoActionEvent += onLocomotionAction;
+			}
 		}
 
 		public override void OnDeactivate()
 		{
 			base.OnDeactivate();
-			base.dispatcher.RemoveListener<InputEvents.ActionEvent>(onActionEvent);
+			if (locomotionBroadcaster != null)
+			{
+				locomotionBroadcaster.OnDoActionEvent -= onLocomotionAction;
+				locomotionBroadcaster = null;
+			}
 		}
 
-		private bool onActionEvent(InputEvents.ActionEvent evt)
+		private void onLocomotionAction(LocomotionController.LocomotionAction action, object userData = null)
 		{
-			if (actionsSet.Contains(evt.Action))
+			InputEvents.Actions action2;
+			switch (action)
+			{
+			case LocomotionController.LocomotionAction.Jump:
+				action2 = InputEvents.Actions.Jump;
+				break;
+			case LocomotionController.LocomotionAction.Torpedo:
+				action2 = InputEvents.Actions.Torpedo;
+				break;
+			case LocomotionController.LocomotionAction.Interact:
+				action2 = InputEvents.Actions.Interact;
+				break;
+			case LocomotionController.LocomotionAction.Action1:
+				action2 = InputEvents.Actions.Action1;
+				break;
+			case LocomotionController.LocomotionAction.Action2:
+				action2 = InputEvents.Actions.Action2;
+				break;
+			case LocomotionController.LocomotionAction.Action3:
+				action2 = InputEvents.Actions.Action3;
+				break;
+		case LocomotionController.LocomotionAction.LaunchThrow:
+				action2 = InputEvents.Actions.Snowball;
+				break;
+			default:
+				return;
+			}
+			if (actionsSet.Contains(action2))
 			{
 				taskIncrement();
 			}
-			return false;
 		}
 	}
 }
