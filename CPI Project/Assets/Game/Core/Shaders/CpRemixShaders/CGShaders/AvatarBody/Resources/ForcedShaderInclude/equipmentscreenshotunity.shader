@@ -69,6 +69,7 @@ Shader "CpRemix/Equipment Screenshot"
 
 			  #pragma vertex vert
 			  #pragma fragment frag
+			  #pragma multi_compile_instancing
 
 			  #include "UnityCG.cginc"
 
@@ -119,8 +120,18 @@ Shader "CpRemix/Equipment Screenshot"
 		  float3 _Decal6Color;
 		  float _Decal6Repeat;
 
+		  struct appdata_t
+		  {
+		  float4 _glesVertex : POSITION;
+		  float4 _glesMultiTexCoord0 : TEXCOORD0;
+		  #ifdef UNITY_INSTANCING_ENABLED
+		  UNITY_VERTEX_INPUT_INSTANCE_ID
+		  #endif
+		  };
+
 		  struct v2f
 		  {
+		  float4 position : SV_POSITION;
 		  float2 xlv_TEXCOORD0 :TEXCOORD0;
 		  float2 xlv_TEXCOORD1 :TEXCOORD1;
 		  float2 xlv_TEXCOORD2 :TEXCOORD2;
@@ -128,6 +139,9 @@ Shader "CpRemix/Equipment Screenshot"
 		  float2 xlv_TEXCOORD4 :TEXCOORD4;
 		  float2 xlv_TEXCOORD5 :TEXCOORD5;
 		  float2 xlv_TEXCOORD6 :TEXCOORD6;
+		  #ifdef UNITY_INSTANCING_ENABLED
+		  UNITY_VERTEX_INPUT_INSTANCE_ID
+		  #endif
 		  };
 
 		  struct FragOutput
@@ -135,15 +149,17 @@ Shader "CpRemix/Equipment Screenshot"
 		  float4 color : SV_Target;
 		  };
 
-		  v2f vert(
-		  float4 _glesVertex : POSITION,
-		  float4 _glesMultiTexCoord0 : TEXCOORD0,
-		  out float4 gl_Position : SV_POSITION
-		  )
+		  v2f vert(appdata_t v)
 		  {
+			#ifdef UNITY_INSTANCING_ENABLED
+			UNITY_SETUP_INSTANCE_ID(v);
+			#endif
 			v2f o;
+			#ifdef UNITY_INSTANCING_ENABLED
+			UNITY_TRANSFER_INSTANCE_ID(v, o);
+			#endif
 			float2 tmpvar_1;
-			tmpvar_1 = _glesMultiTexCoord0.xy;
+			tmpvar_1 = v._glesMultiTexCoord0.xy;
 			float2 decal6RotatedUVs_2;
 			float2 decal5RotatedUVs_3;
 			float2 decal4RotatedUVs_4;
@@ -152,7 +168,7 @@ Shader "CpRemix/Equipment Screenshot"
 			float2 decal1RotatedUVs_7;
 			float4 tmpvar_8;
 			tmpvar_8.w = 1.0;
-			tmpvar_8.xyz = _glesVertex.xyz;
+			tmpvar_8.xyz = v._glesVertex.xyz;
 			float2 pointLocalCenterToOrigin_12;
 			pointLocalCenterToOrigin_12.x = (-0.5 + _Decal1UOffset);
 			pointLocalCenterToOrigin_12.y = (-0.5 + _Decal1VOffset);
@@ -231,7 +247,7 @@ Shader "CpRemix/Equipment Screenshot"
 			tmpvar_61[1].x = -(tmpvar_59);
 			tmpvar_61[1].y = tmpvar_60;
 			decal6RotatedUVs_2 = (mul((tmpvar_1 + pointLocalCenterToOrigin_57), tmpvar_61) - pointLocalCenterToOrigin_57);
-			gl_Position = UnityObjectToClipPos(tmpvar_8);//mul(unity_MatrixVP, mul(unity_ObjectToWorld, tmpvar_8));(unity_MatrixVP * (unity_ObjectToWorld * tmpvar_8));
+			o.position = UnityObjectToClipPos(tmpvar_8);
 			o.xlv_TEXCOORD0 = tmpvar_1;
 			o.xlv_TEXCOORD1 = (((
 			  (decal1RotatedUVs_7 + float2(_Decal1UOffset, _Decal1VOffset))

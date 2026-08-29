@@ -70,9 +70,8 @@ Shader "CpRemix/Equipment Bake"
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
-
-            float4x4 unity_ObjectToWorld;
-            float4x4 unity_MatrixVP;
+            #pragma multi_compile_instancing
+            #include "UnityCG.cginc"
 
             float _Decal1Scale;
             float _Decal1UOffset;
@@ -107,6 +106,10 @@ Shader "CpRemix/Equipment Bake"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+
+                #ifdef UNITY_INSTANCING_ENABLED
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                #endif
             };
 
             struct v2f
@@ -119,6 +122,10 @@ Shader "CpRemix/Equipment Bake"
                 float2 uvDecal5 : TEXCOORD5;
                 float2 uvDecal6 : TEXCOORD6;
                 float4 pos : SV_POSITION;
+
+                #ifdef UNITY_INSTANCING_ENABLED
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                #endif
             };
 
             float2 RotateDecalUV(float2 baseUV, float uOffset, float vOffset, float scale, float rotation)
@@ -137,7 +144,14 @@ Shader "CpRemix/Equipment Bake"
 
             v2f vert(appdata v)
             {
+                #ifdef UNITY_INSTANCING_ENABLED
+                UNITY_SETUP_INSTANCE_ID(v);
+                #endif
                 v2f o;
+                #ifdef UNITY_INSTANCING_ENABLED
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
+                #endif
+
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
                 o.pos = mul(unity_MatrixVP, worldPos);
 

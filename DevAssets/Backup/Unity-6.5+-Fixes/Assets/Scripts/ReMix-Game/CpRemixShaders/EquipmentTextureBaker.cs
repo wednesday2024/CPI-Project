@@ -36,13 +36,16 @@ namespace CpRemixShaders
 			BodyRedChannelColor = bodyRedChannelColor;
 			BodyBlueChannelColor = bodyBlueChannelColor;
 			BodyGreenChannelColor = bodyGreenChannelColor;
+			QualitySettings.antiAliasing = 8;
 			if (equipmentBakeMaterial == null)
 			{
 				equipmentBakeMaterial = new Material(EquipmentShaderUtils.GetEquipmentBakeShader());
+				equipmentBakeMaterial.enableInstancing = true;
 			}
 			if (bodyBakeMaterial == null)
 			{
 				bodyBakeMaterial = new Material(EquipmentShaderUtils.GetBodyBakeShader());
+				bodyBakeMaterial.enableInstancing = true;
 			}
 		}
 
@@ -87,6 +90,11 @@ namespace CpRemixShaders
 
 		public void BakeEquipmentMaterialToAtlas(Material equipmentMaterial, Rect offsetInAtlas, RenderTexture destinationAtlas)
 		{
+			QualitySettings.antiAliasing = 8;
+			if (destinationAtlas != null)
+			{
+				destinationAtlas.antiAliasing = 8;
+			}
 			if (!EquipmentShaderUtils.IsEquipmentPreviewShader(equipmentMaterial.shader) && !EquipmentShaderUtils.IsBodyPreviewShader(equipmentMaterial.shader))
 			{
 				throw new Exception("Material must use one of following shaders: CpRemix/Equipment Preview, CpRemix/Avatar Body Preview. Was using " + equipmentMaterial.shader.name);

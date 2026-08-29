@@ -16,6 +16,7 @@ namespace ClubPenguin.Avatar
 			{
 				bakeMaterial.shader = shader;
 			}
+			bakeMaterial.enableInstancing = true;
 			return bakeMaterial;
 		}
 

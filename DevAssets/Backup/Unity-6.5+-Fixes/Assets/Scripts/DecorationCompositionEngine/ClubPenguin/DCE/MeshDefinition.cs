@@ -36,6 +36,7 @@ namespace ClubPenguin.DCE
 		public virtual Material CreateCombinedMaterial(Texture atlas)
 		{
 			Material material = new Material(DceService.CombinedMeshShader);
+			material.enableInstancing = true;
 			material.mainTexture = atlas;
 			return material;
 		}
