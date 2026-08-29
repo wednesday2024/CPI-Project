@@ -9,15 +9,18 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: UIMinimal
   m_Shader: {fileID: 4800000, guid: a40e4ce6a2d8031449ff074e490450f1, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _OSCMODE_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -52,3 +55,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Oscillation: {r: 1, g: 0.01, b: 1, a: 0.01}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -46,8 +46,8 @@ Shader "CpRemix/UI/Minimal"
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma target 2.0
+			#pragma multi_compile_instancing
 			#pragma shader_feature_local _OSCMODE_OFF _OSCMODE_SINE
-
 			#include "UnityCG.cginc"
 
 			struct appdata_t
@@ -63,6 +63,7 @@ Shader "CpRemix/UI/Minimal"
 				float4 vertex : SV_POSITION;
 				fixed4 color : COLOR;
 				float2 texcoord : TEXCOORD0;
+				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
@@ -76,6 +77,7 @@ Shader "CpRemix/UI/Minimal"
 				v2f o;
 				UNITY_SETUP_INSTANCE_ID(v);
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+				UNITY_TRANSFER_INSTANCE_ID(v, o);
 
 				o.vertex = UnityObjectToClipPos(v.vertex);
 

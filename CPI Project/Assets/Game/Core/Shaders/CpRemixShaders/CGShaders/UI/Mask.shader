@@ -47,6 +47,7 @@ Shader "CpRemix/UI/Mask"
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 2.0
+            #pragma multi_compile_instancing
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
             #include "UnityCG.cginc"
@@ -64,6 +65,7 @@ Shader "CpRemix/UI/Mask"
                 float4 vertex : SV_POSITION;
                 fixed4 color : COLOR;
                 float2 texcoord : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
@@ -75,6 +77,7 @@ Shader "CpRemix/UI/Mask"
                 v2f OUT;
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+                UNITY_TRANSFER_INSTANCE_ID(v, OUT);
 
                 OUT.vertex = UnityObjectToClipPos(v.vertex);
                 OUT.texcoord = v.texcoord;

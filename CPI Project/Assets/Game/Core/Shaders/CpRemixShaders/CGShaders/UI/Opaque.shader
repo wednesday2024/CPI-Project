@@ -48,6 +48,7 @@ Shader "CpRemix/UI/Opaque"
             #pragma target 4.5
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
 
@@ -59,6 +60,7 @@ Shader "CpRemix/UI/Opaque"
                 float4 vertex : POSITION;
                 float4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -66,11 +68,16 @@ Shader "CpRemix/UI/Opaque"
                 float4 position : SV_POSITION;
                 float4 color : COLOR;
                 float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             v2f vert(appdata v)
             {
                 v2f o;
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
 
                 o.position = UnityObjectToClipPos(v.vertex);
                 o.color = v.color * _Color;
