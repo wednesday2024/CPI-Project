@@ -21,7 +21,6 @@ Shader "CpRemix/Avatar Body Preview"
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
-            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
 
@@ -36,23 +35,17 @@ Shader "CpRemix/Avatar Body Preview"
             {
                 float4 vertex : POSITION;
                 float2 uv     : TEXCOORD0;
-
-                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
             {
                 float4 pos : SV_POSITION;
                 float2 uv  : TEXCOORD0;
-
-                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             v2f vert(appdata v)
             {
-                UNITY_SETUP_INSTANCE_ID(v);
                 v2f o;
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv  = v.uv;
                 return o;
@@ -110,8 +103,6 @@ Shader "CpRemix/Avatar Body Preview"
                 float3 normal : NORMAL;
                 float2 uv     : TEXCOORD0;
                 float3 color  : COLOR;
-
-                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -120,15 +111,11 @@ Shader "CpRemix/Avatar Body Preview"
                 float2 uv       : TEXCOORD0;
                 float3 lighting : TEXCOORD1;
                 float3 color    : COLOR;
-
-                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             v2f vert(appdata v)
             {
-                UNITY_SETUP_INSTANCE_ID(v);
                 v2f o;
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
 
                 float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 o.pos   = UnityObjectToClipPos(v.vertex);

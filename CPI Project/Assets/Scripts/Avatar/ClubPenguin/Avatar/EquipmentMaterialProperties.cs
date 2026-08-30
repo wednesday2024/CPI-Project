@@ -65,9 +65,7 @@ namespace ClubPenguin.Avatar
 			{
 				return TexturedMaterialProperties.GetBakeMaterial(AvatarService.EquipmentBakeShader);
 			}
-			Material material = new Material(AvatarService.EquipmentPreviewShader);
-			material.enableInstancing = true;
-			return material;
+			return new Material(AvatarService.EquipmentPreviewShader);
 		}
 
 		public override void ResetMaterial(Material mat)

@@ -19,7 +19,6 @@ Shader "CpRemix/GPU Combined Avatar Alpha"
             #pragma fragment frag
             #pragma target 4.0
             #pragma multi_compile_fwdbase
-            #pragma multi_compile_instancing
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
 
@@ -36,10 +35,6 @@ Shader "CpRemix/GPU Combined Avatar Alpha"
                 float2 uv     : TEXCOORD0;
                 float3 color  : COLOR;
                 float4 tangent: TANGENT;
-
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
             struct v2f
@@ -48,10 +43,6 @@ Shader "CpRemix/GPU Combined Avatar Alpha"
                 float3 ambientLit  : TEXCOORD1;
                 float3 color       : COLOR;
                 float4 vertex      : SV_POSITION;
-
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
             float3 RotateByQuat(float3 v, float4 q)
@@ -62,13 +53,7 @@ Shader "CpRemix/GPU Combined Avatar Alpha"
 
             v2f vert(appdata v)
             {
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_SETUP_INSTANCE_ID(v);
-                #endif
                 v2f o;
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
-                #endif
 
                 float4 bw = frac(v.tangent);
                 uint4 bi = uint4(int4(v.tangent));

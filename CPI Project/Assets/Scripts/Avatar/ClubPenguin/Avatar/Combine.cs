@@ -71,7 +71,6 @@ namespace ClubPenguin.Avatar
             {
                 ViewPart viewPart = parts[i];
                 Material material = new Material(viewPart.HasMaterialProperties(typeof(EquipmentMaterialProperties)) ? AvatarService.EquipmentBakeShader : AvatarService.BodyBakeShader);
-                material.enableInstancing = true;
                 Texture maskTexture = viewPart.GetMaskTexture();
                 viewPart.ApplyMaterialProperties(material);
                 bodyColor.Apply(material);

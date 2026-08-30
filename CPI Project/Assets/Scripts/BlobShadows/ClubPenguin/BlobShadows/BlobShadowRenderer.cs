@@ -106,7 +106,6 @@ namespace ClubPenguin.BlobShadows
 				shadowTriangles = new int[0];
 				shadowMesh = new Mesh();
 				shadowMaterial = new Material(Shader.Find("CpRemix/BlobShadows/ShadowGeoShader"));
-				shadowMaterial.enableInstancing = true;
 				shadowMaterial.SetTexture("_MainTex", ShadowTexture);
 				IsShadowsVisible = true;
 				transformRef = base.transform;
@@ -312,7 +311,6 @@ namespace ClubPenguin.BlobShadows
 						if (!replacementMats.ContainsKey(sharedMaterial))
 						{
 							material = new Material(sharedMaterial);
-							material.enableInstancing = true;
 							material.name = sharedMaterial.name + "_runtimeReplacement";
 							material.SetTexture("_BlobShadowTex", shadowRenderTexture);
 							replacementMats.Add(sharedMaterial, material);

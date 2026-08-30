@@ -15,10 +15,11 @@ Shader "CpRemix/GPU Combined Avatar"
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
-            #pragma multi_compile_instancing
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
 
+            float4 _LightColor0;
+            float4 _WorldSpaceLightPos0;
+            float4 glstate_lightmodel_ambient;
+            float4x4 unity_MatrixVP;
             float4 bonepos[48];
             float4 bonequat[48];
 
@@ -32,10 +33,6 @@ Shader "CpRemix/GPU Combined Avatar"
                 float2 uv : TEXCOORD0;
                 float3 color : COLOR;
                 float4 boneData : TANGENT;
-
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
             struct v2f
@@ -44,10 +41,6 @@ Shader "CpRemix/GPU Combined Avatar"
                 float2 uv : TEXCOORD0;
                 float3 lighting : TEXCOORD1;
                 float3 color : COLOR;
-
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
             float3 RotateVectorByQuaternion(float3 v, float4 q)
@@ -58,13 +51,7 @@ Shader "CpRemix/GPU Combined Avatar"
 
             v2f vert(appdata v)
             {
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_SETUP_INSTANCE_ID(v);
-                #endif
                 v2f o;
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
-                #endif
 
                 int4 boneIndicesSigned = (int4)v.boneData;
                 uint4 indices = (uint4)boneIndicesSigned;
@@ -76,7 +63,7 @@ Shader "CpRemix/GPU Combined Avatar"
                     weights.z * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.z]) + bonepos[indices.z].xyz) +
                     weights.w * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.w]) + bonepos[indices.w].xyz);
 
-                o.pos = mul(UNITY_MATRIX_VP, float4(skinnedPos, 1.0));
+                o.pos = mul(unity_MatrixVP, float4(skinnedPos, 1.0));
                 o.uv = v.uv;
 
                 float3 worldNormal = normalize(RotateVectorByQuaternion(v.normal, bonequat[indices.x]));

@@ -85,7 +85,6 @@ namespace MixAvatar
 			Rect[] atlasUVOffsets = texture2D.PackTextures(subMeshTextures.ToArray(), 0, maxAtlasDimension, true);
 			OffsetUVsToAtlas(combinedSkinnedMeshRenderer, numVerticesPerSubMesh, atlasUVOffsets);
 			Material material = new Material(combinedMeshShader);
-			material.enableInstancing = true;
 			material.mainTexture = texture2D;
 			return new CombinedMeshAtlasData(atlasUVOffsets, material);
 		}

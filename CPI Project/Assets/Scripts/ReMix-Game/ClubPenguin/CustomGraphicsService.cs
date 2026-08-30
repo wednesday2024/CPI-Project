@@ -253,9 +253,8 @@ namespace ClubPenguin
 
 		public void SetAntialiasing(int samples)
 		{
-			const int forcedMaxAntiAliasing = 8;
-			QualitySettings.antiAliasing = forcedMaxAntiAliasing;
-			AntiAliasLevel.SetValue(forcedMaxAntiAliasing);
+			QualitySettings.antiAliasing = samples;
+			AntiAliasLevel.SetValue(samples);
 		}
 
 		public void SetCameraPostEffects(bool value)

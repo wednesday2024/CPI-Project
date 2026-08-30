@@ -53,7 +53,6 @@ namespace MixAvatar
 						yield return true;
 						RenderTexture atlasRenderTexture = new RenderTexture(renderTextureSize, renderTextureSize, 0, RenderTextureFormat.ARGB32)
 						{
-							antiAliasing = 8,
 							isPowerOfTwo = true,
 							filterMode = FilterMode.Bilinear,
 							useMipMap = (request.UseMipMaps == MipMapping.On)
@@ -118,7 +117,6 @@ namespace MixAvatar
 					array[j] = rect;
 				}
 				Material atlasMaterial = new Material(combineRequest.CombinedMeshShader);
-				atlasMaterial.enableInstancing = true;
 				combineRequest.AtlasData = new CombinedMeshAtlasData(array, atlasMaterial);
 			}
 			catch (Exception ex)

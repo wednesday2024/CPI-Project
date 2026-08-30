@@ -81,7 +81,6 @@ namespace ClubPenguin.DCE
 		public override Material CreateCombinedMaterial(Texture atlas)
 		{
 			Material material = new Material(UseGpuSkinning ? DceService.GpuCombinedMeshShader : DceService.CombinedMeshShader);
-			material.enableInstancing = true;
 			material.mainTexture = atlas;
 			return material;
 		}
