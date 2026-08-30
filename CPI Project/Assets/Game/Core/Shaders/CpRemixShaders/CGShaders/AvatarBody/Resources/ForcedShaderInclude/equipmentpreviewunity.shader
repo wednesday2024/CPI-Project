@@ -69,6 +69,7 @@ Shader "CpRemix/Equipment Preview"
 
 		#pragma vertex vert
 		#pragma fragment frag
+		#pragma multi_compile_instancing
 
 		#include "UnityCG.cginc"
 
@@ -124,6 +125,7 @@ Shader "CpRemix/Equipment Preview"
 		{
 		float4 _glesVertex :POSITION;
 		float4 _glesMultiTexCoord0 :TEXCOORD0;
+		UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
 		struct OUT_Data_Vert
@@ -136,6 +138,7 @@ Shader "CpRemix/Equipment Preview"
 		float2 xlv_TEXCOORD5 :TEXCOORD5;
 		float2 xlv_TEXCOORD6 :TEXCOORD6;
 		float4 gl_Position :SV_POSITION;
+		UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
 		struct v2f
@@ -147,6 +150,7 @@ Shader "CpRemix/Equipment Preview"
 		float2 xlv_TEXCOORD4 :TEXCOORD4;
 		float2 xlv_TEXCOORD5 :TEXCOORD5;
 		float2 xlv_TEXCOORD6 :TEXCOORD6;
+		UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
 		struct OUT_Data_Frag
@@ -156,7 +160,9 @@ Shader "CpRemix/Equipment Preview"
 
 		OUT_Data_Vert vert(appdata_t v)
 		{
+		  UNITY_SETUP_INSTANCE_ID(v);
 		  OUT_Data_Vert o;
+		  UNITY_TRANSFER_INSTANCE_ID(v, o);
 		   float2 tmpvar_1;
 		  tmpvar_1 = v._glesMultiTexCoord0.xy;
 		   float2 decal6RotatedUVs_2;

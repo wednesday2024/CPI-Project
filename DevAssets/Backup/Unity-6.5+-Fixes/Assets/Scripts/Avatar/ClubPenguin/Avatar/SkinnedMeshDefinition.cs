@@ -82,6 +82,7 @@ namespace ClubPenguin.Avatar
 		public override Material CreateCombinedMaterial(Texture atlas)
 		{
 			Material material = new Material(UseGpuSkinning ? AvatarService.GpuCombinedMeshShader : AvatarService.CombinedMeshShader);
+			material.enableInstancing = true;
 			material.mainTexture = atlas;
 			return material;
 		}
