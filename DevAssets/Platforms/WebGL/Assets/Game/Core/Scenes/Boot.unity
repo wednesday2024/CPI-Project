@@ -23918,12 +23918,12 @@ MonoBehaviour:
     _eventNames: []
     _eventList: []
   profiler:
-    totalMS: 19.999992
-    recordedMS: 0.44459105
-    percent: 2.2229562
-    msPerFrame: 0.22229552
+    totalMS: 503.02927
+    recordedMS: 0.11432171
+    percent: 0.022726651
+    msPerFrame: 0.00137737
     maxMsPerFrame: 1.5487671
-    msPerCall: 0.22229552
+    msPerCall: 0.00137737
     timesPerFrame: 1
   _eventMenuListFoldout: 1
   _eventListFoldout: 1
@@ -29275,6 +29275,8 @@ MonoBehaviour:
     displayName: Coconut Cove | 4th of July Celebration
   - sceneName: TownInterior
     displayName: Town Interior
+  - sceneName: CarWorld_Decorations_MtBlizzard
+    displayName: Mt. Blizzard | Car World Decorations
 --- !u!114 &240664826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29707,6 +29709,17 @@ MonoBehaviour:
   - eventID: 54
     eventName: minifireworks
     excludeFromDateSystem: 0
+    startMonth: 7
+    startDay: 3
+    endMonth: 7
+    endDay: 6
+    SceneAudioMappings: []
+    SnowballPrefab: {fileID: 0}
+    OriginalMaterial: {fileID: 0}
+    EventMaterial: {fileID: 0}
+  - eventID: 55
+    eventName: carworld
+    excludeFromDateSystem: 1
     startMonth: 7
     startDay: 3
     endMonth: 7
