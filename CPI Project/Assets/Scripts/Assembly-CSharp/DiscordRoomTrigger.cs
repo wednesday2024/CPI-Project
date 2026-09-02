@@ -1,3 +1,4 @@
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -94,3 +95,4 @@ public class DiscordRoomTrigger : MonoBehaviour
             ForceClearIfOwner();
     }
 }
+#endif

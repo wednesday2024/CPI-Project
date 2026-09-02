@@ -1,3 +1,4 @@
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX
 using ClubPenguin;
 using ClubPenguin.Adventure;
 using ClubPenguin.Core;
@@ -1658,3 +1659,4 @@ public class DiscordController : MonoBehaviour
         catch { }
     }
 }
+#endif
