@@ -2097,7 +2097,8 @@ GameObject:
   - component: {fileID: 6663269768898384037}
   - component: {fileID: 5335542084933397438}
   - component: {fileID: 8754738158993602762}
-  m_Layer: 0
+  - component: {fileID: 6211177555703688585}
+  m_Layer: 30
   m_Name: SnowRampSnow
   m_TagString: Snow
   m_Icon: {fileID: 0}
@@ -2176,6 +2177,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6211177555703688585
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314807855782538896}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: b8a4df422b336904389b4fe30663ec34, type: 2}
 --- !u!1 &1317132134746576619
 GameObject:
   m_ObjectHideFlags: 0
@@ -14679,7 +14702,7 @@ GameObject:
   - component: {fileID: 8086525451752553183}
   - component: {fileID: 7835701388198336134}
   - component: {fileID: 6249965965050985618}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: SnowRampSnow
   m_TagString: Snow
   m_Icon: {fileID: 0}
@@ -14777,7 +14800,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b8a4df422b336904389b4fe30663ec34, type: 2}
 --- !u!1 &3749288034824148202
@@ -20754,7 +20777,7 @@ GameObject:
   - component: {fileID: 7783628414803445237}
   - component: {fileID: 2847537217225731401}
   - component: {fileID: 1718822962193835247}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: SnowRampSnow
   m_TagString: Snow
   m_Icon: {fileID: 0}
@@ -20852,7 +20875,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b8a4df422b336904389b4fe30663ec34, type: 2}
 --- !u!1 &5433466581139679986
@@ -28536,7 +28559,7 @@ GameObject:
   - component: {fileID: 6539848517080491624}
   - component: {fileID: 4576813150303172548}
   - component: {fileID: 4937734144417360679}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: SnowRampSnow
   m_TagString: Snow
   m_Icon: {fileID: 0}
@@ -28634,7 +28657,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b8a4df422b336904389b4fe30663ec34, type: 2}
 --- !u!1 &7345905852463868431
@@ -28919,7 +28942,7 @@ GameObject:
   - component: {fileID: 2546110026627708619}
   - component: {fileID: 69086223153898925}
   - component: {fileID: 4426835871805877590}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: SnowRampSnow
   m_TagString: Snow
   m_Icon: {fileID: 0}
@@ -29017,7 +29040,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b8a4df422b336904389b4fe30663ec34, type: 2}
 --- !u!1 &7428262774500570744
