@@ -191,7 +191,7 @@ namespace Disney.Native
 
 		public virtual void ButtonClicked(string aId)
 		{
-			this.OnButtonClicked(this, new ButtonClickedEventArgs(int.Parse(aId)));
+			this.OnButtonClicked(this, new ButtonClickedEventArgs(EntityId.FromULong((ulong)(uint)int.Parse(aId))));
 		}
 	}
 }

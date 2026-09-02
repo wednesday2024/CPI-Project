@@ -6,7 +6,7 @@ namespace Foundation.Unity
 	{
 		public static void DestroyIfInstance(Object obj)
 		{
-			if (obj != null && obj.GetEntityId() < 0)
+			if (obj != null && IsInstance(obj))
 			{
 				Object.Destroy(obj);
 			}
@@ -14,7 +14,7 @@ namespace Foundation.Unity
 
 		public static void DestroyIfAsset(Object obj)
 		{
-			if (obj != null && obj.GetEntityId() >= 0 && obj.GetType() != typeof(GameObject))
+			if (obj != null && !IsInstance(obj) && obj.GetType() != typeof(GameObject))
 			{
 				Resources.UnloadAsset(obj);
 			}
@@ -24,7 +24,7 @@ namespace Foundation.Unity
 		{
 			if (obj != null)
 			{
-				if (obj.GetEntityId() < 0)
+				if (IsInstance(obj))
 				{
 					Object.Destroy(obj);
 				}
@@ -33,6 +33,11 @@ namespace Foundation.Unity
 					Resources.UnloadAsset(obj);
 				}
 			}
+		}
+
+		private static bool IsInstance(Object obj)
+		{
+			return EntityId.ToULong(obj.GetEntityId()) > long.MaxValue;
 		}
 
 		public static void UnloadAssets(this GameObject go)
