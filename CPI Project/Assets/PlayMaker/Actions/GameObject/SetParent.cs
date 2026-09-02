@@ -52,6 +52,8 @@ namespace HutongGames.PlayMaker.Actions
 				{
 					go.transform.localRotation = Quaternion.identity;
 				}
+
+				Physics.SyncTransforms();
 			}
 			
 			Finish();

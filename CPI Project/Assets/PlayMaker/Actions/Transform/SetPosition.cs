@@ -116,9 +116,9 @@ namespace HutongGames.PlayMaker.Actions
 			else
 			{
                 cachedTransform.localPosition = position;
-
-                Physics.SyncTransforms();
             }
+
+			Physics.SyncTransforms();
 		}
 
 #if UNITY_EDITOR

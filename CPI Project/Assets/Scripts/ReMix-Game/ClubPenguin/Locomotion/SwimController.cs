@@ -209,6 +209,7 @@ namespace ClubPenguin.Locomotion
 			if (isCloseToSurface())
 			{
 				base.transform.position = position;
+				Physics.SyncTransforms();
 			}
 			dispatcher.AddListener<DivingEvents.AirSupplyUpdated>(onAirSupplyUpdated);
 			if (CompareTag("Player"))
@@ -548,6 +549,7 @@ namespace ClubPenguin.Locomotion
 				animator.SetFloat(AnimationHashes.Params.LowAirAnimChooser, desiredAnimIndex);
 				TriggerSnapToSurface = false;
 				base.transform.rotation = Quaternion.LookRotation(-cameraTransform.forward, cameraTransform.up);
+				Physics.SyncTransforms();
 				swim.ResetState();
 				impulses.ResetState();
 			}

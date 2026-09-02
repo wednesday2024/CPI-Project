@@ -104,16 +104,19 @@ namespace ClubPenguin.Locomotion
 		public virtual void RemoteSetPosition(Vector3 newPos)
 		{
 			base.transform.position = newPos;
+			Physics.SyncTransforms();
 		}
 
 		public virtual void RemoteSnapPosition(Vector3 newPos)
 		{
 			base.transform.position = newPos;
+			Physics.SyncTransforms();
 		}
 
 		public virtual void RemoteSetFacing(Vector3 newFacing)
 		{
 			base.transform.rotation = Quaternion.LookRotation(newFacing);
+			Physics.SyncTransforms();
 		}
 
 		public virtual void ResetState()

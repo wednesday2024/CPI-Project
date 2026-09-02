@@ -64,6 +64,7 @@ namespace ClubPenguin
 			}
 			base.transform.position = startingPosition;
 			base.transform.rotation = startingRotation;
+			Physics.SyncTransforms();
 			Service.Get<EventDispatcher>().DispatchEvent(new OutOfBoundsWarperEvents.ResetPlayer(base.gameObject));
 		}
 

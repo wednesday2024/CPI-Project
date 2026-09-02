@@ -45,6 +45,14 @@ namespace ClubPenguin
 			eventDispatcher.AddListener<SceneTransitionEvents.TransitionComplete>(onSceneTransitionComplete);
 		}
 
+		private void LateUpdate()
+		{
+			if (base.transform.parent != null)
+			{
+				Physics.SyncTransforms();
+			}
+		}
+
 		public void SpawnPlayer(SpawnPlayerParams spawnPlayerParams)
 		{
 			if (spawnPlayerParams.Zone != null || !string.IsNullOrEmpty(spawnPlayerParams.SceneName))

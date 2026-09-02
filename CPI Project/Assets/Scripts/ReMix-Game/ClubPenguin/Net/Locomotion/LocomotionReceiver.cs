@@ -418,6 +418,7 @@ namespace ClubPenguin.Net.Locomotion
 			else
 			{
 				base.transform.position = vector;
+				Physics.SyncTransforms();
 			}
 		}
 
@@ -586,6 +587,7 @@ namespace ClubPenguin.Net.Locomotion
 			else
 			{
 				base.transform.position = newPos;
+				Physics.SyncTransforms();
 			}
 		}
 	}

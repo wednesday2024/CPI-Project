@@ -501,6 +501,7 @@ namespace ClubPenguin.UI
                     location.y += 0.5f;
                 }
                 SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.transform.position = location;
+                Physics.SyncTransforms();
                 ClubPenguin.Core.SceneRefs.Get<BaseCamera>().Snap();
                 CoroutineRunner.Start(LocomotionUtils.nudgePlayer(component), component.gameObject, "MoveAfterJump");
             }

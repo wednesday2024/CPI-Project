@@ -124,6 +124,7 @@ namespace ClubPenguin.PartyGames
 				component2.SetCurrentController<RunController>();
 			}
 			localPlayerGameObject.transform.position = raceRestartPosition;
+			Physics.SyncTransforms();
 			RaceGameController component3 = localPlayerGameObject.GetComponent<RaceGameController>();
 			if (component3 != null)
 			{
