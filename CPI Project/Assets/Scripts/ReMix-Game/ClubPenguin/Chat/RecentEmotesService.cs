@@ -44,6 +44,10 @@ namespace ClubPenguin.Chat
 			{
 				emoteDefinitionsList = new List<EmoteDefinition>();
 			}
+			while (emoteDefinitionsList.Count > RecentEmotesMaxCount)
+			{
+				emoteDefinitionsList.RemoveAt(emoteDefinitionsList.Count - 1);
+			}
 			return false;
 		}
 
