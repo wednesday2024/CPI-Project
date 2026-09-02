@@ -329,7 +329,6 @@ namespace ClubPenguin
             }
         }
 
-        [PublicTweak(2018, 12, 21)]
         [Tweakable("Network.WebServices.News", Description = "The ClubPenguin Island blog is gone, but if there's another website you like to follow put the URL here. Note: In this custom client, this feature no longer works. It was removed due to multiple security flaws.")]
         public string ChangeCPWebsiteAPIServicehost
         {

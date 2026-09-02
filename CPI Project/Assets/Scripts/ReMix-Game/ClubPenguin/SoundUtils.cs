@@ -74,7 +74,7 @@ namespace ClubPenguin
 				return true;
 			}
 
-			var listener = UnityEngine.Object.FindObjectOfType<AudioListener>();
+			var listener = UnityEngine.Object.FindAnyObjectByType<AudioListener>();
 			var listenerTransform = (listener != null) ? listener.transform : null;
 			if (listenerTransform == null)
 			{

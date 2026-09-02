@@ -72,6 +72,7 @@ public class CreateAssetBundles : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Project saved and refreshed after cleanup.");
+        GenerateManifest.GenerateManifestFile();
     }
 
     private static string DetectAndSwitchPlatform()
