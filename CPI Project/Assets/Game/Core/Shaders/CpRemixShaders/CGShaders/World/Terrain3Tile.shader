@@ -85,10 +85,10 @@ Shader "CpRemix/World/Terrain 3 Tile" {
     // Shadow plane calculations
     float2 shadowOffset = worldPos.xz - _ShadowPlaneWorldPos.xz;
     o.texcoord5.z = worldPos.y;
-    float shadowPlaneHalfDim = _ShadowPlaneDim * 0.5;
+	float shadowPlaneHalfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
     float2 shadowCoord = shadowOffset / shadowPlaneHalfDim;
-    float shadowScale = _ShadowPlaneDim / _ShadowTextureDim;
-    shadowCoord += shadowScale / _ShadowPlaneDim;
+	float shadowScale = _ShadowPlaneDim / max(_ShadowTextureDim, 0.0001);
+	shadowCoord += shadowScale / max(_ShadowPlaneDim, 0.0001);
     shadowCoord += float2(1.0, 1.0);
     o.texcoord5.xy = shadowCoord * 0.5;
 

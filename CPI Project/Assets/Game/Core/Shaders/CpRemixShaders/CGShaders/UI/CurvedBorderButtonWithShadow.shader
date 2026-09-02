@@ -99,7 +99,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
                 float2 powShadowTexCoord = pow(abs(texCoord + _ShadowVec), _Roundness);
 
                 float borderSizeRounded = pow(1.0 - _BorderSize, _Roundness);
-                float aliasSizeInv = 1.0 / _AAliasSize;
+                float aliasSizeInv = 1.0 / max(_AAliasSize, 0.0001);
                 float aliasSize = 1.0 - _AAliasSize;
 
                 float distToCenter = sqrt(dot(powTexCoord, powTexCoord));

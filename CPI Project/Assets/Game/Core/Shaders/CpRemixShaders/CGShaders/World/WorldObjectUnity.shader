@@ -59,8 +59,8 @@ Shader "CpRemix/World/WorldObject"
                 o.uv = v.uv0;
                 o.lightmapUV = v.uv1 * unity_LightmapST.xy + unity_LightmapST.zw;
 
-                float halfDim = _ShadowPlaneDim * 0.5;
-                float aspectOfs = 1.0 / _ShadowTextureDim;
+                float halfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
+                float aspectOfs = 1.0 / max(_ShadowTextureDim, 0.0001);
 
                 float offsetX = worldPos.x - _ShadowPlaneWorldPos.x;
                 float offsetZ = worldPos.z - _ShadowPlaneWorldPos.z;

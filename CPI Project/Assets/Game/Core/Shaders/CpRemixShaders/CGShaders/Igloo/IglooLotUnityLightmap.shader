@@ -102,8 +102,8 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				o.texcoord1 = v.texcoord1 * unity_LightmapST.xy + unity_LightmapST.zw;
 
 				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-				float halfDim = _ShadowPlaneDim * 0.5;
-				float aspectOfs = 1.0 / _ShadowTextureDim;
+				float halfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
+				float aspectOfs = 1.0 / max(_ShadowTextureDim, 0.0001);
 				float offsetX = worldPos.x - _ShadowPlaneWorldPos.x;
 				float offsetZ = worldPos.z - _ShadowPlaneWorldPos.z;
 				o.shadowData.x = (aspectOfs + offsetX / halfDim + 1.0) * 0.5;

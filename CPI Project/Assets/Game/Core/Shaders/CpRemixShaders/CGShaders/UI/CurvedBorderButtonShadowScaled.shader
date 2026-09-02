@@ -95,7 +95,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 		   {
 			 v2f o;
 			 float tmpvar_1;
-			 tmpvar_1 = (1.0 / (_ScaleImage));
+			 tmpvar_1 = (1.0 / max(_ScaleImage, 0.0001));
 			 gl_Position = UnityObjectToClipPos(float4(_glesVertex.xyz, 1.0));
 			 o.xlv_COLOR = (_glesColor * _Color);
 			 o.xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xy * tmpvar_1) + ((1.0 - tmpvar_1) / 2.0));
@@ -109,7 +109,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 			 float4 fragment_1;
 			 float4 image_2;
 			 float tmpvar_3;
-			 tmpvar_3 = (1.0 / (_AAliasSize));
+			 tmpvar_3 = (1.0 / max(_AAliasSize, 0.0001));
 			 float tmpvar_4;
 			 tmpvar_4 = (1.0 - _AAliasSize);
 			 float2 tmpvar_5;

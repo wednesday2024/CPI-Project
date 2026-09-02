@@ -90,7 +90,7 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 				o.texcoord1 = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
 
 				float depthRange  = _SurfaceYCoord - _DeepestYCoord;
-				float depthFactor = saturate((rawWorldPos.y - _DeepestYCoord) / depthRange);
+				float depthFactor = saturate((rawWorldPos.y - _DeepestYCoord) / max(depthRange, 0.0001));
 				depthFactor = 1.0 - depthFactor;
 				float depthBlend  = depthFactor * _DepthMultiply;
 				float invBlend    = 1.0 - depthBlend;

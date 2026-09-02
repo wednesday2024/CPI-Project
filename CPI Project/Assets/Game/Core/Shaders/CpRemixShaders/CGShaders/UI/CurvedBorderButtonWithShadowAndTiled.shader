@@ -110,7 +110,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
                 fragOutput o;
                 float4 fragment_1;
                 float4 image_2;
-                float tmpvar_3 = (1.0 / (_AAliasSize));
+                float tmpvar_3 = (1.0 / max(_AAliasSize, 0.0001));
                 float tmpvar_4 = (1.0 - _AAliasSize);
                 float tmpvar_5 = (1.0 - _OuterShadowBlur);
                 float tmpvar_6 = (1.0 - _InnerShadowBlur);
@@ -122,8 +122,8 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
                 image_2 = tex2D(_MainTex, i.xlv_TEXCOORD0);
                 float2 tmpvar_13 = abs(i.xlv_TEXCOORD0 - 0.5) * 2.0;
                 float tmpvar_14 = max(tmpvar_13.x, tmpvar_13.y);
-                float tmpvar_15 = _OuterShading * clamp(1.0 - ((clamp(sqrt(dot(tmpvar_8, tmpvar_8)), tmpvar_5, 1.0) - tmpvar_5) * (1.0 / _OuterShadowBlur)), 0.0, 1.0);
-                fragment_1 = lerp((_Border * min((tmpvar_11 * 1000.0), 1.0)), (lerp(_Centre, image_2, max((image_2.w - ((float(tmpvar_14 >= 1.0) * _TileAttenuation) * tmpvar_14)), 0.0)) * lerp((1.0 - _InnerShading), 1.0, clamp(1.0 - ((clamp(sqrt(dot(tmpvar_9, tmpvar_9)), tmpvar_6, 1.0) - tmpvar_6) * (1.0 / _InnerShadowBlur)), 0.0, 1.0))), ((1.0 - (clamp(tmpvar_10, tmpvar_4, 1.0) - tmpvar_4) * tmpvar_3)));
+                float tmpvar_15 = _OuterShading * clamp(1.0 - ((clamp(sqrt(dot(tmpvar_8, tmpvar_8)), tmpvar_5, 1.0) - tmpvar_5) * (1.0 / max(_OuterShadowBlur, 0.0001))), 0.0, 1.0);
+                fragment_1 = lerp((_Border * min((tmpvar_11 * 1000.0), 1.0)), (lerp(_Centre, image_2, max((image_2.w - ((float(tmpvar_14 >= 1.0) * _TileAttenuation) * tmpvar_14)), 0.0)) * lerp((1.0 - _InnerShading), 1.0, clamp(1.0 - ((clamp(sqrt(dot(tmpvar_9, tmpvar_9)), tmpvar_6, 1.0) - tmpvar_6) * (1.0 / max(_InnerShadowBlur, 0.0001))), 0.0, 1.0))), ((1.0 - (clamp(tmpvar_10, tmpvar_4, 1.0) - tmpvar_4) * tmpvar_3)));
                 fragment_1.w = (tmpvar_11 > 0.0001) ? tmpvar_11 : tmpvar_15;
                 o.gl_FragData = fragment_1 * i.xlv_COLOR;
                 return o;

@@ -156,8 +156,8 @@ Shader "CpRemix/Equipment Bake"
                 o.pos = mul(unity_MatrixVP, worldPos);
 
                 float2 uvAtlas;
-                uvAtlas.x = (v.uv.x - _AtlasOffsetU) / _AtlasOffsetScaleU;
-                uvAtlas.y = (v.uv.y - _AtlasOffsetV) / _AtlasOffsetScaleV;
+                uvAtlas.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
+                uvAtlas.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
                 o.uvAtlas = uvAtlas;
 
                 o.uvDecal1 = RotateDecalUV(uvAtlas, _Decal1UOffset, _Decal1VOffset, _Decal1Scale, _Decal1RotationRads);
@@ -310,8 +310,8 @@ Shader "CpRemix/Equipment Bake"
                 v2f o;
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
                 o.pos = mul(unity_MatrixVP, worldPos);
-                o.uv.x = (v.uv.x - _AtlasOffsetU) / _AtlasOffsetScaleU;
-                o.uv.y = (v.uv.y - _AtlasOffsetV) / _AtlasOffsetScaleV;
+                o.uv.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
+                o.uv.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
                 return o;
             }
 
@@ -391,8 +391,8 @@ Shader "CpRemix/Equipment Bake"
                 float3 ambient = glstate_lightmodel_ambient.rgb * 0.9;
                 o.lighting = mad(diffuse, 0.65, ambient);
 
-                o.uvAtlas.x = (v.uv.x - _AtlasOffsetU) / _AtlasOffsetScaleU;
-                o.uvAtlas.y = (v.uv.y - _AtlasOffsetV) / _AtlasOffsetScaleV;
+                o.uvAtlas.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
+                o.uvAtlas.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
 
                 o.color = v.color.xyz;
 

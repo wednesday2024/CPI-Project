@@ -65,8 +65,8 @@ Shader "CpRemix/Avatar Body Bake"
                 v2f o;
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv.x = (v.uv.x - _AtlasOffsetU) / _AtlasOffsetScaleU;
-                o.uv.y = (v.uv.y - _AtlasOffsetV) / _AtlasOffsetScaleV;
+                o.uv.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
+                o.uv.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
                 return o;
             }
 

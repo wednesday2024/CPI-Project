@@ -145,16 +145,16 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkleGreyedIcon"
           return o;
         }
 
-        float4 xlat_mutable_Centre;
+        float4 sparkleCentre;
         float4 frag(v2f i) : SV_Target
         {
-          xlat_mutable_Centre.w = _Centre.w;
+          sparkleCentre = _Centre;
           float4 fragment_1;
           float4 fx2_2;
           float4 fx1_3;
           float4 image_4;
           float tmpvar_5;
-          tmpvar_5 = (1.0 / (_AAliasSize));
+          tmpvar_5 = (1.0 / max(_AAliasSize, 0.0001));
           float tmpvar_6;
           tmpvar_6 = (1.0 - _AAliasSize);
           float tmpvar_7;
@@ -184,11 +184,11 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkleGreyedIcon"
           fx2_2 = tex2D(_EffectTex, i.xlv_TEXCOORD3);
           fx1_3.w = (fx1_3.w * _EffectAlpha);
           fx2_2.w = (fx2_2.w * (_EffectAlpha * 0.7));
-          xlat_mutable_Centre.xyz = lerp(_Centre.xyz, fx1_3.xyz, fx1_3.www);
-          xlat_mutable_Centre.xyz = lerp(xlat_mutable_Centre.xyz, fx2_2.xyz, fx2_2.www);
+          sparkleCentre.xyz = lerp(sparkleCentre.xyz, fx1_3.xyz, fx1_3.www);
+          sparkleCentre.xyz = lerp(sparkleCentre.xyz, fx2_2.xyz, fx2_2.www);
           float tmpvar_21;
-          tmpvar_21 = (_OuterShading * clamp((1.0 - ((clamp(sqrt(dot(tmpvar_10, tmpvar_10)), tmpvar_7, 1.0) - tmpvar_7) * (1.0 / (_OuterShadowBlur)))), 0.0, 1.0));
-          fragment_1 = lerp((_Border * min((tmpvar_15 * 1000.0), 1.0)), (lerp(xlat_mutable_Centre, image_4, (max((image_4.w - ((float((tmpvar_18 >= 1.0)) * _TileAttenuation) * tmpvar_18)), 0.0))) * lerp((1.0 - _InnerShading), 1.0, clamp((1.0 - ((clamp(sqrt(dot(tmpvar_11, tmpvar_11)), tmpvar_8, tmpvar_12) - tmpvar_8) * (1.0 / (_InnerShadowBlur)))), 0.0, 1.0))), ((1.0 - ((clamp(tmpvar_14, tmpvar_13, tmpvar_12) - tmpvar_13) * tmpvar_5))));
+          tmpvar_21 = (_OuterShading * clamp((1.0 - ((clamp(sqrt(dot(tmpvar_10, tmpvar_10)), tmpvar_7, 1.0) - tmpvar_7) * (1.0 / max(_OuterShadowBlur, 0.0001)))), 0.0, 1.0));
+          fragment_1 = lerp((_Border * min((tmpvar_15 * 1000.0), 1.0)), (lerp(sparkleCentre, image_4, (max((image_4.w - ((float((tmpvar_18 >= 1.0)) * _TileAttenuation) * tmpvar_18)), 0.0))) * lerp((1.0 - _InnerShading), 1.0, clamp((1.0 - ((clamp(sqrt(dot(tmpvar_11, tmpvar_11)), tmpvar_8, tmpvar_12) - tmpvar_8) * (1.0 / max(_InnerShadowBlur, 0.0001)))), 0.0, 1.0))), ((1.0 - ((clamp(tmpvar_14, tmpvar_13, tmpvar_12) - tmpvar_13) * tmpvar_5))));
           float tmpvar_22;
           if ((tmpvar_15 > 0.0001)) {
             tmpvar_22 = tmpvar_15;

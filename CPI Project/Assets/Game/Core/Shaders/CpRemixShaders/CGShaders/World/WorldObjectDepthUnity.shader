@@ -119,8 +119,8 @@ Shader "CpRemix/World/WorldObject Depth"
 			   * 0.5)* _SurfaceMultiplier));
 			o.xlv_TEXCOORD5 = ((tmpvar_13.xz * _SurfaceTexTile) - (_Time.xx * float2(_SurfaceVelocityX * _SurfaceTexTile, _SurfaceVelocityZ * _SurfaceTexTile)));
 
-			float halfDim = _ShadowPlaneDim * 0.5;
-			float aspectOfs = 1.0 / _ShadowTextureDim;
+			float halfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
+			float aspectOfs = 1.0 / max(_ShadowTextureDim, 0.0001);
 			float offsetX = tmpvar_13.x - _ShadowPlaneWorldPos.x;
 			float offsetZ = tmpvar_13.z - _ShadowPlaneWorldPos.z;
 			o.shadowData.x = (aspectOfs + offsetX / halfDim + 1.0) * 0.5;

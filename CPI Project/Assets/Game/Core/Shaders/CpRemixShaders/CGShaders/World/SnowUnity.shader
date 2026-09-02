@@ -58,7 +58,7 @@ Shader "CpRemix/World/Snow Ramp" {
                 o.texcoord = v.normal.yy * float2(0.45, 0.45) + float2(0.5, 0.5);
 
                 // Calculate shadow texture coordinates
-                float2 shadowCoord = (worldPos.xz - _ShadowPlaneWorldPos.xz) / (_ShadowPlaneDim * 0.5);
+				float2 shadowCoord = (worldPos.xz - _ShadowPlaneWorldPos.xz) / max(_ShadowPlaneDim * 0.5, 0.0001);
                 o.texcoord3.xy = (shadowCoord + float2(1.0, 1.0)) * 0.5;
                 o.texcoord3.z = worldPos.y;
 
