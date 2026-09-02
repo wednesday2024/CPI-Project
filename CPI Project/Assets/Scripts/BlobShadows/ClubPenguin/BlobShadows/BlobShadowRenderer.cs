@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using ClubPenguin.Core;
 using Disney.LaunchPadFramework;
@@ -154,7 +155,16 @@ namespace ClubPenguin.BlobShadows
 			if (BlobShadowsSupported)
 			{
 				setupShadowReceiverMaterials();
+				StartCoroutine(refreshShadowReceiverMaterials());
 			}
+		}
+
+		private IEnumerator refreshShadowReceiverMaterials()
+		{
+			yield return null;
+			setupShadowReceiverMaterials();
+			yield return null;
+			setupShadowReceiverMaterials();
 		}
 
 		private void setupExistingShadowCasters()
@@ -270,10 +280,6 @@ namespace ClubPenguin.BlobShadows
 			if (!BlobShadowsSupported)
 			{
 				return;
-			}
-			if (Time.frameCount % 15 == 0)
-			{
-				setupShadowReceiverMaterials();
 			}
 			Camera main = Camera.main;
 			if (main == null)
