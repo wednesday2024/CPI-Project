@@ -19,7 +19,8 @@ namespace ClubPenguin
 			int num2 = (int)((float)Screen.height * ActiveCamera.rect.height);
 			RenderTexture renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
 			renderTexture.isPowerOfTwo = false;
-			renderTexture.filterMode = FilterMode.Bilinear;
+			renderTexture.filterMode = FilterMode.Trilinear;
+			renderTexture.anisoLevel = 16;
 			renderTexture.useMipMap = false;
 			renderTexture.Create();
 			renderTexture.name = "ScrollRect Background Render Texture: " + base.name;
@@ -27,7 +28,8 @@ namespace ClubPenguin
 			ActiveCamera.Render();
 			RenderTexture.active = renderTexture;
 			Texture2D texture2D = new Texture2D(num, num2, TextureFormat.ARGB32, false);
-			texture2D.filterMode = FilterMode.Bilinear;
+			texture2D.filterMode = FilterMode.Trilinear;
+			texture2D.anisoLevel = 16;
 			texture2D.ReadPixels(new Rect(0f, Screen.height - num2, num, num2), 0, 0);
 			texture2D.Apply();
 			RenderTexture.active = null;

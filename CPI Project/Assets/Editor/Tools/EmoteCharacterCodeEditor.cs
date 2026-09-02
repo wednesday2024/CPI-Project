@@ -135,7 +135,8 @@ namespace ClubPenguin.Editor
 
                 Color[] pixels = readableTexture.GetPixels(pxX, pxY, pxW, pxH);
                 Texture2D thumb = new Texture2D(pxW, pxH, TextureFormat.RGBA32, false);
-                thumb.filterMode = FilterMode.Bilinear;
+                thumb.filterMode = FilterMode.Trilinear;
+                thumb.anisoLevel = 16;
                 thumb.SetPixels(pixels);
                 thumb.Apply();
 
@@ -501,7 +502,8 @@ namespace ClubPenguin.Editor
         private Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
         {
             RenderTexture tmp = RenderTexture.GetTemporary(targetWidth, targetHeight, 0, RenderTextureFormat.Default, RenderTextureReadWrite.sRGB);
-            tmp.filterMode = FilterMode.Bilinear;
+            tmp.filterMode = FilterMode.Trilinear;
+            tmp.anisoLevel = 16;
             Graphics.Blit(source, tmp);
             RenderTexture prev = RenderTexture.active;
             RenderTexture.active = tmp;

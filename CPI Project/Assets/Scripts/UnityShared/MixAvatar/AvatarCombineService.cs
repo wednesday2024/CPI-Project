@@ -55,7 +55,8 @@ namespace MixAvatar
 						{
 							antiAliasing = 8,
 							isPowerOfTwo = true,
-							filterMode = FilterMode.Bilinear,
+							filterMode = FilterMode.Trilinear,
+							anisoLevel = 16,
 							useMipMap = (request.UseMipMaps == MipMapping.On)
 						};
 						yield return true;

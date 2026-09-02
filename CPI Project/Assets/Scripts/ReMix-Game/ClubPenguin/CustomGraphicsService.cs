@@ -137,6 +137,8 @@ namespace ClubPenguin
 
 		public void Init()
 		{
+			QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
+			Texture.SetGlobalAnisotropicFilteringLimits(16, 16);
 			string text = Service.Get<ConditionalConfiguration>().Get("Unity.QualitySetting.property", "Mobile_Low");
 			QualityLevel graphicsLevel;
 			QualityLevel lodPenguinQualityLevel;

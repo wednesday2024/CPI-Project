@@ -78,8 +78,10 @@ namespace ClubPenguin.DCE
 			yield return null;
 			int renderTextureSize = Mathf.Min(Mathf.ClosestPowerOfTwo(curSize), maxAtlasDimension);
 			request.Atlas = new RenderTexture(renderTextureSize, renderTextureSize, 0, RenderTextureFormat.ARGB32);
+			request.Atlas.antiAliasing = 8;
 			request.Atlas.isPowerOfTwo = true;
-			request.Atlas.filterMode = FilterMode.Bilinear;
+			request.Atlas.filterMode = FilterMode.Trilinear;
+			request.Atlas.anisoLevel = 16;
 			request.Atlas.useMipMap = false;
 			yield return null;
 		}

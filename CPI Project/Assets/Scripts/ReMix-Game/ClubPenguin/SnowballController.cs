@@ -39,7 +39,7 @@ namespace ClubPenguin
 			{
 				return;
 			}
-			unspawnDelay -= Time.deltaTime;
+			unspawnDelay -= Time.unscaledDeltaTime;
 			if (unspawnDelay < 0f)
 			{
 				if (tRenderer != null)

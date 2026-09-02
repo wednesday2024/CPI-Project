@@ -179,7 +179,8 @@ public class TextMeshProRenderer : EditorWindow
 
             previewRT = new RenderTexture(ssWidth, ssHeight, 24, RenderTextureFormat.ARGB32);
             previewRT.antiAliasing = 8;
-            previewRT.filterMode = FilterMode.Bilinear;
+            previewRT.filterMode = FilterMode.Trilinear;
+            previewRT.anisoLevel = 16;
             previewRT.Create();
         }
 
@@ -258,7 +259,8 @@ public class TextMeshProRenderer : EditorWindow
 
         RenderTexture ssRT = new RenderTexture(ssWidth, ssHeight, 24, RenderTextureFormat.ARGB32);
         ssRT.antiAliasing = 8;
-        ssRT.filterMode = FilterMode.Bilinear;
+        ssRT.filterMode = FilterMode.Trilinear;
+        ssRT.anisoLevel = 16;
         ssRT.Create();
 
         renderCamera.orthographicSize = ssHeight / 2f;
@@ -267,7 +269,8 @@ public class TextMeshProRenderer : EditorWindow
         renderCamera.targetTexture = null;
 
         RenderTexture finalRT = new RenderTexture(renderWidth, renderHeight, 24, RenderTextureFormat.ARGB32);
-        finalRT.filterMode = FilterMode.Bilinear;
+        finalRT.filterMode = FilterMode.Trilinear;
+        finalRT.anisoLevel = 16;
         finalRT.Create();
 
         Graphics.Blit(ssRT, finalRT);

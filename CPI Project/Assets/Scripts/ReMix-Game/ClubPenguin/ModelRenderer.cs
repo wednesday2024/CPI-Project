@@ -128,7 +128,9 @@ namespace ClubPenguin
 
 		private RenderTexture createRenderTexture()
 		{
-			return new RenderTexture((int)config.TextureDimensions.x, (int)config.TextureDimensions.y, 24, RenderTextureFormat.ARGB32);
+			RenderTexture renderTexture = new RenderTexture((int)config.TextureDimensions.x, (int)config.TextureDimensions.y, 24, RenderTextureFormat.ARGB32);
+			renderTexture.antiAliasing = 8;
+			return renderTexture;
 		}
 
 		private Transform createModelRenderGameObject()

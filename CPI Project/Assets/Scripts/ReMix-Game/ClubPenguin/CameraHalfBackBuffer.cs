@@ -23,7 +23,9 @@ namespace ClubPenguin
 			if (scaledRT == null)
 			{
 				scaledRT = new RenderTexture(Screen.width / 2, Screen.height / 2, 24);
-				scaledRT.filterMode = FilterMode.Bilinear;
+				scaledRT.antiAliasing = 8;
+				scaledRT.filterMode = FilterMode.Trilinear;
+				scaledRT.anisoLevel = 16;
 			}
 		}
 

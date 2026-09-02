@@ -1485,7 +1485,8 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         importer.alphaIsTransparency = false;
         importer.mipmapEnabled = false;
         importer.wrapMode = TextureWrapMode.Clamp;
-        importer.filterMode = FilterMode.Bilinear;
+        importer.filterMode = FilterMode.Trilinear;
+        importer.anisoLevel = 16;
         importer.textureCompression = TextureImporterCompression.Uncompressed;
         importer.SaveAndReimport();
     }
@@ -1503,6 +1504,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         importer.mipmapEnabled = false;
         importer.wrapMode = TextureWrapMode.Clamp;
         importer.filterMode = FilterMode.Point;
+        importer.anisoLevel = 16;
         importer.textureCompression = TextureImporterCompression.Uncompressed;
         importer.SaveAndReimport();
     }
@@ -1608,7 +1610,8 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             shaderParams.ApplyToMaterial(bakeMaterial);
 
             renderTexture = RenderTexture.GetTemporary(outputSize, outputSize, 0, RenderTextureFormat.ARGB32);
-            renderTexture.filterMode = FilterMode.Bilinear;
+            renderTexture.filterMode = FilterMode.Trilinear;
+            renderTexture.anisoLevel = 16;
 
             RenderTexture.active = renderTexture;
             GL.Clear(true, true, new Color(0f, 0f, 0f, 0f));
