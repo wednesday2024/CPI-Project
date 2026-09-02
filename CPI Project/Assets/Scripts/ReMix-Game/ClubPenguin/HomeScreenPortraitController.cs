@@ -147,8 +147,15 @@ namespace ClubPenguin
 			PrecacheLoadingBar.gameObject.SetActive(true);
 			bundlePrecacheManager.StartCaching(precacheComplete);
 			PrecacheTime = bundlePrecacheManager.Config.BundlePrecacheSeconds;
-			yield return new WaitForSeconds(PrecacheTime);
-			precacheComplete();
+			while (bundlePrecacheManager.CompleteRatio < 1f && precacheTimer < PrecacheTime)
+			{
+				precacheTimer += Time.unscaledDeltaTime;
+				yield return null;
+			}
+			if (bundlePrecacheManager.CompleteRatio < 1f)
+			{
+				precacheComplete();
+			}
 		}
 
 		private void precacheComplete()

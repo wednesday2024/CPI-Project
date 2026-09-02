@@ -61,8 +61,16 @@ namespace ClubPenguin
 		{
 			Service.Get<LoadingController>().AddLoadingSystem(this);
 			bundlePrecacheManager.StartCaching(precacheComplete);
-			yield return new WaitForSeconds(bundlePrecacheManager.Config.BundlePrecacheSeconds);
-			precacheComplete();
+			float elapsed = 0f;
+			while (bundlePrecacheManager.CompleteRatio < 1f && elapsed < bundlePrecacheManager.Config.BundlePrecacheSeconds)
+			{
+				elapsed += Time.unscaledDeltaTime;
+				yield return null;
+			}
+			if (bundlePrecacheManager.CompleteRatio < 1f)
+			{
+				precacheComplete();
+			}
 		}
 
 		private void precacheComplete()
