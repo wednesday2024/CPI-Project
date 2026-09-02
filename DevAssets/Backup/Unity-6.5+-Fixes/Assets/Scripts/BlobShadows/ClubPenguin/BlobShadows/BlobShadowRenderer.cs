@@ -4,6 +4,7 @@ using ClubPenguin.Core;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ClubPenguin.BlobShadows
 {
@@ -138,6 +139,24 @@ namespace ClubPenguin.BlobShadows
 			eventDispatcher.AddListener<BlobShadowEvents.EnableBlobShadows>(onEnableBlobShadows);
 		}
 
+		private void OnEnable()
+		{
+			SceneManager.sceneLoaded += OnSceneLoaded;
+		}
+
+		private void OnDisable()
+		{
+			SceneManager.sceneLoaded -= OnSceneLoaded;
+		}
+
+		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+		{
+			if (BlobShadowsSupported)
+			{
+				setupShadowReceiverMaterials();
+			}
+		}
+
 		private void setupExistingShadowCasters()
 		{
             BlobShadowCaster[] array = UnityEngine.Object.FindObjectsByType<BlobShadowCaster>(FindObjectsSortMode.None);
@@ -252,6 +271,10 @@ namespace ClubPenguin.BlobShadows
 			{
 				return;
 			}
+			if (Time.frameCount % 15 == 0)
+			{
+				setupShadowReceiverMaterials();
+			}
 			Camera main = Camera.main;
 			if (main == null)
 			{
@@ -297,30 +320,37 @@ namespace ClubPenguin.BlobShadows
 		{
 			Shader.SetGlobalFloat("_ShadowPlaneDim", ShadowBoxDimension);
 			Shader.SetGlobalFloat("_ShadowTextureDim", RenderTextureDimension);
-			replacementMats = new Dictionary<Material, Material>();
-            Renderer[] array = UnityEngine.Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None);
-            foreach (Renderer renderer in array)
+			if (replacementMats == null)
 			{
+				replacementMats = new Dictionary<Material, Material>();
+			}
+			Renderer[] array = UnityEngine.Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None);
+			foreach (Renderer renderer in array)
+			{
+				if (renderer == null)
+				{
+					continue;
+				}
 				Material[] sharedMaterials = renderer.sharedMaterials;
 				bool anyReplaced = false;
 				for (int m = 0; m < sharedMaterials.Length; m++)
 				{
 					Material sharedMaterial = sharedMaterials[m];
-					if (sharedMaterial != null && sharedMaterial.HasProperty("_BlobShadowTex"))
+					if (sharedMaterial == null || !sharedMaterial.HasProperty("_BlobShadowTex"))
 					{
-						Material material = null;
-						if (!replacementMats.ContainsKey(sharedMaterial))
-						{
-							material = new Material(sharedMaterial);
-							material.enableInstancing = true;
-							material.name = sharedMaterial.name + "_runtimeReplacement";
-							material.SetTexture("_BlobShadowTex", shadowRenderTexture);
-							replacementMats.Add(sharedMaterial, material);
-						}
-						else
-						{
-							material = replacementMats[sharedMaterial];
-						}
+						continue;
+					}
+					Material material = null;
+					if (!replacementMats.TryGetValue(sharedMaterial, out material))
+					{
+						material = new Material(sharedMaterial);
+						material.enableInstancing = true;
+						material.name = sharedMaterial.name + "_runtimeReplacement";
+						material.SetTexture("_BlobShadowTex", shadowRenderTexture);
+						replacementMats.Add(sharedMaterial, material);
+					}
+					if (!ReferenceEquals(sharedMaterials[m], material))
+					{
 						sharedMaterials[m] = material;
 						anyReplaced = true;
 					}
