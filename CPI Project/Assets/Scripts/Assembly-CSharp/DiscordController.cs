@@ -943,6 +943,11 @@ public class DiscordController : MonoBehaviour
                 roomImage = "rh";
                 iconFound = true;
             }
+            else if (iconMatchName.Contains("Mt. Blizzard | Gary's Lab", StringComparison.OrdinalIgnoreCase))
+            {
+                roomImage = "gy";
+                iconFound = true;
+            }
             else if (iconMatchName.Contains("Island Central | DJ Cadence's Studio", StringComparison.OrdinalIgnoreCase))
             {
                 roomImage = "dj";
