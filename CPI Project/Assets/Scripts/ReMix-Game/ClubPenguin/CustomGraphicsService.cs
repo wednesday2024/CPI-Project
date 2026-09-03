@@ -69,11 +69,11 @@ namespace ClubPenguin
 			},
 			{
 				"Mobile_Medium",
-				QualityLevel.Low
+				QualityLevel.Medium
 			},
 			{
 				"Mobile_High",
-				QualityLevel.Low
+				QualityLevel.High
 			},
 			{
 				"Standalone_Low",
@@ -89,7 +89,7 @@ namespace ClubPenguin
 			},
 			{
 				"Default",
-				QualityLevel.Low
+				QualityLevel.High
 			}
 		};
 
@@ -229,7 +229,7 @@ namespace ClubPenguin
 			{
 				setQualityLevel("Default");
                 SetAntialiasing(AntiAliasSamplesHigh);
-                SetCameraPostEffects(false);
+                SetCameraPostEffects(true);
 			}
 		}
 
