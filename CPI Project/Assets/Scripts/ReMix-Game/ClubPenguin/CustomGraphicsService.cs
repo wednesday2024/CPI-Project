@@ -9,7 +9,10 @@ namespace ClubPenguin
 {
 	public class CustomGraphicsService
 	{
-		public int AntiAliasSamplesMedium = 8;
+
+        public int AntiAliasSamplesLow = 2;
+
+        public int AntiAliasSamplesMedium = 4;
 
 		public int AntiAliasSamplesHigh = 8;
 
@@ -174,7 +177,7 @@ namespace ClubPenguin
 				switch (graphicsLevel)
 				{
 				case QualityLevel.Low:
-                    antiAlias = AntiAliasSamplesHigh;
+                    antiAlias = AntiAliasSamplesLow;
                     cameraPost = false;
 					break;
 				case QualityLevel.Medium:
@@ -215,11 +218,11 @@ namespace ClubPenguin
 					break;
 				case QualityLevel.Medium:
 					SetAntialiasing(AntiAliasSamplesMedium);
-					SetCameraPostEffects(false);
+					SetCameraPostEffects(true);
 					break;
 				case QualityLevel.Low:
-                        SetAntialiasing(AntiAliasSamplesHigh);
-                        SetCameraPostEffects(false);
+                        SetAntialiasing(AntiAliasSamplesLow);
+                        SetCameraPostEffects(true);
 					break;
 				}
 				SetLodPenguinQualityLevel(value);
@@ -229,7 +232,7 @@ namespace ClubPenguin
 			{
 				setQualityLevel("Default");
                 SetAntialiasing(AntiAliasSamplesHigh);
-                SetCameraPostEffects(false);
+                SetCameraPostEffects(true);
 			}
 		}
 
