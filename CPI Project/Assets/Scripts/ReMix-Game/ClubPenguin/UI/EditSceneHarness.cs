@@ -44,6 +44,11 @@ namespace ClubPenguin.UI
 
 		private void createEventSystem()
 		{
+			if (Object.FindAnyObjectByType<EventSystem>() != null)
+			{
+				return;
+			}
+
 			GameObject gameObject = new GameObject("EventSystem");
 			gameObject.AddComponent<EventSystem>();
 			gameObject.AddComponent<StandaloneInputModule>();

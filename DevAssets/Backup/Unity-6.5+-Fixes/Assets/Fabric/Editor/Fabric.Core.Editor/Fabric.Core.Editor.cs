@@ -7481,8 +7481,6 @@ namespace Fabric
 				if (m_Data == null)
 				{
 					m_Data = ScriptableObject.CreateInstance<PersistentData>();
-					string path = AssetDatabase.GenerateUniqueAssetPath(projectDataFolder + "PersistentData.asset");
-					AssetDatabase.CreateAsset(m_Data, path);
 				}
 			}
 			return m_Data;
