@@ -15,6 +15,7 @@ Shader "CpRemix/World/Events/Halloween/Pumpkin"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             
             #include "UnityCG.cginc"
             
@@ -23,6 +24,8 @@ Shader "CpRemix/World/Events/Halloween/Pumpkin"
                 float4 vertex : POSITION;
                 float2 texcoord : TEXCOORD0;
                 float4 color : COLOR;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -43,6 +46,8 @@ Shader "CpRemix/World/Events/Halloween/Pumpkin"
 
             v2f vert(appdata v)
             {
+                UNITY_SETUP_INSTANCE_ID(v);
+
                 v2f o;
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex); 
                 o.position = mul(UNITY_MATRIX_VP, worldPos); 

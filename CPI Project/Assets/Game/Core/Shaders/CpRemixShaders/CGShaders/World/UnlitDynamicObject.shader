@@ -19,12 +19,22 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fog
+            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _TintColor;
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float4 texcoord : TEXCOORD0;
+                float4 color : COLOR;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
 
             struct v2f
             {
@@ -39,8 +49,10 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
                 float4 sv_target : SV_Target0;
             };
 
-            v2f vert(appdata_full v)
+            v2f vert(appdata v)
             {
+                UNITY_SETUP_INSTANCE_ID(v);
+
                 v2f o;
 
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
