@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: bfd1ea06f2fb4ff459a3b0fed936209e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8025520500799138825
+    second: mg_pt_title_needle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -173,7 +176,29 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: mg_pt_title_needle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90c6fbbdf50606f60800000000000000
+      internalID: 8025520500799138825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -187,7 +212,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mg_pt_title_needle_0: 8025520500799138825
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
