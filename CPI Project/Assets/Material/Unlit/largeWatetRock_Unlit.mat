@@ -14,7 +14,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
   stringTagMap: {}
@@ -43,6 +43,7 @@ Material:
     - _ShadowPlaneDim: 16
     - _ShadowTextureDim: 256
     - _SrcBlend: 1
+    - _TintColorFloat: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
@@ -54,3 +55,4 @@ Material:
     - _ShadowPlaneWorldPos: {r: 12.42367, g: 7.909609, b: 4.5431705, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
