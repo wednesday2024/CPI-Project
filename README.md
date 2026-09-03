@@ -15,10 +15,10 @@
 > - I do NOT recommend using GitHub's built in ZIP download feature. Because it tends to forget to download files which breaks the project. I only recommend using the older HTTPS git clone or the new Git CLI gh repo clone options to download the repo on Linux. If you are on Windows or macOS, I recommend using git clone or using the official GitHub Desktop app. 
 
 > HTTPS method:
-> ```git clone https://github.com/OpenCPIsland/CPI-Project.git```
+> ```git clone https://github.com/wednesday2024/CPI-Project.git```
 
 > Git CLI method:
-> ```gh repo clone OpenCPIsland/CPI-Project```
+> ```gh repo clone wednesday2024/CPI-Project```
 
 > [The Github Desktop app method](https://github.com/apps/desktop)
 
@@ -58,7 +58,6 @@
 >     - Added and optimized support for native macOS Arm Silicon (Apple M1, M2, M3, M4, and newer chips)
 >     - Changed the Waddle On login coins award from ```1000000``` to ```0```
 >     - Added 2 new lighting options to the igloos. Those are ```Holiday``` and ```Rainbow Migration```. The ```Holiday``` lighting can be unlocked at Penguin level 20 and the ```Rainbow Migration``` lighting can be unlocked at Penguin level 8.
->     - Added an optional skybox in the project to allow a day/night cycle that will cycle every 15 minutes (unfinished)
 >     - Added 30 new Penguin colors.
 >     - Unlock the ```Valentine's Day chair``` at level 8. The ID for the chair is 278 and it will sell at the Igloo furniture shop for 40 coins.
 >     - And most importantly, the game is no longer in the original 32-bit state! This recreation is in a 64-bit state.
