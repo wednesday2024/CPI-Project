@@ -71,8 +71,7 @@ public class CreateAssetBundles : MonoBehaviour
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
-        Debug.Log("Project saved and refreshed after cleanup.");
-        GenerateManifest.GenerateManifestFile();
+       // GenerateManifest.GenerateManifestFile();
     }
 
     private static string DetectAndSwitchPlatform()
@@ -97,7 +96,6 @@ public class CreateAssetBundles : MonoBehaviour
 
         if (platform != "unknown")
         {
-            Debug.Log("Detected platform: " + platform + ". Switching platform...");
         }
 
         return platform;
@@ -114,7 +112,6 @@ public class CreateAssetBundles : MonoBehaviour
             platformProperty.stringValue = platform;
 
             serializedObject.ApplyModifiedProperties();
-            Debug.Log("Platform set to: " + platform + " in client_info.asset");
         }
         else
         {
@@ -147,7 +144,6 @@ public class CreateAssetBundles : MonoBehaviour
             }
 
             File.WriteAllLines(txtFilePath, lines);
-            Debug.Log($"Text file updated with platform: {platform}");
         }
         else
         {
@@ -299,7 +295,6 @@ public class CreateAssetBundles : MonoBehaviour
                     {
                         File.Delete(otherMeta);
                     }
-                    Debug.Log($"Deleted platform folder: {otherDir}");
                 }
             }
         }
@@ -313,10 +308,8 @@ public class CreateAssetBundles : MonoBehaviour
             if (File.Exists(defaultBundleMeta))
             {
                 File.Delete(defaultBundleMeta);
-                Debug.Log($"Deleted default bundle .meta: {defaultBundleMeta}");
             }
             File.Delete(defaultBundle);
-            Debug.Log($"Deleted default bundle: {defaultBundle}");
         }
 
         List<string> unwantedKeywordsList = new List<string>();
@@ -354,17 +347,14 @@ public class CreateAssetBundles : MonoBehaviour
                 if (File.Exists(metaFilePath))
                 {
                     File.Delete(metaFilePath);
-                    Debug.Log($"Deleted .meta: {metaFilePath}");
                 }
 
                 File.Delete(file);
-                Debug.Log($"Deleted: {file}");
 
                 string platformMetaFile = Path.Combine(rootPath, Path.GetFileNameWithoutExtension(file) + ".meta");
                 if (File.Exists(platformMetaFile))
                 {
                     File.Delete(platformMetaFile);
-                    Debug.Log($"Deleted platform .meta: {platformMetaFile}");
                 }
             }
         }
