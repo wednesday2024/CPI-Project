@@ -1,5 +1,8 @@
 using ClubPenguin.Core;
+using ClubPenguin.Locomotion;
 using Disney.LaunchPadFramework;
+using Disney.MobileNetwork;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +11,53 @@ public class WatcherSwitch : Switch
 	public List<TaskWatcher> enableWatchers = new List<TaskWatcher>();
 
 	public List<TaskWatcher> disableWatchers = new List<TaskWatcher>();
+
+	private EventDispatcher dispatcher;
+
+	private void Start()
+	{
+		dispatcher = Service.Get<EventDispatcher>();
+		dispatcher.AddListener<ClubPenguin.ActionSequencerEvents.ActionSequenceStarted>(onActionSequenceStarted);
+	}
+
+	private void OnDestroy()
+	{
+		if (dispatcher != null)
+		{
+			dispatcher.RemoveListener<ClubPenguin.ActionSequencerEvents.ActionSequenceStarted>(onActionSequenceStarted);
+		}
+	}
+
+	private bool onActionSequenceStarted(ClubPenguin.ActionSequencerEvents.ActionSequenceStarted evt)
+	{
+		if (matchesWatcher(enableWatchers, evt.actionGameObject))
+		{
+			Change(true);
+		}
+		if (matchesWatcher(disableWatchers, evt.actionGameObject))
+		{
+			Change(false);
+		}
+		return false;
+	}
+
+	private bool matchesWatcher(List<TaskWatcher> watcherDefinitions, GameObject actionGameObject)
+	{
+		if (actionGameObject == null)
+		{
+			return false;
+		}
+		string actionPath = actionGameObject.GetPath();
+		for (int i = 0; i < watcherDefinitions.Count; i++)
+		{
+			TaskWatcher watcherDefinition = watcherDefinitions[i];
+			if (watcherDefinition != null && watcherDefinition.GetWatcherType() == "interaction" && string.Equals(watcherDefinition.GetExportParameters() as string, actionPath, StringComparison.Ordinal))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public override object GetSwitchParameters()
 	{
