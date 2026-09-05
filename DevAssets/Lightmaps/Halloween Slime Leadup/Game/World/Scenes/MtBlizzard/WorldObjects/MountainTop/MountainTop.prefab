@@ -9248,7 +9248,8 @@ GameObject:
   - component: {fileID: 5185528101604627940}
   - component: {fileID: 7907275881583235018}
   - component: {fileID: 8961653484236457478}
-  m_Layer: 0
+  - component: {fileID: 5704774395507142249}
+  m_Layer: 30
   m_Name: BullseyePlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9327,6 +9328,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5704774395507142249
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724307260581882996}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e05a44b8a75a3964e8a1dde3f179ab81, type: 2}
 --- !u!1 &7998001262975718191
 GameObject:
   m_ObjectHideFlags: 0
