@@ -27879,6 +27879,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.20833333
+    functionName: FabricPlaySound
+    data: SFX/Player/Gear/UnEquip
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.26470545
     functionName: OnPropAction
     data: Release
