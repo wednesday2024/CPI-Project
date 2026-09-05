@@ -5475,9 +5475,9 @@ MonoBehaviour:
   IgnoreHoldAnimationComplete: 0
   IgnoreStoreAnimationComplete: 0
   CustomCamera: {fileID: 0}
-  RetrieveEaseType: 24
+  RetrieveEaseType: 23
   EaseTimeRetrieve: 1
-  StoreEaseType: 23
+  StoreEaseType: 24
   EaseTimeStore: 1
   OnUseDestination: {x: 0, y: 0, z: 0}
   PropUserRef: {fileID: 0}
@@ -5639,7 +5639,7 @@ MonoBehaviour:
         networkSync: 0
         value: 
       - useVariable: 1
-        name: CurrentSoundEventName
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
@@ -5651,7 +5651,7 @@ MonoBehaviour:
       quaternionVariables: []
       gameObjectVariables:
       - useVariable: 1
-        name: MyOwner
+        name: 
         tooltip: 
         showInInspector: 0
         networkSync: 0
