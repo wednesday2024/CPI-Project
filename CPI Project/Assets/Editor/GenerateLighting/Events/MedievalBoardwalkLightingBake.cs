@@ -13,7 +13,7 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
         BakeMedievalBoardwalk();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeMedievalBoardwalk()
     {
@@ -22,8 +22,6 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,10 +45,7 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside scene folder
                 string FolderPath = "Assets/Game/World/Scenes/Events/MedievalParty2018/Resources/AdditiveScenes/MedievalParty2018_Boardwalk_Decorations";
                 string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
 
@@ -58,20 +53,15 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.Animated.isStatic = true;
                 SetStaticRecursively(Gol.Animated, true);
 
                 Gol.ChangeSource(AmbientMode.Skybox);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.LightmappingSkybox);
@@ -80,16 +70,13 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
                     SetStaticRecursively(Gol.Animated, false);
 
                     Gol.ChangeSource(AmbientMode.Flat);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -110,8 +97,6 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -120,6 +105,7 @@ public class MedievalBoardwalkLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

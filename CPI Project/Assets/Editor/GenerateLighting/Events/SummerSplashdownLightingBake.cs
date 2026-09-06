@@ -22,8 +22,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,7 +45,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
                 string FolderPath = "Assets/Game/World/Scenes/Events/SummerBeach2018/Resources/AdditiveScenes/SummerBeach2018_Town_Decorations";
@@ -57,12 +54,10 @@ public class SummerSplashdownLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
 
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.Animated.isStatic = true;
@@ -70,9 +65,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
                 Gol.Animated2.isStatic = true;
                 SetStaticRecursively(Gol.Animated2, true);
-
-                Gol.StaticObject1.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject1, false);
 
                 Gol.StaticObject2.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject2, false);
@@ -100,7 +92,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
                 Gol.ChangeSource(AmbientMode.Skybox);
 
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSource(AmbientMode.Flat);
@@ -110,9 +101,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
                     Gol.Animated2.isStatic = false;
                     SetStaticRecursively(Gol.Animated2, false);
-
-                    Gol.StaticObject1.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject1, true);
 
                     Gol.StaticObject2.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject2, true);
@@ -138,15 +126,13 @@ public class SummerSplashdownLightingBake : MonoBehaviour
                     Gol.StaticObject9.isStatic = false;
                     SetStaticRecursively(Gol.StaticObject9, false);
 
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -168,7 +154,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
         }
     }
 
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -177,6 +162,7 @@ public class SummerSplashdownLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

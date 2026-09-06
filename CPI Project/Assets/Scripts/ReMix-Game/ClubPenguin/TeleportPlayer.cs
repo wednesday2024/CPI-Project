@@ -91,18 +91,24 @@ namespace ClubPenguin
             teleportToZone("Boardwalk");
         }
 
-        [Invokable("SceneLoader.Teleport.PenglantianVault", Description = "Teleport to the Penglantian Vault")]
+        [Invokable("SceneLoader.Teleport.PenglantianVault", Description = "Teleport to the Penglantian Vault if the Pirate Party is active.")]
         [PublicTweak]
         public static void TeleportToPenglantianVault()
         {
-            teleportToZone("EventPirateParty");
+            if (IsScheduledEventActive(18))
+            {
+                teleportToZone("EventPirateParty");
+            }
         }
 
-        [Invokable("SceneLoader.Teleport.Dungeon", Description = "Teleport to the Dungeon")]
+        [Invokable("SceneLoader.Teleport.Dungeon", Description = "Teleport to the Dungeon if the Medieval Party is active.")]
         [PublicTweak]
         public static void TeleportToMedievalDungeon()
         {
-            teleportToZone("EventMedievalDungeon1");
+            if (IsScheduledEventActive(21))
+            {
+                teleportToZone("EventMedievalDungeon1");
+            }
         }
 
         [Invokable("SceneLoader.Teleport.Beach", Description = "Teleport to the Beach")]

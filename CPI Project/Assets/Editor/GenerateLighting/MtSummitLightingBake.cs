@@ -13,7 +13,7 @@ public class MtSummitLightingBake : MonoBehaviour
         BakeMtSummit();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeMtSummit()
     {
@@ -22,8 +22,6 @@ public class MtSummitLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,10 +45,8 @@ public class MtSummitLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
-                // Delete only .exr files and LightingData.asset inside the specified folder
                 string folderPath = "Assets/Game/World/Scenes/MtBlizzardSummit";
                 string[] files = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
 
@@ -58,32 +54,27 @@ public class MtSummitLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
 
-                // Set for baking
                 Gol.ChangeSkybox(Gol.HerbertBaseCubemap);
 
                 Gol.ChangeSource(AmbientMode.Skybox);
 
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.HerbertBaseCubemap);
 
                     Gol.ChangeSource(AmbientMode.Skybox);
 
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -105,7 +96,6 @@ public class MtSummitLightingBake : MonoBehaviour
         }
     }
 
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -114,6 +104,7 @@ public class MtSummitLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

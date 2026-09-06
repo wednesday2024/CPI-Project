@@ -13,18 +13,15 @@ public class IslandIglooLightingBake : MonoBehaviour
         BakeIslandIgloo();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeIslandIgloo()
     {
-        // Open the scene
         EditorSceneManager.OpenScene("Assets/Modules/Igloo/Resources/Scenes/IslandIgloo.unity");
         Scene activeScene = SceneManager.GetActiveScene();
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -48,10 +45,7 @@ public class IslandIglooLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside scene folder
                 string FolderPath = "Assets/Modules/Igloo/Resources/Scenes/IslandIgloo";
                 string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
 
@@ -59,12 +53,9 @@ public class IslandIglooLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.ChangeSource(AmbientMode.Skybox);
@@ -83,8 +74,6 @@ public class IslandIglooLightingBake : MonoBehaviour
 
                 Gol.StaticObject5.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject5, false);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.DayCubemap);
@@ -105,16 +94,13 @@ public class IslandIglooLightingBake : MonoBehaviour
 
                     Gol.StaticObject5.isStatic = false;
                     SetStaticRecursively(Gol.StaticObject5, false);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -135,8 +121,6 @@ public class IslandIglooLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -145,6 +129,7 @@ public class IslandIglooLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

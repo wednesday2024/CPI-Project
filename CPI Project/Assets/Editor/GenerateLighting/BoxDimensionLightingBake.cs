@@ -13,7 +13,7 @@ public class BoxDimensionLightingBake : MonoBehaviour
         BakeBoxDimension();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeBoxDimension()
     {
@@ -23,8 +23,6 @@ public class BoxDimensionLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -48,10 +46,7 @@ public class BoxDimensionLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside scene folder
                 string FolderPath = "Assets/Game/World/Scenes/BoxDimension";
                 string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
 
@@ -59,19 +54,15 @@ public class BoxDimensionLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Color originalAmbientColor = RenderSettings.ambientLight;
                 AmbientMode originalAmbientMode = RenderSettings.ambientMode;
 
                 Gol.ChangeSource(AmbientMode.Trilight);
-                // Set Trilight and HDR color before baking
                 RenderSettings.ambientMode = AmbientMode.Trilight;
                 RenderSettings.ambientLight = new Color(0.05f, 0.01f, 0.27f, 1f);
 
@@ -80,13 +71,9 @@ public class BoxDimensionLightingBake : MonoBehaviour
 
                 Gol.StaticObject2.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject2, false);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
-                    // Reset settings after baking
                     Gol.ChangeSkybox(Gol.BoxDimensionCubemap);
-                    // Restore ambient settings to Flat and white after baking
                     RenderSettings.ambientMode = AmbientMode.Flat;
                     RenderSettings.ambientLight = Color.white;
 
@@ -98,16 +85,13 @@ public class BoxDimensionLightingBake : MonoBehaviour
 
                     Gol.StaticObject2.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject2, true);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -128,8 +112,6 @@ public class BoxDimensionLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -138,6 +120,7 @@ public class BoxDimensionLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

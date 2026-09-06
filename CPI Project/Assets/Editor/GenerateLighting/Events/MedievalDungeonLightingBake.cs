@@ -13,7 +13,7 @@ public class MedievalDungeonLightingBake : MonoBehaviour
         BakeMedievalDungeon();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeMedievalDungeon()
     {
@@ -22,8 +22,6 @@ public class MedievalDungeonLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,10 +45,7 @@ public class MedievalDungeonLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside the folder
                 string MedievalDungeonFolderPath = "Assets/Game/World/Scenes/Events/MedievalParty2018/Resources/Scenes/EventMedievalDungeon1";
                 string[] files = Directory.GetFiles(MedievalDungeonFolderPath, "*", SearchOption.AllDirectories);
 
@@ -58,12 +53,9 @@ public class MedievalDungeonLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.OrbTracker.isStatic = true;
@@ -99,11 +91,8 @@ public class MedievalDungeonLightingBake : MonoBehaviour
                 Gol.StaticObject7.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject7, false);
                 Gol.ChangeSource(AmbientMode.Skybox);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
-                    // Reset settings after baking
                     Gol.ChangeSkybox(Gol.MedievalDungeonSkybox);
 
                     Gol.BigBadBoulder.isStatic = false;
@@ -135,16 +124,13 @@ public class MedievalDungeonLightingBake : MonoBehaviour
                     Gol.StaticObject7.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject7, true);
                     Gol.ChangeSource(AmbientMode.Flat);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -156,8 +142,6 @@ public class MedievalDungeonLightingBake : MonoBehaviour
             Debug.LogError("No active scene found.");
         }
     }
-
-    // Helper method to set scale during baking
     private static void SetScaleForBake(GameObject obj, Vector3 scale)
     {
         if (obj != null)
@@ -165,8 +149,6 @@ public class MedievalDungeonLightingBake : MonoBehaviour
             obj.transform.localScale = scale;
         }
     }
-
-    // Helper method to reset scale after baking
     private static void ResetScaleAfterBake(GameObject obj, Vector3 defaultScale)
     {
         if (obj != null)
@@ -183,8 +165,6 @@ public class MedievalDungeonLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -193,6 +173,7 @@ public class MedievalDungeonLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

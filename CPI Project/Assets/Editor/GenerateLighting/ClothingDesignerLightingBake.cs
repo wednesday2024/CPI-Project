@@ -23,8 +23,6 @@ public class ClothingDesignerLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -48,7 +46,6 @@ public class ClothingDesignerLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
                 string FolderPath = "Assets/Game/ChangeRoom/Scenes/ClothingDesigner";
@@ -58,7 +55,6 @@ public class ClothingDesignerLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
@@ -68,8 +64,6 @@ public class ClothingDesignerLightingBake : MonoBehaviour
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSource(AmbientMode.Flat);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
                 bakeStartTime = EditorApplication.timeSinceStartup;
@@ -106,6 +100,7 @@ public class ClothingDesignerLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

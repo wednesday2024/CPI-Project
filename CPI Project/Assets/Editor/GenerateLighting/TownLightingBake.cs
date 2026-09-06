@@ -22,8 +22,6 @@ public class TownLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,7 +45,6 @@ public class TownLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
                 string townFolderPath = "Assets/Game/World/Scenes/Town";
@@ -57,7 +54,6 @@ public class TownLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
@@ -100,9 +96,6 @@ public class TownLightingBake : MonoBehaviour
                 Gol.StaticObject4.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject4, false);
 
-                Gol.StaticObject6.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject6, false);
-
                 Gol.StaticObject7.isStatic = true;
                 SetStaticRecursively(Gol.StaticObject7, true);
 
@@ -114,9 +107,6 @@ public class TownLightingBake : MonoBehaviour
 
                 Gol.StaticObject10.isStatic = true;
                 SetStaticRecursively(Gol.StaticObject10, true);
-
-               // Gol.StaticObject11.isStatic = true;
-               // SetStaticRecursively(Gol.StaticObject11, true);
 
                 if (Gol.Animated2 != null)
                 {
@@ -166,9 +156,6 @@ public class TownLightingBake : MonoBehaviour
                     Gol.StaticObject4.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject4, true);
 
-                    Gol.StaticObject6.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject6, true);
-
                     Gol.StaticObject7.isStatic = false;
                     SetStaticRecursively(Gol.StaticObject7, false);
 
@@ -181,9 +168,6 @@ public class TownLightingBake : MonoBehaviour
                     Gol.StaticObject10.isStatic = false;
                     SetStaticRecursively(Gol.StaticObject10, false);
 
-                   // Gol.StaticObject11.isStatic = false;
-                  //  SetStaticRecursively(Gol.StaticObject11, false);
-
                     if (Gol.Animated2 != null)
                     {
                         Gol.Animated2.isStatic = false;
@@ -192,7 +176,6 @@ public class TownLightingBake : MonoBehaviour
 
                     Gol.ChangeSource(AmbientMode.Flat);
 
-                    Debug.Log("Lightmap baking completed.");
                 };
 
                 bakeStartTime = EditorApplication.timeSinceStartup;
@@ -245,6 +228,7 @@ public class TownLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

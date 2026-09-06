@@ -13,7 +13,7 @@ public class SeaCavesLightingBake : MonoBehaviour
         BakeSeaCaves();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeSeaCaves()
     {
@@ -22,8 +22,6 @@ public class SeaCavesLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,10 +45,8 @@ public class SeaCavesLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
-                // Delete only .exr files and LightingData.asset inside the Diving folder
                 string folderPath = "Assets/Game/World/Scenes/Diving";
                 string[] files = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
 
@@ -58,12 +54,10 @@ public class SeaCavesLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
 
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.ChangeSource(AmbientMode.Skybox);
@@ -89,7 +83,6 @@ public class SeaCavesLightingBake : MonoBehaviour
                 Gol.StaticObject7.isStatic = true;
                 SetStaticRecursively(Gol.StaticObject7, true);
 
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.DivingCubemap);
@@ -117,15 +110,13 @@ public class SeaCavesLightingBake : MonoBehaviour
                     Gol.StaticObject7.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject7, true);
 
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -147,7 +138,6 @@ public class SeaCavesLightingBake : MonoBehaviour
         }
     }
 
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -156,6 +146,7 @@ public class SeaCavesLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

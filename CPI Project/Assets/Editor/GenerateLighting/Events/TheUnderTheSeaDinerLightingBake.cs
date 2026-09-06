@@ -13,7 +13,7 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
         BakeTheUnderTheSeaDiner();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeTheUnderTheSeaDiner()
     {
@@ -22,8 +22,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,7 +45,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
 
                 string townFolderPath = "Assets/Game/World/Scenes/Events/TheUnderTheSeaDiner/AdditiveScenes/TheUnderTheSeaDiner_Town_Decorations";
@@ -57,7 +54,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
@@ -83,8 +79,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
                 SetStaticRecursively(Gol.StaticObject5, false);
 
                 Gol.ChangeSource(AmbientMode.Skybox);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSource(AmbientMode.Flat);
@@ -103,16 +97,13 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
 
                     Gol.StaticObject4.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject4, true);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -124,8 +115,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
             Debug.LogError("No active scene found.");
         }
     }
-
-    // Helper method to set scale during baking
     private static void SetScaleForBake(GameObject obj, Vector3 scale)
     {
         if (obj != null)
@@ -133,8 +122,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
             obj.transform.localScale = scale;
         }
     }
-
-    // Helper method to reset scale after baking
     private static void ResetScaleAfterBake(GameObject obj, Vector3 defaultScale)
     {
         if (obj != null)
@@ -151,8 +138,6 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -161,6 +146,7 @@ public class TheUnderTheSeaDinerLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

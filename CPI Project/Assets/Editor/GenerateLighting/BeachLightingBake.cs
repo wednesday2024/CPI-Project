@@ -14,7 +14,7 @@ public class BeachLightingBake : MonoBehaviour
         BakeBeach();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
     static List<GameObject> temporarilyStaticObjects = new List<GameObject>();
     static System.Action _postBakeAction = null;
 
@@ -29,10 +29,6 @@ public class BeachLightingBake : MonoBehaviour
             Debug.LogError("No active scene found.");
             return;
         }
-
-        Debug.Log("Current Scene Name: " + activeScene.name);
-        Debug.Log("Current Scene Path: " + activeScene.path);
-
         string gameObjectName = "GameObjectLocations";
         GameObject[] rootObjects = activeScene.GetRootGameObjects();
         GameObject targetObject = null;
@@ -51,11 +47,7 @@ public class BeachLightingBake : MonoBehaviour
             Debug.LogError("GameObject not found: " + gameObjectName);
             return;
         }
-
-        Debug.Log("Found GameObject: " + targetObject.name);
         GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-        // Delete only .exr files and LightingData.asset inside scene folder
         string FolderPath = "Assets/Game/World/Scenes/Beach";
         string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
 
@@ -63,16 +55,10 @@ public class BeachLightingBake : MonoBehaviour
         {
             if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
             {
-                Debug.Log("Deleting: " + file);
                 AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
             }
         }
-
-        // Set up lighting configuration
         Gol.ChangeSkybox(Gol.LightmappingSkybox);
-
-        // Gol.Animated.isStatic = true;
-        // SetStaticRecursively(Gol.Animated, true);
 
         Gol.Animated2.isStatic = true;
         SetStaticRecursively(Gol.Animated2, true);
@@ -88,8 +74,6 @@ public class BeachLightingBake : MonoBehaviour
 
         Gol.StaticObject4.isStatic = false;
         SetStaticRecursively(Gol.StaticObject4, false);
-
-        // Set "MARK4STATIC_" objects to static
         temporarilyStaticObjects.Clear();
         GameObject[] allGameObjects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
         foreach (GameObject go in allGameObjects)
@@ -98,19 +82,13 @@ public class BeachLightingBake : MonoBehaviour
             {
                 go.isStatic = true;
                 temporarilyStaticObjects.Add(go);
-                Debug.Log("Temporarily set static: " + go.name);
             }
         }
 
         Gol.ChangeSource(AmbientMode.Skybox);
-
-        // Setup post-bake cleanup
         _postBakeAction = () =>
         {
             Gol.ChangeSkybox(Gol.DayCubemap);
-
-            // Gol.Animated.isStatic = false;
-            // SetStaticRecursively(Gol.Animated, false);
 
             Gol.Animated2.isStatic = false;
             SetStaticRecursively(Gol.Animated2, false);
@@ -123,14 +101,11 @@ public class BeachLightingBake : MonoBehaviour
 
             Gol.StaticObject4.isStatic = true;
             SetStaticRecursively(Gol.StaticObject4, true);
-
-            // Revert "MARK4STATIC_" objects
             foreach (GameObject go in temporarilyStaticObjects)
             {
                 if (go != null)
                 {
                     go.isStatic = false;
-                    Debug.Log("Reverted static: " + go.name);
                 }
             }
             temporarilyStaticObjects.Clear();
@@ -139,11 +114,7 @@ public class BeachLightingBake : MonoBehaviour
             SetStaticRecursively(Gol.StaticObject2, true);
 
             Gol.ChangeSource(AmbientMode.Flat);
-
-            Debug.Log("Lightmap baking completed.");
         };
-
-        // Begin baking with progress bar
         bakeStartTime = EditorApplication.timeSinceStartup;
         EditorApplication.update += UpdateProgressBar;
         Lightmapping.bakeCompleted += OnBakeCompleted;
@@ -165,6 +136,7 @@ public class BeachLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

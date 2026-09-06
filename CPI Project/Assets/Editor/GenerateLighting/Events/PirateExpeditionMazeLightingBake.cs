@@ -13,7 +13,7 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
         BakePirateExpeditionMaze();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakePirateExpeditionMaze()
     {
@@ -22,8 +22,6 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -47,10 +45,7 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside scene folder
                 string FolderPath = "Assets/Game/World/Scenes/Events/PirateParty2018/Resources/Scenes/EventPirateParty";
                 string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
 
@@ -58,12 +53,9 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.PiratePartySkyboxForBakingLightmaps);
 
                 Gol.Animated.isStatic = true;
@@ -72,8 +64,6 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
                 Gol.ChangeSource(AmbientMode.Skybox);
 
                 Gol.Lighting.SetActive(true);
-
-                // ========== Progress Bar Patch with Elapsed Time ==========
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.EventPiratePartySkybox);
@@ -84,16 +74,13 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
                     Gol.ChangeSource(AmbientMode.Flat);
 
                     Gol.Lighting.SetActive(false);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
-                bakeStartTime = EditorApplication.timeSinceStartup; // Start timer
+                bakeStartTime = EditorApplication.timeSinceStartup;
                 EditorApplication.update += UpdateProgressBar;
                 Lightmapping.bakeCompleted += OnBakeCompleted;
                 Lightmapping.BakeAsync();
                 return;
-                // ========================================================
             }
             else
             {
@@ -114,8 +101,6 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
             SetStaticRecursively(child.gameObject, flag);
         }
     }
-
-    // ===== Progress Bar Support =====
     private static System.Action _postBakeAction = null;
 
     static void OnBakeCompleted()
@@ -124,6 +109,7 @@ public class PirateExpeditionMazeLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }

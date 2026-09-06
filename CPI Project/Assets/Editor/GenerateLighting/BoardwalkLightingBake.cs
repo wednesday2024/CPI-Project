@@ -13,7 +13,7 @@ public class BoardwalkLightingBake : MonoBehaviour
         BakeBoardwalk();
     }
 
-    static double bakeStartTime; // Timer for elapsed seconds
+    static double bakeStartTime;
 
     static void BakeBoardwalk()
     {
@@ -23,8 +23,6 @@ public class BoardwalkLightingBake : MonoBehaviour
 
         if (activeScene.IsValid())
         {
-            Debug.Log("Current Scene Name: " + activeScene.name);
-            Debug.Log("Current Scene Path: " + activeScene.path);
         }
         else
         {
@@ -48,10 +46,7 @@ public class BoardwalkLightingBake : MonoBehaviour
 
             if (targetObject != null)
             {
-                Debug.Log("Found GameObject: " + targetObject.name);
                 GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
-
-                // Delete only .exr files and LightingData.asset inside Boardwalk folder
                 string boardwalkFolderPath = "Assets/Game/World/Scenes/Boardwalk";
                 string[] files = Directory.GetFiles(boardwalkFolderPath, "*", SearchOption.AllDirectories);
 
@@ -59,12 +54,9 @@ public class BoardwalkLightingBake : MonoBehaviour
                 {
                     if (file.EndsWith(".exr") || file.EndsWith("LightingData.asset"))
                     {
-                        Debug.Log("Deleting: " + file);
                         AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
                     }
                 }
-
-                // Set for baking
                 Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
                 Gol.Animated.isStatic = true;
@@ -146,8 +138,6 @@ public class BoardwalkLightingBake : MonoBehaviour
                     SetStaticRecursively(Gol.StaticObject8, true);
 
                     Gol.ChangeSource(AmbientMode.Flat);
-
-                    Debug.Log("Lightmap baking completed.");
                 };
 
                 bakeStartTime = EditorApplication.timeSinceStartup;
@@ -184,6 +174,7 @@ public class BoardwalkLightingBake : MonoBehaviour
         EditorApplication.update -= UpdateProgressBar;
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
+        LightmapTexturePostProcessor.SetLightmapTextureSize();
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }
