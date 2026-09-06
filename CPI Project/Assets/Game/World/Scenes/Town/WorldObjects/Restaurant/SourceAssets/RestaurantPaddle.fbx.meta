@@ -3,7 +3,12 @@ guid: a7af5dfa83abedf48adf41cda5535720
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RestaurantPaddle
+    second: {fileID: 2100000, guid: a2701cb29d6f6e549874d9d937da09e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
