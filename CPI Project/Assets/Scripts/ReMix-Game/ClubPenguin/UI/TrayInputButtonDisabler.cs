@@ -67,17 +67,21 @@ namespace ClubPenguin.UI
 
 		private void disableAndLockForActionSequence(GameObject overrideObject = null)
 		{
+			if (inputButton == null)
+			{
+				return;
+			}
+
 			bool flag = true;
 			if (overrideObject != null)
 			{
 				ButtonDisablerOverride component = overrideObject.GetComponent<ButtonDisablerOverride>();
 				if (component != null && component.buttonsToOverride.Length > 0)
 				{
-					TrayInputButtonDisabler componentInParent = GetComponentInParent<TrayInputButtonDisabler>();
 					string[] buttonsToOverride = component.buttonsToOverride;
 					foreach (string a in buttonsToOverride)
 					{
-						if (a == componentInParent.UIElementID)
+						if (a == UIElementID)
 						{
 							flag = false;
 							break;
