@@ -555,10 +555,12 @@ namespace ClubPenguin.MiniGames.TiltATube
 
 		private void syncGameState()
 		{
+			CancelInvoke("syncGameState");
 			SyncData syncData = calculateGameSyncData();
 			if (string.IsNullOrEmpty(syncData.methodName))
 			{
 				Log.LogError(this, string.Format("O_o\t Can't sync game state, this mini game will not work properly"));
+				Invoke("syncGameState", 1f);
 			}
 			else
 			{
