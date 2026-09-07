@@ -27,6 +27,8 @@ namespace ClubPenguin
 
 		private Vector3? localPlayerSpawnPostion;
 
+		private Coroutine pendingSpawnCoroutine;
+
 		private EventDispatcher eventDispatcher;
 
 		private void Start()
@@ -399,14 +401,20 @@ namespace ClubPenguin
 
 		private void setPositionToSpawnPoint(SpawnPointSelector spawner)
 		{
-			StartCoroutine(setPositionToSpawnPointWaitAFrame(spawner));
+			if (pendingSpawnCoroutine != null)
+			{
+				StopCoroutine(pendingSpawnCoroutine);
+			}
+			pendingSpawnCoroutine = StartCoroutine(setPositionToSpawnPointWaitAFrame(spawner));
 		}
 
 		private IEnumerator setPositionToSpawnPointWaitAFrame(SpawnPointSelector spawner)
 		{
+			Vector3 spawnPosition = spawner.SelectSpawnPosition(CoordinateSpace.World);
+			Quaternion spawnRotation = spawner.SelectSpawnRotation(CoordinateSpace.World);
             base.transform.SetPositionAndRotation(
-				spawner.SelectSpawnPosition(CoordinateSpace.World),
-				spawner.SelectSpawnRotation(CoordinateSpace.World)
+				spawnPosition,
+				spawnRotation
 			);
             Physics.SyncTransforms();
             yield return null;
@@ -416,8 +424,8 @@ namespace ClubPenguin
 				tracker.SetCurrentController<RunController>();
 			}
             base.transform.SetPositionAndRotation(
-                spawner.SelectSpawnPosition(CoordinateSpace.World),
-                spawner.SelectSpawnRotation(CoordinateSpace.World)
+				spawnPosition,
+				spawnRotation
             );
             Physics.SyncTransforms();
             yield return null;
@@ -426,6 +434,7 @@ namespace ClubPenguin
 			movement.Position = base.transform.position;
 			movement.Direction = Vector3.zero;
 			sendNetworkMessage(movement);
+			pendingSpawnCoroutine = null;
 		}
 
 		private void sendNetworkMessage(LocomotionActionEvent action)
