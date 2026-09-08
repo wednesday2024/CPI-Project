@@ -18,6 +18,8 @@ public class BeachLightingBake : MonoBehaviour
     static List<GameObject> temporarilyStaticObjects = new List<GameObject>();
     static System.Action _postBakeAction = null;
 
+    const string waterRockMaterialPath = "Assets/Game/World/Scenes/GlobalAssets/WorldObjects/WaterRocks/SourceAssets/WaterRock.mat";
+
     static void BakeBeach()
     {
         string scenePath = "Assets/Game/World/Scenes/Beach.unity";
@@ -29,6 +31,7 @@ public class BeachLightingBake : MonoBehaviour
             Debug.LogError("No active scene found.");
             return;
         }
+
         string gameObjectName = "GameObjectLocations";
         GameObject[] rootObjects = activeScene.GetRootGameObjects();
         GameObject targetObject = null;
@@ -47,6 +50,7 @@ public class BeachLightingBake : MonoBehaviour
             Debug.LogError("GameObject not found: " + gameObjectName);
             return;
         }
+
         GameObjectLocations Gol = targetObject.GetComponent<GameObjectLocations>();
         string FolderPath = "Assets/Game/World/Scenes/Beach";
         string[] files = Directory.GetFiles(FolderPath, "*", SearchOption.AllDirectories);
@@ -58,6 +62,7 @@ public class BeachLightingBake : MonoBehaviour
                 AssetDatabase.DeleteAsset(file.Replace(Application.dataPath, "Assets"));
             }
         }
+
         Gol.ChangeSkybox(Gol.LightmappingSkybox);
 
         Gol.Animated2.isStatic = true;
@@ -67,7 +72,9 @@ public class BeachLightingBake : MonoBehaviour
         SetStaticRecursively(Gol.StaticObject2, false);
 
         temporarilyStaticObjects.Clear();
+
         GameObject[] allGameObjects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+
         foreach (GameObject go in allGameObjects)
         {
             if (go.name.StartsWith("MARK4STATIC_") && !go.isStatic)
@@ -78,8 +85,36 @@ public class BeachLightingBake : MonoBehaviour
         }
 
         Gol.ChangeSource(AmbientMode.Skybox);
+
+        Material waterRockMaterial = AssetDatabase.LoadAssetAtPath<Material>(waterRockMaterialPath);
+
+        if (waterRockMaterial == null)
+        {
+            Debug.LogError("WaterRock material not found: " + waterRockMaterialPath);
+            return;
+        }
+
+        waterRockMaterial.doubleSidedGI = true;
+        EditorUtility.SetDirty(waterRockMaterial);
+        AssetDatabase.SaveAssets();
+
+
         _postBakeAction = () =>
         {
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(waterRockMaterialPath);
+
+            if (material != null)
+            {
+                material.doubleSidedGI = false;
+                EditorUtility.SetDirty(material);
+                AssetDatabase.SaveAssets();
+
+            }
+            else
+            {
+                Debug.LogError("WaterRock material not found after bake: " + waterRockMaterialPath);
+            }
+
             Gol.ChangeSkybox(Gol.DayCubemap);
 
             Gol.Animated2.isStatic = false;
@@ -95,6 +130,7 @@ public class BeachLightingBake : MonoBehaviour
                     go.isStatic = false;
                 }
             }
+
             temporarilyStaticObjects.Clear();
 
             Gol.StaticObject2.isStatic = true;
@@ -102,6 +138,7 @@ public class BeachLightingBake : MonoBehaviour
 
             Gol.ChangeSource(AmbientMode.Flat);
         };
+
         bakeStartTime = EditorApplication.timeSinceStartup;
         EditorApplication.update += UpdateProgressBar;
         Lightmapping.bakeCompleted += OnBakeCompleted;
@@ -124,6 +161,7 @@ public class BeachLightingBake : MonoBehaviour
         Lightmapping.bakeCompleted -= OnBakeCompleted;
 
         LightmapTexturePostProcessor.SetLightmapTextureSize();
+
         _postBakeAction?.Invoke();
         _postBakeAction = null;
     }
@@ -133,11 +171,13 @@ public class BeachLightingBake : MonoBehaviour
         if (Lightmapping.isRunning)
         {
             double elapsed = EditorApplication.timeSinceStartup - bakeStartTime;
+
             EditorUtility.DisplayProgressBar(
                 "Baking Lightmaps...",
                 $"Busy for {elapsed:F1} seconds.\nPlease wait while Unity bakes the lightmaps.",
                 0.5f
             );
+
             EditorApplication.QueuePlayerLoopUpdate();
             SceneView.RepaintAll();
         }
