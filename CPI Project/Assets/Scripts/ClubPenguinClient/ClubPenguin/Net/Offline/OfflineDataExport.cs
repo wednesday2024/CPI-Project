@@ -43,6 +43,8 @@ namespace ClubPenguin.Net.Offline
 
 		public TutorialData Tutorials;
 
+		public PlayTimeData Playtime;
+
 		[Invokable("Data.Export", Description = "Copy all of the account data for the given username into the clipboard")]
 		[PublicTweak(2018, 12, 21)]
 		public static void ExportData(string userName)
@@ -66,6 +68,7 @@ namespace ClubPenguin.Net.Offline
 			offlineDataExport.DecorationInventory = OfflineDatabase.Read<DecorationInventoryEntity>(token);
 			offlineDataExport.Tube = OfflineDatabase.Read<TubeData>(token);
 			offlineDataExport.Tutorials = OfflineDatabase.Read<TutorialData>(token);
+			offlineDataExport.Playtime = OfflineDatabase.Read<PlayTimeData>(token);
 			OfflineDataExport objectToSerialize = offlineDataExport;
 			objectToSerialize.UserName = objectToSerialize.RegistrationProfile.userName;
 #if UNITY_WEBGL
@@ -147,6 +150,7 @@ namespace ClubPenguin.Net.Offline
 			OfflineDatabase.Write(offlineDataExport.DecorationInventory, token);
 			OfflineDatabase.Write(offlineDataExport.Tube, token);
 			OfflineDatabase.Write(offlineDataExport.Tutorials, token);
+			OfflineDatabase.Write(offlineDataExport.Playtime, token);
 #endif
         }
 
@@ -198,6 +202,7 @@ namespace ClubPenguin.Net.Offline
             OfflineDatabase.Write(offlineDataExport.DecorationInventory, token);
             OfflineDatabase.Write(offlineDataExport.Tube, token);
             OfflineDatabase.Write(offlineDataExport.Tutorials, token);
+			OfflineDatabase.Write(offlineDataExport.Playtime, token);
         }
 #else
 #endif

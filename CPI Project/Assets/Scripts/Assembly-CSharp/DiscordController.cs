@@ -4,6 +4,8 @@ using ClubPenguin.Adventure;
 using ClubPenguin.Core;
 using ClubPenguin.Game.PartyGames;
 using ClubPenguin.MiniGames.TiltATube;
+using ClubPenguin.Net.Client;
+using ClubPenguin.Net.Offline;
 using ClubPenguin.PartyGames;
 using ClubPenguin.Progression;
 using ClubPenguin.UI;
@@ -58,7 +60,7 @@ public class DiscordController : MonoBehaviour
 
     [SerializeField] private float statsSwapSeconds = 30f;
 
-    private bool statsMode;
+    private int rotatingStatsMode;
     private float nextStatsSwapUnscaled;
     private bool runtimeHooksRegistered;
 
@@ -259,7 +261,7 @@ public class DiscordController : MonoBehaviour
             tubeScoreValue = 0f;
             tubeScoreUntilUnscaled = 0f;
 
-            statsMode = false;
+            rotatingStatsMode = 0;
             nextStatsSwapUnscaled = Time.unscaledTime + Mathf.Max(5f, statsSwapSeconds);
 
             RegisterRuntimeHooks();
@@ -360,7 +362,7 @@ public class DiscordController : MonoBehaviour
 
         if (ShouldSwapStatsModeNow())
         {
-            statsMode = !statsMode;
+            rotatingStatsMode = (rotatingStatsMode + 1) % 3;
             nextStatsSwapUnscaled = Time.unscaledTime + Mathf.Max(5f, statsSwapSeconds);
             RefreshPresenceOnly();
         }
@@ -1283,14 +1285,66 @@ public class DiscordController : MonoBehaviour
 
     private string BuildRotatingNonQuestNonTubeStateText()
     {
-        if (!statsMode)
+        if (rotatingStatsMode == 0)
             return $"Unity {Application.unityVersion} | Version {Application.version}";
 
-        int age, lvl, c;
-        if (TryGetPlayerStats(out age, out lvl, out c))
-            return "Age " + age + "d | Level " + lvl + " | Coins " + c;
+        if (rotatingStatsMode == 1)
+        {
+            int age, lvl, c;
+            if (TryGetPlayerStats(out age, out lvl, out c))
+                return "Age " + age + "d | Level " + lvl + " | Coins " + c;
 
-        return $"Unity {Application.unityVersion} | Version {Application.version}";
+            return $"Unity {Application.unityVersion} | Version {Application.version}";
+        }
+
+        return BuildPlaytimeStateText();
+    }
+
+    private string BuildPlaytimeStateText()
+    {
+        try
+        {
+            OfflineDatabase offlineDatabase = Service.Get<OfflineDatabase>();
+            if (offlineDatabase == null || string.IsNullOrEmpty(offlineDatabase.AccessToken))
+                return "Total Playtime unavailable";
+
+            PlayTimeData playTimeData = OfflineDatabase.Read<PlayTimeData>(offlineDatabase.AccessToken);
+            return "Total Playtime: " + FormatPlaytime(playTimeData.TotalSeconds);
+        }
+        catch
+        {
+            return "Total Playtime unavailable";
+        }
+    }
+
+    private static string FormatPlaytime(long totalSeconds)
+    {
+        TimeSpan playtime = TimeSpan.FromSeconds(totalSeconds);
+        long remainingDays = (long)playtime.TotalDays;
+        long years = remainingDays / 365L;
+        remainingDays %= 365L;
+        long months = remainingDays / 30L;
+        remainingDays %= 30L;
+
+        StringBuilder result = new StringBuilder();
+        AppendPlaytimeUnit(result, years, "y");
+        AppendPlaytimeUnit(result, months, "mo");
+        AppendPlaytimeUnit(result, remainingDays, "d");
+        AppendPlaytimeUnit(result, playtime.Hours, "h");
+        AppendPlaytimeUnit(result, playtime.Minutes, "m");
+        AppendPlaytimeUnit(result, playtime.Seconds, "s");
+        return result.Length > 0 ? result.ToString() : "0s";
+    }
+
+    private static void AppendPlaytimeUnit(StringBuilder result, long value, string unit)
+    {
+        if (value <= 0L)
+            return;
+
+        if (result.Length > 0)
+            result.Append(' ');
+
+        result.Append(value).Append(unit);
     }
 
     private bool ShouldSwapStatsModeNow()
