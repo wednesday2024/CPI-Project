@@ -12,6 +12,7 @@ namespace ClubPenguin.SpecialEvents
 
 		protected override void handleCutsceneLoaded(EventCutsceneEvent cutsceneEvent)
 		{
+			markCutsceneWatched(cutsceneEvent.CutsceneData);
 		}
 	}
 }
