@@ -62,53 +62,11 @@ public class SeaCavesLightingBake : MonoBehaviour
 
                 Gol.ChangeSource(AmbientMode.Skybox);
 
-                Gol.StaticObject1.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject1, false);
-
-                Gol.StaticObject2.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject2, false);
-
-                Gol.StaticObject3.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject3, false);
-
-                Gol.StaticObject4.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject4, false);
-
-                Gol.StaticObject5.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject5, false);
-
-                Gol.StaticObject6.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject6, false);
-
-                Gol.StaticObject7.isStatic = true;
-                SetStaticRecursively(Gol.StaticObject7, true);
-
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.DivingCubemap);
 
                     Gol.ChangeSource(AmbientMode.Flat);
-
-                    Gol.StaticObject1.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject1, true);
-
-                    Gol.StaticObject2.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject2, true);
-
-                    Gol.StaticObject3.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject3, true);
-
-                    Gol.StaticObject4.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject4, true);
-
-                    Gol.StaticObject5.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject5, true);
-
-                    Gol.StaticObject6.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject6, true);
-
-                    Gol.StaticObject7.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject7, true);
 
                 };
 
