@@ -66,11 +66,6 @@ public class BoxDimensionLightingBake : MonoBehaviour
                 RenderSettings.ambientMode = AmbientMode.Trilight;
                 RenderSettings.ambientLight = new Color(0.05f, 0.01f, 0.27f, 1f);
 
-                Gol.StaticObject1.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject1, false);
-
-                Gol.StaticObject2.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject2, false);
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.BoxDimensionCubemap);
@@ -80,11 +75,6 @@ public class BoxDimensionLightingBake : MonoBehaviour
                     RenderSettings.ambientMode = originalAmbientMode;
                     RenderSettings.ambientLight = originalAmbientColor;
 
-                    Gol.StaticObject1.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject1, true);
-
-                    Gol.StaticObject2.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject2, true);
                 };
 
                 bakeStartTime = EditorApplication.timeSinceStartup;
