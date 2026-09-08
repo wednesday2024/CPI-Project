@@ -58,19 +58,10 @@ public class PirateExpeditionBeachLightingBake : MonoBehaviour
                 }
                 Gol.ChangeSkybox(Gol.PiratePartySkyboxForBakingLightmaps);
 
-                Gol.EventPirateParty2018_Beach_Prefab.isStatic = true;
-                SetStaticRecursively(Gol.EventPirateParty2018_Beach_Prefab, true);
-
-                Gol.GatewayFX.isStatic = false;
-                SetStaticRecursively(Gol.GatewayFX, false);
-
                 Gol.ChangeSource(AmbientMode.Skybox);
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.PiratePartySkyboxForBakingLightmaps);
-
-                    Gol.EventPirateParty2018_Beach_Prefab.isStatic = false;
-                    SetStaticRecursively(Gol.EventPirateParty2018_Beach_Prefab, false);
 
                     Gol.ChangeSource(AmbientMode.Flat);
                 };
