@@ -1785,9 +1785,10 @@ GameObject:
   - component: {fileID: 2546946183837807878}
   - component: {fileID: 7318894528679411946}
   - component: {fileID: 1536778884209304489}
-  m_Layer: 0
+  - component: {fileID: 73623467009258081}
+  m_Layer: 30
   m_Name: LeftCoastLineSnow
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1864,6 +1865,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &73623467009258081
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800364387631516042}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: c037d15ea31fc14489d268b69b1bf585, type: 2}
 --- !u!1 &5518013927524509031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2256,9 +2279,10 @@ GameObject:
   - component: {fileID: 1586403831922403317}
   - component: {fileID: 3401332787552323166}
   - component: {fileID: 184447611709192075}
-  m_Layer: 0
+  - component: {fileID: 899718025178047638}
+  m_Layer: 30
   m_Name: MiddleSnowHill
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2335,6 +2359,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &899718025178047638
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599912911104616369}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e153ed52fbbc97748af8c16d805e4685, type: 2}
 --- !u!1 &7221256105738129992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,9 +2392,10 @@ GameObject:
   - component: {fileID: 2418150224145194630}
   - component: {fileID: 9164414633349263666}
   - component: {fileID: 2090416727224834936}
-  m_Layer: 0
+  - component: {fileID: 7706584854062221406}
+  m_Layer: 30
   m_Name: LighthouseHillsStepsSnow
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2425,6 +2472,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7706584854062221406
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221256105738129992}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 476fcc094047d2d40a90511557e77114, type: 2}
 --- !u!1 &7717961306702420977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2436,9 +2505,10 @@ GameObject:
   - component: {fileID: 7061714646272575697}
   - component: {fileID: 5965682186315378540}
   - component: {fileID: 2797887196193260831}
-  m_Layer: 0
+  - component: {fileID: 2224053508671725560}
+  m_Layer: 30
   m_Name: LighthouseHills
-  m_TagString: Untagged
+  m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2515,6 +2585,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2224053508671725560
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717961306702420977}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5890ce6cf08224d489e81e7549fa108c, type: 2}
 --- !u!1 &8140268267587387277
 GameObject:
   m_ObjectHideFlags: 0
