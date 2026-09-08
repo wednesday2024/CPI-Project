@@ -1785,10 +1785,9 @@ GameObject:
   - component: {fileID: 2546946183837807878}
   - component: {fileID: 7318894528679411946}
   - component: {fileID: 1536778884209304489}
-  - component: {fileID: 73623467009258081}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: LeftCoastLineSnow
-  m_TagString: Snow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1865,28 +1864,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &73623467009258081
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4800364387631516042}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: c037d15ea31fc14489d268b69b1bf585, type: 2}
 --- !u!1 &5518013927524509031
 GameObject:
   m_ObjectHideFlags: 0
