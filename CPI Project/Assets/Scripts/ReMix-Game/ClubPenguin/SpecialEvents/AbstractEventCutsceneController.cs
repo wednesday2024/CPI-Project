@@ -362,6 +362,15 @@ namespace ClubPenguin.SpecialEvents
 			return false;
 		}
 
+		protected void markCutsceneWatched(ScheduledCutSceneData cutsceneData)
+		{
+			if (!string.IsNullOrEmpty(cutsceneData.PlayedKeyName))
+			{
+				PlayerPrefs.SetInt(GetPlatformKey(createLocalKey(cutsceneData.PlayedKeyName)), 1);
+				PlayerPrefs.Save();
+			}
+		}
+
 		protected void clearPlayerPrefs()
 		{
 			int num = Events.Length;
