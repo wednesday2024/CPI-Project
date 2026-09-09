@@ -34,7 +34,31 @@ namespace Disney.MobileNetwork
 #elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
         public static bool Enabled = true;
 
-        [DllImport("MemoryMonitorLinux", EntryPoint = "get_process_used_bytes")]
+        [DllImport("libMemoryMonitorLinux", EntryPoint = "get_process_used_bytes")]
+        private static extern ulong _getProcessUsedBytes();
+
+        protected override void Init()
+        {
+            try
+            {
+                GetProcessUsedBytes();
+            }
+            catch (Exception ex)
+            {
+                Enabled = false;
+                Log.LogException(typeof(MemoryMonitorWindowsManager), ex);
+            }
+        }
+
+        public override ulong GetProcessUsedBytes()
+        {
+            return Enabled ? _getProcessUsedBytes() : base.GetProcessUsedBytes();
+        }
+
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX_ARM || UNITY_EDITOR_OSX_ARM
+        public static bool Enabled = true;
+
+        [DllImport("libMemoryMonitorOSX", EntryPoint = "get_process_used_bytes")]
         private static extern ulong _getProcessUsedBytes();
 
         protected override void Init()
@@ -93,18 +117,21 @@ namespace Disney.MobileNetwork
             try
             {
                 double wasmBytes = MemoryMonitorWebGL_GetWasmHeapSize();
+
                 if (wasmBytes < 0)
                 {
                     wasmBytes = 0;
                 }
 
                 double jsUsed = MemoryMonitorWebGL_GetJsHeapUsed();
+
                 if (jsUsed < 0)
                 {
                     jsUsed = 0;
                 }
 
                 double sum = wasmBytes + jsUsed;
+
                 if (sum <= 0)
                 {
                     return (ulong)Profiler.usedHeapSizeLong;
@@ -134,6 +161,7 @@ namespace Disney.MobileNetwork
             try
             {
                 double limit = MemoryMonitorWebGL_GetJsHeapLimit();
+
                 if (limit <= 0)
                 {
                     limit = MemoryMonitorWebGL_GetJsHeapTotal();
@@ -160,12 +188,14 @@ namespace Disney.MobileNetwork
         public override ulong GetFreeBytes()
         {
             ulong total = GetTotalBytes();
+
             if (total == 0uL)
             {
                 return 0uL;
             }
 
             ulong used = GetProcessUsedBytes();
+
             if (used >= total)
             {
                 return 0uL;
