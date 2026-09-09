@@ -440,9 +440,10 @@ GameObject:
   - component: {fileID: 3402525049779982032}
   - component: {fileID: 8778931163881778205}
   - component: {fileID: 1442618622820830752}
-  m_Layer: 0
+  - component: {fileID: 2543652789012746607}
+  m_Layer: 30
   m_Name: steeringWheel
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -459,8 +460,7 @@ Transform:
   m_LocalPosition: {x: -0.941, y: -0.018, z: 4.584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6075677108817660103}
+  m_Children: []
   m_Father: {fileID: 7761104956078489204}
   m_LocalEulerAnglesHint: {x: -7.527476, y: 22.296274, z: 14.259085}
 --- !u!33 &8778931163881778205
@@ -520,45 +520,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3325522110243554848
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6075677108817660103}
-  - component: {fileID: 8805943631196737843}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6075677108817660103
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325522110243554848}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.0000000018626451, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3402525049779982032}
-  m_LocalEulerAnglesHint: {x: -7.527476, y: 22.296274, z: 14.259085}
---- !u!64 &8805943631196737843
+--- !u!64 &2543652789012746607
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3325522110243554848}
+  m_GameObject: {fileID: 3321012243868040547}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -571,7 +539,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b09e20b66a66bbb4e951695fc4b26880, type: 2}
 --- !u!1 &3602624159241007929

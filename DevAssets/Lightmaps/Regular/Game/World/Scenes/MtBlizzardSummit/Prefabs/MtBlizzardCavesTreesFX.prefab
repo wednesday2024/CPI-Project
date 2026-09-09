@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4327324565360952149}
   - component: {fileID: 7455197581992908425}
-  m_Layer: 0
+  - component: {fileID: 7843580369499131286}
+  m_Layer: 30
   m_Name: BerryBushA
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +43,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -79,6 +80,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -93,6 +95,27 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.28900012, y: 0.036016464, z: -0.017264485}
     m_Extent: {x: 0.32373533, y: 0.36587375, z: 0.34686786}
   m_DirtyAABB: 0
+--- !u!135 &7843580369499131286
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160228191961405}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3966075
+  m_Center: {x: -0.017266393, y: 0.29115775, z: 0.007646757}
 --- !u!1 &72838409816636547
 GameObject:
   m_ObjectHideFlags: 0
@@ -3059,7 +3082,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &5126503734694727087
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3106,6 +3129,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -3137,7 +3161,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!114 &5227461761313903332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3261,9 +3284,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5236416068216708702}
   - component: {fileID: 3264571509186449201}
-  m_Layer: 0
+  - component: {fileID: 2717748333756517976}
+  m_Layer: 30
   m_Name: BerryBushB
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3293,7 +3317,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3330,6 +3354,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -3344,6 +3369,27 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.15823758, y: 0.013627589, z: 0.016238585}
     m_Extent: {x: 0.1582376, y: 0.23470387, z: 0.23946984}
   m_DirtyAABB: 0
+--- !u!135 &2717748333756517976
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4845466876642594845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2394699
+  m_Center: {x: 0.013627607, y: 0.15823759, z: 0.016238587}
 --- !u!1 &4909936578320681335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,9 +3519,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8053305812687920275}
   - component: {fileID: 182481746076223396}
-  m_Layer: 0
+  - component: {fileID: 9190677598378258909}
+  m_Layer: 30
   m_Name: BerryBushB
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3505,7 +3552,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -3542,6 +3589,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -3556,6 +3604,27 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.15823758, y: 0.013627589, z: 0.016238585}
     m_Extent: {x: 0.1582376, y: 0.23470387, z: 0.23946984}
   m_DirtyAABB: 0
+--- !u!135 &9190677598378258909
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6757369567311602417}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.23947008
+  m_Center: {x: 0.013627568, y: 0.15823762, z: 0.016238622}
 --- !u!1 &8121753771716785034
 GameObject:
   m_ObjectHideFlags: 0
@@ -6293,7 +6362,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &4176049055804909786
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6340,6 +6409,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -6371,7 +6441,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!114 &6664085917869019713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6395,9 +6464,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8088689815685150338}
   - component: {fileID: 5945195351225470391}
-  m_Layer: 0
+  - component: {fileID: 471500716481429635}
+  m_Layer: 30
   m_Name: BerryBushA
-  m_TagString: Untagged
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6427,7 +6497,7 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -6464,6 +6534,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -6478,3 +6549,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.28900012, y: 0.036016464, z: -0.017264485}
     m_Extent: {x: 0.32373533, y: 0.36587375, z: 0.34686786}
   m_DirtyAABB: 0
+--- !u!135 &471500716481429635
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149048834816639059}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.39660734
+  m_Center: {x: -0.017264485, y: 0.2911578, z: 0.007646283}
