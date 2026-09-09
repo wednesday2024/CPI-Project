@@ -130,14 +130,25 @@ namespace ClubPenguin.Locomotion
 		public void OnTriggerExit(Collider collider)
 		{
 			GameObject gameObject = ActionSequencer.FindActionGraphObject(collider.gameObject);
-			if (gameObject == null || gameObject != currentActionGraphGameObject || SceneRefs.ActionSequencer.GetTrigger(base.gameObject) != null)
+			if (gameObject == null)
 			{
 				return;
 			}
 
-			CoroutineRunner.StopAllForOwner(this);
-			interactRequest.Reset();
-			currentActionGraphGameObject = null;
+			bool isActiveSequenceTrigger = SceneRefs.ActionSequencer != null && SceneRefs.ActionSequencer.GetTrigger(base.gameObject) == gameObject;
+			if (gameObject == currentActionGraphGameObject || isActiveSequenceTrigger)
+			{
+				CoroutineRunner.StopAllForOwner(this);
+				interactRequest.Reset();
+				if (isActiveSequenceTrigger)
+				{
+					SceneRefs.ActionSequencer.StopSequence(base.gameObject);
+				}
+				if (gameObject == currentActionGraphGameObject)
+				{
+					currentActionGraphGameObject = null;
+				}
+			}
 		}
 
 		public bool RequestInteraction()
