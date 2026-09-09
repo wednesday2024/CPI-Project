@@ -69,24 +69,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
                 Gol.StaticObject2.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject2, false);
 
-                Gol.StaticObject3.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject3, false);
-
-                Gol.StaticObject4.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject4, false);
-
-                Gol.StaticObject5.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject5, false);
-
-                Gol.StaticObject6.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject6, false);
-
-                Gol.StaticObject7.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject7, false);
-
-                Gol.StaticObject8.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject8, false);
-
                 Gol.StaticObject9.isStatic = true;
                 SetStaticRecursively(Gol.StaticObject9, true);
 
@@ -104,24 +86,6 @@ public class SummerSplashdownLightingBake : MonoBehaviour
 
                     Gol.StaticObject2.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject2, true);
-
-                    Gol.StaticObject3.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject3, true);
-
-                    Gol.StaticObject4.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject4, true);
-
-                    Gol.StaticObject5.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject5, true);
-
-                    Gol.StaticObject6.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject6, true);
-
-                    Gol.StaticObject7.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject7, true);
-
-                    Gol.StaticObject8.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject8, true);
 
                     Gol.StaticObject9.isStatic = false;
                     SetStaticRecursively(Gol.StaticObject9, false);
