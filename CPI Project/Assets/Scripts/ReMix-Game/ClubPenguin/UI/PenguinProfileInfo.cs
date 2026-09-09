@@ -20,12 +20,15 @@ namespace ClubPenguin.UI
 
         public TextMeshProUGUI MembershipStatusText;
 
+        public TextMeshProUGUI PlaytimeText;
+
         public SpriteSelector MembershipSpriteSelector;
 
         private CoinsData coinsData;
 
         public void Start()
         {
+			UpdatePlaytimeText();
             CPDataEntityCollection cPDataEntityCollection = Service.Get<CPDataEntityCollection>();
             DataEntityHandle localPlayerHandle = cPDataEntityCollection.LocalPlayerHandle;
             if (cPDataEntityCollection.TryGetComponent(localPlayerHandle, out coinsData))
@@ -67,6 +70,22 @@ namespace ClubPenguin.UI
             {
                 Log.LogError(this, "Could not find MembershipData on local player handle");
             }
+        }
+
+        private void Update()
+        {
+            UpdatePlaytimeText();
+        }
+
+        private void UpdatePlaytimeText()
+        {
+            if (PlaytimeText == null)
+            {
+                return;
+            }
+
+            long totalSeconds = PlaytimeService.Instance != null ? PlaytimeService.Instance.GetCurrentTotalSeconds() : 0L;
+            PlaytimeText.text = PlaytimeService.FormatPlaytime(totalSeconds);
         }
 
         private void setCoins(int coins)

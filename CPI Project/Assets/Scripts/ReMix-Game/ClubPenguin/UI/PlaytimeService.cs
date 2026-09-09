@@ -80,6 +80,39 @@ namespace ClubPenguin.UI
 			return playTimeData.TotalSeconds + (long)sessionSeconds;
 		}
 
+		public static string FormatPlaytime(long totalSeconds)
+		{
+			System.TimeSpan playtime = System.TimeSpan.FromSeconds(totalSeconds);
+			long remainingDays = (long)playtime.TotalDays;
+			long years = remainingDays / 365L;
+			remainingDays %= 365L;
+			long months = remainingDays / 30L;
+			remainingDays %= 30L;
+
+			System.Text.StringBuilder result = new System.Text.StringBuilder();
+			AppendPlaytimeUnit(result, years, "y");
+			AppendPlaytimeUnit(result, months, "mo");
+			AppendPlaytimeUnit(result, remainingDays, "d");
+			AppendPlaytimeUnit(result, playtime.Hours, "h");
+			AppendPlaytimeUnit(result, playtime.Minutes, "m");
+			AppendPlaytimeUnit(result, playtime.Seconds, "s");
+			return result.Length > 0 ? result.ToString() : "0s";
+		}
+
+		private static void AppendPlaytimeUnit(System.Text.StringBuilder result, long value, string unit)
+		{
+			if (value <= 0L)
+			{
+				return;
+			}
+
+			if (result.Length > 0)
+			{
+				result.Append(' ');
+			}
+			result.Append(value).Append(unit);
+		}
+
 		public void Flush()
 		{
 			if (!isTracking || string.IsNullOrEmpty(accountToken))
