@@ -535,11 +535,9 @@ public class AnnualEventsController3000 : MonoBehaviour
                                 if (tr != null)
                                 {
                                     tr.material = isActive ? eventInfo.EventMaterial : eventInfo.OriginalMaterial;
-                                    Debug.Log($"Material set on prefab '{eventInfo.SnowballPrefab.name}' for eventID '{eventInfo.eventID}' ({eventInfo.eventName}) Active: {isActive}");
                                 }
                             }
 
-                            Debug.Log($"Updated event {eventInfo.eventID} ({eventInfo.eventName}) dates. Active: {isActive}");
                         }
                     }
                 }
@@ -569,7 +567,6 @@ public class AnnualEventsController3000 : MonoBehaviour
                         var contentKey = new PrefabContentKey(keyToUse);
                         contentKey.Key = keyToUse;
                         audioKeyField.SetValue(sceneAsset, contentKey);
-                        Debug.Log($"Scene '{sceneName}' audio key set to '{keyToUse}'");
                     }
                 }
                 else
