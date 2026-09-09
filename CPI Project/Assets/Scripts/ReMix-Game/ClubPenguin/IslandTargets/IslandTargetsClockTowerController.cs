@@ -95,6 +95,8 @@ namespace ClubPenguin.IslandTargets
 
 		public InWorldText DailyRecordText;
 
+		public GameObject ObjectToDisableWhenNoGameServer;
+
 		public TextMesh GameStartCountdownTimerText;
 
 		public InWorldText[] TimerTexts;
@@ -190,6 +192,9 @@ namespace ClubPenguin.IslandTargets
 		private Animator animatorFloatingClock;
 
 		private GameObject normalScarecrowObj;
+
+		private bool shouldDisableObjectWhenNoGameServer;
+
 	private static string GetPlatformKey(string key)
 	{
 #if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
@@ -213,6 +218,11 @@ namespace ClubPenguin.IslandTargets
 			Service.Get<EventDispatcher>().AddListener<ZoneTransitionEvents.ZoneTransition>(onZoneTransition);
 			Service.Get<EventDispatcher>().AddListener<RewardServiceEvents.RewardsEarned>(onRewardsEarned);
 			Service.Get<EventDispatcher>().AddListener<IslandTargetsEvents.ClockTowerStateChanged>(onClockTowerStateChange);
+			shouldDisableObjectWhenNoGameServer = !DisableWhenNoGameServer.IsGameServerAvailable();
+			if (ObjectToDisableWhenNoGameServer != null)
+			{
+				ObjectToDisableWhenNoGameServer.SetActive(!shouldDisableObjectWhenNoGameServer);
+			}
 			if (DisableWhenNoGameServer.IsGameServerAvailable())
 			{
 				gameTimer = new Timer(1f, true, delegate
@@ -246,6 +256,14 @@ namespace ClubPenguin.IslandTargets
 			{
 				BI_Tier1Name = "crate_co_game";
 				Log.LogError(this, string.Format("Error: Tier1 name for BI is not set on '{0}'", base.gameObject.GetPath()));
+			}
+		}
+
+		private void LateUpdate()
+		{
+			if (ObjectToDisableWhenNoGameServer != null)
+			{
+				ObjectToDisableWhenNoGameServer.SetActive(!shouldDisableObjectWhenNoGameServer);
 			}
 		}
 
