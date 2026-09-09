@@ -60,40 +60,18 @@ public class IslandIglooLightingBake : MonoBehaviour
 
                 Gol.ChangeSource(AmbientMode.Skybox);
 
-                Gol.StaticObject1.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject1, false);
-
-                Gol.StaticObject2.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject2, false);
-
                 Gol.StaticObject3.isStatic = false;
                 SetStaticRecursively(Gol.StaticObject3, false);
 
-                Gol.StaticObject4.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject4, false);
-
-                Gol.StaticObject5.isStatic = false;
-                SetStaticRecursively(Gol.StaticObject5, false);
                 _postBakeAction = () =>
                 {
                     Gol.ChangeSkybox(Gol.DayCubemap);
 
                     Gol.ChangeSource(AmbientMode.Trilight);
 
-                    Gol.StaticObject1.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject1, true);
-
-                    Gol.StaticObject2.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject2, true);
-
                     Gol.StaticObject3.isStatic = true;
                     SetStaticRecursively(Gol.StaticObject3, true);
 
-                    Gol.StaticObject4.isStatic = true;
-                    SetStaticRecursively(Gol.StaticObject4, true);
-
-                    Gol.StaticObject5.isStatic = false;
-                    SetStaticRecursively(Gol.StaticObject5, false);
                 };
 
                 bakeStartTime = EditorApplication.timeSinceStartup;
