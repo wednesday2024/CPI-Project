@@ -127,30 +127,6 @@ namespace ClubPenguin.Locomotion
 			}
 		}
 
-		public void OnTriggerExit(Collider collider)
-		{
-			GameObject gameObject = ActionSequencer.FindActionGraphObject(collider.gameObject);
-			if (gameObject == null)
-			{
-				return;
-			}
-
-			bool isActiveSequenceTrigger = SceneRefs.ActionSequencer != null && SceneRefs.ActionSequencer.GetTrigger(base.gameObject) == gameObject;
-			if (gameObject == currentActionGraphGameObject || isActiveSequenceTrigger)
-			{
-				CoroutineRunner.StopAllForOwner(this);
-				interactRequest.Reset();
-				if (isActiveSequenceTrigger)
-				{
-					SceneRefs.ActionSequencer.StopSequence(base.gameObject);
-				}
-				if (gameObject == currentActionGraphGameObject)
-				{
-					currentActionGraphGameObject = null;
-				}
-			}
-		}
-
 		public bool RequestInteraction()
 		{
 			DataEntityHandle handle;

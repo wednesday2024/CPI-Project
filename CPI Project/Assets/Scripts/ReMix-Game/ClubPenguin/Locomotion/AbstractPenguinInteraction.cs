@@ -87,10 +87,7 @@ namespace ClubPenguin.Locomotion
 				{
 					locoEventBroadcaster.BroadcastOnInteractionPreStarted(actionGraphObject);
 					yield return CoroutineRunner.Start(waitForValidLocomotionModeToInteract(), this, "waitForValidLocomotionModeToInteract");
-					if (currentActionGraphGameObject == go)
-					{
-						startInteraction();
-					}
+					startInteraction();
 				}
 			}
 		}
