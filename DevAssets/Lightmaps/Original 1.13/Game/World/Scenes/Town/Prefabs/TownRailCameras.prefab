@@ -146,8 +146,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &8497754625564162346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,8 +785,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &5732585032310629170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,8 +1508,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &6939889458813975483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,7 +2107,7 @@ Transform:
   m_GameObject: {fileID: 1677083660776308317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.20603332, z: 0, w: 0.978545}
-  m_LocalPosition: {x: 12.71, y: 0, z: -6.9}
+  m_LocalPosition: {x: 12.84, y: 0, z: -7.96}
   m_LocalScale: {x: 0.36, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4176,8 +4176,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 1
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &1472073199262914505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4303,6 +4303,103 @@ MonoBehaviour:
   Duration: 1
   DampenMovingTarget: 0
   DoubleDampenMovingTargetAim: 0
+--- !u!1 &3688438971093595202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8711952986166945240}
+  - component: {fileID: 917766789570046585}
+  - component: {fileID: 1641249838405849005}
+  - component: {fileID: 3246510177242363636}
+  - component: {fileID: 1441136623404594090}
+  m_Layer: 24
+  m_Name: Switch03
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8711952986166945240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688438971093595202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.05320748, z: 0, w: 0.9985835}
+  m_LocalPosition: {x: 5.75, y: 0, z: 2.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 844194729582092622}
+  m_LocalEulerAnglesHint: {x: 0, y: -6.1, z: 0}
+--- !u!65 &917766789570046585
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688438971093595202}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.3666573, y: 7.4613132, z: 10.0040455}
+  m_Center: {x: -11.816388, y: 0.052430153, z: -4.683667}
+--- !u!114 &1641249838405849005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688438971093595202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc966c71d25a1d0dea4b3f988e2979ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Latch: 0
+  EditorGizmoColor: {r: 1, g: 1, b: 1, a: 1}
+  Tag: Player
+--- !u!114 &3246510177242363636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688438971093595202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df44f1b4d71f0d94f509f3eccc4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderColorType: 8
+--- !u!114 &1441136623404594090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688438971093595202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6df44f1b4d71f0d94f509f3eccc4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderColorType: 8
 --- !u!1 &3776243287141795341
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,8 +4618,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &5067972265450312958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5358,8 +5455,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &2368634317777544259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5727,8 +5824,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &1617338612742308721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6139,8 +6236,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &5039614126552366520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6469,13 +6566,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5489757438639317233}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.16369341, z: -0, w: 0.9865113}
-  m_LocalPosition: {x: 0.18946266, y: 0, z: 2.2999315}
+  m_LocalRotation: {x: 0, y: -0.3518416, z: 0, w: 0.9360596}
+  m_LocalPosition: {x: -3.84, y: 0, z: 6.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 844194729582092622}
-  m_LocalEulerAnglesHint: {x: 0, y: 18.84268, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -41.2, z: 0}
 --- !u!65 &2049357381944270073
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6495,8 +6592,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.431336, y: 7.4613132, z: 11.753537}
-  m_Center: {x: -8.784391, y: 0.052430153, z: -3.808923}
+  m_Size: {x: 7.311845, y: 7.4613132, z: 9.967649}
+  m_Center: {x: -10.844018, y: 0.052430153, z: -4.7018046}
 --- !u!114 &1619156856459952954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6753,8 +6850,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &8959943179280464624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7095,8 +7192,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &1916824558051073716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7368,8 +7465,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &6508537263464550801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7973,8 +8070,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &3488493379136993424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9095,13 +9192,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7408380824338832717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.08755524, z: -0, w: 0.9961597}
-  m_LocalPosition: {x: 6.23, y: 0, z: -7.8}
+  m_LocalRotation: {x: 0, y: -0.0032288067, z: 0, w: 0.9999948}
+  m_LocalPosition: {x: 6.37, y: 0, z: -7.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6261463659138538387}
-  m_LocalEulerAnglesHint: {x: 0, y: 10.045955, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.37, z: 0}
 --- !u!65 &518689115073664734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9729,8 +9826,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &5310172541345999922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10050,8 +10147,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &6972987872576740866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10376,8 +10473,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 1
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &1702624819603570721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10958,8 +11055,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &5401989895544021936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11129,6 +11226,7 @@ Transform:
   - {fileID: 7865752565388594520}
   - {fileID: 5475241217591403836}
   - {fileID: 5580376022607808150}
+  - {fileID: 8711952986166945240}
   m_Father: {fileID: 31481693791817240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4410672824602304895
@@ -11231,8 +11329,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 1
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &7180547208817793983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11619,8 +11717,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &7409153389466346705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11894,8 +11992,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &6449974744921108709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12403,8 +12501,8 @@ MonoBehaviour:
   MaxYaw: 15
   MaxPitch: 15
   TouchSensitivity: 2
-  InvertYaw: 0
-  InvertPitch: 0
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!114 &1565252241476639772
 MonoBehaviour:
   m_ObjectHideFlags: 0
