@@ -121,8 +121,7 @@ Transform:
   m_LocalPosition: {x: 0.7546305, y: 0.07, z: 0.33684158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 867526013813013338}
+  m_Children: []
   m_Father: {fileID: 7372853759502865276}
   m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
 --- !u!33 &3548624502427661042
@@ -305,6 +304,7 @@ GameObject:
   - component: {fileID: 3052856780173051752}
   - component: {fileID: 8343918226905954718}
   - component: {fileID: 1788670530261485291}
+  - component: {fileID: 7455160131141942586}
   m_Layer: 30
   m_Name: WaterSteps
   m_TagString: Untagged
@@ -324,8 +324,7 @@ Transform:
   m_LocalPosition: {x: 0.7546305, y: 0.07, z: 0.33684158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3500586107053639971}
+  m_Children: []
   m_Father: {fileID: 7372853759502865276}
   m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
 --- !u!33 &8343918226905954718
@@ -385,6 +384,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7455160131141942586
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138291946132518321}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 86925a2c1bc167a4d8f487e25e8f114f, type: 2}
 --- !u!1 &1239827244029793914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,60 +1482,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3492680943402133555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 867526013813013338}
-  - component: {fileID: 6755767381944329752}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &867526013813013338
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3492680943402133555}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 79842417314376936}
-  m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
---- !u!64 &6755767381944329752
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3492680943402133555}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1eb69d84f54847440a0a3dea0843faf1, type: 2}
 --- !u!1 &3869280258127297251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1526,7 +1493,8 @@ GameObject:
   - component: {fileID: 3276376792577106500}
   - component: {fileID: 5872412499052475427}
   - component: {fileID: 1817703050859212906}
-  m_Layer: 0
+  - component: {fileID: 997436010785964253}
+  m_Layer: 30
   m_Name: WaterStepsLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1545,8 +1513,7 @@ Transform:
   m_LocalPosition: {x: 0.7546305, y: 0.07, z: 0.33684158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8533162174013884238}
+  m_Children: []
   m_Father: {fileID: 7372853759502865276}
   m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
 --- !u!33 &5872412499052475427
@@ -1606,6 +1573,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &997436010785964253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869280258127297251}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1ce39fee1c610094b9b4bef2ecf8be52, type: 2}
 --- !u!1 &4357215075239053726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,9 +2256,10 @@ GameObject:
   - component: {fileID: 1586403831922403317}
   - component: {fileID: 3401332787552323166}
   - component: {fileID: 184447611709192075}
-  m_Layer: 0
+  - component: {fileID: 899718025178047638}
+  m_Layer: 30
   m_Name: MiddleSnowHill
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2346,6 +2336,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &899718025178047638
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599912911104616369}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e153ed52fbbc97748af8c16d805e4685, type: 2}
 --- !u!1 &7221256105738129992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,9 +2369,10 @@ GameObject:
   - component: {fileID: 2418150224145194630}
   - component: {fileID: 9164414633349263666}
   - component: {fileID: 2090416727224834936}
-  m_Layer: 0
+  - component: {fileID: 7706584854062221406}
+  m_Layer: 30
   m_Name: LighthouseHillsStepsSnow
-  m_TagString: Untagged
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2436,45 +2449,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7263583528317581610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8533162174013884238}
-  - component: {fileID: 8021752478112329609}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8533162174013884238
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7263583528317581610}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3276376792577106500}
-  m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
---- !u!64 &8021752478112329609
+--- !u!64 &7706584854062221406
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7263583528317581610}
+  m_GameObject: {fileID: 7221256105738129992}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2489,7 +2470,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1ce39fee1c610094b9b4bef2ecf8be52, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 476fcc094047d2d40a90511557e77114, type: 2}
 --- !u!1 &7717961306702420977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,9 +2482,10 @@ GameObject:
   - component: {fileID: 7061714646272575697}
   - component: {fileID: 5965682186315378540}
   - component: {fileID: 2797887196193260831}
-  m_Layer: 0
+  - component: {fileID: 2224053508671725560}
+  m_Layer: 30
   m_Name: LighthouseHills
-  m_TagString: Untagged
+  m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2580,6 +2562,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2224053508671725560
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717961306702420977}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5890ce6cf08224d489e81e7549fa108c, type: 2}
 --- !u!1 &8140268267587387277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,60 +2764,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8646181602857652531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3500586107053639971}
-  - component: {fileID: 7222236526420122854}
-  m_Layer: 29
-  m_Name: collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3500586107053639971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8646181602857652531}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3052856780173051752}
-  m_LocalEulerAnglesHint: {x: -180, y: -6.273599, z: 180}
---- !u!64 &7222236526420122854
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8646181602857652531}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 86925a2c1bc167a4d8f487e25e8f114f, type: 2}
 --- !u!1 &8808474711729777389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3118,9 +3068,9 @@ GameObject:
   - component: {fileID: 3276800122630084037}
   - component: {fileID: 5363693790622288483}
   - component: {fileID: 4852880639967214633}
-  m_Layer: 29
+  m_Layer: 30
   m_Name: MiddleCircleWood
-  m_TagString: Terrain
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3216,6 +3166,6 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1095002728288454919, guid: 105f7697d2ff1a94f9c6a50a32fe8e64, type: 3}
