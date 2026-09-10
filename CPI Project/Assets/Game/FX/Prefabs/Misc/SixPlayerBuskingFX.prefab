@@ -88,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1125083771233710
 GameObject:
@@ -100,7 +101,8 @@ GameObject:
   - component: {fileID: 4029409363846138}
   - component: {fileID: 33744019529436126}
   - component: {fileID: 23095471698743890}
-  m_Layer: 0
+  - component: {fileID: 4026930015313618401}
+  m_Layer: 30
   m_Name: DJStageLightsGreenH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +143,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -178,7 +180,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &4026930015313618401
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125083771233710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1578913
+  m_Center: {x: 0.0000038147, y: 3.410605e-13, z: -0.0000014305118}
 --- !u!1 &1171162224413648
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +270,8 @@ GameObject:
   - component: {fileID: 4374001395993829}
   - component: {fileID: 33987406745812932}
   - component: {fileID: 23342205405330507}
-  m_Layer: 0
+  - component: {fileID: 1878245946034173482}
+  m_Layer: 30
   m_Name: DJStageLightsTealC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +312,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -324,7 +349,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1878245946034173482
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246341784122307}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789133
+  m_Center: {x: 0.00001525879, y: 0.00000214577, z: -0.0000014305114}
 --- !u!1 &1248452798215961
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +460,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1276110800655815
 GameObject:
@@ -502,6 +550,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1277719760022435
 GameObject:
@@ -591,6 +640,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1279817830101581
 GameObject:
@@ -680,6 +730,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1369380392487657
 GameObject:
@@ -692,7 +743,8 @@ GameObject:
   - component: {fileID: 4517506364340935}
   - component: {fileID: 33603742058698702}
   - component: {fileID: 23284846404931315}
-  m_Layer: 0
+  - component: {fileID: 1417655233294727262}
+  m_Layer: 30
   m_Name: DJStageLightsTealG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +785,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -770,7 +822,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1417655233294727262
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369380392487657}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1578913
+  m_Center: {x: 0.000014305124, y: 0.0000028610243, z: -0.0000009536761}
 --- !u!1 &1376528966558586
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +933,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1452579108515514
 GameObject:
@@ -948,6 +1023,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1632819681388834
 GameObject:
@@ -960,7 +1036,8 @@ GameObject:
   - component: {fileID: 4448682148669294}
   - component: {fileID: 33655433891066073}
   - component: {fileID: 23446960101586896}
-  m_Layer: 0
+  - component: {fileID: 1072020570945622337}
+  m_Layer: 30
   m_Name: DJStageLightsPinkA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1078,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1038,7 +1115,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1072020570945622337
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632819681388834}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789132
+  m_Center: {x: -0.0000009536743, y: -2.344791e-13, z: -0.0000033378608}
 --- !u!1 &1704404938065810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1149,8 @@ GameObject:
   - component: {fileID: 4358442449254370}
   - component: {fileID: 33356614735934680}
   - component: {fileID: 23979803636052042}
-  m_Layer: 0
+  - component: {fileID: 1718646244746735888}
+  m_Layer: 30
   m_Name: DJStageLightsGreenB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1191,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1128,7 +1228,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1718646244746735888
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704404938065810}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789133
+  m_Center: {x: 0.000002861023, y: 0.0000009536751, z: -0.00000071525596}
 --- !u!1 &1719133030671088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1339,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1723398361116032
 GameObject:
@@ -1229,7 +1352,8 @@ GameObject:
   - component: {fileID: 4579832908578193}
   - component: {fileID: 33470520379557133}
   - component: {fileID: 23511984774671950}
-  m_Layer: 0
+  - component: {fileID: 4039339453311292276}
+  m_Layer: 30
   m_Name: DJStageLightsGreenE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1394,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1307,7 +1431,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &4039339453311292276
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723398361116032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789133
+  m_Center: {x: 0.000004768372, y: 0.0000007152563, z: -0.0000009536748}
 --- !u!1 &1738572959410864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1465,8 @@ GameObject:
   - component: {fileID: 4542442186030673}
   - component: {fileID: 33998519454785313}
   - component: {fileID: 23180278802570471}
-  m_Layer: 0
+  - component: {fileID: 2149359055753103040}
+  m_Layer: 30
   m_Name: DJStageLightsPinkI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1360,7 +1507,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1397,7 +1544,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &2149359055753103040
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738572959410864}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1578913
+  m_Center: {x: -0.0000019073489, y: -1.7053026e-13, z: -0.0000019073484}
 --- !u!1 &1768389268247585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1615,8 @@ GameObject:
   - component: {fileID: 4487425851000846}
   - component: {fileID: 33789319795047601}
   - component: {fileID: 23090471969239430}
-  m_Layer: 0
+  - component: {fileID: 7670431350244210362}
+  m_Layer: 30
   m_Name: DJStageLightsPinkD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1487,7 +1657,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1524,7 +1694,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &7670431350244210362
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777277886671245}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789133
+  m_Center: {x: 2.2737368e-13, y: -4.973799e-14, z: -0.0000028610239}
 --- !u!1 &1963276561604593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1728,8 @@ GameObject:
   - component: {fileID: 4456610105864909}
   - component: {fileID: 33858979677650205}
   - component: {fileID: 23383585349466446}
-  m_Layer: 0
+  - component: {fileID: 2674020363473540069}
+  m_Layer: 30
   m_Name: DJStageLightsTealF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,7 +1770,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1614,7 +1807,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &2674020363473540069
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963276561604593}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.15789132
+  m_Center: {x: 0.000016212469, y: 0.000002861026, z: -0.0000010728845}
 --- !u!1 &1970345149417478
 GameObject:
   m_ObjectHideFlags: 0
@@ -1737,4 +1952,5 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
