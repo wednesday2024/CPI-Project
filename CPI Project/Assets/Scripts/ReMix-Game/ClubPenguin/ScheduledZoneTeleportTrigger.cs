@@ -8,7 +8,7 @@ namespace ClubPenguin
 	[RequireComponent(typeof(Collider))]
 	public class ScheduledZoneTeleportTrigger : MonoBehaviour
 	{
-		// On scene load, tt will once check for the tag "Player". If true. Checks if that date is activate. If true, does nothing. If false, teleports "Player" to the selected zone after a 2 second delay.
+		// On scene load, it will once check for the tag "Player". If true. Checks if that date is activate. If true, does nothing. If false, teleports "Player" to the selected zone after a 2 second delay.
 		public ZoneDefinition TeleportZone;
 
 		public ScheduledEventDateDefinition Schedule;
