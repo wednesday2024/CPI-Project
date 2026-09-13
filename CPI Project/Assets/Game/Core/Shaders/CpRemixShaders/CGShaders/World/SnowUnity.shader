@@ -72,23 +72,22 @@ Shader "CpRemix/World/Snow Ramp" {
 			fout frag(v2f inp)
 			{
                 fout o;
-                float4 tmp0;
-                float4 tmp1;
-                tmp0 = tex2D(_BlobShadowTex, inp.texcoord3.xy);
-                tmp0.z = inp.texcoord3.z >= tmp0.y;
-                tmp0.z = tmp0.z ? 2.0 : 1.0;
-                tmp0.y = tmp0.y - inp.texcoord3.z;
-                tmp0.y = abs(tmp0.y) * tmp0.z + tmp0.z;
-                tmp0.y = tmp0.y - 0.5;
-                tmp0.y = max(tmp0.y, 1.0);
-                tmp0.x = tmp0.x * tmp0.y;
-                tmp0.x = min(tmp0.x, 1.0);
-                tmp1 = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord1.xy);
-                tmp0.y = tmp1.w * unity_Lightmap_HDR.x;
-                tmp0.yzw = tmp1.xyz * tmp0.yyy;
-                tmp1 = tex2D(_SnowRampTex, inp.texcoord.xy);
-                tmp1.xyz = tmp0.yzw * tmp1.xyz;
-                o.sv_target = tmp0.xxxx * tmp1;
+                
+                float4 shadowResult = tex2D(_BlobShadowTex, inp.texcoord3.xy);
+                shadowResult.z = inp.texcoord3.z >= shadowResult.y ? 2.0 : 1.0;
+                shadowResult.y = (abs(shadowResult.y - inp.texcoord3.z) * shadowResult.z + shadowResult.z) - 0.5;
+                shadowResult.y = max(shadowResult.y, 1.0);
+                float shadowFactor = shadowResult.x * shadowResult.y;
+                shadowFactor = min(shadowFactor, 1.0);
+                
+                float4 lightmapResult = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord1.xy);
+                lightmapResult.w = lightmapResult.w * unity_Lightmap_HDR.x;
+                lightmapResult.xyz = lightmapResult.xyz * lightmapResult.www;
+                
+                float4 snowRampResult = tex2D(_SnowRampTex, inp.texcoord.xy);
+                snowRampResult.xyz = lightmapResult.xyz * snowRampResult.xyz;
+                
+                o.sv_target = float4(shadowFactor.xxx * snowRampResult.xyz, snowRampResult.w);
 				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
 				UNITY_OPAQUE_ALPHA(o.sv_target.w);
                 return o;
