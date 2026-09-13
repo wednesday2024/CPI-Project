@@ -6,7 +6,7 @@ namespace CpRemixShaders
 {
 	public static class EquipmentShaderUtils
 	{
-		public const int MAX_REFERENCE_TEXTURE_DIMENSION = 512;
+		public const int MAX_REFERENCE_TEXTURE_DIMENSION = 4096;
 
 		private static Shader _equipmentBakeShader;
 
