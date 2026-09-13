@@ -34,6 +34,11 @@ namespace ClubPenguin
 
         private const float InputDeadzone = 0.1f;
 
+        private const string XSpeedPlayerPrefsKey = "FreeCamera.XSpeed";
+        private const string YSpeedPlayerPrefsKey = "FreeCamera.YSpeed";
+        private const string ZSpeedPlayerPrefsKey = "FreeCamera.ZSpeed";
+        private const string BumperRotationSensitivityPlayerPrefsKey = "FreeCamera.ControllerSensitivity";
+
         public Transform Target;
         public Camera Camera;
         public float XSensitivity = 1f;
@@ -43,6 +48,7 @@ namespace ClubPenguin
         public float XSpeed = 0.3f;
         public float YSpeed = 0.3f;
         public float ZSpeed = 0.3f;
+        public bool UseDefaultSpeeds;
         public float KeyboardSpeedMultiplier = 0.4f; // The speed for the camera controls via the the keyboard. - Malcolm
         public bool WorldRelativeZMotion;
         public float RotationModifierFOV = 0.8f;
@@ -101,6 +107,14 @@ namespace ClubPenguin
 
         private void Start()
         {
+            if (!UseDefaultSpeeds)
+            {
+                XSpeed = PlayerPrefs.GetFloat(XSpeedPlayerPrefsKey, 0.3f);
+                YSpeed = PlayerPrefs.GetFloat(YSpeedPlayerPrefsKey, 0.3f);
+                ZSpeed = PlayerPrefs.GetFloat(ZSpeedPlayerPrefsKey, 0.3f);
+                BumperRotationSensitivity = PlayerPrefs.GetFloat(BumperRotationSensitivityPlayerPrefsKey, 0.5f);
+            }
+
             Camera = gameObject.AddComponent<Camera>();
             localPlayerMask = LayerMask.NameToLayer("LocalPlayer");
             mainCamera = Camera.main;
@@ -282,6 +296,41 @@ namespace ClubPenguin
                 case YButton: return gamepad.buttonNorth.wasPressedThisFrame;
                 default: return false;
             }
+        }
+
+        [Invokable("FreeCamera.SetControllerSpeeds", Description = "Adjusts the free camera controller speeds.")]
+        [PublicTweak]
+        public static void SetControllerSpeeds(
+            float xSpeed,
+            float ySpeed,
+            float zSpeed,
+            float bumperRotationSensitivity)
+        {
+            PlayerPrefs.SetFloat(XSpeedPlayerPrefsKey, xSpeed);
+            PlayerPrefs.SetFloat(YSpeedPlayerPrefsKey, ySpeed);
+            PlayerPrefs.SetFloat(ZSpeedPlayerPrefsKey, zSpeed);
+            PlayerPrefs.SetFloat(BumperRotationSensitivityPlayerPrefsKey, bumperRotationSensitivity);
+            PlayerPrefs.Save();
+
+            Transform transform = Service.Get<GameObject>().transform.Find("FreeCameraTarget");
+            if (transform != null)
+            {
+                FreeCameraController controller = transform.GetComponent<FreeCameraController>();
+                if (controller != null)
+                {
+                    controller.XSpeed = xSpeed;
+                    controller.YSpeed = ySpeed;
+                    controller.ZSpeed = zSpeed;
+                    controller.BumperRotationSensitivity = bumperRotationSensitivity;
+                }
+            }
+        }
+
+        [Invokable("FreeCamera.LoadDefaultSpeeds", Description = "Loads the default free camera controller speeds.")]
+        [PublicTweak]
+        public static void LoadDefaultSpeeds()
+        {
+            SetControllerSpeeds(0.3f, 0.3f, 0.3f, 0.5f);
         }
 
         [Invokable("FreeCamera.StartCamera", Description = "Sets camera to free camera mode. Try plugging in a game controller. * This was used for in-game video capture")]
