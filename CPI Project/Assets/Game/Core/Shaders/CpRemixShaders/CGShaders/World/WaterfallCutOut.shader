@@ -56,15 +56,15 @@ Shader "CpRemix/World/WaterfallCutOut" {
 			fout frag(v2f inp)
 			{
                 fout o;
-                float4 tmp0;
-                float4 tmp1;
-                tmp0 = tex2D(_MainTex, inp.texcoord1.xy);
-                tmp1.x = tmp0.w < _Cutoff;
-                if (tmp1.x) {
+                
+                float4 texResult = tex2D(_MainTex, inp.texcoord1.xy);
+                
+                if (texResult.w < _Cutoff) {
                     discard;
                 }
-                o.sv_target.w = tmp0.w * _Color.w;
-                o.sv_target.xyz = tmp0.xyz + _Color.xyz;
+                
+                o.sv_target.w = texResult.w * _Color.w;
+                o.sv_target.xyz = texResult.xyz + _Color.xyz;
                 return o;
 			}
 			ENDCG
