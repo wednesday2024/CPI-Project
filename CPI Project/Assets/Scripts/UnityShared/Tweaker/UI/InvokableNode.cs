@@ -48,7 +48,23 @@ namespace Tweaker.UI
 				{
 					tweakable.SetValue(parameterInfo.DefaultValue);
 				}
+				else if (Invokable.Name == "FreeCamera.SetControllerSpeeds" && tweakableType == typeof(float))
+				{
+					tweakable.SetValue(GetFreeCameraSpeed(parameterInfo.Name));
+				}
 				base.Children.Add(new TweakableNode(tweakable, virtualFieldRef));
+			}
+		}
+
+		private static float GetFreeCameraSpeed(string parameterName)
+		{
+			switch (parameterName)
+			{
+				case "xSpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.XSpeed", 0.3f);
+				case "ySpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.YSpeed", 0.3f);
+				case "zSpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ZSpeed", 0.3f);
+				case "bumperRotationSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ControllerSensitivity", 0.5f);
+				default: return 0f;
 			}
 		}
 
