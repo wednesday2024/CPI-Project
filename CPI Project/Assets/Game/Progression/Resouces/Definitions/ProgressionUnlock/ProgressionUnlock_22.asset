@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002f7101eb86213dcd5d39f7f88c7cd, type: 3}
   m_Name: ProgressionUnlock_22
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Level: 22
   ThemeDefinition: {fileID: 11400000, guid: c550a42454a89b34d85576a8019b58cb, type: 2}
   colourPacks: []
@@ -28,6 +29,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 65d83cfca1369b74e99213fe1eafeed7, type: 2}
   - {fileID: 11400000, guid: 08e838d767788b5449f6734b0770e1d4, type: 2}
   - {fileID: 11400000, guid: 8ec796746b388de498421f4a13b44e82, type: 2}
+  equipmentInstances: []
   lots: []
   decorationPurchaseRights: []
   structurePurchaseRights: []

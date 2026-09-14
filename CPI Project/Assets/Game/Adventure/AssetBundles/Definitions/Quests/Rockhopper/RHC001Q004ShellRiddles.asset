@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RHC001Q004ShellRiddles
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -24,9 +25,9 @@ MonoBehaviour:
   SplashScreenText: Quest.RHC1Q4.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: Riddle1
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_OldNote
       type: UnityEngine.Sprite, UnityEngine
@@ -35,21 +36,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 1
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
       Key: Quests/Prefabs/RHC001Q004Riddle01
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
       Text: View
-      IconKey:
-      Id:
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Prefabs/Quest/MascotButtons/MascotOkButtonRH
-  - DisplayName:
+  - DisplayName: 
     Name: Riddle2
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_OldNote
       type: UnityEngine.Sprite, UnityEngine
@@ -58,21 +59,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 1
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
       Key: Quests/Prefabs/RHC001Q004Riddle02
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
       Text: View
-      IconKey:
-      Id:
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Prefabs/Quest/MascotButtons/MascotOkButtonRH
-  - DisplayName:
+  - DisplayName: 
     Name: Riddle3
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_OldNote
       type: UnityEngine.Sprite, UnityEngine
@@ -81,21 +82,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 1
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
       Key: Quests/Prefabs/RHC001Q004Riddle03
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
       Text: View
-      IconKey:
-      Id:
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Prefabs/Quest/MascotButtons/MascotOkButtonRH
-  - DisplayName:
+  - DisplayName: 
     Name: MapTorn
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_MapTorn
       type: UnityEngine.Sprite, UnityEngine
@@ -104,19 +105,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: MapComplete
     ItemText: Sea Caves Map
     ItemInventoryContentKey:
@@ -127,21 +128,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 5
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_MapRHC001Q004
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
       Text: View
-      IconKey:
-      Id:
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Prefabs/Quest/MascotButtons/MascotOkButtonRH
-  - DisplayName:
+  - DisplayName: 
     Name: TreasureChest
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_TreasureChest
       type: UnityEngine.Sprite, UnityEngine
@@ -150,24 +151,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 8a0143b56b7ecde44bf6b125b5186a6f, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 2
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: 31fdfac154871d74ca9a09195cbb6556, type: 2}

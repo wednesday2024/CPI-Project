@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &95502695744855039
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,6 +92,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -442,7 +443,7 @@ MonoBehaviour:
         m_CallState: 2
 --- !u!95 &95834744978017870
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -456,6 +457,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -648,7 +650,7 @@ MonoBehaviour:
         m_CallState: 2
 --- !u!95 &95102882999092759
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -662,6 +664,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -980,7 +983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.374}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 0.2599945}
+  m_AnchoredPosition: {x: 0, y: 0.2599945}
   m_SizeDelta: {x: -0.1000061, y: 0.2480011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222444913825910068
@@ -1205,7 +1208,7 @@ MonoBehaviour:
         m_CallState: 2
 --- !u!95 &95524240925141730
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1219,6 +1222,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1389,7 +1393,6 @@ GameObject:
   - component: {fileID: 222888495584956147}
   - component: {fileID: 114482183970978225}
   - component: {fileID: 114098448983930694}
-  - component: {fileID: 114322451738876487}
   - component: {fileID: 114507133764702745}
   - component: {fileID: 114755395112742239}
   m_Layer: 5
@@ -1416,7 +1419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000045776367, y: 0.49996948}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0.5}
   m_SizeDelta: {x: 0, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222888495584956147
@@ -1472,24 +1475,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &114322451738876487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483553822719307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f95f45ec2ab527e9cee72e93e99ccd15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScrollUp: {fileID: 114353779595102420}
-  ScrollDown: {fileID: 114012014006505359}
-  CloseButton: {fileID: 114615204946214556}
-  WebViewerPanel: {fileID: 1968928499722638}
-  TitleText: {fileID: 114360128046584293}
-  LoadingPanel: {fileID: 1739457837683058}
 --- !u!114 &114507133764702745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,7 +1604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.36110583, y: 0.36224264}
   m_AnchorMax: {x: 0.63900006, y: 0.63775736}
-  m_AnchoredPosition: {x: -0.0010070801, y: 0.0000076293945}
+  m_AnchoredPosition: {x: -0.0010070801, y: 0}
   m_SizeDelta: {x: 0, y: -0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222380011409721497

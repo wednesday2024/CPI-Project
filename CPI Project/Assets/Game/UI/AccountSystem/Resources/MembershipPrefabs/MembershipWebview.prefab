@@ -758,7 +758,6 @@ GameObject:
   - component: {fileID: 222497521195934540}
   - component: {fileID: 114685728092833437}
   - component: {fileID: 114539457966827254}
-  - component: {fileID: 114648297460677278}
   m_Layer: 5
   m_Name: MembershipWebview
   m_TagString: Untagged
@@ -851,24 +850,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &114648297460677278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438252792387938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f95f45ec2ab527e9cee72e93e99ccd15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScrollUp: {fileID: 114966512684481172}
-  ScrollDown: {fileID: 114035268920533005}
-  CloseButton: {fileID: 114851328232548600}
-  WebViewerPanel: {fileID: 1946263503193278}
-  TitleText: {fileID: 114940918312087037}
-  LoadingPanel: {fileID: 1439335948157138}
 --- !u!1 &1439335948157138
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +887,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
   m_AnchorMin: {x: 0.36110583, y: 0.36224264}
   m_AnchorMax: {x: 0.63900006, y: 0.63775736}
-  m_AnchoredPosition: {x: -0.000076293945, y: -0.000045776367}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.000045776367}
   m_SizeDelta: {x: -4, y: -2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222346988299857566

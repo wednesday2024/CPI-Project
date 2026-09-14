@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: AAC001Q000TestQuest
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 1
   OverridesFirstObjective: 0
   IsReplayable: 0
@@ -19,17 +20,17 @@ MonoBehaviour:
   ChapterNumber: 0
   QuestNumber: 0
   Title: AA Test Quest
-  AbbreviatedTitle:
+  AbbreviatedTitle: 
   Description: AA Test Quest is to be combined with AAC001Q001
-  SplashScreenText:
+  SplashScreenText: 
   Instructions: []
   QuestItems: []
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 3a0915a69966bf547b4c3701813bc88b, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 99
   CompletedQuestRequirement: []
   TimeLock:

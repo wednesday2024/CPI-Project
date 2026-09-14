@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3002f7101eb86213dcd5d39f7f88c7cd, type: 3}
   m_Name: ProgressionUnlock_19
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Level: 19
   ThemeDefinition: {fileID: 11400000, guid: e77b7bad62217c94b91e440419085f4d, type: 2}
   colourPacks: []
@@ -34,6 +35,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36dc3e767f52ad744a872117b19338f4, type: 2}
   - {fileID: 11400000, guid: 46456461fe92b274ab8214f1638248c7, type: 2}
   - {fileID: 11400000, guid: 1f88a3fde8c80d54093bd68796b4d037, type: 2}
+  equipmentInstances: []
   lots: []
   decorationPurchaseRights: []
   structurePurchaseRights: []

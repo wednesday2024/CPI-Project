@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: AAC002Q004Icy
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -20,7 +21,9 @@ MonoBehaviour:
   QuestNumber: 4
   Title: Quest.AAC2Q4.Title
   AbbreviatedTitle: AAC1Q4.ShortTitle.Text
-  Description: Players are given a special hovercraft, infiltrate Herbert's base, learn about his plans, disable his doom machine, and have to escape after being caught!
+  Description: Players are given a special hovercraft, infiltrate Herbert's base,
+    learn about his plans, disable his doom machine, and have to escape after being
+    caught!
   SplashScreenText: Quest.AAC2Q4.Desc
   Instructions: []
   QuestItems: []

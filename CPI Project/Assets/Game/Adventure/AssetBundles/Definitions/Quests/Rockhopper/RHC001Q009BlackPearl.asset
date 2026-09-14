@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RHC001Q009BlackPearl
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -20,11 +21,13 @@ MonoBehaviour:
   QuestNumber: 9
   Title: Quest.RHC1Q9.Title
   AbbreviatedTitle: Quest.ShortTitle.9
-  Description: The player solves the puzzle behind the tablets. They must find a giant pearl, toss it into a volcano, retrieve the pearl, and then use the pearl as a key to inlock the ruins of Penglantis.
+  Description: The player solves the puzzle behind the tablets. They must find a
+    giant pearl, toss it into a volcano, retrieve the pearl, and then use the pearl
+    as a key to inlock the ruins of Penglantis.
   SplashScreenText: Quest.RHC1Q9.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: SailsInked1
     ItemText: Inked Sail 1
     ItemInventoryContentKey:
@@ -35,19 +38,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 5
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked1
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInked2
     ItemText: Inked Sail 2
     ItemInventoryContentKey:
@@ -58,19 +61,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 5
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked2
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInked3
     ItemText: Inked Sail 3
     ItemInventoryContentKey:
@@ -81,19 +84,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 5
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked3
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInkedFin
     ItemText: Treasure Instructions
     ItemInventoryContentKey:
@@ -104,19 +107,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 5
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInkedFin
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: PearlGiant
     ItemText: Giant Pearl
     ItemInventoryContentKey:
@@ -127,19 +130,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: PearlBlack
     ItemText: Black Pearl
     ItemInventoryContentKey:
@@ -150,24 +153,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 647c8085a672d6847b00fcb81f3bdb4d, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 5
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: c6838ad6d7b936e48afa338ca542c36b, type: 2}

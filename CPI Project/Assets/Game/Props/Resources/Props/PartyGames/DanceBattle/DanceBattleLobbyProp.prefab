@@ -2,10 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &1162584972050072
 GameObject:
-  serializedVersion: 5
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4352207789240764}
   - component: {fileID: 114995640634946560}
@@ -27,27 +28,30 @@ GameObject:
 --- !u!4 &4352207789240764
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
 --- !u!114 &114995640634946560
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1d4893633077d0996596b887cb91540, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   UseOnceImmediately: 0
   StoreAfterUse: 0
   PlayIdleAnimAfterUse: 1
@@ -56,7 +60,8 @@ MonoBehaviour:
   TargetBoneName: r_wrist_jnt
   MaxDistanceFromUser: 3
   CheckCollisions: 1
-  AnimOverrideController: {fileID: 22100000, guid: 0711923c83f55764dbf68c0500b5f51d, type: 2}
+  AnimOverrideController: {fileID: 22100000, guid: 0711923c83f55764dbf68c0500b5f51d,
+    type: 2}
   AnimReplacementController: {fileID: 0}
   IgnoreHoldAnimationComplete: 0
   IgnoreStoreAnimationComplete: 0
@@ -68,51 +73,54 @@ MonoBehaviour:
   OnUseDestination: {x: 0, y: 0, z: 0}
   PropUserRef: {fileID: 0}
   UpdateUser: 1
-  ExperienceInstanceId:
+  ExperienceInstanceId: 
   OwnerId: 0
-  PropId:
+  PropId: 
   IsOwnerLocalPlayer: 0
   PropDef: {fileID: 0}
   IsUseCompleted: 0
 --- !u!114 &114598875286898641
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bfcf00401bfc40ddc1e79a193f99abe, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114777954033801128
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b962ab6fd7c7517fdc636d593912178, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ShowConfirmationPopup: 0
   WatchActionEventCancel: 1
-  i18nConfirmationTitleText:
-  i18nConfirmationBodyText:
+  i18nConfirmationTitleText: 
+  i18nConfirmationBodyText: 
   ImageOverride: {fileID: 0}
   RestoreTouchPadControlsOnCancel: 0
 --- !u!114 &114403785864000146
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9a2118133dddd6d73cd63d54a0fc06e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   GameObjectContentKey:
     Key: FX/PartySuppliesAndGear/Prefabs/BirthdayCakeEffect
     type: UnityEngine.GameObject, UnityEngine
@@ -120,14 +128,15 @@ MonoBehaviour:
 --- !u!114 &114199675504095421
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05189d17526510791112f02694e6fda9, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   IKModifiers:
   - BoneName: backbone_jnt
     IdleZRot: -30
@@ -140,19 +149,20 @@ MonoBehaviour:
 --- !u!114 &114109193859676131
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202d7c71dce9ad21ae81d5f7fab5d570, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   SwimControlsScreenDefinitionContentKey:
     Key: Definitions/ControlsScreen/PartyGames/DanceBattle/DanceBattleLobbySwimGroupDefinition
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   DivingControlsScreenDefinitionContentKey:
-    Key:
+    Key: 
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   ControlsScreenDefinitionContentKey:
     Key: Definitions/ControlsScreen/PartyGames/DanceBattle/DanceBattleLobbyGroupDefinition
@@ -169,14 +179,15 @@ MonoBehaviour:
 --- !u!114 &114073151919586678
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4999cb7b2d81a38c6ac77d5767568293, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Trigger: 0
   DisableJoystick: 1
   HideJoystick: 1
@@ -187,14 +198,15 @@ MonoBehaviour:
 --- !u!114 &114984056947717894
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
@@ -202,7 +214,7 @@ MonoBehaviour:
     startState: State 1
     states:
     - name: State 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -217,10 +229,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -244,15 +256,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events: []
     globalTransitions: []
     variables:
@@ -262,52 +274,52 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: Action1AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: PropTriggerAction1
       - useVariable: 1
         name: Action1SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action2AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: PropTriggerAction2
       - useVariable: 1
         name: Action2SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action3AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: PropTriggerAction3
       - useVariable: 1
         name: Action3SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: ActionButtonsPrefabPath
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: CurrentSoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
-        value:
+        value: 
       vector2Variables: []
       vector3Variables: []
       colorVariables: []
@@ -316,7 +328,7 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: MyOwner
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -328,22 +340,25 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000
-    description:
-    docUrl:
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 1
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -364,7 +379,10 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 11400000, guid: 07bf8f25d4787b4429cfadc9c874782a, type: 2}
@@ -372,23 +390,13 @@ MonoBehaviour:
 --- !u!114 &114628033193273892
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162584972050072}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46a3a503b252b52fcaaa939a85151991, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   PenguinYAxisRotation: -51.77
---- !u!1001 &100100000
-Prefab:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1162584972050072}
-  m_IsPrefabParent: 1

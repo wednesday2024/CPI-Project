@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RKC001Q002Fix
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -26,7 +27,7 @@ MonoBehaviour:
   QuestItems:
   - DisplayName: Chuggable Cheese
     Name: Cheese Steamers
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Rewards/Sprites/StinkyCheese
       type: UnityEngine.Sprite, UnityEngine
@@ -35,21 +36,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   - DisplayName: Choklidium
     Name: Choklidium
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Images/Exchange_Collectible_Chocolite
       type: UnityEngine.Sprite, UnityEngine
@@ -58,21 +59,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   - DisplayName: Empty Harmonizer
     Name: Empty Harmonizer
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_Harmonizer_Empty
       type: UnityEngine.Sprite, UnityEngine
@@ -81,21 +82,21 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   - DisplayName: Full Harmonizer
     Name: Full Harmonizer
-    ItemText:
+    ItemText: 
     ItemInventoryContentKey:
       Key: Quests/Icon_Harmonizer_Full
       type: UnityEngine.Sprite, UnityEngine
@@ -104,24 +105,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 0694102c8a14dd14686fb6e1ddd0e91b, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 1
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: c29eee251ea7de344a641ec642c0d1f4, type: 2}

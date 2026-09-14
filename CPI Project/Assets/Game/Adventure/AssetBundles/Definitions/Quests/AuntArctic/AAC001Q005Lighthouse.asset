@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: AAC001Q005Lighthouse
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -20,11 +21,12 @@ MonoBehaviour:
   QuestNumber: 5
   Title: Quest.AAC1Q5.Title
   AbbreviatedTitle: AAC1Q5.ShortTitle.Text
-  Description: Use ziplines/geysers to power up a battery, collect sea glass from Rockhopper, and finally fix the lighthouse.
+  Description: Use ziplines/geysers to power up a battery, collect sea glass from
+    Rockhopper, and finally fix the lighthouse.
   SplashScreenText: Quest.AAC1Q5.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: BatteryEmpty
     ItemText: Empty Battery
     ItemInventoryContentKey:
@@ -35,19 +37,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: BatteryLow
     ItemText: Low Charged Battery
     ItemInventoryContentKey:
@@ -58,19 +60,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: BatteryFull
     ItemText: Fully Charged Battery
     ItemInventoryContentKey:
@@ -81,19 +83,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SeaGlassPolished
     ItemText: Polished Sea Glass
     ItemInventoryContentKey:
@@ -104,24 +106,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: e715d393696a41247b609eadad5e116d, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 3
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: bd9ec04c090c1d743a548f65c479d591, type: 2}

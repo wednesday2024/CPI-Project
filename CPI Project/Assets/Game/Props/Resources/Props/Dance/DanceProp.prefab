@@ -2,10 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &1363463048908898
 GameObject:
-  serializedVersion: 5
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4451852903695771}
   - component: {fileID: 114630775901894598}
@@ -26,27 +27,30 @@ GameObject:
 --- !u!4 &4451852903695771
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5700005, y: 3.25, z: -6.590001}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
 --- !u!114 &114630775901894598
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1d4893633077d0996596b887cb91540, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   UseOnceImmediately: 0
   StoreAfterUse: 0
   PlayIdleAnimAfterUse: 1
@@ -55,7 +59,8 @@ MonoBehaviour:
   TargetBoneName: hips_jnt
   MaxDistanceFromUser: 3
   CheckCollisions: 1
-  AnimOverrideController: {fileID: 22100000, guid: 895b93cd4aac1b44885d34c13fba3758, type: 2}
+  AnimOverrideController: {fileID: 22100000, guid: 895b93cd4aac1b44885d34c13fba3758,
+    type: 2}
   AnimReplacementController: {fileID: 0}
   IgnoreHoldAnimationComplete: 0
   IgnoreStoreAnimationComplete: 1
@@ -67,52 +72,55 @@ MonoBehaviour:
   OnUseDestination: {x: 0, y: 0, z: 0}
   PropUserRef: {fileID: 0}
   UpdateUser: 1
-  ExperienceInstanceId:
+  ExperienceInstanceId: 
   OwnerId: 0
-  PropId:
+  PropId: 
   IsOwnerLocalPlayer: 0
   PropDef: {fileID: 0}
   IsUseCompleted: 0
 --- !u!114 &114328807153698124
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b962ab6fd7c7517fdc636d593912178, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ShowConfirmationPopup: 0
   WatchActionEventCancel: 1
-  i18nConfirmationTitleText:
-  i18nConfirmationBodyText:
+  i18nConfirmationTitleText: 
+  i18nConfirmationBodyText: 
   ImageOverride: {fileID: 0}
   RestoreTouchPadControlsOnCancel: 0
 --- !u!114 &114875915335020076
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b0bb1b9491c9b07b8930d3596bf1db1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ItemType: Dance
 --- !u!114 &114532698653919619
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
@@ -120,7 +128,7 @@ MonoBehaviour:
     startState: State 1
     states:
     - name: State 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -135,10 +143,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -162,15 +170,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events: []
     globalTransitions: []
     variables:
@@ -178,19 +186,19 @@ MonoBehaviour:
       intVariables:
       - useVariable: 1
         name: AnimationParamValue1
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 1
       - useVariable: 1
         name: AnimationParamValue2
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 2
       - useVariable: 1
         name: AnimationParamValue3
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 3
@@ -198,19 +206,19 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: AnimationParamName1
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
       - useVariable: 1
         name: AnimationParamName2
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
       - useVariable: 1
         name: AnimationParamName3
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
@@ -227,23 +235,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -264,7 +275,10 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 11400000, guid: 891546be32e98734cb938d64f3d80ce9, type: 2}
@@ -272,61 +286,65 @@ MonoBehaviour:
 --- !u!114 &114847502407206824
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ada6c58c71e2349e294e55e3ac12d1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ParameterName: GameSubStates
   Value: 0
   ExecuteOnDisable: 1
 --- !u!114 &114983770142878643
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ada6c58c71e2349e294e55e3ac12d1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ParameterName: ExitTorsoNull
   Value: 1
   ExecuteOnDisable: 1
 --- !u!114 &114755153962150511
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27ada6c58c71e2349e294e55e3ac12d1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   ParameterName: UseTorsoNull
   Value: 0
   ExecuteOnDisable: 1
 --- !u!114 &114709162277260214
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363463048908898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202d7c71dce9ad21ae81d5f7fab5d570, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   SwimControlsScreenDefinitionContentKey:
     Key: Definitions/ControlsScreen/Dance/DanceSwimGroupDefinition
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   DivingControlsScreenDefinitionContentKey:
-    Key:
+    Key: 
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   ControlsScreenDefinitionContentKey:
     Key: Definitions/ControlsScreen/Dance/DanceGroupDefinition
@@ -335,19 +353,8 @@ MonoBehaviour:
     Key: Definitions/ControlsScreen/Dance/DanceTubeGroupDefinition
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   SitControlsScreenDefinitionContentKey:
-    Key:
+    Key: 
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
   SitSwimControlsScreenDefinitionContentKey:
     Key: Definitions/ControlsScreen/Dance/DanceSitSwimGroupDefinition
     type: ClubPenguin.UI.InputButtonGroupDefinition, ReMix-Game
---- !u!1001 &100100000
-Prefab:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1363463048908898}
-  m_IsPrefabParent: 1

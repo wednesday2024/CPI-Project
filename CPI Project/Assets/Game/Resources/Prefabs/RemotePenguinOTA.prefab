@@ -1505,6 +1505,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1799f9de0ab0c20add29b3684cc2afff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MembershipUnlockFXKey:
+    Key: fx/character/prefabs/membershipunlockfx
+    type: UnityEngine.GameObject, UnityEngine.CoreModule
+  MembershipUnlockAnimationKey:
+    Key: celebrationanimations/allaccesscelebration
+    type: UnityEngine.GameObject, UnityEngine.CoreModule
+  LevelUpFXKey:
+    Key: fx/character/prefabs/levelup
+    type: UnityEngine.GameObject, UnityEngine.CoreModule
 --- !u!114 &114726309286287739
 MonoBehaviour:
   m_ObjectHideFlags: 0

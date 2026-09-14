@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RHC001Q005CureTheCurse
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -20,11 +21,13 @@ MonoBehaviour:
   QuestNumber: 5
   Title: Quest.RHC1Q5.Title
   AbbreviatedTitle: AAC1Q5.ShortTitle.Text
-  Description: Rockhopper is cursed and Aunt Arctic has an old reciepe that will help! Players must find the indredients, follow the reciepe steps, and give the cure potion to Rockhopper.
+  Description: Rockhopper is cursed and Aunt Arctic has an old reciepe that will
+    help! Players must find the indredients, follow the reciepe steps, and give the
+    cure potion to Rockhopper.
   SplashScreenText: Quest.RHC1Q5.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: ConchEmpty
     ItemText: Conch
     ItemInventoryContentKey:
@@ -35,19 +38,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: PotionReciepe
     ItemText: Old Recipe
     ItemInventoryContentKey:
@@ -58,19 +61,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 1
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
       Key: Quests/Prefabs/RHC001Q005Recipe
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: RedPuffleOBerryJam
     ItemText: Red O'berry Jam
     ItemInventoryContentKey:
@@ -81,19 +84,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: FishSlobber
     ItemText: Fish Slobber
     ItemInventoryContentKey:
@@ -104,19 +107,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: Pearl
     ItemText: Pearl
     ItemInventoryContentKey:
@@ -127,19 +130,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: HealingPotion
     ItemText: Cure Concoction
     ItemInventoryContentKey:
@@ -150,24 +153,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 86c53ab955ba3574283faa306dbbdab4, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 3
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: 762794b801460bb4287a3f41378b80c5, type: 2}

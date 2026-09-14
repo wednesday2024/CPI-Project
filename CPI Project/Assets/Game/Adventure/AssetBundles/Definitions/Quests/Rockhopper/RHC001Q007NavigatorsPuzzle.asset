@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RHC001Q007NavigatorsPuzzle
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 1
   IsReplayable: 1
@@ -20,11 +21,11 @@ MonoBehaviour:
   QuestNumber: 7
   Title: Quest.RHC1Q7.Title
   AbbreviatedTitle: Quest.ShortTitle.7
-  Description:
+  Description: 
   SplashScreenText: Quest.RHC1Q7.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: MapAndConstellationUnsolved
     ItemText: Map And Constellation
     ItemInventoryContentKey:
@@ -35,19 +36,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
+      Text: 
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Buttons/PromptBlueButton
-  - DisplayName:
+  - DisplayName: 
     Name: MapAndConstellationSolved
     ItemText: Map And Constellation
     ItemInventoryContentKey:
@@ -58,24 +59,24 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 1
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
       Key: Quests/Prefabs/RHC001Q006MapSolved
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
+      Text: 
+      IconKey: 
+      Id: 
       ButtonPrefabKey: Buttons/PromptBlueButton
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 00b878e9202f4f84f9b5d8b596d13107, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 4
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: 0e94e7afb35716941a63319f640ea463, type: 2}

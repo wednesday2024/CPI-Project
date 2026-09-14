@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d91b37bcbd153f5a77c1b7115672ff7, type: 3}
   m_Name: RHC001Q008GoodImpressions
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Prototyped: 0
   OverridesFirstObjective: 0
   IsReplayable: 1
@@ -20,11 +21,11 @@ MonoBehaviour:
   QuestNumber: 8
   Title: Quest.RHC1Q8.Title
   AbbreviatedTitle: Quest.ShortTitle.8
-  Description:
+  Description: 
   SplashScreenText: Quest.RHC1Q8.Splash
   Instructions: []
   QuestItems:
-  - DisplayName:
+  - DisplayName: 
     Name: Book
     ItemText: Old Book
     ItemInventoryContentKey:
@@ -35,19 +36,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: BookWorm
     ItemText: Book Worm
     ItemInventoryContentKey:
@@ -58,19 +59,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SquidInk
     ItemText: Squid Ink
     ItemInventoryContentKey:
@@ -81,19 +82,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: Sails
     ItemText: Sail Cloth
     ItemInventoryContentKey:
@@ -104,19 +105,19 @@ MonoBehaviour:
       type: UnityEngine.GameObject, UnityEngine
     IsHiddenWhenNotCollected: 1
     ClickAction: 0
-    ClickActionArg:
+    ClickActionArg: 
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
-      Key:
+      Key: 
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInked1
     ItemText: Ink Impression
     ItemInventoryContentKey:
@@ -129,17 +130,17 @@ MonoBehaviour:
     ClickAction: 5
     ClickActionArg: Quests/CloseUp_SailsInked1
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked1
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInked2
     ItemText: Ink Impression
     ItemInventoryContentKey:
@@ -152,17 +153,17 @@ MonoBehaviour:
     ClickAction: 5
     ClickActionArg: Quests/CloseUp_SailsInked2
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked2
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
-  - DisplayName:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
+  - DisplayName: 
     Name: SailsInked3
     ItemText: Ink Impression
     ItemInventoryContentKey:
@@ -175,22 +176,22 @@ MonoBehaviour:
     ClickAction: 5
     ClickActionArg: Quests/CloseUp_SailsInked3
     PopupContentKey:
-      Key:
+      Key: 
       type: UnityEngine.GameObject, UnityEngine
     PopupImageContentKey:
       Key: Quests/CloseUp_SailsInked3
       type: UnityEngine.Sprite, UnityEngine
     UseItemButton:
-      Text:
-      IconKey:
-      Id:
-      ButtonPrefabKey:
+      Text: 
+      IconKey: 
+      Id: 
+      ButtonPrefabKey: 
   StartReward: {fileID: 0}
   CompleteReward: {fileID: 11400000, guid: 0f58fe5949a522449b45f16ee9efbddb, type: 2}
   ObjectiveRewards: []
   IsRewardPopupSupressed: 0
-  RewardPopupPrefabOverride:
-  RewardPopupMusicOverride:
+  RewardPopupPrefabOverride: 
+  RewardPopupMusicOverride: 
   LevelRequirement: 4
   CompletedQuestRequirement:
   - {fileID: 11400000, guid: 6cb49a3d3a8172f4c84dce8b56a8e052, type: 2}

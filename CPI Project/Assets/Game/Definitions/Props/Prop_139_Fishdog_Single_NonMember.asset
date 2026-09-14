@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da2171e238c7fd570bb804df51fd1108, type: 3}
   m_Name: Prop_139_Fishdog_Single_NonMember
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Id: 139
   Name: Prop_Fishdog_Single
   Description: Prop.Description.49
@@ -19,7 +20,7 @@ MonoBehaviour:
     Key: Props/Fishdog/FishdogSingleProp
     type: UnityEngine.GameObject, UnityEngine
   ExperienceContentKey:
-    Key:
+    Key: 
     type: UnityEngine.GameObject, UnityEngine
   IconContentKey:
     Key: Images/PartySupplies_FishDogSingle
@@ -35,7 +36,7 @@ MonoBehaviour:
   TotalReward: {fileID: 0}
   MinPerPlayerReward: {fileID: 0}
   Shareable: 0
-  RecipientConsumable:
+  RecipientConsumable: 
   ServerAddedItem: 0
   RetrieveAnimType: 0
   TotalItemQuantity: 0
