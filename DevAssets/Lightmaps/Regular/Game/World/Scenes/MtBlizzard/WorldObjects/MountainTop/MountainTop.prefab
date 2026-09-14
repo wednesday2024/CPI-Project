@@ -8544,6 +8544,7 @@ GameObject:
   - component: {fileID: 4352828005393949003}
   - component: {fileID: 522090121753566846}
   - component: {fileID: 7609516350821769228}
+  - component: {fileID: 3128456990265809982}
   m_Layer: 30
   m_Name: RockPlatform
   m_TagString: Untagged
@@ -8644,6 +8645,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8664457, y: 0.50570804, z: 1.6566104}
   m_Center: {x: 0.01828899, y: 0.25310266, z: 0.000024457311}
+--- !u!64 &3128456990265809982
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966997781783962985}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: c4b9adadea8d55f4cadef95625a5f8cf, type: 2}
 --- !u!1 &7011558192161888885
 GameObject:
   m_ObjectHideFlags: 0
