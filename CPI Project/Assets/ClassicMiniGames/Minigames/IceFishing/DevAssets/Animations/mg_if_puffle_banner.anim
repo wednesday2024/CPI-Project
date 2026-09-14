@@ -2,11 +2,12 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!74 &7400000
 AnimationClip:
-  serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: mg_if_puffle_banner
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -17,58 +18,82 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: {x: -8.401967, y: 0, z: -0.0041503906}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 3.2286787, y: 0.05, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 2
         value: {x: -0.5096411, y: 0.1, z: -0.0041503906}
         inSlope: {x: 3.2286782, y: -0.024999987, z: 0}
         outSlope: {x: 3.2286787, y: -0.025, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 3
         value: {x: 1.2840692, y: 0, z: -0.0041503906}
         inSlope: {x: 0, y: -0.1, z: 0}
         outSlope: {x: 0.40178853, y: -0.1, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 4
         value: {x: 1.7441983, y: -0.1, z: -0.0041503906}
-        inSlope: {x: 0.5061699, y: -2.2351742E-08, z: 0}
+        inSlope: {x: 0.5061699, y: -0.000000022351742, z: 0}
         outSlope: {x: 0.5061699, y: 0, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 6
         value: {x: 2.793102, y: 0.1, z: -0.0041503906}
         inSlope: {x: 0.49353433, y: 0, z: 0}
         outSlope: {x: 0.49353433, y: 0, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 7
         value: {x: 3.234278, y: 0, z: -0.0041503906}
         inSlope: {x: 0.37651736, y: -0.100000024, z: 0}
         outSlope: {x: 0, y: -0.1, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 8
         value: {x: 5.052066, y: -0.1, z: -0.0041503906}
         inSlope: {x: 3.272017, y: -0.025000028, z: 0}
         outSlope: {x: 3.2720175, y: -0.025, z: 0}
         tangentMode: 1
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
         time: 10
         value: {x: 13.05033, y: 0, z: -0.0041503906}
         inSlope: {x: 3.2720175, y: 0.050000034, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 1
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path:
+    path: 
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -86,6 +111,8 @@ AnimationClip:
       typeID: 4
       customType: 0
       isPPtrCurve: 0
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -109,13 +136,12 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_HasGenericRootTransform: 0
+  m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_GenerateMotionCurves: 0
   m_Events:
   - time: 10
     functionName: OnAnimationFinished
-    data:
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
