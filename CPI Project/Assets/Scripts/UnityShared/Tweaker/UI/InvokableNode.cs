@@ -63,6 +63,9 @@ namespace Tweaker.UI
 				case "xSpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.XSpeed", 0.3f);
 				case "ySpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.YSpeed", 0.3f);
 				case "zSpeed": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ZSpeed", 0.3f);
+				case "xSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.XSensitivity", 1f);
+				case "ySensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.YSensitivity", 1f);
+				case "zSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ZSensitivity", 1f);
 				case "bumperRotationSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ControllerSensitivity", 0.5f);
 				default: return 0f;
 			}
