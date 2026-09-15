@@ -66,6 +66,10 @@ namespace Tweaker.UI
 				case "xSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.XSensitivity", 1f);
 				case "ySensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.YSensitivity", 1f);
 				case "zSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ZSensitivity", 1f);
+				case "rotationModifierFOV": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.RotationModifierFOV", 0.8f);
+				case "xSpeedModifierFOV": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.XSpeedModifierFOV", 0.7f);
+				case "ySpeedModifierFOV": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.YSpeedModifierFOV", 0.7f);
+				case "zSpeedModifierFOV": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ZSpeedModifierFOV", 0.7f);
 				case "bumperRotationSensitivity": return UnityEngine.PlayerPrefs.GetFloat("FreeCamera.ControllerSensitivity", 0.5f);
 				default: return 0f;
 			}

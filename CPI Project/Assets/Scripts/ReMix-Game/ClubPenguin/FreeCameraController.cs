@@ -40,6 +40,10 @@ namespace ClubPenguin
         private const string XSensitivityPlayerPrefsKey = "FreeCamera.XSensitivity";
         private const string YSensitivityPlayerPrefsKey = "FreeCamera.YSensitivity";
         private const string ZSensitivityPlayerPrefsKey = "FreeCamera.ZSensitivity";
+        private const string RotationModifierFOVPlayerPrefsKey = "FreeCamera.RotationModifierFOV";
+        private const string XSpeedModifierFOVPlayerPrefsKey = "FreeCamera.XSpeedModifierFOV";
+        private const string YSpeedModifierFOVPlayerPrefsKey = "FreeCamera.YSpeedModifierFOV";
+        private const string ZSpeedModifierFOVPlayerPrefsKey = "FreeCamera.ZSpeedModifierFOV";
         private const string BumperRotationSensitivityPlayerPrefsKey = "FreeCamera.ControllerSensitivity";
 
         public Transform Target;
@@ -118,6 +122,10 @@ namespace ClubPenguin
                 XSensitivity = PlayerPrefs.GetFloat(XSensitivityPlayerPrefsKey, 1f);
                 YSensitivity = PlayerPrefs.GetFloat(YSensitivityPlayerPrefsKey, 1f);
                 ZSensitivity = PlayerPrefs.GetFloat(ZSensitivityPlayerPrefsKey, 1f);
+                RotationModifierFOV = PlayerPrefs.GetFloat(RotationModifierFOVPlayerPrefsKey, 0.8f);
+                XSpeedModifierFOV = PlayerPrefs.GetFloat(XSpeedModifierFOVPlayerPrefsKey, 0.7f);
+                YSpeedModifierFOV = PlayerPrefs.GetFloat(YSpeedModifierFOVPlayerPrefsKey, 0.7f);
+                ZSpeedModifierFOV = PlayerPrefs.GetFloat(ZSpeedModifierFOVPlayerPrefsKey, 0.7f);
                 BumperRotationSensitivity = PlayerPrefs.GetFloat(BumperRotationSensitivityPlayerPrefsKey, 0.5f);
             }
 
@@ -304,7 +312,7 @@ namespace ClubPenguin
             }
         }
 
-        [Invokable("FreeCamera.SetControllerSpeeds", Description = "Adjusts the free camera controller speeds and sensitivities.")]
+        [Invokable("FreeCamera.SetControllerSpeeds", Description = "Adjusts the free camera controller speeds, sensitivities, and FOV modifiers.")]
         [PublicTweak]
         public static void SetControllerSpeeds(
             float xSpeed,
@@ -313,6 +321,10 @@ namespace ClubPenguin
             float xSensitivity,
             float ySensitivity,
             float zSensitivity,
+            float rotationModifierFOV,
+            float xSpeedModifierFOV,
+            float ySpeedModifierFOV,
+            float zSpeedModifierFOV,
             float bumperRotationSensitivity)
         {
             PlayerPrefs.SetFloat(XSpeedPlayerPrefsKey, xSpeed);
@@ -321,6 +333,10 @@ namespace ClubPenguin
             PlayerPrefs.SetFloat(XSensitivityPlayerPrefsKey, xSensitivity);
             PlayerPrefs.SetFloat(YSensitivityPlayerPrefsKey, ySensitivity);
             PlayerPrefs.SetFloat(ZSensitivityPlayerPrefsKey, zSensitivity);
+            PlayerPrefs.SetFloat(RotationModifierFOVPlayerPrefsKey, rotationModifierFOV);
+            PlayerPrefs.SetFloat(XSpeedModifierFOVPlayerPrefsKey, xSpeedModifierFOV);
+            PlayerPrefs.SetFloat(YSpeedModifierFOVPlayerPrefsKey, ySpeedModifierFOV);
+            PlayerPrefs.SetFloat(ZSpeedModifierFOVPlayerPrefsKey, zSpeedModifierFOV);
             PlayerPrefs.SetFloat(BumperRotationSensitivityPlayerPrefsKey, bumperRotationSensitivity);
             PlayerPrefs.Save();
 
@@ -336,16 +352,20 @@ namespace ClubPenguin
                     controller.XSensitivity = xSensitivity;
                     controller.YSensitivity = ySensitivity;
                     controller.ZSensitivity = zSensitivity;
+                    controller.RotationModifierFOV = rotationModifierFOV;
+                    controller.XSpeedModifierFOV = xSpeedModifierFOV;
+                    controller.YSpeedModifierFOV = ySpeedModifierFOV;
+                    controller.ZSpeedModifierFOV = zSpeedModifierFOV;
                     controller.BumperRotationSensitivity = bumperRotationSensitivity;
                 }
             }
         }
 
-        [Invokable("FreeCamera.LoadDefaultSpeeds", Description = "Loads the default free camera controller speeds and sensitivities.")]
+        [Invokable("FreeCamera.LoadDefaultSpeeds", Description = "Loads the default free camera controller speeds, sensitivities, and FOV modifiers.")]
         [PublicTweak]
         public static void LoadDefaultSpeeds()
         {
-            SetControllerSpeeds(0.3f, 0.3f, 0.3f, 1f, 1f, 1f, 0.5f);
+            SetControllerSpeeds(0.3f, 0.3f, 0.3f, 1f, 1f, 1f, 0.8f, 0.7f, 0.7f, 0.7f, 0.5f);
         }
 
         [Invokable("FreeCamera.StartCamera", Description = "Sets camera to free camera mode. Try plugging in a game controller. * This was used for in-game video capture")]
