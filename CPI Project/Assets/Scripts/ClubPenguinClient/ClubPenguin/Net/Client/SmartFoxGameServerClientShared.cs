@@ -1,22 +1,30 @@
+using ClubPenguin.Net.Client.Event;
 using ClubPenguin.Net.Client.Smartfox;
 using ClubPenguin.Net.Domain;
 using ClubPenguin.Net.Utils;
 using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
+using Org.BouncyCastle.Crypto.Generators;
 using Sfs2X;
+using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
+using Sfs2X.Logging;
 using Sfs2X.Requests;
 using Sfs2X.Util;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using UnityEngine;
 
 namespace ClubPenguin.Net.Client
 {
-	internal class SmartFoxGameServerClientShared
+	public class SmartFoxGameServerClientShared
 	{
 		private readonly string zone;
 
@@ -25,6 +33,11 @@ namespace ClubPenguin.Net.Client
 		private readonly bool enableLagMonitor;
 
 		internal readonly bool UseEncryption;
+
+		internal bool EnableLagMonitorLogging
+		{
+			get { return enableLagMonitor; }
+		}
 
 		internal SmartFoxEncryptor SmartFoxEncryptor;
 
@@ -40,13 +53,20 @@ namespace ClubPenguin.Net.Client
 
 		private object smartFoxLock = new object();
 
-		private SmartFox smartFox;
+		public SmartFox smartFox;
 
 		private object serverTimeLock = new object();
 
 		private long pendingServerTime = 0L;
 
 		private Stopwatch pendingTimer = new Stopwatch();
+
+		private const int WEBSOCKET_HEARTBEAT_INTERVAL_SEC = 1;
+		private const int WEBSOCKET_MISSED_HEARTBEATS_BEFORE_DISCONNECT = 2;
+		private const int WEBSOCKET_WATCHDOG_TIMEOUT_SEC = WEBSOCKET_HEARTBEAT_INTERVAL_SEC * WEBSOCKET_MISSED_HEARTBEATS_BEFORE_DISCONNECT;
+		private Stopwatch websocketWatchdogTimer = new Stopwatch();
+		private bool websocketWatchdogActive = false;
+		private bool websocketWatchdogDisconnecting = false;
 
 		internal ConcurrentQueue<KeyValuePair<GameServerEvent, object>> TriggeredEvents = new ConcurrentQueue<KeyValuePair<GameServerEvent, object>>();
 
@@ -262,19 +282,82 @@ namespace ClubPenguin.Net.Client
 			{
 				if (smartFox != null)
 				{
-					smartFox.InitCrypto();
-				}
-			}
+                }
+            }
 		}
 
 		internal void Disconnect()
 		{
+			StopWebSocketWatchdog();
 			lock (smartFoxLock)
 			{
 				if (smartFox != null)
 				{
 					smartFox.Disconnect();
 				}
+			}
+		}
+
+		internal void StartWebSocketWatchdog()
+		{
+			lock (smartFoxLock)
+			{
+				if (smartFox == null || !smartFox.IsConnected)
+					return;
+
+				websocketWatchdogDisconnecting = false;
+				websocketWatchdogActive = true;
+				websocketWatchdogTimer.Reset();
+				websocketWatchdogTimer.Start();
+			}
+		}
+
+		internal void StopWebSocketWatchdog()
+		{
+			websocketWatchdogActive = false;
+			websocketWatchdogDisconnecting = false;
+			websocketWatchdogTimer.Stop();
+			websocketWatchdogTimer.Reset();
+		}
+
+		internal void NotifyWebSocketPong()
+		{
+			if (!websocketWatchdogActive)
+				return;
+
+			websocketWatchdogTimer.Restart();
+		}
+
+		internal void TickWebSocketWatchdog()
+		{
+			if (!websocketWatchdogActive || websocketWatchdogDisconnecting)
+				return;
+
+			if (websocketWatchdogTimer.Elapsed.TotalSeconds < WEBSOCKET_WATCHDOG_TIMEOUT_SEC)
+				return;
+
+			SmartFox currentSmartFox;
+			lock (smartFoxLock)
+			{
+				currentSmartFox = smartFox;
+				if (currentSmartFox == null || !currentSmartFox.IsConnected)
+				{
+					StopWebSocketWatchdog();
+					return;
+				}
+
+				websocketWatchdogDisconnecting = true;
+			}
+
+			UnityEngine.Debug.LogWarning("SmartFox WebSocket watchdog: no PING_PONG response for " + WEBSOCKET_WATCHDOG_TIMEOUT_SEC + " seconds. Closing the stale connection.");
+			try
+			{
+				currentSmartFox.Disconnect();
+			}
+			catch (Exception ex)
+			{
+				UnityEngine.Debug.LogWarning("SmartFox WebSocket watchdog failed to close the connection: " + ex);
+				StopWebSocketWatchdog();
 			}
 		}
 
@@ -369,10 +452,73 @@ namespace ClubPenguin.Net.Client
 			return result;
 		}
 
+		internal static bool IsLocalGameServerHost(string host)
+		{
+			if (string.Equals(host, "localhost", StringComparison.OrdinalIgnoreCase) || host == "127.0.0.1")
+			{
+				return true;
+			}
+
+			IPAddress hostAddress;
+			if (!IPAddress.TryParse(host, out hostAddress))
+			{
+				return false;
+			}
+
+			try
+			{
+				NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+				for (int i = 0; i < networkInterfaces.Length; i++)
+				{
+					if (networkInterfaces[i].OperationalStatus != OperationalStatus.Up)
+					{
+						continue;
+					}
+
+					UnicastIPAddressInformationCollection addresses = networkInterfaces[i].GetIPProperties().UnicastAddresses;
+					foreach (UnicastIPAddressInformation address in addresses)
+					{
+						if (address.Address.Equals(hostAddress))
+						{
+							return true;
+						}
+
+						if (hostAddress.AddressFamily == AddressFamily.InterNetwork && address.Address.AddressFamily == AddressFamily.InterNetwork && address.IPv4Mask != null && IsSameIPv4Network(address.Address, hostAddress, address.IPv4Mask))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			catch (NetworkInformationException)
+			{
+				return false;
+			}
+
+			return false;
+		}
+
+		private static bool IsSameIPv4Network(IPAddress localAddress, IPAddress hostAddress, IPAddress subnetMask)
+		{
+			byte[] localBytes = localAddress.GetAddressBytes();
+			byte[] hostBytes = hostAddress.GetAddressBytes();
+			byte[] maskBytes = subnetMask.GetAddressBytes();
+			for (int i = 0; i < maskBytes.Length; i++)
+			{
+				if ((localBytes[i] & maskBytes[i]) != (hostBytes[i] & maskBytes[i]))
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		internal SmartFoxGameServerClientShared(ClubPenguinClient clubPenguinClient, string gameZone, bool gameEncryption, bool gameDebugging, bool lagMonitoring)
 		{
 			zone = gameZone;
-			UseEncryption = gameEncryption;
+			string gameServerHost = Service.Get<ICommonGameSettings>().GameServerHost;
+			UseEncryption = !IsLocalGameServerHost(gameServerHost);
 			sfsDebugLogging = gameDebugging;
 			enableLagMonitor = lagMonitoring;
 			ClubPenguinClient = clubPenguinClient;
@@ -383,19 +529,32 @@ namespace ClubPenguin.Net.Client
 
 		private void setup()
 		{
+			bool test = false;
 			lock (smartFoxLock)
 			{
 				if (smartFox == null)
 				{
-					smartFox = new SmartFox(sfsDebugLogging);
-					smartFox.ThreadSafeMode = false;
-					sfsThread.AddListeners(smartFox);
-				}
+
+                    smartFox = new SmartFox(UseEncryption ? UseWebSocket.WSS_BIN : UseWebSocket.WS_BIN, sfsDebugLogging);
+                    UnityEngine.Debug.Log("After creating SmartFox: Created SFS instance: " + smartFox.GetHashCode());
+                    SmartFoxFramePump.Register(() =>
+                    {
+                        smartFox?.ProcessEvents();
+                        TickWebSocketWatchdog();
+						if (!test)
+						{
+                            UnityEngine.Debug.Log("Inside your pump: Created SFS instance: " + smartFox?.GetHashCode());
+							test = true;
+                        }
+                    });
+                    sfsThread.AddListeners(smartFox);
+                }
 			}
 		}
 
 		internal void teardown()
 		{
+            StopWebSocketWatchdog();
 			lock (smartFoxLock)
 			{
 				clientRoomName = null;
@@ -430,13 +589,12 @@ namespace ClubPenguin.Net.Client
 
 		internal void onLogin()
 		{
-			if (enableLagMonitor)
+			lock (smartFoxLock)
 			{
-				lock (smartFoxLock)
-				{
-					smartFox.EnableLagMonitor(true);
-				}
+				smartFox.EnableLagMonitor(true, WEBSOCKET_HEARTBEAT_INTERVAL_SEC, 3);
 			}
+
+			StartWebSocketWatchdog();
 		}
 
 		internal void initUDP()
@@ -500,10 +658,10 @@ namespace ClubPenguin.Net.Client
 			{
 				setup();
 				ConnectionAttempts = 0;
-				ConfigData configData = new ConfigData();
+                ConfigData configData = new ConfigData();
 				configData.Host = serverIP;
 				configData.Port = serverTcpPort;
-				configData.HttpsPort = serverHttpsPort;
+                configData.HttpsPort = serverHttpsPort;
 				configData.Zone = zone;
 				configData.Debug = sfsDebugLogging;
 				if (configData.BlueBox != null)
@@ -512,11 +670,14 @@ namespace ClubPenguin.Net.Client
 				}
 				configData.UdpHost = serverIP;
 				configData.UdpPort = serverTcpPort;
-				smartFox.Connect(configData);
-			}
+                configData.Port = UseEncryption ? serverHttpsPort : configData.HttpPort;
+                UnityEngine.Debug.Log("Before Connect: Created SFS instance: " + smartFox.GetHashCode());
+                smartFox.Connect(configData);
+            }
 		}
 
-		internal void reconnect()
+
+        internal void reconnect()
 		{
 			ConnectionAttempts++;
 			string host;
@@ -544,11 +705,12 @@ namespace ClubPenguin.Net.Client
 				}
 				configData.UdpHost = host;
 				configData.UdpPort = tcpPort;
-				smartFox.Connect(configData);
-			}
+                configData.Port = UseEncryption ? httpsPort : configData.HttpPort;
+                smartFox.Connect(configData);
+            }
 		}
 
-		internal static SFSDataWrapper serialize(byte b)
+        internal static SFSDataWrapper serialize(byte b)
 		{
 			return new SFSDataWrapper(SFSDataType.BYTE, b);
 		}

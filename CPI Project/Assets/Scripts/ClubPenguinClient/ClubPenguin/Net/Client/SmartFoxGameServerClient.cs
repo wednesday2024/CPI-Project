@@ -6,6 +6,7 @@ using ClubPenguin.Net.Domain.Igloo;
 using ClubPenguin.Net.Utils;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
+using Sfs2X;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Entities.Variables;
@@ -93,27 +94,28 @@ namespace ClubPenguin.Net.Client
 		{
 			while (true)
 			{
-				if (mt.TriggerForceTeardownAfterDelay)
+               
+                if (mt.TriggerForceTeardownAfterDelay)
 				{
 					CoroutineRunner.Start(forceTeardownAfterDelay(mt.smartFoxRef, 5), this, "forceTeardownAfterDelay");
-					mt.TriggerForceTeardownAfterDelay = false;
+                    mt.TriggerForceTeardownAfterDelay = false;
 				}
 				if (mt.TriggerInitCrypto)
 				{
 					mt.InitCrypto();
 					mt.TriggerInitCrypto = false;
 				}
-				long serverTime;
+                long serverTime;
 				if (mt.TryGetServerTimeUpdate(out serverTime))
 				{
 					lastServerTime = serverTime;
-					clientTimer.Reset();
-					clientTimer.Start();
-				}
-				try
+                    clientTimer.Reset();
+                    clientTimer.Start();
+                }
+                try
 				{
-					processEvents();
-				}
+                    processEvents();
+                }
 				catch (Exception ex)
 				{
 					Log.LogError(this, "Catching error in the smartfox event processing loop, so networking doesn't stop: " + ex.Message);
@@ -127,8 +129,8 @@ namespace ClubPenguin.Net.Client
 		{
 			if (!eventListeners.ContainsKey(gameServerEvent))
 			{
-				eventListeners.Add(gameServerEvent, listener);
-			}
+                eventListeners.Add(gameServerEvent, listener);
+            }
 			else
 			{
                 IDictionary<GameServerEvent, GameServerEventListener> gameServerEvents = this.eventListeners;
@@ -159,7 +161,9 @@ namespace ClubPenguin.Net.Client
 			int count = mt.TriggeredEvents.Count;
 			if (count != 0)
 			{
-				eventProcessingTimer.Reset();
+              
+
+                eventProcessingTimer.Reset();
 				eventProcessingTimer.Start();
 				int num = Mathf.Max(count, 10);
 				KeyValuePair<GameServerEvent, object> item;

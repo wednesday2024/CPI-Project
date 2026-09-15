@@ -19,10 +19,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace ClubPenguin.Net.Client
 {
-    internal class SmartFoxGameServerClientSFSThread
+    public class SmartFoxGameServerClientSFSThread
     {
         private struct TimeStampRequest
         {
@@ -39,7 +40,7 @@ namespace ClubPenguin.Net.Client
 
         private const int MAX_CONNECTION_ATTEMPTS = 3;
 
-        private readonly SmartFoxGameServerClientShared mt;
+        internal readonly SmartFoxGameServerClientShared mt;
 
         private long timestampRequestCount = 0L;
 
@@ -50,32 +51,30 @@ namespace ClubPenguin.Net.Client
             mt = smartFoxGameServerClientShared;
         }
 
-        private void onConnectionRetry(BaseEvent evt)
+        public void onConnectionRetry(BaseEvent evt)
         {
         }
 
-        private void onConnectionResume(BaseEvent evt)
+        public void onConnectionResume(BaseEvent evt)
         {
         }
 
-        private void onSocketError(BaseEvent evt)
+        public void onSocketError(BaseEvent evt)
         {
             string data = (string)evt.Params["errorMessage"];
             mt.triggerEvent(GameServerEvent.NETWORK_ERROR, data);
         }
 
-        private void onUserVariableUpdate(BaseEvent evt)
+        public void onUserVariableUpdate(BaseEvent evt)
         {
             UnityEngine.Debug.Log("UserVariableUpdate as been fired");
             User user = (User)evt.Params["user"];
-
-            //ArrayList changedVars = (ArrayList)evt.Params["changedVars"];// [SFS ERROR] Error handling data: Error dispatching event userVariablesUpdate: Specified cast is not valid. happens on 1.7.8.1 Client API
-            List<string> changedVars = (List<string>)evt.Params["changedVars"];//According to ChatGPT 5.2 they change in 1.7.5.X
+            List<string> changedVars = (List<string>)evt.Params["changedVars"];
 
             broadcastUserVariables(user, changedVars);
         }
 
-        private void broadcastUserVariables(User user, List<string> changedVars = null)
+        public void broadcastUserVariables(User user, List<string> changedVars = null)
         {
             bool flag = getSessionId(user) == mt.ClubPenguinClient.PlayerSessionId;
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.PROTOTYPE.GetKey())) && user.ContainsVariable(SocketUserVars.PROTOTYPE.GetKey()))
@@ -292,7 +291,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void onProximityListUpdate(BaseEvent evt)
+        public void onProximityListUpdate(BaseEvent evt)
         {
             RoomMember roomMember;
             foreach (User item in (List<User>)evt.Params["addedUsers"])
@@ -333,20 +332,25 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void onServerObjectUpdate(BaseEvent evt)
+        public void onServerObjectUpdate(BaseEvent evt)
         {
             IMMOItem sfsItem = (IMMOItem)evt.Params["mmoItem"];
             CPMMOItem data = ItemFactory.Create(sfsItem, getSessionId);
             mt.triggerEvent(GameServerEvent.SERVER_ITEM_CHANGED, data);
         }
 
-        private void onPingPong(BaseEvent evt)
+        public void onPingPong(BaseEvent evt)
         {
+            mt.NotifyWebSocketPong();
+
             int milliseconds = (int)evt.Params["lagValue"];
-            mt.ClubPenguinClient.logGameServerPing(milliseconds);
+            if (mt.EnableLagMonitorLogging)
+            {
+                mt.ClubPenguinClient.logGameServerPing(milliseconds);
+            }
         }
 
-        private void onExtensionResponse(BaseEvent evt)
+        public void onExtensionResponse(BaseEvent evt)
         {
             try
             {
@@ -537,7 +541,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void fetchServerTimestamp(bool fetchEncryptionKeyAfterwards)
+        public void fetchServerTimestamp(bool fetchEncryptionKeyAfterwards)
         {
             long num = timestampRequestCount++;
             Stopwatch stopwatch = new Stopwatch();
@@ -552,7 +556,7 @@ namespace ClubPenguin.Net.Client
             });
         }
 
-        private void timeStampRecieved(long clientTime, long serverTime)
+        public void timeStampRecieved(long clientTime, long serverTime)
         {
             if (!timeStampRequests.ContainsKey(clientTime))
             {
@@ -570,25 +574,40 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void fetchEncryptionKey()
+        public void fetchEncryptionKey()
         {
-            RSAParameters value = mt.ClubPenguinClient.CPKeyValueDatabase.GetRsaParameters().Value;
-            string str = Convert.ToBase64String(value.Exponent);
-            string str2 = Convert.ToBase64String(value.Modulus);
-            mt.send(SmartfoxCommand.GET_ROOM_ENCRYPTION_KEY, new Dictionary<string, SFSDataWrapper>
+            UnityEngine.Debug.Log("[WebGL] fetchEncryptionKey() - START");
+            try
             {
+                RSAParameters? rsaParams = mt.ClubPenguinClient.CPKeyValueDatabase.GetRsaParameters();
+
+                if (!rsaParams.HasValue)
                 {
-                    "pkm",
-                    SmartFoxGameServerClientShared.serialize(str2)
-                },
-                {
-                    "pke",
-                    SmartFoxGameServerClientShared.serialize(str)
+					UnityEngine.Debug.LogError("RSA parameters not available, cannot fetch encryption key");
+					return;
                 }
-            });
+
+                RSAParameters value = rsaParams.Value;
+                string str = Convert.ToBase64String(value.Exponent);
+                string str2 = Convert.ToBase64String(value.Modulus);
+                UnityEngine.Debug.Log($"[WebGL] Sending encryption key request - pkm length: {str2.Length}, pke: {str}");
+
+                mt.send(SmartfoxCommand.GET_ROOM_ENCRYPTION_KEY, new Dictionary<string, SFSDataWrapper>
+        {
+            { "pkm", SmartFoxGameServerClientShared.serialize(str2) },
+            { "pke", SmartFoxGameServerClientShared.serialize(str) }
+        });
+
+                UnityEngine.Debug.Log("[WebGL] fetchEncryptionKey() - request sent");
+            }
+            catch (Exception ex)
+            {
+                UnityEngine.Debug.LogError($"[WebGL] Error in fetchEncryptionKey: {ex.Message}");
+                Log.LogException(this, ex);
+            }
         }
 
-        private void encryptionKeyReceived(string encodedEncryptedEncryptionKey)
+        public void encryptionKeyReceived(string encodedEncryptedEncryptionKey)
         {
             RSAParameters value = mt.ClubPenguinClient.CPKeyValueDatabase.GetRsaParameters().Value;
             byte[] ciphertext = Convert.FromBase64String(encodedEncryptedEncryptionKey);
@@ -597,7 +616,7 @@ namespace ClubPenguin.Net.Client
             roomJoinCompleted();
         }
 
-        private void roomJoinCompleted()
+        public void roomJoinCompleted()
         {
             JoinRoomData joinRoomData;
             if (mt.TryClearJoinRoomData(out joinRoomData))
@@ -608,23 +627,14 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        private void onConnection(BaseEvent evt)
+        public void onConnection(BaseEvent evt)
         {
-            bool flag = false;
-            if (evt.Params != null && evt.Params.ContainsKey("success"))
+            UnityEngine.Debug.Log("Created SFS instance: " + mt.smartFox.GetHashCode());
+            Debug.Log("if OnConnect gets tampet");
+            if ((bool)evt.Params["success"])
             {
-                flag = (bool)evt.Params["success"];
-            }
-            if (flag)
-            {
-                if (mt.UseEncryption)
-                {
-                    mt.TriggerInitCrypto = true;
-                }
-                else
-                {
-                    mt.login();
-                }
+                Debug.Log("Attempting Login");
+                mt.login();
                 return;
             }
 
@@ -667,7 +677,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        private void onCryptoInit(BaseEvent evt)
+        public void onCryptoInit(BaseEvent evt)
         {
             bool flag = false;
             if (evt.Params != null && evt.Params.ContainsKey("success"))
@@ -715,7 +725,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        private void onLogin(BaseEvent evt)
+        public void onLogin(BaseEvent evt)
         {
             User user = (User)evt.Params["user"];
             mt.ClubPenguinClient.PlayerSessionId = mt.JoinRoomDataSessionId;
@@ -723,7 +733,7 @@ namespace ClubPenguin.Net.Client
             mt.onLogin();
         }
 
-        private void onLoginError(BaseEvent evt)
+        public void onLoginError(BaseEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             Log.LogNetworkErrorFormatted(this, "Login Failed. Error: {0}", text);
@@ -734,7 +744,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        private void onRoomCreationError(BaseEvent evt)
+        public void onRoomCreationError(BaseEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             string text = (string)evt.Params["errorMessage"];
@@ -750,7 +760,7 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        private void onRoomJoin(BaseEvent evt)
+        public void onRoomJoin(BaseEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             if (RoomIdentifier.EqualsIgnoreInstanceId(room.Name, mt.JoinRoomDataRoom))
@@ -762,12 +772,15 @@ namespace ClubPenguin.Net.Client
                 }
                 else
                 {
-                    fetchServerTimestamp(true);
+                    UnityEngine.Debug.Log("Initializing fake time server");
+                    mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                    UnityEngine.Debug.Log("Running fetchEncryptionKey()");
+                    fetchEncryptionKey();
                 }
             }
         }
 
-        private void onRoomJoinError(BaseEvent evt)
+        public void onRoomJoinError(BaseEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             short num = (short)evt.Params["errorCode"];
@@ -791,13 +804,16 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        private void onUdpInit(BaseEvent evt)
+        public void onUdpInit(BaseEvent evt)
         {
             bool flag = (bool)evt.Params["success"];
             string text = (string)evt.Params["errorMessage"];
             if (flag)
             {
-                fetchServerTimestamp(true);
+                UnityEngine.Debug.Log("Initializing fake time server");
+                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
+                fetchEncryptionKey();
                 return;
             }
             ConfigData smartFoxConfiguration = mt.smartFoxConfiguration;
@@ -812,12 +828,16 @@ namespace ClubPenguin.Net.Client
             }
             else
             {
-                fetchServerTimestamp(true);
+                UnityEngine.Debug.Log("Initializing fake time server");
+                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
+                fetchEncryptionKey();
             }
         }
 
-        private void onConnectionLost(BaseEvent evt)
+        public void onConnectionLost(BaseEvent evt)
         {
+            mt.StopWebSocketWatchdog();
             string text = (string)evt.Params["reason"];
             if (mt.WasTornDownImmediately)
             {
@@ -843,7 +863,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void onLogout(BaseEvent evt)
+        public void onLogout(BaseEvent evt)
         {
             mt.ClientRoomName = null;
             if (mt.isConnected && !mt.WasTornDownImmediately)
@@ -857,22 +877,22 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private void onDebugMessage(BaseEvent evt)
+        public void onDebugMessage(BaseEvent evt)
         {
             string text = (string)evt.Params["message"];
         }
 
-        private void onInfoMessage(BaseEvent evt)
+        public void onInfoMessage(BaseEvent evt)
         {
             string text = (string)evt.Params["message"];
         }
 
-        private void onWarnMessage(BaseEvent evt)
+        public void onWarnMessage(BaseEvent evt)
         {
             string text = (string)evt.Params["message"];
         }
 
-        private void onErrorMessage(BaseEvent evt)
+        public void onErrorMessage(BaseEvent evt)
         {
             if (!mt.WasTornDownImmediately)
             {
@@ -881,7 +901,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        private LocomotionActionEvent locomotionActionEventFromProps(int playerId, ISFSObject props)
+        public LocomotionActionEvent locomotionActionEventFromProps(int playerId, ISFSObject props)
         {
             // UnityEngine.Debug.Log("penguin? l.a   :::   " + props.ToJson());
             LocomotionActionEvent result = default(LocomotionActionEvent);
@@ -904,12 +924,12 @@ namespace ClubPenguin.Net.Client
             return result;
         }
 
-        private long getSessionId(User user)
+        public long getSessionId(User user)
         {
             return long.Parse(user.GetVariable(SocketUserVars.SESSION_ID.GetKey()).GetStringValue());
         }
 
-        private long getSessionId(int? userId)
+        public long getSessionId(int? userId)
         {
             if (!userId.HasValue)
             {
@@ -923,7 +943,7 @@ namespace ClubPenguin.Net.Client
             return getSessionId(userById);
         }
 
-        private PartyGameStartEvent partyGameStartEventFromProps(ISFSObject props)
+        public PartyGameStartEvent partyGameStartEventFromProps(ISFSObject props)
         {
             PartyGameStartEvent result = default(PartyGameStartEvent);
             result.owner = props.GetLong("owner");
@@ -933,7 +953,7 @@ namespace ClubPenguin.Net.Client
             return result;
         }
 
-        private PartyGameStartEventV2 partyGameStartEventV2FromProps(ISFSObject props)
+        public PartyGameStartEventV2 partyGameStartEventV2FromProps(ISFSObject props)
         {
             PartyGameStartEventV2 result = default(PartyGameStartEventV2);
             result.sessionId = props.GetInt("id");
@@ -942,7 +962,7 @@ namespace ClubPenguin.Net.Client
             return result;
         }
 
-        private PartyGameEndEvent partyGameEndEventFromProps(ISFSObject props)
+        public PartyGameEndEvent partyGameEndEventFromProps(ISFSObject props)
         {
             PartyGameEndEvent result = default(PartyGameEndEvent);
             List<PartyGameEndPlayerResult> list = mt.JsonService.Deserialize<List<PartyGameEndPlayerResult>>(props.GetUtfString("results"));
@@ -956,7 +976,7 @@ namespace ClubPenguin.Net.Client
             return result;
         }
 
-        private PartyGameMessageEvent partyGameMessageEventFromProps(ISFSObject props)
+        public PartyGameMessageEvent partyGameMessageEventFromProps(ISFSObject props)
         {
             PartyGameMessageEvent result = default(PartyGameMessageEvent);
             result.sessionId = props.GetInt("id");

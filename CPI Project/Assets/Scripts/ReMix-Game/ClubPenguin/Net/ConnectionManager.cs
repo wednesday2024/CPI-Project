@@ -3,6 +3,7 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace ClubPenguin.Net
 {
@@ -44,23 +45,22 @@ namespace ClubPenguin.Net
 				callback(NetworkConnectionState.BasicConnection);
 				yield break;
 			}
-			bool isPinging = true;
-			Ping ping = new Ping("8.8.8.8");
-			while (isPinging)
-			{
-				if (ping.isDone)
-				{
-					connectionState = ((ping.time >= 0) ? NetworkConnectionState.BasicConnection : NetworkConnectionState.NoConnection);
-					isPinging = false;
-				}
-				else if (Time.unscaledTime - pingStartTime >= 2f)
-				{
-					connectionState = NetworkConnectionState.NoConnection;
-					isPinging = false;
-				}
-				yield return null;
-			}
-			callback(connectionState);
+            // WebGL: Use UnityWebRequest to check connectivity
+            using (UnityWebRequest webRequest = UnityWebRequest.Head("https://www.google.com"))
+            {
+                webRequest.timeout = (int)pingTimeout;
+                yield return webRequest.SendWebRequest();
+
+                if (webRequest.result == UnityWebRequest.Result.Success)
+                {
+                    connectionState = NetworkConnectionState.BasicConnection;
+                }
+                else
+                {
+                    connectionState = NetworkConnectionState.NoConnection;
+                }
+            }
+            callback(connectionState);
 		}
 	}
 }

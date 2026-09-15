@@ -34,6 +34,18 @@ namespace ClubPenguin
 
         private const float InputDeadzone = 0.1f;
 
+        private const string XSpeedPlayerPrefsKey = "FreeCamera.XSpeed";
+        private const string YSpeedPlayerPrefsKey = "FreeCamera.YSpeed";
+        private const string ZSpeedPlayerPrefsKey = "FreeCamera.ZSpeed";
+        private const string XSensitivityPlayerPrefsKey = "FreeCamera.XSensitivity";
+        private const string YSensitivityPlayerPrefsKey = "FreeCamera.YSensitivity";
+        private const string ZSensitivityPlayerPrefsKey = "FreeCamera.ZSensitivity";
+        private const string RotationModifierFOVPlayerPrefsKey = "FreeCamera.RotationModifierFOV";
+        private const string XSpeedModifierFOVPlayerPrefsKey = "FreeCamera.XSpeedModifierFOV";
+        private const string YSpeedModifierFOVPlayerPrefsKey = "FreeCamera.YSpeedModifierFOV";
+        private const string ZSpeedModifierFOVPlayerPrefsKey = "FreeCamera.ZSpeedModifierFOV";
+        private const string BumperRotationSensitivityPlayerPrefsKey = "FreeCamera.ControllerSensitivity";
+
         public Transform Target;
         public Camera Camera;
         public float XSensitivity = 1f;
@@ -43,6 +55,7 @@ namespace ClubPenguin
         public float XSpeed = 0.3f;
         public float YSpeed = 0.3f;
         public float ZSpeed = 0.3f;
+        public bool UseDefaultSpeeds;
         public float KeyboardSpeedMultiplier = 0.4f; // The speed for the camera controls via the the keyboard. - Malcolm
         public bool WorldRelativeZMotion;
         public float RotationModifierFOV = 0.8f;
@@ -101,6 +114,21 @@ namespace ClubPenguin
 
         private void Start()
         {
+            if (!UseDefaultSpeeds)
+            {
+                XSpeed = PlayerPrefs.GetFloat(XSpeedPlayerPrefsKey, 0.3f);
+                YSpeed = PlayerPrefs.GetFloat(YSpeedPlayerPrefsKey, 0.3f);
+                ZSpeed = PlayerPrefs.GetFloat(ZSpeedPlayerPrefsKey, 0.3f);
+                XSensitivity = PlayerPrefs.GetFloat(XSensitivityPlayerPrefsKey, 1f);
+                YSensitivity = PlayerPrefs.GetFloat(YSensitivityPlayerPrefsKey, 1f);
+                ZSensitivity = PlayerPrefs.GetFloat(ZSensitivityPlayerPrefsKey, 1f);
+                RotationModifierFOV = PlayerPrefs.GetFloat(RotationModifierFOVPlayerPrefsKey, 0.8f);
+                XSpeedModifierFOV = PlayerPrefs.GetFloat(XSpeedModifierFOVPlayerPrefsKey, 0.7f);
+                YSpeedModifierFOV = PlayerPrefs.GetFloat(YSpeedModifierFOVPlayerPrefsKey, 0.7f);
+                ZSpeedModifierFOV = PlayerPrefs.GetFloat(ZSpeedModifierFOVPlayerPrefsKey, 0.7f);
+                BumperRotationSensitivity = PlayerPrefs.GetFloat(BumperRotationSensitivityPlayerPrefsKey, 0.5f);
+            }
+
             Camera = gameObject.AddComponent<Camera>();
             localPlayerMask = LayerMask.NameToLayer("LocalPlayer");
             mainCamera = Camera.main;
@@ -282,6 +310,62 @@ namespace ClubPenguin
                 case YButton: return gamepad.buttonNorth.wasPressedThisFrame;
                 default: return false;
             }
+        }
+
+        [Invokable("FreeCamera.SetControllerSpeeds", Description = "Adjusts the free camera controller speeds, sensitivities, and FOV modifiers.")]
+        [PublicTweak]
+        public static void SetControllerSpeeds(
+            float xSpeed,
+            float ySpeed,
+            float zSpeed,
+            float xSensitivity,
+            float ySensitivity,
+            float zSensitivity,
+            float rotationModifierFOV,
+            float xSpeedModifierFOV,
+            float ySpeedModifierFOV,
+            float zSpeedModifierFOV,
+            float bumperRotationSensitivity)
+        {
+            PlayerPrefs.SetFloat(XSpeedPlayerPrefsKey, xSpeed);
+            PlayerPrefs.SetFloat(YSpeedPlayerPrefsKey, ySpeed);
+            PlayerPrefs.SetFloat(ZSpeedPlayerPrefsKey, zSpeed);
+            PlayerPrefs.SetFloat(XSensitivityPlayerPrefsKey, xSensitivity);
+            PlayerPrefs.SetFloat(YSensitivityPlayerPrefsKey, ySensitivity);
+            PlayerPrefs.SetFloat(ZSensitivityPlayerPrefsKey, zSensitivity);
+            PlayerPrefs.SetFloat(RotationModifierFOVPlayerPrefsKey, rotationModifierFOV);
+            PlayerPrefs.SetFloat(XSpeedModifierFOVPlayerPrefsKey, xSpeedModifierFOV);
+            PlayerPrefs.SetFloat(YSpeedModifierFOVPlayerPrefsKey, ySpeedModifierFOV);
+            PlayerPrefs.SetFloat(ZSpeedModifierFOVPlayerPrefsKey, zSpeedModifierFOV);
+            PlayerPrefs.SetFloat(BumperRotationSensitivityPlayerPrefsKey, bumperRotationSensitivity);
+            PlayerPrefs.Save();
+
+            Transform transform = Service.Get<GameObject>().transform.Find("FreeCameraTarget");
+            if (transform != null)
+            {
+                FreeCameraController controller = transform.GetComponent<FreeCameraController>();
+                if (controller != null)
+                {
+                    controller.XSpeed = xSpeed;
+                    controller.YSpeed = ySpeed;
+                    controller.ZSpeed = zSpeed;
+                    controller.XSensitivity = xSensitivity;
+                    controller.YSensitivity = ySensitivity;
+                    controller.ZSensitivity = zSensitivity;
+                    controller.RotationModifierFOV = rotationModifierFOV;
+                    controller.XSpeedModifierFOV = xSpeedModifierFOV;
+                    controller.YSpeedModifierFOV = ySpeedModifierFOV;
+                    controller.ZSpeedModifierFOV = zSpeedModifierFOV;
+                    controller.BumperRotationSensitivity = bumperRotationSensitivity;
+                }
+            }
+        }
+
+        [Invokable("FreeCamera.LoadDefaultSpeeds", Description = "Loads the default free camera controller speeds, sensitivities, and FOV modifiers.")]
+        [PublicTweak]
+        public static void LoadDefaultSpeeds()
+        {
+            SetControllerSpeeds(0.3f, 0.3f, 0.3f, 1f, 1f, 1f, 0.8f, 0.7f, 0.7f, 0.7f, 0.5f);
         }
 
         [Invokable("FreeCamera.StartCamera", Description = "Sets camera to free camera mode. Try plugging in a game controller. * This was used for in-game video capture")]

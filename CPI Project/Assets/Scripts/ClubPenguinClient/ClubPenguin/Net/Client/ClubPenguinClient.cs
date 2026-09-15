@@ -367,7 +367,7 @@ namespace ClubPenguin.Net.Client
 			Configuration.SetSetting("yield-time", 0f);
 			Configuration.SetSetting("default-json-serializer", typeof(SerializeLitJson));
 			Configuration.SetSetting("default-json-deserializer", typeof(DeserializeLitJson));
-			Configuration.SetBaseUri("cp-api-base-uri", apiUrl);
+			Configuration.SetBaseUri("cp-api-base-uri", GetWebServiceBaseUri(apiUrl));
 			Configuration.SetSetting("cp-api-client-token", clientToken);
 			Configuration.SetSetting("cp-api-client-version", clientApiVersion);
 			if (AccessToken != null)
@@ -377,6 +377,25 @@ namespace ClubPenguin.Net.Client
 			setWakContentVersionFromContentSystem();
 			Service.Get<EventDispatcher>().AddListener<Content.ContentManifestUpdated>(onContentManifestUpdated);
 			Configuration.Bootstrap();
+		}
+
+		private static string GetWebServiceBaseUri(string apiUrl)
+		{
+			Uri apiUri;
+			if (!Uri.TryCreate(apiUrl, UriKind.Absolute, out apiUri) || apiUri.Scheme != Uri.UriSchemeHttps || !SmartFoxGameServerClientShared.IsLocalGameServerHost(apiUri.Host))
+			{
+				return apiUrl;
+			}
+
+			UriBuilder localApiUri = new UriBuilder(apiUri)
+			{
+				Scheme = Uri.UriSchemeHttp
+			};
+			if (localApiUri.Port == 443)
+			{
+				localApiUri.Port = 80;
+			}
+			return localApiUri.Uri.ToString();
 		}
 
 		private bool onContentManifestUpdated(Content.ContentManifestUpdated evt)
@@ -435,21 +454,23 @@ namespace ClubPenguin.Net.Client
 			CoroutineRunner.StartPersistent(generateKeyPairCoroutine(successCallback, failureCallback), this, "GenerateKeyPair");
 		}
 
-		private IEnumerator generateKeyPairCoroutine(Action<RSAParameters> successCallback, System.Action failureCallback)
-		{
-			Thread thread = new Thread((ThreadStart)delegate
-			{
-				rsaParameters = RsaEncryptor.GenerateKeypair();
-			});
-			thread.Start();
-			while (!rsaParameters.HasValue)
-			{
-				yield return null;
-			}
-			successCallback(rsaParameters.Value);
-		}
+        private IEnumerator generateKeyPairCoroutine(Action<RSAParameters> successCallback, System.Action failureCallback)
+        {
+            Thread thread = new Thread((ThreadStart)delegate
+            {
+                rsaParameters = RsaEncryptor.GenerateKeypair();
+            });
+            thread.Start();
+			
+            while (!rsaParameters.HasValue)
+            {
+                yield return null;
+            }
 
-		internal void logGameServerPing(int milliseconds)
+            if (successCallback != null) successCallback(rsaParameters.Value);
+        }
+
+        internal void logGameServerPing(int milliseconds)
 		{
 			if (GameServerLatency != null)
 			{

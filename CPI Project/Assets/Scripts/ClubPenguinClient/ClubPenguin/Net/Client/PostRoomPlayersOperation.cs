@@ -99,6 +99,7 @@ namespace ClubPenguin.Net.Client
 				sessionId = Math.Abs(BitConverter.ToInt64(array, 0)),
 				host = Service.Get<ICommonGameSettings>().GameServerHost,
 				tcpPort = 9933,
+				httpsPort = 8443,
 				userName = offlineDatabase.Read<RegistrationProfile>().userName,
 				swid = offlineDatabase.AccessToken
 			};

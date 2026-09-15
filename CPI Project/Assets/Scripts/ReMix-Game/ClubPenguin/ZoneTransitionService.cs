@@ -314,7 +314,7 @@ namespace ClubPenguin
 #if UNITY_ANDROID
     string clientVersion = "1"; // EnvironmentManager.BundleVersion.ToString(3);
 #else
-            string clientVersion = EnvironmentManager.BundleVersion.ToString(3);
+            string clientVersion = "1"; // EnvironmentManager.BundleVersion.ToString(3);
 #endif
 
             string setting = hg.ApiWebKit.Configuration.GetSetting<string>("cp-content-version");

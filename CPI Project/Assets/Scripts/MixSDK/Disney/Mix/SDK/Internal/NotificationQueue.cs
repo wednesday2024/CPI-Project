@@ -71,24 +71,30 @@ namespace Disney.Mix.SDK.Internal
 		}
 
 		public void Dispatch(BaseNotification notification, Action successCallback, Action failureCallback)
-		{
-			if (notification.SequenceNumber <= LatestSequenceNumber)
-			{
-				successCallback();
-			}
-			else if (ShouldDispatchNotification(notification))
-			{
-				this.OnQueued(notification.SequenceNumber.Value);
-				DispatchNotification(notification);
-				DispatchQueue();
-				successCallback();
-			}
-			else
-			{
-				QueueNotification(notification);
-				WaitForDispatchOrClear(notification.SequenceNumber.Value, successCallback, failureCallback);
-			}
-		}
+        {
+            //this might be the proper bypass?
+            DispatchNotification(notification);
+            DispatchQueue();
+            successCallback();
+            Clear();
+
+            /*if (notification.SequenceNumber <= LatestSequenceNumber)
+            {
+                successCallback();
+            }
+            else if (ShouldDispatchNotification(notification))
+            {
+                this.OnQueued(notification.SequenceNumber.Value);
+                DispatchNotification(notification);
+                DispatchQueue();
+                successCallback();
+            }
+            else
+            {
+                QueueNotification(notification);
+                WaitForDispatchOrClear(notification.SequenceNumber.Value, successCallback, failureCallback);
+            }*/
+        }
 
 		public void Dispatch(IEnumerable<BaseNotification> notifications, Action successCallback, Action failureCallback)
 		{
