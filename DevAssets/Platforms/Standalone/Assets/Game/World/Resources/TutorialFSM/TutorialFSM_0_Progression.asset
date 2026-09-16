@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: TutorialFSM_0_Progression
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Delay
     states:
     - name: End
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -65,17 +66,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Hide Tutorial
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -94,6 +95,7 @@ MonoBehaviour:
         toState: Reset sorting
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -130,9 +132,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 43656c6c70686f6e65427574746f6e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -140,7 +142,8 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 0f000000
     - name: Show Cell Phone
-      description: Check out Island Live on your CPI Phone to find rewards and special events
+      description: Check out Island Live on your CPI Phone to find rewards and special
+        events
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -159,6 +162,7 @@ MonoBehaviour:
         toState: Hide Tutorial 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -178,14 +182,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -198,11 +202,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -217,9 +221,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 43656c6c50686f6e65427574746f6e00002042000000410000000002430000dc42010000000100000000000000000000000000704100007ac30000003f000000000000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e657731009a99193f0101010043656c6c50686f6e65427574746f6e46494e495348454443656c6c50686f6e65427574746f6e43656c6c70686f6e65427574746f6e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000130000002500000001000000080000000700000007000000080000000800000008000000020000000100000003000000120000000100000002000000010000000100000001000000010000000300000013000000170000000300000003000000
         paramName:
@@ -251,7 +255,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000f000000180000001900000021000000250000002900000031000000390000004100000045000000460000000000000067000000680000006c0000006d0000006e0000006f00000070000000010000007f0000008700000096000000
         paramByteDataSize: 0f000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000021000000000000000100000004000000010000000100000001000000010000000f00000000000000080000000f0000000f000000
     - name: Delay
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -270,6 +274,7 @@ MonoBehaviour:
         toState: PC/MAC?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -304,9 +309,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcccc3d0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -316,7 +321,7 @@ MonoBehaviour:
         paramDataPos: 000000000500000005000000
         paramByteDataSize: 050000000000000001000000
     - name: Hide Tutorial 3
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -335,6 +340,7 @@ MonoBehaviour:
         toState: Sort UI to top
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -373,9 +379,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcccc3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -385,7 +391,8 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: Show Cell Phone 2
-      description: Great! Check out Daily Challenges or island activities for more XP and coins.
+      description: Great! Check out Daily Challenges or island activities for more
+        XP and coins.
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -404,6 +411,7 @@ MonoBehaviour:
         toState: Hide Tutorial
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -421,8 +429,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -435,11 +443,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -454,9 +462,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000000000000000000000000000000002000000010000000000000000000000000016430000af430000003f0000003f0000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e657733009a99193f000101000100000046494e4953484544
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000130000002500000001000000080000000700000007000000080000000800000008000000020000000100000003000000120000000100000002000000010000000100000001000000010000000700000017000000
         paramName:
@@ -485,7 +493,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000090000000a00000012000000160000001a000000220000002a0000003200000036000000370000000000000058000000590000005d0000005e0000005f000000600000006100000065000000
         paramByteDataSize: 00000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000021000000000000000100000004000000010000000100000001000000010000000400000008000000
     - name: PC/MAC?
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -504,6 +512,7 @@ MonoBehaviour:
         toState: Show Cell Phone 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -512,6 +521,7 @@ MonoBehaviour:
         toState: Show Cell Phone
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -546,9 +556,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5472756546616c7365
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1700000017000000
         paramName:
@@ -557,7 +567,8 @@ MonoBehaviour:
         paramDataPos: 0000000004000000
         paramByteDataSize: 0400000005000000
     - name: Show Cell Phone 3
-      description: Check out Island Live on your CPI Phone to find rewards and special events
+      description: Check out Island Live on your CPI Phone to find rewards and special
+        events
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -576,6 +587,7 @@ MonoBehaviour:
         toState: Hide Tutorial 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -595,14 +607,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -615,11 +627,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -634,9 +646,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 43656c6c50686f6e65427574746f6e00002042000000000000000002430000dc42010000000100000000000000000000000000704100007ac30000003f000000000000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e65773109009a99193f0101010043656c6c50686f6e65427574746f6e46494e495348454443656c6c50686f6e65427574746f6e43656c6c70686f6e65427574746f6e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000130000002500000001000000080000000700000007000000080000000800000008000000020000000100000003000000120000000100000002000000010000000100000001000000010000000300000013000000170000000300000003000000
         paramName:
@@ -668,7 +680,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000f000000180000001900000021000000250000002900000031000000390000004100000045000000460000000000000068000000690000006d0000006e0000006f000000700000007100000001000000800000008800000097000000
         paramByteDataSize: 0f000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000022000000000000000100000004000000010000000100000001000000010000000f00000000000000080000000f0000000f000000
     - name: PC/MAC? 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -687,6 +699,7 @@ MonoBehaviour:
         toState: Show Cell Phone 6
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -695,6 +708,7 @@ MonoBehaviour:
         toState: Show Cell Phone 5
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -729,9 +743,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5472756546616c7365
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1700000017000000
         paramName:
@@ -740,7 +754,8 @@ MonoBehaviour:
         paramDataPos: 0000000004000000
         paramByteDataSize: 0400000005000000
     - name: Show Cell Phone 4
-      description: Great! Check out Daily Challenges or island activities for more XP and coins.
+      description: Great! Check out Daily Challenges or island activities for more
+        XP and coins.
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -759,6 +774,7 @@ MonoBehaviour:
         toState: Hide Tutorial
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -776,8 +792,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -790,11 +806,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -809,9 +825,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000000000000000000000000000000000200000001000000000000000000000000009643000016440000003f0000003f0000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e657733009a99193f000101010100000046494e4953484544
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000130000002500000001000000080000000700000007000000080000000800000008000000020000000100000003000000120000000100000002000000010000000100000001000000010000000700000017000000
         paramName:
@@ -840,7 +856,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000090000000a00000012000000160000001a000000220000002a0000003200000036000000370000000000000058000000590000005d0000005e0000005f000000600000006100000065000000
         paramByteDataSize: 00000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000021000000000000000100000004000000010000000100000001000000010000000400000008000000
     - name: Sort UI to top
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -859,6 +875,7 @@ MonoBehaviour:
         toState: Wait
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -892,17 +909,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Reset sorting
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -921,6 +938,7 @@ MonoBehaviour:
         toState: Enable UI
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -954,15 +972,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Show Cell Phone 5
       description: Spin for daily prizes and come back often to unlock reward chests
       colorIndex: 5
@@ -983,6 +1001,7 @@ MonoBehaviour:
         toState: Hide Tutorial 4
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1000,14 +1019,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1020,11 +1039,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1039,9 +1058,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5370696e427574746f6e000000000000000000010000a0410000a04100000000030000000000000000000000000000000000c8c20000003f0000003f0000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e657732009a99193f010101005370696e427574746f6e46494e49534845444461696c795370696e427574746f6e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000025000000010000000800000007000000070000000800000008000000080000000200000001000000030000001200000001000000020000000100000001000000010000000100000003000000130000001700000003000000
         paramName:
@@ -1072,7 +1091,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000a00000013000000140000001c00000020000000240000002c000000340000003c00000040000000410000000000000062000000630000006700000068000000690000006a0000006b00000001000000750000007d000000
         paramByteDataSize: 0a000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000021000000000000000100000004000000010000000100000001000000010000000a00000000000000080000000f000000
     - name: Hide Tutorial 2
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -1091,6 +1110,7 @@ MonoBehaviour:
         toState: Disable Spin Button 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1124,15 +1144,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Show Cell Phone 6
       description: Spin for daily prizes and come back often to unlock reward chests
       colorIndex: 5
@@ -1153,6 +1173,7 @@ MonoBehaviour:
         toState: Hide Tutorial 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1170,14 +1191,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1190,11 +1211,11 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1209,9 +1230,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5370696e427574746f6e000000000000000000010000a0410000a0410000000001000000000000000000000000009643000000000000003f0000003f0000964301476c6f62616c55492e50726f6772657373696f6e5475746f7269616c2e4e657732009a99193f010101005370696e427574746f6e46494e49534845444461696c795370696e427574746f6e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000025000000010000000800000007000000070000000800000008000000080000000200000001000000030000001200000001000000020000000100000001000000010000000100000003000000130000001700000003000000
         paramName:
@@ -1242,7 +1263,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000a00000013000000140000001c00000020000000240000002c000000340000003c00000040000000410000000000000062000000630000006700000068000000690000006a0000006b00000001000000750000007d000000
         paramByteDataSize: 0a000000000000000900000001000000080000000400000004000000080000000800000008000000040000000100000021000000000000000100000004000000010000000100000001000000010000000a00000000000000080000000f000000
     - name: Hide Tutorial 4
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -1261,6 +1282,7 @@ MonoBehaviour:
         toState: Disable Spin Button
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1294,17 +1316,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Wait
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1323,6 +1345,7 @@ MonoBehaviour:
         toState: PC/MAC? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1338,8 +1361,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1352,8 +1375,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SpinButton
@@ -1371,9 +1394,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000a040cdcc4c3e000000003f0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 12000000020000000200000001000000130000000f0000001700000001000000
         paramName:
@@ -1388,7 +1411,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000040000000800000000000000090000000e00000016000000
         paramByteDataSize: 0000000004000000040000000100000000000000050000000800000001000000
     - name: WaitForButton
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1407,6 +1430,7 @@ MonoBehaviour:
         toState: TapButton
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1420,8 +1444,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1434,8 +1458,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: OKButton
@@ -1453,9 +1477,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000a040cdcc4c3e00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1200000002000000020000000100000013000000
         paramName:
@@ -1467,7 +1491,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000040000000800000000000000
         paramByteDataSize: 0000000004000000040000000100000000000000
     - name: TapButton
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1486,6 +1510,7 @@ MonoBehaviour:
         toState: WaitForCheckmark
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1499,8 +1524,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1526,9 +1551,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4f4b427574746f6e46494e4953484544
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000017000000
         paramName:
@@ -1538,7 +1563,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000008000000
         paramByteDataSize: 080000000000000008000000
     - name: WaitForCheckmark
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1557,6 +1582,7 @@ MonoBehaviour:
         toState: Show Cell Phone 4
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1591,9 +1617,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000040400046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -1603,7 +1629,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: WaitForButton 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1622,6 +1648,7 @@ MonoBehaviour:
         toState: TapButton 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1635,8 +1662,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1649,8 +1676,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: OKButton
@@ -1668,9 +1695,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000a040cdcc4c3e00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1200000002000000020000000100000013000000
         paramName:
@@ -1682,7 +1709,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000040000000800000000000000
         paramByteDataSize: 0000000004000000040000000100000000000000
     - name: TapButton 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1701,6 +1728,7 @@ MonoBehaviour:
         toState: WaitForCheckmark 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1714,8 +1742,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1741,9 +1769,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4f4b427574746f6e46494e4953484544
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000017000000
         paramName:
@@ -1753,7 +1781,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000008000000
         paramByteDataSize: 080000000000000008000000
     - name: WaitForCheckmark 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1772,6 +1800,7 @@ MonoBehaviour:
         toState: Show Cell Phone 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1806,9 +1835,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000040400046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -1818,7 +1847,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: Disable Spin Button
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1837,6 +1866,7 @@ MonoBehaviour:
         toState: WaitForButton 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1871,9 +1901,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4461696c795370696e427574746f6e00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000001000000
         paramName:
@@ -1882,7 +1912,7 @@ MonoBehaviour:
         paramDataPos: 000000000f000000
         paramByteDataSize: 0f00000001000000
     - name: Disable Spin Button 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1901,6 +1931,7 @@ MonoBehaviour:
         toState: WaitForButton
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1935,9 +1966,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4461696c795370696e427574746f6e00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000001000000
         paramName:
@@ -1946,7 +1977,7 @@ MonoBehaviour:
         paramDataPos: 000000000f000000
         paramByteDataSize: 0f00000001000000
     - name: Disable Spin Button 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1965,6 +1996,7 @@ MonoBehaviour:
         toState: End
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1999,9 +2031,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4461696c795370696e427574746f6e00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000001000000
         paramName:
@@ -2010,7 +2042,7 @@ MonoBehaviour:
         paramDataPos: 000000000f000000
         paramByteDataSize: 0f00000001000000
     - name: Enable UI
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -2029,6 +2061,7 @@ MonoBehaviour:
         toState: Disable Spin Button 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2062,15 +2095,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2106,23 +2139,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -2143,6 +2179,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
