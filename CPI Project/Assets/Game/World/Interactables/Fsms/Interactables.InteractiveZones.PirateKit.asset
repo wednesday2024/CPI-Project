@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: Interactables.InteractiveZones.PirateKit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: General
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Setup
     states:
     - name: Wait For Local Player Action
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Action 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnAction2Button
@@ -46,6 +48,7 @@ MonoBehaviour:
         toState: Action 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnAction3Button
@@ -54,6 +57,7 @@ MonoBehaviour:
         toState: Action 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: CancelFSM
@@ -62,6 +66,7 @@ MonoBehaviour:
         toState: Cancelled
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnJumpButton
@@ -70,6 +75,7 @@ MonoBehaviour:
         toState: StopCurrentSound
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -86,7 +92,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: Penguin
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -94,8 +100,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -120,9 +126,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4f6e416374696f6e31427574746f6e4f6e416374696f6e32427574746f6e4f6e416374696f6e33427574746f6e4f6e4a756d70427574746f6e0100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 17000000170000001700000017000000170000001700000011000000170000001400000013000000
         paramName:
@@ -139,7 +145,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000f0000001e0000002d00000039000000390000003b0000000000000000000000
         paramByteDataSize: 000000000f0000000f0000000f0000000c0000000000000002000000000000000000000000000000
     - name: Action 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -158,6 +164,7 @@ MonoBehaviour:
         toState: Wait For Local Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: CancelFSM
@@ -166,6 +173,7 @@ MonoBehaviour:
         toState: Cancelled
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -189,20 +197,20 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -216,34 +224,34 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: Action2AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action2SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action2SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -258,9 +266,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 07000000010100000000000000000000003f0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 070000000100000013000000120000001200000013000000070000001200000012000000010000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -283,7 +291,7 @@ MonoBehaviour:
         paramDataPos: 0000000004000000000000000000000001000000010000000500000002000000030000000900000004000000020000000a0000000e0000001300000013000000
         paramByteDataSize: 04000000010000000000000000000000000000000000000004000000000000000000000001000000000000000000000004000000050000000000000001000000
     - name: Action 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -302,6 +310,7 @@ MonoBehaviour:
         toState: Wait For Local Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: CancelFSM
@@ -310,6 +319,7 @@ MonoBehaviour:
         toState: Cancelled
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -338,31 +348,31 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: SqueezeBox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: SqueezeBox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -371,7 +381,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: Penguin
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -383,53 +393,53 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: PirateKitSqueezeBoxProp(Clone)
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Untagged
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: squeezeBox
         - useVariable: 1
           name: Action3AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action3SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action3SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -444,9 +454,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0700000000010100000000000000000000003f0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 14000000120000001200000013000000070000000100000013000000120000000100000013000000120000001200000013000000070000001200000012000000010000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -476,7 +486,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000000000000004000000010000000200000005000000020000000300000004000000030000000600000005000000060000000a00000007000000040000000b0000000f0000001400000014000000
         paramByteDataSize: 0000000000000000000000000000000004000000010000000000000000000000010000000000000000000000000000000000000004000000000000000000000001000000000000000000000004000000050000000000000001000000
     - name: Action 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -495,6 +505,7 @@ MonoBehaviour:
         toState: Wait For Local Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: CancelFSM
@@ -503,6 +514,7 @@ MonoBehaviour:
         toState: Cancelled
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -526,20 +538,20 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -553,34 +565,34 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: Action1AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action1SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action1SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -595,9 +607,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 07000000010100000000000000000000003f0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 070000000100000013000000120000001200000013000000070000001200000012000000010000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -620,7 +632,7 @@ MonoBehaviour:
         paramDataPos: 0000000004000000000000000000000001000000010000000500000002000000030000000900000004000000020000000a0000000e0000001300000013000000
         paramByteDataSize: 04000000010000000000000000000000000000000000000004000000000000000000000001000000000000000000000004000000050000000000000001000000
     - name: Setup
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -639,6 +651,7 @@ MonoBehaviour:
         toState: Wait For Local Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnRemotePlayerAttached
@@ -647,6 +660,7 @@ MonoBehaviour:
         toState: Wait For Remote Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -665,13 +679,13 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: MyOwner
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: MyOwner
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -679,8 +693,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -692,8 +706,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Player
@@ -711,9 +725,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4f6e4c6f63616c506c6179657241747461636865644f6e52656d6f7465506c6179657241747461636865640001004f6e4c6f63616c506c6179657241747461636865644f6e52656d6f7465506c6179657241747461636865640001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000013000000130000001200000017000000170000001100000001000000170000001700000011000000
         paramName:
@@ -731,7 +745,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000150000002b0000002d0000002e0000004300000059000000
         paramByteDataSize: 0000000000000000000000000000000015000000160000000200000001000000150000001600000002000000
     - name: Wait For Remote Player Action
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -750,6 +764,7 @@ MonoBehaviour:
         toState: Remote Action 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnAction2Button
@@ -758,6 +773,7 @@ MonoBehaviour:
         toState: Remote Action 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: OnAction3Button
@@ -766,6 +782,7 @@ MonoBehaviour:
         toState: Remote Action 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -800,9 +817,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 4f6e416374696f6e31427574746f6e4f6e416374696f6e32427574746f6e4f6e416374696f6e33427574746f6e0100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1700000017000000170000001700000017000000170000001100000017000000
         paramName:
@@ -817,7 +834,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000f0000001e0000002d0000002d0000002d0000002f000000
         paramByteDataSize: 000000000f0000000f0000000f00000000000000000000000200000000000000
     - name: Remote Action 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -836,6 +853,7 @@ MonoBehaviour:
         toState: Wait For Remote Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -853,14 +871,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -874,16 +892,16 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: Action2AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action2SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -898,9 +916,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 01000000000000003f0001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0100000013000000120000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -916,7 +934,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000100000001000000050000000a0000000a000000
         paramByteDataSize: 010000000000000000000000000000000000000004000000050000000000000001000000
     - name: Remote Action 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -935,6 +953,7 @@ MonoBehaviour:
         toState: Wait For Remote Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -957,25 +976,25 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: SqueezeBox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: SqueezeBox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -984,7 +1003,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: Penguin
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -996,35 +1015,35 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: PirateKitSqueezeBoxProp(Clone)
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Untagged
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: squeezeBox
         - useVariable: 1
           name: Action3AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action3SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1039,9 +1058,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0001000000000000003f0001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000130000000100000013000000120000000100000013000000120000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -1064,7 +1083,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000100000000000000000000000100000002000000010000000200000003000000040000000300000002000000060000000b0000000b000000
         paramByteDataSize: 00000000000000000000000000000000010000000000000000000000010000000000000000000000000000000000000004000000050000000000000001000000
     - name: Remote Action 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1083,6 +1102,7 @@ MonoBehaviour:
         toState: Wait For Remote Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1100,14 +1120,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1121,16 +1141,16 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: Action1AnimationTrigger
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         - useVariable: 1
           name: Action1SoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1145,9 +1165,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 01000000000000003f0001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0100000013000000120000001200000013000000070000000f0000001700000001000000
         paramName:
@@ -1163,7 +1183,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000100000001000000050000000a0000000a000000
         paramByteDataSize: 010000000000000000000000000000000000000004000000050000000000000001000000
     - name: Cancelled
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1189,14 +1209,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1210,13 +1230,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SFX/Player/Props/StopAll
@@ -1234,9 +1254,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0100000015000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001300000007000000120000001300000007000000
         paramName:
@@ -1249,7 +1269,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000100000004000000
         paramByteDataSize: 000000000000000004000000000000000000000004000000
     - name: StopCurrentSound
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1268,6 +1288,7 @@ MonoBehaviour:
         toState: Wait For Local Player Action
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1283,14 +1304,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1304,13 +1325,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: CurrentSoundEventName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SFX/Player/Props/StopAll
@@ -1328,9 +1349,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0100000015000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001300000007000000120000001300000007000000
         paramName:
@@ -1375,52 +1396,52 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: Action1AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action1SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action2AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action2SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action3AnimationTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: Action3SoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: ActionButtonsPrefabPath
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: CurrentSoundEventName
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
-        value:
+        value: 
       vector2Variables: []
       vector3Variables: []
       colorVariables: []
@@ -1429,19 +1450,19 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: MyOwner
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: Penguin
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: SqueezeBox
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -1452,23 +1473,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -1489,6 +1513,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

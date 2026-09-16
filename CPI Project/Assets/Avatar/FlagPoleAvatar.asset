@@ -3,8 +3,9 @@
 --- !u!90 &9000000
 Avatar:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: FlagPoleAvatar
   m_AvatarSize: 1376
   m_Avatar:
@@ -28,15 +29,7 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 0
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 2623001219
-        - 2691107320
-        - 4113879523
-        - 631023376
-        - 2867539194
-        - 3714957397
-        - 2870744485
+        m_ID: 0000000083d2579cf80967a0e3d134f510a79c25fa2cebaa55c06ddda5151cab
         m_AxesArray: []
     m_AvatarSkeletonPose:
       data:
@@ -56,10 +49,10 @@ Avatar:
         - t: {x: 0.18446365, y: 0, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: 0.17245723, y: 2.842171E-16, z: 0}
+        - t: {x: 0.17245723, y: 2.842171e-16, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: 0.1932745, y: 2.842171E-16, z: 0}
+        - t: {x: 0.1932745, y: 2.842171e-16, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
         - t: {x: -0, y: 0, z: 0}
@@ -83,24 +76,16 @@ Avatar:
         - t: {x: 0.18446365, y: 0, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: 0.17245723, y: 2.842171E-16, z: 0}
+        - t: {x: 0.17245723, y: 2.842171e-16, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: 0.1932745, y: 2.842171E-16, z: 0}
+        - t: {x: 0.1932745, y: 2.842171e-16, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
         - t: {x: -0, y: 0, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-    m_SkeletonNameIDArray:
-    - 0
-    - 2623001219
-    - 2105674367
-    - 889705834
-    - 1923592122
-    - 1338476042
-    - 4259797530
-    - 2870744485
+    m_SkeletonNameIDArray: 0000000083d2579c7f0a827d6ad50735baafa7720a86c74f1a5ae7fda5151cab
     m_Human:
       data:
         serializedVersion: 2
@@ -111,75 +96,18 @@ Avatar:
         m_Skeleton:
           data:
             m_Node: []
-            m_ID: []
+            m_ID: 
             m_AxesArray: []
         m_SkeletonPose:
           data:
             m_X: []
         m_LeftHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_RightHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-        m_Handles: []
-        m_ColliderArray: []
-        m_HumanBoneIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_HumanBoneMass:
         - 0.14545456
         - 0.12121213
@@ -206,32 +134,6 @@ Avatar:
         - 0
         - 0
         - 0
-        m_ColliderIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
         m_Scale: 1
         m_ArmTwist: 0.5
         m_ForeArmTwist: 0.5
@@ -243,8 +145,8 @@ Avatar:
         m_HasLeftHand: 0
         m_HasRightHand: 0
         m_HasTDoF: 0
-    m_HumanSkeletonIndexArray: []
-    m_HumanSkeletonReverseIndexArray: []
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
     m_RootMotionBoneIndex: 1
     m_RootMotionBoneX:
       t: {x: 0, y: 0, z: 0}
@@ -257,22 +159,34 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 0
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 2623001219
+        m_ID: 0000000083d2579c
         m_AxesArray: []
     m_RootMotionSkeletonPose:
       data:
         m_X: []
-    m_RootMotionSkeletonIndexArray:
-    - 0
-    - 1
+    m_RootMotionSkeletonIndexArray: 0000000001000000
   m_TOS:
-  - 0:
-  - 631023376: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt
-  - 2623001219: flagPole_jnt
-  - 2691107320: flagPole_jnt/flagPole_A_jnt
-  - 2867539194: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt/flag_C_jnt
-  - 2870744485: flagPole
-  - 3714957397: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt/flag_C_jnt/flag_D_jnt
-  - 4113879523: flagPole_jnt/flagPole_A_jnt/flag_A_jnt
+    4113879523: flagPole_jnt/flagPole_A_jnt/flag_A_jnt
+    2691107320: flagPole_jnt/flagPole_A_jnt
+    3714957397: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt/flag_C_jnt/flag_D_jnt
+    2623001219: flagPole_jnt
+    0: 
+    2867539194: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt/flag_C_jnt
+    2870744485: flagPole
+    631023376: flagPole_jnt/flagPole_A_jnt/flag_A_jnt/flag_B_jnt
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1

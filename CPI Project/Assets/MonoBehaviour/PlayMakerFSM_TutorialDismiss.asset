@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: PlayMakerFSM_TutorialDismiss
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: AutomatedTest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Find Director
     states:
     - name: Press Anywhere
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Wait
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -72,10 +74,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 05000000
         paramName:
@@ -83,7 +85,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Find Director
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -102,6 +104,7 @@ MonoBehaviour:
         toState: Is Tutorial Finished?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -118,7 +121,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: TutorialDirector
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -131,14 +134,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: TutorialFSMContainer
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Untagged
@@ -156,9 +159,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000a0400046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1200000012000000130000000f0000001700000001000000
         paramName:
@@ -171,7 +174,7 @@ MonoBehaviour:
         paramDataPos: 00000000010000000000000000000000050000000d000000
         paramByteDataSize: 000000000000000000000000050000000800000001000000
     - name: Finish
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -215,17 +218,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Is Tutorial Finished?
-      description:
+      description: 
       colorIndex: 1
       position:
         serializedVersion: 2
@@ -244,6 +247,7 @@ MonoBehaviour:
         toState: Finish
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: NO
@@ -252,6 +256,7 @@ MonoBehaviour:
         toState: Determine Actions
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -266,7 +271,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: TutorialDirector
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -292,9 +297,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5945534e4f000100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1300000017000000170000001100000001000000
         paramName:
@@ -306,7 +311,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000030000000500000007000000
         paramByteDataSize: 0000000003000000020000000200000001000000
     - name: Determine Actions
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -325,6 +330,7 @@ MonoBehaviour:
         toState: Press Anywhere
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: FINISHED
@@ -333,6 +339,7 @@ MonoBehaviour:
         toState: Wait
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: PRESS BUTTON
@@ -341,6 +348,7 @@ MonoBehaviour:
         toState: Press Button
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -355,7 +363,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: TutorialDirector
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -369,10 +377,10 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: ButtonPath
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -387,9 +395,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 46494e4953484544505245535320414e595748455245505245535320425554544f4e
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1300000017000000170000001200000017000000
         paramName:
@@ -401,7 +409,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000080000000000000016000000
         paramByteDataSize: 00000000080000000e000000000000000c000000
     - name: Wait
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -420,6 +428,7 @@ MonoBehaviour:
         toState: Is Tutorial Finished?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -454,9 +463,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000803f0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -466,7 +475,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: Press Button
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -485,6 +494,7 @@ MonoBehaviour:
         toState: Wait
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -510,17 +520,17 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: HierarchyPath
         - useVariable: 1
           name: ButtonPath
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -534,10 +544,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 05000000120000001200000005000000
         paramName:
@@ -571,10 +581,10 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: ButtonPath
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
-        value:
+        value: 
       vector2Variables: []
       vector3Variables: []
       colorVariables: []
@@ -583,7 +593,7 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: TutorialDirector
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -594,23 +604,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -631,6 +644,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

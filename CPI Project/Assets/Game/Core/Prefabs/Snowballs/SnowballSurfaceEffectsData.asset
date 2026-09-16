@@ -3,96 +3,127 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15dc49a4103f8f55011081f488561bf3, type: 3}
   m_Name: SnowballSurfaceEffectsData
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Effects:
-  - System: {fileID: 198347138634126139, guid: efa06f785bbd76f4a819f08784159b4c, type: 2}
+  - System: {fileID: 198347138634126139, guid: efa06f785bbd76f4a819f08784159b4c, type: 3}
     SurfaceLayer:
       serializedVersion: 2
       m_Bits: 1073750017
-    SurfaceTag:
+    SurfaceTag: 
     UseCollisionHeight: 1
     WalkSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     JogSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
+    StoppingSwitch:
+      EventName: 
+      SwitchValue: 
+    SprintSwitch:
+      EventName: 
+      SwitchValue: 
     LandSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     TubeSlideLoopSwitch:
-      EventName:
-      SwitchValue:
-  - System: {fileID: 198347138634126139, guid: efa06f785bbd76f4a819f08784159b4c, type: 2}
+      EventName: 
+      SwitchValue: 
+  - System: {fileID: 198347138634126139, guid: efa06f785bbd76f4a819f08784159b4c, type: 3}
     SurfaceLayer:
       serializedVersion: 2
       m_Bits: 393216
-    SurfaceTag:
+    SurfaceTag: 
     UseCollisionHeight: 0
     WalkSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     JogSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
+    StoppingSwitch:
+      EventName: 
+      SwitchValue: 
+    SprintSwitch:
+      EventName: 
+      SwitchValue: 
     LandSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     TubeSlideLoopSwitch:
-      EventName:
-      SwitchValue:
-  - System: {fileID: 198050165294974604, guid: c4b4d9d564b2a114e9ac53df2a847ba1, type: 2}
+      EventName: 
+      SwitchValue: 
+  - System: {fileID: 198050165294974604, guid: c4b4d9d564b2a114e9ac53df2a847ba1, type: 3}
     SurfaceLayer:
       serializedVersion: 2
       m_Bits: 16
-    SurfaceTag:
+    SurfaceTag: 
     UseCollisionHeight: 0
     WalkSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     JogSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
+    StoppingSwitch:
+      EventName: 
+      SwitchValue: 
+    SprintSwitch:
+      EventName: 
+      SwitchValue: 
     LandSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     TubeSlideLoopSwitch:
-      EventName:
-      SwitchValue:
-  - System: {fileID: 198932311641183304, guid: 41de3918ce62ff7479c17c3d3873f54c, type: 2}
+      EventName: 
+      SwitchValue: 
+  - System: {fileID: 198932311641183304, guid: 41de3918ce62ff7479c17c3d3873f54c, type: 3}
     SurfaceLayer:
       serializedVersion: 2
       m_Bits: 134217744
     SurfaceTag: Fire
     UseCollisionHeight: 0
     WalkSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     JogSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
+    StoppingSwitch:
+      EventName: 
+      SwitchValue: 
+    SprintSwitch:
+      EventName: 
+      SwitchValue: 
     LandSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
     TubeSlideLoopSwitch:
-      EventName:
-      SwitchValue:
+      EventName: 
+      SwitchValue: 
   DefaultWalkSwitch:
-    EventName:
-    SwitchValue:
+    EventName: 
+    SwitchValue: 
   DefaultJogSwitch:
-    EventName:
-    SwitchValue:
+    EventName: 
+    SwitchValue: 
+  DefaultStoppingSwitch:
+    EventName: 
+    SwitchValue: 
+  DefaultSprintSwitch:
+    EventName: 
+    SwitchValue: 
   DefaultLandSwitch:
-    EventName:
-    SwitchValue:
+    EventName: 
+    SwitchValue: 
   DefaultTubeSlideLoopSwitch:
-    EventName:
-    SwitchValue:
+    EventName: 
+    SwitchValue: 

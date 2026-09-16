@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: SunSet2018_QuestHints
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: General
   fsm:
     dataVersion: 2
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Wait 5 seconds
     states:
     - name: HasPlayerTalked to 02 Rookie?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 03 AuntArctic?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -46,6 +48,7 @@ MonoBehaviour:
         toState: Rookie Pop-Up Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -68,7 +71,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo02Rookie
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo02Rookie
@@ -87,10 +90,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -100,7 +103,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 03 AuntArctic?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -119,6 +122,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 04 Rory?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -127,6 +131,7 @@ MonoBehaviour:
         toState: Aunt Arctic Pop-Up Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -149,7 +154,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo03AuntArctic
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo03AuntArctic
@@ -168,10 +173,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -181,7 +186,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 07 Rockhopper?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -200,6 +205,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 08 DJCadence?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -208,6 +214,7 @@ MonoBehaviour:
         toState: Rockhopper Pop-Up
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -230,7 +237,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo07Rockhopper
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo07Rockhopper
@@ -249,10 +256,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -262,7 +269,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 08 DJCadence?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -281,6 +288,7 @@ MonoBehaviour:
         toState: YAY We're DONE!
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -289,6 +297,7 @@ MonoBehaviour:
         toState: DJCadence Pop-Up
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -311,7 +320,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo08DJCadence
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo08DJCadence
@@ -330,10 +339,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -343,7 +352,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 01 JPG?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -362,6 +371,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 02 Rookie?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -370,6 +380,7 @@ MonoBehaviour:
         toState: JetPackGuy Pop-Up Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -392,7 +403,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo01JPG
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo01JPG
@@ -411,10 +422,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -424,7 +435,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 04 Rory?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -443,6 +454,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 05 Dot?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -451,6 +463,7 @@ MonoBehaviour:
         toState: Rory Pop-Up Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -473,7 +486,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo04Rory
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo04Rory
@@ -492,10 +505,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -505,7 +518,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 05 Dot?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -524,6 +537,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 06 Gary?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -532,6 +546,7 @@ MonoBehaviour:
         toState: Dot Pop-Up Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -554,7 +569,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo05Dot
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo05Dot
@@ -573,10 +588,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -586,7 +601,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HasPlayerTalked to 06 Gary?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -605,6 +620,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 07 Rockhopper?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -613,6 +629,7 @@ MonoBehaviour:
         toState: Gary Pop-Up Hint 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -635,7 +652,7 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: PlayerPref_TalkedTo06Gary
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SunSet2018_TalkedTo06Gary
@@ -654,10 +671,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001700000017000000
         paramName:
@@ -667,7 +684,8 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: YAY We're DONE!
-      description: But I"m still gonna stick around incase we reset the quest and I'm needed again. :)
+      description: But I"m still gonna stick around incase we reset the quest and
+        I'm needed again. :)
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -686,14 +704,15 @@ MonoBehaviour:
         toState: Wait for Quest to Be Reset
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -717,15 +736,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Wait for Quest to Be Reset
       description: This states waits for the Quest to be reset. :)
       colorIndex: 0
@@ -746,6 +765,7 @@ MonoBehaviour:
         toState: QuestHasBeenReset = False
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -775,13 +795,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: QuestHasBeenReset
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -792,10 +812,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - 
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 110000001700000011000000
         paramName:
@@ -824,6 +844,7 @@ MonoBehaviour:
         toState: Wait 5 seconds
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -853,13 +874,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: QuestHasBeenReset
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -870,9 +891,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 110000001100000001000000
         paramName:
@@ -901,6 +922,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -923,23 +945,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -957,9 +979,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1003,6 +1025,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1025,23 +1048,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1059,9 +1082,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1105,6 +1128,7 @@ MonoBehaviour:
         toState: HUB 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1133,13 +1157,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: 5SecondIntervals
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -1151,9 +1175,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000001000000
         paramName:
@@ -1163,7 +1187,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000001000000
     - name: HUB 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1182,14 +1206,15 @@ MonoBehaviour:
         toState: Wait 5 seconds
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1213,15 +1238,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Aunt Arctic Pop-Up Hint
       description: Come speak with me.
       colorIndex: 2
@@ -1242,6 +1267,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1264,23 +1290,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1298,9 +1324,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1344,6 +1370,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1366,23 +1393,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1400,9 +1427,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1446,6 +1473,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1468,23 +1496,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1502,9 +1530,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1548,6 +1576,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1570,23 +1599,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1604,9 +1633,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1650,6 +1679,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1672,23 +1702,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1706,9 +1736,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1752,6 +1782,7 @@ MonoBehaviour:
         toState: Reset 5SecondIntervals to 0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1774,23 +1805,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/AA/AAC001Q002/Obj0/1-6
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1808,9 +1839,9 @@ MonoBehaviour:
         - AuntArctic
         - 
         byteData: 0000000000000000000000008040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1835,7 +1866,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000500000001000000060000000a000000020000000e0000000f00000010000000000000001100000012000000010000001300000002000000
         paramByteDataSize: 000000000100000000000000040000000100000000000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000
     - name: Wait 5 seconds
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -1854,6 +1885,7 @@ MonoBehaviour:
         toState: Time for a hint?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1880,8 +1912,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 5
@@ -1895,9 +1927,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -1926,6 +1958,7 @@ MonoBehaviour:
         toState: Is Tray Down?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -1934,6 +1967,7 @@ MonoBehaviour:
         toState: Tick
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1962,13 +1996,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: 5SecondIntervals
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 24
@@ -1983,9 +2017,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -2017,6 +2051,7 @@ MonoBehaviour:
         toState: Wait 5 seconds
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2045,13 +2080,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: 5SecondIntervals
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -2063,9 +2098,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000001000000
         paramName:
@@ -2094,6 +2129,7 @@ MonoBehaviour:
         toState: Then Dont Show Hint2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -2102,6 +2138,7 @@ MonoBehaviour:
         toState: HasPlayerTalked to 01 JPG?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2130,8 +2167,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -2147,9 +2184,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f00000017000000010000001700000017000000
         paramName:
@@ -2161,7 +2198,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000000000000100000002000000
         paramByteDataSize: 0000000000000000010000000000000000000000
     - name: Then Dont Show Hint2
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -2180,14 +2217,15 @@ MonoBehaviour:
         toState: Wait 5 seconds
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -2211,15 +2249,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2251,63 +2289,63 @@ MonoBehaviour:
       intVariables:
       - useVariable: 1
         name: 5SecondIntervals
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       boolVariables:
       - useVariable: 1
         name: QuestHasBeenReset
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       stringVariables:
       - useVariable: 1
         name: PlayerPref_TalkedTo01JPG
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo01JPG
       - useVariable: 1
         name: PlayerPref_TalkedTo02Rookie
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo02Rookie
       - useVariable: 1
         name: PlayerPref_TalkedTo03AuntArctic
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo03AuntArctic
       - useVariable: 1
         name: PlayerPref_TalkedTo04Rory
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo04Rory
       - useVariable: 1
         name: PlayerPref_TalkedTo05Dot
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo05Dot
       - useVariable: 1
         name: PlayerPref_TalkedTo06Gary
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo06Gary
       - useVariable: 1
         name: PlayerPref_TalkedTo07Rockhopper
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo07Rockhopper
       - useVariable: 1
         name: PlayerPref_TalkedTo08DJCadence
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: SunSet2018_TalkedTo08DJCadence
@@ -2325,22 +2363,25 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-    description:
-    docUrl:
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -2361,6 +2402,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

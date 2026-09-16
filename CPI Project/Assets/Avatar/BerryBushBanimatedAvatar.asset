@@ -3,8 +3,9 @@
 --- !u!90 &9000000
 Avatar:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: BerryBushBanimatedAvatar
   m_AvatarSize: 832
   m_Avatar:
@@ -20,11 +21,7 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 2
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 3406642299
-        - 1809124778
-        - 3674175907
+        m_ID: 000000007b3c0dcbaa0dd56ba379ffda
         m_AxesArray: []
     m_AvatarSkeletonPose:
       data:
@@ -38,7 +35,7 @@ Avatar:
         - t: {x: -0, y: 0, z: 0}
           q: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: -0.23173852, y: 0, z: 4.262521E-17}
+        - t: {x: -0.23173852, y: 0, z: 4.262521e-17}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
     m_DefaultPose:
@@ -53,14 +50,10 @@ Avatar:
         - t: {x: -0, y: 0, z: 0}
           q: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
           s: {x: 1, y: 1, z: 1}
-        - t: {x: -0.23173852, y: 0, z: 4.262521E-17}
+        - t: {x: -0.23173852, y: 0, z: 4.262521e-17}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-    m_SkeletonNameIDArray:
-    - 0
-    - 3406642299
-    - 1809124778
-    - 4074527760
+    m_SkeletonNameIDArray: 000000007b3c0dcbaa0dd56b105cdcf2
     m_Human:
       data:
         serializedVersion: 2
@@ -71,75 +64,18 @@ Avatar:
         m_Skeleton:
           data:
             m_Node: []
-            m_ID: []
+            m_ID: 
             m_AxesArray: []
         m_SkeletonPose:
           data:
             m_X: []
         m_LeftHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_RightHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-        m_Handles: []
-        m_ColliderArray: []
-        m_HumanBoneIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_HumanBoneMass:
         - 0.14545456
         - 0.12121213
@@ -166,32 +102,6 @@ Avatar:
         - 0
         - 0
         - 0
-        m_ColliderIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
         m_Scale: 1
         m_ArmTwist: 0.5
         m_ForeArmTwist: 0.5
@@ -203,8 +113,8 @@ Avatar:
         m_HasLeftHand: 0
         m_HasRightHand: 0
         m_HasTDoF: 0
-    m_HumanSkeletonIndexArray: []
-    m_HumanSkeletonReverseIndexArray: []
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
     m_RootMotionBoneIndex: -1
     m_RootMotionBoneX:
       t: {x: 0, y: 0, z: 0}
@@ -213,14 +123,30 @@ Avatar:
     m_RootMotionSkeleton:
       data:
         m_Node: []
-        m_ID: []
+        m_ID: 
         m_AxesArray: []
     m_RootMotionSkeletonPose:
       data:
         m_X: []
-    m_RootMotionSkeletonIndexArray: []
+    m_RootMotionSkeletonIndexArray: 
   m_TOS:
-  - 0:
-  - 1809124778: BerryBushJointA
-  - 3406642299: BerryBushB
-  - 3674175907: BerryBushJointA/BerryBushJointB
+    3674175907: BerryBushJointA/BerryBushJointB
+    0: 
+    3406642299: BerryBushB
+    1809124778: BerryBushJointA
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1

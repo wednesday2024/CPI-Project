@@ -961,7 +961,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Spawn TreasureChest [Root]
+        toState: 'Spawn TreasureChest [Root]'
         linkStyle: 0
         linkConstraint: 0
         linkTarget: 0
@@ -1033,7 +1033,7 @@ MonoBehaviour:
         - StoreObject
         paramDataPos: 0000000001000000000000000d0000001a00000002000000
         paramByteDataSize: 00000000000000000d0000000d0000000d00000000000000
-    - name: Spawn TreasureChest [Root]
+    - name: 'Spawn TreasureChest [Root]'
       description: 
       colorIndex: 0
       position:
@@ -3940,7 +3940,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Spawn Sparkles [Root]
+        toState: 'Spawn Sparkles [Root]'
         linkStyle: 0
         linkConstraint: 0
         linkTarget: 0
@@ -3989,7 +3989,7 @@ MonoBehaviour:
         - realTime
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
-    - name: Spawn Sparkles [Root]
+    - name: 'Spawn Sparkles [Root]'
       description: 
       colorIndex: 0
       position:

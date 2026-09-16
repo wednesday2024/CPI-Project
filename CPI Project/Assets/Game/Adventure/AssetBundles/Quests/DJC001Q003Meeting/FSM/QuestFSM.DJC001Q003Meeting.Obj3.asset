@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.DJC001Q003Meeting.Obj3
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 2
@@ -38,14 +39,15 @@ MonoBehaviour:
         toState: Find Local Player
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -69,17 +71,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Find Local Player
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -98,6 +100,7 @@ MonoBehaviour:
         toState: Find RootDot
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -112,7 +115,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -125,14 +128,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Player
@@ -149,10 +152,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -162,7 +165,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000000000000
     - name: Find RootRory
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -181,6 +184,7 @@ MonoBehaviour:
         toState: Find RootRoryTopLevel
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -195,7 +199,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRory
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -203,8 +207,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -217,13 +221,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRory
@@ -241,9 +245,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -255,7 +259,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootRoryTopLevel
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -274,6 +278,7 @@ MonoBehaviour:
         toState: Get FSM Bool RootPlayerHasNewPizza
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -288,7 +293,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRoryTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -296,8 +301,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -310,13 +315,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRoryTopLevel
@@ -334,9 +339,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -348,7 +353,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootDot
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -367,6 +372,7 @@ MonoBehaviour:
         toState: Find RootDotTopLevel
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -381,7 +387,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootDot
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -389,8 +395,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -403,13 +409,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootDot
@@ -427,9 +433,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -441,7 +447,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootDotTopLevel
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -460,6 +466,7 @@ MonoBehaviour:
         toState: Find RootRory
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -474,7 +481,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootDotTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -482,8 +489,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -496,13 +503,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootDotTopLevel
@@ -520,9 +527,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -534,7 +541,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: FORCE ADD Item RecordedMusic
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -553,6 +560,7 @@ MonoBehaviour:
         toState: FORCE ADD Item FlowerBunches x5
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -580,8 +588,8 @@ MonoBehaviour:
         fsmFloatParams: []
         fsmIntParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -594,9 +602,9 @@ MonoBehaviour:
         stringParams:
         - RecordedMusic
         byteData: 00000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000700000010000000
         paramName:
@@ -606,7 +614,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000400000000000000
     - name: FORCE ADD Item FlowerBunches x5
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -625,6 +633,7 @@ MonoBehaviour:
         toState: Player At Town 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -652,8 +661,8 @@ MonoBehaviour:
         fsmFloatParams: []
         fsmIntParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 5
@@ -666,9 +675,9 @@ MonoBehaviour:
         stringParams:
         - FlowerBunches
         byteData: 00000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000700000010000000
         paramName:
@@ -678,7 +687,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000400000000000000
     - name: Player At Town 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -697,6 +706,7 @@ MonoBehaviour:
         toState: Find RootBoombox
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -705,6 +715,7 @@ MonoBehaviour:
         toState: Player At Boardwalk
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -741,10 +752,10 @@ MonoBehaviour:
         - Town
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -754,7 +765,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000002000000
         paramByteDataSize: 000000000000000000000000
     - name: Player At Boardwalk
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -773,6 +784,7 @@ MonoBehaviour:
         toState: Animate DotTopLevel 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -781,6 +793,7 @@ MonoBehaviour:
         toState: Player At Diving
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -817,10 +830,10 @@ MonoBehaviour:
         - Boardwalk
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -849,6 +862,7 @@ MonoBehaviour:
         toState: HUB 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -863,7 +877,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootDotTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -876,8 +890,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: BoardwalkAway
@@ -895,9 +909,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -907,7 +921,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 010000000000000000000000
     - name: Player At Diving
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -926,6 +940,7 @@ MonoBehaviour:
         toState: Animate DotTopLevel 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -934,6 +949,7 @@ MonoBehaviour:
         toState: HUB 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -970,10 +986,10 @@ MonoBehaviour:
         - Diving
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -1002,6 +1018,7 @@ MonoBehaviour:
         toState: Animate RoryTopLevel 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1016,7 +1033,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootDotTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1029,8 +1046,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DivingAway
@@ -1048,9 +1065,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -1079,6 +1096,7 @@ MonoBehaviour:
         toState: HUB 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1093,7 +1111,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRoryTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1106,8 +1124,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DivingAway
@@ -1125,9 +1143,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -1137,7 +1155,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 010000000000000000000000
     - name: HUB 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1156,14 +1174,15 @@ MonoBehaviour:
         toState: HUB 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1187,17 +1206,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: HUB 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1216,14 +1235,15 @@ MonoBehaviour:
         toState: Does Player Have New Pizza 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1247,17 +1267,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Find RootRestaurantTomato
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1276,6 +1296,7 @@ MonoBehaviour:
         toState: Find RootRestaurantPepper
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1290,7 +1311,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRestaurantTomato
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1298,8 +1319,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1312,13 +1333,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRestaurantTomato
@@ -1336,9 +1357,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -1350,7 +1371,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootRestaurantPepper
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1369,6 +1390,7 @@ MonoBehaviour:
         toState: Find RootRestaurantRollingpin
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1383,7 +1405,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRestaurantPepper
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1391,8 +1413,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1405,13 +1427,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRestaurantPepper
@@ -1429,9 +1451,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -1443,7 +1465,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootRestaurantRollingpin
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1462,6 +1484,7 @@ MonoBehaviour:
         toState: Animate DotTopLevel 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1476,7 +1499,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRestaurantRollingpin
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1484,8 +1507,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1498,13 +1521,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRestaurantRollingpin
@@ -1522,9 +1545,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -1555,6 +1578,7 @@ MonoBehaviour:
         toState: Animate RoryTopLevel 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1569,7 +1593,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootDotTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1582,8 +1606,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: TownAway
@@ -1601,9 +1625,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -1632,6 +1656,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkMeetingSetUp
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1646,7 +1671,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootRoryTopLevel
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -1659,8 +1684,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: TownAway
@@ -1678,9 +1703,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -1690,7 +1715,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 010000000000000000000000
     - name: HUB 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1709,14 +1734,15 @@ MonoBehaviour:
         toState: HUB 4
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1740,17 +1766,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: HUB 4
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1769,14 +1795,15 @@ MonoBehaviour:
         toState: Does Player Have New Pizza 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1800,17 +1827,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Does Player Have New Pizza 1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1829,6 +1856,7 @@ MonoBehaviour:
         toState: Player At Town 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -1837,6 +1865,7 @@ MonoBehaviour:
         toState: ChangeObj0
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1855,8 +1884,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1869,13 +1898,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -1888,13 +1917,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -1907,9 +1936,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -1944,6 +1973,7 @@ MonoBehaviour:
         toState: Player At Town 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1979,10 +2009,10 @@ MonoBehaviour:
         stringParams:
         - Buy a Pizza
         - Quest.Text.DJC001Q003Meeting.Obj3.i18nDescription
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -1991,7 +2021,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000
         paramByteDataSize: 0000000000000000
     - name: Player At Town 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2010,6 +2040,7 @@ MonoBehaviour:
         toState: Set Waypoint PizzaMenu
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -2018,6 +2049,7 @@ MonoBehaviour:
         toState: Set Waypoint Town 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2054,10 +2086,10 @@ MonoBehaviour:
         - Town
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -2067,7 +2099,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000002000000
         paramByteDataSize: 000000000000000000000000
     - name: Spawn TriggerWalkMeetingSetUp
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -2086,6 +2118,7 @@ MonoBehaviour:
         toState: HUB 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2099,20 +2132,22 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1541168567970894, guid: dffa4931257971544ba14b5efe48e6bc, type: 2}
+          value: {fileID: 1541168567970894, guid: dffa4931257971544ba14b5efe48e6bc,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1858650030243547, guid: b13a119c3ed96834d86e48c739a28999, type: 2}
+          value: {fileID: 1858650030243547, guid: b13a119c3ed96834d86e48c739a28999,
+            type: 3}
         - useVariable: 1
           name: TriggerWalkMeetingSetUp
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -2134,40 +2169,31 @@ MonoBehaviour:
         fsmVector2Params: []
         fsmVector3Params:
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: 0
-            z: 0
+          value: {x: 0, y: 0, z: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: 0
-            z: 0
+          value: {x: 0, y: 0, z: 0}
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: 0
-            z: 0
+          value: {x: 0, y: 0, z: 0}
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c00000013000000
         paramName:
@@ -2180,7 +2206,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000002000000
         paramByteDataSize: 000000000000000000000000000000000000000000000000
     - name: Set Waypoint PizzaMenu
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2199,6 +2225,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2212,8 +2239,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -2235,14 +2262,11 @@ MonoBehaviour:
         fsmVector2Params: []
         fsmVector3Params:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: -0.25
-            z: 0
+          value: {x: 0, y: -0.25, z: 0}
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
@@ -2250,9 +2274,9 @@ MonoBehaviour:
         - DJC001Q003_Mark_PizzaMenu
         - 
         byteData: 01
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -2264,7 +2288,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000100000000000000
     - name: Set Waypoint Town 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2283,6 +2307,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2296,8 +2321,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -2319,14 +2344,11 @@ MonoBehaviour:
         fsmVector2Params: []
         fsmVector3Params:
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: 0
-            z: 0
+          value: {x: 0, y: 0, z: 0}
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
@@ -2334,9 +2356,9 @@ MonoBehaviour:
         - 
         - Town
         byteData: 01
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -2348,7 +2370,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000100000000000000
     - name: Player At Town 3
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2367,6 +2389,7 @@ MonoBehaviour:
         toState: ChangeObj2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -2375,6 +2398,7 @@ MonoBehaviour:
         toState: ChangeObj1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2411,10 +2435,10 @@ MonoBehaviour:
         - Town
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -2443,6 +2467,7 @@ MonoBehaviour:
         toState: Set Waypoint Town 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2478,10 +2503,10 @@ MonoBehaviour:
         stringParams:
         - Go to Island Central
         - Quest.Text.DJC001Q005Concert.Obj1.ChangeObj0.i18nText
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -2509,6 +2534,7 @@ MonoBehaviour:
         toState: Set Waypoint Frankys
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2544,10 +2570,10 @@ MonoBehaviour:
         stringParams:
         - Go to Franky's
         - Quest.Text.DJC001Q003Meeting.Obj3.ChangeObj2.i18nText
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -2556,7 +2582,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000
         paramByteDataSize: 0000000000000000
     - name: Set Waypoint Town 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2575,6 +2601,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2588,8 +2615,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -2611,14 +2638,11 @@ MonoBehaviour:
         fsmVector2Params: []
         fsmVector3Params:
         - useVariable: 1
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: 0
-            z: 0
+          value: {x: 0, y: 0, z: 0}
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
@@ -2626,9 +2650,9 @@ MonoBehaviour:
         - 
         - Town
         byteData: 01
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -2640,7 +2664,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000100000000000000
     - name: Set Waypoint Frankys
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -2659,6 +2683,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2672,8 +2697,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -2695,14 +2720,11 @@ MonoBehaviour:
         fsmVector2Params: []
         fsmVector3Params:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
-            x: 0
-            y: -1
-            z: 0
+          value: {x: 0, y: -1, z: 0}
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
@@ -2710,9 +2732,9 @@ MonoBehaviour:
         - DJC001Q003_Mark_MeetingSetUp
         - 
         byteData: 01
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -2724,7 +2746,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000100000000000000
     - name: Gameplay Set The Table
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -2743,6 +2765,7 @@ MonoBehaviour:
         toState: Set TRUE RootPlayerHasNewPizza
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: TriggerWalkMeetingSetUpEnter
@@ -2751,6 +2774,7 @@ MonoBehaviour:
         toState: Set TRUE PlayerIsInsideSetUp
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: TriggerWalkMeetingSetUpExit
@@ -2759,6 +2783,7 @@ MonoBehaviour:
         toState: Set FALSE PlayerIsInsideSetUp
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: InventoryChanged
@@ -2767,6 +2792,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: PizzaBoxUsed
@@ -2775,6 +2801,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: PizzaBoxStored
@@ -2783,6 +2810,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: PizzaBoxRetrieved
@@ -2791,6 +2819,7 @@ MonoBehaviour:
         toState: Does Player Have New Pizza 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -2861,44 +2890,44 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -2945,9 +2974,9 @@ MonoBehaviour:
         - PizzaBoxUsed
         - InventoryChanged
         byteData: 01
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 05000000170000000500000017000000050000001700000005000000170000000500000017000000050000001700000005000000170000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000000500000017000000170000001700000017000000110000001700000001000000
         paramName:
@@ -3012,7 +3041,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000100000002000000020000000300000003000000040000000400000005000000050000000600000006000000070000000700000008000000090000000a00000000000000080000000b0000000c0000000d0000000e00000001000000090000000f000000100000001100000012000000020000000a00000013000000140000001500000016000000030000000b0000001700000018000000190000001a000000040000000c0000001b0000001c0000001d0000001e000000050000000d0000001f000000200000002100000022000000060000002300000000000000
         paramByteDataSize: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000
     - name: Get FSM Bool RootPlayerHasNewPizza
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -3031,6 +3060,7 @@ MonoBehaviour:
         toState: Get FSM Bool RootPlayerHeardSetSceneHint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3047,8 +3077,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -3061,13 +3091,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -3080,7 +3110,7 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -3091,9 +3121,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -3105,7 +3135,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Bread PizzaBoxed Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -3124,6 +3154,7 @@ MonoBehaviour:
         toState: Bread PizzaPlanet Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3158,10 +3189,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_27
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -3169,7 +3200,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaPlanet Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -3188,6 +3219,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxedSpicy Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3222,10 +3254,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_59
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -3233,7 +3265,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaBoxedSpicy Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -3252,6 +3284,7 @@ MonoBehaviour:
         toState: Bread PizzaSlice Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3286,10 +3319,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_92
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -3297,7 +3330,12 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: How Many Pizza Boxes Does the Player Have? 1
-      description: "Checks for:\nPizzaBox, PizzaPlanet, etc...\nStore each value in an INT"
+      description: 'Checks for:
+
+        PizzaBox, PizzaPlanet, etc...
+
+        Store
+        each value in an INT'
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -3316,6 +3354,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBox? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3363,43 +3402,43 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxes
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesPlanet
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlices
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlicesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlicesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -3410,10 +3449,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0500000010000000050000001000000005000000100000000500000010000000050000001000000005000000100000000500000010000000
         paramName:
@@ -3434,7 +3473,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000100000002000000020000000300000003000000040000000400000005000000050000000600000006000000
         paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: Set TRUE RootPlayerHasNewPizza
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -3453,6 +3492,7 @@ MonoBehaviour:
         toState: WaitZa 0.1 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3469,8 +3509,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -3483,13 +3523,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -3501,8 +3541,8 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -3513,9 +3553,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -3527,7 +3567,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Set TRUE PlayerIsInsideSetUp
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -3546,6 +3586,7 @@ MonoBehaviour:
         toState: Does Player Have New Pizza 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3575,13 +3616,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: PlayerIsInsideSetUp
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -3592,9 +3633,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 110000001100000001000000
         paramName:
@@ -3604,7 +3645,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000001000000
     - name: Does Player Have New Pizza 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -3623,6 +3664,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaBox?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -3631,6 +3673,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3649,8 +3692,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -3663,13 +3706,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -3682,13 +3725,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -3701,9 +3744,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -3719,7 +3762,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000000000000001000000000000000100000001000000
         paramByteDataSize: 000000000000000000000000000000000100000000000000000000000000000001000000
     - name: Is the player holding a PizzaBox?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -3738,6 +3781,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -3746,6 +3790,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaBoxPlanet?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3782,10 +3827,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -3795,7 +3840,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Is the player holding a PizzaBoxPlanet?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -3814,6 +3859,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -3822,6 +3868,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaBoxSpicy?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3858,10 +3905,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -3871,7 +3918,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Is the player holding a PizzaBoxSpicy?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -3890,6 +3937,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -3898,6 +3946,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaSlice?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -3934,10 +3983,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -3947,7 +3996,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: HUB 10
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -3966,14 +4015,15 @@ MonoBehaviour:
         toState: ' Clear Waypoint 2'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -3997,17 +4047,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Set FALSE PlayerIsInsideSetUp
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -4026,6 +4076,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxed Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4055,13 +4106,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: PlayerIsInsideSetUp
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -4072,9 +4123,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 110000001100000001000000
         paramName:
@@ -4084,7 +4135,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000001000000
     - name: HUB 99
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -4103,14 +4154,15 @@ MonoBehaviour:
         toState: HUB 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -4134,15 +4186,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: ChangeObj3
       description: Equip a Pizza
       colorIndex: 1
@@ -4163,6 +4215,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4198,10 +4251,10 @@ MonoBehaviour:
         stringParams:
         - Equip a Pizza
         - Quest.Text.DJC001Q003Meeting.Obj3.ChangeObj3.i18nText
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -4210,7 +4263,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000
         paramByteDataSize: 0000000000000000
     - name: Does Player have at least 1 PizzaBox? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -4229,6 +4282,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaBox
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -4237,6 +4291,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxPlanet? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4265,13 +4320,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxes
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -4286,9 +4341,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -4301,7 +4356,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaBoxPlanet? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -4320,6 +4375,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaPlanet
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -4328,6 +4384,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxSpicy? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4356,13 +4413,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesPlanet
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -4377,9 +4434,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -4392,7 +4449,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaBoxSpicy? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -4411,6 +4468,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaBoxSpicy
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -4419,6 +4477,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSlice? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4447,13 +4506,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -4468,9 +4527,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -4483,7 +4542,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Breadcrumb To PizzaBox
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4502,6 +4561,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4545,7 +4605,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -4558,7 +4618,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Breadcrumb To PizzaPlanet
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4577,6 +4637,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4620,7 +4681,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -4633,7 +4694,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Breadcrumb To PizzaBoxSpicy
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4652,6 +4713,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4695,7 +4757,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -4708,7 +4770,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: HUB 5
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -4727,14 +4789,15 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -4758,17 +4821,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Bread PizzaBoxed Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4787,6 +4850,7 @@ MonoBehaviour:
         toState: Bread PizzaPlanet Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4821,10 +4885,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_27
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -4832,7 +4896,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaPlanet Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4851,6 +4915,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxedSpicy Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4885,10 +4950,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_59
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -4896,7 +4961,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaBoxedSpicy Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -4915,6 +4980,7 @@ MonoBehaviour:
         toState: Bread PizzaSlice Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -4949,10 +5015,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_92
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -4960,7 +5026,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Is Player Standing Inside Set Up
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -4979,6 +5045,7 @@ MonoBehaviour:
         toState: HUB 8
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -4987,6 +5054,7 @@ MonoBehaviour:
         toState: Has RootPlayerHeardSetSceneHint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5016,7 +5084,7 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: PlayerIsInsideSetUp
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -5029,9 +5097,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 11000000170000001700000001000000
         paramName:
@@ -5042,7 +5110,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000100000000000000
         paramByteDataSize: 00000000000000000000000001000000
     - name: Does Player have at least 1 PizzaBox? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -5061,6 +5129,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -5069,6 +5138,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxPlanet? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5097,13 +5167,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxes
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -5118,9 +5188,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -5133,7 +5203,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaBoxPlanet? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -5152,6 +5222,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -5160,6 +5231,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxSpicy? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5188,13 +5260,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesPlanet
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -5209,9 +5281,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -5224,7 +5296,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaBoxSpicy? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -5243,6 +5315,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -5251,6 +5324,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSlice? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5279,13 +5353,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -5300,9 +5374,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -5334,6 +5408,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5350,8 +5425,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -5364,13 +5439,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -5382,8 +5457,8 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -5394,9 +5469,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -5408,7 +5483,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: HUB 8
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -5427,14 +5502,15 @@ MonoBehaviour:
         toState: HUB 9
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -5458,17 +5534,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: HUB 9
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -5487,14 +5563,15 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -5518,17 +5595,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Does Player Have New Pizza 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -5547,6 +5624,7 @@ MonoBehaviour:
         toState: Is Player Standing Inside Set Up
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -5555,6 +5633,7 @@ MonoBehaviour:
         toState: Has PlayerHeardOldPizzaHint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5573,8 +5652,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -5587,13 +5666,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHasNewPizza
@@ -5606,13 +5685,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: RefRootPlayerHasNewPizza
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -5625,9 +5704,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -5662,6 +5741,7 @@ MonoBehaviour:
         toState: Set TRUE PlayerHeardOldPizzaHint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5684,23 +5764,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/1
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -5718,9 +5798,9 @@ MonoBehaviour:
         - DJCadence
         - 
         byteData: 000000000000000000000000b040000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -5745,7 +5825,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000500000001000000060000000a000000020000000e0000000f00000010000000000000001100000012000000010000001300000002000000
         paramByteDataSize: 000000000100000000000000040000000100000000000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000
     - name: Has PlayerHeardOldPizzaHint
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -5764,6 +5844,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -5772,6 +5853,7 @@ MonoBehaviour:
         toState: DJCadence (Pop-Up) Dialog 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5801,7 +5883,7 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: PlayerHeardOldPizzaHint
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -5814,9 +5896,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 11000000170000001700000001000000
         paramName:
@@ -5827,7 +5909,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000100000000000000
         paramByteDataSize: 00000000000000000000000001000000
     - name: Set TRUE PlayerHeardOldPizzaHint
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -5846,6 +5928,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5875,13 +5958,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: PlayerHeardOldPizzaHint
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -5892,9 +5975,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 110000001100000001000000
         paramName:
@@ -5904,7 +5987,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000001000000
     - name: ' Clear Waypoint 1'
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -5923,6 +6006,7 @@ MonoBehaviour:
         toState: Gameplay Set The Table
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -5956,17 +6040,22 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: How Many Pizza Boxes Does the Player Have? 2
-      description: "Checks for:\nPizzaBox, PizzaPlanet, etc...\nStore each value in an INT"
+      description: 'Checks for:
+
+        PizzaBox, PizzaPlanet, etc...
+
+        Store
+        each value in an INT'
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -5985,6 +6074,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBox? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6032,43 +6122,43 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxes
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesPlanet
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlices
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlicesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaBoxesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: HeldPizzaSlicesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -6079,10 +6169,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0500000010000000050000001000000005000000100000000500000010000000050000001000000005000000100000000500000010000000
         paramName:
@@ -6103,7 +6193,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000100000002000000020000000300000003000000040000000400000005000000050000000600000006000000
         paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: DJCadence (Pop-Up) Dialog 2
-      description: Alright, good to go? Set the scene at Franky’s.
+      description: "Alright, good to go? Set the scene at Franky\u2019s."
       colorIndex: 2
       position:
         serializedVersion: 2
@@ -6122,6 +6212,7 @@ MonoBehaviour:
         toState: Set TRUE RootPlayerHeardSetSceneHint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6138,8 +6229,8 @@ MonoBehaviour:
         - {fileID: 0}
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -6152,26 +6243,26 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/2
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/1
@@ -6192,9 +6283,9 @@ MonoBehaviour:
         - DJCadence
         - 
         byteData: 000000000000000000000000b04000000000010115000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000120000001300000007000000
         paramName:
@@ -6222,7 +6313,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000500000001000000060000000a000000020000000e0000000f00000010000000000000001100000012000000010000001300000002000000030000000000000014000000
         paramByteDataSize: 000000000100000000000000040000000100000000000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000000000000000000004000000
     - name: Has RootPlayerHeardSetSceneHint
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -6241,6 +6332,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -6249,6 +6341,7 @@ MonoBehaviour:
         toState: DJCadence (Pop-Up) Dialog 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6267,8 +6360,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -6281,13 +6374,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHeardSetSceneHint
@@ -6300,13 +6393,13 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHeardSetSceneHint
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: RefRootPlayerHeardSetSceneHint
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -6319,9 +6412,9 @@ MonoBehaviour:
         - True
         - False
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -6337,7 +6430,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000000000000001000000000000000100000001000000
         paramByteDataSize: 000000000000000000000000000000000100000000000000000000000000000001000000
     - name: Set TRUE RootPlayerHeardSetSceneHint
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -6356,6 +6449,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6372,8 +6466,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -6386,13 +6480,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHeardSetSceneHint
@@ -6404,8 +6498,8 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -6416,9 +6510,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -6430,7 +6524,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Get FSM Bool RootPlayerHeardSetSceneHint
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -6449,6 +6543,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxed Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6465,8 +6560,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -6479,13 +6574,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerHeardSetSceneHint
@@ -6498,7 +6593,7 @@ MonoBehaviour:
         fsmBoolParams:
         - useVariable: 1
           name: RefRootPlayerHeardSetSceneHint
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -6509,9 +6604,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -6523,7 +6618,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: HUB 100
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -6542,14 +6637,15 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -6573,17 +6669,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: -----Start Quest Cinematic-----
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -6602,6 +6698,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxed Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6636,9 +6733,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 01010100010101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 01000000010000000100000001000000010000000100000001000000
         paramName:
@@ -6652,7 +6749,7 @@ MonoBehaviour:
         paramDataPos: 00000000010000000200000003000000040000000500000006000000
         paramByteDataSize: 01000000010000000100000001000000010000000100000001000000
     - name: Locomote Player to MeetingSetUp
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -6671,6 +6768,7 @@ MonoBehaviour:
         toState: WaitAa 0.25 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6685,16 +6783,17 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1728685540840347, guid: b13a119c3ed96834d86e48c739a28999, type: 2}
+          value: {fileID: 1728685540840347, guid: b13a119c3ed96834d86e48c739a28999,
+            type: 3}
         fsmOwnerDefaultParams: []
         animationCurveParams: []
         functionCallParams: []
@@ -6709,8 +6808,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.15
@@ -6723,9 +6822,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000000000804001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1300000013000000070000000f0000000200000001000000
         paramName:
@@ -6738,7 +6837,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000000000000400000008000000
         paramByteDataSize: 000000000000000004000000000000000400000001000000
     - name: WaitAa 0.25 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -6757,6 +6856,7 @@ MonoBehaviour:
         toState: Ani Cam MeetingSetUpPizza
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6783,8 +6883,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.25
@@ -6798,9 +6898,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -6829,6 +6929,7 @@ MonoBehaviour:
         toState: WaitAb 1.85 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6846,26 +6947,42 @@ MonoBehaviour:
         - curve:
             serializedVersion: 2
             m_Curve:
-            - serializedVersion: 2
+            - serializedVersion: 3
               time: 0
               value: 0
               inSlope: 0
               outSlope: 0
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 0.2744136
               value: 0.100581795
               inSlope: 0.9318631
               outSlope: 0.9318631
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 0.7237922
               value: 0.9005351
               inSlope: 0.86238587
               outSlope: 0.86238587
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 1
               value: 1
               inSlope: 0
               outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -6896,7 +7013,7 @@ MonoBehaviour:
         arrayParamSizes: 00000000
         arrayParamTypes:
         - ClubPenguin.Cinematography.AnimateCameraActionSettings
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000030000000300000003000000090000000200000016000000010000000c000000
         paramName:
@@ -6912,7 +7029,7 @@ MonoBehaviour:
         paramDataPos: 00000000010000000200000003000000000000000c000000000000001000000000000000
         paramByteDataSize: 000000000000000000000000000000000c00000004000000000000000100000000000000
     - name: WaitAb 1.85 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -6931,6 +7048,7 @@ MonoBehaviour:
         toState: Player Unequip Prop
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -6957,8 +7075,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1.85
@@ -6972,9 +7090,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -6984,7 +7102,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: Find RootBoombox
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7003,6 +7121,7 @@ MonoBehaviour:
         toState: Find RootFlowerBouquetPink
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7017,7 +7136,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootBoombox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7025,8 +7144,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7039,13 +7158,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootBoombox
@@ -7063,9 +7182,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -7077,7 +7196,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootFlowerBouquetPink
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7096,6 +7215,7 @@ MonoBehaviour:
         toState: Find RootPizzaTrayQuest
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7110,7 +7230,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootFlowerBouquetPink
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7118,8 +7238,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7132,13 +7252,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootFlowerBouquetPink
@@ -7156,9 +7276,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -7170,7 +7290,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Find RootPizzaTrayQuest
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7189,6 +7309,7 @@ MonoBehaviour:
         toState: Find RootRestaurantTomato
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7203,7 +7324,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootPizzaTrayQuest
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7211,8 +7332,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7225,13 +7346,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.DJC001Q003Meeting
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPizzaTrayQuest
@@ -7249,9 +7370,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -7282,6 +7403,7 @@ MonoBehaviour:
         toState: WaitAc 1 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7298,13 +7420,13 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootPizzaTrayQuest
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7317,14 +7439,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Appear
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: SFX/AO/Item/PizzaGhettoDrop
@@ -7342,9 +7464,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000120000001300000007000000
         paramName:
@@ -7376,6 +7498,7 @@ MonoBehaviour:
         toState: WaitAd 0.25 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7390,7 +7513,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootFlowerBouquetPink
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7403,8 +7526,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Appear
@@ -7422,9 +7545,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000
         paramName:
@@ -7434,7 +7557,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 010000000000000000000000
     - name: WaitAc 1 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -7453,6 +7576,7 @@ MonoBehaviour:
         toState: Animate FlowerBouquetPink
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7479,8 +7603,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -7494,9 +7618,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -7506,7 +7630,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: WaitAd 0.25 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -7525,6 +7649,7 @@ MonoBehaviour:
         toState: Animate Boombox
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7551,8 +7676,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.25
@@ -7566,9 +7691,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -7597,6 +7722,7 @@ MonoBehaviour:
         toState: WaitAe 0.55 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7613,13 +7739,13 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RefRootBoombox
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -7632,20 +7758,20 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: AppearPlayMusic
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: MUS/Quest/Cadence/C001Q003
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: BoomboxPlay
@@ -7663,9 +7789,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 010000001300000012000000120000001200000013000000
         paramName:
@@ -7678,7 +7804,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000001000000
         paramByteDataSize: 010000000000000000000000000000000000000000000000
     - name: WaitAe 0.55 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -7697,6 +7823,7 @@ MonoBehaviour:
         toState: Deactivate RestaurantTomato
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7723,8 +7850,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.55
@@ -7738,9 +7865,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -7750,7 +7877,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: Deactivate RestaurantTomato
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7769,6 +7896,7 @@ MonoBehaviour:
         toState: Deactivate RestaurantPepper
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7786,7 +7914,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: RefRootRestaurantTomato
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7805,14 +7933,14 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -7823,9 +7951,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000011000000110000000100000001000000
         paramName:
@@ -7837,7 +7965,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000001000000
         paramByteDataSize: 0000000000000000000000000100000001000000
     - name: Deactivate RestaurantPepper
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7856,6 +7984,7 @@ MonoBehaviour:
         toState: Deactivate RestaurantRollingPin
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7873,7 +8002,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: RefRootRestaurantPepper
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7892,14 +8021,14 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -7910,9 +8039,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000011000000110000000100000001000000
         paramName:
@@ -7924,7 +8053,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000001000000
         paramByteDataSize: 0000000000000000000000000100000001000000
     - name: Deactivate RestaurantRollingPin
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -7943,6 +8072,7 @@ MonoBehaviour:
         toState: WaitBa 1.05 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -7960,7 +8090,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: RefRootRestaurantRollingpin
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -7979,14 +8109,14 @@ MonoBehaviour:
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -7997,9 +8127,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000011000000110000000100000001000000
         paramName:
@@ -8011,7 +8141,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000001000000
         paramByteDataSize: 0000000000000000000000000100000001000000
     - name: WaitBa 1.05 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -8030,6 +8160,7 @@ MonoBehaviour:
         toState: DJCadence (Pop-Up) Dialog 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8056,8 +8187,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1.05
@@ -8071,9 +8202,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -8102,6 +8233,7 @@ MonoBehaviour:
         toState: WaitBc 1.35 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8119,26 +8251,42 @@ MonoBehaviour:
         - curve:
             serializedVersion: 2
             m_Curve:
-            - serializedVersion: 2
+            - serializedVersion: 3
               time: 0
               value: 0
               inSlope: 0
               outSlope: 0
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 0.2744136
               value: 0.100581795
               inSlope: 0.9318631
               outSlope: 0.9318631
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 0.7237922
               value: 0.9005351
               inSlope: 0.86238587
               outSlope: 0.86238587
-            - serializedVersion: 2
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
               time: 1
               value: 1
               inSlope: 0
               outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -8162,9 +8310,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000e03f0000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 16000000020000000100000002000000
         paramName:
@@ -8175,7 +8323,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000005000000
         paramByteDataSize: 00000000040000000100000004000000
     - name: WaitBb 0.15 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -8194,6 +8342,7 @@ MonoBehaviour:
         toState: Disable Ani Cam
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8220,8 +8369,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.15
@@ -8235,9 +8384,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -8266,6 +8415,7 @@ MonoBehaviour:
         toState: WaitBb 0.15 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8282,8 +8432,8 @@ MonoBehaviour:
         - {fileID: 0}
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -8296,26 +8446,26 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/3
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/2
@@ -8336,9 +8486,9 @@ MonoBehaviour:
         - DJCadence
         - 
         byteData: 000000000000000000000000000000010100010115000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000120000001300000007000000
         paramName:
@@ -8366,7 +8516,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000500000001000000060000000a000000020000000e0000000f00000010000000000000001100000012000000010000001300000002000000030000000000000014000000
         paramByteDataSize: 000000000100000000000000040000000100000000000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000000000000000000004000000
     - name: WaitBc 1.35 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -8385,6 +8535,7 @@ MonoBehaviour:
         toState: DJCadence (Pop-Up) Dialog 4
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8411,8 +8562,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1.35
@@ -8426,9 +8577,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -8438,7 +8589,8 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: DJCadence (Pop-Up) Dialog 4
-      description: They’ll be here any second. Hide in the kitchen and break out some cooking gear.
+      description: "They\u2019ll be here any second. Hide in the kitchen and break
+        out some cooking gear."
       colorIndex: 2
       position:
         serializedVersion: 2
@@ -8457,6 +8609,7 @@ MonoBehaviour:
         toState: WaitBd 0.15 Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8473,8 +8626,8 @@ MonoBehaviour:
         - {fileID: 0}
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -8487,26 +8640,26 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/4
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/Obj3/3
@@ -8527,9 +8680,9 @@ MonoBehaviour:
         - DJCadence
         - 
         byteData: 000000000000000000000000000000010100010115000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000120000001300000007000000
         paramName:
@@ -8557,7 +8710,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000500000001000000060000000a000000020000000e0000000f00000010000000000000001100000012000000010000001300000002000000030000000000000014000000
         paramByteDataSize: 000000000100000000000000040000000100000000000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000000000000000000004000000
     - name: WaitBd 0.15 Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -8576,6 +8729,7 @@ MonoBehaviour:
         toState: Remove Item RecordedMusic
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8602,8 +8756,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.15
@@ -8617,9 +8771,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -8629,7 +8783,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: Finish
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -8673,17 +8827,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Hold
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -8698,10 +8852,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -8725,15 +8879,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: -----End Quest Cinematic-----
       description: Keeps Remote Players Hidden!
       colorIndex: 6
@@ -8754,6 +8908,7 @@ MonoBehaviour:
         toState: Finish
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8788,9 +8943,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 01010000010101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 01000000010000000100000001000000010000000100000001000000
         paramName:
@@ -8804,7 +8959,7 @@ MonoBehaviour:
         paramDataPos: 00000000010000000200000003000000040000000500000006000000
         paramByteDataSize: 01000000010000000100000001000000010000000100000001000000
     - name: ' Clear Waypoint 2'
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -8823,6 +8978,7 @@ MonoBehaviour:
         toState: -----Start Quest Cinematic-----
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8856,17 +9012,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Player Unequip Prop
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -8885,6 +9041,7 @@ MonoBehaviour:
         toState: Animate PizzaTrayQuest ++Audio++
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8918,17 +9075,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Remove Item RecordedMusic
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -8947,6 +9104,7 @@ MonoBehaviour:
         toState: Remove Item FlowerBunches x5
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -8974,8 +9132,8 @@ MonoBehaviour:
         fsmFloatParams: []
         fsmIntParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -8988,9 +9146,9 @@ MonoBehaviour:
         stringParams:
         - RecordedMusic
         byteData: 01000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000700000010000000
         paramName:
@@ -9000,7 +9158,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000400000000000000
     - name: Remove Item FlowerBunches x5
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -9019,6 +9177,7 @@ MonoBehaviour:
         toState: Destroy TriggerWalkMeetingSetUp
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9046,8 +9205,8 @@ MonoBehaviour:
         fsmFloatParams: []
         fsmIntParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -9060,9 +9219,9 @@ MonoBehaviour:
         stringParams:
         - FlowerBunches
         byteData: 01000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000700000010000000
         paramName:
@@ -9072,7 +9231,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000400000000000000
     - name: Destroy TriggerWalkMeetingSetUp
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -9091,6 +9250,7 @@ MonoBehaviour:
         toState: -----End Quest Cinematic-----
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9105,7 +9265,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: TriggerWalkMeetingSetUp
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -9123,16 +9283,16 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
@@ -9142,10 +9302,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 130000000f00000011000000
         paramName:
@@ -9155,7 +9315,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000000000000
     - name: Bread PizzaBoxed Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9174,6 +9334,7 @@ MonoBehaviour:
         toState: Bread PizzaPlanet Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9208,10 +9369,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_27
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -9219,7 +9380,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaPlanet Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9238,6 +9399,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxedSpicy Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9272,10 +9434,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_59
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -9283,7 +9445,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaBoxedSpicy Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9302,6 +9464,7 @@ MonoBehaviour:
         toState: Bread PizzaSlice Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9336,10 +9499,10 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Consumable_92
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -9347,7 +9510,7 @@ MonoBehaviour:
         paramDataPos: 00000000
         paramByteDataSize: 00000000
     - name: Bread PizzaSliceSpicy Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9366,6 +9529,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxNM Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9404,9 +9568,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_94
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9417,7 +9581,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSlice Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9436,6 +9600,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceSpicy Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9474,9 +9639,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_33
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9487,7 +9652,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSliceSpicy Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9506,6 +9671,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxNM Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9544,9 +9710,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_94
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9557,7 +9723,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSlice Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9576,6 +9742,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceSpicy Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9614,9 +9781,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_33
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9627,7 +9794,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSliceSpicy Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9646,6 +9813,7 @@ MonoBehaviour:
         toState: Bread PizzaBoxNM Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9684,9 +9852,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_94
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9697,7 +9865,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSlice Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -9716,6 +9884,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceSpicy Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9754,9 +9923,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_33
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -9767,7 +9936,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Does Player have at least 1 PizzaSlice? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -9786,6 +9955,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -9794,6 +9964,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSliceSpicy? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9822,13 +9993,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlices
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -9843,9 +10014,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -9858,7 +10029,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaSliceSpicy? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -9877,6 +10048,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -9885,6 +10057,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxNM? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -9913,13 +10086,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlicesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -9934,9 +10107,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -9949,7 +10122,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Is the player holding a PizzaSlice?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -9968,6 +10141,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -9976,6 +10150,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaSliceSpicy?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10012,10 +10187,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -10025,7 +10200,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Is the player holding a PizzaSliceSpicy?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10044,6 +10219,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10052,6 +10228,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaBoxNM?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10088,10 +10265,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -10101,7 +10278,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Does Player have at least 1 PizzaSlice? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10120,6 +10297,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaSlice
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10128,6 +10306,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSliceSpicy? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10156,13 +10335,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlices
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -10177,9 +10356,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -10192,7 +10371,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaSliceSpicy? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10211,6 +10390,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaSliceSpicy
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10219,6 +10399,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaBoxNM? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10247,13 +10428,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlicesSpicy
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -10268,9 +10449,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -10283,7 +10464,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Breadcrumb To PizzaSlice
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -10302,6 +10483,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10345,7 +10527,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -10358,7 +10540,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Breadcrumb To PizzaSliceSpicy
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -10377,6 +10559,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10420,7 +10603,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -10452,6 +10635,7 @@ MonoBehaviour:
         toState: How Many Pizza Boxes Does the Player Have? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10478,8 +10662,8 @@ MonoBehaviour:
         fsmEnumParams: []
         fsmFloatParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0.1
@@ -10493,9 +10677,9 @@ MonoBehaviour:
         stringParams:
         - FINISHED
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -10505,7 +10689,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000
         paramByteDataSize: 000000000000000001000000
     - name: Bread PizzaBoxNM Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -10524,6 +10708,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceNM Cleared 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10562,9 +10747,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_108
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -10575,7 +10760,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSliceNM Cleared 1
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -10594,6 +10779,7 @@ MonoBehaviour:
         toState: FORCE ADD Item RecordedMusic
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10632,9 +10818,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_137
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -10645,7 +10831,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Does Player have at least 1 PizzaBoxNM? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10664,6 +10850,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10672,6 +10859,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSliceNM? 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10700,13 +10888,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -10721,9 +10909,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -10736,7 +10924,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaSliceNM? 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10755,6 +10943,7 @@ MonoBehaviour:
         toState: HUB 99
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10763,6 +10952,7 @@ MonoBehaviour:
         toState: Set FALSE RootPlayerHasNewPizza
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10791,13 +10981,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlicesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -10812,9 +11002,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -10827,7 +11017,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Is the player holding a PizzaBoxNM?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10846,6 +11036,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10854,6 +11045,7 @@ MonoBehaviour:
         toState: Is the player holding a PizzaSliceNM?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10890,10 +11082,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -10903,7 +11095,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Is the player holding a PizzaSliceNM?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10922,6 +11114,7 @@ MonoBehaviour:
         toState: HUB 10
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -10930,6 +11123,7 @@ MonoBehaviour:
         toState: ChangeObj3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -10966,10 +11160,10 @@ MonoBehaviour:
         stringParams:
         - True
         - False
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 050000001700000017000000
         paramName:
@@ -10979,7 +11173,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000
         paramByteDataSize: 000000000000000000000000
     - name: Does Player have at least 1 PizzaBoxNM? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -10998,6 +11192,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaBoxNM
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -11006,6 +11201,7 @@ MonoBehaviour:
         toState: Does Player have at least 1 PizzaSliceNM? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11034,13 +11230,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaBoxesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -11055,9 +11251,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -11070,7 +11266,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Does Player have at least 1 PizzaSliceNM? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -11089,6 +11285,7 @@ MonoBehaviour:
         toState: Breadcrumb To PizzaSliceNM
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -11097,6 +11294,7 @@ MonoBehaviour:
         toState: HUB 5
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11125,13 +11323,13 @@ MonoBehaviour:
         fsmIntParams:
         - useVariable: 1
           name: HeldPizzaSlicesNM
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 1
@@ -11146,9 +11344,9 @@ MonoBehaviour:
         - False
         - True
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 100000001000000017000000170000001700000001000000
         paramName:
@@ -11161,7 +11359,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000010000000200000000000000
         paramByteDataSize: 000000000000000000000000000000000000000001000000
     - name: Breadcrumb To PizzaBoxNM
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11177,9 +11375,10 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState:
+        toState: 
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11223,7 +11422,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -11236,7 +11435,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Breadcrumb To PizzaSliceNM
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11255,6 +11454,7 @@ MonoBehaviour:
         toState: ' Clear Waypoint 1'
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11298,7 +11498,7 @@ MonoBehaviour:
         arrayParamSizes: 03000000
         arrayParamTypes:
         - System.String
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000c000000030000000300000003000000
         paramName:
@@ -11311,7 +11511,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000010000000200000003000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Bread PizzaBoxNM Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11330,6 +11530,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceNM Cleared 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11368,9 +11569,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_108
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -11381,7 +11582,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSliceNM Cleared 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11400,6 +11601,7 @@ MonoBehaviour:
         toState: HUB 100
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11438,9 +11640,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_137
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -11451,7 +11653,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaBoxNM Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11470,6 +11672,7 @@ MonoBehaviour:
         toState: Bread PizzaSliceNM Cleared 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11508,9 +11711,9 @@ MonoBehaviour:
         - Consumables/NewGearItem59
         - Consumable_108
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -11521,7 +11724,7 @@ MonoBehaviour:
         paramDataPos: 00000000000000000400000001000000
         paramByteDataSize: 00000000040000000100000000000000
     - name: Bread PizzaSliceNM Cleared 3
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -11540,6 +11743,7 @@ MonoBehaviour:
         toState: Locomote Player to MeetingSetUp
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -11578,9 +11782,9 @@ MonoBehaviour:
         - Consumables/NewGearItem33
         - Consumable_137
         byteData: 0100000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000000000000100000003000000
         paramName:
@@ -11627,75 +11831,75 @@ MonoBehaviour:
       intVariables:
       - useVariable: 1
         name: HeldPizzaBoxes
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaBoxesNM
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaBoxesPlanet
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaBoxesSpicy
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaSlices
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaSlicesNM
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: HeldPizzaSlicesSpicy
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       boolVariables:
       - useVariable: 1
         name: PlayerHeardOldPizzaHint
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: PlayerIsInsideSetUp
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootPlayerHasNewPizza
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootPlayerHeardSetSceneHint
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       stringVariables:
       - useVariable: 1
         name: RootFSMname
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: QuestFSM.DJC001Q003Meeting
@@ -11707,73 +11911,73 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: LocalPlayer
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootBoombox
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootDot
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootDotTopLevel
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootFlowerBouquetPink
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootPizzaTrayQuest
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootRestaurantPepper
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootRestaurantRollingpin
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootRestaurantTomato
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootRory
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootRoryTopLevel
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: TriggerWalkMeetingSetUp
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -11785,22 +11989,25 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-    description:
-    docUrl:
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -11821,6 +12028,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

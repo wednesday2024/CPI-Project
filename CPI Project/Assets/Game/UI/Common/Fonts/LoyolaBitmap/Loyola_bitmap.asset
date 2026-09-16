@@ -2,11 +2,12 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!128 &12800000
 Font:
-  serializedVersion: 5
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Loyola_bitmap
+  serializedVersion: 5
   m_LineSpacing: 65
   m_DefaultMaterial: {fileID: 2100000, guid: c440e28b872a1844d9d74ed1cd66aab7, type: 2}
   m_FontSize: 49
@@ -2305,9 +2306,9 @@ Font:
       height: -62
     advance: 33
     flipped: 0
-  m_KerningValues: {}
+  m_KerningValues: []
   m_PixelScale: 0.1
-  m_FontData:
+  m_FontData: 
   m_Ascent: 0
   m_Descent: -65
   m_DefaultStyle: 0
@@ -2315,3 +2316,4 @@ Font:
   m_FallbackFonts: []
   m_FontRenderingMode: 0
   m_UseLegacyBoundsCalculation: 0
+  m_ShouldRoundAdvanceValue: 1

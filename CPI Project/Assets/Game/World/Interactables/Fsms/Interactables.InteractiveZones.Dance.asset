@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: Interactables.InteractiveZones.Dance
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: General
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Setup
     states:
     - name: WaitForInput
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Action1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: Action2
@@ -46,6 +48,7 @@ MonoBehaviour:
         toState: Action2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: Action3
@@ -54,6 +57,7 @@ MonoBehaviour:
         toState: Action3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: Interact
@@ -62,6 +66,7 @@ MonoBehaviour:
         toState: DanceTurnedOff
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: PenguinMove
@@ -70,6 +75,7 @@ MonoBehaviour:
         toState: DanceTurnedOff
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: JUMP
@@ -78,6 +84,7 @@ MonoBehaviour:
         toState: DanceTurnedOff
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -112,9 +119,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 496e746572616374416374696f6e31416374696f6e32416374696f6e334a554d5050656e6775696e4d6f76650100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1700000017000000170000001700000017000000170000001100000017000000
         paramName:
@@ -129,7 +136,7 @@ MonoBehaviour:
         paramDataPos: 00000000080000000f000000160000001d000000210000002c0000002e000000
         paramByteDataSize: 08000000070000000700000007000000040000000b0000000200000000000000
     - name: Action1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -148,6 +155,7 @@ MonoBehaviour:
         toState: WaitForInput
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -167,20 +175,20 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -193,14 +201,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 1
           name: AnimationParamName1
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
           value: GameMode
@@ -218,9 +226,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 070000000147616d65537562537461746573010001557365546f72736f4e756c6c0100010100000001416e696d6174696f6e506172616d56616c75653100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0700000001000000130000000300000001000000010000000100000013000000030000000100000001000000010000001200000013000000120000001000000001000000
         paramName:
@@ -244,7 +252,7 @@ MonoBehaviour:
         paramDataPos: 000000000400000000000000050000001200000013000000140000000100000015000000210000002200000023000000000000000200000001000000240000003d000000
         paramByteDataSize: 0400000001000000000000000d000000010000000100000001000000000000000c0000000100000001000000010000000000000000000000000000001900000001000000
     - name: Setup
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -263,6 +271,7 @@ MonoBehaviour:
         toState: WaitForInput
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -276,8 +285,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -303,9 +312,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0145786974546f72736f4e756c6c0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0100000013000000030000000100000001000000
         paramName:
@@ -317,7 +326,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000e0000000f000000
         paramByteDataSize: 01000000000000000d0000000100000001000000
     - name: Action2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -336,6 +345,7 @@ MonoBehaviour:
         toState: WaitForInput
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -355,20 +365,20 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -381,14 +391,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 1
           name: AnimationParamName2
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
           value: GameMode
@@ -406,9 +416,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 070000000147616d65537562537461746573010001557365546f72736f4e756c6c0100010200000001416e696d6174696f6e506172616d56616c75653200
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0700000001000000130000000300000001000000010000000100000013000000030000000100000001000000010000001200000013000000120000001000000001000000
         paramName:
@@ -432,7 +442,7 @@ MonoBehaviour:
         paramDataPos: 000000000400000000000000050000001200000013000000140000000100000015000000210000002200000023000000000000000200000001000000240000003d000000
         paramByteDataSize: 0400000001000000000000000d000000010000000100000001000000000000000c0000000100000001000000010000000000000000000000000000001900000001000000
     - name: Action3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -451,6 +461,7 @@ MonoBehaviour:
         toState: WaitForInput
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -470,20 +481,20 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -496,14 +507,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 1
           name: AnimationParamName3
-          tooltip:
+          tooltip: 
           showInInspector: 1
           networkSync: 0
           value: GameMode
@@ -521,9 +532,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 070000000147616d65537562537461746573010001557365546f72736f4e756c6c0100010300000001416e696d6174696f6e506172616d56616c75653300
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0700000001000000130000000300000001000000010000000100000013000000030000000100000001000000010000001200000013000000120000001000000001000000
         paramName:
@@ -547,7 +558,7 @@ MonoBehaviour:
         paramDataPos: 000000000400000000000000050000001200000013000000140000000100000015000000210000002200000023000000000000000200000001000000240000003d000000
         paramByteDataSize: 0400000001000000000000000d000000010000000100000001000000000000000c0000000100000001000000010000000000000000000000000000001900000001000000
     - name: DanceTurnedOff
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -566,6 +577,7 @@ MonoBehaviour:
         toState: WaitForInput
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -581,14 +593,14 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -614,9 +626,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0147616d65537562537461746573000001557365546f72736f4e756c6c0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 01000000130000000300000001000000010000000100000013000000030000000100000001000000
         paramName:
@@ -660,19 +672,19 @@ MonoBehaviour:
       intVariables:
       - useVariable: 1
         name: AnimationParamValue1
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 1
       - useVariable: 1
         name: AnimationParamValue2
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 2
       - useVariable: 1
         name: AnimationParamValue3
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: 3
@@ -680,19 +692,19 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: AnimationParamName1
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
       - useVariable: 1
         name: AnimationParamName2
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
       - useVariable: 1
         name: AnimationParamName3
-        tooltip:
+        tooltip: 
         showInInspector: 1
         networkSync: 0
         value: GameMode
@@ -709,23 +721,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -746,6 +761,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

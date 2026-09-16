@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.RHC001Q007NavigatorsPuzzle.Obj2ParallelStaggerTriggersDig1
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Start Objective
     states:
     - name: WaitA 0.1Sec
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkRiseX1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -72,9 +74,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -84,7 +86,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: WaitB 0.1Sec
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -103,6 +105,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkUpdateObjX1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -137,9 +140,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -149,7 +152,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: WaitC 0.1Sec
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -168,6 +171,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkDigX1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -202,9 +206,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -214,7 +218,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: End
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -229,10 +233,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -256,15 +260,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Start Objective
       description: Use this state to determine where you want to start the objective.
       colorIndex: 0
@@ -285,14 +289,15 @@ MonoBehaviour:
         toState: Get Local Player
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -316,17 +321,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Spawn TriggerWalkDigX1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -345,6 +350,7 @@ MonoBehaviour:
         toState: End
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -360,26 +366,28 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1774518214783054, guid: 027c80416594eb34ebaa53d021249c2d, type: 2}
+          value: {fileID: 1774518214783054, guid: 027c80416594eb34ebaa53d021249c2d,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797, type: 2}
+          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797,
+            type: 3}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XDig
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XDig
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -388,7 +396,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -400,14 +408,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q007NavigatorsPuzzle
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootTriggerPuzzle1XDig
@@ -425,9 +433,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000000000000000000001000000000000000000000000010000000000000000000000000100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c000000130000001400000012000000120000001300000001000000
         paramName:
@@ -445,7 +453,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000d0000001a000000020000000000000000000000010000000300000027000000
         paramByteDataSize: 00000000000000000d0000000d0000000d000000000000000000000000000000000000000000000001000000
     - name: Spawn TriggerWalkRiseX1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -464,6 +472,7 @@ MonoBehaviour:
         toState: WaitB 0.1Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -479,26 +488,28 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1263997251518494, guid: 675c791e6975eab459d87955daab4fea, type: 2}
+          value: {fileID: 1263997251518494, guid: 675c791e6975eab459d87955daab4fea,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797, type: 2}
+          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797,
+            type: 3}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XRise
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XRise
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -507,7 +518,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -519,14 +530,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q007NavigatorsPuzzle
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootTriggerPuzzle1XRise
@@ -544,9 +555,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000000000000000000001000000000000000000000000010000000000000000000000000100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c000000130000001400000012000000120000001300000001000000
         paramName:
@@ -564,7 +575,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000d0000001a000000020000000000000000000000010000000300000027000000
         paramByteDataSize: 00000000000000000d0000000d0000000d000000000000000000000000000000000000000000000001000000
     - name: Spawn TriggerWalkUpdateObjX1
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -583,6 +594,7 @@ MonoBehaviour:
         toState: WaitC 0.1Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -598,26 +610,28 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1556751630115328, guid: c715e5763690c8144a7ab14d5e581ede, type: 2}
+          value: {fileID: 1556751630115328, guid: c715e5763690c8144a7ab14d5e581ede,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797, type: 2}
+          value: {fileID: 1697638098089899, guid: 29ff64ee083384343a5e1d78fcadb797,
+            type: 3}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XObjUpdate
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 1
           name: RefRootTriggerPuzzle1XObjUpdate
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -626,7 +640,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -638,14 +652,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q007NavigatorsPuzzle
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootTriggerPuzzle1XObjUpdate
@@ -663,9 +677,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000000000000000000001000000000000000000000000010000000000000000000000000100
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c000000130000001400000012000000120000001300000001000000
         paramName:
@@ -683,7 +697,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000d0000001a000000020000000000000000000000010000000300000027000000
         paramByteDataSize: 00000000000000000d0000000d0000000d000000000000000000000000000000000000000000000001000000
     - name: Get Local Player
-      description:
+      description: 
       colorIndex: 1
       position:
         serializedVersion: 2
@@ -702,6 +716,7 @@ MonoBehaviour:
         toState: WaitA 0.1Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -716,7 +731,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -729,14 +744,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Player
@@ -753,10 +768,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -783,25 +798,25 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: LocalPlayer
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootTriggerPuzzle1XDig
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootTriggerPuzzle1XObjUpdate
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RefRootTriggerPuzzle1XRise
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -812,23 +827,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -849,6 +867,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

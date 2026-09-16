@@ -3,17 +3,20 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b7c925bb1faf25c21423bbbad249fbb, type: 3}
   m_Name: SlideControllerData
-  m_EditorClassIdentifier:
-  PilotPrefab: {fileID: 1936975494173958, guid: ba654f0e69ac26d45a5f4183044caaae, type: 2}
-  SledPrefab: {fileID: 1273483897373431, guid: 9f74a3e038a31544585c20b98888a856, type: 2}
-  ParticlesPrefab: {fileID: 198925800593002429, guid: 1d0a26956b7c0224a9cfeecd8cab4d85, type: 2}
+  m_EditorClassIdentifier: 
+  PilotPrefab: {fileID: 1936975494173958, guid: ba654f0e69ac26d45a5f4183044caaae,
+    type: 3}
+  SledPrefab: {fileID: 1273483897373431, guid: 9f74a3e038a31544585c20b98888a856, type: 3}
+  ParticlesPrefab: {fileID: 198925800593002429, guid: 1d0a26956b7c0224a9cfeecd8cab4d85,
+    type: 3}
   BuildMomentumTime: 1
   MinHeightForTrick: 0.1
   TurnSmoothing: 2
@@ -38,36 +41,50 @@ MonoBehaviour:
   WaveCurve:
     serializedVersion: 2
     m_Curve:
-    - serializedVersion: 2
+    - serializedVersion: 3
       time: 0
       value: 0
       inSlope: 4.582408
       outSlope: 4.582408
       tangentMode: 0
-    - serializedVersion: 2
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 0.293
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - serializedVersion: 2
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 0.707
       value: -1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - serializedVersion: 2
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 1
       value: 0
       inSlope: 5.5021653
       outSlope: 5.5021653
       tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   ImpulseScaleOnWater: 0.05
-  WaterRipples: {fileID: 198751437268150650, guid: 29c182b17dcd6b1458eabb5017cc5ebe, type: 2}
-  WaterSplash: {fileID: 1588204619140039, guid: f709f305129ab284993f92e6e7a61ade, type: 2}
+  WaterRipples: {fileID: 198751437268150650, guid: 29c182b17dcd6b1458eabb5017cc5ebe,
+    type: 3}
+  WaterSplash: {fileID: 1588204619140039, guid: f709f305129ab284993f92e6e7a61ade,
+    type: 3}
   SplashCooldown: 0.75
   SplashOffset: 0.15
   WaterRippleOffset: -0.12
@@ -87,8 +104,8 @@ MonoBehaviour:
     SurfaceSamplingData: {fileID: 0}
     VelocityMagEventName: SFX/Player/Sled/SlideLoop
     VelocityMagRTP: Velocity
-    YVelocityEventName:
-    YVelocityRTP:
+    YVelocityEventName: 
+    YVelocityRTP: 
     SupportedEventName: SFX/Player/Sled/SlideLoop
-    AirborneEventName:
+    AirborneEventName: 
     LandedEventName: SFX/Player/Sled/Land

@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.RHC001Q003CursedDummy.Obj8RHSpeechDirector
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: GetPlayer
     states:
     - name: DefaultState
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Set True RootRHDummyCommentFin
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -57,7 +59,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -69,14 +71,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q003CursedDummy
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRHDummyComment
@@ -94,9 +96,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0001526566526f6f74524844756d6d79436f6d6d656e74010001526566526f6f74524844756d6d79436f6d6d656e74526f636b686f70706572486173436f6d6d656e74656401
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -131,6 +133,7 @@ MonoBehaviour:
         toState: All Done!
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -153,23 +156,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/RH/RHC001Q003/Obj8RHSP/1
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -184,9 +187,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 51756573742e5248433030315130303343757273656444756d6d792e5370656563684469726563746f72000000000000526f636b686f707065720500000000000000000001000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -211,7 +214,7 @@ MonoBehaviour:
         paramDataPos: 000000002a000000000000002b0000002f000000300000003a0000003e00000042000000420000004300000044000000000000004500000046000000010000004700000002000000
         paramByteDataSize: 2a000000010000000000000004000000010000000a000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000
     - name: GetPlayer
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -230,6 +233,7 @@ MonoBehaviour:
         toState: Find Rockhopper
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -244,7 +248,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -257,14 +261,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Player
@@ -281,10 +285,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -294,7 +298,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000000000000
     - name: All Done!
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -309,10 +313,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -336,17 +340,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: SetUpRHPutSwordAway
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -365,6 +369,7 @@ MonoBehaviour:
         toState: Wait 1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -379,7 +384,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: Rockhopper
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -392,8 +397,8 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: PuttingAwaySword
@@ -410,10 +415,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1300000012000000
         paramName:
@@ -422,7 +427,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000
         paramByteDataSize: 0000000000000000
     - name: Wait 1.5
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -441,6 +446,7 @@ MonoBehaviour:
         toState: SetUpRHPutSwordAway 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -475,9 +481,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000c03f0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -487,7 +493,7 @@ MonoBehaviour:
         paramDataPos: 000000000500000005000000
         paramByteDataSize: 050000000000000001000000
     - name: Set True RootRHDummyCommentFin
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -506,6 +512,7 @@ MonoBehaviour:
         toState: Find Rockhopper 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -523,7 +530,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -535,14 +542,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q003CursedDummy
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRHDummyCommentFin
@@ -560,9 +567,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 010000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001100000001000000
         paramName:
@@ -574,7 +581,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000002000000
         paramByteDataSize: 0000000000000000000000000200000001000000
     - name: Has RH Already Commented?
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -593,6 +600,7 @@ MonoBehaviour:
         toState: All Done!
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -601,6 +609,7 @@ MonoBehaviour:
         toState: DefaultState
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -620,7 +629,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -632,14 +641,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q003CursedDummy
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootRHDummyCommentFin
@@ -657,9 +666,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0001526566526f6f74524844756d6d79436f6d6d656e7446696e000001526566526f6f74524844756d6d79436f6d6d656e7446696e5472756546616c736500
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -675,7 +684,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000001a0000001b00000035000000390000003e000000
         paramByteDataSize: 0000000000000000000000001a000000010000001a000000040000000500000001000000
     - name: Find Rockhopper
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -694,6 +703,7 @@ MonoBehaviour:
         toState: Has RH Already Commented?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -708,7 +718,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: Rockhopper
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -721,14 +731,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Rockhopper
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: NPC
@@ -745,10 +755,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -758,7 +768,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000000000000
     - name: Destroy Rockhopper sword
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -777,6 +787,7 @@ MonoBehaviour:
         toState: RockhopperPopUp1
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -791,7 +802,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RockhopperSword
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -817,9 +828,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 130000000f00000011000000
         paramName:
@@ -829,7 +840,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000005000000
         paramByteDataSize: 000000000500000002000000
     - name: Wait 1
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -848,6 +859,7 @@ MonoBehaviour:
         toState: Destroy Rockhopper sword
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -882,9 +894,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000803f0000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -894,7 +906,7 @@ MonoBehaviour:
         paramDataPos: 000000000500000005000000
         paramByteDataSize: 050000000000000001000000
     - name: Find Rockhopper 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -913,6 +925,7 @@ MonoBehaviour:
         toState: Wait 1.5
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -927,7 +940,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: RockhopperSword
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -940,14 +953,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RHsword(Clone)
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Untagged
@@ -964,10 +977,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -977,7 +990,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000000000000
     - name: SetUpRHPutSwordAway 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -996,6 +1009,7 @@ MonoBehaviour:
         toState: SetUpRHPutSwordAway
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1009,17 +1023,18 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1399345267933640, guid: f5bf3dd4d1668a84baa8da93f44fcf55, type: 2}
+          value: {fileID: 1399345267933640, guid: f5bf3dd4d1668a84baa8da93f44fcf55,
+            type: 3}
         fsmOwnerDefaultParams:
         - ownerOption: 1
           gameObject:
             useVariable: 1
             name: Rockhopper
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1044,9 +1059,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000000000000000000000010000000000000000000000000101000000a0400000000000803f0046494e4953484544
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 14000000130000001c0000001c000000110000000f000000110000000f00000017000000
         paramName:
@@ -1062,7 +1077,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000000000000d0000001a0000001c000000210000002300000028000000
         paramByteDataSize: 00000000000000000d0000000d0000000200000005000000020000000500000008000000
     - name: Null
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1077,10 +1092,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1104,15 +1119,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -1136,13 +1151,13 @@ MonoBehaviour:
       boolVariables:
       - useVariable: 1
         name: RefRootRHDummyComment
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootRHDummyCommentFin
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
@@ -1155,19 +1170,19 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: LocalPlayer
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: Rockhopper
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: RockhopperSword
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -1179,22 +1194,25 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 0000000000000000000000000000000000000000
-    description:
-    docUrl:
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -1215,6 +1233,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

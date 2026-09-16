@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.AAC002Q010Skyberg.Obj1Hints
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: GetPlayer
     states:
     - name: GetPlayer
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Does Player Require Hints?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -52,7 +54,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -65,14 +67,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Penguin
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: Player
@@ -89,10 +91,10 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 120000001200000013000000
         paramName:
@@ -102,7 +104,7 @@ MonoBehaviour:
         paramDataPos: 000000000100000000000000
         paramByteDataSize: 000000000000000000000000
     - name: wait 5 secs
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -121,6 +123,7 @@ MonoBehaviour:
         toState: Time For a Hint?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -155,9 +158,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000a0400046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -186,6 +189,7 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -205,7 +209,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -217,14 +221,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootHintTimerIntervals5secs
@@ -242,9 +246,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000001526566526f6f7448696e7454696d6572496e74657276616c7335736563730100000000000000000001526566526f6f7448696e7454696d6572496e74657276616c73357365637300
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1000000010000000010000001400000012000000120000001000000001000000
         paramName:
@@ -259,7 +263,7 @@ MonoBehaviour:
         paramDataPos: 000000002300000028000000000000000000000001000000290000004c000000
         paramByteDataSize: 2300000005000000010000000000000000000000000000002300000001000000
     - name: Time For a Hint?
-      description:
+      description: 
       colorIndex: 5
       position:
         serializedVersion: 2
@@ -278,6 +282,7 @@ MonoBehaviour:
         toState: Is Tray Down?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -286,6 +291,7 @@ MonoBehaviour:
         toState: Tick
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -305,7 +311,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -317,14 +323,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootHintTimerIntervals5secs
@@ -342,9 +348,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000001526566526f6f7448696e7454696d6572496e74657276616c733573656373000000000001526566526f6f7448696e7454696d6572496e74657276616c7335736563730c00000001496e74657276616c73423448696e745472756546616c73655472756500
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001000000001000000100000001000000017000000170000001700000001000000
         paramName:
@@ -362,7 +368,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000002300000024000000470000005b0000005f0000006400000068000000
         paramByteDataSize: 0000000000000000000000002300000001000000230000001400000004000000050000000400000001000000
     - name: Is Tray Down?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -381,6 +387,7 @@ MonoBehaviour:
         toState: Then Dont Show Hint2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -389,6 +396,7 @@ MonoBehaviour:
         toState: 'Determine which hint '
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -425,9 +433,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000000547275650046616c736554727565
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f00000017000000010000001700000017000000
         paramName:
@@ -439,7 +447,7 @@ MonoBehaviour:
         paramDataPos: 0000000005000000090000000a0000000f000000
         paramByteDataSize: 0500000004000000010000000500000004000000
     - name: Then Dont Show Hint2
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -458,14 +466,15 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -489,17 +498,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Is player in GamePlay State?
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -518,6 +527,7 @@ MonoBehaviour:
         toState: Is Tray Down?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -526,6 +536,7 @@ MonoBehaviour:
         toState: Then Dont Show Hint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -544,7 +555,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: LocalPlayer
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -553,7 +564,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -565,26 +576,26 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q005CureTheCurse.Obj2
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: GamePlayB
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q005CureTheCurse
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootInGamePlayState
@@ -602,9 +613,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5472756546616c73650001000001526566526f6f74496e47616d65506c61795374617465000001526566526f6f74496e47616d65506c617953746174655472756546616c736500
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000120000001200000017000000170000001100000001000000140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -627,7 +638,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000004000000090000000b0000000000000002000000030000000c00000024000000250000003d0000004100000046000000
         paramByteDataSize: 00000000000000000000000004000000050000000200000001000000000000000000000000000000180000000100000018000000040000000500000001000000
     - name: Then Dont Show Hint
-      description:
+      description: 
       colorIndex: 6
       position:
         serializedVersion: 2
@@ -646,14 +657,15 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -677,17 +689,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Reset Timer
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -706,6 +718,7 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -725,7 +738,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -737,14 +750,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootHintTimerIntervals5secs
@@ -762,9 +775,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000001526566526f6f7448696e7454696d6572496e74657276616c733573656373000000000000000000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1000000010000000010000001400000012000000120000001000000001000000
         paramName:
@@ -779,7 +792,7 @@ MonoBehaviour:
         paramDataPos: 000000002300000028000000000000000000000001000000290000002e000000
         paramByteDataSize: 2300000005000000010000000000000000000000000000000500000001000000
     - name: 'Determine which hint '
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -798,6 +811,7 @@ MonoBehaviour:
         toState: Rookie PopUp Hint 1 (Dup Obj 1)
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: GiveSecondHint
@@ -806,6 +820,7 @@ MonoBehaviour:
         toState: Rookie PopUp Hint 2 (Dup Obj 1)
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: NoMoreHints
@@ -814,6 +829,7 @@ MonoBehaviour:
         toState: Rookie PopUp Hint 2 (Dup Obj 1)
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -833,7 +849,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -845,14 +861,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootNumbPlayerTalkedToKlutzy
@@ -870,9 +886,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000001526566526f6f744e756d62506c6179657254616c6b6564546f4b6c75747a79000000000001526566526f6f744e756d62506c6179657254616c6b6564546f4b6c75747a790200000000476976655365636f6e6448696e7447697665466972737448696e744e6f4d6f726548696e747300
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001000000001000000100000001000000017000000170000001700000001000000
         paramName:
@@ -890,7 +906,13 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000002400000025000000490000004e0000005c0000006900000074000000
         paramByteDataSize: 000000000000000000000000240000000100000024000000050000000e0000000d0000000b00000001000000
     - name: NoMoreHints
-      description: "After Rookie has given the SECOND/FINAL HINT send paths here for no more hints to be given.\nCURRENTLY NOT USED!\nRight now Rookie repeats the final hint every minute."
+      description: 'After Rookie has given the SECOND/FINAL HINT send paths here
+        for no more hints to be given.
+
+        CURRENTLY NOT USED!
+
+        Right
+        now Rookie repeats the final hint every minute.'
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -905,10 +927,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -932,17 +954,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Does Player Require Hints?
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -961,6 +983,7 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: NoMoreHints
@@ -969,6 +992,7 @@ MonoBehaviour:
         toState: wait 5 secs
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -988,7 +1012,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1000,14 +1024,14 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootNumbPlayerTalkedToKlutzy
@@ -1025,9 +1049,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0000000001526566526f6f744e756d62506c6179657254616c6b6564546f4b6c75747a79000000000001526566526f6f744e756d62506c6179657254616c6b6564546f4b6c75747a79020000000054727565547275654e6f4d6f726548696e747300
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001000000001000000100000001000000017000000170000001700000001000000
         paramName:
@@ -1064,6 +1088,7 @@ MonoBehaviour:
         toState: RootNumbPlayerTalkedToKlutzy = 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1086,23 +1111,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/RK/AAC002Q010/Obj1Hints/Hint2
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1117,9 +1142,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 51756573742e546578742e41414330303251303130536b79626572672e4f626a3146534d2e526f6f6b696520506f7055702031322e6931386e436f6e74656e7473000000000000526f6f6b69650800000000000000000000000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1163,6 +1188,7 @@ MonoBehaviour:
         toState: RootNumbPlayerTalkedToKlutzy = 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1185,23 +1211,23 @@ MonoBehaviour:
         layoutOptionParams: []
         fsmStringParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: DIA/RK/AAC002Q010/Obj1Hints/Hint1
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value:
+          value: 
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -1216,9 +1242,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 51756573742e546578742e41414330303251303130536b79626572672e4f626a3146534d2e526f6f6b696520506f70557020322e6931386e436f6e74656e7473000000000000526f6f6b69650700000000000000000001000101
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000000100000005000000000000000100000003000000000000000200000003000000010000000100000001000000120000000100000001000000120000000100000012000000
         paramName:
@@ -1243,7 +1269,7 @@ MonoBehaviour:
         paramDataPos: 0000000040000000000000004100000045000000460000004c0000005000000054000000540000005500000056000000000000005700000058000000010000005900000002000000
         paramByteDataSize: 400000000100000000000000040000000100000006000000040000000400000000000000010000000100000001000000000000000100000001000000000000000100000000000000
     - name: RootNumbPlayerTalkedToKlutzy = 2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1262,6 +1288,7 @@ MonoBehaviour:
         toState: ChangeObj2 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1279,7 +1306,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1292,13 +1319,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootNumbPlayerTalkedToKlutzy
@@ -1316,9 +1343,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 020000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001000000001000000
         paramName:
@@ -1330,7 +1357,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000005000000
         paramByteDataSize: 0000000000000000000000000500000001000000
     - name: RootNumbPlayerTalkedToKlutzy = 3
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -1349,6 +1376,7 @@ MonoBehaviour:
         toState: Is Player Beside Klutzy? 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1366,7 +1394,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1379,13 +1407,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootNumbPlayerTalkedToKlutzy
@@ -1403,9 +1431,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 030000000000
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001000000001000000
         paramName:
@@ -1432,10 +1460,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1459,15 +1487,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Rookie Final Hint 3/3
       description: 1/3 and 2/3 are found in the Obj1 FSM
       colorIndex: 4
@@ -1484,10 +1512,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1511,15 +1539,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: ChangeObj2
       description: Use pizza & crab exclamation emojis
       colorIndex: 1
@@ -1540,6 +1568,7 @@ MonoBehaviour:
         toState: Clear Waypoint 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1574,9 +1603,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 5573652050697a7a6120262043726162204578636c696d6174696f6e204d61726b20656d6f6a6951756573742e546578742e41414330303251303130536b79626572672e4f626a3146534d2e4368616e67654f626a322e6931386e54657874
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -1604,6 +1633,7 @@ MonoBehaviour:
         toState: Reset Timer
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1638,9 +1668,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 41736b204b6c75747a7920666f7220612070697a7a6120696e204372616251756573742e546578742e41414330303251303130536b79626572672e4f626a3146534d2e4368616e67654f626a3220322e6931386e54657874
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -1668,6 +1698,7 @@ MonoBehaviour:
         toState: Set Waypoint to Klutzy
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1702,9 +1733,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 57616c6b20746f204b6c75747a7951756573742e546578742e41414330303251303130536b79626572672e4f626a3146534d2e4368616e67654f626a3220332e6931386e54657874
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0300000003000000
         paramName:
@@ -1713,7 +1744,7 @@ MonoBehaviour:
         paramDataPos: 000000000e000000
         paramByteDataSize: 0e0000003a000000
     - name: Basically handing the player the answer
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -1728,10 +1759,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -1755,17 +1786,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Is Player Beside Klutzy? 2
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -1784,6 +1815,7 @@ MonoBehaviour:
         toState: ChangeObj2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -1792,6 +1824,7 @@ MonoBehaviour:
         toState: ChangeObj2 3
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1811,7 +1844,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: LocalPlayer
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -1824,13 +1857,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMname
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.AAC002Q010Skyberg
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootPlayerBesideKlutzy
@@ -1848,9 +1881,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 0001526566526f6f74506c617965724265736964654b6c75747a79000001526566526f6f74506c617965724265736964654b6c75747a795472756546616c736500
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 140000001200000012000000110000000100000011000000170000001700000001000000
         paramName:
@@ -1866,7 +1899,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000001000000000000001b0000001c000000370000003b00000040000000
         paramByteDataSize: 0000000000000000000000001b000000010000001b000000040000000500000001000000
     - name: Set Waypoint to Klutzy
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -1885,6 +1918,7 @@ MonoBehaviour:
         toState: Reset Timer
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1898,11 +1932,12 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1913383566134694, guid: c3f14cdad6b188246ae663e5a0277c46, type: 2}
+          value: {fileID: 1913383566134694, guid: c3f14cdad6b188246ae663e5a0277c46,
+            type: 3}
         fsmOwnerDefaultParams: []
         animationCurveParams: []
         functionCallParams: []
@@ -1925,9 +1960,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 41414330303251303130576179706f696e744b6c75747a79506f736974696f6e3148657262657274426173650100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -1939,7 +1974,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000210000002c0000002d000000
         paramByteDataSize: 21000000000000000b000000010000000d000000
     - name: Clear Waypoint 3
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -1958,6 +1993,7 @@ MonoBehaviour:
         toState: Reset Timer
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -1991,15 +2027,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Send to NoMoreHints
       description: To shut hints off!
       colorIndex: 4
@@ -2016,10 +2052,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -2043,15 +2079,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: 'Send this to NoMoreHints '
       description: To shut hints off!
       colorIndex: 4
@@ -2068,10 +2104,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -2095,15 +2131,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Send this to NoMoreHints
       description: To shut hints off!
       colorIndex: 4
@@ -2120,10 +2156,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -2147,15 +2183,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Send that NoMoreHints
       description: To shut hints off!
       colorIndex: 4
@@ -2172,10 +2208,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -2199,15 +2235,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2254,69 +2290,69 @@ MonoBehaviour:
       intVariables:
       - useVariable: 1
         name: IntervalsB4Hint
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 12
       - useVariable: 1
         name: RefRootHintNumber
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootHintSubNumber
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootHintTimerIntervals5secs
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootNumbPlayerTalkedToKlutzy
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       boolVariables:
       - useVariable: 1
         name: RefRootHintShareIntroHint
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootInGamePlayState
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootPlayerBesideKlutzy
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
         name: RefRootQuestNotifierNeedsUnhiding
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       stringVariables:
       - useVariable: 1
         name: RefRootCurrentObjective
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
-        value:
+        value: 
       - useVariable: 1
         name: RootFSMname
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: QuestFSM.AAC002Q010Skyberg
@@ -2328,7 +2364,7 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: LocalPlayer
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -2339,23 +2375,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -2376,6 +2415,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

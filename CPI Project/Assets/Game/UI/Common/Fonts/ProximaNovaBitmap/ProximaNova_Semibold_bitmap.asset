@@ -2,11 +2,12 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!128 &12800000
 Font:
-  serializedVersion: 5
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ProximaNova_Semibold_bitmap
+  serializedVersion: 5
   m_LineSpacing: 86
   m_DefaultMaterial: {fileID: 2100000, guid: f20cfd7ba7b00ec46990b143ca71998c, type: 2}
   m_FontSize: 65
@@ -4150,7 +4151,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.8333333
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -4294,7 +4295,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.8
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -4470,7 +4471,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.76666665
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -4678,7 +4679,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.73333335
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -4918,7 +4919,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.7
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -5190,7 +5191,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.6666667
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -5494,7 +5495,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.6333333
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -5830,7 +5831,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.6
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -6198,7 +6199,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.56666666
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -6598,7 +6599,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.53333336
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -8470,7 +8471,7 @@ Font:
     uv:
       serializedVersion: 2
       x: 0.5
-      y: -7.450581E-09
+      y: -0.000000007450581
       width: 0.03333336
       height: 0.06666667
     vert:
@@ -9121,9 +9122,9 @@ Font:
       height: -90
     advance: 90
     flipped: 0
-  m_KerningValues: {}
+  m_KerningValues: []
   m_PixelScale: 0.1
-  m_FontData:
+  m_FontData: 
   m_Ascent: 0
   m_Descent: -86
   m_DefaultStyle: 0
@@ -9131,3 +9132,4 @@ Font:
   m_FallbackFonts: []
   m_FontRenderingMode: 0
   m_UseLegacyBoundsCalculation: 0
+  m_ShouldRoundAdvanceValue: 1

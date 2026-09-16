@@ -3,8 +3,9 @@
 --- !u!90 &9000000
 Avatar:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: BlobShadowAvatar
   m_AvatarSize: 928
   m_Avatar:
@@ -20,11 +21,7 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 2
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 3043726969
-        - 489000808
-        - 1838834371
+        m_ID: 0000000079966bb5688f251dc3629a6d
         m_AxesArray: []
     m_AvatarSkeletonPose:
       data:
@@ -56,11 +53,7 @@ Avatar:
         - t: {x: -0, y: 0, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-    m_SkeletonNameIDArray:
-    - 0
-    - 3043726969
-    - 489000808
-    - 2217533138
+    m_SkeletonNameIDArray: 0000000079966bb5688f251dd2de2c84
     m_Human:
       data:
         serializedVersion: 2
@@ -71,75 +64,18 @@ Avatar:
         m_Skeleton:
           data:
             m_Node: []
-            m_ID: []
+            m_ID: 
             m_AxesArray: []
         m_SkeletonPose:
           data:
             m_X: []
         m_LeftHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_RightHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-        m_Handles: []
-        m_ColliderArray: []
-        m_HumanBoneIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_HumanBoneMass:
         - 0.14545456
         - 0.12121213
@@ -166,32 +102,6 @@ Avatar:
         - 0
         - 0
         - 0
-        m_ColliderIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
         m_Scale: 1
         m_ArmTwist: 0.5
         m_ForeArmTwist: 0.5
@@ -203,8 +113,8 @@ Avatar:
         m_HasLeftHand: 0
         m_HasRightHand: 0
         m_HasTDoF: 0
-    m_HumanSkeletonIndexArray: []
-    m_HumanSkeletonReverseIndexArray: []
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
     m_RootMotionBoneIndex: 2
     m_RootMotionBoneX:
       t: {x: 0, y: 0, z: 0}
@@ -217,18 +127,30 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 0
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 489000808
+        m_ID: 00000000688f251d
         m_AxesArray: []
     m_RootMotionSkeletonPose:
       data:
         m_X: []
-    m_RootMotionSkeletonIndexArray:
-    - 0
-    - 2
+    m_RootMotionSkeletonIndexArray: 0000000002000000
   m_TOS:
-  - 0:
-  - 489000808: joint1
-  - 1838834371: joint1/joint2
-  - 3043726969: FishingBlobMesh
+    3043726969: FishingBlobMesh
+    0: 
+    489000808: joint1
+    1838834371: joint1/joint2
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1

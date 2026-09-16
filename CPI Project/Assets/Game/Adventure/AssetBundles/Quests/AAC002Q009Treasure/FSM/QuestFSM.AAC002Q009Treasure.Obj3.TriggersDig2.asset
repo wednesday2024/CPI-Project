@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.AAC002Q009Treasure.Obj3.TriggersDig2
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: Quest
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Start Objective
     states:
     - name: WaitA 0.2Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -38,6 +39,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkRiseX2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -72,9 +74,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -84,7 +86,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: WaitB 0.2Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -103,6 +105,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkUpdateObjX2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -137,9 +140,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -149,7 +152,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: WaitC 0.2Sec
-      description:
+      description: 
       colorIndex: 3
       position:
         serializedVersion: 2
@@ -168,6 +171,7 @@ MonoBehaviour:
         toState: Spawn TriggerWalkDigX2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -202,9 +206,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: cdcc4c3e0046494e495348454400
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 0f0000001700000001000000
         paramName:
@@ -214,7 +218,7 @@ MonoBehaviour:
         paramDataPos: 00000000050000000d000000
         paramByteDataSize: 050000000800000001000000
     - name: End
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -229,10 +233,10 @@ MonoBehaviour:
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -256,15 +260,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Start Objective
       description: Use this state to determine where you want to start the objective.
       colorIndex: 0
@@ -285,14 +289,15 @@ MonoBehaviour:
         toState: WaitA 0.2Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -316,17 +321,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Spawn TriggerWalkDigX2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -345,6 +350,7 @@ MonoBehaviour:
         toState: End
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -358,20 +364,22 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1006313371496345, guid: c0a6410aec97e994bb17d7f1ec4dc2d4, type: 2}
+          value: {fileID: 1006313371496345, guid: c0a6410aec97e994bb17d7f1ec4dc2d4,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b, type: 2}
+          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b,
+            type: 3}
         - useVariable: 1
           name: TriggerWalkDigX2
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -397,9 +405,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000000000803e00000000000000000000000000000000000100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c00000013000000
         paramName:
@@ -412,7 +420,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000d0000001a00000002000000
         paramByteDataSize: 00000000000000000d0000000d0000000d00000000000000
     - name: Spawn TriggerWalkRiseX2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -431,6 +439,7 @@ MonoBehaviour:
         toState: WaitB 0.2Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -444,20 +453,22 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1689383496650063, guid: 138d9aab749828846863fee5a29a5769, type: 2}
+          value: {fileID: 1689383496650063, guid: 138d9aab749828846863fee5a29a5769,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b, type: 2}
+          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b,
+            type: 3}
         - useVariable: 1
           name: TriggerWalkRiseX2
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -483,9 +494,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000000000803e00000000000000000000000000000000000100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c00000013000000
         paramName:
@@ -498,7 +509,7 @@ MonoBehaviour:
         paramDataPos: 0000000001000000000000000d0000001a00000002000000
         paramByteDataSize: 00000000000000000d0000000d0000000d00000000000000
     - name: Spawn TriggerWalkUpdateObjX2
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -517,6 +528,7 @@ MonoBehaviour:
         toState: WaitC 0.2Sec
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -530,20 +542,22 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1842499278972825, guid: 6d907d3313d0fb54a802485ec5cebca5, type: 2}
+          value: {fileID: 1842499278972825, guid: 6d907d3313d0fb54a802485ec5cebca5,
+            type: 3}
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b, type: 2}
+          value: {fileID: 1748390321621414, guid: 6b6b1a13f2b51d84097fccae2dfce15b,
+            type: 3}
         - useVariable: 1
           name: TriggerWalkUpdateObjX2
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -569,9 +583,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 000000000000803e00000000000000000000000000000000000100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 13000000130000001c0000001c0000001c00000013000000
         paramName:
@@ -601,19 +615,19 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: TriggerWalkDigX2
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: TriggerWalkRiseX2
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: TriggerWalkUpdateObjX2
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -624,23 +638,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 1
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -661,6 +678,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0

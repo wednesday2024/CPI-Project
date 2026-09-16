@@ -3,15 +3,16 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb21a0c298ec1c989c132b0c4f24133, type: 3}
   m_Name: SettingsSubScreen
-  m_EditorClassIdentifier:
-  NodePrefab: {fileID: 1362141259008929, guid: 9b5cff8712904c74a90a164512c15256, type: 2}
+  m_EditorClassIdentifier: 
+  NodePrefab: {fileID: 1362141259008929, guid: 9b5cff8712904c74a90a164512c15256, type: 3}
   ChildNodes:
   - {fileID: 11400000, guid: 6cefb585fa9e8ae49a0207a5a313a0ee, type: 2}
   - {fileID: 11400000, guid: fa81ad879644d944db95ca0454cc9012, type: 2}

@@ -3,15 +3,16 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcb21a0c298ec1c989c132b0c4f24133, type: 3}
   m_Name: IglooScreenContainerContent
-  m_EditorClassIdentifier:
-  NodePrefab: {fileID: 1167570450333472, guid: e0ed858188a4fec4a881fecd85779b84, type: 2}
+  m_EditorClassIdentifier: 
+  NodePrefab: {fileID: 1167570450333472, guid: e0ed858188a4fec4a881fecd85779b84, type: 3}
   ChildNodes:
   - {fileID: 11400000, guid: 30bc9746cb2d2cc4d8f69827db32a4e1, type: 2}
   - {fileID: 11400000, guid: cd9cd511718fa964c82da01f2c001e8b, type: 2}

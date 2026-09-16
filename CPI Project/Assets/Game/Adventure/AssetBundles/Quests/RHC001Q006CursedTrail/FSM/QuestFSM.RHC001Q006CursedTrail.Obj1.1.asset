@@ -3,14 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1219815696, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: QuestFSM.RHC001Q006CursedTrail.Obj1.1
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   category: General
   fsm:
     dataVersion: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
     startState: Start Objective
     states:
     - name: Finish
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -63,15 +64,15 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Start Objective
       description: Use this state to determine where you want to start the objective.
       colorIndex: 0
@@ -92,14 +93,15 @@ MonoBehaviour:
         toState: Remove Breadcrumb 2
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames: []
         customNames: []
-        actionEnabled:
-        actionIsOpen:
-        actionStartIndex:
-        actionHashCodes:
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -123,17 +125,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Player In Boardwalk?
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -152,6 +154,7 @@ MonoBehaviour:
         toState: Find Objects
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       - fsmEvent:
           name: False
@@ -160,6 +163,7 @@ MonoBehaviour:
         toState: WP To Boardwalk
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -194,9 +198,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 426f61726477616c6b5472756546616c7365
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001700000017000000
         paramName:
@@ -206,7 +210,7 @@ MonoBehaviour:
         paramDataPos: 00000000090000000d000000
         paramByteDataSize: 090000000400000005000000
     - name: WP To Boardwalk
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -230,8 +234,8 @@ MonoBehaviour:
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -257,9 +261,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 426f61726477616c6b0100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 030000001300000003000000010000001c000000
         paramName:
@@ -271,7 +275,7 @@ MonoBehaviour:
         paramDataPos: 000000000000000000000000090000000a000000
         paramByteDataSize: 000000000000000009000000010000000d000000
     - name: ActivateTreasure
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -290,6 +294,7 @@ MonoBehaviour:
         toState: Clear Waypoint
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -306,7 +311,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: Treasure1
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -315,7 +320,7 @@ MonoBehaviour:
           gameObject:
             useVariable: 1
             name: Treasure1
-            tooltip:
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -340,9 +345,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 010001000000426f61726477616c6b0100000000000000000000000001
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000011000000110000000100000001000000030000001300000003000000010000001c000000
         paramName:
@@ -359,7 +364,11 @@ MonoBehaviour:
         paramDataPos: 00000000000000000200000004000000050000000600000000000000060000000f00000010000000
         paramByteDataSize: 0000000002000000020000000100000001000000000000000000000009000000010000000d000000
     - name: Find Objects
-      description: "NOTE: looking for more state machine?\nGo into the Boardwalk scene, put the Boardwalk > RHC001Q006CursedTrail prefab in the scene, and edit the FSM located on Treasure1."
+      description: 'NOTE: looking for more state machine?
+
+        Go into the Boardwalk
+        scene, put the Boardwalk > RHC001Q006CursedTrail prefab in the scene, and
+        edit the FSM located on Treasure1.'
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -378,6 +387,7 @@ MonoBehaviour:
         toState: ActivateTreasure
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -392,7 +402,7 @@ MonoBehaviour:
         fsmGameObjectParams:
         - useVariable: 1
           name: Treasure1
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {fileID: 0}
@@ -400,8 +410,8 @@ MonoBehaviour:
         - ownerOption: 0
           gameObject:
             useVariable: 0
-            name:
-            tooltip:
+            name: 
+            tooltip: 
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
@@ -414,13 +424,13 @@ MonoBehaviour:
         fsmStringParams:
         - useVariable: 1
           name: RootFSMName
-          tooltip:
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: QuestFSM.RHC001Q006CursedTrail
         - useVariable: 0
-          name:
-          tooltip:
+          name: 
+          tooltip: 
           showInInspector: 0
           networkSync: 0
           value: RootTreasure1
@@ -438,9 +448,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 1400000012000000120000001300000001000000
         paramName:
@@ -452,7 +462,7 @@ MonoBehaviour:
         paramDataPos: 0000000000000000010000000000000000000000
         paramByteDataSize: 0000000000000000000000000000000001000000
     - name: Clear Waypoint
-      description:
+      description: 
       colorIndex: 0
       position:
         serializedVersion: 2
@@ -471,6 +481,7 @@ MonoBehaviour:
         toState: Finish
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -504,17 +515,17 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData:
-        arrayParamSizes:
+        byteData: 
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
-        paramDataType:
+        paramDataType: 
         paramName: []
-        paramDataPos:
-        paramByteDataSize:
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Remove Breadcrumb 2
-      description:
+      description: 
       colorIndex: 4
       position:
         serializedVersion: 2
@@ -533,6 +544,7 @@ MonoBehaviour:
         toState: Player In Boardwalk?
         linkStyle: 0
         linkConstraint: 0
+        linkTarget: 0
         colorIndex: 0
       actionData:
         actionNames:
@@ -567,9 +579,9 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 476561725f3135
-        arrayParamSizes:
+        arrayParamSizes: 
         arrayParamTypes: []
-        customTypeSizes:
+        customTypeSizes: 
         customTypeNames: []
         paramDataType: 03000000
         paramName:
@@ -624,14 +636,14 @@ MonoBehaviour:
       floatVariables:
       - useVariable: 1
         name: Distance
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
       intVariables:
       - useVariable: 1
         name: RefRootRHC001Q001ObjFin
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: 0
@@ -639,7 +651,7 @@ MonoBehaviour:
       stringVariables:
       - useVariable: 1
         name: RootFSMName
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: QuestFSM.RHC001Q006CursedTrail
@@ -651,31 +663,31 @@ MonoBehaviour:
       gameObjectVariables:
       - useVariable: 1
         name: PathTrigger
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: Penguin
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: QuestPath
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: Trail1
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
       - useVariable: 1
         name: Treasure1
-        tooltip:
+        tooltip: 
         showInInspector: 0
         networkSync: 0
         value: {fileID: 0}
@@ -686,23 +698,26 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs:
-    description:
-    docUrl:
+      variableCategoryIDs: 
+    description: 
+    docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
-    watermark:
-    password:
+    watermark: 
+    password: 
     locked: 0
     manualUpdate: 0
+    outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
+    OutputEvents: []
     RestartOnEnable: 1
+    ResetVariablesOnEnable: 0
     EnableDebugFlow: 0
     EnableBreakpoints: 1
     editorFlags: 3
-    activeStateName:
+    activeStateName: 
     mouseEvents: 0
     handleLevelLoaded: 0
     handleTriggerEnter2D: 0
@@ -723,6 +738,9 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
+    handleLateUpdate: 0
     handleApplicationEvents: 0
+    handleUiEvents: 0
+    handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
