@@ -2,6 +2,7 @@ using ClubPenguin.Core;
 using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 	public class CoinCountWidget : MonoBehaviour
 	{
 		[SerializeField]
-		private Text coinCountText;
+		private TextMeshProUGUI coinCountText;
 
 		private CPDataEntityCollection dataEntityCollection;
 
