@@ -3,6 +3,7 @@ using ClubPenguin.Core;
 using Disney.Kelowna.Common.DataModel;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ namespace ClubPenguin.UI
 	{
 		private const int LOD_INDEX = 1;
 
-		public Text DisplayNameText;
+		public TextMeshProUGUI DisplayNameText;
 
 		private AvatarRenderTextureComponent avatarRenderTextureComponent;
 
