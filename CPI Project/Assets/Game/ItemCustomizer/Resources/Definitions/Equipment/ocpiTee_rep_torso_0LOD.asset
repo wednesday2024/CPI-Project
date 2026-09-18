@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2ea87c845033af1bf71a7294a73f9a4, type: 3}
-  m_Name: cpiCap_add_head_1LOD
+  m_Name: ocpiTee_rep_torso_0LOD
   m_EditorClassIdentifier: 
   SkinnedMesh:
-    Name: head
-    Mesh: {fileID: -7070831255929112694, guid: d236434d36f03dd488abc8ec21e5217f, type: 3}
-    RootBoneName: chest_jnt
+    Name: torso
+    Mesh: {fileID: 6297267204642607378, guid: 08bbafd7ce694fb9ebaa77d44b5e67d9, type: 3}
+    RootBoneName: hips_jnt
     BoneNames:
+    - hips_jnt
+    - backbone_jnt
     - chest_jnt
     - neck_jnt
     - beak_jnt
@@ -48,10 +50,20 @@ MonoBehaviour:
     - l_lowerLid_jnt
     - jaw_jnt
     - jawEnd_jnt
+    - l_armpit_jnt
+    - r_armpit_jnt
+    - l_shoulder_jnt
+    - l_elbow_jnt
+    - l_wrist_jnt
+    - r_shoulder_jnt
+    - r_elbow_jnt
+    - r_wrist_jnt
+    - belly_jnt
   BodyMaterial:
-    DiffuseTexture: {fileID: 2800000, guid: 9f179eadb8251f443853ef2b63cb5b4f, type: 3}
-    BodyColorsMaskTexture: {fileID: 0}
-    DetailMatCapMaskEmissiveTexture: {fileID: 2800000, guid: 2972ed86be4c1cb45b1b5b2de424da10,
+    DiffuseTexture: {fileID: 2800000, guid: 28afd4c2e74053e4f944cd425e43bb25, type: 3}
+    BodyColorsMaskTexture: {fileID: 2800000, guid: eb82e053a86a91f49a41acf917d196f5,
+      type: 3}
+    DetailMatCapMaskEmissiveTexture: {fileID: 2800000, guid: 99b0a666b381d6f468144a7529e85ebc,
       type: 3}
   EquipmentMaterial:
     Decals123OpacityTexture: {fileID: 0}
