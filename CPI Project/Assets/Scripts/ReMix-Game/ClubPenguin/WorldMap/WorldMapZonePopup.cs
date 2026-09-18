@@ -6,6 +6,7 @@ using DevonLocalization.Core;
 using Disney.MobileNetwork;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ namespace ClubPenguin.WorldMap
 		[SerializeField]
 		private ButtonClickListener btnZonePromptNo = null;
 
-		public Text ZoneText;
+		public TextMeshProUGUI ZoneText;
 
 		public RectTransform Arrow;
 

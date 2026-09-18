@@ -1,11 +1,12 @@
 using ClubPenguin.Core;
 using Disney.MobileNetwork;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ClubPenguin.UI
 {
-	[RequireComponent(typeof(Text))]
+	[RequireComponent(typeof(TextMeshProUGUI))]
 	public class CurrentServerText : MonoBehaviour
 	{
 		public void Start()
@@ -14,7 +15,7 @@ namespace ClubPenguin.UI
 			PresenceData component = cPDataEntityCollection.GetComponent<PresenceData>(cPDataEntityCollection.LocalPlayerHandle);
 			if (component != null)
 			{
-				GetComponent<Text>().text = string.Format("{0} ", component.World);
+				GetComponent<TextMeshProUGUI>().text = string.Format("{0} ", component.World);
 			}
 		}
 	}
