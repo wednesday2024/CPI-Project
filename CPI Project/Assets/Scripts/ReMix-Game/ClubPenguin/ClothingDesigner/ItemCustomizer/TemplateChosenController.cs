@@ -2,6 +2,7 @@ using ClubPenguin.Analytics;
 using ClubPenguin.Core;
 using DevonLocalization.Core;
 using Disney.MobileNetwork;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,13 +18,13 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 		private Image templateImage;
 
 		[SerializeField]
-		private Text templateTitle;
+		private TextMeshProUGUI templateTitle;
 
 		[SerializeField]
-		private Text templateDescription;
+		private TextMeshProUGUI templateDescription;
 
 		[SerializeField]
-		private Text templateCost;
+		private TextMeshProUGUI templateCost;
 
 		[SerializeField]
 		private GameObject selectButton;
