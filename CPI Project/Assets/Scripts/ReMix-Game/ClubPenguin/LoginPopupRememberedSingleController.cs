@@ -5,6 +5,7 @@ using Disney.Kelowna.Common.SEDFSM;
 using Disney.Mix.SDK;
 using Disney.MobileNetwork;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ namespace ClubPenguin
 		[Header("Other Controls")]
 		public Toggle RememberPassword;
 
-		public Text DisplayName;
+		public TextMeshProUGUI DisplayName;
 
 		public SpriteSelector MembershipSelector;
 

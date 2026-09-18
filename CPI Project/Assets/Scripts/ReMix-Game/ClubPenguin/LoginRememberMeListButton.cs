@@ -5,6 +5,7 @@ using Disney.Kelowna.Common.SEDFSM;
 using Disney.Mix.SDK;
 using Disney.MobileNetwork;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ namespace ClubPenguin
 	public class LoginRememberMeListButton : LoginPopupContentController
 	{
 		[Header("Display")]
-		public Text DisplayName;
+		public TextMeshProUGUI DisplayName;
 
 		[Header("Other Components")]
 		public Button LoginButton;
