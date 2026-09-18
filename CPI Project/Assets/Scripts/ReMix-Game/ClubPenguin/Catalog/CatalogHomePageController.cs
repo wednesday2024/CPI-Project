@@ -12,6 +12,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,21 +38,21 @@ namespace ClubPenguin.Catalog
 
 		public Image TodaysChallengeBackground;
 
-		public Text ThemeTitle;
+		public TextMeshProUGUI ThemeTitle;
 
-		public Text ThemeDescription;
+		public TextMeshProUGUI ThemeDescription;
 
-		public Text ThemeEndingText;
+		public TextMeshProUGUI ThemeEndingText;
 
-		public Text TimeText;
+		public TextMeshProUGUI TimeText;
 
 		public GameObject ChallengeMemberLock;
 
 		public GameObject ChallengeProgressionLock;
 
-		public Text ChallengeProgressionLockText;
+		public TextMeshProUGUI ChallengeProgressionLockText;
 
-		public Text CoinReward;
+		public TextMeshProUGUI CoinReward;
 
 		public TutorialDefinitionKey Catalog1TutorialDefinition;
 
