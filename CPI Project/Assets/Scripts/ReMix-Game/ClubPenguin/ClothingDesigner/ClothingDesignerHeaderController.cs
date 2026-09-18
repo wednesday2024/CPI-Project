@@ -2,6 +2,7 @@ using ClubPenguin.Catalog;
 using ClubPenguin.ClothingDesigner.ItemCustomizer;
 using DevonLocalization.Core;
 using Disney.MobileNetwork;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,12 @@ namespace ClubPenguin.ClothingDesigner
 	{
 		private Image challengeHeaderImage;
 
-		private Text challengeHeaderText;
+		private TextMeshProUGUI challengeHeaderText;
 
 		private void Awake()
 		{
 			challengeHeaderImage = GetComponentInChildren<Image>();
-			challengeHeaderText = GetComponentInChildren<Text>(true);
+			challengeHeaderText = GetComponentInChildren<TextMeshProUGUI>(true);
 			ClothingDesignerContext.EventBus.AddListener<ClothingDesignerUIEvents.ChangeStateInventory>(onTemplateState);
 			CatalogContext.EventBus.AddListener<CatalogUIEvents.AcceptChallengeClickedEvent>(onAcceptChallengeClicked);
 			CustomizationContext.EventBus.AddListener<CustomizerUIEvents.StartPurchaseMoment>(onStartPurchaseMoment);
