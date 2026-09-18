@@ -7,13 +7,14 @@ using Disney.Kelowna.Common;
 using Disney.Kelowna.Common.DataModel;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using TMPro;
 using UnityEngine.UI;
 
 namespace ClubPenguin.Catalog
 {
 	public class CatalogHeaderController : ACatalogController
 	{
-		public Text HeaderText;
+		public TextMeshProUGUI HeaderText;
 
 		public Button BackButton;
 
