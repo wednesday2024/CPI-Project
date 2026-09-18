@@ -90,6 +90,8 @@ Shader "CpRemix/UI/Mask"
             {
                 fixed4 color = tex2D(_MainTex, IN.texcoord) * IN.color;
 
+                color.a = smoothstep(0.02, 0.98, color.a);
+
                 #ifdef UNITY_UI_ALPHACLIP
                 clip(color.a - 0.001);
                 #endif
