@@ -14,6 +14,8 @@ namespace ClubPenguin.UI
 	{
 		public ClaimableRewardDefinition EventItemDefinition;
 
+		public ScheduledEventDateDefinitionKey[] AdditionalDateDefinitionKeys;
+
 		private List<DReward> rewards;
 
 		public event System.Action CollectItemSucceeded;
@@ -53,7 +55,19 @@ namespace ClubPenguin.UI
 		{
 			DateTime target = Service.Get<ContentSchedulerService>().ScheduledEventDate();
 			ScheduledEventDateDefinition definitionById = Service.Get<IGameData>().GetDefinitionById(EventItemDefinition.DateDefinitionKey);
-			return DateTimeUtils.DoesDateFallBetween(target, definitionById.Dates.StartDate, definitionById.Dates.EndDate);
+			if (DateTimeUtils.DoesDateFallBetween(target, definitionById.Dates.StartDate, definitionById.Dates.EndDate))
+			{
+				return true;
+			}
+			for (int i = 0; AdditionalDateDefinitionKeys != null && i < AdditionalDateDefinitionKeys.Length; i++)
+			{
+				definitionById = Service.Get<IGameData>().GetDefinitionById(AdditionalDateDefinitionKeys[i]);
+				if (DateTimeUtils.DoesDateFallBetween(target, definitionById.Dates.StartDate, definitionById.Dates.EndDate))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public bool HasItem()

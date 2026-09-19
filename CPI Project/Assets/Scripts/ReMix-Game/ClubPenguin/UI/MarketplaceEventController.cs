@@ -1,4 +1,5 @@
 using ClubPenguin.Rewards;
+using ClubPenguin.Core;
 using Disney.Kelowna.Common;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ namespace ClubPenguin.UI
 
 		public ClaimableRewardDefinition[] EventItems;
 
+		public ScheduledEventDateDefinitionKey[] AdditionalDateDefinitionKeys;
+
 		private static PrefabContentKey eventItemButtonContentKey = new PrefabContentKey("Prefabs/MarketplaceEventItemButton");
 
 		private void Start()
@@ -36,6 +39,7 @@ namespace ClubPenguin.UI
 			{
 				MarketplaceEventItem item = new MarketplaceEventItem();
 				item.EventItemDefinition = EventItems[i];
+				item.AdditionalDateDefinitionKeys = AdditionalDateDefinitionKeys;
 				if (ExistingRowItem == null)
 				{
 					Content.LoadAsync(delegate(string path, GameObject prefab)

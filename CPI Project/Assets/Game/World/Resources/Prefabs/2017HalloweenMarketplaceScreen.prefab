@@ -255,6 +255,13 @@ MonoBehaviour:
   ItemIconPenguinColor: {r: 0.16862746, g: 0.15686275, b: 0.15686275, a: 1}
   ItemsBlocker: {fileID: 1288713661454928}
   EventNameForBI: Halloween
+  AdditionalDateDefinitionKeys:
+  - Id: 51
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 52
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 53
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
   EventItems:
   - {fileID: 11400000, guid: 34889a876e0d974498e10529d81b4897, type: 2}
   - {fileID: 11400000, guid: fd204e1e382dead41a887102efb6081f, type: 2}

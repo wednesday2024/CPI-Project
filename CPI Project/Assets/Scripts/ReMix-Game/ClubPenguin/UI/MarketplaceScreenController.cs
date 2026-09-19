@@ -189,7 +189,19 @@ namespace ClubPenguin.UI
             if (!string.IsNullOrEmpty(definition.ItemListDisplayName))
             {
                 Text componentInChildren = ItemListHeader.GetComponentInChildren<Text>();
-                componentInChildren.text = Service.Get<Localizer>().GetTokenTranslation(definition.ItemListDisplayName);
+                string itemListDisplayName = Service.Get<Localizer>().GetTokenTranslation(definition.ItemListDisplayName);
+                if (componentInChildren != null)
+                {
+                    componentInChildren.text = itemListDisplayName;
+                }
+                else
+                {
+                    TextMeshProUGUI textMeshPro = ItemListHeader.GetComponentInChildren<TextMeshProUGUI>();
+                    if (textMeshPro != null)
+                    {
+                        textMeshPro.text = itemListDisplayName;
+                    }
+                }
                 ItemListHeader.SetActive(true);
             }
             itemTextColor = ColorUtils.HexToColor(definition.TextColorHex);
