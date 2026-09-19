@@ -57,6 +57,8 @@ namespace ClubPenguin.UI
 
 		private bool isSuppressed;
 
+		private bool coroutineActive;
+
 		private CoinsData coinsData;
 
 		private CPDataEntityCollection dataEntityCollection;
@@ -117,6 +119,7 @@ namespace ClubPenguin.UI
 		{
 			stopLoopAudio();
 			CoroutineRunner.StopAllForOwner(this);
+			coroutineActive = false;
 			if (coinsData != null)
 			{
 				coinsData.OnCoinsAdded -= onAddCoins;
@@ -153,7 +156,10 @@ namespace ClubPenguin.UI
 
 		public void OnCoinIntroAnimationComplete()
 		{
-			CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+			if (!coroutineActive)
+			{
+				CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+			}
 		}
 
 		public void OnCoinOutroAnimationComplete()
@@ -227,7 +233,22 @@ namespace ClubPenguin.UI
 
 		private void onCoinsChanged(int newCoinCount)
 		{
-			if (newCoinCount <= coinCount)
+			int queuedCoinCount = coinCount + remainingCoins;
+			if (newCoinCount > queuedCoinCount)
+			{
+				remainingCoins += newCoinCount - queuedCoinCount;
+				if (state == CoinHudState.closed)
+				{
+					showCoinHud();
+					state = CoinHudState.opening;
+				}
+				else if (state == CoinHudState.waitingToClose && !coroutineActive)
+				{
+					CancelInvoke();
+					CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+				}
+			}
+			else if (newCoinCount < coinCount)
 			{
 				coinCount = newCoinCount;
 				CoinText.text = coinCount.ToString();
@@ -236,6 +257,7 @@ namespace ClubPenguin.UI
 
 		private IEnumerator updateCoinDisplay()
 		{
+			coroutineActive = true;
 			eventDispatcher.DispatchEvent(default(HudEvents.CoinAdditionStart));
 			state = CoinHudState.addingCoins;
 			showCoinAdding();
@@ -277,6 +299,7 @@ namespace ClubPenguin.UI
 			stopCoinAdding();
 			stopLoopAudio();
 			state = CoinHudState.waitingToClose;
+			coroutineActive = false;
 			eventDispatcher.DispatchEvent(default(HudEvents.CoinAdditionStop));
 			Invoke("hideCoinHud", CloseTime);
 		}
