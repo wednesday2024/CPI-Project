@@ -129,12 +129,11 @@ public class EquipmentFBXRestorer : EditorWindow
         string meshAssetPath = AssetDatabase.GetAssetPath(assets[0].SkinnedMesh.Mesh);
         string meshDirectory = Path.GetDirectoryName(meshAssetPath);
         string exportPath = Path.Combine(meshDirectory, filename + ".fbx");
+        string temporaryExportPath = Path.Combine(meshDirectory, filename + "_replacement.fbx");
+        string existingGuid = GetMetaGuid(exportPath + ".meta");
 
-        if (File.Exists(exportPath))
-        {
-            Debug.Log($"Skipping {filename}: FBX already exists at {exportPath}");
-            return;
-        }
+        if (File.Exists(temporaryExportPath))
+            AssetDatabase.DeleteAsset(temporaryExportPath);
 
         GameObject tempRoot = new GameObject(filename);
 
@@ -185,7 +184,26 @@ public class EquipmentFBXRestorer : EditorWindow
 
 #if UNITY_2020_2_OR_NEWER
             var options = new ExportModelOptions { ExportFormat = ExportFormat.Binary };
-            ModelExporter.ExportObject(exportPath, tempRoot, options);
+            ModelExporter.ExportObject(temporaryExportPath, tempRoot, options);
+
+            if (!File.Exists(temporaryExportPath))
+                throw new IOException($"FBX exporter did not create the temporary file: {temporaryExportPath}");
+
+            AssetDatabase.Refresh();
+
+            if (File.Exists(exportPath))
+            {
+                if (!AssetDatabase.DeleteAsset(exportPath))
+                    throw new IOException($"Could not remove the existing FBX: {exportPath}");
+            }
+
+            string moveError = AssetDatabase.MoveAsset(temporaryExportPath, exportPath);
+            if (!string.IsNullOrEmpty(moveError))
+                throw new IOException($"Could not move replacement FBX into place: {moveError}");
+
+            if (!string.IsNullOrEmpty(existingGuid))
+                SetMetaGuid(exportPath + ".meta", existingGuid);
+
             Debug.Log($"Exported FBX to: {exportPath}");
 #else
             Debug.LogError("FBX Exporter SDK not available. Requires Unity 2020.2 or newer.");
@@ -201,7 +219,7 @@ public class EquipmentFBXRestorer : EditorWindow
             if (importer != null)
             {
                 importer.isReadable = true;
-                importer.generateSecondaryUV = true;
+                importer.generateSecondaryUV = false;
                 importer.materialImportMode = ModelImporterMaterialImportMode.None;
 
                 SerializedObject serializedImporter = new SerializedObject(importer);
@@ -237,6 +255,40 @@ public class EquipmentFBXRestorer : EditorWindow
         finally
         {
             DestroyImmediate(tempRoot);
+        }
+    }
+
+    private static string GetMetaGuid(string metaPath)
+    {
+        if (!File.Exists(metaPath))
+            return null;
+
+        string[] lines = File.ReadAllLines(metaPath);
+        for (int i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i].Trim();
+            if (line.StartsWith("guid:", System.StringComparison.Ordinal))
+                return line.Substring("guid:".Length).Trim();
+        }
+
+        return null;
+    }
+
+    private static void SetMetaGuid(string metaPath, string guid)
+    {
+        if (!File.Exists(metaPath))
+            return;
+
+        string[] lines = File.ReadAllLines(metaPath);
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (lines[i].TrimStart().StartsWith("guid:", System.StringComparison.Ordinal))
+            {
+                lines[i] = "guid: " + guid;
+                File.WriteAllLines(metaPath, lines);
+                AssetDatabase.Refresh();
+                return;
+            }
         }
     }
 
