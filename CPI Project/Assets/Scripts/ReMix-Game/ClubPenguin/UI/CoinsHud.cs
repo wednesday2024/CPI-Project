@@ -173,6 +173,7 @@ namespace ClubPenguin.UI
 			{
 				this.HudClosed(base.gameObject);
 			}
+			state = CoinHudState.closed;
 			base.gameObject.SetActive(false);
 		}
 
@@ -343,7 +344,6 @@ namespace ClubPenguin.UI
 
 		private void hideCoinHud()
 		{
-			state = CoinHudState.closed;
 			coinAnimator.SetBool("isShown", false);
 		}
 
