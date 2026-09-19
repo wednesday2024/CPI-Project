@@ -19,7 +19,7 @@ public class BlueprintIconRendererWindow : EditorWindow
     private Color fillColor = DefaultFillColor;
     private Color outlineColor = Color.white;
     private int outlinePixels = 3;
-    private float rotationY;
+    private Vector3 rotation;
     private Texture2D lastRenderedIcon;
     private string lastSavePath;
     private Vector2 scrollPosition;
@@ -84,7 +84,7 @@ public class BlueprintIconRendererWindow : EditorWindow
             LoadRenderData();
             TeardownPreviewScene();
 
-            if (selectedTemplate != null && renderData != null)
+            if (selectedTemplate != null)
             {
                 SetupPreviewScene();
             }
@@ -123,7 +123,7 @@ public class BlueprintIconRendererWindow : EditorWindow
 
     private void DrawRenderSettings()
     {
-        if (selectedTemplate == null || renderData == null)
+        if (selectedTemplate == null)
         {
             return;
         }
@@ -132,7 +132,9 @@ public class BlueprintIconRendererWindow : EditorWindow
         fillColor = EditorGUILayout.ColorField("Fill Color", fillColor);
         outlineColor = EditorGUILayout.ColorField("Outline Color", outlineColor);
         outlinePixels = EditorGUILayout.IntSlider("Outline Pixels", outlinePixels, 1, 6);
-        rotationY = EditorGUILayout.Slider("Rotation Y", rotationY, 0f, 360f);
+        rotation.x = EditorGUILayout.Slider("Rotation X", rotation.x, 0f, 360f);
+        rotation.y = EditorGUILayout.Slider("Rotation Y", rotation.y, 0f, 360f);
+        rotation.z = EditorGUILayout.Slider("Rotation Z", rotation.z, 0f, 360f);
 
         GUILayout.Space(8f);
     }
@@ -155,7 +157,7 @@ public class BlueprintIconRendererWindow : EditorWindow
 
     private void DrawRenderAndSave()
     {
-        if (selectedTemplate == null || renderData == null)
+        if (selectedTemplate == null)
         {
             return;
         }
@@ -215,7 +217,7 @@ public class BlueprintIconRendererWindow : EditorWindow
     {
         TeardownPreviewScene();
 
-        if (selectedTemplate == null || renderData == null)
+        if (selectedTemplate == null)
         {
             return;
         }
@@ -268,7 +270,7 @@ public class BlueprintIconRendererWindow : EditorWindow
         }
 
         previewRenderTexture = new RenderTexture(IconSize, IconSize, 24, RenderTextureFormat.ARGB32);
-        previewRenderTexture.antiAliasing = 4;
+        previewRenderTexture.antiAliasing = 8;
         previewRenderTexture.Create();
 
         GameObject camGO = new GameObject("PreviewCam");
@@ -307,7 +309,7 @@ public class BlueprintIconRendererWindow : EditorWindow
         }
 
         previewMaterial.SetColor("_FillColor", fillColor);
-        previewRoot.transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
+        previewRoot.transform.rotation = Quaternion.Euler(rotation);
 
         previewCamera.Render();
 
@@ -365,7 +367,8 @@ public class BlueprintIconRendererWindow : EditorWindow
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
             string fileName = Path.GetFileNameWithoutExtension(path);
-            if (fileName.StartsWith(equipmentName + "_") && fileName.EndsWith("_0LOD"))
+            if (fileName.StartsWith(equipmentName + "_", System.StringComparison.OrdinalIgnoreCase) &&
+                fileName.EndsWith("_0LOD", System.StringComparison.OrdinalIgnoreCase))
             {
                 assetPaths.Add(path);
             }
