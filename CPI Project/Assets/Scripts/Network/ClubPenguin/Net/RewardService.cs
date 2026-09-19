@@ -1,6 +1,7 @@
 using ClubPenguin.Net.Client;
 using ClubPenguin.Net.Client.Event;
 using ClubPenguin.Net.Domain;
+using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using hg.ApiWebKit.core.http;
@@ -243,7 +244,10 @@ namespace ClubPenguin.Net
 		{
 			SignedResponse<InRoomRewards> signedResponse = (SignedResponse<InRoomRewards>)data;
 			APICall<AddRoomRewardsOperation> aPICall = clubPenguinClient.RewardApi.AddRoomRewards(signedResponse);
-			aPICall.OnResponse += onAssetsSet;
+			if (!Service.Get<ICommonGameSettings>().OfflineMode)
+			{
+				aPICall.OnResponse += onAssetsSet;
+			}
 			aPICall.OnError += handleCPResponseError;
 			aPICall.Execute();
 			Service.Get<EventDispatcher>().DispatchEvent(new RewardServiceEvents.RoomRewardsReceived(signedResponse.Data.room, signedResponse.Data.collected));
