@@ -164,6 +164,11 @@ namespace ClubPenguin.UI
 
 		public void OnCoinOutroAnimationComplete()
 		{
+			if (state != CoinHudState.waitingToClose || coroutineActive || remainingCoins > 0)
+			{
+				coinAnimator.SetBool(ANIMATOR_IS_SHOWING, true);
+				return;
+			}
 			if (this.HudClosed != null)
 			{
 				this.HudClosed(base.gameObject);
@@ -195,7 +200,11 @@ namespace ClubPenguin.UI
 			case CoinHudState.waitingToClose:
 				CancelInvoke();
 				remainingCoins += coinsAdded;
-				CoroutineRunner.Start(updateCoinDisplay(), this, "updateXpDisplay");
+				showCoinHud();
+				if (!coroutineActive)
+				{
+					CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+				}
 				break;
 			}
 		}
@@ -226,7 +235,11 @@ namespace ClubPenguin.UI
 			case CoinHudState.waitingToClose:
 				CancelInvoke();
 				remainingCoins -= coinsRemoved;
-				CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+				showCoinHud();
+				if (!coroutineActive)
+				{
+					CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
+				}
 				break;
 			}
 		}
@@ -245,6 +258,7 @@ namespace ClubPenguin.UI
 				else if (state == CoinHudState.waitingToClose && !coroutineActive)
 				{
 					CancelInvoke();
+					showCoinHud();
 					CoroutineRunner.Start(updateCoinDisplay(), this, "updateCoinDisplay");
 				}
 			}
