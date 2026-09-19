@@ -211,10 +211,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224487200948869332}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171, y: -18.85}
-  m_SizeDelta: {x: 75, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222491772878264140
 CanvasRenderer:
@@ -1429,6 +1429,17 @@ MonoBehaviour:
   EventNameForBI: Holiday
   EventItems:
   - {fileID: 11400000, guid: 5106603642c56a94db1382d72be650f2, type: 2}
+  AdditionalDateDefinitionKeys:
+  - Id: 36
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 37
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 38
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 39
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 45
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
 --- !u!1 &1046978132913626
 GameObject:
   m_ObjectHideFlags: 0
@@ -6080,6 +6091,17 @@ MonoBehaviour:
   EventNameForBI: Holiday
   EventItems:
   - {fileID: 11400000, guid: 23374bcb46b3db244a7ff5ce2e44e07c, type: 2}
+  AdditionalDateDefinitionKeys:
+  - Id: 36
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 37
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 38
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 39
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 45
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
 --- !u!1 &1255017375169627
 GameObject:
   m_ObjectHideFlags: 0
@@ -9213,6 +9235,17 @@ MonoBehaviour:
   EventNameForBI: Holiday
   EventItems:
   - {fileID: 11400000, guid: 6cb9cc98460dc1442a046d1060935109, type: 2}
+  AdditionalDateDefinitionKeys:
+  - Id: 36
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 37
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 38
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 39
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 45
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
 --- !u!1 &1479373604748802
 GameObject:
   m_ObjectHideFlags: 0
@@ -11105,6 +11138,17 @@ MonoBehaviour:
   EventNameForBI: Holiday
   EventItems:
   - {fileID: 11400000, guid: 9fb2ccd270a21134b977b8e536292d33, type: 2}
+  AdditionalDateDefinitionKeys:
+  - Id: 36
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 37
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 38
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 39
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 45
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
 --- !u!1 &1558394333615861
 GameObject:
   m_ObjectHideFlags: 0
@@ -13140,10 +13184,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224403656936542608}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171, y: -18.85}
-  m_SizeDelta: {x: 75, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222223361272170719
 CanvasRenderer:
@@ -13238,10 +13282,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224545658618504373}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171, y: -18.85}
-  m_SizeDelta: {x: 75, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222263290067434454
 CanvasRenderer:
@@ -14772,10 +14816,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224564123741038888}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171, y: -18.85}
-  m_SizeDelta: {x: 75, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222119022932676191
 CanvasRenderer:
@@ -18033,6 +18077,17 @@ MonoBehaviour:
   EventNameForBI: Holiday
   EventItems:
   - {fileID: 11400000, guid: bfc2a066f8b4e5e4797f9871e8a56a17, type: 2}
+  AdditionalDateDefinitionKeys:
+  - Id: 36
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 37
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 38
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 39
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  - Id: 45
+    type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
 --- !u!1 &1879574861822237
 GameObject:
   m_ObjectHideFlags: 0
