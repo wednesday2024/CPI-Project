@@ -126,8 +126,7 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
         private void ApplyRotation()
         {
             rotationTarget.localPosition = _originalPosition;
-            rotationTarget.localRotation = _originalRotation;
-            rotationTarget.RotateAround(rotationCenter.position, Vector3.forward, _value * 57.29578f);
+            rotationTarget.localRotation = _originalRotation * Quaternion.Euler(0f, 0f, _value * 57.29578f);
         }
 
         public void OnPointerUp(PointerEventData eventData)
