@@ -28,6 +28,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
     private const float MaxUvOffset = 0.5f;
     private const float UvKeyPrecision = 1000000f;
     private const string DecalTextureFolder = "Assets/AssetPipeline/BundleAssets/AssetBundles/Decals";
+    private const string LastSaveDirectoryPreference = "CpRemixEquipmentTextureRenderer.LastSaveDirectory";
 
     private static readonly int[] OutputSizeValues = { 0, 128, 256, 512, 1024, 2048, 4096 };
     private static readonly string[] OutputSizeLabels = { "Auto", "128", "256", "512", "1024", "2048", "4096" };
@@ -845,8 +846,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         }
 
         string defaultFileName = BuildDefaultFileName(sourceMesh, sourceMaterial);
-        string savePath = EditorUtility.SaveFilePanelInProject("Save Baked Texture", defaultFileName, "png", "Choose where to save the baked texture.");
-        if (string.IsNullOrEmpty(savePath))
+        if (!TryShowSavePanelInProject("Save Baked Texture", defaultFileName, "png", "Choose where to save the baked texture.", out string savePath))
         {
             DestroyImmediate(bakedTexture);
             return;
@@ -858,6 +858,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             File.WriteAllBytes(absoluteSavePath, bakedTexture.EncodeToPNG());
             AssetDatabase.ImportAsset(savePath, ImportAssetOptions.ForceUpdate);
             ConfigureImportedTexture(savePath);
+            RememberSaveDirectory(savePath);
 
             Texture2D importedTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(savePath);
             if (importedTexture != null)
@@ -897,8 +898,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         }
 
         string defaultFileName = BuildDecal123FileName(sourceMesh);
-        string savePath = EditorUtility.SaveFilePanelInProject("Save Decal 123 Texture", defaultFileName, "png", "Choose where to save the generated decal 123 texture.");
-        if (string.IsNullOrEmpty(savePath))
+        if (!TryShowSavePanelInProject("Save Decal 123 Texture", defaultFileName, "png", "Choose where to save the generated decal 123 texture.", out string savePath))
         {
             DestroyImmediate(decalTexture);
             return;
@@ -910,6 +910,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             File.WriteAllBytes(absoluteSavePath, decalTexture.EncodeToPNG());
             AssetDatabase.ImportAsset(savePath, ImportAssetOptions.ForceUpdate);
             ConfigureImportedDecal123Texture(savePath);
+            RememberSaveDirectory(savePath);
 
             Texture2D importedTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(savePath);
             if (importedTexture != null)
@@ -958,8 +959,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         }
 
         string defaultFileName = BuildMaterialFileName(resolvedDefinition, sourceMesh);
-        string savePath = EditorUtility.SaveFilePanelInProject("Create Material From Definition", defaultFileName, "mat", "Choose where to save the generated material.");
-        if (string.IsNullOrEmpty(savePath))
+        if (!TryShowSavePanelInProject("Create Material From Definition", defaultFileName, "mat", "Choose where to save the generated material.", out string savePath))
         {
             DestroyImmediate(material);
             return;
@@ -968,6 +968,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         AssetDatabase.CreateAsset(material, savePath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        RememberSaveDirectory(savePath);
 
         sourceMaterial = AssetDatabase.LoadAssetAtPath<Material>(savePath);
         if (sourceMaterial == null)
@@ -1473,6 +1474,52 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         EditorUtility.DisplayDialog("CPRemix Equipment Texture Renderer", error, "OK");
     }
 
+    private static bool TryShowSavePanelInProject(string title, string defaultFileName, string extension, string message, out string assetPath)
+    {
+        assetPath = null;
+        string projectRoot = Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
+        string initialDirectory = projectRoot;
+        string lastSaveDirectory = EditorPrefs.GetString(LastSaveDirectoryPreference, string.Empty).Replace('\\', '/').Trim('/');
+        if (!string.IsNullOrEmpty(lastSaveDirectory) &&
+            (lastSaveDirectory.Equals("Assets", StringComparison.OrdinalIgnoreCase) ||
+             lastSaveDirectory.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase)))
+        {
+            initialDirectory = Path.GetFullPath(Path.Combine(projectRoot, lastSaveDirectory));
+        }
+
+        if (!Directory.Exists(initialDirectory))
+        {
+            initialDirectory = projectRoot;
+        }
+
+        string selectedPath = EditorUtility.SaveFilePanel(title, initialDirectory, defaultFileName, extension);
+        if (string.IsNullOrEmpty(selectedPath))
+        {
+            return false;
+        }
+
+        string assetsRoot = Path.GetFullPath(Application.dataPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        string fullSelectedPath = Path.GetFullPath(selectedPath);
+        string assetsPrefix = assetsRoot + Path.DirectorySeparatorChar;
+        if (!fullSelectedPath.StartsWith(assetsPrefix, StringComparison.OrdinalIgnoreCase))
+        {
+            ShowError("Choose a save location inside the project's Assets folder.");
+            return false;
+        }
+
+        assetPath = "Assets" + fullSelectedPath.Substring(assetsRoot.Length).Replace('\\', '/');
+        return true;
+    }
+
+    private static void RememberSaveDirectory(string assetPath)
+    {
+        string directory = Path.GetDirectoryName(assetPath);
+        if (!string.IsNullOrEmpty(directory))
+        {
+            EditorPrefs.SetString(LastSaveDirectoryPreference, directory.Replace('\\', '/'));
+        }
+    }
+
     private static void ConfigureImportedTexture(string assetPath)
     {
         TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
@@ -1482,12 +1529,12 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         }
 
         importer.textureType = TextureImporterType.Default;
-        importer.alphaIsTransparency = false;
+        importer.alphaIsTransparency = true;
         importer.mipmapEnabled = false;
         importer.wrapMode = TextureWrapMode.Clamp;
         importer.filterMode = FilterMode.Trilinear;
         importer.anisoLevel = 16;
-        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.textureCompression = TextureImporterCompression.CompressedHQ;
         importer.SaveAndReimport();
     }
 
@@ -1500,12 +1547,12 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         }
 
         importer.textureType = TextureImporterType.Default;
-        importer.alphaIsTransparency = false;
+        importer.alphaIsTransparency = true;
         importer.mipmapEnabled = false;
         importer.wrapMode = TextureWrapMode.Clamp;
-        importer.filterMode = FilterMode.Point;
+        importer.filterMode = FilterMode.Trilinear;
         importer.anisoLevel = 16;
-        importer.textureCompression = TextureImporterCompression.Uncompressed;
+        importer.textureCompression = TextureImporterCompression.CompressedHQ;
         importer.SaveAndReimport();
     }
 
@@ -1622,7 +1669,9 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             bakedTexture = new Texture2D(outputSize, outputSize, TextureFormat.RGBA32, false, false);
             bakedTexture.name = material.name + "_Baked";
             bakedTexture.ReadPixels(new Rect(0f, 0f, outputSize, outputSize), 0, 0);
-            ForceOpaqueAlpha(bakedTexture);
+            Color32[] bakedPixels = bakedTexture.GetPixels32();
+            DilateRasterizedColors(bakedPixels, outputSize, 10);
+            bakedTexture.SetPixels32(bakedPixels);
             bakedTexture.Apply(false, false);
             return true;
         }
@@ -1651,17 +1700,6 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
                 DestroyImmediate(bakeMaterial);
             }
         }
-    }
-
-    private static void ForceOpaqueAlpha(Texture2D texture)
-    {
-        Color32[] pixels = texture.GetPixels32();
-        for (int i = 0; i < pixels.Length; i++)
-        {
-            pixels[i].a = byte.MaxValue;
-        }
-
-        texture.SetPixels32(pixels);
     }
 
     private static bool TryReadMaterialParams(Material material, out EquipmentShaderParams shaderParams, out string error)
@@ -2107,7 +2145,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
     private static Texture2D RasterizeDecal123Texture(Vector2[] uv, int[] triangles, int[] triangleIslandIndices, Color32[] islandColors, int size)
     {
         Color32[] pixels = new Color32[size * size];
-        Color32 backgroundColor = new Color32(0, 0, 0, 255);
+        Color32 backgroundColor = new Color32(0, 0, 0, 0);
         for (int pixelIndex = 0; pixelIndex < pixels.Length; pixelIndex++)
         {
             pixels[pixelIndex] = backgroundColor;
@@ -2122,10 +2160,222 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             RasterizeTriangle(pixels, size, a, b, c, islandColors[triangleIslandIndices[triangleIndex]]);
         }
 
+        FillSmallRasterizedGaps(pixels, size, 4);
+        RemoveStrayRasterizedColors(pixels, size);
+        DilateRasterizedColors(pixels, size, 10);
+
         Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
         texture.SetPixels32(pixels);
         texture.Apply(false, false);
         return texture;
+    }
+
+    private static void DilateRasterizedColors(Color32[] pixels, int size, int radius)
+    {
+        Color32[] sourcePixels = new Color32[pixels.Length];
+        Array.Copy(pixels, sourcePixels, pixels.Length);
+        int radiusSquared = radius * radius;
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                int pixelIndex = (y * size) + x;
+                if (sourcePixels[pixelIndex].a != 0)
+                {
+                    continue;
+                }
+
+                Color32 nearestColor = sourcePixels[pixelIndex];
+                int nearestDistanceSquared = radiusSquared + 1;
+                int minY = Mathf.Max(0, y - radius);
+                int maxY = Mathf.Min(size - 1, y + radius);
+                int minX = Mathf.Max(0, x - radius);
+                int maxX = Mathf.Min(size - 1, x + radius);
+                for (int neighborY = minY; neighborY <= maxY; neighborY++)
+                {
+                    for (int neighborX = minX; neighborX <= maxX; neighborX++)
+                    {
+                        int offsetX = neighborX - x;
+                        int offsetY = neighborY - y;
+                        int distanceSquared = (offsetX * offsetX) + (offsetY * offsetY);
+                        if (distanceSquared > radiusSquared || distanceSquared >= nearestDistanceSquared)
+                        {
+                            continue;
+                        }
+
+                        Color32 neighborColor = sourcePixels[(neighborY * size) + neighborX];
+                        if (neighborColor.a == 0)
+                        {
+                            continue;
+                        }
+
+                        nearestColor = neighborColor;
+                        nearestColor.a = 0;
+                        nearestDistanceSquared = distanceSquared;
+                    }
+                }
+
+                if (nearestDistanceSquared <= radiusSquared)
+                {
+                    pixels[pixelIndex] = nearestColor;
+                }
+            }
+        }
+    }
+
+    private static void RemoveStrayRasterizedColors(Color32[] pixels, int size)
+    {
+        Color32[] sourcePixels = new Color32[pixels.Length];
+        for (int pass = 0; pass < 2; pass++)
+        {
+            Array.Copy(pixels, sourcePixels, pixels.Length);
+            for (int y = 1; y < size - 1; y++)
+            {
+                for (int x = 1; x < size - 1; x++)
+                {
+                    int pixelIndex = (y * size) + x;
+                    Color32 currentColor = sourcePixels[pixelIndex];
+                    if (currentColor.a == 0)
+                    {
+                        continue;
+                    }
+
+                    Color32 majorityColor = currentColor;
+                    int majorityCount = 0;
+                    for (int neighborY = y - 1; neighborY <= y + 1; neighborY++)
+                    {
+                        for (int neighborX = x - 1; neighborX <= x + 1; neighborX++)
+                        {
+                            if (neighborX == x && neighborY == y)
+                            {
+                                continue;
+                            }
+
+                            Color32 neighborColor = sourcePixels[(neighborY * size) + neighborX];
+                            if (neighborColor.a == 0)
+                            {
+                                continue;
+                            }
+
+                            int neighborCount = CountNeighborColor(sourcePixels, size, neighborX, neighborY, neighborColor);
+                            if (neighborCount > majorityCount)
+                            {
+                                majorityColor = neighborColor;
+                                majorityCount = neighborCount;
+                            }
+                        }
+                    }
+
+                    if (majorityCount >= 5 && !AreSameColor(currentColor, majorityColor))
+                    {
+                        pixels[pixelIndex] = majorityColor;
+                    }
+                }
+            }
+        }
+    }
+
+    private static void FillSmallRasterizedGaps(Color32[] pixels, int size, int maxGapSize)
+    {
+        Color32[] sourcePixels = new Color32[pixels.Length];
+        Array.Copy(pixels, sourcePixels, pixels.Length);
+        FillHorizontalRasterizedGaps(sourcePixels, pixels, size, maxGapSize);
+        Array.Copy(pixels, sourcePixels, pixels.Length);
+        FillVerticalRasterizedGaps(sourcePixels, pixels, size, maxGapSize);
+    }
+
+    private static void FillHorizontalRasterizedGaps(Color32[] sourcePixels, Color32[] pixels, int size, int maxGapSize)
+    {
+        for (int y = 0; y < size; y++)
+        {
+            int x = 0;
+            while (x < size)
+            {
+                if (sourcePixels[(y * size) + x].a != 0)
+                {
+                    x++;
+                    continue;
+                }
+
+                int gapStart = x;
+                while (x < size && sourcePixels[(y * size) + x].a == 0)
+                {
+                    x++;
+                }
+
+                int gapSize = x - gapStart;
+                if (gapStart > 0 && x < size && gapSize <= maxGapSize)
+                {
+                    Color32 leftColor = sourcePixels[(y * size) + gapStart - 1];
+                    Color32 rightColor = sourcePixels[(y * size) + x];
+                    if (AreSameColor(leftColor, rightColor))
+                    {
+                        for (int gapX = gapStart; gapX < x; gapX++)
+                        {
+                            pixels[(y * size) + gapX] = leftColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void FillVerticalRasterizedGaps(Color32[] sourcePixels, Color32[] pixels, int size, int maxGapSize)
+    {
+        for (int x = 0; x < size; x++)
+        {
+            int y = 0;
+            while (y < size)
+            {
+                if (sourcePixels[(y * size) + x].a != 0)
+                {
+                    y++;
+                    continue;
+                }
+
+                int gapStart = y;
+                while (y < size && sourcePixels[(y * size) + x].a == 0)
+                {
+                    y++;
+                }
+
+                int gapSize = y - gapStart;
+                if (gapStart > 0 && y < size && gapSize <= maxGapSize)
+                {
+                    Color32 topColor = sourcePixels[((gapStart - 1) * size) + x];
+                    Color32 bottomColor = sourcePixels[(y * size) + x];
+                    if (AreSameColor(topColor, bottomColor))
+                    {
+                        for (int gapY = gapStart; gapY < y; gapY++)
+                        {
+                            pixels[(gapY * size) + x] = topColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static int CountNeighborColor(Color32[] pixels, int size, int centerX, int centerY, Color32 color)
+    {
+        int count = 0;
+        for (int y = centerY - 1; y <= centerY + 1; y++)
+        {
+            for (int x = centerX - 1; x <= centerX + 1; x++)
+            {
+                if (AreSameColor(pixels[(y * size) + x], color))
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private static bool AreSameColor(Color32 left, Color32 right)
+    {
+        return left.a != 0 && right.a != 0 && left.r == right.r && left.g == right.g && left.b == right.b;
     }
 
     private static Vector2 UvToPixelSpace(Vector2 uv, int size)
@@ -2164,9 +2414,10 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
                 bool isInside = signedArea > 0f
                     ? edge0 >= 0f && edge1 >= 0f && edge2 >= 0f
                     : edge0 <= 0f && edge1 <= 0f && edge2 <= 0f;
+                int pixelIndex = (y * size) + x;
                 if (isInside)
                 {
-                    pixels[(y * size) + x] = color;
+                    pixels[pixelIndex] = color;
                 }
             }
         }
