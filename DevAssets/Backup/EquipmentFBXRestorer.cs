@@ -219,7 +219,7 @@ public class EquipmentFBXRestorer : EditorWindow
             if (importer != null)
             {
                 importer.isReadable = true;
-                importer.generateSecondaryUV = false;
+                importer.generateSecondaryUV = true;
                 importer.materialImportMode = ModelImporterMaterialImportMode.None;
 
                 SerializedObject serializedImporter = new SerializedObject(importer);
