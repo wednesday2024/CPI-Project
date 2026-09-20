@@ -3,8 +3,9 @@
 --- !u!90 &9000000
 Avatar:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ParachuteTangledAvatar
   m_AvatarSize: 1280
   m_Avatar:
@@ -28,15 +29,7 @@ Avatar:
           m_AxesId: -1
         - m_ParentId: 0
           m_AxesId: -1
-        m_ID:
-        - 0
-        - 198703462
-        - 2630827844
-        - 2873339921
-        - 1658904557
-        - 3314282931
-        - 2730774329
-        - 2629836489
+        m_ID: 0000000066f9d70b443fcf9c11b043abeddfe062b3f18bc5394fc4a2c91ec09c
         m_AxesArray: []
     m_AvatarSkeletonPose:
       data:
@@ -92,15 +85,7 @@ Avatar:
         - t: {x: -0, y: 0, z: 0}
           q: {x: 0, y: -0, z: -0, w: 1}
           s: {x: 1, y: 1, z: 1}
-    m_SkeletonNameIDArray:
-    - 0
-    - 198703462
-    - 1282900918
-    - 1897376262
-    - 3275191830
-    - 4267138982
-    - 3119981942
-    - 2629836489
+    m_SkeletonNameIDArray: 0000000066f9d70bb683774c06aa1771167637c3a65f57fe7625f7b9c91ec09c
     m_Human:
       data:
         serializedVersion: 2
@@ -111,75 +96,18 @@ Avatar:
         m_Skeleton:
           data:
             m_Node: []
-            m_ID: []
+            m_ID: 
             m_AxesArray: []
         m_SkeletonPose:
           data:
             m_X: []
         m_LeftHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_RightHand:
           data:
-            m_HandBoneIndex:
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-            - -1
-        m_Handles: []
-        m_ColliderArray: []
-        m_HumanBoneIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         m_HumanBoneMass:
         - 0.14545456
         - 0.12121213
@@ -206,32 +134,6 @@ Avatar:
         - 0
         - 0
         - 0
-        m_ColliderIndex:
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
-        - -1
         m_Scale: 1
         m_ArmTwist: 0.5
         m_ForeArmTwist: 0.5
@@ -243,8 +145,8 @@ Avatar:
         m_HasLeftHand: 0
         m_HasRightHand: 0
         m_HasTDoF: 0
-    m_HumanSkeletonIndexArray: []
-    m_HumanSkeletonReverseIndexArray: []
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
     m_RootMotionBoneIndex: -1
     m_RootMotionBoneX:
       t: {x: 0, y: 0, z: 0}
@@ -253,18 +155,34 @@ Avatar:
     m_RootMotionSkeleton:
       data:
         m_Node: []
-        m_ID: []
+        m_ID: 
         m_AxesArray: []
     m_RootMotionSkeletonPose:
       data:
         m_X: []
-    m_RootMotionSkeletonIndexArray: []
+    m_RootMotionSkeletonIndexArray: 
   m_TOS:
-  - 0:
-  - 198703462: parachute_A_jnt
-  - 1658904557: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt
-  - 2629836489: TangledParachute_mesh
-  - 2630827844: parachute_A_jnt/parachute_B_jnt
-  - 2730774329: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt/parachute_E_jnt/parachute_F_jnt
-  - 2873339921: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt
-  - 3314282931: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt/parachute_E_jnt
+    1658904557: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt
+    3314282931: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt/parachute_E_jnt
+    198703462: parachute_A_jnt
+    2873339921: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt
+    0: 
+    2630827844: parachute_A_jnt/parachute_B_jnt
+    2629836489: TangledParachute_mesh
+    2730774329: parachute_A_jnt/parachute_B_jnt/parachute_C_jnt/parachute_D_jnt/parachute_E_jnt/parachute_F_jnt
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1

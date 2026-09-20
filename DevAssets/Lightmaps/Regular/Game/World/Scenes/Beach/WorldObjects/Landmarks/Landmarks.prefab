@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 377183434877897627}
   - component: {fileID: 1579733646505271410}
   - component: {fileID: 1672250771343576750}
+  - component: {fileID: 3741904647681373415}
   m_Layer: 30
   m_Name: innerTube
   m_TagString: Untagged
@@ -313,10 +314,32 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.9075614, y: 0.312453, z: 1.036898}
   m_Center: {x: 0.0007471008, y: -0.09965556, z: -0.16752326}
+--- !u!64 &3741904647681373415
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2248311185933600809}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: f7aeb617cdef1d6478a6fe484050b475, type: 2}
 --- !u!1 &2828353999322129757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4240,7 +4263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProximityGroup: SceneryAndObstacles
-  Distance: 8
+  Distance: 12
   Offset: {x: 0, y: 0, z: 0}
   ExplosionParticle: {fileID: 198398649885109544, guid: cced6a48a7f4a99499d48cc7d5517663,
     type: 3}
@@ -4421,6 +4444,7 @@ GameObject:
   - component: {fileID: 2262206928587599195}
   - component: {fileID: 4085472640927166022}
   - component: {fileID: 8393573909268376953}
+  - component: {fileID: 3534495013836395726}
   m_Layer: 30
   m_Name: innerTube (1)
   m_TagString: Untagged
@@ -4517,10 +4541,32 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.9075614, y: 0.312453, z: 1.036898}
   m_Center: {x: 0.0007509229, y: -0.09965555, z: -0.16752326}
+--- !u!64 &3534495013836395726
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760087006082062986}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: f7aeb617cdef1d6478a6fe484050b475, type: 2}
 --- !u!1 &8950069867411340526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4876,6 +4922,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7761104956078489204}
     m_Modifications:
+    - target: {fileID: 811499524867097559, guid: db099e3a5f742094186f54dae13b9c6d,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9de1504267c642449923dd766d7a10b9, type: 2}
     - target: {fileID: 5649309266638476766, guid: db099e3a5f742094186f54dae13b9c6d,
         type: 3}
       propertyPath: m_LocalPosition.x
