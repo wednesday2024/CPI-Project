@@ -4,6 +4,7 @@ Shader "CpRemix/UI/Mask"
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
+        [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
         _StencilOp ("Stencil Operation", Float) = 0
@@ -72,6 +73,17 @@ Shader "CpRemix/UI/Mask"
             sampler2D _MainTex;
             fixed4 _Color;
 
+            #ifdef UNITY_INSTANCING_ENABLED
+            UNITY_INSTANCING_BUFFER_START(PerDrawSprite)
+                UNITY_DEFINE_INSTANCED_PROP(fixed4, unity_SpriteRendererColorArray)
+            UNITY_INSTANCING_BUFFER_END(PerDrawSprite)
+            #define _RendererColor UNITY_ACCESS_INSTANCED_PROP(PerDrawSprite, unity_SpriteRendererColorArray)
+            #else
+            CBUFFER_START(UnityPerDrawSprite)
+                fixed4 _RendererColor;
+            CBUFFER_END
+            #endif
+
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -81,7 +93,7 @@ Shader "CpRemix/UI/Mask"
 
                 OUT.vertex = UnityObjectToClipPos(v.vertex);
                 OUT.texcoord = v.texcoord;
-                OUT.color = v.color * _Color;
+                OUT.color = v.color * _Color * _RendererColor;
 
                 return OUT;
             }
