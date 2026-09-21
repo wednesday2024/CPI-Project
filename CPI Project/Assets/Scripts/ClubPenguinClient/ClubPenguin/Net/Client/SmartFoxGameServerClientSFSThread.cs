@@ -69,6 +69,7 @@ namespace ClubPenguin.Net.Client
         {
             UnityEngine.Debug.Log("UserVariableUpdate as been fired");
             User user = (User)evt.Params["user"];
+			
             List<string> changedVars = (List<string>)evt.Params["changedVars"];
 
             broadcastUserVariables(user, changedVars);
@@ -341,8 +342,9 @@ namespace ClubPenguin.Net.Client
 
         public void onPingPong(BaseEvent evt)
         {
-            mt.NotifyWebSocketPong();
-
+            // A successful SmartFox ping/pong is our application-level liveness
+            // signal. Native WebSocket implementations may not report a close when
+            // the underlying network path has silently disappeared.
             int milliseconds = (int)evt.Params["lagValue"];
             if (mt.EnableLagMonitorLogging)
             {
@@ -837,7 +839,6 @@ namespace ClubPenguin.Net.Client
 
         public void onConnectionLost(BaseEvent evt)
         {
-            mt.StopWebSocketWatchdog();
             string text = (string)evt.Params["reason"];
             if (mt.WasTornDownImmediately)
             {

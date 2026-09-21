@@ -61,12 +61,6 @@ namespace ClubPenguin.Net.Client
 
 		private Stopwatch pendingTimer = new Stopwatch();
 
-		private const int WEBSOCKET_HEARTBEAT_INTERVAL_SEC = 1;
-		private const int WEBSOCKET_MISSED_HEARTBEATS_BEFORE_DISCONNECT = 2;
-		private const int WEBSOCKET_WATCHDOG_TIMEOUT_SEC = WEBSOCKET_HEARTBEAT_INTERVAL_SEC * WEBSOCKET_MISSED_HEARTBEATS_BEFORE_DISCONNECT;
-		private Stopwatch websocketWatchdogTimer = new Stopwatch();
-		private bool websocketWatchdogActive = false;
-		private bool websocketWatchdogDisconnecting = false;
 
 		internal ConcurrentQueue<KeyValuePair<GameServerEvent, object>> TriggeredEvents = new ConcurrentQueue<KeyValuePair<GameServerEvent, object>>();
 
@@ -288,76 +282,12 @@ namespace ClubPenguin.Net.Client
 
 		internal void Disconnect()
 		{
-			StopWebSocketWatchdog();
 			lock (smartFoxLock)
 			{
 				if (smartFox != null)
 				{
 					smartFox.Disconnect();
 				}
-			}
-		}
-
-		internal void StartWebSocketWatchdog()
-		{
-			lock (smartFoxLock)
-			{
-				if (smartFox == null || !smartFox.IsConnected)
-					return;
-
-				websocketWatchdogDisconnecting = false;
-				websocketWatchdogActive = true;
-				websocketWatchdogTimer.Reset();
-				websocketWatchdogTimer.Start();
-			}
-		}
-
-		internal void StopWebSocketWatchdog()
-		{
-			websocketWatchdogActive = false;
-			websocketWatchdogDisconnecting = false;
-			websocketWatchdogTimer.Stop();
-			websocketWatchdogTimer.Reset();
-		}
-
-		internal void NotifyWebSocketPong()
-		{
-			if (!websocketWatchdogActive)
-				return;
-
-			websocketWatchdogTimer.Restart();
-		}
-
-		internal void TickWebSocketWatchdog()
-		{
-			if (!websocketWatchdogActive || websocketWatchdogDisconnecting)
-				return;
-
-			if (websocketWatchdogTimer.Elapsed.TotalSeconds < WEBSOCKET_WATCHDOG_TIMEOUT_SEC)
-				return;
-
-			SmartFox currentSmartFox;
-			lock (smartFoxLock)
-			{
-				currentSmartFox = smartFox;
-				if (currentSmartFox == null || !currentSmartFox.IsConnected)
-				{
-					StopWebSocketWatchdog();
-					return;
-				}
-
-				websocketWatchdogDisconnecting = true;
-			}
-
-			UnityEngine.Debug.LogWarning("SmartFox WebSocket watchdog: no PING_PONG response for " + WEBSOCKET_WATCHDOG_TIMEOUT_SEC + " seconds. Closing the stale connection.");
-			try
-			{
-				currentSmartFox.Disconnect();
-			}
-			catch (Exception ex)
-			{
-				UnityEngine.Debug.LogWarning("SmartFox WebSocket watchdog failed to close the connection: " + ex);
-				StopWebSocketWatchdog();
 			}
 		}
 
@@ -527,34 +457,32 @@ namespace ClubPenguin.Net.Client
 			setup();
 		}
 
-		private void setup()
-		{
-			bool test = false;
-			lock (smartFoxLock)
-			{
-				if (smartFox == null)
-				{
+        private void setup()
+        {
+            bool test = false;
+            lock (smartFoxLock)
+            {
+                if (smartFox == null)
+                {
 
                     smartFox = new SmartFox(UseEncryption ? UseWebSocket.WSS_BIN : UseWebSocket.WS_BIN, sfsDebugLogging);
                     UnityEngine.Debug.Log("After creating SmartFox: Created SFS instance: " + smartFox.GetHashCode());
                     SmartFoxFramePump.Register(() =>
                     {
                         smartFox?.ProcessEvents();
-                        TickWebSocketWatchdog();
-						if (!test)
-						{
+                        if (!test)
+                        {
                             UnityEngine.Debug.Log("Inside your pump: Created SFS instance: " + smartFox?.GetHashCode());
-							test = true;
+                            test = true;
                         }
                     });
                     sfsThread.AddListeners(smartFox);
                 }
-			}
-		}
+            }
+        }
 
-		internal void teardown()
+        internal void teardown()
 		{
-            StopWebSocketWatchdog();
 			lock (smartFoxLock)
 			{
 				clientRoomName = null;
@@ -589,12 +517,13 @@ namespace ClubPenguin.Net.Client
 
 		internal void onLogin()
 		{
-			lock (smartFoxLock)
+			if (enableLagMonitor)
 			{
-				smartFox.EnableLagMonitor(true, WEBSOCKET_HEARTBEAT_INTERVAL_SEC, 3);
+				lock (smartFoxLock)
+				{
+					smartFox.EnableLagMonitor(true);
+				}
 			}
-
-			StartWebSocketWatchdog();
 		}
 
 		internal void initUDP()
@@ -631,7 +560,19 @@ namespace ClubPenguin.Net.Client
 		{
 			lock (smartFoxLock)
 			{
-				smartFox.Send(request);
+				if (smartFox == null || !smartFox.IsConnected)
+				{
+					return;
+				}
+
+				try
+				{
+					smartFox.Send(request);
+				}
+				catch (InvalidOperationException)
+				{
+                    smartFox.Disconnect();
+                }
 			}
 		}
 
