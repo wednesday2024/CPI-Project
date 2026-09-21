@@ -35,6 +35,7 @@ public class AnnualEventsController3000 : MonoBehaviour
     [Serializable]
     public class EventInfo
     {
+        [Header("Scheduled Event Dates")]
         [Tooltip("Use the event ID from the ScheduledEventDate asset. (example: date_22_halloween2018 results to ID 22.)")]
         public string eventID;
 
@@ -52,9 +53,11 @@ public class AnnualEventsController3000 : MonoBehaviour
         public int endMonth;
         public int endDay;
 
+        [Header("Audio")]
         [Tooltip("Map scene names to event specific audio keys.")]
         public SceneAudioMapping[] SceneAudioMappings;
 
+        [Header("Snowball")]
         [Tooltip("Optional material swap prefab for this event.")]
         public GameObject SnowballPrefab;
         public Material OriginalMaterial;
