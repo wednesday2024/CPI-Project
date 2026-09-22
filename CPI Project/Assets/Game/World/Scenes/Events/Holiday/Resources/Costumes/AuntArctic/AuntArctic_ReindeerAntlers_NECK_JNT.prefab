@@ -84,8 +84,80 @@ PrefabInstance:
       propertyPath: m_Name
       value: AuntArctic_ReindeerAntlers_NECK_JNT
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2236237030686087061, guid: d628dd3cb9198d240a12aa77a9530d45, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -2511240423080479738, guid: d628dd3cb9198d240a12aa77a9530d45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8359022816715257821}
+    - targetCorrespondingSourceObject: {fileID: -2511240423080479738, guid: d628dd3cb9198d240a12aa77a9530d45,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5773694452382489071}
   m_SourcePrefab: {fileID: 100100000, guid: d628dd3cb9198d240a12aa77a9530d45, type: 3}
+--- !u!1 &6053477666840544575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2511240423080479738, guid: d628dd3cb9198d240a12aa77a9530d45,
+    type: 3}
+  m_PrefabInstance: {fileID: 658666831944692025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!33 &8359022816715257821
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053477666840544575}
+  m_Mesh: {fileID: -7070831255929112694, guid: d628dd3cb9198d240a12aa77a9530d45, type: 3}
+--- !u!23 &5773694452382489071
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053477666840544575}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3d31b6fdcd7f3346f94c11b59d2d0529, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
