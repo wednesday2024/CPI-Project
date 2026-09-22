@@ -22203,7 +22203,8 @@ GameObject:
   - component: {fileID: 6240999812643775355}
   - component: {fileID: 2470817395093100575}
   - component: {fileID: 5970833247295259696}
-  m_Layer: 0
+  - component: {fileID: 8081736664860407039}
+  m_Layer: 30
   m_Name: HolidayBowRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22282,6 +22283,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8081736664860407039
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713980478563197404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5111943166826217543, guid: 6fca424f62c78354db1ea6e0e6fe8c71, type: 3}
 --- !u!1 &1714687444074976865
 GameObject:
   m_ObjectHideFlags: 0
@@ -49970,7 +49993,8 @@ GameObject:
   - component: {fileID: 8731677286970243926}
   - component: {fileID: 3270645461402551189}
   - component: {fileID: 8457357804973414132}
-  m_Layer: 0
+  - component: {fileID: 7830922648546440937}
+  m_Layer: 30
   m_Name: HolidayWreath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50049,6 +50073,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7830922648546440937
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642741884608252746}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5775441922232089544, guid: 61b8c30542b810f449644556d95777a9, type: 3}
 --- !u!1 &3645263579574612199
 GameObject:
   m_ObjectHideFlags: 0
@@ -112171,7 +112217,8 @@ GameObject:
   - component: {fileID: 6871198725504390051}
   - component: {fileID: 398745675148023786}
   - component: {fileID: 2518804995413194213}
-  m_Layer: 0
+  - component: {fileID: 5196810585013274837}
+  m_Layer: 30
   m_Name: HolidayWreathBowRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112250,6 +112297,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5196810585013274837
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296085487200906894}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7242305466840190425, guid: a1a47810a97898441a38c2cd09cdeeb0, type: 3}
 --- !u!1 &8297592492811270275
 GameObject:
   m_ObjectHideFlags: 0
@@ -117014,7 +117083,8 @@ GameObject:
   - component: {fileID: 5662816627371360001}
   - component: {fileID: 8570477221492951746}
   - component: {fileID: 1070472780337631264}
-  m_Layer: 0
+  - component: {fileID: 4277373638551588215}
+  m_Layer: 30
   m_Name: HolidayWreath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117093,6 +117163,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4277373638551588215
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697727945713793357}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5775441922232089544, guid: 61b8c30542b810f449644556d95777a9, type: 3}
 --- !u!1 &8705484525563022054
 GameObject:
   m_ObjectHideFlags: 0
