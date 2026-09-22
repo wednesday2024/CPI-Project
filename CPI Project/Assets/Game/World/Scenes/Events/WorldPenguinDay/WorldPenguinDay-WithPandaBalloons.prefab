@@ -122,7 +122,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4140734112510498}
-  - component: {fileID: 114827960532266716}
   m_Layer: 0
   m_Name: WorldPenguinDay-WithPandaBalloons
   m_TagString: Untagged
@@ -147,18 +146,6 @@ Transform:
   - {fileID: 4424689525783344}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!114 &114827960532266716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1009745105358316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e6330da78ad60fd619789fa8e07878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1018078136447638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1812,6 @@ GameObject:
   - component: {fileID: 4370357752512078}
   - component: {fileID: 33752106681975678}
   - component: {fileID: 23221912442887860}
-  - component: {fileID: 95534291823131468}
   - component: {fileID: 8827930306772574794}
   m_Layer: 30
   m_Name: pandaBaloon (2)
@@ -1906,28 +1892,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95534291823131468
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207808858227978}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a2d1e5bd6c167194a8c652269c4a48c0, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &8827930306772574794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2517,7 +2481,6 @@ GameObject:
   - component: {fileID: 4614317664258616}
   - component: {fileID: 33937297530109926}
   - component: {fileID: 23363685995137890}
-  - component: {fileID: 95651610853683446}
   - component: {fileID: 2036425222512488763}
   m_Layer: 30
   m_Name: pandaBaloon (3)
@@ -2598,28 +2561,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95651610853683446
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312282415718578}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a2d1e5bd6c167194a8c652269c4a48c0, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &2036425222512488763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3006,7 +2947,6 @@ GameObject:
   - component: {fileID: 4027840524970728}
   - component: {fileID: 33348763504816398}
   - component: {fileID: 23712254664398536}
-  - component: {fileID: 95833775369538382}
   - component: {fileID: 3296431242527946416}
   m_Layer: 30
   m_Name: pandaBaloon (4)
@@ -3087,28 +3027,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95833775369538382
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1402106375004266}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a2d1e5bd6c167194a8c652269c4a48c0, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &3296431242527946416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3724,7 +3642,6 @@ GameObject:
   - component: {fileID: 4370406862434162}
   - component: {fileID: 33425232382321574}
   - component: {fileID: 23989513803329490}
-  - component: {fileID: 95243179876524060}
   - component: {fileID: 2922780016237666132}
   m_Layer: 30
   m_Name: rockHopperPenguinBaloon
@@ -3805,28 +3722,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95243179876524060
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484299905357146}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 68edcb42102cbaf4e9d6f2692c758a87, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &2922780016237666132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5058,7 +4953,6 @@ GameObject:
   - component: {fileID: 4967602378201080}
   - component: {fileID: 33305906434572150}
   - component: {fileID: 23932449751737594}
-  - component: {fileID: 95553121896937316}
   - component: {fileID: 528163133455108179}
   m_Layer: 30
   m_Name: rockHopperPenguinBaloon (2)
@@ -5139,28 +5033,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95553121896937316
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649399434063980}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 68edcb42102cbaf4e9d6f2692c758a87, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &528163133455108179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5330,7 +5202,6 @@ GameObject:
   - component: {fileID: 4771674709058870}
   - component: {fileID: 33751791357372452}
   - component: {fileID: 23790114442652398}
-  - component: {fileID: 95626416050125080}
   - component: {fileID: 245353273177028144}
   m_Layer: 30
   m_Name: rockHopperPenguinBaloon (3)
@@ -5411,28 +5282,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95626416050125080
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651807044130674}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 68edcb42102cbaf4e9d6f2692c758a87, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &245353273177028144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5845,7 +5694,6 @@ GameObject:
   - component: {fileID: 4460595723259130}
   - component: {fileID: 33133575719178230}
   - component: {fileID: 23556680134036254}
-  - component: {fileID: 95514614237987370}
   - component: {fileID: 7530062406326703654}
   m_Layer: 30
   m_Name: pandaBaloon (1)
@@ -5926,28 +5774,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95514614237987370
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725246328152572}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a2d1e5bd6c167194a8c652269c4a48c0, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &7530062406326703654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6158,7 +5984,6 @@ GameObject:
   - component: {fileID: 4855646390682188}
   - component: {fileID: 33692199155880372}
   - component: {fileID: 23331256492221104}
-  - component: {fileID: 95746904772307054}
   - component: {fileID: 3166047143431913442}
   m_Layer: 30
   m_Name: pandaBaloon
@@ -6239,28 +6064,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95746904772307054
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751814121662512}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: a2d1e5bd6c167194a8c652269c4a48c0, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &3166047143431913442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6293,7 +6096,6 @@ GameObject:
   - component: {fileID: 4757508289802124}
   - component: {fileID: 33516860518991408}
   - component: {fileID: 23397825454092658}
-  - component: {fileID: 95967489458572920}
   - component: {fileID: 484841069656852227}
   m_Layer: 30
   m_Name: rockHopperPenguinBaloon (1)
@@ -6374,28 +6176,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95967489458572920
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769139624575256}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 68edcb42102cbaf4e9d6f2692c758a87, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &484841069656852227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7667,7 +7447,6 @@ GameObject:
   - component: {fileID: 4909960246266644}
   - component: {fileID: 33994533538507230}
   - component: {fileID: 23121906886042536}
-  - component: {fileID: 95775412515527366}
   - component: {fileID: 2310003413396852127}
   m_Layer: 30
   m_Name: rockHopperPenguinBaloon (4)
@@ -7748,28 +7527,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &95775412515527366
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962287228931450}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 68edcb42102cbaf4e9d6f2692c758a87, type: 2}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &2310003413396852127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8049,6 +7806,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PicnicTableTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8196,6 +7963,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PicnicTableTrigger (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8332,6 +8109,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PicnicTableTrigger (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
@@ -8470,6 +8257,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PicnicTableTrigger (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8607,6 +8404,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PicnicTableTrigger (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8743,6 +8550,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PicnicTableTrigger (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
@@ -8891,6 +8708,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PicnicTableTrigger (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9037,6 +8864,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PicnicTableTrigger (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143925425684193442, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256771566325107287, guid: 09b8b88f39c560d4792afaa0a292c2bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7154041729142441460, guid: 09b8b88f39c560d4792afaa0a292c2bc,
         type: 3}
