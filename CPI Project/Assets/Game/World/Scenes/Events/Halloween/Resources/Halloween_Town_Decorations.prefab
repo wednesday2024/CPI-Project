@@ -115215,7 +115215,8 @@ GameObject:
   - component: {fileID: 2105528719918663991}
   - component: {fileID: 8925258404807984230}
   - component: {fileID: 8392510523099343699}
-  m_Layer: 0
+  - component: {fileID: 1489856653081734652}
+  m_Layer: 30
   m_Name: pumpkinRegular 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115294,6 +115295,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1489856653081734652
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9206037216151413284}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4171589474084860938, guid: a2b4dc4a35c7f1406b0141c8a8a502c6, type: 3}
 --- !u!1 &9213209245121379770
 GameObject:
   m_ObjectHideFlags: 0
