@@ -2,6 +2,7 @@ using ClubPenguin.Avatar;
 using ClubPenguin.Cinematography;
 using ClubPenguin.Locomotion;
 using ClubPenguin.Net;
+using ClubPenguin.Props;
 using ClubPenguin.UI;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
@@ -34,6 +35,14 @@ namespace ClubPenguin
 		private bool ignoreRemoteChat;
 
 		private Dictionary<long, WorldSpeechBubble> activeSpeechBubbles = new Dictionary<long, WorldSpeechBubble>();
+
+		private PropUser sizzlePropUser;
+
+		private PropDefinition sizzlePropDefinition;
+
+		private bool sizzleAnimationObserved;
+
+		private bool sizzlePropStoreRequested;
 
 		public bool IgnoreRemoteChat
 		{
@@ -71,6 +80,7 @@ namespace ClubPenguin
 
 		private void Update()
 		{
+			updateSizzleProp();
 			foreach (KeyValuePair<long, WorldSpeechBubble> activeSpeechBubble in activeSpeechBubbles)
 			{
 				RectTransform component = activeSpeechBubble.Value.GetComponent<RectTransform>();
@@ -262,11 +272,103 @@ namespace ClubPenguin
 				Transform avatar = getAvatar(sessionId);
 				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
 				{
-					Animator component = avatar.GetComponent<Animator>();
-					component.SetInteger(AnimationHashes.Params.Emote, sizzleclipID);
-					component.SetTrigger(AnimationHashes.Params.PlayEmote);
+					playSizzle(avatar, sizzleclipID);
 				}
 			}
+		}
+
+		private void playSizzle(Transform avatar, int sizzleClipId)
+		{
+			Animator animator = avatar.GetComponent<Animator>();
+			SizzleClipDefinition sizzleClip;
+			if (!Service.Get<GameData>().Get<Dictionary<int, SizzleClipDefinition>>().TryGetValue(sizzleClipId, out sizzleClip))
+			{
+				triggerSizzle(animator, sizzleClipId);
+				return;
+			}
+
+			PropUser propUser = avatar.GetComponent<PropUser>();
+			AvatarDataHandle avatarDataHandle = avatar.GetComponent<AvatarDataHandle>();
+			if (sizzleClip.Prop == null || propUser == null || avatarDataHandle == null || !avatarDataHandle.IsLocalPlayer)
+			{
+				triggerSizzle(animator, sizzleClipId);
+				return;
+			}
+			if (propUser.Prop != null)
+			{
+				if (propUser.Prop.PropDef == sizzleClip.Prop && sizzlePropStoreRequested)
+				{
+					System.Action<Prop> retryAfterStore = null;
+					retryAfterStore = delegate(Prop removedProp)
+					{
+						if (removedProp.PropDef != sizzleClip.Prop)
+						{
+							return;
+						}
+						propUser.EPropRemoved -= retryAfterStore;
+						playSizzle(avatar, sizzleClipId);
+					};
+					propUser.EPropRemoved += retryAfterStore;
+				}
+				return;
+			}
+
+			System.Action<Prop> playWithProp = null;
+			playWithProp = delegate(Prop retrievedProp)
+			{
+				if (retrievedProp.PropDef != sizzleClip.Prop)
+				{
+					return;
+				}
+				propUser.EPropRetrieved -= playWithProp;
+				sizzlePropUser = propUser;
+				sizzlePropDefinition = sizzleClip.Prop;
+				sizzleAnimationObserved = false;
+				sizzlePropStoreRequested = false;
+				triggerSizzle(animator, sizzleClipId);
+			};
+			propUser.EPropRetrieved += playWithProp;
+			propUser.SuppressControlsForNextRetrieve = true;
+			Service.Get<PropService>().LocalPlayerRetrieveProp(sizzleClip.Prop.GetNameOnServer());
+		}
+
+		private void updateSizzleProp()
+		{
+			if (sizzlePropUser == null)
+			{
+				return;
+			}
+			if (sizzlePropUser.Prop == null)
+			{
+				sizzlePropUser = null;
+				sizzlePropDefinition = null;
+				sizzleAnimationObserved = false;
+				sizzlePropStoreRequested = false;
+				return;
+			}
+
+			Animator animator = sizzlePropUser.GetComponent<Animator>();
+			AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(AnimationHashes.Layers.Base);
+			bool isSizzleState = state.IsTag("Sizzling");
+			if (animator.IsInTransition(AnimationHashes.Layers.Base))
+			{
+				isSizzleState |= animator.GetNextAnimatorStateInfo(AnimationHashes.Layers.Base).IsTag("Sizzling");
+			}
+			if (isSizzleState)
+			{
+				sizzleAnimationObserved = true;
+			}
+			else if ((!sizzleAnimationObserved && !LocomotionUtils.CanPlaySizzle(sizzlePropUser.gameObject) || sizzleAnimationObserved) && !sizzlePropStoreRequested && sizzlePropUser.Prop.PropDef == sizzlePropDefinition)
+			{
+				sizzlePropStoreRequested = true;
+				Service.Get<PropService>().LocalPlayerStoreProp();
+			}
+		}
+
+		private static void triggerSizzle(Animator animator, int sizzleClipId)
+		{
+			animator.SetInteger(AnimationHashes.Params.Emote, sizzleClipId);
+			animator.SetTrigger(AnimationHashes.Params.PlayEmote);
 		}
 
 		private void showActiveTyping(long sessionId)

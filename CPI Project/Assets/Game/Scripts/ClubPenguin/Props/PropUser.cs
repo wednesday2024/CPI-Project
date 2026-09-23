@@ -69,6 +69,8 @@ namespace ClubPenguin.Props
 			private set;
 		}
 
+		public bool SuppressControlsForNextRetrieve;
+
 		public DataEntityHandle PlayerHandle
 		{
 			get
@@ -418,12 +420,17 @@ namespace ClubPenguin.Props
 			{
 				yield break;
 			}
+			bool suppressControls = SuppressControlsForNextRetrieve;
+			SuppressControlsForNextRetrieve = false;
 			Prop = propToRetrieve;
 			parentPropToTargetBone(Prop);
 			Prop.PropUserRef = this;
 			CameraCullingMaskHelper.SetLayerRecursive(Prop.transform, LayerMask.LayerToName(base.gameObject.layer));
 			Prop.gameObject.SetActive(true);
-			ShowPropControls();
+			if (!suppressControls)
+			{
+				ShowPropControls();
+			}
 			List<PropAccessory> accessories = new List<PropAccessory>(propToRetrieve.GetComponentsInChildren<PropAccessory>());
 			float MAX_WAIT_TIME = 1f;
 			float time = Time.time;
@@ -454,7 +461,10 @@ namespace ClubPenguin.Props
 			{
 				anim.runtimeAnimatorController = defaultAnimatorController;
 			}
-			setInteractionButtonActive();
+			if (!suppressControls)
+			{
+				setInteractionButtonActive();
+			}
 			if (this.EPropSpawned != null)
 			{
 				this.EPropSpawned(Prop);

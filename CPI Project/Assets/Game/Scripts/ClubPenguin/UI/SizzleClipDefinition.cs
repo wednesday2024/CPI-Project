@@ -1,5 +1,6 @@
 using ClubPenguin.Core;
 using ClubPenguin.Core.StaticGameData;
+using ClubPenguin.Props;
 using Newtonsoft.Json;
 using System;
 using UnityEngine;
@@ -16,6 +17,8 @@ namespace ClubPenguin.UI
 		public string AnimationHash;
 
 		public float IconAnimationTime;
+
+		public PropDefinition Prop;
 
 		[SerializeField]
 		[JsonProperty]
