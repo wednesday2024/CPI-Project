@@ -103,7 +103,6 @@ GameObject:
   - component: {fileID: 2528644633593266252}
   - component: {fileID: 8736298783771878722}
   - component: {fileID: 7316570727382189714}
-  - component: {fileID: 6809610464965012036}
   m_Layer: 30
   m_Name: SnowLumpA
   m_TagString: Snow
@@ -184,28 +183,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &7316570727382189714
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 132158867837521453}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1c40331f64c2a574bbee181913ca5aca, type: 2}
---- !u!64 &6809610464965012036
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1665,7 +1642,6 @@ GameObject:
   - component: {fileID: 6506721338936129449}
   - component: {fileID: 8560013484218166721}
   - component: {fileID: 663981416395198884}
-  - component: {fileID: 2441710713658285485}
   m_Layer: 30
   m_Name: SnowLumpA (3)
   m_TagString: Snow
@@ -1746,28 +1722,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &663981416395198884
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842459408677130445}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1c40331f64c2a574bbee181913ca5aca, type: 2}
---- !u!64 &2441710713658285485
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3472,7 +3426,6 @@ GameObject:
   - component: {fileID: 1773549701149053385}
   - component: {fileID: 2823602713038484716}
   - component: {fileID: 7408317311187044190}
-  - component: {fileID: 2936400445878663877}
   m_Layer: 30
   m_Name: SnowLumpA (4)
   m_TagString: Snow
@@ -3553,28 +3506,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &7408317311187044190
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3254442326852518269}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1c40331f64c2a574bbee181913ca5aca, type: 2}
---- !u!64 &2936400445878663877
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5674,7 +5605,6 @@ GameObject:
   - component: {fileID: 6110061554024335785}
   - component: {fileID: 8689963883979271040}
   - component: {fileID: 7039096812636459484}
-  - component: {fileID: 2252056876194386767}
   m_Layer: 30
   m_Name: SnowLumpA (2)
   m_TagString: Snow
@@ -5755,28 +5685,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &7039096812636459484
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5254734069436342187}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1c40331f64c2a574bbee181913ca5aca, type: 2}
---- !u!64 &2252056876194386767
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7676,7 +7584,6 @@ GameObject:
   - component: {fileID: 6704952648600560447}
   - component: {fileID: 2598245568439535130}
   - component: {fileID: 2995730713750210656}
-  - component: {fileID: 1803667459788856915}
   m_Layer: 30
   m_Name: SnowLumpA (1)
   m_TagString: Snow
@@ -7757,28 +7664,6 @@ MeshRenderer:
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &2995730713750210656
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7570363952049528488}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1c40331f64c2a574bbee181913ca5aca, type: 2}
---- !u!64 &1803667459788856915
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
