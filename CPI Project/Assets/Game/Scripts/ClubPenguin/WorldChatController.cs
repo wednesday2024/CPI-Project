@@ -44,6 +44,12 @@ namespace ClubPenguin
 
 		private bool sizzlePropStoreRequested;
 
+		private bool waitingForSizzlePropRemoval;
+
+		private Transform pendingSizzleAvatar;
+
+		private int pendingSizzleClipId;
+
 		public bool IgnoreRemoteChat
 		{
 			set
@@ -296,19 +302,20 @@ namespace ClubPenguin
 			}
 			if (propUser.Prop != null)
 			{
-				if (propUser.Prop.PropDef == sizzleClip.Prop && sizzlePropStoreRequested)
+				if (sizzlePropUser == propUser && sizzlePropDefinition != null)
 				{
-					System.Action<Prop> retryAfterStore = null;
-					retryAfterStore = delegate(Prop removedProp)
+					pendingSizzleAvatar = avatar;
+					pendingSizzleClipId = sizzleClipId;
+					if (!waitingForSizzlePropRemoval)
 					{
-						if (removedProp.PropDef != sizzleClip.Prop)
-						{
-							return;
-						}
-						propUser.EPropRemoved -= retryAfterStore;
-						playSizzle(avatar, sizzleClipId);
-					};
-					propUser.EPropRemoved += retryAfterStore;
+						waitingForSizzlePropRemoval = true;
+						propUser.EPropRemoved += onSizzlePropRemoved;
+					}
+					if (!sizzlePropStoreRequested)
+					{
+						sizzlePropStoreRequested = true;
+						Service.Get<PropService>().LocalPlayerStoreProp();
+					}
 				}
 				return;
 			}
@@ -330,6 +337,22 @@ namespace ClubPenguin
 			propUser.EPropRetrieved += playWithProp;
 			propUser.SuppressControlsForNextRetrieve = true;
 			Service.Get<PropService>().LocalPlayerRetrieveProp(sizzleClip.Prop.GetNameOnServer());
+		}
+
+		private void onSizzlePropRemoved(Prop removedProp)
+		{
+			if (removedProp.PropDef != sizzlePropDefinition || pendingSizzleAvatar == null)
+			{
+				return;
+			}
+			PropUser propUser = sizzlePropUser;
+			propUser.EPropRemoved -= onSizzlePropRemoved;
+			waitingForSizzlePropRemoval = false;
+			Transform avatar = pendingSizzleAvatar;
+			int sizzleClipId = pendingSizzleClipId;
+			pendingSizzleAvatar = null;
+			pendingSizzleClipId = 0;
+			playSizzle(avatar, sizzleClipId);
 		}
 
 		private void updateSizzleProp()
