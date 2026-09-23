@@ -16,6 +16,7 @@ using UnityEngine.SceneManagement;
 public static class ServerDataGenerator
 {
     private const string OutputDirectory = "Assets/Generated/Export/ServerData/";
+    private const string ScheduledEventDatesPath = "Assets/Game/Resources/Definitions/ScheduledEventDates";
 
     [MenuItem("Project/Server Data/Generate JSONs")]
     private static void GenerateFromMenu()
@@ -41,6 +42,8 @@ public static class ServerDataGenerator
         List<string> results = new List<string>();
         try
         {
+            ForceReserializeScheduledEventDates();
+
             for (int i = 0; i < configs.Count; i++)
             {
                 StaticGameDataDefinitionConfig config = configs[i];
@@ -89,6 +92,22 @@ public static class ServerDataGenerator
         EditorUtility.DisplayDialog("Server Data JSON", "Generated " + results.Count + " JSON files in:\n" + absoluteOutputDirectory, "OK");
     }
 
+    private static void ForceReserializeScheduledEventDates()
+    {
+        string[] assetPaths = AssetDatabase.FindAssets("", new[] { ScheduledEventDatesPath })
+            .Select(AssetDatabase.GUIDToAssetPath)
+            .Where(path => !AssetDatabase.IsValidFolder(path))
+            .ToArray();
+
+        if (assetPaths.Length == 0)
+        {
+            return;
+        }
+
+        AssetDatabase.ForceReserializeAssets(assetPaths, ForceReserializeAssetsOptions.ReserializeAssets);
+        AssetDatabase.SaveAssets();
+    }
+
     private static void WriteJsonFile(string absoluteOutputDirectory, string exportPath, JObject json)
     {
         string outputPath = Path.Combine(absoluteOutputDirectory, "Assets", "Generated", "Export", exportPath + ".json");
@@ -103,6 +122,7 @@ public static class ServerDataGenerator
         JsonSerializer serializer = JsonSerializer.CreateDefault();
         List<string> scenePaths = AssetDatabase.FindAssets("t:Scene")
             .Select(AssetDatabase.GUIDToAssetPath)
+            .Where(IsEditableProjectScene)
             .OrderBy(path => path, StringComparer.Ordinal)
             .ToList();
         int pickupableCount = 0;
@@ -187,6 +207,15 @@ public static class ServerDataGenerator
         }
 
         return new SceneCollectibleExport(pickupables, pickupableGroups, pickupableCount, groupCount);
+    }
+
+    private static bool IsEditableProjectScene(string scenePath)
+    {
+        if (!scenePath.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase) || !AssetDatabase.IsOpenForEdit(scenePath))
+        {
+            return false;
+        }
+        return true;
     }
 
     private static JObject SerializeCollectible(Collectible collectible, JsonSerializer serializer)
