@@ -50,6 +50,8 @@ namespace ClubPenguin
 
 		private int pendingSizzleClipId;
 
+		private Dictionary<PropUser, bool> remoteSizzleProps = new Dictionary<PropUser, bool>();
+
 		public bool IgnoreRemoteChat
 		{
 			set
@@ -87,6 +89,7 @@ namespace ClubPenguin
 		private void Update()
 		{
 			updateSizzleProp();
+			updateRemoteSizzleProps();
 			foreach (KeyValuePair<long, WorldSpeechBubble> activeSpeechBubble in activeSpeechBubbles)
 			{
 				RectTransform component = activeSpeechBubble.Value.GetComponent<RectTransform>();
@@ -304,6 +307,7 @@ namespace ClubPenguin
 			{
 				if (propUser.Prop != null && propUser.Prop.PropDef == sizzleClip.Prop)
 				{
+					remoteSizzleProps[propUser] = false;
 					triggerSizzle(animator, sizzleClipId);
 					return;
 				}
@@ -319,6 +323,7 @@ namespace ClubPenguin
 							return;
 						}
 						propUser.EPropRetrieved -= playRemoteWithProp;
+						remoteSizzleProps[propUser] = false;
 						triggerSizzle(animator, sizzleClipId);
 					};
 					propUser.EPropRetrieved += playRemoteWithProp;
@@ -423,6 +428,36 @@ namespace ClubPenguin
 			{
 				sizzlePropStoreRequested = true;
 				Service.Get<PropService>().LocalPlayerStoreProp();
+			}
+		}
+
+		private void updateRemoteSizzleProps()
+		{
+			List<PropUser> remotePropUsers = new List<PropUser>(remoteSizzleProps.Keys);
+			foreach (PropUser propUser in remotePropUsers)
+			{
+				if (propUser == null || propUser.Prop == null)
+				{
+					remoteSizzleProps.Remove(propUser);
+					continue;
+				}
+
+				Animator animator = propUser.GetComponent<Animator>();
+				AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(AnimationHashes.Layers.Base);
+				bool isSizzleState = state.IsTag("Sizzling");
+				if (animator.IsInTransition(AnimationHashes.Layers.Base))
+				{
+					isSizzleState |= animator.GetNextAnimatorStateInfo(AnimationHashes.Layers.Base).IsTag("Sizzling");
+				}
+				if (isSizzleState)
+				{
+					remoteSizzleProps[propUser] = true;
+				}
+				else if (remoteSizzleProps[propUser])
+				{
+					remoteSizzleProps.Remove(propUser);
+					new StorePropCMD(propUser, true).Execute();
+				}
 			}
 		}
 
