@@ -278,12 +278,12 @@ namespace ClubPenguin
 				Transform avatar = getAvatar(sessionId);
 				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
 				{
-					playSizzle(avatar, sizzleclipID);
+					playSizzle(avatar, sizzleclipID, sessionId);
 				}
 			}
 		}
 
-		private void playSizzle(Transform avatar, int sizzleClipId)
+		private void playSizzle(Transform avatar, int sizzleClipId, long playerId = 0L)
 		{
 			Animator animator = avatar.GetComponent<Animator>();
 			SizzleClipDefinition sizzleClip;
@@ -295,9 +295,47 @@ namespace ClubPenguin
 
 			PropUser propUser = avatar.GetComponent<PropUser>();
 			AvatarDataHandle avatarDataHandle = avatar.GetComponent<AvatarDataHandle>();
-			if (sizzleClip.Prop == null || propUser == null || avatarDataHandle == null || !avatarDataHandle.IsLocalPlayer)
+			if (sizzleClip.Prop == null || propUser == null || avatarDataHandle == null)
 			{
 				triggerSizzle(animator, sizzleClipId);
+				return;
+			}
+			if (!avatarDataHandle.IsLocalPlayer)
+			{
+				if (propUser.Prop != null && propUser.Prop.PropDef == sizzleClip.Prop)
+				{
+					triggerSizzle(animator, sizzleClipId);
+					return;
+				}
+
+				System.Action retrieveRemoteProp = null;
+				retrieveRemoteProp = delegate
+				{
+					System.Action<Prop> playRemoteWithProp = null;
+					playRemoteWithProp = delegate(Prop retrievedProp)
+					{
+						if (retrievedProp.PropDef != sizzleClip.Prop)
+						{
+							return;
+						}
+						propUser.EPropRetrieved -= playRemoteWithProp;
+						triggerSizzle(animator, sizzleClipId);
+					};
+					propUser.EPropRetrieved += playRemoteWithProp;
+					new RetrievePropCMD(sizzleClip.Prop.GetNameOnServer(), sizzleClip.Prop.PropAssetContentKey, propUser, playerId, false).Execute();
+				};
+
+				if (propUser.Prop != null)
+				{
+					new StorePropCMD(propUser, true, delegate
+					{
+						retrieveRemoteProp();
+					}).Execute();
+				}
+				else
+				{
+					retrieveRemoteProp();
+				}
 				return;
 			}
 			if (propUser.Prop != null)
