@@ -52,6 +52,8 @@ namespace ClubPenguin
 
 		private Dictionary<PropUser, bool> remoteSizzleProps = new Dictionary<PropUser, bool>();
 
+		private Dictionary<long, int> pendingRemoteSizzles = new Dictionary<long, int>();
+
 		public bool IgnoreRemoteChat
 		{
 			set
@@ -90,6 +92,7 @@ namespace ClubPenguin
 		{
 			updateSizzleProp();
 			updateRemoteSizzleProps();
+			updatePendingRemoteSizzles();
 			foreach (KeyValuePair<long, WorldSpeechBubble> activeSpeechBubble in activeSpeechBubbles)
 			{
 				RectTransform component = activeSpeechBubble.Value.GetComponent<RectTransform>();
@@ -282,6 +285,25 @@ namespace ClubPenguin
 				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
 				{
 					playSizzle(avatar, sizzleclipID, sessionId);
+				}
+				else if (!flag)
+				{
+					pendingRemoteSizzles[sessionId] = sizzleclipID;
+				}
+			}
+		}
+
+		private void updatePendingRemoteSizzles()
+		{
+			List<long> pendingSessionIds = new List<long>(pendingRemoteSizzles.Keys);
+			foreach (long sessionId in pendingSessionIds)
+			{
+				Transform avatar = getAvatar(sessionId);
+				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
+				{
+					int sizzleClipId = pendingRemoteSizzles[sessionId];
+					pendingRemoteSizzles.Remove(sessionId);
+					playSizzle(avatar, sizzleClipId, sessionId);
 				}
 			}
 		}
