@@ -54,6 +54,8 @@ namespace ClubPenguin
 
 		private Dictionary<long, int> pendingRemoteSizzles = new Dictionary<long, int>();
 
+		private Dictionary<long, float> pendingRemoteSizzleTimes = new Dictionary<long, float>();
+
 		public bool IgnoreRemoteChat
 		{
 			set
@@ -284,11 +286,21 @@ namespace ClubPenguin
 				Transform avatar = getAvatar(sessionId);
 				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
 				{
-					playSizzle(avatar, sizzleclipID, sessionId);
+					PropUser propUser = avatar.GetComponent<PropUser>();
+					if (!flag && propUser != null && propUser.Prop == null)
+					{
+						pendingRemoteSizzles[sessionId] = sizzleclipID;
+						pendingRemoteSizzleTimes[sessionId] = Time.time + 0.5f;
+					}
+					else
+					{
+						playSizzle(avatar, sizzleclipID, sessionId);
+					}
 				}
 				else if (!flag)
 				{
 					pendingRemoteSizzles[sessionId] = sizzleclipID;
+					pendingRemoteSizzleTimes[sessionId] = Time.time + 0.5f;
 				}
 			}
 		}
@@ -298,11 +310,16 @@ namespace ClubPenguin
 			List<long> pendingSessionIds = new List<long>(pendingRemoteSizzles.Keys);
 			foreach (long sessionId in pendingSessionIds)
 			{
+				if (Time.time < pendingRemoteSizzleTimes[sessionId])
+				{
+					continue;
+				}
 				Transform avatar = getAvatar(sessionId);
 				if (avatar != null && LocomotionUtils.CanPlaySizzle(avatar.gameObject))
 				{
 					int sizzleClipId = pendingRemoteSizzles[sessionId];
 					pendingRemoteSizzles.Remove(sessionId);
+					pendingRemoteSizzleTimes.Remove(sessionId);
 					playSizzle(avatar, sizzleClipId, sessionId);
 				}
 			}
