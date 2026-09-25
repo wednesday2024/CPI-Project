@@ -47502,7 +47502,7 @@ GameObject:
   - component: {fileID: 4249214429570673259}
   m_Layer: 30
   m_Name: BoxCollider
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90238,9 +90238,10 @@ GameObject:
   - component: {fileID: 1577257044143466354}
   - component: {fileID: 5658347425040355184}
   - component: {fileID: 8393459416885095380}
+  - component: {fileID: 942578655092305618}
   m_Layer: 30
   m_Name: LivingSled
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90318,6 +90319,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &942578655092305618
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249419947627546728}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8736426086253055810, guid: b8724a4f6638ce3adba9621a78724bf6, type: 3}
 --- !u!1 &5255833008359113890
 GameObject:
   m_ObjectHideFlags: 0
@@ -152113,7 +152136,7 @@ GameObject:
   - component: {fileID: 8014818572374929436}
   m_Layer: 30
   m_Name: BoxCollider
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152625,7 +152648,7 @@ GameObject:
   - component: {fileID: 2744901125424279695}
   m_Layer: 30
   m_Name: BoxCollider
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157082,7 +157105,7 @@ GameObject:
   - component: {fileID: 9052241187652473429}
   m_Layer: 30
   m_Name: BoxCollider
-  m_TagString: Untagged
+  m_TagString: Wood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
