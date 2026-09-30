@@ -5,7 +5,7 @@
 > - **Unity 6000.3.25f1 LTS**
 
 > [!CAUTION]
-> - We do NOT recommend upgrading to Unity 6.5 or newer from this Unity 6.3 branch because it is known to break Fabric Audio completely and many core functions of Club Penguin Island. However, we do have an experimental Unity 6.5 branch that can be found [here](DevAssets/Backup/Unity-6.5+-Fixes).
+> - We do NOT recommend upgrading to Unity 6.5 or newer from this Unity 6.3 branch because it is known to break Fabric Audio completely and many core functions of Club Penguin Island. However, we do have an experimental Unity 6.5 branch that can be found [here](https://github.com/wednesday2024/CPI-Project/tree/experimental_unity-6.7_urp).
 
  ## **Builds can be found here:**
  - [Builds](https://opencpisland.github.io/)
@@ -27,10 +27,6 @@
  Q: Why is everything pink or not loading when I load the game?
 
  A: You need to run the Unity Editor menu item:```Project -> AssetBundles -> Generated -> Generate client side AssetBundles```
- 
- Q: I've upgraded to Unity 6.8 or above. I've regenerated the Asset Bundles but objects are still pink!
- 
- A: Unity has made the decision to remove the original Built in Render Pipeline that Club Penguin Island used for shaders. You will need to recreate all of the shaders by hand in Shader Graph to Universal Render Pipeline.
  
  - For other commonly asked questions, you can find those in the ```#faq``` channel of our [Discord server](https://discord.gg/jkWbd3uqTS).
 
