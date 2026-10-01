@@ -49,6 +49,7 @@ public class DiscordController : MonoBehaviour
     private static string marketplaceLabel = "";
 
     private static bool cfcDonationActive = false;
+    private static bool freeCameraModeActive = false;
 
     private static bool tubeLobbyActive = false;
     private static bool tubeRaceActive = false;
@@ -163,6 +164,17 @@ public class DiscordController : MonoBehaviour
     {
         if (Instance != null)
             Instance.SetCFCDonationStatus(active);
+    }
+
+    public static void SetFreeCameraModeGlobal(bool active)
+    {
+        if (freeCameraModeActive == active)
+            return;
+
+        freeCameraModeActive = active;
+
+        if (Instance != null)
+            Instance.RefreshPresenceOnly();
     }
 
     [Serializable]
@@ -1366,6 +1378,9 @@ public class DiscordController : MonoBehaviour
 
     private string BuildStateText()
     {
+        if (freeCameraModeActive)
+            return "Free Camera Mode";
+
         if (cfcDonationActive)
             return "Donating coins to CFC.";
 
