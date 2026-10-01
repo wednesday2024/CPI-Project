@@ -60,6 +60,20 @@ namespace ClubPenguin.ClothingDesigner.Inventory
 					{
 					}
 				}
+				AvatarDetailsData avatarDetails;
+				if (Service.Get<CPDataEntityCollection>().TryGetComponent(localPlayerHandle, out avatarDetails) && avatarDetails.Outfit != null)
+				{
+					for (int i = 0; i < avatarDetails.Outfit.Length; i++)
+					{
+						long equipmentId = avatarDetails.Outfit[i].Id;
+						InventoryIconModel<DCustomEquipment> equipment;
+						if (inventoryData.Inventory.TryGetValue(equipmentId, out equipment))
+						{
+							inventoryData.CurrentAvatarEquipment.Add(equipmentId);
+							equipment.IsEquipped = true;
+						}
+					}
+				}
 			}
 			else
 			{
