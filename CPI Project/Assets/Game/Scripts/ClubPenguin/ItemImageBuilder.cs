@@ -269,6 +269,7 @@ namespace ClubPenguin
 				{
 					if (sharedMaterial.shader.name == AvatarService.EquipmentPreviewShader.name)
 					{
+						sharedMaterial.enableInstancing = SystemInfo.graphicsMemorySize >= 1024;
 						sharedMaterial.shader = AvatarService.EquipmentScreenshotShader;
 					}
 					else
