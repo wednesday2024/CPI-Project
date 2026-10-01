@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [ExecuteInEditMode]
 internal class ClothingOutlinerImageEffect : MonoBehaviour
@@ -32,6 +33,10 @@ internal class ClothingOutlinerImageEffect : MonoBehaviour
 
 	private Material outlinerMaterial;
 
+	private GameObject overlayCanvasObject;
+
+	private RawImage overlayImage;
+
 	public Texture OutlineTexture
 	{
 		set
@@ -39,6 +44,7 @@ internal class ClothingOutlinerImageEffect : MonoBehaviour
 			if (outlinerMaterial != null)
 			{
 				outlinerMaterial.SetTexture("_OutlineTex", value);
+				overlayImage.texture = value;
 			}
 		}
 	}
@@ -55,6 +61,7 @@ internal class ClothingOutlinerImageEffect : MonoBehaviour
 		outlinerMaterial = new Material(OUTLINE_SHADER);
 		outlinerMaterial.SetInt(PROP_LOOKUPS_ID, OutlineLookups);
 		outlinerMaterial.SetColor(PROP_OUTLINE_COLOR_ID, OutlineColor);
+		createOverlayCanvas();
 	}
 
 	public void Update()
@@ -75,10 +82,66 @@ internal class ClothingOutlinerImageEffect : MonoBehaviour
 		}
 	}
 
-	public void OnRenderImage(RenderTexture source, RenderTexture destination)
+	private void createOverlayCanvas()
 	{
-		float value = OutlineLookupDistance + animDelta;
-		outlinerMaterial.SetFloat(PROP_LOOKUP_DISTANCE_ID, value);
-		Graphics.Blit(source, destination, outlinerMaterial);
+		Camera targetCamera = GetComponent<Camera>();
+		overlayCanvasObject = new GameObject("ClothingOutlinerOverlay", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler));
+		overlayCanvasObject.layer = LayerMask.NameToLayer("UI");
+		Canvas canvas = overlayCanvasObject.GetComponent<Canvas>();
+		canvas.renderMode = RenderMode.ScreenSpaceCamera;
+		canvas.worldCamera = targetCamera;
+		canvas.planeDistance = Mathf.Max(targetCamera.nearClipPlane + 0.1f, 1f);
+		canvas.overrideSorting = true;
+		canvas.sortingOrder = 32767;
+		overlayCanvasObject.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+
+		RectTransform canvasRect = (RectTransform)overlayCanvasObject.transform;
+		canvasRect.anchorMin = Vector2.zero;
+		canvasRect.anchorMax = Vector2.one;
+		canvasRect.offsetMin = Vector2.zero;
+		canvasRect.offsetMax = Vector2.zero;
+
+		GameObject imageObject = new GameObject("Outline", typeof(RectTransform), typeof(CanvasRenderer), typeof(RawImage));
+		imageObject.layer = LayerMask.NameToLayer("UI");
+		imageObject.transform.SetParent(canvasRect, false);
+		RectTransform imageRect = (RectTransform)imageObject.transform;
+		imageRect.anchorMin = Vector2.zero;
+		imageRect.anchorMax = Vector2.one;
+		imageRect.offsetMin = Vector2.zero;
+		imageRect.offsetMax = Vector2.zero;
+
+		overlayImage = imageObject.GetComponent<RawImage>();
+		overlayImage.texture = Texture2D.whiteTexture;
+		overlayImage.material = outlinerMaterial;
+		overlayImage.raycastTarget = false;
+		overlayImage.maskable = false;
+	}
+
+	private void OnEnable()
+	{
+		if (overlayCanvasObject != null)
+		{
+			overlayCanvasObject.SetActive(true);
+		}
+	}
+
+	private void OnDisable()
+	{
+		if (overlayCanvasObject != null)
+		{
+			overlayCanvasObject.SetActive(false);
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (overlayCanvasObject != null)
+		{
+			Destroy(overlayCanvasObject);
+		}
+		if (outlinerMaterial != null)
+		{
+			Destroy(outlinerMaterial);
+		}
 	}
 }

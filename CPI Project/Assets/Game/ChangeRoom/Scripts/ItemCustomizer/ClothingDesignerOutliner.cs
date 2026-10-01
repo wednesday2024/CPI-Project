@@ -52,6 +52,11 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 			component.OnChildAdded += onChildAdded;
 			SelectedChannel = -1;
 			OutlineLayer = LayerMask.NameToLayer(OutlineLayerName);
+			Camera mainCamera = Camera.main;
+			if (mainCamera != null && OutlineLayer >= 0)
+			{
+				mainCamera.cullingMask &= ~(1 << OutlineLayer);
+			}
 		}
 
 		private void onChildAdded(AvatarViewDistinctChild child)
