@@ -20,6 +20,7 @@ Shader "CpRemix/UI/TextSlow"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Transparent"
             "IgnoreProjector"="True"
             "RenderType"="Transparent"
@@ -55,9 +56,11 @@ Shader "CpRemix/UI/TextSlow"
 
             #pragma multi_compile_local _OSCMODE_OFF _OSCMODE_SINE
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+
+            SAMPLER(sampler_MainTex);
             float4 _MainTex_ST;
 
             float4 _Color;
@@ -88,7 +91,7 @@ Shader "CpRemix/UI/TextSlow"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                float4 clipPos = UnityObjectToClipPos(v.vertex);
+                float4 clipPos = TransformObjectToHClip(v.vertex.xyz);
 
                 #if defined(_OSCMODE_SINE)
                 clipPos.x += sin(_Time.y * _Oscillation.x) * _Oscillation.y;
@@ -96,7 +99,7 @@ Shader "CpRemix/UI/TextSlow"
                 #endif
 
                 o.vertex = clipPos;
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = (v.uv * _MainTex_ST.xy + _MainTex_ST.zw);
                 o.color = v.color * _Color;
 
                 return o;
@@ -104,7 +107,7 @@ Shader "CpRemix/UI/TextSlow"
 
             half4 frag(v2f i) : SV_Target
             {
-                half4 texcol = tex2D(_MainTex, i.uv);
+                half4 texcol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
                 texcol += _TextureSampleAdd;
 
                 return texcol * i.color;
@@ -114,5 +117,4 @@ Shader "CpRemix/UI/TextSlow"
         }
     }
 
-    FallBack "UI/Default"
 }

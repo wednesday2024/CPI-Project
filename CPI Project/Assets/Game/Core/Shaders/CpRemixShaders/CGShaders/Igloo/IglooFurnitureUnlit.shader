@@ -11,7 +11,8 @@ Shader "CpRemix/Igloo/IglooFurnitureUnlit"
     {
         Tags
         {
-            "LIGHTMODE" = "FORWARDBASE"
+            "RenderPipeline" = "UniversalPipeline"
+            "LightMode" = "UniversalForward"
             "QUEUE" = "Geometry"
             "RenderType" = "Opaque"
         }
@@ -20,19 +21,18 @@ Shader "CpRemix/Igloo/IglooFurnitureUnlit"
         {
             Tags
             {
-                "LIGHTMODE" = "FORWARDBASE"
+                "LightMode" = "UniversalForward"
                 "QUEUE" = "Geometry"
                 "RenderType" = "Opaque"
             }
 
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
@@ -65,7 +65,7 @@ Shader "CpRemix/Igloo/IglooFurnitureUnlit"
                 v2f o;
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 o.color = _Color + _Highlight;
                 o.vertexColor = v.color;
@@ -73,15 +73,15 @@ Shader "CpRemix/Igloo/IglooFurnitureUnlit"
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                fixed4 tex = tex2D(_MainTex, i.uv);
+                half4 tex = tex2D(_MainTex, i.uv);
                 return tex * i.color * i.vertexColor;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 
-    FallBack "VertexLit"
+    Fallback Off
 }

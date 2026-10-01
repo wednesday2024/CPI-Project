@@ -12,7 +12,7 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 	{
 		Tags
 		{
-			"LIGHTMODE" = "FORWARDBASE"
+			"RenderPipeline" = "UniversalPipeline"
 			"QUEUE" = "Geometry"
 			"RenderType" = "Opaque"
 		}
@@ -21,27 +21,34 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 		{
 			Tags
 			{
-				"LIGHTMODE" = "FORWARDBASE"
+				"LightMode" = "UniversalForward"
 				"QUEUE" = "Geometry"
 				"RenderType" = "Opaque"
 			}
 
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
-			sampler2D _MainTex;
-			sampler2D _BlobShadowTex;
-			float4 _MainTex_ST;
-			float4 _Color;
-			float _Highlight;
-			float4 _LightColor0;
+			TEXTURE2D(_MainTex);
+			SAMPLER(sampler_MainTex);
+			TEXTURE2D(_BlobShadowTex);
+			SAMPLER(sampler_BlobShadowTex);
 			float _ShadowPlaneDim;
 			float _ShadowTextureDim;
 			float3 _ShadowPlaneWorldPos;
+
+			CBUFFER_START(UnityPerMaterial)
+				float4 _MainTex_ST;
+				float4 _Color;
+				float _Highlight;
+			CBUFFER_END
 
 			struct appdata
 			{
@@ -57,51 +64,44 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float4 color : COLOR0;
 				float2 texcoord : TEXCOORD0;
 				float2 texcoord1 : TEXCOORD1;
+				float fogFactor : TEXCOORD2;
 				float3 shadowData : TEXCOORD3;
-				UNITY_FOG_COORDS(2)
+				half3 normalWS : TEXCOORD4;
 			};
 
 			inline float3 DecodeDirectionalVertexLighting(float3 worldNormal)
 			{
-				float4 n = float4(worldNormal, 1.0);
+				float upWeight = saturate(worldNormal.y);
+				float equatorWeight = saturate(1.0 - abs(worldNormal.y));
+				float downWeight = saturate(-worldNormal.y);
+				float3 ambient = unity_AmbientSky.rgb * upWeight
+					+ unity_AmbientEquator.rgb * equatorWeight
+					+ unity_AmbientGround.rgb * downWeight;
 
-				float3 shLinear;
-				shLinear.x = dot(unity_SHAr, n);
-				shLinear.y = dot(unity_SHAg, n);
-				shLinear.z = dot(unity_SHAb, n);
-
-				float4 shCross = worldNormal.xyzz * worldNormal.yzzx;
-
-				float3 shQuadratic;
-				shQuadratic.x = dot(unity_SHBr, shCross);
-				shQuadratic.y = dot(unity_SHBg, shCross);
-				shQuadratic.z = dot(unity_SHBb, shCross);
-				shQuadratic += unity_SHC.xyz * (worldNormal.x * worldNormal.x - worldNormal.y * worldNormal.y);
-
-				float3 ambient = max(shLinear + shQuadratic, 0.0);
-
-				ambient = max((1.055 * pow(ambient, 0.4166667)) - 0.055, 0.0);
-
-				float ndl = saturate((dot(worldNormal, _WorldSpaceLightPos0.xyz) + 1.0) * 0.25);
-				float3 direct = _LightColor0.rgb * ndl;
-
-				return direct + ambient;
+				Light mainLight = GetMainLight();
+				float ndl = saturate((dot(worldNormal, mainLight.direction) + 1.0) * 0.25);
+				return ambient + mainLight.color * ndl;
 			}
 
 			v2f vert(appdata v)
 			{
 				v2f o;
 
-				o.position = UnityObjectToClipPos(v.vertex);
+				o.position = TransformObjectToHClip(v.vertex.xyz);
 
-				float3 worldNormal = normalize(mul(v.normal, (float3x3)unity_WorldToObject));
+				float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal));
 				float3 lighting = DecodeDirectionalVertexLighting(worldNormal);
 
-				o.color = float4(lighting, 2.0) * _Color + _Highlight.xxxx;
+				o.color = float4(lighting, 2.0) * _Color;
+				o.normalWS = worldNormal;
 				o.texcoord = v.texcoord;
-				o.texcoord1 = v.texcoord1 * unity_LightmapST.xy + unity_LightmapST.zw;
+				#if defined(LIGHTMAP_ON)
+					o.texcoord1 = v.texcoord1 * unity_LightmapST.xy + unity_LightmapST.zw;
+				#else
+					o.texcoord1 = 0.0;
+				#endif
 
-				float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+				float3 worldPos = TransformObjectToWorld(v.vertex.xyz);
 				float halfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
 				float aspectOfs = 1.0 / max(_ShadowTextureDim, 0.0001);
 				float offsetX = worldPos.x - _ShadowPlaneWorldPos.x;
@@ -110,20 +110,20 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				o.shadowData.y = (aspectOfs + offsetZ / halfDim + 1.0) * 0.5;
 				o.shadowData.z = worldPos.y;
 
-				UNITY_TRANSFER_FOG(o, o.position);
+				o.fogFactor = ComputeFogFactor(o.position.z);
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			float4 frag(v2f i) : SV_Target
 			{
-				fixed4 lightmapSample = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, i.texcoord1);
-				lightmapSample.rgb *= lightmapSample.a * unity_Lightmap_HDR.x;
-				lightmapSample.a = 1.0;
+				float3 lighting = i.color.rgb;
+				#if defined(LIGHTMAP_ON)
+					lighting *= SampleLightmap(i.texcoord1, normalize(i.normalWS));
+				#endif
+				float4 albedo = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
+				float4 col = float4((lighting + _Highlight.xxx) * albedo.rgb * 0.9, 1.0);
 
-				fixed4 albedo = tex2D(_MainTex, i.texcoord);
-				fixed4 col = lightmapSample * i.color * albedo * 0.9;
-
-				float4 shadowSample = tex2D(_BlobShadowTex, i.shadowData.xy);
+				float4 shadowSample = SAMPLE_TEXTURE2D(_BlobShadowTex, sampler_BlobShadowTex, i.shadowData.xy);
 				float shadowDepth = shadowSample.y;
 				float shadowIntensity = shadowSample.x;
 				float isAbove = (i.shadowData.z >= shadowDepth) ? 2.0 : 1.0;
@@ -132,13 +132,13 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float shadowMult = min(shadowIntensity * max(shadowFactor, 1.0), 1.0);
 				col.rgb *= shadowMult;
 
-				UNITY_APPLY_FOG(i.fogCoord, col);
-				UNITY_OPAQUE_ALPHA(col.a);
+				col.rgb = MixFog(col.rgb, i.fogFactor);
+				col.a = 1.0;
 				return col;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 
-	Fallback "VertexLit"
+	Fallback Off
 }

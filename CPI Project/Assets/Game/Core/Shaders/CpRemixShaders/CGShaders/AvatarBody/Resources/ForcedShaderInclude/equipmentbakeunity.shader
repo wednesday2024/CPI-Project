@@ -59,6 +59,8 @@ Shader "CpRemix/Equipment Bake"
     }
     SubShader
     {
+        Tags { "RenderPipeline" = "UniversalPipeline" }
+
         Pass
         {
             Blend One One, One One
@@ -71,7 +73,7 @@ Shader "CpRemix/Equipment Bake"
             #pragma fragment frag
             #pragma target 4.0
             #pragma multi_compile_instancing
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float _Decal1Scale;
             float _Decal1UOffset;
@@ -152,8 +154,7 @@ Shader "CpRemix/Equipment Bake"
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
                 #endif
 
-                float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(unity_MatrixVP, worldPos);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
 
                 float2 uvAtlas;
                 uvAtlas.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
@@ -290,8 +291,7 @@ Shader "CpRemix/Equipment Bake"
             float _AtlasOffsetV;
             float _AtlasOffsetScaleU;
             float _AtlasOffsetScaleV;
-            float4x4 unity_ObjectToWorld;
-            float4x4 unity_MatrixVP;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct appdata
             {
@@ -308,8 +308,7 @@ Shader "CpRemix/Equipment Bake"
             v2f vert(appdata v)
             {
                 v2f o;
-                float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(unity_MatrixVP, worldPos);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.uv.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
                 o.uv.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
                 return o;
@@ -347,21 +346,18 @@ Shader "CpRemix/Equipment Bake"
             #pragma fragment frag
             #pragma target 4.0
 
-            float4 _LightColor0;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
             float _AtlasOffsetU;
             float _AtlasOffsetV;
             float _AtlasOffsetScaleU;
             float _AtlasOffsetScaleV;
-            float4 _WorldSpaceLightPos0;
-            float4x4 unity_ObjectToWorld;
-            float4x4 unity_WorldToObject;
-            float4 glstate_lightmodel_ambient;
-            float4x4 unity_MatrixVP;
 
             struct appdata
             {
                 float4 vertex : POSITION;
-                float4 normal : NORMAL;
+                float3 normal : NORMAL;
                 float2 uv : TEXCOORD0;
                 float4 color : COLOR;
             };
@@ -378,17 +374,15 @@ Shader "CpRemix/Equipment Bake"
             {
                 v2f o;
 
-                float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = mul(unity_MatrixVP, worldPos);
+                float3 worldPos = TransformObjectToWorld(v.vertex.xyz);
+                o.pos = TransformWorldToHClip(worldPos);
 
-                float3 lightVec = _WorldSpaceLightPos0.xyz - worldPos.xyz * _WorldSpaceLightPos0.w;
-                float3 lightDir = normalize(lightVec);
+                float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal.xyz));
+                Light mainLight = GetMainLight();
+                float ndotl = max(dot(worldNormal, mainLight.direction), 0.0);
 
-                float3 worldNormal = normalize(mul(v.normal.xyz, (float3x3)unity_WorldToObject));
-                float ndotl = max(dot(worldNormal, lightDir), 0.0);
-
-                float3 diffuse = ndotl * _LightColor0.rgb;
-                float3 ambient = glstate_lightmodel_ambient.rgb * 0.9;
+                float3 diffuse = ndotl * mainLight.color;
+                float3 ambient = unity_AmbientSky.rgb * 0.45;
                 o.lighting = mad(diffuse, 0.65, ambient);
 
                 o.uvAtlas.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);

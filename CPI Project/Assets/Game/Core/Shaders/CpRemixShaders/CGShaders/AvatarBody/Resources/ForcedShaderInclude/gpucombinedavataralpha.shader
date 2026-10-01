@@ -5,128 +5,101 @@ Shader "CpRemix/GPU Combined Avatar Alpha"
         _MainTex ("Diffuse Texture", 2D) = "white" {}
         _Alpha ("Alpha", Float) = 0
     }
+
     SubShader
     {
-        Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+        Tags { "RenderPipeline" = "UniversalPipeline" "Queue" = "Transparent" "RenderType" = "Transparent" }
 
         Pass
         {
-            Tags { "LightMode"="ForwardBase" }
+            Tags { "LightMode" = "UniversalForwardOnly" }
             Blend SrcAlpha OneMinusSrcAlpha
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
-            #pragma multi_compile_fwdbase
             #pragma multi_compile_instancing
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
 
-            sampler2D _MainTex;
-            float _Alpha;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
+            CBUFFER_START(UnityPerMaterial)
+                float _Alpha;
+            CBUFFER_END
 
             float4 bonepos[48];
             float4 bonequat[48];
 
-            struct appdata
+            struct Attributes
             {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                float2 uv     : TEXCOORD0;
-                float3 color  : COLOR;
-                float4 tangent: TANGENT;
-
-                #ifdef UNITY_INSTANCING_ENABLED
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                float2 uv : TEXCOORD0;
+                float3 color : COLOR;
+                float4 tangent : TANGENT;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
-            struct v2f
+            struct Varyings
             {
-                float2 uv          : TEXCOORD0;
-                float3 ambientLit  : TEXCOORD1;
-                float3 color       : COLOR;
-                float4 vertex      : SV_POSITION;
-
-                #ifdef UNITY_INSTANCING_ENABLED
+                float4 positionCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float3 lighting : TEXCOORD1;
+                float3 color : COLOR;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
-            float3 RotateByQuat(float3 v, float4 q)
+            float3 RotateByQuat(float3 value, float4 rotation)
             {
-                float3 t = 2.0 * cross(q.xyz, v);
-                return v + q.w * t + cross(q.xyz, t);
+                float3 t = 2.0 * cross(rotation.xyz, value);
+                return value + rotation.w * t + cross(rotation.xyz, t);
             }
 
-            v2f vert(appdata v)
+            Varyings vert(Attributes input)
             {
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_SETUP_INSTANCE_ID(v);
-                #endif
-                v2f o;
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
-                #endif
+                UNITY_SETUP_INSTANCE_ID(input);
+                Varyings output;
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
 
-                float4 bw = frac(v.tangent);
-                uint4 bi = uint4(int4(v.tangent));
+                float4 weights = frac(input.tangent);
+                uint4 indices = (uint4)(int4)input.tangent;
+                float3 worldPosition = 0.0;
+                float3 worldNormal = 0.0;
 
-                float3 worldPos = float3(0,0,0);
-                float3 worldNormal = float3(0,0,0);
+                float3 p0 = RotateByQuat(input.positionOS.xyz, bonequat[indices.x]) + bonepos[indices.x].xyz;
+                worldPosition += p0 * weights.x;
+                worldNormal += RotateByQuat(input.normalOS, bonequat[indices.x]) * weights.x;
+                worldPosition += (RotateByQuat(input.positionOS.xyz, bonequat[indices.y]) + bonepos[indices.y].xyz) * weights.y;
+                worldPosition += (RotateByQuat(input.positionOS.xyz, bonequat[indices.z]) + bonepos[indices.z].xyz) * weights.z;
+                worldPosition += (RotateByQuat(input.positionOS.xyz, bonequat[indices.w]) + bonepos[indices.w].xyz) * weights.w;
 
-                {
-                    float3 p = RotateByQuat(v.vertex.xyz, bonequat[bi.x]) + bonepos[bi.x].xyz;
-                    worldPos += p * bw.x;
-                    float3 n = RotateByQuat(v.normal, bonequat[bi.x]);
-                    worldNormal += n * bw.x;
-                }
-                {
-                    float3 p = RotateByQuat(v.vertex.xyz, bonequat[bi.y]) + bonepos[bi.y].xyz;
-                    worldPos += p * bw.y;
-                }
-                {
-                    float3 p = RotateByQuat(v.vertex.xyz, bonequat[bi.z]) + bonepos[bi.z].xyz;
-                    worldPos += p * bw.z;
-                }
-                {
-                    float3 p = RotateByQuat(v.vertex.xyz, bonequat[bi.w]) + bonepos[bi.w].xyz;
-                    worldPos += p * bw.w;
-                }
+                float nDotL = max(dot(normalize(worldNormal), GetMainLight().direction), 0.0);
+                float3 diffuse = nDotL * GetMainLight().color;
+                float rim = (nDotL + 0.5) * 0.6;
+                float3 ambient = unity_AmbientSky.rgb * 0.45;
 
-                o.vertex = mul(unity_MatrixVP, float4(worldPos, 1.0));
-                o.uv = v.uv;
-
-                float3 normalWS = normalize(worldNormal);
-                float nDotL = max(dot(normalWS, _WorldSpaceLightPos0.xyz), 0.0);
-                float3 diffuse = nDotL * _LightColor0.rgb;
-
-                float rim = nDotL + 0.5;
-                float rimClamped = rim * 0.6;
-
-                float3 ambient = glstate_lightmodel_ambient.rgb * 0.9;
-                float3 lit = mad(diffuse, 0.75, ambient);
-
-                o.ambientLit = max(float3(rimClamped, rimClamped, rimClamped), lit);
-
-                o.color = v.color;
-                return o;
+                output.positionCS = TransformWorldToHClip(worldPosition);
+                output.uv = input.uv;
+                output.lighting = max(rim.xxx, diffuse * 0.75 + ambient);
+                output.color = input.color;
+                return output;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            float4 frag(Varyings input) : SV_Target
             {
-                fixed4 tex = tex2D(_MainTex, i.uv);
-
+                UNITY_SETUP_INSTANCE_ID(input);
+                float4 tex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
                 float alphaSigned = tex.a * 2.0 - 1.0;
                 float posPart = max(alphaSigned, 0.0);
                 float negPart = 1.0 - posPart;
-
-                fixed3 result = tex.rgb * i.ambientLit * negPart + tex.rgb * posPart;
-
-                return fixed4(result, _Alpha);
+                float3 result = tex.rgb * input.lighting * negPart + tex.rgb * posPart;
+                return float4(result, _Alpha);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

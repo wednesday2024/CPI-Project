@@ -15,7 +15,8 @@ Shader "CpRemix/Igloo/IglooDynamicLightmap"
 	{
 		Tags
 		{
-			"LIGHTMODE" = "FORWARDBASE"
+            "RenderPipeline" = "UniversalPipeline"
+			"LightMode" = "UniversalForward"
 			"QUEUE" = "Geometry"
 			"RenderType" = "Opaque"
 		}
@@ -24,18 +25,17 @@ Shader "CpRemix/Igloo/IglooDynamicLightmap"
 		{
 			Tags
 			{
-				"LIGHTMODE" = "FORWARDBASE"
+				"LightMode" = "UniversalForward"
 				"QUEUE" = "Geometry"
 				"RenderType" = "Opaque"
 			}
 
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-			#include "Lighting.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			sampler2D _MainTex;
 			sampler2D _Lightmap;
 			sampler2D _BlobShadowTex;
@@ -94,14 +94,14 @@ Shader "CpRemix/Igloo/IglooDynamicLightmap"
 				float3 ambient = sh0 + sh1 + unity_SHC.xyz * ((normalWorldSpace.x * normalWorldSpace.x) - (normalWorldSpace.y * normalWorldSpace.y));
 				ambient = max((1.055 * pow(max(ambient, 0.0), 0.4166667)) - 0.055, 0.0);
 
-				float ndl = clamp((dot(float4(normalWorldSpace, 0.0), _WorldSpaceLightPos0) + 1.0) / 4.0, 0.0, 1.0);
-				float3 direct = (_LightColor0.rgb * ndl);
+				float ndl = clamp((dot(float4(normalWorldSpace, 0.0), _MainLightPosition) + 1.0) / 4.0, 0.0, 1.0);
+				float3 direct = (_MainLightColor.rgb * ndl);
 
 				float4 litColor = float4(max(0.0, ambient) + direct, 1.0);
 				litColor *= _Color;
 				litColor += _Highlight;
 
-				o.pos = UnityObjectToClipPos(v.vertex);
+				o.pos = TransformObjectToHClip(v.vertex.xyz);
 				o.color = litColor;
 				o.uv = TRANSFORM_TEX(v.texcoord.xy, _MainTex);
 				o.uv2 = v.texcoord1.xy;
@@ -118,13 +118,13 @@ Shader "CpRemix/Igloo/IglooDynamicLightmap"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
-				fixed4 baseTex = tex2D(_MainTex, i.uv);
-				fixed4 lm = tex2D(_Lightmap, i.uv2);
+				half4 baseTex = tex2D(_MainTex, i.uv);
+				half4 lm = tex2D(_Lightmap, i.uv2);
 
-				fixed lit = saturate(max(lm.r, _ShadowBrightness));
-				fixed shadowLerp = lit * 0.9;
+				half lit = saturate(max(lm.r, _ShadowBrightness));
+				half shadowLerp = lit * 0.9;
 
 				float4 shadowSample = tex2D(_BlobShadowTex, i.shadowData.xy);
 				float shadowDepth = shadowSample.y;
@@ -134,13 +134,13 @@ Shader "CpRemix/Igloo/IglooDynamicLightmap"
 				float shadowFactor = mad(abs(depthDiff), isAbove, isAbove) - 0.5;
 				float shadowMult = min(shadowIntensity * max(shadowFactor, 1.0), 1.0);
 
-				fixed4 col = lerp(_ShadowColor, i.color * baseTex, shadowLerp);
+				half4 col = lerp(_ShadowColor, i.color * baseTex, shadowLerp);
 				col.rgb *= shadowMult;
 				return col;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 
-	FallBack "VertexLit"
+	Fallback Off
 }

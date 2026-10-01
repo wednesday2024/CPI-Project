@@ -10,6 +10,7 @@ Shader "Custom/mg_pt_Shader_PizzaSauce"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Transparent"
             "RenderType"="Transparent"
         }
@@ -26,8 +27,7 @@ Shader "Custom/mg_pt_Shader_PizzaSauce"
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4 _Color;
             float4x4 _ScaleTransform;
@@ -78,5 +78,5 @@ Shader "Custom/mg_pt_Shader_PizzaSauce"
         }
     }
 
-    FallBack "Unlit/Transparent"
+    Fallback Off
 }

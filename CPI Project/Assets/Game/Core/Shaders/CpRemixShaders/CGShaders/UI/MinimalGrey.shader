@@ -18,6 +18,7 @@ Shader "CpRemix/UI/MinimalGrey"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Transparent"
             "IgnoreProjector"="True"
             "RenderType"="Transparent"
@@ -52,9 +53,10 @@ Shader "CpRemix/UI/MinimalGrey"
             #pragma target 4.5
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
             float _GreyScaleEffect;
             float _Brightness;
@@ -82,7 +84,7 @@ Shader "CpRemix/UI/MinimalGrey"
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 o.color = v.color;
                 o.uv = v.uv;
                 return o;
@@ -90,7 +92,7 @@ Shader "CpRemix/UI/MinimalGrey"
 
             float4 frag(v2f i) : SV_Target
             {
-                float4 texCol = tex2D(_MainTex, i.uv);
+                float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
 
                 float grey = (texCol.r + texCol.g + texCol.b) * 0.33;
                 float brightnessScale = 1.0 + (_Brightness * 2.0);
@@ -113,5 +115,5 @@ Shader "CpRemix/UI/MinimalGrey"
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

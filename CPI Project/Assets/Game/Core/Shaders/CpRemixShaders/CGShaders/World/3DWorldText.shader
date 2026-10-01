@@ -9,6 +9,7 @@ Shader "CpRemix/World/3DWorldText"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 			"IGNOREPROJECTOR" = "true"
 			"QUEUE" = "Transparent"
 			"RenderType" = "Transparent"
@@ -26,13 +27,24 @@ Shader "CpRemix/World/3DWorldText"
 			Fog { Mode Off }
 			Blend SrcAlpha OneMinusSrcAlpha
 
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			// Shader properties
 			float4 _Color;
 			float4 _MainTex_ST;
@@ -47,12 +59,12 @@ Shader "CpRemix/World/3DWorldText"
 			};
 
 			// Vertex shader
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 			{
 				v2f o;
 
 				// Transform the vertex position into clip space
-				o.pos = UnityObjectToClipPos(v.vertex);
+				o.pos = TransformObjectToHClip(v.vertex.xyz);
 
 				// Apply the texture scaling and offset (for tiling and UV adjustments)
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
@@ -64,7 +76,7 @@ Shader "CpRemix/World/3DWorldText"
 			}
 
 			// Fragment shader
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
 				// Sample the alpha value from the font texture
 				float4 texColor = tex2D(_MainTex, i.uv);
@@ -75,7 +87,7 @@ Shader "CpRemix/World/3DWorldText"
 				return finalColor;
 			}
 
-			ENDCG
+			ENDHLSL
 		}
 	}
 	Fallback Off

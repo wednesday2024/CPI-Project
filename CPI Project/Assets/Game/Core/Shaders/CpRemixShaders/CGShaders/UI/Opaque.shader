@@ -17,6 +17,7 @@ Shader "CpRemix/UI/Opaque"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Geometry"
             "RenderType"="Opaque"
             "IgnoreProjector"="True"
@@ -50,9 +51,10 @@ Shader "CpRemix/UI/Opaque"
             #pragma fragment frag
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
             float4 _Color;
 
             struct appdata
@@ -79,7 +81,7 @@ Shader "CpRemix/UI/Opaque"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                o.position = UnityObjectToClipPos(v.vertex);
+                o.position = TransformObjectToHClip(v.vertex.xyz);
                 o.color = v.color * _Color;
                 o.uv = v.uv;
 
@@ -88,12 +90,12 @@ Shader "CpRemix/UI/Opaque"
 
             float4 frag(v2f i) : SV_Target
             {
-                return tex2D(_MainTex, i.uv) * i.color;
+                return SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) * i.color;
             }
 
             ENDHLSL
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

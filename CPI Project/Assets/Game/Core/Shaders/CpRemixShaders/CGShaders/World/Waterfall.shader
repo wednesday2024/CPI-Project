@@ -7,23 +7,35 @@ Shader "CpRemix/World/Waterfall" {
         _Reverse ("Reverse (X,Y)", Vector) = (0,0,0,0)
 	}
 	SubShader {
-		Tags { "QUEUE" = "Transparent" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "QUEUE" = "Transparent" }
 		Pass {
 			Tags { "QUEUE" = "Transparent" }
 			Blend SrcAlpha OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
 			ZWrite Off
-			GpuProgramID 36015
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			//#pragma multi_compile_fog
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			struct v2f
 			{
 				float4 position : SV_POSITION0;
 				float2 texcoord1 : TEXCOORD1;
-				//UNITY_FOG_COORDS(2)
+				//float fogFactor : TEXCOORD2;
 			};
 			struct fout
 			{
@@ -42,11 +54,11 @@ Shader "CpRemix/World/Waterfall" {
 			sampler2D _MainTex;
 			
 			// Keywords: 
-			v2f vert(appdata_full v) {
+			v2f vert(Attributes v) {
                 v2f o;
 
                 // Use Unity's built-in function to transform vertex position from object space to clip space
-                o.position = UnityObjectToClipPos(v.vertex);
+                o.position = TransformObjectToHClip(v.vertex.xyz);
 
                 // Compute reverse multipliers: 1 for normal, -1 for reversed
                 float reverseX = (_Reverse.x > 0.5) ? -1.0 : 1.0;
@@ -56,7 +68,7 @@ Shader "CpRemix/World/Waterfall" {
                 o.texcoord1.xy = float2(reverseX * _XScrollSpeed.x, reverseY * _YScrollSpeed.x) * _Time.xx + v.texcoord.xy;
 
                 // Handle fog
-                //UNITY_TRANSFER_FOG(o, o.position);
+                //o.fogFactor = ComputeFogFactor(o.position.z);
 
                 return o;
             }
@@ -69,11 +81,11 @@ Shader "CpRemix/World/Waterfall" {
                 tmp0 = tex2D(_MainTex, inp.texcoord1.xy);
                 o.sv_target.w = tmp0.w * _Color.w;
                 o.sv_target.xyz = tmp0.xyz + _Color.xyz;
-				//UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
+				//o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
-	Fallback "Diffuse"
+	Fallback Off
 }

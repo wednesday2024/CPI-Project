@@ -17,6 +17,7 @@ Shader "CpRemix/UI/MaskGrey"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Transparent"
             "RenderType"="Transparent"
             "IgnoreProjector"="True"
@@ -52,9 +53,10 @@ Shader "CpRemix/UI/MaskGrey"
             #pragma multi_compile_instancing
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
             float _Brightness;
 
             struct appdata
@@ -81,7 +83,7 @@ Shader "CpRemix/UI/MaskGrey"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                o.position = UnityObjectToClipPos(v.vertex);
+                o.position = TransformObjectToHClip(v.vertex.xyz);
                 o.color = v.color;
                 o.uv = v.uv;
 
@@ -90,7 +92,7 @@ Shader "CpRemix/UI/MaskGrey"
 
             float4 frag(v2f i) : SV_Target
             {
-                float4 texCol = tex2D(_MainTex, i.uv);
+                float4 texCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
 
                 #ifdef UNITY_UI_ALPHACLIP
                 clip(texCol.a - 0.001);
@@ -121,5 +123,5 @@ Shader "CpRemix/UI/MaskGrey"
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

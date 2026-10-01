@@ -11,6 +11,7 @@ Shader "CpRemix/World/ScrollAdditive"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 			"QUEUE" = "Transparent"
 		}
 		Pass
@@ -21,13 +22,24 @@ Shader "CpRemix/World/ScrollAdditive"
 			}
 			//ZWrite Off
 			Blend SrcAlpha One
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			float _XScrollSpeed;
 			float _YScrollSpeed;
 			float4 _Color;
@@ -39,12 +51,12 @@ Shader "CpRemix/World/ScrollAdditive"
 				float4 position : SV_POSITION;
 			};
 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 			{
 				v2f o;
 
 				// Simplified vertex position calculation
-				o.position = UnityObjectToClipPos(v.vertex);
+				o.position = TransformObjectToHClip(v.vertex.xyz);
 
 				// Scroll the texture coordinates based on time and scroll speed
 				o.texcoord = v.texcoord.xy + float2(_XScrollSpeed, _YScrollSpeed) * _Time.x;
@@ -65,8 +77,8 @@ Shader "CpRemix/World/ScrollAdditive"
 				return outputColor;
 			}
 
-			ENDCG
+			ENDHLSL
 		}
 	}
-	Fallback "Diffuse"
+	Fallback Off
 }

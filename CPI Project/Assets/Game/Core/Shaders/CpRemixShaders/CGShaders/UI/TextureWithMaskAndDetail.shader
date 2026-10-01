@@ -12,6 +12,7 @@ Shader "CpRemix/UI/TextureWithMaskAndDetail"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue"="Transparent"
             "RenderType"="Transparent"
             "IgnoreProjector"="True"
@@ -23,19 +24,22 @@ Shader "CpRemix/UI/TextureWithMaskAndDetail"
             ZWrite Off
             Cull Off
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma target 4.0
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
-            sampler2D _MaskTex;
-            sampler2D _DetailTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            TEXTURE2D(_MaskTex);
+            SAMPLER(sampler_MaskTex);
+            TEXTURE2D(_DetailTex);
+            SAMPLER(sampler_DetailTex);
 
-            fixed4 _Color;
+            half4 _Color;
 
             struct appdata
             {
@@ -48,7 +52,7 @@ Shader "CpRemix/UI/TextureWithMaskAndDetail"
             struct v2f
             {
                 float4 pos : SV_POSITION;
-                fixed4 color : COLOR;
+                half4 color : COLOR;
                 float2 uv : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
                 UNITY_VERTEX_OUTPUT_STEREO
@@ -61,18 +65,18 @@ Shader "CpRemix/UI/TextureWithMaskAndDetail"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.color = v.color * _Color;
                 o.uv = v.uv;
 
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
-                fixed4 mainCol = tex2D(_MainTex, i.uv) * i.color;
-                fixed4 detailCol = tex2D(_DetailTex, i.uv);
-                fixed4 maskCol = tex2D(_MaskTex, i.uv);
+                half4 mainCol = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv) * i.color;
+                half4 detailCol = SAMPLE_TEXTURE2D(_DetailTex, sampler_DetailTex, i.uv);
+                half4 maskCol = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, i.uv);
 
                 mainCol.rgb = lerp(
                     mainCol.rgb,
@@ -88,7 +92,7 @@ Shader "CpRemix/UI/TextureWithMaskAndDetail"
                 return mainCol;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 

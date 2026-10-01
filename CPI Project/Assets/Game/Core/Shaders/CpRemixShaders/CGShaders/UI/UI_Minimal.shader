@@ -17,6 +17,7 @@ Shader "CpRemix/UI/Minimal"
 	{
 		Tags
 		{
+			"RenderPipeline" = "UniversalPipeline"
 			"Queue" = "Transparent"
 			"IgnoreProjector" = "True"
 			"RenderType" = "Transparent"
@@ -42,13 +43,13 @@ Shader "CpRemix/UI/Minimal"
 
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma target 2.0
 			#pragma multi_compile_instancing
 			#pragma shader_feature_local _OSCMODE_OFF _OSCMODE_SINE
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 			struct appdata_t
 			{
@@ -61,15 +62,16 @@ Shader "CpRemix/UI/Minimal"
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
-				fixed4 color : COLOR;
+				half4 color : COLOR;
 				float2 texcoord : TEXCOORD0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
 
-			sampler2D _MainTex;
+			TEXTURE2D(_MainTex);
+			SAMPLER(sampler_MainTex);
 			float4 _MainTex_ST;
-			fixed4 _Color;
+			half4 _Color;
 			float4 _Oscillation;
 
 			v2f vert(appdata_t v)
@@ -79,7 +81,7 @@ Shader "CpRemix/UI/Minimal"
 				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 				UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.vertex = TransformObjectToHClip(v.vertex.xyz);
 
 				#ifdef _OSCMODE_SINE
 				o.vertex.x += sin(_Oscillation.x * _Time.y) * _Oscillation.y;
@@ -91,12 +93,12 @@ Shader "CpRemix/UI/Minimal"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
-				return tex2D(_MainTex, i.texcoord) * i.color;
+				return SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord) * i.color;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
-	FallBack "UI/Default"
+	FallBack Off
 }

@@ -10,15 +10,27 @@ Shader "CpRemix/World/Wave Osc Scroll" {
         _YScrollSpeed ("Y Scroll Speed", Float) = 1
     }
     SubShader {
-        Tags { "RenderType" = "Opaque" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
         Pass {
             Tags { "RenderType" = "Opaque" }
-            CGPROGRAM
+            HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             struct v2f {
                 float4 position : SV_POSITION0;
                 float4 texcoord : TEXCOORD0;
@@ -43,7 +55,7 @@ Shader "CpRemix/World/Wave Osc Scroll" {
             // Texture params for Fragment Shader
             sampler2D _MainTex;
 
-            v2f vert(appdata_full v) {
+            v2f vert(Attributes v) {
                 v2f o;
                 float4 tmp0;
                 float4 tmp1;
@@ -67,10 +79,10 @@ Shader "CpRemix/World/Wave Osc Scroll" {
                 tmp0 = unity_ObjectToWorld._m02_m12_m22_m32 * tmp0.zzzz + tmp1;
                 tmp0 = tmp0 + unity_ObjectToWorld._m03_m13_m23_m33;
 
-                tmp1 = tmp0.yyyy * unity_MatrixVP._m01_m11_m21_m31;
-                tmp1 = unity_MatrixVP._m00_m10_m20_m30 * tmp0.xxxx + tmp1;
-                tmp1 = unity_MatrixVP._m02_m12_m22_m32 * tmp0.zzzz + tmp1;
-                o.position = unity_MatrixVP._m03_m13_m23_m33 * tmp0.wwww + tmp1;
+                tmp1 = tmp0.yyyy * UNITY_MATRIX_VP._m01_m11_m21_m31;
+                tmp1 = UNITY_MATRIX_VP._m00_m10_m20_m30 * tmp0.xxxx + tmp1;
+                tmp1 = UNITY_MATRIX_VP._m02_m12_m22_m32 * tmp0.zzzz + tmp1;
+                o.position = UNITY_MATRIX_VP._m03_m13_m23_m33 * tmp0.wwww + tmp1;
 
                 o.texcoord = v.color;
                 o.texcoord1.xy = _Time.xx * float2(_XScrollSpeed.x, _YScrollSpeed.x) + v.texcoord.xy;
@@ -90,7 +102,7 @@ Shader "CpRemix/World/Wave Osc Scroll" {
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 }

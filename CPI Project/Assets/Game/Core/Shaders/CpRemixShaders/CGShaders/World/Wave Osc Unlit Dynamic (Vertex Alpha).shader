@@ -8,17 +8,29 @@ Shader "CpRemix/World/Wave Osc Unlit Dynamic (Vertex Alpha)"
 	}
 
 	SubShader {
-		Tags { "RenderType" = "Opaque" "DisableBatching" = "True" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" "DisableBatching" = "True" }
 
 		Pass {
 			Tags { "RenderType" = "Opaque" }
 
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			struct v2f
 			{
 				float4 position : SV_POSITION;
@@ -37,7 +49,7 @@ Shader "CpRemix/World/Wave Osc Unlit Dynamic (Vertex Alpha)"
 			float _OscSpeed;
 			sampler2D _MainTex;
 			
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 			{
 				v2f o;
 
@@ -48,7 +60,7 @@ Shader "CpRemix/World/Wave Osc Unlit Dynamic (Vertex Alpha)"
 				float oscillatedVertex = sin((_Time.y * _OscSpeed) + axisOffset) * vertexColorApplication;
 				float3 newPosition = v.vertex.xyz + oscillatedVertex * oscDirWorld;
 
-				o.position = UnityObjectToClipPos(float4(newPosition, 1.0));
+				o.position = TransformObjectToHClip(newPosition);
 
 				o.texcoord = v.color.xyz;
 				o.texcoord1.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
@@ -64,11 +76,11 @@ Shader "CpRemix/World/Wave Osc Unlit Dynamic (Vertex Alpha)"
 				o.sv_target.xyz = texColor.xyz * inp.texcoord.xyz;
 				o.sv_target.w = 1.0;
 
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.w = 1.0;
 
 				return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

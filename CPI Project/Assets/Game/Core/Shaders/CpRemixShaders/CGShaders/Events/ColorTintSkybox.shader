@@ -4,63 +4,48 @@ Shader "CpRemix/World/Events/Color/Color Tint Skybox" {
 		_cubemap ("Environment Map", Cube) = "white" {}
 	}
 	SubShader {
-		Tags { "QUEUE" = "Background" }
+		Tags { "RenderPipeline" = "UniversalPipeline" "Queue" = "Background" "RenderType" = "Background" "PreviewType" = "Skybox" }
 		Pass {
-			Tags { "QUEUE" = "Background" }
 			ZClip Off
 			ZWrite Off
 			Cull Off
-			GpuProgramID 20910
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-			
-			#include "UnityCG.cginc"
-			struct v2f
-			{
-				float4 position : SV_POSITION0;
-				float3 texcoord : TEXCOORD0;
-			};
-			struct fout
-			{
-				float4 sv_target : SV_Target0;
-			};
-			// $Globals ConstantBuffers for Vertex Shader
-			// $Globals ConstantBuffers for Fragment Shader
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+			TEXTURECUBE(_cubemap);
+			SAMPLER(sampler_cubemap);
+			CBUFFER_START(UnityPerMaterial)
 			float4 _TintColor;
-			// Custom ConstantBuffers for Vertex Shader
-			// Custom ConstantBuffers for Fragment Shader
-			// Texture params for Vertex Shader
-			// Texture params for Fragment Shader
-			samplerCUBE _cubemap;
-			
-			// Keywords: 
-			v2f vert(appdata_full v)
-{
-    v2f o;
-    
-    // Transform the vertex position from object space to world space
-    float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-    
-    // Transform the world position to clip space using the view-projection matrix
-    o.position = mul(UNITY_MATRIX_VP, worldPos);
+			CBUFFER_END
 
-    // Pass through the texture coordinates (xyz if required, otherwise xy)
-    o.texcoord.xyz = v.texcoord.xyz;
-
-    return o;
-}
-
-			// Keywords: 
-			fout frag(v2f inp)
+			struct Attributes
 			{
-                fout o;
-                float4 tmp0;
-                tmp0 = texCUBE(_cubemap, inp.texcoord.xyz);
-                o.sv_target = tmp0 * _TintColor;
-                return o;
+				float4 positionOS : POSITION;
+			};
+
+			struct Varyings
+			{
+				float4 positionCS : SV_POSITION;
+				float3 direction : TEXCOORD0;
+			};
+
+			Varyings vert(Attributes input)
+			{
+				Varyings output;
+				output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+				output.positionCS.z = UNITY_RAW_FAR_CLIP_VALUE * output.positionCS.w;
+				output.direction = input.positionOS.xyz;
+				return output;
 			}
-			ENDCG
+
+			half4 frag(Varyings input) : SV_Target
+			{
+				return SAMPLE_TEXTURECUBE(_cubemap, sampler_cubemap, input.direction) * _TintColor;
+			}
+			ENDHLSL
 		}
 	}
+	Fallback Off
 }

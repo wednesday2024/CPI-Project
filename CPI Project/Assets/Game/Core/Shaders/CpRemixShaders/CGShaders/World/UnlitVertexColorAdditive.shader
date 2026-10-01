@@ -8,6 +8,7 @@ Shader "CpRemix/World/Unlit Vertex Color Additive"
 	{
 	  Tags
 	  {
+            "RenderPipeline" = "UniversalPipeline"
 		"QUEUE" = "Transparent"
 	  }
 	  LOD 100
@@ -21,15 +22,15 @@ Shader "CpRemix/World/Unlit Vertex Color Additive"
 		ZWrite Off
 		Cull Off
 		Blend One One
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#pragma multi_compile_fog
 
-			fixed4 _Color;
+			half4 _Color;
 
 			struct v2f
 			{
@@ -38,7 +39,7 @@ Shader "CpRemix/World/Unlit Vertex Color Additive"
 
 			struct FragOutput
 			{
-			  fixed4 color : SV_Target;
+			  half4 color : SV_Target;
 			};
 
 			v2f vert(
@@ -48,7 +49,7 @@ Shader "CpRemix/World/Unlit Vertex Color Additive"
 			)
 			{
 			  v2f o;
-			  outpos = UnityObjectToClipPos(vertex);
+			  outpos = TransformObjectToHClip(vertex.xyz);
 			  o.color = color;
 			  return o;
 			}
@@ -61,8 +62,8 @@ Shader "CpRemix/World/Unlit Vertex Color Additive"
 			  return o;
 			}
 
-			ENDCG
+			ENDHLSL
 	  }
 	}
-		FallBack "Diffuse"
+		Fallback Off
 }

@@ -31,6 +31,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 	{
 		Tags
 		{
+		  "RenderPipeline" = "UniversalPipeline"
 		  "PreviewType" = "Plane"
 		  "QUEUE" = "Transparent"
 		}
@@ -62,12 +63,12 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 		  Blend SrcAlpha OneMinusSrcAlpha
 		  ColorMask[_ColorMask]
 
-		  CGPROGRAM
+		  HLSLPROGRAM
 
 		  #pragma vertex vert
 		  #pragma fragment frag
 
-		  #include "UnityCG.cginc"
+		  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 		  float4 _Color;
 		  float2 _ShadowVec;
@@ -85,8 +86,17 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 		  float _InnerShadowBlur;
 		  float _TileAttenuation;
 		  float _EffectAlpha;
-		  sampler2D _MainTex;
-		  sampler2D _EffectTex;
+		  TEXTURE2D(_MainTex);
+		  SAMPLER(sampler_MainTex);
+		  TEXTURE2D(_EffectTex);
+		  SAMPLER(sampler_EffectTex);
+
+		  struct appdata_t
+		  {
+			float4 vertex : POSITION;
+			float4 color : COLOR;
+			float2 texcoord : TEXCOORD0;
+		  };
 
 		  struct v2f
 		  {
@@ -98,11 +108,11 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 			float2 xlv_TEXCOORD3 : TEXCOORD3;
 		  };
 
-		  v2f vert(appdata_full v)
+		  v2f vert(appdata_t v)
 		  {
 			v2f o;
 			float2 tmpvar_1 = (float2(1.0, 1.0) + (abs(_ShadowVec) * 0.5));
-			o.pos = UnityObjectToClipPos(v.vertex);
+			o.pos = TransformObjectToHClip(v.vertex.xyz);
 			o.xlv_COLOR = v.color * _Color;
 
 			float2 tmpvar_13 = (_ShadowVec * 0.5);
@@ -165,20 +175,20 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 			 float2 tmpvar_11;
 			 tmpvar_11 = pow(abs((i.xlv_TEXCOORD1 + _ShadowInnerVec)), (_Roundness));
 			 float tmpvar_12;
-			 tmpvar_12 = pow((1.0 - _BorderSize), _Roundness);
+			 tmpvar_12 = pow(max(1.0 - _BorderSize, 0.0), max(_Roundness, 0.0));
 			 float tmpvar_13;
 			 tmpvar_13 = (tmpvar_12 - _AAliasSize);
 			 float tmpvar_14;
 			 tmpvar_14 = sqrt(dot(tmpvar_9, tmpvar_9));
 			 float tmpvar_15;
 			 tmpvar_15 = (1.0 - ((clamp(tmpvar_14, tmpvar_6, 1.0) - tmpvar_6) * tmpvar_5));
-			 image_4 = tex2D(_MainTex, i.xlv_TEXCOORD0);
+			image_4 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.xlv_TEXCOORD0);
 			 float2 tmpvar_17;
 			 tmpvar_17 = abs(((i.xlv_TEXCOORD0 - 0.5) * 2.0));
 			 float tmpvar_18;
 			 tmpvar_18 = max(tmpvar_17.x, tmpvar_17.y);
-			 fx1_3 = tex2D(_EffectTex, i.xlv_TEXCOORD2);
-			 fx2_2 = tex2D(_EffectTex, i.xlv_TEXCOORD3);
+			fx1_3 = SAMPLE_TEXTURE2D(_EffectTex, sampler_EffectTex, i.xlv_TEXCOORD2);
+			fx2_2 = SAMPLE_TEXTURE2D(_EffectTex, sampler_EffectTex, i.xlv_TEXCOORD3);
 			 fx1_3.w = (fx1_3.w * _EffectAlpha);
 			 fx2_2.w = (fx2_2.w * (_EffectAlpha * 0.7));
 			 sparkleCentre.xyz = lerp(sparkleCentre.xyz, fx1_3.xyz, fx1_3.www);
@@ -200,7 +210,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithSparkle"
 			 return o;
 		  }
 
-		  ENDCG
+		  ENDHLSL
 		}
 	}
 

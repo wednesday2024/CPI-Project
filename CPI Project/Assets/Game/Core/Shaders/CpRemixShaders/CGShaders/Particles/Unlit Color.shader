@@ -8,6 +8,7 @@ Shader "CpRemix/Particles/Unlit Color"
 	{
 	  Tags
 	  {
+            "RenderPipeline" = "UniversalPipeline"
 		"RenderType" = "Opaque"
 	  }
 	  Pass
@@ -17,18 +18,17 @@ Shader "CpRemix/Particles/Unlit Color"
 		  "RenderType" = "Opaque"
 		}
 
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
-			fixed4 _Color;
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			half4 _Color;
 
 			struct FragOutput
 			{
-			  fixed4 color : SV_Target;
+			  half4 color : SV_Target;
 			};
 
 			void vert(
@@ -36,7 +36,7 @@ Shader "CpRemix/Particles/Unlit Color"
 			out float4 outpos : SV_POSITION
 			)
 			{
-			  outpos = UnityObjectToClipPos(vertex);
+			  outpos = TransformObjectToHClip(vertex.xyz);
 			}
 
 			FragOutput frag()
@@ -46,8 +46,8 @@ Shader "CpRemix/Particles/Unlit Color"
 			  return o;
 			}
 
-			ENDCG
+			ENDHLSL
 	  }
 	}
-		FallBack "Diffuse"
+		Fallback Off
 }

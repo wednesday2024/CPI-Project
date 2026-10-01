@@ -7,25 +7,40 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 		_DepthMultiply ("DepthMultiply", Range(0, 1)) = 1
 	}
 	SubShader {
-		Tags { "RenderType" = "Opaque" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
 		Pass {
-			Tags { "RenderType" = "Opaque" }
-			GpuProgramID 65288
-			CGPROGRAM
+			Tags { "LightMode" = "UniversalForward" "RenderType" = "Opaque" }
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
-			#include "UnityCG.cginc"
-
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			struct v2f {
 				float4 position    : SV_POSITION0;
 				float3 color       : COLOR0;
 				float2 texcoord    : TEXCOORD0;
 				float2 texcoord1   : TEXCOORD1;
+				float3 normalWS : TEXCOORD6;
 				float3 texcoord2   : TEXCOORD2;
 				float3 texcoord3   : TEXCOORD3;
 				float2 texcoord4   : TEXCOORD4;
-				UNITY_FOG_COORDS(5)
+				float fogFactor : TEXCOORD5;
 			};
 
 			struct fout {
@@ -49,7 +64,7 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 			sampler2D _MainTex;
 			sampler2D _SurfaceReflectionsRGB;
 
-			v2f vert(appdata_full v) {
+			v2f vert(Attributes v) {
 				v2f o;
 
 				float3 oscAxisOS = float3(
@@ -75,7 +90,7 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 				float3 displacedOS = v.vertex.xyz + wave * oscDirOS;
 
 				float4 worldPos = mul(unity_ObjectToWorld, float4(displacedOS, 1.0));
-				o.position = mul(unity_MatrixVP, worldPos);
+				o.position = mul(UNITY_MATRIX_VP, worldPos);
 				o.color = v.color.xyz;
 
 				float3 rawWorldPos = float3(
@@ -88,6 +103,7 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 				o.texcoord4 = rawWorldPos.xz * _DynSurfaceTexTile - surfaceScroll;
 				o.texcoord  = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				o.texcoord1 = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
+				o.normalWS = TransformObjectToWorldNormal(v.normal);
 
 				float depthRange  = _SurfaceYCoord - _DeepestYCoord;
 				float depthFactor = saturate((rawWorldPos.y - _DeepestYCoord) / max(depthRange, 0.0001));
@@ -110,15 +126,14 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 				float surfRefl  = invBlend * aboveSurface * normYSq * _DynSurfaceMultiplier * 0.5;
 				o.texcoord3 = surfRefl * _SurfaceReflectionColor;
 
-				UNITY_TRANSFER_FOG(o, o.position);
+				o.fogFactor = ComputeFogFactor(o.position.z);
 				return o;
 			}
 
 			fout frag(v2f inp) {
 				fout o;
 
-				float4 lm   = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord1);
-				float3 lmRGB = lm.xyz * (lm.w * unity_Lightmap_HDR.x);
+				float3 lmRGB = SampleLightmap(inp.texcoord1, normalize(inp.normalWS));
 
 				float4 albedo = tex2D(_MainTex, inp.texcoord);
 				float3 lit    = lmRGB * (albedo.xyz * inp.color);
@@ -127,11 +142,11 @@ Shader "CpRemix/World/Wave Osc Depth (Vertex Alpha)" {
 				float3 reflRGB = refl.x * inp.texcoord3;
 
 				o.sv_target = float4(lit * inp.texcoord2 + reflRGB, 1.0);
-				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+				o.sv_target.w = 1.0;
 				return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

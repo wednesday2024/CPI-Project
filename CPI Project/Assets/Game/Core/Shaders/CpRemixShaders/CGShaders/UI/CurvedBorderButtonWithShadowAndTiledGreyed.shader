@@ -30,6 +30,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
     {
         Tags
         {
+                    "RenderPipeline" = "UniversalPipeline"
           "PreviewType" = "Plane"
           "QUEUE" = "Transparent"
         }
@@ -61,10 +62,10 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
             Blend SrcAlpha OneMinusSrcAlpha
             ColorMask[_ColorMask]
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float4 _Color;
             float2 _ShadowVec;
@@ -82,7 +83,15 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
             float _TileAttenuation;
             float _GreyGamma;
             float _GreySaturate;
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+                float4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
+            };
 
             struct v2f
             {
@@ -97,12 +106,12 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
                 float4 gl_FragData : SV_Target;
             };
 
-            v2f vert(appdata_full v)
+            v2f vert(appdata_t v)
             {
                 v2f o;
                 float2 shadowVecAbs = abs(_ShadowVec) * 0.5;
                 float2 tmpvar_1 = float2(1.0, 1.0) + shadowVecAbs;
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.xlv_COLOR = v.color * _Color;
                 o.xlv_TEXCOORD0 = ((v.texcoord.xy * _Tile.xy + _Tile.zw) * float2(tmpvar_1.x / tmpvar_1.y, tmpvar_1.y)) - (0.5 * _ShadowVec);
                 o.xlv_TEXCOORD1 = ((v.texcoord.xy * 2.0 - 1.0) * tmpvar_1) - (0.5 * _ShadowVec);
@@ -122,11 +131,11 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
                 float2 tmpvar_7 = pow(abs(i.xlv_TEXCOORD1), _Roundness);
                 float2 tmpvar_8 = pow(abs(i.xlv_TEXCOORD1 + _ShadowVec), _Roundness);
                 float2 tmpvar_9 = pow(abs(i.xlv_TEXCOORD1 + _ShadowInnerVec), _Roundness);
-                float tmpvar_10 = pow(1.0 - _BorderSize, _Roundness);
+                float tmpvar_10 = pow(max(1.0 - _BorderSize, 0.0), max(_Roundness, 0.0));
                 float tmpvar_11 = tmpvar_10 - _AAliasSize;
                 float tmpvar_12 = sqrt(dot(tmpvar_7, tmpvar_7));
                 float tmpvar_13 = 1.0 - ((clamp(tmpvar_12, tmpvar_4, 1.0) - tmpvar_4) * tmpvar_3);
-                image_2 = tex2D(_MainTex, i.xlv_TEXCOORD0);
+                image_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.xlv_TEXCOORD0);
                 float2 tmpvar_15 = abs((i.xlv_TEXCOORD0 - 0.5) * 2.0);
                 float tmpvar_16 = max(tmpvar_15.x, tmpvar_15.y);
                 float tmpvar_17 = _OuterShading * clamp(1.0 - ((clamp(sqrt(dot(tmpvar_8, tmpvar_8)), tmpvar_5, 1.0) - tmpvar_5) * (1.0 / max(_OuterShadowBlur, 0.0001))), 0.0, 1.0);
@@ -139,12 +148,12 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiledGreyed"
                     tmpvar_18 = tmpvar_17;
 
                 fragment_1.w = tmpvar_18;
-                fragment_1.xyz = pow(dot(fragment_1.xyz, float3(0.2126, 0.7152, 0.0722)), _GreyGamma) + _GreySaturate;
+                fragment_1.xyz = pow(max(dot(fragment_1.xyz, float3(0.2126, 0.7152, 0.0722)), 0.0), max(_GreyGamma, 0.0)) + _GreySaturate;
                 o.gl_FragData = fragment_1 * i.xlv_COLOR;
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

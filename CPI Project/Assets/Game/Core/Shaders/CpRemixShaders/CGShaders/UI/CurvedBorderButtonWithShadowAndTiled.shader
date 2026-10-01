@@ -28,6 +28,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "PreviewType" = "Plane"
             "QUEUE" = "Transparent"
         }
@@ -59,12 +60,12 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
             Blend SrcAlpha OneMinusSrcAlpha
             ColorMask[_ColorMask]
 
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float4 _Color;
             float4 _Tile;
@@ -79,7 +80,8 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
             float _OuterShadowBlur;
             float _InnerShadowBlur;
             float _TileAttenuation;
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
             struct v2f
             {
@@ -97,7 +99,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
             {
                 v2f o;
                 float2 tmpvar_1 = float2(1.0, 1.0) + (abs(_ShadowVec) * 0.5);
-                gl_Position = UnityObjectToClipPos(float4(_glesVertex.xyz, 1.0));
+                gl_Position = TransformObjectToHClip(_glesVertex.xyz);
                 o.xlv_COLOR = _glesColor * _Color;
                 float2 tmpvar_4 = _ShadowVec * 0.5;
                 o.xlv_TEXCOORD0 = (((_glesMultiTexCoord0.xy * _Tile.xy) + _Tile.zw) * float2(tmpvar_1.x / tmpvar_1.y, tmpvar_1.y)) - tmpvar_4;
@@ -119,7 +121,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
                 float2 tmpvar_9 = pow(abs(i.xlv_TEXCOORD1 + _ShadowInnerVec), _Roundness);
                 float tmpvar_10 = sqrt(dot(tmpvar_7, tmpvar_7));
                 float tmpvar_11 = (1.0 - ((clamp(tmpvar_10, tmpvar_4, 1.0) - tmpvar_4) * tmpvar_3));
-                image_2 = tex2D(_MainTex, i.xlv_TEXCOORD0);
+                image_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.xlv_TEXCOORD0);
                 float2 tmpvar_13 = abs(i.xlv_TEXCOORD0 - 0.5) * 2.0;
                 float tmpvar_14 = max(tmpvar_13.x, tmpvar_13.y);
                 float tmpvar_15 = _OuterShading * clamp(1.0 - ((clamp(sqrt(dot(tmpvar_8, tmpvar_8)), tmpvar_5, 1.0) - tmpvar_5) * (1.0 / max(_OuterShadowBlur, 0.0001))), 0.0, 1.0);
@@ -129,7 +131,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadowAndTiled"
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

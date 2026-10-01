@@ -9,19 +9,19 @@ Shader "CpRemix/World/UV Rotation Unlit (No Fog)"
 	}
 	SubShader
 	{
-		Tags { "RenderType" = "Opaque" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
 		LOD 100
 		Pass
 		{
 			Tags { "RenderType" = "Opaque" }
 			LOD 100
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			// Shader properties
 			float _RotationSpeed;
 			float _PivotX;
@@ -65,7 +65,7 @@ Shader "CpRemix/World/UV Rotation Unlit (No Fog)"
 				o.xlv_COLOR = _glesColor;
 
 				// Transform vertex position to clip space (SV_POSITION defined here)
-				o.pos = UnityObjectToClipPos(_glesVertex);
+				o.pos = TransformObjectToHClip(_glesVertex.xyz);
 
 				return o;
 			}
@@ -83,8 +83,8 @@ Shader "CpRemix/World/UV Rotation Unlit (No Fog)"
 				return o;
 			}
 
-			ENDCG
+			ENDHLSL
 		}
 	}
-	Fallback "Mobile/Diffuse"
+	Fallback Off
 }

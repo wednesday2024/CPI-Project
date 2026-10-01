@@ -10,19 +10,19 @@ Shader "CpRemix/World/Unlit Dynamic Object (NO FOG)"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType"="Opaque" }
         LOD 100
 
         Pass
         {
             Tags { "RenderType"="Opaque" }
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
@@ -50,20 +50,20 @@ Shader "CpRemix/World/Unlit Dynamic Object (NO FOG)"
                 UNITY_SETUP_INSTANCE_ID(v);
 
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.uv = v.uv * _MainTex_ST.xy + _MainTex_ST.zw;
                 o.color = v.color;
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            half4 frag (v2f i) : SV_Target
             {
-                fixed4 c = tex2D(_MainTex, i.uv) * i.color;
+                half4 c = tex2D(_MainTex, i.uv) * i.color;
                 c *= _TintColor;
                 c.rgb += _AdditiveColor.rgb * _AdditiveColor.a;
                 return saturate(c);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

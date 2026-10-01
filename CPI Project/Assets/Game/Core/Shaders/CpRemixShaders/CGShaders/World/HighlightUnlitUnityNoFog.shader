@@ -5,17 +5,29 @@ Shader "CpRemix/World/Highlight Unlit Unity NO FOG" {
 		_HighlightIntensity ("Highlight Intensity", Range(0, 1)) = 0.6
 	}
 	SubShader {
-		LOD 100
+		Tags { "RenderPipeline" = "UniversalPipeline" }
+        LOD 100
 		Tags { "RenderType" = "Opaque" }
 		Pass {
 			LOD 100
 			Tags { "RenderType" = "Opaque" }
-			GpuProgramID 41547
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			struct v2f
 			{
 				float4 position : SV_POSITION0;
@@ -38,7 +50,7 @@ Shader "CpRemix/World/Highlight Unlit Unity NO FOG" {
 			sampler2D _MainTex;
 			
 			// Keywords: 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 {
     v2f o;
     
@@ -78,7 +90,7 @@ Shader "CpRemix/World/Highlight Unlit Unity NO FOG" {
                 o.sv_target.w = 1.0;
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

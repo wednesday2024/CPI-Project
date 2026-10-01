@@ -9,27 +9,28 @@ Shader "CpRemix/World/WorldObject Depth"
 	{
 	  Tags
 	  {
+            "RenderPipeline" = "UniversalPipeline"
 	  }
 	  Pass // ind: 1, name: 
 	  {
 		Tags
 		{
-		  "LIGHTMODE" = "FORWARDBASE"
+		  "LightMode" = "UniversalForward"
 		}
-		CGPROGRAM
+		HLSLPROGRAM
 
 		#pragma vertex vert
 		#pragma fragment frag
 		#pragma multi_compile_fog
+		#pragma multi_compile _ LIGHTMAP_ON
+		#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 
-		#include "UnityCG.cginc"
-		#include "AutoLight.cginc"
-		#include "Lighting.cginc"
-
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 		//float4 _Time;
 		// float4x4 unity_ObjectToWorld;
 		//float4x4 unity_WorldToObject;
-		//float4x4 unity_MatrixVP;
+		//float4x4 UNITY_MATRIX_VP;
 		//float4 unity_LightmapST;
 		float _SurfaceYCoord;
 		float _DeepestYCoord;
@@ -57,7 +58,8 @@ Shader "CpRemix/World/WorldObject Depth"
 			float3 xlv_TEXCOORD4 : TEXCOORD4;
 			float2 xlv_TEXCOORD5 : TEXCOORD5;
 			float3 shadowData : TEXCOORD6;
-			UNITY_FOG_COORDS(2)
+			float fogFactor : TEXCOORD2;
+			float3 normalWS : TEXCOORD7;
 		};
 
 		struct FragOutput
@@ -107,10 +109,11 @@ Shader "CpRemix/World/WorldObject Depth"
 			isBelowSurface_2 = (_SurfaceYCoord - tmpvar_13.y);
 			isBelowSurface_2 = (isBelowSurface_2 * float((isBelowSurface_2 > 0.0)));
 			isBelowSurface_2 = min(1.0, isBelowSurface_2);
-			Position = UnityObjectToClipPos(float4(_glesVertex.xyz, 1.0));
+			Position = TransformObjectToHClip(_glesVertex.xyz);
 			o.xlv_COLOR = _glesColor.xyz;
 			o.xlv_TEXCOORD0 = _glesMultiTexCoord0.xy;
 			o.xlv_TEXCOORD1 = ((_glesMultiTexCoord1.xy * unity_LightmapST.xy) + unity_LightmapST.zw);
+			o.normalWS = worldSpaceNormalNormalized_4;
 			o.xlv_TEXCOORD3 = ((_DepthColor * depthDeltaNormalized_3) + float((1.0 - depthDeltaNormalized_3)));
 			o.xlv_TEXCOORD4 = (_SurfaceReflectionColor * ((
 				((((worldSpaceNormalNormalized_4.y * worldSpaceNormalNormalized_4.y) * float(
@@ -127,7 +130,7 @@ Shader "CpRemix/World/WorldObject Depth"
 			o.shadowData.y = (aspectOfs + offsetZ / halfDim + 1.0) * 0.5;
 			o.shadowData.z = tmpvar_13.y;
 
-			UNITY_TRANSFER_FOG(o,Position);
+			o.fogFactor = ComputeFogFactor(Position.z);
 			return o;
 		}
 
@@ -137,7 +140,7 @@ Shader "CpRemix/World/WorldObject Depth"
 			FragOutput o;
 			float3 diffuseSample_2 = tex2D(_Diffuse, i.xlv_TEXCOORD0).xyz;
 			
-			float3 lightmapColor = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, i.xlv_TEXCOORD1));
+			float3 lightmapColor = SampleLightmap(i.xlv_TEXCOORD1, normalize(i.normalWS));
 			
 			float4 shadowSample = tex2D(_BlobShadowTex, i.shadowData.xy);
 			float shadowDepth = shadowSample.y;
@@ -153,13 +156,13 @@ Shader "CpRemix/World/WorldObject Depth"
 			float4 tmpvar_7;
 			tmpvar_7.w = 1.0;
 			tmpvar_7.xyz = outputColor_1;
-			UNITY_APPLY_FOG(i.fogCoord, tmpvar_7);
-			UNITY_OPAQUE_ALPHA(tmpvar_7.w);
+			tmpvar_7.rgb = MixFog(tmpvar_7.rgb, i.fogFactor);
+			tmpvar_7.w = 1.0;
 			o.FragData = tmpvar_7;
 			return o;
 		}
 
-		ENDCG
+		ENDHLSL
 	  }
 	}
 	FallBack Off

@@ -10,8 +10,10 @@ Shader "Hidden/ClothingOutlinerImageEffect"
     }
     SubShader
     {
+        Tags { "RenderPipeline" = "UniversalPipeline" "Queue" = "Transparent" "RenderType" = "Transparent" }
         Pass
         {
+            Blend One One
             ZTest Always
             ZWrite Off
             Cull Off
@@ -22,29 +24,32 @@ Shader "Hidden/ClothingOutlinerImageEffect"
             #pragma fragment frag
             #pragma target 4.0
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _MainTex;
-            sampler2D _OutlineTex;
+            TEXTURE2D(_OutlineTex);
+            SAMPLER(sampler_OutlineTex);
             float4 _OutlineColor;
 
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float4 color : COLOR;
             };
 
             struct v2f
             {
                 float4 pos : SV_Position;
                 float2 uv : TEXCOORD0;
+                float4 color : COLOR;
             };
 
             v2f vert(appdata v)
             {
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.uv = v.uv;
+                o.color = v.color;
                 return o;
             }
 
@@ -54,34 +59,32 @@ Shader "Hidden/ClothingOutlinerImageEffect"
 
             float4 frag(v2f i) : SV_Target0
             {
-                float4 mainColor = tex2D(_MainTex, i.uv);
-
                 float outlineStrength = 0.0f;
 
                 if (i.uv.x > 0.125f && i.uv.x < 0.875f && i.uv.y > 0.125f && i.uv.y < 0.875f)
                 {
-                    float3 center = tex2D(_OutlineTex, i.uv).xyz;
+                    float3 center = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv).xyz;
 
                     float2 o1 = float2(0.00390625f, 0.00390625f);
                     float2 o2 = float2(0.01171875f, 0.01171875f);
 
-                    float3 d0 = tex2D(_OutlineTex, i.uv + float2(-o1.x, -o1.y)).xyz - center;
-                    float3 d1 = tex2D(_OutlineTex, i.uv + float2(-o1.x,  0.0f)).xyz - center;
-                    float3 d2 = tex2D(_OutlineTex, i.uv + float2(-o1.x,  o1.y)).xyz - center;
-                    float3 d3 = tex2D(_OutlineTex, i.uv + float2( o1.x, -o1.y)).xyz - center;
-                    float3 d4 = tex2D(_OutlineTex, i.uv + float2( o1.x,  0.0f)).xyz - center;
-                    float3 d5 = tex2D(_OutlineTex, i.uv + float2( o1.x,  o1.y)).xyz - center;
-                    float3 d6 = tex2D(_OutlineTex, i.uv + float2( 0.0f,  o1.y)).xyz - center;
-                    float3 d7 = tex2D(_OutlineTex, i.uv + float2( 0.0f, -o1.y)).xyz - center;
+                    float3 d0 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o1.x, -o1.y)).xyz - center;
+                    float3 d1 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o1.x,  0.0f)).xyz - center;
+                    float3 d2 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o1.x,  o1.y)).xyz - center;
+                    float3 d3 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o1.x, -o1.y)).xyz - center;
+                    float3 d4 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o1.x,  0.0f)).xyz - center;
+                    float3 d5 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o1.x,  o1.y)).xyz - center;
+                    float3 d6 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( 0.0f,  o1.y)).xyz - center;
+                    float3 d7 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( 0.0f, -o1.y)).xyz - center;
 
-                    float3 e0 = tex2D(_OutlineTex, i.uv + float2(-o2.x, -o2.y)).xyz - center;
-                    float3 e1 = tex2D(_OutlineTex, i.uv + float2(-o2.x,  0.0f)).xyz - center;
-                    float3 e2 = tex2D(_OutlineTex, i.uv + float2(-o2.x,  o2.y)).xyz - center;
-                    float3 e3 = tex2D(_OutlineTex, i.uv + float2( o2.x, -o2.y)).xyz - center;
-                    float3 e4 = tex2D(_OutlineTex, i.uv + float2( o2.x,  0.0f)).xyz - center;
-                    float3 e5 = tex2D(_OutlineTex, i.uv + float2( o2.x,  o2.y)).xyz - center;
-                    float3 e6 = tex2D(_OutlineTex, i.uv + float2( 0.0f,  o2.y)).xyz - center;
-                    float3 e7 = tex2D(_OutlineTex, i.uv + float2( 0.0f, -o2.y)).xyz - center;
+                    float3 e0 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o2.x, -o2.y)).xyz - center;
+                    float3 e1 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o2.x,  0.0f)).xyz - center;
+                    float3 e2 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2(-o2.x,  o2.y)).xyz - center;
+                    float3 e3 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o2.x, -o2.y)).xyz - center;
+                    float3 e4 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o2.x,  0.0f)).xyz - center;
+                    float3 e5 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( o2.x,  o2.y)).xyz - center;
+                    float3 e6 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( 0.0f,  o2.y)).xyz - center;
+                    float3 e7 = SAMPLE_TEXTURE2D(_OutlineTex, sampler_OutlineTex, i.uv + float2( 0.0f, -o2.y)).xyz - center;
 
                     float strength =
                         lum(d0) * 0.7070000171661376953125f +
@@ -104,7 +107,7 @@ Shader "Hidden/ClothingOutlinerImageEffect"
                     outlineStrength = strength * 0.16666667163372039794921875f;
                 }
 
-                return mainColor + _OutlineColor * outlineStrength;
+                return float4(_OutlineColor.rgb * outlineStrength * i.color.rgb, 0.0f);
             }
 
             ENDHLSL

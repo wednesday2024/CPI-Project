@@ -9,6 +9,7 @@ Shader "CpRemix/Particles/UnlitDiffuse"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "RenderType" = "Opaque"
         }
         LOD 100
@@ -20,13 +21,12 @@ Shader "CpRemix/Particles/UnlitDiffuse"
             }
             LOD 100
 
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             float4 _MainTex_ST;
             sampler2D _MainTex;
             float3 _TintColor;
@@ -50,7 +50,7 @@ Shader "CpRemix/Particles/UnlitDiffuse"
                 v2f o;
                 o.texcoord = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
                 o.color = v.color.rgb;
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 return o;
             }
 
@@ -62,7 +62,7 @@ Shader "CpRemix/Particles/UnlitDiffuse"
                 return texColor;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

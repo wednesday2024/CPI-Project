@@ -12,9 +12,11 @@ Shader "CpRemix/Combined Avatar Depth"
 
     SubShader
     {
+        Tags { "RenderPipeline" = "UniversalPipeline" "Queue" = "Geometry+99" "RenderType" = "Opaque" }
+
         Pass
         {
-            Tags { "LightMode" = "ForwardBase" }
+            Tags { "LightMode" = "UniversalForwardOnly" }
 
             HLSLPROGRAM
 
@@ -23,13 +25,17 @@ Shader "CpRemix/Combined Avatar Depth"
             #pragma target 4.0
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
-            sampler2D _MainTex;
-            sampler2D _Diffuse;
-            sampler2D _BodyColorsMaskTex;
-            sampler2D _DetailAndMatcapMaskAndEmissive;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            TEXTURE2D(_Diffuse);
+            SAMPLER(sampler_Diffuse);
+            TEXTURE2D(_BodyColorsMaskTex);
+            SAMPLER(sampler_BodyColorsMaskTex);
+            TEXTURE2D(_DetailAndMatcapMaskAndEmissive);
+            SAMPLER(sampler_DetailAndMatcapMaskAndEmissive);
 
             float3 _BodyRedChannelColor;
             float3 _BodyGreenChannelColor;
@@ -73,8 +79,8 @@ Shader "CpRemix/Combined Avatar Depth"
                 v2f o;
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                o.pos   = UnityObjectToClipPos(v.vertex);
+                float3 worldPos = TransformObjectToWorld(v.vertex.xyz);
+                o.pos = TransformWorldToHClip(worldPos);
                 o.color = v.color;
 
                 float velX = _SurfaceVelocityX * _Time.x;
@@ -84,14 +90,11 @@ Shader "CpRemix/Combined Avatar Depth"
 
                 o.uvMain = v.uv;
 
-                float3 toLightDir  = _WorldSpaceLightPos0.xyz - worldPos * _WorldSpaceLightPos0.w;
-                float3 lightDir    = normalize(toLightDir);
-                float3 worldNormal = normalize(mul((float3x3)unity_ObjectToWorld, v.normal));
-
-                float NdotL = max(dot(worldNormal, lightDir), 0.0);
-
-                float3 ambient = glstate_lightmodel_ambient.xyz * 0.9;
-                float3 diffuse = NdotL * _LightColor0.xyz;
+                float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal));
+                Light mainLight = GetMainLight();
+                float NdotL = max(dot(worldNormal, mainLight.direction), 0.0);
+                float3 ambient = unity_AmbientSky.rgb * 0.45;
+                float3 diffuse = NdotL * mainLight.color;
 
                 float wrap = (NdotL + 0.5) * 0.6;
 
@@ -122,11 +125,11 @@ Shader "CpRemix/Combined Avatar Depth"
 
             float4 frag(v2f i) : SV_Target
             {
-                float4 main   = tex2D(_MainTex,                      i.uvMain);
-                float4 surf   = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvSurface);
-                float4 bodyDetail = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvMain);
-                float4 bodyMask = tex2D(_BodyColorsMaskTex, i.uvMain);
-                float4 bodyDiff = tex2D(_Diffuse, i.uvMain);
+                float4 main = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uvMain);
+                float4 surf = SAMPLE_TEXTURE2D(_DetailAndMatcapMaskAndEmissive, sampler_DetailAndMatcapMaskAndEmissive, i.uvSurface);
+                float4 bodyDetail = SAMPLE_TEXTURE2D(_DetailAndMatcapMaskAndEmissive, sampler_DetailAndMatcapMaskAndEmissive, i.uvMain);
+                float4 bodyMask = SAMPLE_TEXTURE2D(_BodyColorsMaskTex, sampler_BodyColorsMaskTex, i.uvMain);
+                float4 bodyDiff = SAMPLE_TEXTURE2D(_Diffuse, sampler_Diffuse, i.uvMain);
 
                 float3 bodyColorFromMask;
                 bodyColorFromMask.x = mad(bodyMask.z, _BodyBlueChannelColor.x, mad(bodyMask.x, _BodyRedChannelColor.x, bodyMask.y * _BodyGreenChannelColor.x));
