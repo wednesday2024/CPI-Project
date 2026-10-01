@@ -116,7 +116,7 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 			{
 				num2 = Mathf.RoundToInt((float)num3 * referenceCamera.aspect);
 			}
-			outlineRtt = new RenderTexture(num2, num3, 4096);
+			outlineRtt = new RenderTexture(num2, num3, 24);
 			if (flag)
 			{
 				outlineRtt.antiAliasing = 8;
