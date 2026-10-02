@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9002735826908242390}
+  - component: {fileID: 7343375234232722628}
   m_Layer: 17
   m_Name: MickeyLamp
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   - {fileID: 7328604610194488084}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7343375234232722628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057798813691460044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed695b77130efa5e926032a586fbbb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7079331428035714303
 PrefabInstance:
   m_ObjectHideFlags: 0
