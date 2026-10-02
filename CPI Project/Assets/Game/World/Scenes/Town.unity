@@ -28040,6 +28040,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7b5d9940da0e0d4fbe57b2a0df8ba9f, type: 3}
+--- !u!1 &20890234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1698667711670123660, guid: f7b5d9940da0e0d4fbe57b2a0df8ba9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 20890233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &23265027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32922,7 +32928,8 @@ MonoBehaviour:
     - target: {fileID: 3409623426612023283}
     - target: {fileID: 5532345583182841139}
     - target: {fileID: 5532345583182841138}
-    disable: []
+    disable:
+    - target: {fileID: 20890234}
     giStatic: []
     removeStatic: []
   - name: Original with no statue
@@ -32939,7 +32946,8 @@ MonoBehaviour:
     - target: {fileID: 3409623426612023283}
     - target: {fileID: 5532345583182841139}
     - target: {fileID: 5532345583182841138}
-    disable: []
+    disable:
+    - target: {fileID: 20890234}
     giStatic: []
     removeStatic: []
   - name: Rainbow Migration
