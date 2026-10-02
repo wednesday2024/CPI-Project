@@ -15,8 +15,8 @@ public static class GeneratedEventMenus
     static void Run_BoardwalkBeta() => GenerateLightingEventBatchRunner.Run("Assets/Game/World/Scenes/Boardwalk.unity", "Beta");
     [MenuItem("Project/Events Lightmap Baking/Boardwalk/Temp Blizzard Tease")]
     static void Run_BoardwalkTempBlizzardTease() => GenerateLightingEventBatchRunner.Run("Assets/Game/World/Scenes/Boardwalk.unity", "Temp Blizzard Tease");
-    [MenuItem("Project/Events Lightmap Baking/Boardwalk/Halloween Leadup")]
-    static void Run_BoardwalkHalloweenLeadup() => GenerateLightingEventBatchRunner.Run("Assets/Game/World/Scenes/Boardwalk.unity", "Halloween Leadup");
+    [MenuItem("Project/Events Lightmap Baking/Boardwalk/Halloween LeadUp")]
+    static void Run_BoardwalkHalloweenLeadUp() => GenerateLightingEventBatchRunner.Run("Assets/Game/World/Scenes/Boardwalk.unity", "Halloween LeadUp");
     [MenuItem("Project/Events Lightmap Baking/Boardwalk/Cars 3")]
     static void Run_BoardwalkCars3() => GenerateLightingEventBatchRunner.Run("Assets/Game/World/Scenes/Boardwalk.unity", "Cars 3");
     [MenuItem("Project/Events Lightmap Baking/Boardwalk/Descendants")]
