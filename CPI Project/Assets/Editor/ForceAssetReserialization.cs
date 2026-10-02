@@ -1,28 +1,24 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 public static class ForceAssetReserialization
 {
     [MenuItem("Project/Force Asset Reserialization")]
     public static void ReserializeAllAssets()
     {
-        string[] allPaths = AssetDatabase.GetAllAssetPaths();
-        List<string> assets = new List<string>();
+        HashSet<string> assetSet = new HashSet<string>(StringComparer.Ordinal);
+        AddPaths(assetSet, AssetDatabase.GetAllAssetPaths());
 
-        for (int i = 0; i < allPaths.Length; i++)
+        string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab");
+        for (int i = 0; i < prefabGuids.Length; i++)
         {
-            string path = allPaths[i];
-
-            if (!path.StartsWith("Assets/", StringComparison.Ordinal))
-                continue;
-
-            if (AssetDatabase.IsValidFolder(path))
-                continue;
-
-            assets.Add(path);
+            string path = AssetDatabase.GUIDToAssetPath(prefabGuids[i]);
+            if (!string.IsNullOrEmpty(path))
+                assetSet.Add(path);
         }
+
+        List<string> assets = new List<string>(assetSet);
 
         if (assets.Count == 0)
             return;
@@ -58,6 +54,12 @@ public static class ForceAssetReserialization
                 {
                     string path = typeAssets[i];
 
+                    if (IsTaskDefinition(path))
+                    {
+                        processed++;
+                        continue;
+                    }
+
                     float progress = (float)processed / assets.Count;
 
                     if (EditorUtility.DisplayCancelableProgressBar(
@@ -83,5 +85,21 @@ public static class ForceAssetReserialization
         {
             EditorUtility.ClearProgressBar();
         }
+    }
+
+    private static void AddPaths(HashSet<string> paths, string[] candidates)
+    {
+        for (int i = 0; i < candidates.Length; i++)
+        {
+            string path = candidates[i];
+            if (path.StartsWith("Assets/", StringComparison.Ordinal) && !AssetDatabase.IsValidFolder(path))
+                paths.Add(path);
+        }
+    }
+
+    private static bool IsTaskDefinition(string path)
+    {
+        return path.EndsWith(".asset", StringComparison.OrdinalIgnoreCase)
+            && path.IndexOf("/Definitions/Tasks/", StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }
