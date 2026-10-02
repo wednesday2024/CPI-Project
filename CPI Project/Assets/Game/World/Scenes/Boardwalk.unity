@@ -177726,7 +177726,10 @@ MonoBehaviour:
     - target: {fileID: 1883431617}
     - target: {fileID: 1000010495}
     - target: {fileID: 425241453}
-    disable: []
+    disable:
+    - target: {fileID: 699683832}
+    - target: {fileID: 699683831}
+    - target: {fileID: 699683830}
     giStatic:
     - target: {fileID: 79809840}
     - target: {fileID: 79809842}
@@ -181940,6 +181943,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 13355}
   m_SourcePrefab: {fileID: 100100000, guid: 1507a0a2727d1a443bf4b695ac769eb1, type: 3}
+--- !u!1 &699683830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6729386663228576675, guid: 17aaa982126ed9d44a2439466cd0d94b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6430132219971682278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &699683831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 63904476723993013, guid: 17aaa982126ed9d44a2439466cd0d94b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6430132219971682278}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &699683832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6912547248560919921, guid: 17aaa982126ed9d44a2439466cd0d94b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6430132219971682278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!136 &720931403
 CapsuleCollider:
   m_ObjectHideFlags: 0
