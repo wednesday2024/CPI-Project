@@ -22096,10 +22096,9 @@ GameObject:
   - component: {fileID: 9064}
   - component: {fileID: 7996}
   - component: {fileID: 10799}
-  - component: {fileID: 10800}
   m_Layer: 30
   m_Name: SnowyPineTreeTallWithTrunk
-  m_TagString: Snow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -56981,7 +56980,8 @@ Transform:
   m_LocalPosition: {x: 20.73, y: -0.61078084, z: 3.24}
   m_LocalScale: {x: 0.31168935, y: 0.3116889, z: 0.31168997}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1837669626}
   m_Father: {fileID: 5379}
   m_LocalEulerAnglesHint: {x: 180, y: 32.365192, z: 175.79814}
 --- !u!4 &6860
@@ -102601,28 +102601,6 @@ CapsuleCollider:
   m_Height: 12.865399
   m_Direction: 1
   m_Center: {x: -0.24505216, y: 5.668967, z: -0.065685034}
---- !u!64 &10800
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2599}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: f827f94783fa4fd48937d2aed752bcb2, type: 2}
 --- !u!136 &10801
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -189449,6 +189427,60 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 11384}
   m_SourcePrefab: {fileID: 100100000, guid: 1507a0a2727d1a443bf4b695ac769eb1, type: 3}
+--- !u!1 &1837669625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1837669626}
+  - component: {fileID: 1837669627}
+  m_Layer: 30
+  m_Name: SnowyPineTreeTallWithTrunk (1)
+  m_TagString: Snow
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1837669626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837669625}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 9.41, z: -0.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6859}
+  m_LocalEulerAnglesHint: {x: 180, y: 32.365192, z: 175.79814}
+--- !u!64 &1837669627
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837669625}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: bc59623abf6c67342a59cf1c52b2ba9c, type: 2}
 --- !u!136 &1879825333
 CapsuleCollider:
   m_ObjectHideFlags: 0
