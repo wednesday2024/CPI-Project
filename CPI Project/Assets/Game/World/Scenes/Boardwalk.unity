@@ -1977,7 +1977,8 @@ GameObject:
   - component: {fileID: 8378}
   - component: {fileID: 7339}
   - component: {fileID: 11224}
-  m_Layer: 0
+  - component: {fileID: 11225}
+  m_Layer: 30
   m_Name: FunHut_danceFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79606,7 +79607,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3123}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -144105,6 +144106,28 @@ MonoBehaviour:
   TilesX: 1
   TilesY: 6
   SecondsPerChange: 1
+--- !u!64 &11225
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7839509958096197155, guid: 178d9173cc992d34e9036bb9db9b0384, type: 3}
 --- !u!114 &11226
 MonoBehaviour:
   m_ObjectHideFlags: 0
