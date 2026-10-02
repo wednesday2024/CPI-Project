@@ -3,10 +3,11 @@
 --- !u!43 &4300000
 Mesh:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: CementBase
-  serializedVersion: 8
+  serializedVersion: 12
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
@@ -26,17 +27,43 @@ Mesh:
   m_BindPose: []
   m_BoneNameHashes: 
   m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
   m_MeshCompression: 1
   m_IsReadable: 0
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
   m_IndexBuffer: 
-  m_Skin: []
   m_VertexData:
-    m_CurrentChannels: 0
+    serializedVersion: 3
     m_VertexCount: 0
     m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
     - stream: 0
       offset: 0
       format: 0
@@ -86,14 +113,14 @@ Mesh:
       m_BitSize: 18
     m_Normals:
       m_NumItems: 250
-      m_Range: 2
-      m_Start: -1
+      m_Range: 1.999999
+      m_Start: -0.9999995
       m_Data: 00020820800002082080000008008000000820800002082080ff03f83f80ff03682ff008fe9f7389f7fd8fe0ff08fe9f10f0c69478dffff7fd7fdfff09019f10f0fbed6e4c89f7fd4fe0ee08fe9f738908fe6f2ff0f6028fe0fff7fdbfdfee04ee6e4c893997684c8909017fdffff6029f738908fe9f738900020820804303082080bc00082080c694082080fbed0e208004eece0b800000080080bc00080080c69408008009010f008009010f0080c694987389000208208004ee0e2080fbed0e2080c694082080bc000820804303383480ff03f83f804303f83f803997f83f80f602ff3f80f602ff3f80399778dfff08fe7fdfff000208208000020820800002082080ff03f83f80ff03f83f80ff03f83f80ff03082080000208208000020820800002082080000008008000000800800000080080000008
       m_BitSize: 10
     m_Tangents:
       m_NumItems: 250
-      m_Range: 2
-      m_Start: -1
+      m_Range: 1.999999
+      m_Start: -0.9999995
       m_Data: 04fe4fe0ff04fe4fe0ff00be0fe0fb00be4f9010040941901000e60f60fe00e63f44bd0d2ca81cff00dc0700820020e83bbd54e2ff7f8201dc17807d4024048442012448075e07e0178084021c3808b201240884bd40d45bc08103e007407d00f8e7475278641a63ffbad3ebfe8240d4fb1afe0124289efff6fd6fdffffafd6fdffffafd6fdfff11fa6fdffff5f56bdfffe5f50be1fffff9ff9fffeffd0fa0ff31f6ff9fffbad3fb9fffbed3fb9fff54e23f6100f901901f00fb05941f00eb05941f00e405901f00fc01901f00fc0140dfff00faff9fff0cfeff9fffcaf10fa0ff43d4fb9fff40d4fb9fffafe14fcc80c4f0574c7c29f69f62ff29f60fe0ff00fe0fe0ff00fe0fe0ff00fe0fe0ff005a03a035005a33200003023020000302002000000200200000fe0fe0fffffdffdffffff5ff5ffffff50f
       m_BitSize: 10
     m_Weights:
@@ -102,11 +129,11 @@ Mesh:
       m_BitSize: 0
     m_NormalSigns:
       m_NumItems: 125
-      m_Data: 0fe07b02fb81ff0f50004085fc000000
+      m_Data: 0f801000e081ff0f40004001fc000000
       m_BitSize: 1
     m_TangentSigns:
       m_NumItems: 250
-      m_Data: 0000500140015005401455101000405555150500050000000000001500000000
+      m_Data: 0000500140005005400051100000004554050000000000000000001500000000
       m_BitSize: 1
     m_FloatColors:
       m_NumItems: 500
@@ -127,6 +154,27 @@ Mesh:
     m_Center: {x: 0.00000059604645, y: 0.27317625, z: -0.00000047683716}
     m_Extent: {x: 0.40429008, y: 0.27317625, z: 0.32472277}
   m_MeshUsageFlags: 0
+  m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
-  m_MeshOptimized: 1
+  'm_MeshMetrics[0]': 1
+  'm_MeshMetrics[1]': 1
+  m_MeshOptimizationFlags: -1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+  m_MeshLodInfo:
+    serializedVersion: 2
+    m_LodSelectionCurve:
+      serializedVersion: 1
+      m_LodSlope: 0
+      m_LodBias: 0
+    m_NumLevels: 1
+    m_SubMeshes:
+    - serializedVersion: 2
+      m_Levels:
+      - serializedVersion: 1
+        m_IndexStart: 0
+        m_IndexCount: 0
