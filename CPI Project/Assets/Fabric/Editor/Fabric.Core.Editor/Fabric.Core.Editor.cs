@@ -3051,7 +3051,11 @@ namespace Fabric
 			}
 			if (!EditorApplication.isPlaying && !EditorApplication.isPlayingOrWillChangePlaymode)
 			{
-				Enable(FabricManager.Instance._enableEditorPreviewer);
+				FabricManager instance = FabricManager.Instance;
+				if (instance != null)
+				{
+					Enable(instance._enableEditorPreviewer);
+				}
 			}
 		}
 
