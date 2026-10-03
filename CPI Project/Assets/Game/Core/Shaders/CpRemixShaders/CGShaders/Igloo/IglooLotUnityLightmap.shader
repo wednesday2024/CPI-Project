@@ -78,8 +78,6 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 					+ unity_AmbientEquator.rgb * equatorWeight
 					+ unity_AmbientGround.rgb * downWeight;
 
-				ambient = max((1.055 * pow(max(ambient, 0.0), 0.4166667)) - 0.055, 0.0);
-
 				Light mainLight = GetMainLight();
 				float ndl = saturate((dot(worldNormal, mainLight.direction) + 1.0) * 0.25);
 				return ambient + mainLight.color * ndl;
@@ -94,7 +92,7 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal));
 				float3 lighting = DecodeDirectionalVertexLighting(worldNormal);
 
-				o.color = float4(lighting, 2.0) * _Color + _Highlight.xxxx;
+				o.color = float4(lighting, 2.0) * _Color;
 				o.normalWS = worldNormal;
 				o.texcoord = v.texcoord;
 				#if defined(LIGHTMAP_ON)
@@ -120,16 +118,10 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 			{
 				float3 lighting = i.color.rgb;
 				#if defined(LIGHTMAP_ON)
-					float4 lmSample = SAMPLE_TEXTURE2D(unity_Lightmap, samplerunity_Lightmap, i.texcoord1);
-					lighting *= DecodeLightmap(lmSample, half4(LIGHTMAP_HDR_MULTIPLIER, LIGHTMAP_HDR_EXPONENT, 0.0, 0.0));
+					lighting *= SampleLightmap(i.texcoord1, normalize(i.normalWS));
 				#endif
-
-				float sideWeight = 1.0 - saturate(i.normalWS.y);
-				lighting *= 1.0 + 0.25 * sideWeight;
-				lighting += 0.25 * sideWeight * sideWeight;
-
 				float4 albedo = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
-				float4 col = float4(lighting * albedo.rgb * 0.9, 1.0);
+				float4 col = float4((lighting + _Highlight.xxx) * albedo.rgb * 0.9, 1.0);
 
 				float4 shadowSample = SAMPLE_TEXTURE2D(_BlobShadowTex, sampler_BlobShadowTex, i.shadowData.xy);
 				float shadowDepth = shadowSample.y;
