@@ -32974,7 +32974,8 @@ MonoBehaviour:
       rotation: {x: 0, y: 13.823, z: 0}
       scale: {x: 1, y: 1, z: 1}
     delete: []
-    enable: []
+    enable:
+    - target: {fileID: 1681354022}
     disable:
     - target: {fileID: 900832002}
     giStatic: []
@@ -45983,6 +45984,12 @@ PrefabInstance:
 --- !u!4 &1681354021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4684293811889324, guid: f81aa428cbbba9d4893cb94f628c0876,
+    type: 3}
+  m_PrefabInstance: {fileID: 1681354020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1681354022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1186487690702682, guid: f81aa428cbbba9d4893cb94f628c0876,
     type: 3}
   m_PrefabInstance: {fileID: 1681354020}
   m_PrefabAsset: {fileID: 0}
