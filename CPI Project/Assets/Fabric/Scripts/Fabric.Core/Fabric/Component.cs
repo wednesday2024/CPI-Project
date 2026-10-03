@@ -3486,7 +3486,11 @@ namespace Fabric
 			}
 			else
 			{
-				UnityEngine.Object.DestroyImmediate(_instanceHolder.gameObject);
+				if (_instanceHolder != null)
+				{
+					UnityEngine.Object.DestroyImmediate(_instanceHolder);
+					_instanceHolder = null;
+				}
 			}
 		}
 
