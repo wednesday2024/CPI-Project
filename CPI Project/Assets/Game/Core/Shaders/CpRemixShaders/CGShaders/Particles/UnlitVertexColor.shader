@@ -8,6 +8,7 @@ Shader "CpRemix/Particles/UnlitVertexColor"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "RenderType" = "Opaque"
         }
         LOD 100
@@ -19,12 +20,23 @@ Shader "CpRemix/Particles/UnlitVertexColor"
                 "RenderType" = "Opaque"
             }
 
-            CGPROGRAM
+            HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             // Uniforms
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -38,7 +50,7 @@ Shader "CpRemix/Particles/UnlitVertexColor"
             };
 
             // Vertex shader
-            v2f vert(appdata_full v)
+            v2f vert(Attributes v)
             {
                 v2f o;
 
@@ -49,22 +61,22 @@ Shader "CpRemix/Particles/UnlitVertexColor"
                 o.color = v.color.rgb;
 
                 // Compute the vertex position in clip space
-                o.pos = UnityObjectToClipPos(v.vertex);
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
 
                 return o;
             }
 
             // Fragment shader
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
                 // Sample the texture
-                fixed4 texColor = tex2D(_MainTex, i.texcoord);
+                half4 texColor = tex2D(_MainTex, i.texcoord);
 
                 // Multiply texture color with vertex color
-                return fixed4(texColor.rgb * i.color, texColor.a);
+                return half4(texColor.rgb * i.color, texColor.a);
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

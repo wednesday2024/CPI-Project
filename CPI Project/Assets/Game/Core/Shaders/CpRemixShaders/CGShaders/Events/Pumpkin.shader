@@ -7,18 +7,18 @@ Shader "CpRemix/World/Events/Halloween/Pumpkin"
     }
     SubShader 
     {
-        Tags { "RenderType" = "Opaque" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
         Pass 
         {
             Tags { "RenderType" = "Opaque" }
             
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
             
-            #include "UnityCG.cginc"
-            
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -64,7 +64,7 @@ Shader "CpRemix/World/Events/Halloween/Pumpkin"
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 }

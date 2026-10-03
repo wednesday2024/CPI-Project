@@ -7,6 +7,7 @@ Shader "CpRemix/BlobShadows/ShadowGeoShader"
 
     SubShader
     {
+        Tags { "RenderPipeline" = "UniversalPipeline" }
         Pass
         {
             HLSLPROGRAM
@@ -16,8 +17,7 @@ Shader "CpRemix/BlobShadows/ShadowGeoShader"
             #pragma fragment frag
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             Texture2D _MainTex;
             SamplerState sampler_MainTex;
 

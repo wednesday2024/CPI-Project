@@ -9,20 +9,20 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
 
     SubShader
     {
-        Tags { "RenderType" = "Opaque" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
 
         Pass
         {
             Tags { "RenderType" = "Opaque" }
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fog
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float4 _TintColor;
@@ -41,7 +41,7 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
                 float4 position : SV_POSITION;
                 float2 texcoord : TEXCOORD0;
                 float4 color    : COLOR0;
-                UNITY_FOG_COORDS(1)
+                float fogFactor : TEXCOORD1;
             };
 
             struct fout
@@ -56,11 +56,11 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
                 v2f o;
 
                 float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-                o.position = mul(unity_MatrixVP, worldPos);
+                o.position = mul(UNITY_MATRIX_VP, worldPos);
                 o.texcoord.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
                 o.color = v.color;
 
-                UNITY_TRANSFER_FOG(o, o.position);
+                o.fogFactor = ComputeFogFactor(o.position.z);
 
                 return o;
             }
@@ -73,12 +73,12 @@ Shader "CpRemix/World/Unlit Dynamic Object (FOG)"
                 tmp0 = tmp0 * inp.color;
                 o.sv_target = tmp0 * _TintColor;
 
-                UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-                UNITY_OPAQUE_ALPHA(o.sv_target.w);
+                o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+                o.sv_target.w = 1.0;
 
                 return o;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

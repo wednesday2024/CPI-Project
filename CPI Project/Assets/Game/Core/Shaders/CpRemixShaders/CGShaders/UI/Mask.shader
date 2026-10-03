@@ -18,6 +18,7 @@ Shader "CpRemix/UI/Mask"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Transparent"
             "IgnoreProjector" = "True"
             "RenderType" = "Transparent"
@@ -51,7 +52,7 @@ Shader "CpRemix/UI/Mask"
             #pragma multi_compile_instancing
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct appdata_t
             {
@@ -64,23 +65,24 @@ Shader "CpRemix/UI/Mask"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                fixed4 color : COLOR;
+                half4 color : COLOR;
                 float2 texcoord : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            sampler2D _MainTex;
-            fixed4 _Color;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            half4 _Color;
 
             #ifdef UNITY_INSTANCING_ENABLED
             UNITY_INSTANCING_BUFFER_START(PerDrawSprite)
-                UNITY_DEFINE_INSTANCED_PROP(fixed4, unity_SpriteRendererColorArray)
+                UNITY_DEFINE_INSTANCED_PROP(half4, unity_SpriteRendererColorArray)
             UNITY_INSTANCING_BUFFER_END(PerDrawSprite)
             #define _RendererColor UNITY_ACCESS_INSTANCED_PROP(PerDrawSprite, unity_SpriteRendererColorArray)
             #else
             CBUFFER_START(UnityPerDrawSprite)
-                fixed4 _RendererColor;
+                half4 _RendererColor;
             CBUFFER_END
             #endif
 
@@ -91,16 +93,16 @@ Shader "CpRemix/UI/Mask"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
                 UNITY_TRANSFER_INSTANCE_ID(v, OUT);
 
-                OUT.vertex = UnityObjectToClipPos(v.vertex);
+                OUT.vertex = TransformObjectToHClip(v.vertex.xyz);
                 OUT.texcoord = v.texcoord;
                 OUT.color = v.color * _Color * _RendererColor;
 
                 return OUT;
             }
 
-            fixed4 frag(v2f IN) : SV_Target
+            half4 frag(v2f IN) : SV_Target
             {
-                fixed4 color = tex2D(_MainTex, IN.texcoord) * IN.color;
+                half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord) * IN.color;
 
                 color.a = smoothstep(0.02, 0.98, color.a);
 
@@ -114,5 +116,5 @@ Shader "CpRemix/UI/Mask"
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

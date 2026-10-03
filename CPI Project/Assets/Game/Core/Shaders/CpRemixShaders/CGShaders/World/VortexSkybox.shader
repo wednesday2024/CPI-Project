@@ -13,6 +13,7 @@ Shader "CpRemix/Skybox/Vortex"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 			"Queue" = "Background"
 			"RenderType" = "Background"
 			"PreviewType" = "Skybox"
@@ -25,12 +26,11 @@ Shader "CpRemix/Skybox/Vortex"
 
 		Pass
 		{
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 			float4 _Tint;
@@ -52,12 +52,12 @@ Shader "CpRemix/Skybox/Vortex"
 			v2f vert(appdata v)
 			{
 				v2f o;
-				o.pos = UnityObjectToClipPos(v.vertex);
+				o.pos = TransformObjectToHClip(v.vertex.xyz);
 				o.screenPos = ComputeScreenPos(o.pos);
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			half4 frag(v2f i) : SV_Target
 			{
 				float2 uv = i.screenPos.xy / i.screenPos.w;
 				uv = TRANSFORM_TEX(uv, _MainTex);
@@ -76,7 +76,7 @@ Shader "CpRemix/Skybox/Vortex"
 
 				return tex2D(_MainTex, rotatedUV) * _Tint;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 

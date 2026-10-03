@@ -35,7 +35,7 @@ namespace ClubPenguin.UI
 				isLoadingPrefab = true;
 				if (PlatformUtils.GetAspectRatioType() == AspectRatioType.Portrait)
 				{
-					SceneRefs.FullScreenPopupManager.CreatePopup(contentPrefabContentKey, "Accessibility.Popup.Title.IglooList", false, onPrefabCreated);
+					SceneRefs.FullScreenPopupManager.CreatePopup(contentPrefabContentKey, "Accessibility.Popup.Title.IglooList", true, onPrefabCreated);
 				}
 				else
 				{
@@ -59,7 +59,7 @@ namespace ClubPenguin.UI
 		private static IEnumerator ShowPopup(GameObject container)
 		{
 			yield return new WaitForEndOfFrame();
-			Service.Get<EventDispatcher>().DispatchEvent(new PopupEvents.ShowPopup(container));
+			Service.Get<EventDispatcher>().DispatchEvent(new PopupEvents.ShowCameraSpacePopup(container));
 		}
 
 		public void OnDestroy()

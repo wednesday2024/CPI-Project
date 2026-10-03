@@ -6,19 +6,22 @@ Shader "Hidden/BlueprintIconOutline"
     }
     SubShader
     {
-        Tags { "Queue"="Geometry" "RenderType"="Opaque" }
+        Tags { "RenderPipeline"="UniversalPipeline" "Queue"="Geometry" "RenderType"="Opaque" }
 
         Pass
         {
             Cull Back
             ZWrite On
 
-            CGPROGRAM
+            Tags { "LightMode"="UniversalForwardOnly" }
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            fixed4 _FillColor;
+            CBUFFER_START(UnityPerMaterial)
+                half4 _FillColor;
+            CBUFFER_END
 
             struct appdata
             {
@@ -36,14 +39,14 @@ Shader "Hidden/BlueprintIconOutline"
             v2f vert(appdata v)
             {
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
-                o.worldNormal = UnityObjectToWorldNormal(v.normal);
-                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                o.viewDir = normalize(_WorldSpaceCameraPos - worldPos);
+                VertexPositionInputs positionInputs = GetVertexPositionInputs(v.vertex.xyz);
+                o.pos = positionInputs.positionCS;
+                o.worldNormal = TransformObjectToWorldNormal(v.normal);
+                o.viewDir = GetWorldSpaceViewDir(positionInputs.positionWS);
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
                 float3 n = normalize(i.worldNormal);
                 float3 v = normalize(i.viewDir);
@@ -52,12 +55,12 @@ Shader "Hidden/BlueprintIconOutline"
 
                 float shade = lerp(0.4, 1.0, ndotv);
 
-                fixed4 col;
+                half4 col;
                 col.rgb = _FillColor.rgb * shade;
                 col.a = 1.0;
                 return col;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

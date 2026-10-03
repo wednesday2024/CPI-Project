@@ -24,6 +24,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 	  {
 		Tags
 		{
+		  "RenderPipeline" = "UniversalPipeline"
 		  "PreviewType" = "Plane"
 		  "QUEUE" = "Transparent"
 		}
@@ -54,12 +55,12 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 		  }
 		  Blend SrcAlpha OneMinusSrcAlpha
 		  ColorMask[_ColorMask]
-					  CGPROGRAM
+					  HLSLPROGRAM
 
 			  #pragma vertex vert
 			  #pragma fragment frag
 
-			  #include "UnityCG.cginc"
+			  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
 		  // float4x4 unity_ObjectToWorld;
 		  // float4x4 unity_MatrixVP;
@@ -73,7 +74,8 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 		   float _Roundness;
 		   float2 _ShadowVec;
 		   float _ImageAttenuation;
-		   uniform sampler2D _MainTex;
+			   TEXTURE2D(_MainTex);
+			   SAMPLER(sampler_MainTex);
 
 		   struct v2f
 		   {
@@ -96,7 +98,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 			 v2f o;
 			 float tmpvar_1;
 			 tmpvar_1 = (1.0 / max(_ScaleImage, 0.0001));
-			 gl_Position = UnityObjectToClipPos(float4(_glesVertex.xyz, 1.0));
+				 gl_Position = TransformObjectToHClip(_glesVertex.xyz);
 			 o.xlv_COLOR = (_glesColor * _Color);
 			 o.xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xy * tmpvar_1) + ((1.0 - tmpvar_1) / 2.0));
 			 o.xlv_TEXCOORD1 = (((_glesMultiTexCoord0.xy * 2.0) - 1.0) * _ScaleBox);
@@ -117,7 +119,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 			 float2 tmpvar_6;
 			 tmpvar_6 = pow(abs((i.xlv_TEXCOORD1 + _ShadowVec)), (_Roundness));
 			 float tmpvar_7;
-			 tmpvar_7 = pow((1.0 - _BorderSize), _Roundness);
+			 tmpvar_7 = pow(max(1.0 - _BorderSize, 0.0), max(_Roundness, 0.0));
 			 float tmpvar_8;
 			 tmpvar_8 = (tmpvar_7 - _AAliasSize);
 			 float tmpvar_9;
@@ -138,7 +140,7 @@ Shader "CpRemix/UI/CurvedBorderButtonShadowScaled"
 			 tmpvar_13 = (1.0 - ((
 			   clamp(sqrt(dot(tmpvar_6, tmpvar_6)), tmpvar_4, 1.0)
 			  - tmpvar_4) * tmpvar_3));
-			 image_2 = tex2D(_MainTex, i.xlv_TEXCOORD0);
+				 image_2 = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.xlv_TEXCOORD0);
 			 float2 tmpvar_16;
 			 tmpvar_16 = abs(((i.xlv_TEXCOORD0 - 0.5) * 2.0));
 			 float tmpvar_17;
@@ -173,7 +175,7 @@ o.gl_FragData = (fragment_1 * i.xlv_COLOR);
 return o;
 }
 
-ENDCG
+					  ENDHLSL
 } // end phase
 	  }
 		  FallBack Off

@@ -5,6 +5,7 @@ using ClubPenguin.Core;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 namespace ClubPenguin.BlobShadows
@@ -45,6 +46,8 @@ namespace ClubPenguin.BlobShadows
 		private Transform transformRef;
 
 		private RenderTexture shadowRenderTexture;
+
+		private CommandBuffer shadowRenderCommandBuffer;
 
 		private Camera prevMainCam;
 
@@ -107,6 +110,7 @@ namespace ClubPenguin.BlobShadows
 				shadowUv = new Vector2[0];
 				shadowTriangles = new int[0];
 				shadowMesh = new Mesh();
+				shadowRenderCommandBuffer = new CommandBuffer { name = "Render Blob Shadows" };
 				shadowMaterial = new Material(Shader.Find("CpRemix/BlobShadows/ShadowGeoShader"));
 				shadowMaterial.enableInstancing = true;
 				shadowMaterial.SetTexture("_MainTex", ShadowTexture);
@@ -169,7 +173,7 @@ namespace ClubPenguin.BlobShadows
 
 		private void setupExistingShadowCasters()
 		{
-            BlobShadowCaster[] array = UnityEngine.Object.FindObjectsByType<BlobShadowCaster>(FindObjectsSortMode.None);
+			BlobShadowCaster[] array = UnityEngine.Object.FindObjectsByType<BlobShadowCaster>(FindObjectsSortMode.None);
             for (int i = 0; i < array.Length; i++)
 			{
 				array[i].SetBlobShadowCam(this);
@@ -199,24 +203,18 @@ namespace ClubPenguin.BlobShadows
 			transformRef.forward = Vector3.down;
 		}
 
-		public void RenderBlobs()
+		public void RenderBlobs(ScriptableRenderContext context)
 		{
 			if (!BlobShadowsSupported)
 			{
 				return;
 			}
-			Graphics.SetRenderTarget(shadowRenderTexture);
-			GL.Clear(false, true, Color.white);
-			GL.LoadOrtho();
-			GL.LoadIdentity();
 			Matrix4x4 worldToLocalMatrix = transformRef.worldToLocalMatrix;
 			Vector4 row = worldToLocalMatrix.GetRow(2);
 			row.y = 0f - row.y;
 			row.w = 0f - row.w;
 			worldToLocalMatrix.SetRow(2, row);
 			Matrix4x4 value = projectionMatrix * worldToLocalMatrix;
-			shadowMaterial.SetMatrix(BLOB_SHADOW_CAM_VP_ID, value);
-			shadowMaterial.SetPass(0);
 			int num = 0;
 			int count = ShadowCasters.Count;
 			for (int i = 0; i < count; i++)
@@ -271,8 +269,13 @@ namespace ClubPenguin.BlobShadows
 				}
 			}
 			shadowMesh.vertices = shadowVertices;
-			Graphics.DrawMeshNow(shadowMesh, Matrix4x4.identity);
-			Graphics.SetRenderTarget(null);
+			shadowRenderCommandBuffer.Clear();
+			shadowRenderCommandBuffer.SetRenderTarget(shadowRenderTexture);
+			shadowRenderCommandBuffer.SetViewport(new Rect(0f, 0f, RenderTextureDimension, RenderTextureDimension));
+			shadowRenderCommandBuffer.ClearRenderTarget(false, true, Color.white);
+			shadowRenderCommandBuffer.SetGlobalMatrix(BLOB_SHADOW_CAM_VP_ID, value);
+			shadowRenderCommandBuffer.DrawMesh(shadowMesh, Matrix4x4.identity, shadowMaterial, 0, 0);
+			context.ExecuteCommandBuffer(shadowRenderCommandBuffer);
 		}
 
 		private void Update()
@@ -384,6 +387,23 @@ namespace ClubPenguin.BlobShadows
 		{
 			eventDispatcher.RemoveListener<BlobShadowEvents.DisableBlobShadows>(onDisableBlobShadows);
 			eventDispatcher.RemoveListener<BlobShadowEvents.EnableBlobShadows>(onEnableBlobShadows);
+			if (shadowRenderCommandBuffer != null)
+			{
+				shadowRenderCommandBuffer.Release();
+			}
+			if (shadowRenderTexture != null)
+			{
+				shadowRenderTexture.Release();
+				UnityEngine.Object.Destroy(shadowRenderTexture);
+			}
+			if (shadowMesh != null)
+			{
+				UnityEngine.Object.Destroy(shadowMesh);
+			}
+			if (shadowMaterial != null)
+			{
+				UnityEngine.Object.Destroy(shadowMaterial);
+			}
 			if (replacementMats == null)
 			{
 				return;

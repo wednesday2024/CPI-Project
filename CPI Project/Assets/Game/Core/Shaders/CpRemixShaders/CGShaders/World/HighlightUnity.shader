@@ -5,25 +5,41 @@ Shader "CpRemix/World/HighlightUnity" {
 		_HighlightIntensity ("Highlight Intensity", Range(0, 1)) = 0.6
 	}
 	SubShader {
-		LOD 100
-		Tags { "RenderType" = "Opaque" }
+		Tags { "RenderPipeline" = "UniversalPipeline" }
+        LOD 100
+		Tags { "LightMode" = "UniversalForward" "RenderType" = "Opaque" }
 		Pass {
 			LOD 100
-			Tags { "RenderType" = "Opaque" }
-			GpuProgramID 22814
-			CGPROGRAM
+			Tags { "LightMode" = "UniversalForward" "RenderType" = "Opaque" }
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			struct v2f
 			{
 				float4 position : SV_POSITION0;
 				float2 texcoord : TEXCOORD0;
 				float2 texcoord1 : TEXCOORD1;
+				float3 normalWS : TEXCOORD2;
 				float3 color : COLOR0;
-				UNITY_FOG_COORDS(3)
+				float fogFactor : TEXCOORD3;
 			};
 			struct fout
 			{
@@ -40,7 +56,7 @@ Shader "CpRemix/World/HighlightUnity" {
 			sampler2D _MainTex;
 			
 			// Keywords: 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 {
     v2f o;
     
@@ -53,6 +69,7 @@ Shader "CpRemix/World/HighlightUnity" {
 
     // Calculate texture coordinates
     o.texcoord1.xy = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
+    o.normalWS = TransformObjectToWorldNormal(v.normal);
     o.texcoord.xy = v.texcoord.xy;
 
     // Compute highlight effect using sine and cosine time-based distortion
@@ -68,7 +85,7 @@ Shader "CpRemix/World/HighlightUnity" {
     o.color.xyz = highlight * _HighlightIntensity * _HighlightColor;
 
     // Transfer fog data
-    UNITY_TRANSFER_FOG(o, o.position);
+    o.fogFactor = ComputeFogFactor(o.position.z);
     
     return o;
 }
@@ -79,17 +96,15 @@ Shader "CpRemix/World/HighlightUnity" {
                 fout o;
                 float4 tmp0;
                 float4 tmp1;
-                tmp0 = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord1.xy);
-                tmp0.w = tmp0.w * unity_Lightmap_HDR.x;
-                tmp0.xyz = tmp0.xyz * tmp0.www;
+                tmp0 = float4(SampleLightmap(inp.texcoord1.xy, normalize(inp.normalWS)), 1.0);
                 tmp1 = tex2D(_MainTex, inp.texcoord.xy);
                 o.sv_target.xyz = tmp1.xyz * tmp0.xyz + inp.color.xyz;
                 o.sv_target.w = 1.0;
-				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+				o.sv_target.w = 1.0;
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

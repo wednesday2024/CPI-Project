@@ -4,102 +4,90 @@ Shader "CpRemix/GPU Combined Avatar"
     {
         _MainTex ("Diffuse Texture", 2D) = "white" {}
     }
+
     SubShader
     {
-        Tags { "Queue" = "Geometry+99" "RenderType" = "Opaque" }
+        Tags { "RenderPipeline" = "UniversalPipeline" "Queue" = "Geometry+99" "RenderType" = "Opaque" }
+
         Pass
         {
-            Tags { "LightMode" = "ForwardBase" }
+            Tags { "LightMode" = "UniversalForwardOnly" }
 
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
             #pragma multi_compile_instancing
-            #include "UnityCG.cginc"
-            #include "Lighting.cginc"
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
             float4 bonepos[48];
             float4 bonequat[48];
 
-            Texture2D _MainTex;
-            SamplerState sampler_MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
-            struct appdata
+            struct Attributes
             {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
                 float2 uv : TEXCOORD0;
                 float3 color : COLOR;
                 float4 boneData : TANGENT;
-
-                #ifdef UNITY_INSTANCING_ENABLED
                 UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
-            struct v2f
+            struct Varyings
             {
-                float4 pos : SV_POSITION;
+                float4 positionCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 lighting : TEXCOORD1;
                 float3 color : COLOR;
-
-                #ifdef UNITY_INSTANCING_ENABLED
                 UNITY_VERTEX_INPUT_INSTANCE_ID
-                #endif
             };
 
-            float3 RotateVectorByQuaternion(float3 v, float4 q)
+            float3 RotateVectorByQuaternion(float3 value, float4 rotation)
             {
-                float3 t = 2.0 * cross(q.xyz, v);
-                return v + q.w * t + cross(q.xyz, t);
+                float3 t = 2.0 * cross(rotation.xyz, value);
+                return value + rotation.w * t + cross(rotation.xyz, t);
             }
 
-            v2f vert(appdata v)
+            Varyings vert(Attributes input)
             {
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_SETUP_INSTANCE_ID(v);
-                #endif
-                v2f o;
-                #ifdef UNITY_INSTANCING_ENABLED
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
-                #endif
+                UNITY_SETUP_INSTANCE_ID(input);
+                Varyings output;
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
 
-                int4 boneIndicesSigned = (int4)v.boneData;
-                uint4 indices = (uint4)boneIndicesSigned;
-                float4 weights = frac(v.boneData) * 2.0;
+                int4 signedIndices = (int4)input.boneData;
+                uint4 indices = (uint4)signedIndices;
+                float4 weights = frac(input.boneData) * 2.0;
+                float3 skinnedPosition =
+                    weights.x * (RotateVectorByQuaternion(input.positionOS.xyz, bonequat[indices.x]) + bonepos[indices.x].xyz) +
+                    weights.y * (RotateVectorByQuaternion(input.positionOS.xyz, bonequat[indices.y]) + bonepos[indices.y].xyz) +
+                    weights.z * (RotateVectorByQuaternion(input.positionOS.xyz, bonequat[indices.z]) + bonepos[indices.z].xyz) +
+                    weights.w * (RotateVectorByQuaternion(input.positionOS.xyz, bonequat[indices.w]) + bonepos[indices.w].xyz);
 
-                float3 skinnedPos =
-                    weights.x * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.x]) + bonepos[indices.x].xyz) +
-                    weights.y * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.y]) + bonepos[indices.y].xyz) +
-                    weights.z * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.z]) + bonepos[indices.z].xyz) +
-                    weights.w * (RotateVectorByQuaternion(v.vertex.xyz, bonequat[indices.w]) + bonepos[indices.w].xyz);
+                float3 worldNormal = normalize(RotateVectorByQuaternion(input.normalOS, bonequat[indices.x]));
+                Light mainLight = GetMainLight();
+                float ndotl = max(dot(worldNormal, mainLight.direction), 0.0);
+                float3 diffuse = ndotl * mainLight.color;
+                float litFloor = (ndotl + 0.5) * 0.6;
+                float3 ambient = unity_AmbientSky.rgb * 0.45;
 
-                o.pos = mul(UNITY_MATRIX_VP, float4(skinnedPos, 1.0));
-                o.uv = v.uv;
-
-                float3 worldNormal = normalize(RotateVectorByQuaternion(v.normal, bonequat[indices.x]));
-                float3 lightVec = _WorldSpaceLightPos0.xyz - skinnedPos * _WorldSpaceLightPos0.w;
-                float3 lightDir = normalize(lightVec);
-
-                float ndotl = max(dot(worldNormal, lightDir), 0.0);
-                float3 diffuse = ndotl * _LightColor0.rgb;
-                float3 litFloor = (ndotl + 0.5) * 0.6;
-                float3 ambient = glstate_lightmodel_ambient.rgb * 0.9;
-
-                o.lighting = max(litFloor, diffuse * 0.75 + ambient);
-                o.color = v.color;
-
-                return o;
+                output.positionCS = TransformWorldToHClip(skinnedPosition);
+                output.uv = input.uv;
+                output.lighting = max(litFloor, diffuse * 0.75 + ambient);
+                output.color = input.color;
+                return output;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag(Varyings input) : SV_Target
             {
-                float4 tex = _MainTex.Sample(sampler_MainTex, i.uv);
-                float alphaSigned = tex.a * 2.0 - 1.0;
-                float selfLit = saturate(alphaSigned);
-                float3 color = tex.rgb * (i.lighting * (1.0 - selfLit) + selfLit);
+                UNITY_SETUP_INSTANCE_ID(input);
+                float4 tex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, input.uv);
+                float selfLit = saturate(tex.a * 2.0 - 1.0);
+                float3 color = tex.rgb * (input.lighting * (1.0 - selfLit) + selfLit);
                 return float4(color, 1.0);
             }
             ENDHLSL

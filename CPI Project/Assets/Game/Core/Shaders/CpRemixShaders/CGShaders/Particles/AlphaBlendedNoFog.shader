@@ -9,6 +9,7 @@ Shader "CpRemix/Particles/Alpha Blended No Fog"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Transparent"
             "IgnoreProjector" = "True"
             "RenderType" = "Transparent"
@@ -22,13 +23,12 @@ Shader "CpRemix/Particles/Alpha Blended No Fog"
 
         Pass
         {
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4 _MainTex_ST;
 
@@ -42,25 +42,25 @@ Shader "CpRemix/Particles/Alpha Blended No Fog"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                fixed4 color : COLOR;
+                half4 color : COLOR;
                 float2 uv : TEXCOORD0;
             };
 
             v2f vert(appdata_t v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
                 o.color = v.color;
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
                 return tex2D(_MainTex, i.uv) * i.color;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 

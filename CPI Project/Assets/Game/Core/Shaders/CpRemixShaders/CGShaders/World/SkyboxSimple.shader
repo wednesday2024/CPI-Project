@@ -10,6 +10,7 @@ Shader "CpRemix/Skybox/Simple Cubemap Shader"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "QUEUE" = "Background"
         }
         Pass
@@ -20,16 +21,15 @@ Shader "CpRemix/Skybox/Simple Cubemap Shader"
             }
             ZWrite Off
             Cull Off
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             samplerCUBE _cubemap;
             sampler2D _MainTex;
-            fixed4 _Color;
+            half4 _Color;
 
             struct v2f
             {
@@ -38,7 +38,7 @@ Shader "CpRemix/Skybox/Simple Cubemap Shader"
 
             struct FragOutput
             {
-                fixed4 color : SV_Target;
+                half4 color : SV_Target;
             };
 
             v2f vert(
@@ -48,7 +48,7 @@ Shader "CpRemix/Skybox/Simple Cubemap Shader"
             )
             {
                 v2f o;
-                outpos = UnityObjectToClipPos(vertex);
+                outpos = TransformObjectToHClip(vertex.xyz);
                 o.uv = uv;
                 return o;
             }
@@ -58,14 +58,14 @@ Shader "CpRemix/Skybox/Simple Cubemap Shader"
                 FragOutput o;
 
                 float4 texColor = tex2D(_MainTex, i.uv.xy);
-                fixed4 cubemapColor = texCUBE(_cubemap, i.uv);
+                half4 cubemapColor = texCUBE(_cubemap, i.uv.xyz);
 
                 o.color = texColor * cubemapColor * _Color;
 
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

@@ -14,6 +14,7 @@ Shader "CpRemix/World/SunsetThankYouHeart"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 			"QUEUE" = "Transparent"
 		}
 		Pass
@@ -21,13 +22,24 @@ Shader "CpRemix/World/SunsetThankYouHeart"
 			Tags { "QUEUE" = "Transparent" }
 			Blend One One
 
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 
 			#pragma vertex vert
 			#pragma fragment frag
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			float _XScrollSpeedA;
 			float _XScrollSpeedB;
 			float _AlphaYScrollSpeed;
@@ -50,12 +62,12 @@ Shader "CpRemix/World/SunsetThankYouHeart"
 				float4 gl_FragData : SV_Target;
 			};
 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 			{
 				v2f o;
 
 				// Handle vertex positions and transformations
-				o.pos = UnityObjectToClipPos(v.vertex); 
+				o.pos = TransformObjectToHClip(v.vertex.xyz);
 
 				// Calculate scrolling texture coordinates
 				o.xlv_TEXCOORD1 = v.texcoord.xy + float2(_XScrollSpeedA, 0) * _Time.x;
@@ -83,8 +95,8 @@ Shader "CpRemix/World/SunsetThankYouHeart"
 				return o;
 			}
 
-			ENDCG
+			ENDHLSL
 		}
 	}
-	Fallback "Diffuse"
+	Fallback Off
 }

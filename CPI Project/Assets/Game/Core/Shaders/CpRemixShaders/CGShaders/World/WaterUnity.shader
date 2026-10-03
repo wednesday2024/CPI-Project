@@ -29,6 +29,7 @@ Shader "CpRemix/World/Water"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 		  "QUEUE" = "Transparent"
 		}
 		LOD 200
@@ -41,16 +42,14 @@ Shader "CpRemix/World/Water"
 		  LOD 200
 		  Blend SrcAlpha OneMinusSrcAlpha
 
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
 
-			#include "UnityCG.cginc"
-			#include "AutoLight.cginc"
-			#include "Lighting.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			float _Shininess;
 			float _SpecIntensity;
 			float _ShoreTile;
@@ -83,7 +82,7 @@ Shader "CpRemix/World/Water"
 				float3 xlv_TEXCOORD4 : TEXCOORD4;
 				float2 xlv_TEXCOORD5 : TEXCOORD5;
 				float xlv_TEXCOORD6 : TEXCOORD6;
-				UNITY_FOG_COORDS(7) // Fog coordinate for vertex shader output
+				float fogFactor : TEXCOORD7; // Fog coordinate for vertex shader output
 			};
 
 			struct fragOutput {
@@ -105,11 +104,11 @@ Shader "CpRemix/World/Water"
 			  float specWaveBounce = 1.0 + (_SinTime.w * _SpecWavesBounce);
 
 			  float4 normalVec = float4(_glesNormal, 0.0);
-			  float3 worldNormal = normalize(UnityObjectToClipPos(normalVec).xyz);
+			  float3 worldNormal = normalize(TransformObjectToWorldNormal(_glesNormal));
 
-			  float4 clipPos = UnityObjectToClipPos(_glesVertex);
+			  float4 clipPos = TransformObjectToHClip(_glesVertex.xyz);
 			  float3 viewDir = normalize(_WorldSpaceCameraPos - clipPos.xyz);
-			  float3 lightDir = normalize(_WorldSpaceLightPos0.xyz - (clipPos.xyz * _WorldSpaceLightPos0.w));
+			  float3 lightDir = normalize(_MainLightPosition.xyz - (clipPos.xyz * _MainLightPosition.w));
 
 			  // Specular reflection
 			  float3 incidentLight = -lightDir;
@@ -117,7 +116,7 @@ Shader "CpRemix/World/Water"
 				(2.0 * (dot(worldNormal, incidentLight) * worldNormal))
 			  ), viewDir));
 			  float specFactor = max(0.0, (spec * _Shininess) + (1.0 - _Shininess));
-			  float3 specColor = max(float3(0.5, 0.5, 0.5), (_LightColor0.xyz * specFactor) * _SpecIntensity);
+			  float3 specColor = max(float3(0.5, 0.5, 0.5), (_MainLightColor.xyz * specFactor) * _SpecIntensity);
 
 			  // Shore wave animation data
 			  float3 waveData;
@@ -127,7 +126,7 @@ Shader "CpRemix/World/Water"
 
 			  float shoreMask = max(0.0, (_glesColor.x - _glesColor.y) - _glesColor.z);
 
-			  gl_Position = UnityObjectToClipPos(float4(_glesVertex.xyz, 1.0));
+			  gl_Position = TransformObjectToHClip(_glesVertex.xyz);
 			  o.xlv_TEXCOORD0 = ((_glesMultiTexCoord0.xy + (
 				(normalize(_ShoreWavesUVDirection) * _Time.x)
 			   * _ShoreWavesTimeScale)) * _ShoreTile);
@@ -142,7 +141,7 @@ Shader "CpRemix/World/Water"
 			  o.xlv_TEXCOORD5 = float2(shoreMask, 1.0 - shoreMask);
 			  o.xlv_TEXCOORD6 = max(max(specColor.x, specColor.y), specColor.z);
 
-			  UNITY_TRANSFER_FOG(o, gl_Position);
+			  o.fogFactor = ComputeFogFactor(gl_Position.z);
 
 			  return o;
 			}
@@ -176,12 +175,12 @@ Shader "CpRemix/World/Water"
 			   * (i.xlv_TEXCOORD5.x * shoreFoam)
 			  )));
 
-			  UNITY_APPLY_FOG(i.fogCoord, o.gl_FragData);
+			  o.gl_FragData.rgb = MixFog(o.gl_FragData.rgb, i.fogFactor);
 
 			  return o;
 			}
 
-		ENDCG
+		ENDHLSL
 	  }
 	  }
 		  FallBack Off

@@ -18,6 +18,7 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Transparent"
             "IgnoreProjector" = "True"
             "RenderType" = "Transparent"
@@ -49,7 +50,7 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
             #pragma fragment frag
             #pragma target 2.0
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct appdata_t
             {
@@ -62,15 +63,17 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                fixed4 color : COLOR;
+                half4 color : COLOR;
                 float2 flags : TEXCOORD0;
                 float2 uv : TEXCOORD1;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            sampler2D _MainTex;
-            sampler2D _EmojiTex;
-            fixed4 _Color;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            TEXTURE2D(_EmojiTex);
+            SAMPLER(sampler_EmojiTex);
+            half4 _Color;
             float _EmojiScalar;
 
             v2f vert(appdata_t v)
@@ -79,7 +82,7 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-                OUT.vertex = UnityObjectToClipPos(v.vertex);
+                OUT.vertex = TransformObjectToHClip(v.vertex.xyz);
                 OUT.color = v.color * _Color;
 
                 float u = v.texcoord.x;
@@ -91,12 +94,12 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
                 return OUT;
             }
 
-            fixed4 frag(v2f IN) : SV_Target
+            half4 frag(v2f IN) : SV_Target
             {
-                fixed fontAlpha = tex2D(_MainTex, IN.uv).a;
-                fixed4 emoji = tex2D(_EmojiTex, IN.uv) * _EmojiScalar;
+                half fontAlpha = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv).a;
+                half4 emoji = SAMPLE_TEXTURE2D(_EmojiTex, sampler_EmojiTex, IN.uv) * _EmojiScalar;
 
-                fixed4 color;
+                half4 color;
                 color.rgb = IN.color.rgb * IN.flags.x + emoji.rgb * IN.flags.y;
                 color.a = fontAlpha * IN.color.a * IN.flags.x + emoji.a * IN.flags.y;
 
@@ -108,5 +111,5 @@ Shader "CpRemix/UI/BitMapFontAndEmoji"
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

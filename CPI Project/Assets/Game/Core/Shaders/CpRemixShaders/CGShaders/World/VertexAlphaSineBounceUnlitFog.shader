@@ -3,24 +3,36 @@ Shader "CpRemix/World/Vertex Alpha Sine Bounce Unlit (Fog)" {
 		_MainTex ("Texture", 2D) = "white" {}
 	}
 	SubShader {
-		LOD 100
+		Tags { "RenderPipeline" = "UniversalPipeline" }
+        LOD 100
 		Tags { "RenderType" = "Opaque" }
 		Pass {
 			LOD 100
 			Tags { "RenderType" = "Opaque" }
-			GpuProgramID 39011
-			CGPROGRAM
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			struct v2f
 			{
 				float2 texcoord : TEXCOORD0;
 				float4 color : COLOR0;
 				float4 position : SV_POSITION0;
-				UNITY_FOG_COORDS(1)
+				float fogFactor : TEXCOORD1;
 			};
 			struct fout
 			{
@@ -36,7 +48,7 @@ Shader "CpRemix/World/Vertex Alpha Sine Bounce Unlit (Fog)" {
 			sampler2D _MainTex;
 			
 			// Keywords: 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 {
     v2f o;
 
@@ -58,7 +70,7 @@ Shader "CpRemix/World/Vertex Alpha Sine Bounce Unlit (Fog)" {
     o.position.xzw = clipPosition.xzw;
 
     // Handle fog
-    UNITY_TRANSFER_FOG(o, o.position);
+    o.fogFactor = ComputeFogFactor(o.position.z);
 
     return o;
 }
@@ -70,12 +82,12 @@ Shader "CpRemix/World/Vertex Alpha Sine Bounce Unlit (Fog)" {
                 float4 tmp0;
                 tmp0 = tex2D(_MainTex, inp.texcoord.xy);
                 o.sv_target = tmp0 * inp.color;
-				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+				o.sv_target.w = 1.0;
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
-	Fallback "Mobile/Diffuse"
+	Fallback Off
 }

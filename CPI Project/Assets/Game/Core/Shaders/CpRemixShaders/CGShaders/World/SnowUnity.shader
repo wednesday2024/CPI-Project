@@ -4,23 +4,39 @@ Shader "CpRemix/World/Snow Ramp" {
 		[HideInspector] _BlobShadowTex ("Blob Shadow Tex", 2D) = "white" {}
 	}
 	SubShader {
-		Tags { "RenderType" = "Opaque" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
 		Pass {
-			Tags { "RenderType" = "Opaque" }
-			GpuProgramID 17079
-			CGPROGRAM
+			Tags { "LightMode" = "UniversalForward" "RenderType" = "Opaque" }
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			struct v2f
 			{
 				float4 position : SV_POSITION0;
 				float2 texcoord : TEXCOORD0;
 				float2 texcoord1 : TEXCOORD1;
+				float3 normalWS : TEXCOORD4;
 				float3 texcoord3 : TEXCOORD3;
-				UNITY_FOG_COORDS(2)
+				float fogFactor : TEXCOORD2;
 			};
 			struct fout
 			{
@@ -39,7 +55,7 @@ Shader "CpRemix/World/Snow Ramp" {
 			sampler2D _BlobShadowTex;
 			
 			// Optimized vert function
-			v2f vert(appdata_full v) {
+			v2f vert(Attributes v) {
                 v2f o;
                 
                 // Calculate world position
@@ -51,10 +67,11 @@ Shader "CpRemix/World/Snow Ramp" {
                 );
 
                 // Transform world position to clip space
-                o.position = mul(unity_MatrixVP, worldPos);
+                o.position = mul(UNITY_MATRIX_VP, worldPos);
 
                 // Set texture coordinates
                 o.texcoord1 = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
+                o.normalWS = TransformObjectToWorldNormal(v.normal);
                 o.texcoord = v.normal.yy * float2(0.45, 0.45) + float2(0.5, 0.5);
 
                 // Calculate shadow texture coordinates
@@ -63,7 +80,7 @@ Shader "CpRemix/World/Snow Ramp" {
                 o.texcoord3.z = worldPos.y;
 
                 // Transfer fog coordinates
-                UNITY_TRANSFER_FOG(o, o.position);
+                o.fogFactor = ComputeFogFactor(o.position.z);
 
                 return o;
             }
@@ -80,19 +97,17 @@ Shader "CpRemix/World/Snow Ramp" {
                 float shadowFactor = shadowResult.x * shadowResult.y;
                 shadowFactor = min(shadowFactor, 1.0);
                 
-                float4 lightmapResult = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord1.xy);
-                lightmapResult.w = lightmapResult.w * unity_Lightmap_HDR.x;
-                lightmapResult.xyz = lightmapResult.xyz * lightmapResult.www;
+                float4 lightmapResult = float4(SampleLightmap(inp.texcoord1.xy, normalize(inp.normalWS)), 1.0);
                 
                 float4 snowRampResult = tex2D(_SnowRampTex, inp.texcoord.xy);
                 snowRampResult.xyz = lightmapResult.xyz * snowRampResult.xyz;
                 
                 o.sv_target = float4(shadowFactor.xxx * snowRampResult.xyz, snowRampResult.w);
-				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+				o.sv_target.w = 1.0;
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

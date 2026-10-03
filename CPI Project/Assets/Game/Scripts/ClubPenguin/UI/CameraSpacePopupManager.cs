@@ -4,6 +4,7 @@ using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace ClubPenguin.UI
 {
@@ -22,6 +23,10 @@ namespace ClubPenguin.UI
 		private int defaultOrderInLayer;
 
 		private Canvas canvas;
+
+		private Camera stackedBaseCamera;
+
+		private UniversalAdditionalCameraData stackedBaseCameraData;
 
 		private void Awake()
 		{
@@ -52,12 +57,69 @@ namespace ClubPenguin.UI
 
 		private void enableCamera()
 		{
-			if (PopupCamera != null && !PopupCamera.enabled && ToggleCamera)
+			if (PopupCamera != null && ToggleCamera)
 			{
-				PopupCamera.useOcclusionCulling = Camera.main.useOcclusionCulling;
-				PopupCamera.enabled = true;
-				CoroutineRunner.Start(waitForPopupToClose(), this, "");
+				if (!addPopupCameraToStack())
+				{
+					return;
+				}
+				if (!PopupCamera.enabled)
+				{
+					PopupCamera.useOcclusionCulling = Camera.main.useOcclusionCulling;
+					PopupCamera.enabled = true;
+					CoroutineRunner.Start(waitForPopupToClose(), this, "");
+				}
 			}
+		}
+
+		private bool addPopupCameraToStack()
+		{
+			Camera baseCamera = Camera.main;
+			if (baseCamera == null)
+			{
+				Debug.LogError("CameraSpacePopupManager could not find the base camera for its popup camera.", this);
+				return false;
+			}
+
+			UniversalAdditionalCameraData baseCameraData = baseCamera.GetComponent<UniversalAdditionalCameraData>();
+			if (baseCameraData == null)
+			{
+				baseCameraData = baseCamera.gameObject.AddComponent<UniversalAdditionalCameraData>();
+			}
+			if (baseCameraData.renderType != CameraRenderType.Base)
+			{
+				Debug.LogError("CameraSpacePopupManager requires the MainCamera to be a URP base camera.", baseCamera);
+				return false;
+			}
+
+			if (stackedBaseCamera != baseCamera)
+			{
+				removePopupCameraFromStack();
+				stackedBaseCamera = baseCamera;
+				stackedBaseCameraData = baseCameraData;
+			}
+
+			UniversalAdditionalCameraData popupCameraData = PopupCamera.GetComponent<UniversalAdditionalCameraData>();
+			if (popupCameraData == null)
+			{
+				popupCameraData = PopupCamera.gameObject.AddComponent<UniversalAdditionalCameraData>();
+			}
+			popupCameraData.renderType = CameraRenderType.Overlay;
+			if (!baseCameraData.cameraStack.Contains(PopupCamera))
+			{
+				baseCameraData.cameraStack.Add(PopupCamera);
+			}
+			return true;
+		}
+
+		private void removePopupCameraFromStack()
+		{
+			if (stackedBaseCameraData != null && PopupCamera != null)
+			{
+				stackedBaseCameraData.cameraStack.Remove(PopupCamera);
+			}
+			stackedBaseCamera = null;
+			stackedBaseCameraData = null;
 		}
 
 		private void disableCamera()
@@ -98,6 +160,7 @@ namespace ClubPenguin.UI
 
 		private void OnDestroy()
 		{
+			removePopupCameraFromStack();
 			ClubPenguin.Core.SceneRefs.Remove(this);
 		}
 	}

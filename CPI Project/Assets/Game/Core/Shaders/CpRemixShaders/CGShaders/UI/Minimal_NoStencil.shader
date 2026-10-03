@@ -10,6 +10,7 @@ Shader "CpRemix/UI/Minimal_NoStencil"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Transparent"
             "IgnoreProjector" = "True"
             "RenderType" = "Transparent"
@@ -31,7 +32,7 @@ Shader "CpRemix/UI/Minimal_NoStencil"
             #pragma fragment frag
             #pragma target 2.0
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct appdata_t
             {
@@ -44,13 +45,14 @@ Shader "CpRemix/UI/Minimal_NoStencil"
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                fixed4 color : COLOR;
+                half4 color : COLOR;
                 float2 texcoord : TEXCOORD0;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            sampler2D _MainTex;
-            fixed4 _Color;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+            half4 _Color;
 
             v2f vert(appdata_t v)
             {
@@ -58,20 +60,20 @@ Shader "CpRemix/UI/Minimal_NoStencil"
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-                OUT.vertex = UnityObjectToClipPos(v.vertex);
+                OUT.vertex = TransformObjectToHClip(v.vertex.xyz);
                 OUT.texcoord = v.texcoord;
                 OUT.color = v.color * _Color;
 
                 return OUT;
             }
 
-            fixed4 frag(v2f IN) : SV_Target
+            half4 frag(v2f IN) : SV_Target
             {
-                return tex2D(_MainTex, IN.texcoord) * IN.color;
+                return SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.texcoord) * IN.color;
             }
             ENDHLSL
         }
     }
 
-    FallBack "UI/Default"
+    FallBack Off
 }

@@ -9,100 +9,210 @@ Shader "CpRemix/World/WorldObject"
 
     SubShader
     {
+        Tags
+        {
+            "RenderType" = "Opaque"
+            "RenderPipeline" = "UniversalPipeline"
+            "Queue" = "Geometry"
+        }
+
         Pass
         {
-            Tags { "LightMode" = "ForwardBase" }
+            Name "ForwardLit"
+            Tags
+            {
+                "LightMode" = "UniversalForward"
+            }
 
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile_fog
 
-            #include "UnityCG.cginc"
+            #pragma multi_compile_fog
+            #pragma multi_compile _ LIGHTMAP_ON
+            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
+            #pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+            #pragma multi_compile _ SHADOWS_SHADOWMASK
+
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+
+            TEXTURE2D(_Diffuse);
+            SAMPLER(sampler_Diffuse);
+
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
+            TEXTURE2D(_BlobShadowTex);
+            SAMPLER(sampler_BlobShadowTex);
 
             float _ShadowPlaneDim;
             float _ShadowTextureDim;
             float3 _ShadowPlaneWorldPos;
 
-            sampler2D _Diffuse;
-            sampler2D _MainTex;
-            sampler2D _BlobShadowTex;
-
-            struct appdata
+            struct Attributes
             {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                float4 color  : COLOR;
-                float2 uv0    : TEXCOORD0;
-                float2 uv1    : TEXCOORD1;
+                float4 positionOS : POSITION;
+                float3 normalOS   : NORMAL;
+                float4 color      : COLOR;
+                float2 uv0        : TEXCOORD0;
+                float2 uv1        : TEXCOORD1;
             };
 
-            struct v2f
+            struct Varyings
             {
-                float4 pos         : SV_POSITION;
-                float4 color       : COLOR;
-                float2 uv          : TEXCOORD0;
-                float2 lightmapUV  : TEXCOORD1;
-                float3 shadowData  : TEXCOORD2;
-                UNITY_FOG_COORDS(3)
+                float4 positionCS : SV_POSITION;
+                float4 color      : COLOR;
+                float2 uv         : TEXCOORD0;
+                float2 lightmapUV : TEXCOORD1;
+                float3 shadowData : TEXCOORD2;
+                float fogFactor   : TEXCOORD3;
+                float3 normalWS   : TEXCOORD4;
             };
 
-            v2f vert(appdata v)
-            {
-                v2f o;
+            CBUFFER_START(UnityPerMaterial)
+                float4 _Diffuse_ST;
+                float4 _MainTex_ST;
+                float4 _BlobShadowTex_ST;
+            CBUFFER_END
 
-                float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
-                o.pos = UnityObjectToClipPos(v.vertex);
+            Varyings vert(Attributes v)
+            {
+                Varyings o;
+
+                float3 worldPos = TransformObjectToWorld(v.positionOS.xyz);
+
+                o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
+                o.normalWS = TransformObjectToWorldNormal(v.normalOS);
 
                 o.color = v.color;
                 o.uv = v.uv0;
-                o.lightmapUV = v.uv1 * unity_LightmapST.xy + unity_LightmapST.zw;
 
-                float halfDim = max(_ShadowPlaneDim * 0.5, 0.0001);
-                float aspectOfs = 1.0 / max(_ShadowTextureDim, 0.0001);
+                #if defined(LIGHTMAP_ON)
+                    o.lightmapUV =
+                        v.uv1 * unity_LightmapST.xy +
+                        unity_LightmapST.zw;
+                #else
+                    o.lightmapUV = v.uv1;
+                #endif
 
-                float offsetX = worldPos.x - _ShadowPlaneWorldPos.x;
-                float offsetZ = worldPos.z - _ShadowPlaneWorldPos.z;
+                float halfDim =
+                    max(_ShadowPlaneDim * 0.5, 0.0001);
 
-                o.shadowData.x = (aspectOfs + offsetX / halfDim + 1.0) * 0.5;
-                o.shadowData.y = (aspectOfs + offsetZ / halfDim + 1.0) * 0.5;
-                o.shadowData.z = worldPos.y;
+                float aspectOfs =
+                    1.0 / max(_ShadowTextureDim, 0.0001);
 
-                UNITY_TRANSFER_FOG(o, o.pos);
+                float offsetX =
+                    worldPos.x - _ShadowPlaneWorldPos.x;
+
+                float offsetZ =
+                    worldPos.z - _ShadowPlaneWorldPos.z;
+
+                o.shadowData.x =
+                    (aspectOfs + offsetX / halfDim + 1.0) * 0.5;
+
+                o.shadowData.y =
+                    (aspectOfs + offsetZ / halfDim + 1.0) * 0.5;
+
+                o.shadowData.z =
+                    worldPos.y;
+
+                o.fogFactor =
+                    ComputeFogFactor(o.positionCS.z);
 
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            half4 frag(Varyings i) : SV_Target
             {
-                float4 shadowSample = tex2D(_BlobShadowTex, i.shadowData.xy);
+                float4 shadowSample =
+                    SAMPLE_TEXTURE2D(
+                        _BlobShadowTex,
+                        sampler_BlobShadowTex,
+                        i.shadowData.xy
+                    );
 
-                float shadowDepth = shadowSample.y;
-                float shadowIntensity = shadowSample.x;
+                float shadowDepth =
+                    shadowSample.y;
 
-                float isAbove = (i.shadowData.z >= shadowDepth) ? 2.0 : 1.0;
-                float depthDiff = shadowDepth - i.shadowData.z;
+                float shadowIntensity =
+                    shadowSample.x;
 
-                float shadowFactor = mad(abs(depthDiff), isAbove, isAbove) - 0.5;
-                float shadowMult = min(shadowIntensity * max(shadowFactor, 1.0), 1.0);
+                float isAbove =
+                    (i.shadowData.z >= shadowDepth)
+                    ? 2.0
+                    : 1.0;
 
-                float4 lm = UNITY_SAMPLE_TEX2D(unity_Lightmap, i.lightmapUV);
-                float3 lightColor = lm.rgb * (lm.a * unity_Lightmap_HDR.x);
+                float depthDiff =
+                    shadowDepth - i.shadowData.z;
 
-                float4 diffSample = tex2D(_Diffuse, i.uv);
-                float4 mainSample = tex2D(_MainTex, i.uv);
-                float4 diff = diffSample.a > 0.0 ? diffSample : mainSample;
+                float shadowFactor =
+                    mad(
+                        abs(depthDiff),
+                        isAbove,
+                        isAbove
+                    ) - 0.5;
 
-                float3 col = diff.rgb * lightColor * i.color.rgb * shadowMult;
-                float4 final = float4(col, 1.0);
+                float shadowMult =
+                    min(
+                        shadowIntensity *
+                        max(shadowFactor, 1.0),
+                        1.0
+                    );
 
-                UNITY_APPLY_FOG(i.fogCoord, final);
+                float3 lightColor = 1.0;
+
+                #if defined(LIGHTMAP_ON)
+
+                    half3 bakedGI =
+                        SampleLightmap(
+                            i.lightmapUV,
+                            normalize(i.normalWS)
+                        );
+
+                    lightColor = bakedGI;
+
+                #endif
+
+                float4 diffSample =
+                    SAMPLE_TEXTURE2D(
+                        _Diffuse,
+                        sampler_Diffuse,
+                        i.uv
+                    );
+
+                float4 mainSample =
+                    SAMPLE_TEXTURE2D(
+                        _MainTex,
+                        sampler_MainTex,
+                        i.uv
+                    );
+
+                float4 diff =
+                    diffSample.a > 0.0
+                        ? diffSample
+                        : mainSample;
+
+                float3 col =
+                    diff.rgb *
+                    lightColor *
+                    i.color.rgb *
+                    shadowMult;
+
+                float4 final =
+                    float4(col, 1.0);
+
+                final.rgb =
+                    MixFog(
+                        final.rgb,
+                        i.fogFactor
+                    );
 
                 return final;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 }

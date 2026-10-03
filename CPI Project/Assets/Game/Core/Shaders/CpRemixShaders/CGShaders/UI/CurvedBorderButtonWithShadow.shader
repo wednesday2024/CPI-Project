@@ -22,6 +22,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "PreviewType" = "Plane"
             "QUEUE" = "Transparent"
         }
@@ -53,11 +54,11 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
             Blend SrcAlpha OneMinusSrcAlpha
             ColorMask[_ColorMask]
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float4 _Color;
             float4 _Centre;
@@ -67,7 +68,15 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
             float _Roundness;
             float2 _ShadowVec;
             float _ScaleBox;
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
+
+            struct appdata_t
+            {
+                float4 vertex : POSITION;
+                float4 color : COLOR;
+                float2 texcoord : TEXCOORD0;
+            };
 
             struct v2f
             {
@@ -81,10 +90,10 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
                 float4 gl_FragData : SV_Target;
             };
 
-            v2f vert(appdata_full v)
+            v2f vert(appdata_t v)
             {
                 v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);  // Avoid extra matrix multiplications
+                o.pos = TransformObjectToHClip(v.vertex.xyz);
                 o.xlv_COLOR = v.color * _Color;          // Simplified color calculation
                 o.xlv_TEXCOORD0 = v.texcoord.xy;
                 return o;
@@ -98,7 +107,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
                 float2 powTexCoord = pow(abs(texCoord), _Roundness);
                 float2 powShadowTexCoord = pow(abs(texCoord + _ShadowVec), _Roundness);
 
-                float borderSizeRounded = pow(1.0 - _BorderSize, _Roundness);
+                float borderSizeRounded = pow(max(1.0 - _BorderSize, 0.0), max(_Roundness, 0.0));
                 float aliasSizeInv = 1.0 / max(_AAliasSize, 0.0001);
                 float aliasSize = 1.0 - _AAliasSize;
 
@@ -114,7 +123,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
                 float shadowBlend = (shadowBorderFactor < 0.9) ? (0.8 + (shadowBorderFactor * 0.2)) : 1.0;
                 float shadowAlpha = (shadowCenterFactor > 0.5) ? (shadowCenterFactor * 0.2) : 0.0;
 
-                float4 texColor = tex2D(_MainTex, i.xlv_TEXCOORD0);
+                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.xlv_TEXCOORD0);
                 float4 borderColor = _Border * (1.0 - borderFactor);
                 float4 centerColor = _Centre * borderFactor * (1.0 - texColor.w) + texColor * texColor.w * borderFactor;
 
@@ -125,7 +134,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
                 return o;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

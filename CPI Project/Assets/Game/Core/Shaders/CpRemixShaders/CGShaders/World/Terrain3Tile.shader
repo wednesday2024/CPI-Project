@@ -19,15 +19,30 @@ Shader "CpRemix/World/Terrain 3 Tile" {
 		[HideInspector] _BlobShadowTex ("Blob Shadow Tex", 2D) = "white" {}
 	}
 	SubShader {
-		Pass {
-			Tags { "LIGHTMODE" = "ALWAYS" }
-			GpuProgramID 47581
-			CGPROGRAM
+		Tags { "RenderPipeline" = "UniversalPipeline" }
+        Pass {
+			Tags { "LightMode" = "UniversalForward" }
+			HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
+			#pragma multi_compile _ LIGHTMAP_ON
+			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 			
-			#include "UnityCG.cginc"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			struct v2f
 			{
 			
@@ -37,8 +52,9 @@ Shader "CpRemix/World/Terrain 3 Tile" {
 				float2 texcoord1 : TEXCOORD1;
 				float2 texcoord2 : TEXCOORD2;
 				float2 texcoord3 : TEXCOORD3;
+				float3 normalWS : TEXCOORD4;
 				float3 texcoord5 : TEXCOORD5;
-				UNITY_FOG_COORDS(6)
+				float fogFactor : TEXCOORD6;
 			};
 			struct fout
 			{
@@ -63,7 +79,7 @@ Shader "CpRemix/World/Terrain 3 Tile" {
 			sampler2D _BlobShadowTex;
 			
 			// Keywords: 
-			v2f vert(appdata_full v)
+			v2f vert(Attributes v)
 {
     v2f o;
 
@@ -71,13 +87,14 @@ Shader "CpRemix/World/Terrain 3 Tile" {
     float4 worldPos = mul(unity_ObjectToWorld, v.vertex);
 
     // Compute clip-space position (using View-Projection matrix)
-    o.position = mul(unity_MatrixVP, worldPos);
+    o.position = mul(UNITY_MATRIX_VP, worldPos);
 
     // Pass vertex color to the fragment shader
     o.color = v.color;
 
     // Compute lightmap and texture coordinates
     o.texcoord.xy = v.texcoord1.xy * unity_LightmapST.xy + unity_LightmapST.zw;
+    o.normalWS = TransformObjectToWorldNormal(v.normal);
     o.texcoord1.xy = v.texcoord.xy * _RedChannelTexTile.xx;
     o.texcoord2.xy = v.texcoord.xy * _GreenChannelTexTile.xx;
     o.texcoord3.xy = v.texcoord.xy * _BlueChannelTexTile.xx;
@@ -93,7 +110,7 @@ Shader "CpRemix/World/Terrain 3 Tile" {
     o.texcoord5.xy = shadowCoord * 0.5;
 
     // Apply fog (Unity built-in)
-    UNITY_TRANSFER_FOG(o, o.position);
+    o.fogFactor = ComputeFogFactor(o.position.z);
 
     return o;
 }
@@ -114,9 +131,7 @@ Shader "CpRemix/World/Terrain 3 Tile" {
                 tmp1.xyz = _AlphaDepthColor * tmp2.zzz + inp.color.www;
                 tmp2 = tex2D(_RedChannelTex, inp.texcoord1.xy);
                 tmp0.xyz = tmp2.xyz * inp.color.xxx + tmp0.xyz;
-                tmp2 = UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, inp.texcoord.xy);
-                tmp0.w = tmp2.w * unity_Lightmap_HDR.x;
-                tmp2.xyz = tmp2.xyz * tmp0.www;
+                tmp2.xyz = SampleLightmap(inp.texcoord.xy, normalize(inp.normalWS));
                 tmp0.xyz = tmp0.xyz * tmp2.xyz;
                 tmp0.xyz = tmp1.xyz * tmp0.xyz;
                 tmp1 = tex2D(_BlobShadowTex, inp.texcoord5.xy);
@@ -130,11 +145,11 @@ Shader "CpRemix/World/Terrain 3 Tile" {
                 tmp0.w = min(tmp0.w, 1.0);
                 o.sv_target.xyz = tmp0.www * tmp0.xyz;
                 o.sv_target.w = 1.0;
-				UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-				UNITY_OPAQUE_ALPHA(o.sv_target.w);
+				o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+				o.sv_target.w = 1.0;
                 return o;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

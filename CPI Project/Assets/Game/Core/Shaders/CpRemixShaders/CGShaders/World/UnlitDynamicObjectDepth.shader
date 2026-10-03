@@ -4,16 +4,28 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
         _DepthMultiply ("DepthMultiply", Range(0, 1)) = 1
     }
     SubShader {
-        Tags { "RenderType" = "Opaque" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
         Pass {
             Tags { "RenderType" = "Opaque" }
-            CGPROGRAM
+            HLSLPROGRAM
+            struct Attributes
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
+                float4 color : COLOR;
+                float4 texcoord : TEXCOORD0;
+                float4 texcoord1 : TEXCOORD1;
+                float4 texcoord2 : TEXCOORD2;
+                float4 texcoord3 : TEXCOORD3;
+            };
+
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fog
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             struct v2f {
                 float4 position : SV_POSITION0;
                 float2 texcoord : TEXCOORD0;
@@ -21,7 +33,7 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
                 float3 texcoord2 : TEXCOORD2;
                 float3 texcoord3 : TEXCOORD3;
                 float4 color : COLOR0;
-                UNITY_FOG_COORDS(1)
+                float fogFactor : TEXCOORD1;
             };
 
             struct fout {
@@ -41,7 +53,7 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
             sampler2D _MainTex;
             sampler2D _SurfaceReflectionsRGB;
 
-            v2f vert(appdata_full v) {
+            v2f vert(Attributes v) {
                 v2f o;
                 float4 tmp0;
                 float4 tmp1;
@@ -52,10 +64,10 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
                 tmp0 = unity_ObjectToWorld._m02_m12_m22_m32 * v.vertex.zzzz + tmp0;
                 tmp1 = tmp0 + unity_ObjectToWorld._m03_m13_m23_m33;
                 tmp0.xyz = unity_ObjectToWorld._m03_m13_m23 * v.vertex.www + tmp0.xyz;
-                tmp2 = tmp1.yyyy * unity_MatrixVP._m01_m11_m21_m31;
-                tmp2 = unity_MatrixVP._m00_m10_m20_m30 * tmp1.xxxx + tmp2;
-                tmp2 = unity_MatrixVP._m02_m12_m22_m32 * tmp1.zzzz + tmp2;
-                o.position = unity_MatrixVP._m03_m13_m23_m33 * tmp1.wwww + tmp2;
+                tmp2 = tmp1.yyyy * UNITY_MATRIX_VP._m01_m11_m21_m31;
+                tmp2 = UNITY_MATRIX_VP._m00_m10_m20_m30 * tmp1.xxxx + tmp2;
+                tmp2 = UNITY_MATRIX_VP._m02_m12_m22_m32 * tmp1.zzzz + tmp2;
+                o.position = UNITY_MATRIX_VP._m03_m13_m23_m33 * tmp1.wwww + tmp2;
 
                 tmp1.xy = _DynSurfaceTexTile * float2(_SurfaceVelocityX, _SurfaceVelocityZ);
                 tmp1.xy = tmp1.xy * _Time.xx;
@@ -101,7 +113,7 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
                 o.texcoord3.xyz = tmp0.xxx * _SurfaceReflectionColor;
                 o.color = v.color;
 
-                UNITY_TRANSFER_FOG(o, o.position);
+                o.fogFactor = ComputeFogFactor(o.position.z);
                 return o;
             }
 
@@ -118,12 +130,12 @@ Shader "CpRemix/World/Unlit Dynamic Object Depth" {
                 o.sv_target.xyz = tmp0.xyz * inp.color.xyz;
                 o.sv_target.w = 1.0;
 
-                UNITY_APPLY_FOG(inp.fogCoord, o.sv_target);
-                UNITY_OPAQUE_ALPHA(o.sv_target.w);
+                o.sv_target.rgb = MixFog(o.sv_target.rgb, inp.fogFactor);
+                o.sv_target.w = 1.0;
 
                 return o;
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }

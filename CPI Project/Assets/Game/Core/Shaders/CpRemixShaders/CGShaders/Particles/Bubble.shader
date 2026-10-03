@@ -7,20 +7,20 @@ Shader "CpRemix/Particles/Bubble"
 	}
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True" }
+		Tags {
+            "RenderPipeline" = "UniversalPipeline" "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True" }
 		Pass
 		{
-			Tags { "LightMode" = "ForwardBase" }
+			Tags { "LightMode" = "UniversalForward" }
 			Blend SrcAlpha OneMinusSrcAlpha
 			ZWrite Off
 			Cull Off
 
-			CGPROGRAM
+			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma target 3.0
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			sampler2D _MainTex;
 			float4 _Color;
 
@@ -41,7 +41,7 @@ Shader "CpRemix/Particles/Bubble"
 			v2f vert(appdata v)
 			{
 				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.vertex = TransformObjectToHClip(v.vertex.xyz);
 				o.color = v.color * _Color;
 				o.uv = v.uv;
 				return o;
@@ -52,7 +52,7 @@ Shader "CpRemix/Particles/Bubble"
 				float4 tex = tex2D(_MainTex, i.uv);
 				return tex * i.color;
 			}
-			ENDCG
+			ENDHLSL
 		}
 	}
 }

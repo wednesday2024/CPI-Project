@@ -13,6 +13,7 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha no add"
 	{
 		Tags
 		{
+            "RenderPipeline" = "UniversalPipeline"
 			"QUEUE" = "Transparent"
 			"RenderType" = "Transparent"
 		}
@@ -27,14 +28,13 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha no add"
 			Cull Off
 			Blend SrcAlpha One
 
-			CGPROGRAM
+			HLSLPROGRAM
 
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
 
-			#include "UnityCG.cginc"
-
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			float3 _OscDir;
 			float4 _OscAxis;
 			float _OscSpeed;
@@ -46,7 +46,7 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha no add"
 			{
 				float4 xlv_TEXCOORD0 : TEXCOORD0;
 				float2 xlv_TEXCOORD1 : TEXCOORD1;
-				UNITY_FOG_COORDS(2)
+				float fogFactor : TEXCOORD2;
 			};
 
 			struct FragOutput
@@ -69,14 +69,14 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha no add"
 				float3 newPosition = _glesVertex.xyz + oscillatedVertex * oscDirWorld;
 
 				// Transform the oscillated vertex position to clip space
-				gl_Position = UnityObjectToClipPos(float4(newPosition, 1.0));
+				gl_Position = TransformObjectToHClip(newPosition);
 
 				// Scroll texture coordinates
 				o.xlv_TEXCOORD0 = _glesColor;
 				o.xlv_TEXCOORD1 = _glesMultiTexCoord0.xy + float2(_XScrollSpeed * _Time.x, _YScrollSpeed * _Time.x);
 
 				// Transfer fog coordinates
-				UNITY_TRANSFER_FOG(o, gl_Position);
+				o.fogFactor = ComputeFogFactor(gl_Position.z);
 
 				return o;
 			}
@@ -88,14 +88,14 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha no add"
 				float4 outputColor = tex2D(_MainTex, i.xlv_TEXCOORD1) * i.xlv_TEXCOORD0.w;
 
 				// Apply fog and handle alpha transparency
-				UNITY_APPLY_FOG(i.fogCoord, outputColor);
-				UNITY_OPAQUE_ALPHA(outputColor.w);
+				outputColor.rgb = MixFog(outputColor.rgb, i.fogFactor);
+				outputColor.w = 1.0;
 
 				o.gl_FragData = outputColor;
 				return o;
 			}
 
-			ENDCG
+			ENDHLSL
 		}
 	}
 	FallBack Off

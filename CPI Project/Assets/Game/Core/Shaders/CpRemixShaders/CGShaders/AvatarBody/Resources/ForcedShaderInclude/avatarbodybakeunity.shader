@@ -16,102 +16,81 @@ Shader "CpRemix/Avatar Body Bake"
 
     SubShader
     {
+        Tags { "RenderPipeline" = "UniversalPipeline" "RenderType" = "Opaque" }
+
         Pass
         {
-            Tags { "LightMode" = "ForwardBase" }
+            Tags { "LightMode" = "SRPDefaultUnlit" }
             Blend One One, One One
 
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
             #pragma multi_compile_instancing
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            sampler2D _Diffuse;
-            sampler2D _BodyColorsMaskTex;
-            sampler2D _DetailAndMatcapMaskAndEmissive;
+            TEXTURE2D(_Diffuse);
+            SAMPLER(sampler_Diffuse);
+            TEXTURE2D(_BodyColorsMaskTex);
+            SAMPLER(sampler_BodyColorsMaskTex);
+            TEXTURE2D(_DetailAndMatcapMaskAndEmissive);
+            SAMPLER(sampler_DetailAndMatcapMaskAndEmissive);
 
-            float3 _BodyRedChannelColor;
-            float3 _BodyGreenChannelColor;
-            float3 _BodyBlueChannelColor;
+            CBUFFER_START(UnityPerMaterial)
+                float4 _BodyRedChannelColor;
+                float4 _BodyGreenChannelColor;
+                float4 _BodyBlueChannelColor;
+                float _AtlasOffsetU;
+                float _AtlasOffsetV;
+                float _AtlasOffsetScaleU;
+                float _AtlasOffsetScaleV;
+            CBUFFER_END
 
-            float _AtlasOffsetU;
-            float _AtlasOffsetV;
-            float _AtlasOffsetScaleU;
-            float _AtlasOffsetScaleV;
-
-            struct appdata
+            struct Attributes
             {
-                float4 vertex : POSITION;
-                float2 uv     : TEXCOORD0;
-
+                float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
-            struct v2f
+            struct Varyings
             {
-                float4 pos : SV_POSITION;
-                float2 uv  : TEXCOORD0;
-
+                float4 positionCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
-            v2f vert(appdata v)
+            Varyings vert(Attributes input)
             {
-                UNITY_SETUP_INSTANCE_ID(v);
-                v2f o;
-                UNITY_TRANSFER_INSTANCE_ID(v, o);
-                o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv.x = (v.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001);
-                o.uv.y = (v.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001);
-                return o;
+                UNITY_SETUP_INSTANCE_ID(input);
+                Varyings output;
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
+                output.positionCS = TransformObjectToHClip(input.positionOS.xyz);
+                output.uv = float2(
+                    (input.uv.x - _AtlasOffsetU) / max(_AtlasOffsetScaleU, 0.0001),
+                    (input.uv.y - _AtlasOffsetV) / max(_AtlasOffsetScaleV, 0.0001));
+                return output;
             }
 
-            float4 frag(v2f i) : SV_Target
+            float4 frag(Varyings input) : SV_Target
             {
-                float2 uv = i.uv;
+                UNITY_SETUP_INSTANCE_ID(input);
+                float2 uv = input.uv;
+                float4 mask = SAMPLE_TEXTURE2D(_BodyColorsMaskTex, sampler_BodyColorsMaskTex, uv);
+                float4 detail = SAMPLE_TEXTURE2D(_DetailAndMatcapMaskAndEmissive, sampler_DetailAndMatcapMaskAndEmissive, uv);
+                float4 diffuse = SAMPLE_TEXTURE2D(_Diffuse, sampler_Diffuse, uv);
 
-                float4 mask   = tex2D(_BodyColorsMaskTex, uv);
-                float4 detail = tex2D(_DetailAndMatcapMaskAndEmissive, uv);
-                float4 diff   = tex2D(_Diffuse, uv);
-
-                float maskR = mask.x;
-                float maskG = mask.y;
-                float maskB = mask.z;
-
-                float3 colorFromMask;
-                colorFromMask.x = mad(maskB, _BodyBlueChannelColor.x,  mad(maskR, _BodyRedChannelColor.x,  maskG * _BodyGreenChannelColor.x));
-                colorFromMask.y = mad(maskB, _BodyBlueChannelColor.y,  mad(maskR, _BodyRedChannelColor.y,  maskG * _BodyGreenChannelColor.y));
-                colorFromMask.z = mad(maskB, _BodyBlueChannelColor.z,  mad(maskR, _BodyRedChannelColor.z,  maskG * _BodyGreenChannelColor.z));
-
-                float maxChannel = max(maskB, max(maskG, maskR));
-                float3 tinted    = maxChannel * colorFromMask;
-                float  invMax    = 1.0 - maxChannel;
-
-                float detailMask  = detail.x;
-                float matcapMask  = detail.y;
-
-                float3 composite;
-                composite.x = mad(diff.x, invMax, tinted.x) * detailMask;
-                composite.y = mad(diff.y, invMax, tinted.y) * detailMask;
-                composite.z = mad(diff.z, invMax, tinted.z) * detailMask;
-
-                float2 centered = uv - 0.5;
-                float2 doubled  = centered * 2.0;
-                float  inBounds = (1.0 >= max(abs(doubled.y), abs(doubled.x))) ? 1.0 : 0.0;
-
-                float4 result;
-                result.x = composite.x * inBounds;
-                result.y = composite.y * inBounds;
-                result.z = composite.z * inBounds;
-                result.w = mad(-matcapMask, 0.5, 0.5) * inBounds;
-
-                return result;
+                float3 colorFromMask =
+                    mask.r * _BodyRedChannelColor.rgb +
+                    mask.g * _BodyGreenChannelColor.rgb +
+                    mask.b * _BodyBlueChannelColor.rgb;
+                float maxChannel = max(mask.b, max(mask.g, mask.r));
+                float3 composite = (diffuse.rgb * (1.0 - maxChannel) + maxChannel * colorFromMask) * detail.r;
+                float inBounds = max(abs((uv - 0.5) * 2.0).x, abs((uv - 0.5) * 2.0).y) <= 1.0 ? 1.0 : 0.0;
+                return float4(composite * inBounds, (0.5 - detail.g * 0.5) * inBounds);
             }
-
             ENDHLSL
         }
     }

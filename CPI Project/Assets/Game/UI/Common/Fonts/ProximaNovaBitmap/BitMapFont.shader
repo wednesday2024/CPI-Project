@@ -15,6 +15,7 @@ Shader "UI/BitMapFont"
     {
         Tags
         {
+            "RenderPipeline" = "UniversalPipeline"
             "CanUseSpriteAtlas" = "true"
             "IGNOREPROJECTOR" = "true"
             "PreviewType" = "Plane"
@@ -52,15 +53,16 @@ Shader "UI/BitMapFont"
             Blend SrcAlpha OneMinusSrcAlpha
             ColorMask[_ColorMask]
 
-            CGPROGRAM
+            HLSLPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
 
-            #include "UnityCG.cginc"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             float4 _Color;
-            sampler2D _MainTex;
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
             struct v2f
             {
@@ -74,13 +76,13 @@ Shader "UI/BitMapFont"
                 v2f o;
                 o.color = color;
                 o.texcoord = texcoord;
-                o.pos = UnityObjectToClipPos(vertex); // Simplified transform
+                o.pos = TransformObjectToHClip(vertex.xyz);
                 return o;
             }
 
             float4 frag(v2f i) : SV_Target
             {
-                float4 texColor = tex2D(_MainTex, i.texcoord);
+                float4 texColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
                 float4 finalColor = texColor * i.color * _Color;
 
                 // Alpha check to discard if below threshold
@@ -90,7 +92,7 @@ Shader "UI/BitMapFont"
                 return finalColor;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
     FallBack Off

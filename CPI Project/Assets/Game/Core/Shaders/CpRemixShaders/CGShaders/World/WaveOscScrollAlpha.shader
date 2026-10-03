@@ -12,21 +12,21 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha"
     }
     SubShader
     {
-        Tags { "QUEUE" = "Transparent" "DisableBatching" = "True" }
+        Tags {
+            "RenderPipeline" = "UniversalPipeline" "QUEUE" = "Transparent" "DisableBatching" = "True" }
         Pass
         {
             Tags { "QUEUE" = "Transparent" }
             Blend One One, One One
             Cull Off
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 4.0
             #pragma multi_compile_fog
 
-            #include "UnityCG.cginc"
-
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             sampler2D _MainTex;
             float4    _TintColor;
             float3    _OscDir;
@@ -64,7 +64,7 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha"
 
                 v.vertex.xyz += displacement * localOscDir;
 
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = TransformObjectToHClip(v.vertex.xyz);
                 o.color  = v.color;
                 o.uv     = v.uv + float2(_XScrollSpeed, _YScrollSpeed) * _Time.x;
 
@@ -77,7 +77,7 @@ Shader "CpRemix/World/Wave Osc Scroll with Alpha"
                 return tex * i.color.w + _TintColor;
             }
 
-            ENDCG
+            ENDHLSL
         }
     }
 }
