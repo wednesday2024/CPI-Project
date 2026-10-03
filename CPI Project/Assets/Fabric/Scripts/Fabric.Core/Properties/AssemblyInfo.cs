@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Fabric.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCopyright("Copyright © TazMan-Audio 2026")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.1.0")]
 [assembly: AssemblyCompany("TazMan-Audio")]
 [assembly: AssemblyProduct("Fabric.Core")]
 [assembly: AssemblyConfiguration("")]
