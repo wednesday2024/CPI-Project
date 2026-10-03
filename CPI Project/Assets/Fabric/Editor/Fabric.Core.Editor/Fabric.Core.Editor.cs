@@ -22,7 +22,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 [assembly: ComVisible(false)]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.1.0")]
 [assembly: AssemblyTrademark("")]
 [assembly: Guid("9b155348-94cc-4296-ba3e-3e322dedfb15")]
 [assembly: CompilationRelaxations(8)]
