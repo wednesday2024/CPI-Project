@@ -31,7 +31,6 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 			#pragma fragment frag
 			#pragma multi_compile_fog
 			#pragma multi_compile _ LIGHTMAP_ON
-			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
 
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -66,21 +65,28 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float2 texcoord1 : TEXCOORD1;
 				float fogFactor : TEXCOORD2;
 				float3 shadowData : TEXCOORD3;
-				half3 normalWS : TEXCOORD4;
 			};
 
 			inline float3 DecodeDirectionalVertexLighting(float3 worldNormal)
 			{
 				float upWeight = saturate(worldNormal.y);
-				float equatorWeight = saturate(1.0 - abs(worldNormal.y));
-				float downWeight = saturate(-worldNormal.y);
-				float3 ambient = unity_AmbientSky.rgb * upWeight
-					+ unity_AmbientEquator.rgb * equatorWeight
-					+ unity_AmbientGround.rgb * downWeight;
+				float downWeight = 1.0 - smoothstep(-1.0, 0.8, worldNormal.y);
+				float skyWeight = upWeight;
+				float groundWeight = downWeight;
+				float equatorWeight = max(1.0 - skyWeight - groundWeight, 0.0);
+				float3 skyAmbient = unity_AmbientSky.rgb;
+				float3 equatorAmbient = unity_AmbientEquator.rgb;
+				float skyLuminance = dot(skyAmbient, float3(0.2126, 0.7152, 0.0722));
+				float equatorLuminance = dot(equatorAmbient, float3(0.2126, 0.7152, 0.0722));
+				skyAmbient = lerp(skyAmbient, skyLuminance.xxx, 0.1);
+				equatorAmbient = lerp(equatorAmbient, equatorLuminance.xxx, 0.1);
+				float3 ambient = skyAmbient * skyWeight
+					+ equatorAmbient * equatorWeight
+					+ unity_AmbientGround.rgb * groundWeight * 0.7;
 
 				Light mainLight = GetMainLight();
 				float ndl = saturate((dot(worldNormal, mainLight.direction) + 1.0) * 0.25);
-				return ambient + mainLight.color * ndl;
+				return ambient + mainLight.color * ndl + float3(0.1, 0.1, 0.1);
 			}
 
 			v2f vert(appdata v)
@@ -92,8 +98,7 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal));
 				float3 lighting = DecodeDirectionalVertexLighting(worldNormal);
 
-				o.color = float4(lighting, 2.0) * _Color;
-				o.normalWS = worldNormal;
+				o.color = float4(lighting, 3.0) * _Color + _Highlight.xxxx;
 				o.texcoord = v.texcoord;
 				#if defined(LIGHTMAP_ON)
 					o.texcoord1 = v.texcoord1 * unity_LightmapST.xy + unity_LightmapST.zw;
@@ -116,12 +121,14 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 
 			float4 frag(v2f i) : SV_Target
 			{
-				float3 lighting = i.color.rgb;
+				half4 lightmapSample = half4(1.0, 1.0, 1.0, 1.0);
 				#if defined(LIGHTMAP_ON)
-					lighting *= SampleLightmap(i.texcoord1, normalize(i.normalWS));
+					lightmapSample = SAMPLE_TEXTURE2D(unity_Lightmap, samplerunity_Lightmap, i.texcoord1);
+					lightmapSample.rgb *= lightmapSample.a * LIGHTMAP_HDR_MULTIPLIER;
+					lightmapSample.a = 1.0;
 				#endif
 				float4 albedo = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
-				float4 col = float4((lighting + _Highlight.xxx) * albedo.rgb * 0.9, 1.0);
+				float4 col = lightmapSample * i.color * albedo * 0.9;
 
 				float4 shadowSample = SAMPLE_TEXTURE2D(_BlobShadowTex, sampler_BlobShadowTex, i.shadowData.xy);
 				float shadowDepth = shadowSample.y;
