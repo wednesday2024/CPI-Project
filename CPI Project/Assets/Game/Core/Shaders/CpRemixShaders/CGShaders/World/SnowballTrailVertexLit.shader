@@ -1,4 +1,4 @@
-Shader "CpRemix/World/Snowball Trail VertexLit URP"
+Shader "CpRemix/World/Snowball Trail VertexLit"
 {
     Properties
     {
