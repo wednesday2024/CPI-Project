@@ -346,7 +346,14 @@ namespace ClubPenguin.Game.PartyGames
 
 		private string formatTimer(TimeSpan countdownTime)
 		{
-			return default(DateTime).Add(countdownTime).ToString("m:ss");
+			if (countdownTime < TimeSpan.Zero)
+			{
+				countdownTime = TimeSpan.Zero;
+			}
+			int totalSeconds = (int)countdownTime.TotalSeconds;
+			int minutes = totalSeconds / 60;
+			int seconds = totalSeconds % 60;
+			return string.Format("{0}:{1:00}", minutes, seconds);
 		}
 
 		private void onLobbyPlayersUpdated(PartyGamePlayerCollection players)
