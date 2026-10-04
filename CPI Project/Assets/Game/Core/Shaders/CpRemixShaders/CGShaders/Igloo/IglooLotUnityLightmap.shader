@@ -98,7 +98,7 @@ Shader "CpRemix/Igloo/IglooLotUnityLightmap"
 				float3 worldNormal = normalize(TransformObjectToWorldNormal(v.normal));
 				float3 lighting = DecodeDirectionalVertexLighting(worldNormal);
 
-				o.color = float4(lighting, 3.0) * _Color + _Highlight.xxxx;
+				o.color = float4(lighting, 2.0) * _Color + _Highlight.xxxx;
 				o.texcoord = v.texcoord;
 				#if defined(LIGHTMAP_ON)
 					o.texcoord1 = v.texcoord1 * unity_LightmapST.xy + unity_LightmapST.zw;
