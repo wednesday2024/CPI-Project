@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 33667159459586696}
   - component: {fileID: 23904386093924800}
   - component: {fileID: 114979886334223434}
+  - component: {fileID: 8584334890730688216}
   m_Layer: 17
   m_Name: DanceFloorMesh
   m_TagString: Untagged
@@ -210,6 +211,27 @@ MonoBehaviour:
   TilesX: 2
   TilesY: 2
   SecondsPerChange: 1
+--- !u!65 &8584334890730688216
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259446829376544}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4812336, y: 0.05041837, z: 1.4812337}
+  m_Center: {x: 0, y: 0.014768902, z: 0}
 --- !u!1 &1318820495732990
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +244,7 @@ GameObject:
   - component: {fileID: 33475965153430284}
   - component: {fileID: 23925713516122979}
   - component: {fileID: 114644568100127920}
+  - component: {fileID: 4627457597857354802}
   m_Layer: 0
   m_Name: DanceFloorTiles
   m_TagString: Untagged
@@ -316,6 +339,27 @@ MonoBehaviour:
   TilesX: 2
   TilesY: 2
   SecondsPerChange: 1
+--- !u!65 &4627457597857354802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318820495732990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3800607, y: 0.0000001937151, z: 1.3851796}
+  m_Center: {x: 0.002652973, y: 0.03997799, z: -0.0011449456}
 --- !u!1 &1771230428844360
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,8 +411,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1, y: 1.0456696, z: 1}
+  m_Center: {x: 0, y: 0.30716524, z: 0}
 --- !u!1 &1872799958288353
 GameObject:
   m_ObjectHideFlags: 0
