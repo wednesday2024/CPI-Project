@@ -381,7 +381,6 @@ namespace ClubPenguin
                 freeCameraTargetObj.transform.rotation = Camera.main.transform.rotation;
                 FreeCameraController freeCameraController = freeCameraTargetObj.AddComponent<FreeCameraController>();
                 freeCameraController.Target = freeCameraTargetObj.transform;
-                DiscordController.SetFreeCameraModeGlobal(true);
             }
         }
 
@@ -392,7 +391,6 @@ namespace ClubPenguin
             Transform transform = Service.Get<GameObject>().transform.Find("FreeCameraTarget");
             if (transform != null)
             {
-                DiscordController.SetFreeCameraModeGlobal(false);
                 UnityEngine.Object.Destroy(transform.gameObject);
             }
         }
@@ -439,8 +437,6 @@ namespace ClubPenguin
 
         private void OnDestroy()
         {
-            DiscordController.SetFreeCameraModeGlobal(false);
-
             if (context != null)
                 context.SendEvent(new ExternalEvent("Root", "restoreUI"));
 

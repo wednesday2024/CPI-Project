@@ -21,8 +21,6 @@ namespace ClubPenguin.Igloo.Catalog
 {
 	public class IglooCatalogController : MonoBehaviour
 	{
-		private const string DISCORD_MARKETPLACE_NAME = "IgloosAndInteriors";
-
 		private const int CATEGORY_SUBFILTER_STANDARD_BUTTON_COUNT = 2;
 
 		private const int THEME_SUBFILTER_STANDARD_BUTTON_COUNT = 1;
@@ -121,11 +119,8 @@ namespace ClubPenguin.Igloo.Catalog
 
 		private bool waitingToHideLoadingModal = false;
 
-		private bool marketplaceStateDispatched;
-
 		private void OnDestroy()
 		{
-			dispatchMarketplaceClosed();
 			CoroutineRunner.StopAllForOwner(this);
 			catalogScrollRect.onValueChanged.RemoveListener(onScrollRectValueChanged);
 			PooledScrollRect.ObjectAdded -= onPooledObjectAdded;
@@ -134,7 +129,6 @@ namespace ClubPenguin.Igloo.Catalog
 
 		private void Start()
 		{
-			dispatchMarketplaceOpened();
 			Dictionary<int, DecorationDefinition> dictionary = Service.Get<GameData>().Get<Dictionary<int, DecorationDefinition>>();
 			decorationDefinitions = new Dictionary<int, DecorationDefinition>(dictionary);
 			Dictionary<int, StructureDefinition> dictionary2 = Service.Get<GameData>().Get<Dictionary<int, StructureDefinition>>();
@@ -189,32 +183,11 @@ namespace ClubPenguin.Igloo.Catalog
 
 		public void OnCloseClicked()
 		{
-			dispatchMarketplaceClosed();
 			if (ClubPenguin.Core.SceneRefs.IsSet<SceneManipulationService>() && ClubPenguin.Core.SceneRefs.Get<SceneManipulationService>().ObjectManipulationInputController != null)
 			{
 				ClubPenguin.Core.SceneRefs.Get<SceneManipulationService>().ObjectManipulationInputController.SkipOneFrame = true;
 			}
 			UnityEngine.Object.Destroy(base.gameObject);
-		}
-
-		private void dispatchMarketplaceOpened()
-		{
-			if (marketplaceStateDispatched)
-			{
-				return;
-			}
-			marketplaceStateDispatched = true;
-			Service.Get<EventDispatcher>().DispatchEvent(new MarketplaceEvents.MarketplaceOpened(DISCORD_MARKETPLACE_NAME));
-		}
-
-		private void dispatchMarketplaceClosed()
-		{
-			if (!marketplaceStateDispatched)
-			{
-				return;
-			}
-			marketplaceStateDispatched = false;
-			Service.Get<EventDispatcher>().DispatchEvent(new MarketplaceEvents.MarketplaceClosed(DISCORD_MARKETPLACE_NAME));
 		}
 
 		private void loadSubfilterButtons()
