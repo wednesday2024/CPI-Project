@@ -18,6 +18,7 @@ public class AnnualEventsController3000 : MonoBehaviour
     private const string PLAYERPREFS_OVERRIDE_MODE_KEY = "AnnualEventsController.OverrideMode";
     private const string PLAYERPREFS_FORCED_EVENT_KEY = "AnnualEventsController.ForcedEventKey";
 
+    [UnityEngine.Scripting.Preserve]
     private OverrideMode overrideMode = OverrideMode.Automatic;
     private string forcedEventKey = null;
 

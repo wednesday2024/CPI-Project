@@ -17,54 +17,13 @@ namespace ClubPenguin
 
 		private readonly Dictionary<Type, object> dataMap;
 
-		private static MethodInfo _loadAsyncManifestMethod;
-
-		private static MethodInfo _loadImmediateManifestMethod;
+		private static readonly Dictionary<Type, Func<GameData, ManifestContentKey, CoroutineReturn>> manifestLoaders =
+			new Dictionary<Type, Func<GameData, ManifestContentKey, CoroutineReturn>>();
 
 		public bool Initialized
 		{
 			get;
 			private set;
-		}
-
-		private static MethodInfo loadAsyncManifestMethod
-		{
-			get
-			{
-				if (_loadAsyncManifestMethod == null)
-				{
-					MethodInfo[] methods = typeof(GameData).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
-					for (int i = 0; i < methods.Length; i++)
-					{
-						if (methods[i].Name == "loadAsyncManifest" && methods[i].GetParameters()[0].ParameterType == typeof(ManifestContentKey))
-						{
-							_loadAsyncManifestMethod = methods[i];
-							break;
-						}
-					}
-				}
-				return _loadAsyncManifestMethod;
-			}
-		}
-
-		private static MethodInfo loadImmediateManifestMethod
-		{
-			get
-			{
-				if (_loadImmediateManifestMethod == null)
-				{
-					MethodInfo[] methods = typeof(GameData).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic);
-					for (int i = 0; i < methods.Length; i++)
-					{
-						if (methods[i].Name == "loadImmediateManifest" && methods[i].GetParameters()[0].ParameterType == typeof(ManifestContentKey))
-						{
-							_loadImmediateManifestMethod = methods[i];
-							break;
-						}
-					}
-				}
-				return _loadImmediateManifestMethod;
-			}
 		}
 
 		public event Action<GameData> EInitialized;
@@ -98,6 +57,11 @@ namespace ClubPenguin
 		public void Init(Type[] types)
 		{
 			CoroutineRunner.Start(loadData(types), this, "LoadData");
+		}
+
+		public static void RegisterManifestLoader<T>() where T : ScriptableObject
+		{
+			manifestLoaders[typeof(T)] = (gameData, manifestContentKey) => gameData.loadAsyncManifest<T>(manifestContentKey);
 		}
 
 		public T Get<T>()
@@ -159,28 +123,18 @@ namespace ClubPenguin
 
 		private CoroutineReturn loadAsyncManifest(Type type)
 		{
-			return (CoroutineReturn)loadAsyncManifestMethod.MakeGenericMethod(type).Invoke(this, new object[1]
+			Func<GameData, ManifestContentKey, CoroutineReturn> loader;
+			if (!manifestLoaders.TryGetValue(type, out loader))
 			{
-				StaticGameDataUtils.GetManifestContentKey(type)
-			});
+				throw new InvalidOperationException("No AOT manifest loader is registered for " + type.FullName + ".");
+			}
+
+			return loader(this, StaticGameDataUtils.GetManifestContentKey(type));
 		}
 
 		private CoroutineReturn loadAsyncManifest<T>(ManifestContentKey manifestContentKey) where T : ScriptableObject
 		{
 			return Content.LoadAsync(onManifestLoaded<T>, manifestContentKey);
-		}
-
-		private void loadImmediateManifest(Type type)
-		{
-			loadImmediateManifestMethod.MakeGenericMethod(type).Invoke(this, new object[1]
-			{
-				StaticGameDataUtils.GetManifestContentKey(type)
-			});
-		}
-
-		private void loadImmediateManifest<T>(ManifestContentKey manifestContentKey) where T : ScriptableObject
-		{
-			onManifestLoaded<T>(manifestContentKey.Key, Content.LoadImmediate(manifestContentKey));
 		}
 
 		private void onManifestLoaded<T>(string contentKey, Manifest manifest) where T : ScriptableObject

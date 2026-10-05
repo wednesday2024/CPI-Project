@@ -548,47 +548,30 @@ namespace ClubPenguin
             public IEnumerable<NamedToggleValueAttribute.NamedToggleValue> GetNameToggleValues()
             {
                 List<NamedToggleValueAttribute.NamedToggleValue> list = new List<NamedToggleValueAttribute.NamedToggleValue>();
-                var controllerType = Type.GetType("AnnualEventsController3000");
-                if (controllerType != null)
+                AnnualEventsController3000 controller = AnnualEventsController3000.Instance;
+                if (controller != null && controller.events != null)
                 {
-                    var instanceProperty = controllerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
-                    if (instanceProperty != null)
+                    foreach (AnnualEventsController3000.EventInfo @event in controller.events)
                     {
-                        object instance = instanceProperty.GetValue(null);
-                        if (instance != null)
+                        if (@event == null)
                         {
-                            var eventsField = controllerType.GetField("events", BindingFlags.Public | BindingFlags.Instance);
-                            if (eventsField != null)
-                            {
-                                var events = eventsField.GetValue(instance) as Array;
-                                if (events != null)
-                                {
-                                    foreach (var @event in events)
-                                    {
-                                        if (@event == null)
-                                        {
-                                            continue;
-                                        }
-                                        var eventType = @event.GetType();
-                                        var eventIDField = eventType.GetField("eventID");
-                                        var eventNameField = eventType.GetField("eventName");
-                                        string id = (eventIDField?.GetValue(@event) as string) ?? "";
-                                        string name = (eventNameField?.GetValue(@event) as string) ?? "";
-                                        if (string.IsNullOrEmpty(id) && string.IsNullOrEmpty(name))
-                                        {
-                                            continue;
-                                        }
-                                        string value = id + "|" + name;
-                                        string display = string.IsNullOrEmpty(name) ? id : name;
-                                        if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(name))
-                                        {
-                                            display = id + "_" + name;
-                                        }
-                                        list.Add(new NamedToggleValueAttribute.NamedToggleValue(display, value));
-                                    }
-                                }
-                            }
+                            continue;
                         }
+
+                        string id = @event.eventID ?? "";
+                        string name = @event.eventName ?? "";
+                        if (string.IsNullOrEmpty(id) && string.IsNullOrEmpty(name))
+                        {
+                            continue;
+                        }
+
+                        string value = id + "|" + name;
+                        string display = string.IsNullOrEmpty(name) ? id : name;
+                        if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(name))
+                        {
+                            display = id + "_" + name;
+                        }
+                        list.Add(new NamedToggleValueAttribute.NamedToggleValue(display, value));
                     }
                 }
                 return list;
@@ -599,68 +582,46 @@ namespace ClubPenguin
         [PublicTweak]
         public void AnnualParties_End()
         {
-            var controllerType = Type.GetType("AnnualEventsController3000");
-            if (controllerType != null)
+            AnnualEventsController3000 controller = AnnualEventsController3000.Instance;
+            if (controller != null)
             {
-                var instanceProperty = controllerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
-                object instance = instanceProperty?.GetValue(null);
-                if (instance != null)
-                {
-                    var method = controllerType.GetMethod("ForceEndParty", BindingFlags.Public | BindingFlags.Instance);
-                    method?.Invoke(instance, null);
-                    PlayerPrefs.Save();
-                }
-                else
-                {
-                    Debug.LogError("AnnualEventsController3000.Instance is null");
-                }
+                controller.ForceEndParty();
+                PlayerPrefs.Save();
+                return;
             }
+
+            Debug.LogError("AnnualEventsController3000.Instance is null");
         }
 
         [Invokable("PartySwitcher.AnnualParties", Description = "Return to annual parties.")]
         [PublicTweak]
         public void AnnualParties_Default()
         {
-            var controllerType = Type.GetType("AnnualEventsController3000");
-            if (controllerType != null)
+            AnnualEventsController3000 controller = AnnualEventsController3000.Instance;
+            if (controller != null)
             {
-                var instanceProperty = controllerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
-                object instance = instanceProperty?.GetValue(null);
-                if (instance != null)
-                {
-                    var method = controllerType.GetMethod("SetDefaultMode", BindingFlags.Public | BindingFlags.Instance);
-                    method?.Invoke(instance, null);
-                    PlayerPrefs.Save();
-                }
-                else
-                {
-                    Debug.LogError("AnnualEventsController3000.Instance is null");
-                }
+                controller.SetDefaultMode();
+                PlayerPrefs.Save();
+                return;
             }
+
+            Debug.LogError("AnnualEventsController3000.Instance is null");
         }
 
         [Invokable("PartySwitcher.Parties", Description = "Force a specific party on.")]
         [PublicTweak]
         public void AnnualParties_Switch([NamedToggleValue(typeof(AnnualEventKeyGenerator), 0u)][ArgDescription("Change rooms for this setting to take effect.")] string Party)
         {
-            var controllerType = Type.GetType("AnnualEventsController3000");
-            if (controllerType != null)
+            AnnualEventsController3000 controller = AnnualEventsController3000.Instance;
+            if (controller != null)
             {
-                var instanceProperty = controllerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
-                object instance = instanceProperty?.GetValue(null);
-                if (instance != null)
-                {
-                    var endMethod = controllerType.GetMethod("ForceEndParty", BindingFlags.Public | BindingFlags.Instance);
-                    endMethod?.Invoke(instance, null);
-                    var method = controllerType.GetMethod("ForcePartyKey", BindingFlags.Public | BindingFlags.Instance);
-                    method?.Invoke(instance, new object[] { Party });
-                    PlayerPrefs.Save();
-                }
-                else
-                {
-                    Debug.LogError("AnnualEventsController3000.Instance is null");
-                }
+                controller.ForceEndParty();
+                controller.ForcePartyKey(Party);
+                PlayerPrefs.Save();
+                return;
             }
+
+            Debug.LogError("AnnualEventsController3000.Instance is null");
         }
 
         private string formatUrl(string url)

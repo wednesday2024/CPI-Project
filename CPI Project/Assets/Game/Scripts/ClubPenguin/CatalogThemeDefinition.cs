@@ -11,6 +11,7 @@ namespace ClubPenguin
 	public class CatalogThemeDefinition : StaticGameDataDefinition
 	{
 		[StaticGameDataDefinitionId]
+		[UnityEngine.Scripting.Preserve]
 		public int Id;
 
 		[LocalizationToken]

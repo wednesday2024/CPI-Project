@@ -83,6 +83,54 @@ namespace ClubPenguin
 			typeof(CommerceResourceURLsDefinition)
 		};
 
+		static InitGameDataAction()
+		{
+			GameData.RegisterManifestLoader<EmoteDefinition>();
+			GameData.RegisterManifestLoader<SizzleClipDefinition>();
+			GameData.RegisterManifestLoader<EquipmentCategoryDefinition>();
+			GameData.RegisterManifestLoader<FabricDefinition>();
+			GameData.RegisterManifestLoader<DecalDefinition>();
+			GameData.RegisterManifestLoader<PropDefinition>();
+			GameData.RegisterManifestLoader<TubeDefinition>();
+			GameData.RegisterManifestLoader<PromptDefinition>();
+			GameData.RegisterManifestLoader<DisneyStoreFranchiseDefinition>();
+			GameData.RegisterManifestLoader<CatalogThemeDefinition>();
+			GameData.RegisterManifestLoader<CatalogThemeScheduleDefinition>();
+			GameData.RegisterManifestLoader<MascotDefinition>();
+			GameData.RegisterManifestLoader<CollectibleDefinition>();
+			GameData.RegisterManifestLoader<TemporaryHeadStatusDefinition>();
+			GameData.RegisterManifestLoader<PartyGameDefinition>();
+			GameData.RegisterManifestLoader<PartyGameLauncherDefinition>();
+			GameData.RegisterManifestLoader<MarketingLoadingScreenDefinition>();
+			GameData.RegisterManifestLoader<LightingDefinition>();
+			GameData.RegisterManifestLoader<MusicTrackDefinition>();
+			GameData.RegisterManifestLoader<CollisionRuleSetDefinition>();
+			GameData.RegisterManifestLoader<CollisionRuleDefinition>();
+			GameData.RegisterManifestLoader<ZoneDefinition>();
+			GameData.RegisterManifestLoader<LotDefinition>();
+			GameData.RegisterManifestLoader<LoginZoneDefinition>();
+			GameData.RegisterManifestLoader<DecorationCategoryDefinition>();
+			GameData.RegisterManifestLoader<MusicGenreDefinition>();
+			GameData.RegisterManifestLoader<GroupDefinition>();
+			GameData.RegisterManifestLoader<CommerceResourceURLsDefinition>();
+			GameData.RegisterManifestLoader<CellPhoneSaleActivityDefinition>();
+			GameData.RegisterManifestLoader<MembershipPlansDefinition>();
+			GameData.RegisterManifestLoader<AvatarColorDefinition>();
+			GameData.RegisterManifestLoader<ProgressionUnlockDefinition>();
+			GameData.RegisterManifestLoader<AllAccessEventDefinition>();
+			GameData.RegisterManifestLoader<FeatureDefinition>();
+			GameData.RegisterManifestLoader<FeatureLabelBreadcrumbDefinition>();
+			GameData.RegisterManifestLoader<ConditionalDefinition>();
+			GameData.RegisterManifestLoader<DecorationDefinition>();
+			GameData.RegisterManifestLoader<StructureDefinition>();
+			GameData.RegisterManifestLoader<ScheduledEventDateDefinition>();
+			GameData.RegisterManifestLoader<HomeScreenTakeoverDefinition>();
+			GameData.RegisterManifestLoader<TutorialDefinition>();
+			GameData.RegisterManifestLoader<ClaimableRewardDefinition>();
+			GameData.RegisterManifestLoader<TemplateDefinition>();
+			GameData.RegisterManifestLoader<ProductDefinition>();
+		}
+
 		private bool isInitComplete = false;
 
 		public override bool HasSecondPass

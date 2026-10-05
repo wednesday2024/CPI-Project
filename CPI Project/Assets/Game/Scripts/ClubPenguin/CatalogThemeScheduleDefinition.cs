@@ -9,12 +9,16 @@ namespace ClubPenguin
 	public class CatalogThemeScheduleDefinition : StaticGameDataDefinition
 	{
 		[StaticGameDataDefinitionId]
+		[UnityEngine.Scripting.Preserve]
 		public int Id;
 
+		[UnityEngine.Scripting.Preserve]
 		public int Day;
 
+		[UnityEngine.Scripting.Preserve]
 		public int Month;
 
+		[UnityEngine.Scripting.Preserve]
 		public int Year;
 
 		public int CatalogThemeId;
