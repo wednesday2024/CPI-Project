@@ -61,6 +61,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "G:\Programs\Games\Club Penguin Island\Annual Events\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "G:\Programs\Games\Club Penguin Island\Annual Events\baselib.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "G:\Programs\Games\Club Penguin Island\Annual Events\GameAssembly.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "G:\Programs\Games\Club Penguin Island\Annual Events\UnityPlayer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "G:\Programs\Games\Club Penguin Island\Annual Events\UnityCrashHandler64.exe"; DestDir: "{app}"; Flags: ignoreversion
 
