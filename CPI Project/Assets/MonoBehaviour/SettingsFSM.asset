@@ -37,6 +37,8 @@ MonoBehaviour:
       Event: disable
     - Target: SettingsCustomGraphicsLoader
       Event: disable
+    - Target: SettingsControlsLoader
+      Event: disable
     Transitions:
     - Event: membershipInfo
       TargetState: MembershipInfo
@@ -58,6 +60,8 @@ MonoBehaviour:
       TargetState: Help
     - Event: graphics
       TargetState: CustomGraphics
+    - Event: controls
+      TargetState: AllControls
     OnExitEvents: []
   - Name: MembershipInfo
     OnEntryEvents:
@@ -142,6 +146,14 @@ MonoBehaviour:
   - Name: CustomGraphics
     OnEntryEvents:
     - Target: SettingsCustomGraphicsLoader
+      Event: enable
+    Transitions:
+    - Event: back
+      TargetState: Transition
+    OnExitEvents: []
+  - Name: AllControls
+    OnEntryEvents:
+    - Target: SettingsControlsLoader
       Event: enable
     Transitions:
     - Event: back
