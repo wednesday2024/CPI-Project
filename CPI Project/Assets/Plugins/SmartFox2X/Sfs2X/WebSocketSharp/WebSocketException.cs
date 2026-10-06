@@ -1,0 +1,57 @@
+using System;
+
+namespace Sfs2X.WebSocketSharp
+{
+	public class WebSocketException : Exception
+	{
+		private ushort _code;
+
+		public ushort Code => _code;
+
+		private WebSocketException(ushort code, string message, Exception innerException)
+			: base(message ?? code.GetErrorMessage(), innerException)
+		{
+			_code = code;
+		}
+
+		internal WebSocketException()
+			: this(CloseStatusCode.Abnormal, null, null)
+		{
+		}
+
+		internal WebSocketException(Exception innerException)
+			: this(CloseStatusCode.Abnormal, null, innerException)
+		{
+		}
+
+		internal WebSocketException(string message)
+			: this(CloseStatusCode.Abnormal, message, null)
+		{
+		}
+
+		internal WebSocketException(CloseStatusCode code)
+			: this(code, null, null)
+		{
+		}
+
+		internal WebSocketException(string message, Exception innerException)
+			: this(CloseStatusCode.Abnormal, message, innerException)
+		{
+		}
+
+		internal WebSocketException(CloseStatusCode code, Exception innerException)
+			: this(code, null, innerException)
+		{
+		}
+
+		internal WebSocketException(CloseStatusCode code, string message)
+			: this(code, message, null)
+		{
+		}
+
+		internal WebSocketException(CloseStatusCode code, string message, Exception innerException)
+			: this((ushort)code, message, innerException)
+		{
+		}
+	}
+}
