@@ -94,7 +94,7 @@ Shader "CpRemix/UI/CurvedBorderButtonWithShadow"
             {
                 v2f o;
                 o.pos = TransformObjectToHClip(v.vertex.xyz);
-                o.xlv_COLOR = v.color * _Color;          // Simplified color calculation
+                o.xlv_COLOR = v.color * _Color;
                 o.xlv_TEXCOORD0 = v.texcoord.xy;
                 return o;
             }
