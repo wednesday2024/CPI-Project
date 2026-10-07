@@ -243,11 +243,7 @@ namespace ClubPenguin.UI
 
 		private void OnTimerTick()
 		{
-			if (baitCount == 0 && tooltipInputButton.TooltipEnabled && tooltipInputButton.IsOpen && timerText != null)
-			{
-				tooltipInputButton.CloseTooltip();
-			}
-			else if (networkServiceManager != null)
+			if (networkServiceManager != null)
 			{
 				TimeSpan time = resetDailyDateTime - networkServiceManager.ServerDateTime;
 				if (time.TotalSeconds > 0.0)
