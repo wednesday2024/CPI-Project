@@ -143,6 +143,10 @@ namespace ClubPenguin.Igloo.UI
 			}
 		}
 
+		public void MarketplaceScreenIntroComplete()
+		{
+		}
+
 		private void getPlayers()
 		{
 			setStateOfSelectionButtons(InteractiveState.NonInteractive);
