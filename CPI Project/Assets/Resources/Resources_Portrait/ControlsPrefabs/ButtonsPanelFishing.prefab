@@ -1917,6 +1917,8 @@ GameObject:
   - component: {fileID: 114546683746571630}
   - component: {fileID: 95121383288793925}
   - component: {fileID: 114053509250248732}
+  - component: {fileID: 114053509250248733}
+  - component: {fileID: 114053509250248734}
   m_Layer: 5
   m_Name: Tooltip
   m_TagString: Untagged
@@ -2109,6 +2111,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114053509250248733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804988775303077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f1993f27e8ab7478249650db38b787, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: TutorialUI::ClubPenguin.TutorialUI.TutorialTooltipTMP
+  Bubble: {fileID: 0}
+  Pointer: {fileID: 0}
+  HeaderText: {fileID: 0}
+  SubHeaderText: {fileID: 0}
+  BodyText: {fileID: 0}
+  AutoDestroy: 0
+  ScreenPadding: 50
+--- !u!114 &114053509250248734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804988775303077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: ""
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!224 &224468906845572013
 RectTransform:
   m_ObjectHideFlags: 0
