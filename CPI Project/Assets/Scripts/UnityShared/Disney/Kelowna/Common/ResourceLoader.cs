@@ -7,12 +7,51 @@ namespace Disney.Kelowna.Common
 	{
 		public static TAsset Load(ref ContentManifest.AssetEntry entry)
 		{
-			UnityEngine.Object @object = Resources.Load(entry.Key, typeof(TAsset));
+			string resourcePath = ResourcePathResolver.Resolve(entry.Key, typeof(TAsset));
+			UnityEngine.Object @object = Resources.Load(resourcePath, typeof(TAsset));
 			if (@object == null)
 			{
-				throw new ArgumentException("Asset could not be loaded. Is the key correct? Key = " + entry.Key);
+				throw new ArgumentException("Asset could not be loaded. Is the key correct? Key = " + entry.Key + ", resolved path = " + resourcePath);
 			}
 			return (TAsset)(object)@object;
+		}
+	}
+
+	internal static class ResourcePathResolver
+	{
+		public static string Resolve(string key, Type assetType)
+		{
+			string orientationFolder = GetOrientationFolder();
+			if (!string.IsNullOrEmpty(orientationFolder))
+			{
+				string orientationPath = orientationFolder + "/" + key;
+				if (Resources.Load(orientationPath, assetType) != null)
+				{
+					return orientationPath;
+				}
+			}
+
+			return key;
+		}
+
+		private static string GetOrientationFolder()
+		{
+			switch (Application.platform)
+			{
+			case RuntimePlatform.Android:
+			case RuntimePlatform.IPhonePlayer:
+				return "resources_portrait";
+			case RuntimePlatform.WebGLPlayer:
+			case RuntimePlatform.WindowsPlayer:
+			case RuntimePlatform.OSXPlayer:
+			case RuntimePlatform.LinuxPlayer:
+			case RuntimePlatform.WindowsEditor:
+			case RuntimePlatform.OSXEditor:
+			case RuntimePlatform.LinuxEditor:
+				return "resources_landscape";
+			default:
+				return null;
+			}
 		}
 	}
 }

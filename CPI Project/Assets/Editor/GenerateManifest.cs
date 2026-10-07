@@ -135,10 +135,16 @@ public class GenerateManifest
                     if (lowerPath.Contains("textmesh pro/resources") || lowerPath.Contains("zfbrowser/"))
                         continue;
 
-                    if (!lowerPath.Contains("/resources/"))
+                    bool isOrientationResource = TryGetOrientationResourceFolder(assetPath, out string resourceOrientation, out string orientationFolder);
+                    if (!lowerPath.Contains("/resources/") && !isOrientationResource)
                         continue;
 
-                    string relative = GetRelativePathInResources(assetPath);
+                    if (isOrientationResource && !string.Equals(resourceOrientation, GetOrientationForPlatform(platformFolder), StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    string relative = isOrientationResource
+                        ? GetRelativePathInOrientationResourceFolder(assetPath, orientationFolder)
+                        : GetRelativePathInResources(assetPath);
                     if (string.IsNullOrEmpty(relative))
                         continue;
 
@@ -358,6 +364,14 @@ public class GenerateManifest
         return assetPath.Substring(idx + "/resources/".Length).Replace("\\", "/");
     }
 
+    private static string GetRelativePathInOrientationResourceFolder(string assetPath, string orientationFolder)
+    {
+        string normalizedPath = assetPath.Replace("\\", "/");
+        int idx = normalizedPath.IndexOf(orientationFolder + "/", StringComparison.OrdinalIgnoreCase);
+        if (idx == -1) return null;
+        return normalizedPath.Substring(idx + orientationFolder.Length + 1);
+    }
+
     private static bool TryGetLocalizedResourceGenericKey(string assetPartNoExt, out string genericKey)
     {
         for (int i = 0; i < localizedResourceLanguageSuffixes.Length; i++)
@@ -382,6 +396,34 @@ public class GenerateManifest
     private static string GetLocalizedResourceManifestLine(string genericKey, string ext)
     {
         return $"asset:{genericKey}?dl=res&x={ext.ToLowerInvariant()}&l=true&ld=en_US";
+    }
+
+    private static bool TryGetOrientationResourceFolder(string assetPath, out string orientation, out string folderName)
+    {
+        string normalizedPath = assetPath.Replace("\\", "/");
+        string[] variants = { "resources_portrait", "resources_landscape" };
+        foreach (string variant in variants)
+        {
+            if (normalizedPath.StartsWith(variant + "/", StringComparison.OrdinalIgnoreCase) ||
+                normalizedPath.IndexOf("/" + variant + "/", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                orientation = variant == "resources_portrait" ? "portrait" : "landscape";
+                folderName = variant;
+                return true;
+            }
+        }
+
+        orientation = null;
+        folderName = null;
+        return false;
+    }
+
+    private static string GetOrientationForPlatform(string platformFolder)
+    {
+        if (platformFolder == "android" || platformFolder == "ios")
+            return "portrait";
+
+        return "landscape";
     }
 
     private static string GetPlatformFolderFromActiveBuildTarget()
