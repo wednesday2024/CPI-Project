@@ -1,4 +1,4 @@
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_WEBGL
 using Disney.Kelowna.Common;
 using System.Collections;
 using System.Linq;
