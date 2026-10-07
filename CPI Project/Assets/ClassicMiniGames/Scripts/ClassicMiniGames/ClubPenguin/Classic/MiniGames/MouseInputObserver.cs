@@ -96,7 +96,7 @@ namespace ClubPenguin.Classic.MiniGames
 
             Vector2 currentMousePos = Mouse.current.position.ReadValue();
 
-            // Calculate delta and scaled speed (like classic Input.GetAxis)
+            
             Vector2 delta = currentMousePos - lastMousePos;
             float num = horizontalSpeed * delta.x * Time.deltaTime;
             float num2 = verticalSpeed * delta.y * Time.deltaTime;

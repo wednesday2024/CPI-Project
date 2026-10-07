@@ -14,7 +14,7 @@ namespace SmoothieSmash
 
         public event Action<Vector2, Vector2> SteeringChangedEvent;
 
-        private const float TouchSteeringMultiplier = 1.5f; // Increase for faster movement
+        private const float TouchSteeringMultiplier = 1.5f; 
 
         private Vector2? swipeStartPosition = null;
         private bool swipeDownTriggered = false;
@@ -48,7 +48,7 @@ namespace SmoothieSmash
                 {
                     float swipeDistance = touchPosition.y - swipeStartPosition.Value.y;
                     float requiredDistance = Screen.height * 0.5f;
-                    if (swipeDistance <= -requiredDistance) // Negative for downward swipe
+                    if (swipeDistance <= -requiredDistance) 
                     {
                         swipeDownTriggered = true;
                         OnSwipeDown();
@@ -167,7 +167,7 @@ namespace SmoothieSmash
 				}
 			}
 
-			// Keyboard must work even when a controller is connected.
+			
 			Vector2 vector = (keyboardVec != Vector2.zero) ? keyboardVec : gamepadVec;
 
 			if (vector != CurrentSteering && SteeringChangedEvent != null)

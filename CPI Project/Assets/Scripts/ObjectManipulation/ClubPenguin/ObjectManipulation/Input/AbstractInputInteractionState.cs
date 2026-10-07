@@ -39,39 +39,39 @@ namespace ClubPenguin.ObjectManipulation.Input
 
         public virtual int Update()
         {
-            int num = InputWrapper.touchCount; // Use InputWrapper for touch count
+            int num = InputWrapper.touchCount; 
 
             if (num == 1)
             {
                 TouchEquivalent touchEq = InputWrapper.GetTouch(0);
-                if (touchEq.Phase != UnityEngine.TouchPhase.Canceled) // Check if touch is valid
+                if (touchEq.Phase != UnityEngine.TouchPhase.Canceled) 
                 {
                     processOneTouch(touchEq);
                 }
-                return num; // Return early if touch is handled
+                return num; 
             }
-            else if (num == 2) // Handle two-finger input if needed, similar to DragAreaState
+            else if (num == 2) 
             {
                 return num;
             }
 
-            if (InputWrapper.GetMouseButton(0)) // Check if left mouse button is held down
+            if (InputWrapper.GetMouseButton(0)) 
             {
                 if (!EventSystem.current.IsPointerOverGameObject() && !IsScreenPointOverUI(InputWrapper.mousePosition))
                 {
                     processOneTouch(TouchEquivalent.FromLeftMouseButton(lastMousePositionWhenDown));
                     lastMousePositionWhenDown = InputWrapper.mousePosition;
                 }
-                num = 1; // Indicate that one input is active (mouse)
+                num = 1; 
             }
-            else if (InputWrapper.GetMouseButtonUp(0)) // Check if left mouse button was released
+            else if (InputWrapper.GetMouseButtonUp(0)) 
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     processOneTouch(TouchEquivalent.FromLeftMouseButton(lastMousePositionWhenDown));
                     lastMousePositionWhenDown = Vector3.zero;
                 }
-                num = 0; // No active input after release
+                num = 0; 
             }
             else
             {
@@ -151,7 +151,7 @@ namespace ClubPenguin.ObjectManipulation.Input
 
         public virtual int Update()
         {
-            // Ensure EnhancedTouch is enabled once
+            
             if (!enhancedTouchInitialized)
             {
                 if (!EnhancedTouchSupport.enabled)
@@ -164,10 +164,10 @@ namespace ClubPenguin.ObjectManipulation.Input
             int num = UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches.Count;
             if (num == 1)
             {
-                // If you need specific logic for single touch, implement here
+                
             }
 
-            // Mouse input using new Input System
+            
             if (Mouse.current != null && Mouse.current.leftButton.isPressed)
             {
                 num = 1;

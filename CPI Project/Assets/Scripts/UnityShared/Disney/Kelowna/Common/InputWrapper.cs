@@ -259,7 +259,7 @@ namespace Disney.Kelowna.Common
             get
             {
                 if (instance.fakeTouch.HasValue) return 1;
-                // Use EnhancedTouch if enabled, otherwise fallback (should always use new system)
+                
                 return EnhancedTouch.EnhancedTouchSupport.enabled ? EnhancedTouch.Touch.activeTouches.Count : 0;
             }
         }
@@ -271,7 +271,7 @@ namespace Disney.Kelowna.Common
                 if (instance.fakeMousePosition.HasValue)
                     return instance.fakeMousePosition.Value;
 
-                // Use Mouse.current from new Input System
+                
                 return Mouse.current != null ? (Vector3)Mouse.current.position.ReadValue() : Vector3.zero;
             }
         }
@@ -290,7 +290,7 @@ namespace Disney.Kelowna.Common
             var touches = EnhancedTouch.Touch.activeTouches;
             var touch = touches[index];
 
-            // You may want to track previous time for deltaTime, here we just pass 0
+            
             return TouchEquivalent.FromEnhancedTouch(touch, 0);
         }
 

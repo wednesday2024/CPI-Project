@@ -156,10 +156,10 @@ namespace JetpackReboot
 
 		private void Update()
 		{
-			// Use the new Input System for mouse and touch handling
+			
 			Vector3 mousePosition = Vector3.zero;
 
-			// Mouse input
+			
 			if (Mouse.current != null)
 			{
 				mousePosition = Mouse.current.position.ReadValue();
@@ -178,12 +178,12 @@ namespace JetpackReboot
 				OnTouchDrag(new Vector2(mousePosition.x, mousePosition.y));
 			}
 
-			// Touch input
+			
 			if (Touchscreen.current != null)
 			{
 				foreach (var touch in Touchscreen.current.touches)
 				{
-					// Only process active touches
+					
 					if (!touch.press.isPressed && !touch.press.wasPressedThisFrame && !touch.press.wasReleasedThisFrame)
 						continue;
 
@@ -216,7 +216,7 @@ namespace JetpackReboot
 
 		private bool IsTouchOrMouseClickOverUI(int _touchId)
 		{
-			// For mouse (_touchId == -1 or 0), and for touch (_touchId >= 0)
+			
 			if (EventSystem.current == null)
 				return false;
 

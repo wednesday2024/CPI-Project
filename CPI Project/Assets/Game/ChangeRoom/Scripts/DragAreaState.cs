@@ -242,7 +242,7 @@ namespace ClubPenguin.ClothingDesigner
 
         public virtual void UpdateState()
         {
-            // Touch input (new Input System)
+            
             if (Touchscreen.current != null && Touchscreen.current.touches.Count == 1 && PlatformUtils.GetPlatformType() != PlatformType.Standalone)
             {
                 var touchControl = Touchscreen.current.touches[0];
@@ -261,12 +261,12 @@ namespace ClubPenguin.ClothingDesigner
                     phase = phase,
                     position = touchControl.position.ReadValue(),
                     deltaPosition = Vector2.zero,
-                    tapCount = 0 // Not tracked in new Input System
+                    tapCount = 0 
                 };
                 ProcessOneTouch(touch);
                 return;
             }
-            // Two-finger touch (pinch/zoom)
+            
             if (Touchscreen.current != null && Touchscreen.current.touches.Count == 2)
             {
                 ProcessTwoTouchPinchAndZoom();

@@ -26,7 +26,7 @@ namespace Disney.Kelowna.Common
         public Vector2 RawPosition { get; init; }
         public int TapCount { get; init; }
 
-        private static bool DebugLoggingEnabled => false; // Set to true for debugging
+        private static bool DebugLoggingEnabled => false; 
 
         public static void Initialize()
         {
@@ -176,14 +176,14 @@ namespace Disney.Kelowna.Common
             }
         }
 
-        // This is for UnityEngine.InputSystem.EnhancedTouch.Touch
+        
         public static TouchEquivalent FromEnhancedTouch(EnhancedTouch.Touch touch, float prevTime = 0)
         {
             TouchEquivalent result = default(TouchEquivalent);
             result.fingerId = touch.finger.index;
             result.position = touch.screenPosition;
             result.rawPosition = touch.screenPosition;
-            // deltaTime workaround: use difference between current and previous touch time
+            
             result.deltaTime = prevTime > 0 ? (float)(touch.time - prevTime) : 0f;
             result.deltaPosition = touch.delta;
             result.phase = ConvertPhase(touch.phase);
@@ -191,7 +191,7 @@ namespace Disney.Kelowna.Common
             return result;
         }
 
-        // This is for mouse input
+        
         public static TouchEquivalent FromMouseButton(int buttonIndex, Vector3 lastMousePosition)
         {
             TouchEquivalent result = default(TouchEquivalent);
