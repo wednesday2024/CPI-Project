@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > ### Unity Version
-> - **Unity 6000.3.25f1 LTS**
+> - **Unity 6000.3.26f1 LTS**
 
  ## **Builds can be found here:**
  - [Builds](https://opencpisland.github.io/)
