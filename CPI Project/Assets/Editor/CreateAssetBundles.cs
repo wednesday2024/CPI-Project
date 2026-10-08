@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 using System.IO;
 using System;
 using System.Text;
@@ -114,26 +113,14 @@ public class CreateAssetBundles : MonoBehaviour
 
     private static bool SaveProject()
     {
-        for (int sceneIndex = 0; sceneIndex < SceneManager.sceneCount; sceneIndex++)
-        {
-            Scene scene = SceneManager.GetSceneAt(sceneIndex);
-            if (!scene.isDirty || string.IsNullOrEmpty(scene.path))
-            {
-                continue;
-            }
-
-            if (!EditorSceneManager.SaveScene(scene))
-            {
-                return false;
-            }
-        }
-
+        bool scenesSaved = EditorSceneManager.SaveOpenScenes();
         AssetDatabase.SaveAssets();
-        return true;
+        return scenesSaved;
     }
 
     private static bool SwitchPlatformReferences(string platform)
     {
+        SceneSetup[] sceneSetup = EditorSceneManager.GetSceneManagerSetup();
         bool usePortrait = platform == "android" || platform == "ios";
         string[] files = Directory.GetFiles(Application.dataPath, "*", SearchOption.AllDirectories);
 
@@ -173,6 +160,10 @@ public class CreateAssetBundles : MonoBehaviour
         finally
         {
             EditorUtility.ClearProgressBar();
+            if (sceneSetup.Length > 0)
+            {
+                EditorSceneManager.RestoreSceneManagerSetup(sceneSetup);
+            }
         }
 
         return true;
