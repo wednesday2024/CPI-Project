@@ -2,45 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using System.IO;
-using System;
-using System.Text;
 using Disney.Kelowna.Common;
 
 public class CreateAssetBundles : MonoBehaviour
 {
-    private sealed class PlatformGuidPair
-    {
-        public readonly string Landscape;
-        public readonly string Portrait;
-
-        public PlatformGuidPair(string landscape, string portrait)
-        {
-            Landscape = landscape;
-            Portrait = portrait;
-        }
-    }
-
-    private static readonly PlatformGuidPair[] platformGuidMap =
-    {
-        new PlatformGuidPair("da198753b02579940800ff30f3448aea", "bb5e05892a61daf45bf46e634114c649"),
-        new PlatformGuidPair("63f16fc003895eb4f862d5051eeeb0e9", "6b96bc0f6b303c0449f8b58e46771881"),
-        new PlatformGuidPair("76b050ca715275e4596879ba176c9fd3", "0ab5c1ee1574c57499a7f37d8e46218c"),
-        new PlatformGuidPair("d595192883b992546be6f86ff8feb8ac", "252ff1bc9c9161c47b44d33032878290"),
-        new PlatformGuidPair("0f139580c8cf9a7478563d532e65e6bf", "8d4785b95d210ea42b97188ee165d003"),
-        new PlatformGuidPair("bfdb4e3cf87607141bb1af4934fef6b4", "48e89a6caac727f479217b789ce0c553"),
-        new PlatformGuidPair("d6209b187784b3342a61ae6c048ae3e7", "d52e10999d0071d4a93bec1a3c9a38da")
-    };
-
     [MenuItem("Project/AssetBundles/Generated/Generate client side AssetBundles")]
     static void BuildAllAssetBundles()
     {
-        if (!SaveProject())
-        {
-            return;
-        }
-
         string platform = DetectAndSwitchPlatform();
 
         if (platform == "unknown")
@@ -49,14 +18,8 @@ public class CreateAssetBundles : MonoBehaviour
             return;
         }
 
-        if (!SwitchPlatformReferences(platform))
-        {
-            return;
-        }
-
         ModifyClientInfoAsset(platform);
         ModifyTextFile(platform);
-        AssetDatabase.SaveAssets();
 
         List<AssetBundleBuild> validAssetBundles = new List<AssetBundleBuild>();
 
@@ -109,91 +72,6 @@ public class CreateAssetBundles : MonoBehaviour
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
        // GenerateManifest.GenerateManifestFile();
-    }
-
-    private static bool SaveProject()
-    {
-        bool scenesSaved = EditorSceneManager.SaveOpenScenes();
-        AssetDatabase.SaveAssets();
-        return scenesSaved;
-    }
-
-    private static bool SwitchPlatformReferences(string platform)
-    {
-        SceneSetup[] sceneSetup = EditorSceneManager.GetSceneManagerSetup();
-        bool usePortrait = platform == "android" || platform == "ios";
-        string[] files = Directory.GetFiles(Application.dataPath, "*", SearchOption.AllDirectories);
-
-        try
-        {
-            for (int fileIndex = 0; fileIndex < files.Length; fileIndex++)
-            {
-                string file = files[fileIndex];
-                string relativePath = file.Substring(Application.dataPath.Length + 1).Replace('\\', '/');
-                EditorUtility.DisplayProgressBar(
-                    "Switching Platform References",
-                    platform + "  " + relativePath,
-                    files.Length == 0 ? 1f : (float)fileIndex / files.Length);
-
-                if (file.EndsWith(".meta", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                byte[] contents = File.ReadAllBytes(file);
-                bool changed = false;
-                foreach (PlatformGuidPair pair in platformGuidMap)
-                {
-                    string sourceGuid = usePortrait ? pair.Landscape : pair.Portrait;
-                    string targetGuid = usePortrait ? pair.Portrait : pair.Landscape;
-                    changed |= ReplaceGuidReferences(contents, sourceGuid, targetGuid);
-                }
-
-                if (changed)
-                {
-                    File.WriteAllBytes(file, contents);
-                }
-            }
-
-            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
-        }
-        finally
-        {
-            EditorUtility.ClearProgressBar();
-            if (sceneSetup.Length > 0)
-            {
-                EditorSceneManager.RestoreSceneManagerSetup(sceneSetup);
-            }
-        }
-
-        return true;
-    }
-
-    private static bool ReplaceGuidReferences(byte[] contents, string sourceGuid, string targetGuid)
-    {
-        byte[] source = Encoding.ASCII.GetBytes("guid: " + sourceGuid);
-        byte[] replacement = Encoding.ASCII.GetBytes("guid: " + targetGuid);
-        bool changed = false;
-
-        for (int index = 0; index <= contents.Length - source.Length; index++)
-        {
-            int offset = 0;
-            while (offset < source.Length && contents[index + offset] == source[offset])
-            {
-                offset++;
-            }
-
-            if (offset != source.Length)
-            {
-                continue;
-            }
-
-            Buffer.BlockCopy(replacement, 0, contents, index, replacement.Length);
-            index += source.Length - 1;
-            changed = true;
-        }
-
-        return changed;
     }
 
     private static string DetectAndSwitchPlatform()
