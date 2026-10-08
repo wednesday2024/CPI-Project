@@ -326,7 +326,6 @@ using System.Collections;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using static UnityEngine.Windows.Speech.PhraseRecognitionSystem;
 
 namespace Sfs2X.Core.Sockets
 {
