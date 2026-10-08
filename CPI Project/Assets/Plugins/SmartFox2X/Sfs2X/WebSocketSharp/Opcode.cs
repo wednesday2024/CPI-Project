@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	internal enum Opcode : byte
@@ -10,3 +12,4 @@ namespace Sfs2X.WebSocketSharp
 		Pong = 10
 	}
 }
+#endif

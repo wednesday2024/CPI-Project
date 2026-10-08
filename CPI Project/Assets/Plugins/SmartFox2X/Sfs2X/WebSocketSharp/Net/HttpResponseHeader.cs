@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	public enum HttpResponseHeader
@@ -38,3 +40,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		SecWebSocketVersion = 33
 	}
 }
+#endif

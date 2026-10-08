@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using Sfs2X.Util;
 
 namespace Sfs2X.Core
@@ -9,3 +11,4 @@ namespace Sfs2X.Core
 		void Decrypt(ByteArray data);
 	}
 }
+#endif

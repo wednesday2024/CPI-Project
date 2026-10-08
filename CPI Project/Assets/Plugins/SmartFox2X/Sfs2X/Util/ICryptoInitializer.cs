@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.Util
 {
 	public interface ICryptoInitializer
@@ -5,3 +7,4 @@ namespace Sfs2X.Util
 		void Run();
 	}
 }
+#endif

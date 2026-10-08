@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,3 +19,4 @@ namespace Sfs2X.Util
 		}
 	}
 }
+#endif

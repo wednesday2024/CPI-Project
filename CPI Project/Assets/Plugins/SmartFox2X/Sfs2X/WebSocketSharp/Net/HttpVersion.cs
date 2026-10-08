@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 
 namespace Sfs2X.WebSocketSharp.Net
@@ -9,3 +11,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		public static readonly Version Version11 = new Version(1, 1);
 	}
 }
+#endif

@@ -1,3 +1,4 @@
+#if UNITY_WEBGL
 using System;
 
 namespace Sfs2X.Exceptions
@@ -10,3 +11,17 @@ namespace Sfs2X.Exceptions
 		}
 	}
 }
+#else
+using System;
+
+namespace Sfs2X.Exceptions
+{
+    public class SFSCodecError : Exception
+    {
+        public SFSCodecError(string message)
+            : base(message)
+        {
+        }
+    }
+}
+#endif

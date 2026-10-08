@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	internal enum Rsv : byte
@@ -6,3 +8,4 @@ namespace Sfs2X.WebSocketSharp
 		On = 1
 	}
 }
+#endif

@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 using System.Collections.Generic;
 using Sfs2X.Core;
@@ -78,3 +80,4 @@ namespace Sfs2X.Util
 		}
 	}
 }
+#endif

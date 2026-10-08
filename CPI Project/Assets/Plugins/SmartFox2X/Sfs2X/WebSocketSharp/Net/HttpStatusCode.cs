@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	public enum HttpStatusCode
@@ -50,3 +52,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		HttpVersionNotSupported = 505
 	}
 }
+#endif

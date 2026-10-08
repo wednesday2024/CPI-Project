@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	internal enum LineState
@@ -7,3 +9,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		Lf = 2
 	}
 }
+#endif

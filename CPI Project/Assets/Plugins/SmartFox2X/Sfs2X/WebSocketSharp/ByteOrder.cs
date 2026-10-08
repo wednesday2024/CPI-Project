@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	public enum ByteOrder
@@ -6,3 +8,4 @@ namespace Sfs2X.WebSocketSharp
 		Big = 1
 	}
 }
+#endif

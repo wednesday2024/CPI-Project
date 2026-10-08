@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	public enum CloseStatusCode : ushort
@@ -17,3 +19,4 @@ namespace Sfs2X.WebSocketSharp
 		TlsHandshakeFailure = 1015
 	}
 }
+#endif

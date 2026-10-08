@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	public enum LogLevel
@@ -11,3 +13,4 @@ namespace Sfs2X.WebSocketSharp
 		None = 6
 	}
 }
+#endif

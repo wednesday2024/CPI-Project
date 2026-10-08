@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp
 {
 	public enum WebSocketState : ushort
@@ -9,3 +11,4 @@ namespace Sfs2X.WebSocketSharp
 		Closed = 4
 	}
 }
+#endif

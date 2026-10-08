@@ -1,3 +1,4 @@
+#if UNITY_WEBGL
 namespace Sfs2X.Requests
 {
 	public class ManualDisconnectionRequest : BaseRequest
@@ -16,3 +17,23 @@ namespace Sfs2X.Requests
 		}
 	}
 }
+#else
+namespace Sfs2X.Requests
+{
+    public class ManualDisconnectionRequest : BaseRequest
+    {
+        public ManualDisconnectionRequest()
+            : base(RequestType.ManualDisconnection)
+        {
+        }
+
+        public override void Validate(SmartFox sfs)
+        {
+        }
+
+        public override void Execute(SmartFox sfs)
+        {
+        }
+    }
+}
+#endif

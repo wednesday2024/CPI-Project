@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	internal enum InputChunkState
@@ -9,3 +11,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		End = 4
 	}
 }
+#endif

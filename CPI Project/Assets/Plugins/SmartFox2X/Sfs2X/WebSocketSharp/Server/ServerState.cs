@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Server
 {
 	internal enum ServerState
@@ -8,3 +10,4 @@ namespace Sfs2X.WebSocketSharp.Server
 		Stop = 3
 	}
 }
+#endif

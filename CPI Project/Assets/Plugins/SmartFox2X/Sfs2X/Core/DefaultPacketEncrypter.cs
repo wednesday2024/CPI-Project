@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System.IO;
 using System.Security.Cryptography;
 using Sfs2X.Bitswarm;
@@ -55,3 +57,4 @@ namespace Sfs2X.Core
 		}
 	}
 }
+#endif

@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 
 namespace Sfs2X.WebSocketSharp.Server
@@ -11,3 +13,4 @@ namespace Sfs2X.WebSocketSharp.Server
 		WebSocket WebSocket { get; }
 	}
 }
+#endif

@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 using System.Net.Security;
 using System.Security.Authentication;
@@ -146,3 +148,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		}
 	}
 }
+#endif

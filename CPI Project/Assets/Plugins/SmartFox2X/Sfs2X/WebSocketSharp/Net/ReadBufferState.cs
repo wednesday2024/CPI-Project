@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	internal class ReadBufferState
@@ -82,3 +84,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		}
 	}
 }
+#endif

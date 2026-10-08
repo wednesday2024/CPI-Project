@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -492,3 +494,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		}
 	}
 }
+#endif

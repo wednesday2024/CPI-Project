@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 
 namespace Sfs2X.WebSocketSharp.Net
@@ -14,3 +16,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		MultiValueInResponse = 0x20
 	}
 }
+#endif

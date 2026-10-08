@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	internal enum InputState
@@ -6,3 +8,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		Headers = 1
 	}
 }
+#endif

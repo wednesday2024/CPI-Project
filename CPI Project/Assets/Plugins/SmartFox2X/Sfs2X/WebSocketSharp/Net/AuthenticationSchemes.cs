@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 namespace Sfs2X.WebSocketSharp.Net
 {
 	public enum AuthenticationSchemes
@@ -8,3 +10,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		Anonymous = 0x8000
 	}
 }
+#endif

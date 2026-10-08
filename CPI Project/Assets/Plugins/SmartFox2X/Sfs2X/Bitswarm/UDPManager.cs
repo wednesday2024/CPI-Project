@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -254,3 +256,4 @@ namespace Sfs2X.Bitswarm
 		}
 	}
 }
+#endif

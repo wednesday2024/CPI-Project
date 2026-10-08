@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+#else
 using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
@@ -39,3 +41,4 @@ namespace Sfs2X.WebSocketSharp.Net
 		}
 	}
 }
+#endif

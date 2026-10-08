@@ -1,3 +1,4 @@
+#if UNITY_WEBGL
 namespace SFSLitJson
 {
 	public enum JsonType
@@ -12,3 +13,19 @@ namespace SFSLitJson
 		Boolean = 7
 	}
 }
+#else
+namespace SFSLitJson
+{
+    public enum JsonType
+    {
+        None = 0,
+        Object = 1,
+        Array = 2,
+        String = 3,
+        Int = 4,
+        Long = 5,
+        Double = 6,
+        Boolean = 7
+    }
+}
+#endif
