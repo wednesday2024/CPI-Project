@@ -12,9 +12,13 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 
 		private const int MAX_STANDALONE_RENDER_SIZE = 4096;
 
+		#if UNITY_ANDROID || UNITY_IOS
+        private const int ANTI_ALIASING_2 = 4;
+		#else
 		private const int ANTI_ALIASING_2 = 8;
+		#endif
 
-		public int MaxRenderTextureSize;
+        public int MaxRenderTextureSize;
 
 		public AnimationCurve OutlinerAnimationCurve;
 
