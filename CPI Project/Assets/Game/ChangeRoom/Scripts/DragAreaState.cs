@@ -26,7 +26,7 @@ namespace ClubPenguin.ClothingDesigner
                 result.position = touchEq.Position;
                 result.deltaPosition = touchEq.DeltaPosition;
                 result.tapCount = touchEq.TapCount;
-                Debug.Log($"ITouch.FromTouchEquivalent: phase={result.phase}, position={result.position}, delta={result.deltaPosition}, tapCount={result.tapCount}");
+                /*Debug.Log($"ITouch.FromTouchEquivalent: phase={result.phase}, position={result.position}, delta={result.deltaPosition}, tapCount={result.tapCount}");*/
                 return result;
             }
 
@@ -77,7 +77,7 @@ namespace ClubPenguin.ClothingDesigner
                 result.position = mousePosition;
                 result.deltaPosition = mousePosition - (Vector2)lastPosition;
                 lastPosition = mousePosition;
-                Debug.Log($"ITouch.FromMouse: phase={result.phase}, position={result.position}, delta={result.deltaPosition}, tapCount={result.tapCount}");
+                /*Debug.Log($"ITouch.FromMouse: phase={result.phase}, position={result.position}, delta={result.deltaPosition}, tapCount={result.tapCount}");*/
                 return result;
             }
         }
@@ -121,7 +121,7 @@ namespace ClubPenguin.ClothingDesigner
         {
             if (InputWrapper.touchCount < 2)
             {
-                Debug.LogWarning("ProcessTwoTouchPinchAndZoom: Not enough touches");
+                /*Debug.LogWarning("ProcessTwoTouchPinchAndZoom: Not enough touches");*/
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace ClubPenguin.ClothingDesigner
             float prevDist = Vector2.Distance(prevPos0, prevPos1);
             float pinchDelta = currentDist - prevDist;
 
-            Debug.Log($"ProcessTwoTouchPinchAndZoom: pinchDelta={pinchDelta}, touch0.phase={touch0.Phase}, touch1.phase={touch1.Phase}");
+            /*Debug.Log($"ProcessTwoTouchPinchAndZoom: pinchDelta={pinchDelta}, touch0.phase={touch0.Phase}, touch1.phase={touch1.Phase}");*/
         }
 
         protected bool checkButtonDrag(Vector2 dragDelta)
