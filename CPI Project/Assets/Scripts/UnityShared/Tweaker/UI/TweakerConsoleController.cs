@@ -22,6 +22,8 @@ namespace Tweaker.UI
 
 		private KeyBindingManager keyBindingManager;
 
+		private bool debugGestureWasActive;
+
 		public Tweaker Tweaker
 		{
 			get;
@@ -150,43 +152,48 @@ namespace Tweaker.UI
 		{
 			while (true)
 			{
-				float timer = 0f;
-				while (timer < 1f)
+				bool debugGestureIsActive = IsDebugGestureActive();
+				if (debugGestureIsActive && !debugGestureWasActive)
 				{
-					if (Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
-					{
-					}
-					timer += Time.deltaTime;
-					yield return null;
+					ShowConsole();
 				}
-				if (IsScreenTouched())
-				{
-				}
+				debugGestureWasActive = debugGestureIsActive;
+				yield return null;
 			}
 		}
 
-		private bool IsScreenTouched()
+		private bool IsDebugGestureActive()
 		{
-			bool flag = false;
-			bool flag2 = false;
+			bool hasTopLeftTouch = false;
+			bool hasBottomRightTouch = false;
 			var touchscreen = Touchscreen.current;
-			if (touchscreen != null && touchscreen.touches.Count >= 2)
+			if (touchscreen == null || Screen.width <= 0 || Screen.height <= 0)
 			{
-				for (int i = 0; i < touchscreen.touches.Count; i++)
+				return false;
+			}
+
+			for (int i = 0; i < touchscreen.touches.Count; i++)
+			{
+				var touch = touchscreen.touches[i];
+				if (!touch.press.isPressed)
 				{
-					var touch = touchscreen.touches[i].ReadValue();
-					float num = touch.position.y / (float)Screen.height;
-					if (num < 0.2f)
-					{
-						flag = true;
-					}
-					else if (num > 0.8f)
-					{
-						flag2 = true;
-					}
+					continue;
+				}
+
+				Vector2 position = touch.position.ReadValue();
+				float normalizedX = position.x / Screen.width;
+				float normalizedY = position.y / Screen.height;
+				if (normalizedX < 0.2f && normalizedY > 0.8f)
+				{
+					hasTopLeftTouch = true;
+				}
+				else if (normalizedX > 0.8f && normalizedY < 0.2f)
+				{
+					hasBottomRightTouch = true;
 				}
 			}
-			return flag && flag2;
+
+			return hasTopLeftTouch && hasBottomRightTouch;
 		}
 	}
 }
@@ -214,6 +221,8 @@ namespace Tweaker.UI
 
 		private KeyBindingManager keyBindingManager;
 
+		private bool debugGestureWasActive;
+
 		public Tweaker Tweaker
 		{
 			get;
@@ -342,45 +351,53 @@ namespace Tweaker.UI
 		{
 			while (true)
 			{
-				float timer = 0f;
-				while (timer < 1f)
+				if (Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
 				{
-					if (Keyboard.current != null && Keyboard.current.backquoteKey.wasPressedThisFrame)
-					{
-						base.gameObject.SetActive(!base.gameObject.activeSelf);
-					}
-					timer += Time.deltaTime;
-					yield return null;
+					base.gameObject.SetActive(!base.gameObject.activeSelf);
 				}
-				if (IsScreenTouched())
+
+				bool debugGestureIsActive = IsDebugGestureActive();
+				if (debugGestureIsActive && !debugGestureWasActive)
 				{
 					ShowConsole();
 				}
+				debugGestureWasActive = debugGestureIsActive;
+				yield return null;
 			}
 		}
 
-		private bool IsScreenTouched()
+		private bool IsDebugGestureActive()
 		{
-			bool flag = false;
-			bool flag2 = false;
+			bool hasTopLeftTouch = false;
+			bool hasBottomRightTouch = false;
 			var touchscreen = Touchscreen.current;
-			if (touchscreen != null && touchscreen.touches.Count >= 2)
+			if (touchscreen == null || Screen.width <= 0 || Screen.height <= 0)
 			{
-				for (int i = 0; i < touchscreen.touches.Count; i++)
+				return false;
+			}
+
+			for (int i = 0; i < touchscreen.touches.Count; i++)
+			{
+				var touch = touchscreen.touches[i];
+				if (!touch.press.isPressed)
 				{
-					var touch = touchscreen.touches[i].ReadValue();
-					float num = touch.position.y / (float)Screen.height;
-					if (num < 0.2f)
-					{
-						flag = true;
-					}
-					else if (num > 0.8f)
-					{
-						flag2 = true;
-					}
+					continue;
+				}
+
+				Vector2 position = touch.position.ReadValue();
+				float normalizedX = position.x / Screen.width;
+				float normalizedY = position.y / Screen.height;
+				if (normalizedX < 0.2f && normalizedY > 0.8f)
+				{
+					hasTopLeftTouch = true;
+				}
+				else if (normalizedX > 0.8f && normalizedY < 0.2f)
+				{
+					hasBottomRightTouch = true;
 				}
 			}
-			return flag && flag2;
+
+			return hasTopLeftTouch && hasBottomRightTouch;
 		}
 	}
 }
