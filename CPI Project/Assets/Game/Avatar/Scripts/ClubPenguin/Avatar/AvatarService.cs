@@ -129,8 +129,12 @@ namespace ClubPenguin.Avatar
 			yield return null;
 			int renderTextureSize = Mathf.Min(Mathf.ClosestPowerOfTwo(curSize), maxAtlasDimension);
 			request.Atlas = new RenderTexture(renderTextureSize, renderTextureSize, 0, RenderTextureFormat.ARGB32);
+			#if UNITY_ANDROID || UNITY_IOS
+            request.Atlas.antiAliasing = 4;
+			#else
 			request.Atlas.antiAliasing = 8;
-			request.Atlas.isPowerOfTwo = true;
+			#endif
+            request.Atlas.isPowerOfTwo = true;
 			request.Atlas.filterMode = FilterMode.Trilinear;
 			request.Atlas.anisoLevel = 16;
 			request.Atlas.useMipMap = false;
