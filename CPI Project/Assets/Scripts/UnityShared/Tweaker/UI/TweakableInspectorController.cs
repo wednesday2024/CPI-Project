@@ -73,7 +73,7 @@ namespace Tweaker.UI
 					yield return contentFactory.MakeEditSerializedStringView(tweakable, gridController.Console.Serializer);
 				}
 			}
-			if (tweakable.HasStep)
+			if (tweakable.HasStep && !TweakerFlagsUtil.IsSet(TweakableUIFlags.HideStepper, tweakable))
 			{
 				yield return contentFactory.MakeStepperView(tweakable);
 			}

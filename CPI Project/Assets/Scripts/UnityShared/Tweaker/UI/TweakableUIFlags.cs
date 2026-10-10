@@ -7,6 +7,7 @@ namespace Tweaker.UI
 	{
 		None = 0x0,
 		HideRangeSlider = 0x1,
-		RethrowExceptions = 0x2
+		RethrowExceptions = 0x2,
+		HideStepper = 0x4
 	}
 }

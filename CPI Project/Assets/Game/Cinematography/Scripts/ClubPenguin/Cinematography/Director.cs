@@ -2,6 +2,7 @@ using ClubPenguin.Core;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using Tweaker.Core;
+using Tweaker.UI;
 using UnityEngine;
 
 namespace ClubPenguin.Cinematography
@@ -54,6 +55,34 @@ namespace ClubPenguin.Cinematography
 
 		[Tweakable("Debug.ShowCameraControllers")]
 		public static bool ShowCameraControllers;
+
+		private static float gameplayCameraFieldOfView = 60f;
+
+		[Tweakable("Cinematography.FieldOfView", Description = "Sets the gameplay camera field of view. Portrait uses a FOV of 60 and Landscape uses a FOV of 40.")]
+		[PublicTweak]
+		[TweakerRange(5f, 120f)]
+		[StepSize(0.5f)]
+		[TweakableUIFlags(TweakableUIFlags.HideStepper)]
+		public static float GameplayCameraFieldOfView
+		{
+			get
+			{
+				Camera gameplayCamera = SceneRefs.Get<Camera>();
+				return gameplayCamera != null ? gameplayCamera.fieldOfView : gameplayCameraFieldOfView;
+			}
+			set
+			{
+				gameplayCameraFieldOfView = Mathf.Clamp(Mathf.Round(value * 2f) * 0.5f, 5f, 120f);
+				Camera gameplayCamera = SceneRefs.Get<Camera>();
+				if (gameplayCamera == null)
+				{
+					Debug.LogWarning("Cannot set the gameplay camera field of view because the camera is unavailable.");
+					return;
+				}
+
+				gameplayCamera.fieldOfView = gameplayCameraFieldOfView;
+			}
+		}
 
 		public bool InCinematicContext
 		{
