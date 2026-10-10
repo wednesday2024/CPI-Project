@@ -129,7 +129,11 @@ namespace ClubPenguin
 		private RenderTexture createRenderTexture()
 		{
 			RenderTexture renderTexture = new RenderTexture((int)config.TextureDimensions.x, (int)config.TextureDimensions.y, 24, RenderTextureFormat.ARGB32);
+			#if UNITY_ANDROID || UNITY_IOS
+			renderTexture.antiAliasing = 4;
+			#else
 			renderTexture.antiAliasing = 8;
+			#endif
 			return renderTexture;
 		}
 
