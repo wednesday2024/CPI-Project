@@ -16,6 +16,8 @@ namespace Disney.Kelowna.Common
 
 			public int RefCount = 0;
 
+			public bool IsAddressable;
+
 			public override string ToString()
 			{
 				return string.Format("[Item] Value='{0}', Refcount={1}", Value, RefCount);
@@ -40,14 +42,18 @@ namespace Disney.Kelowna.Common
 
 		private readonly Action<T, List<UnityEngine.Object>> releaseDelegate;
 
+		private readonly bool usesDefaultReleaseDelegate;
+
 		public ContentCache()
 		{
 			releaseDelegate = DefaultReleaseDelegate;
+			usesDefaultReleaseDelegate = true;
 		}
 
 		public ContentCache(Action<T, List<UnityEngine.Object>> releaseDelegate)
 		{
 			this.releaseDelegate = releaseDelegate;
+			usesDefaultReleaseDelegate = false;
 		}
 
 		public static void DefaultReleaseDelegate(T value, List<UnityEngine.Object> subObjects)
@@ -63,9 +69,11 @@ namespace Disney.Kelowna.Common
 		{
 			if (Content.ContainsKey(content.Key))
 			{
+				bool isAddressableAsset = Content.RetainAddressableAsset(content.Key);
 				Item item;
 				if (cache.TryGetValue(content.Key, out item))
 				{
+					item.IsAddressable = isAddressableAsset;
 					if ((UnityEngine.Object)item.Value == (UnityEngine.Object)null)
 					{
 					}
@@ -78,6 +86,7 @@ namespace Disney.Kelowna.Common
 				else
 				{
 					item = new Item();
+					item.IsAddressable = isAddressableAsset;
 					cache.Add(content.Key, item);
 					item.RefCount = 1;
 					AssetRequest<T> assetRequest = Content.LoadAsync(content);
@@ -87,7 +96,10 @@ namespace Disney.Kelowna.Common
 					}
 					if (item.RefCount <= 0)
 					{
-						releaseDelegate.InvokeSafe(assetRequest.Asset, new List<UnityEngine.Object>());
+						if (!usesDefaultReleaseDelegate || !item.IsAddressable)
+						{
+							releaseDelegate.InvokeSafe(assetRequest.Asset, new List<UnityEngine.Object>());
+						}
 						onAcquired(null);
 						yield break;
 					}
@@ -142,6 +154,11 @@ namespace Disney.Kelowna.Common
 			Item value;
 			if (cache.TryGetValue(content.Key, out value))
 			{
+				bool isAddressableAsset = value.IsAddressable;
+				if (isAddressableAsset)
+				{
+					Content.ReleaseAddressableAsset(content.Key);
+				}
 				if (value.RefCount <= 0)
 				{
 					Log.LogErrorFormatted(this, "Releasing a key '{0}' with refcount <= 0!", content.Key);
@@ -158,7 +175,10 @@ namespace Disney.Kelowna.Common
 					{
 						Log.LogErrorFormatted(this, "Releasing asset '{0}': Value is a destroyed object!", content);
 					}
-					releaseDelegate.InvokeSafe(value.Value, arg);
+					if (!usesDefaultReleaseDelegate || !isAddressableAsset)
+					{
+						releaseDelegate.InvokeSafe(value.Value, arg);
+					}
 					value.Value = null;
 					cache.Remove(content.Key);
 					result = true;

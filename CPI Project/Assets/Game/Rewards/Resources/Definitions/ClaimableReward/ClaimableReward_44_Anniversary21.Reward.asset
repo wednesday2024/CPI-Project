@@ -17,7 +17,15 @@ MonoBehaviour:
     Amount: 200
   MascotXP: []
   Collectibles: []
-  ConsumableInstances: []
+  ConsumableInstances:
+  - Consumable: {fileID: 11400000, guid: 43006f4586b28a34e982e08125b35d0f, type: 2}
+    Count: 4
+  - Consumable: {fileID: 11400000, guid: 88cb2e94b43ff324d92cb73f3ae2ebcb, type: 2}
+    Count: 4
+  - Consumable: {fileID: 11400000, guid: 586add5551a32d44b92cfd54edbced99, type: 2}
+    Count: 4
+  - Consumable: {fileID: 11400000, guid: babd96f5cf6ab344d9cc58eba771af9e, type: 2}
+    Count: 4
   Decals: []
   Fabrics:
   - Definition: {fileID: 11400000, guid: e0214ebf77b5b7544bf88d9134d37e8e, type: 2}

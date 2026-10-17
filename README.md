@@ -2,7 +2,7 @@
 
 > [!IMPORTANT]
 > ### Unity Version
-> - **Unity 6000.3.25f1 LTS**
+> - **Unity 6000.3.26f1 LTS**
 
  ## **Builds can be found here:**
  - [Builds](https://opencpisland.github.io/)
@@ -29,10 +29,10 @@
 
  ### Notes
  - **The Penguin data gets stored here in the Windows Registry:**  
-  - **Built .exe client:** `HKEY_CURRENT_USER\SOFTWARE\OpenCPI\CP Island`  
-  - **Unity Editor:** `HKEY_CURRENT_USER\SOFTWARE\Unity\UnityEditor\OpenCPI\CP Island`
+  - **Built .exe client:** `HKEY_CURRENT_USER\SOFTWARE\OpenCPI Interactive\CP Island`  
+  - **Unity Editor:** `HKEY_CURRENT_USER\SOFTWARE\Unity\UnityEditor\OpenCPI Interactive\CP Island`
  - **The Penguin data gets stored here on Linux for the built client but the Editor path is currently unknown because we had to rewrite the data paths to play more nicely with Linux:**
-  - `/home/your_username/.config/unity3d/OpenCPI/CP Island/prefs`
+  - `/home/your_username/.config/unity3d/OpenCPI Interactive/CP Island/prefs`
  - To launch the game in the Unity editor:
    - Open `Assets/Game/Core/Scenes/Boot.unity`
   - Hit the Play button.
@@ -209,6 +209,8 @@
 > [Minileandro](https://github.com/Minileandro)
 
 > [Thunder](https://github.com/Ivorplayz)
+
+> [Koloway](https://github.com/Koloway)
 
 > [Maksim](https://github.com/loozmax)
 

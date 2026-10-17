@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Disney.Kelowna.Common
 {
@@ -18,6 +20,12 @@ namespace Disney.Kelowna.Common
 		private readonly Dictionary<string, BundleMount> unmountingBundles;
 
 		private readonly ICoroutine monitorCoroutine;
+
+		private readonly Dictionary<string, CachedAddressable> addressableAssets = new Dictionary<string, CachedAddressable>();
+
+		private readonly Dictionary<string, int> addressableReferenceCounts = new Dictionary<string, int>();
+
+		private readonly HashSet<string> pinnedAddressableBundles = new HashSet<string>();
 
 		public int UnmountFrameCount = 250;
 
@@ -42,6 +50,120 @@ namespace Disney.Kelowna.Common
 				monitorCoroutine.Cancel();
 			}
 			UnmountAllBundles();
+			foreach (CachedAddressable cachedAddressable in addressableAssets.Values)
+			{
+				if (cachedAddressable.Handle.IsValid())
+				{
+					Addressables.Release(cachedAddressable.Handle);
+				}
+			}
+			addressableAssets.Clear();
+			addressableReferenceCounts.Clear();
+		}
+
+		public AsyncOperationHandle<TAsset> LoadAddressableAsync<TAsset>(string assetKey, string bundleKey, string address) where TAsset : class
+		{
+			CachedAddressable cachedAddressable;
+			if (addressableAssets.TryGetValue(assetKey, out cachedAddressable))
+			{
+				cachedAddressable.LastLoadFrame = Time.frameCount;
+				return cachedAddressable.Handle.Convert<TAsset>();
+			}
+			AsyncOperationHandle<TAsset> handle = Addressables.LoadAssetAsync<TAsset>(address);
+			addressableAssets.Add(assetKey, new CachedAddressable(handle, bundleKey));
+			return handle;
+		}
+
+		public AsyncOperationHandle DownloadAddressableDependencies(string assetKey, string bundleKey, string address)
+		{
+			CachedAddressable cachedAddressable;
+			if (addressableAssets.TryGetValue(assetKey, out cachedAddressable))
+			{
+				cachedAddressable.LastLoadFrame = Time.frameCount;
+				return cachedAddressable.Handle;
+			}
+			AsyncOperationHandle handle = Addressables.DownloadDependenciesAsync(address);
+			addressableAssets.Add(assetKey, new CachedAddressable(handle, bundleKey));
+			return handle;
+		}
+
+		public TAsset LoadAddressableImmediate<TAsset>(string assetKey, string bundleKey, string address) where TAsset : class
+		{
+#if UNITY_WEBGL
+			throw new InvalidOperationException("Addressable assets must be loaded asynchronously on WebGL.");
+#else
+			AsyncOperationHandle<TAsset> handle = LoadAddressableAsync<TAsset>(assetKey, bundleKey, address);
+			TAsset asset = handle.WaitForCompletion();
+			if (handle.Status != AsyncOperationStatus.Succeeded)
+			{
+				throw handle.OperationException ?? new InvalidOperationException("Addressable asset load failed: " + address);
+			}
+			return asset;
+#endif
+		}
+
+		public void RetainAddressable(string assetKey)
+		{
+			int referenceCount;
+			addressableReferenceCounts.TryGetValue(assetKey, out referenceCount);
+			addressableReferenceCounts[assetKey] = referenceCount + 1;
+			CachedAddressable cachedAddressable;
+			if (addressableAssets.TryGetValue(assetKey, out cachedAddressable))
+			{
+				cachedAddressable.LastLoadFrame = Time.frameCount;
+			}
+		}
+
+		public void ReleaseAddressableReference(string assetKey)
+		{
+			int referenceCount;
+			if (!addressableReferenceCounts.TryGetValue(assetKey, out referenceCount))
+			{
+				return;
+			}
+			if (referenceCount <= 1)
+			{
+				addressableReferenceCounts.Remove(assetKey);
+				CachedAddressable cachedAddressable;
+				if (addressableAssets.TryGetValue(assetKey, out cachedAddressable))
+				{
+					cachedAddressable.LastLoadFrame = Time.frameCount;
+				}
+			}
+			else
+			{
+				addressableReferenceCounts[assetKey] = referenceCount - 1;
+			}
+		}
+
+		public bool ReleaseAddressable(string assetKey)
+		{
+			if (addressableReferenceCounts.ContainsKey(assetKey))
+			{
+				return false;
+			}
+			CachedAddressable cachedAddressable;
+			if (addressableAssets.TryGetValue(assetKey, out cachedAddressable))
+			{
+				if (cachedAddressable.Handle.IsValid())
+				{
+					Addressables.Release(cachedAddressable.Handle);
+				}
+				addressableAssets.Remove(assetKey);
+			}
+			return true;
+		}
+
+		public void SetAddressableBundlePinned(string bundleKey, bool isPinned)
+		{
+			if (isPinned)
+			{
+				pinnedAddressableBundles.Add(bundleKey);
+			}
+			else
+			{
+				pinnedAddressableBundles.Remove(bundleKey);
+			}
 		}
 
 		public BundleMount MountBundle(string bundleKey, AssetBundle bundle, bool pinned = false)
@@ -241,6 +363,21 @@ namespace Disney.Kelowna.Common
 
 		public void UnmountUnusedBundles()
 		{
+			List<string> addressablesToRelease = new List<string>();
+			foreach (KeyValuePair<string, CachedAddressable> addressableAsset in addressableAssets)
+			{
+				CachedAddressable cachedAddressable = addressableAsset.Value;
+				if (!addressableReferenceCounts.ContainsKey(addressableAsset.Key) &&
+					!pinnedAddressableBundles.Contains(cachedAddressable.BundleKey) &&
+					Time.frameCount - cachedAddressable.LastLoadFrame >= UnmountFrameCount)
+				{
+					addressablesToRelease.Add(addressableAsset.Key);
+				}
+			}
+			for (int i = 0; i < addressablesToRelease.Count; i++)
+			{
+				ReleaseAddressable(addressablesToRelease[i]);
+			}
 			foreach (KeyValuePair<string, BundleMount> mountedBundle in mountedBundles)
 			{
 				BundleMount value = mountedBundle.Value;
@@ -258,6 +395,22 @@ namespace Disney.Kelowna.Common
 				UnmountBundle(bundlesToUnmount[i].Key, false);
 			}
 			bundlesToUnmount.Clear();
+		}
+
+		private sealed class CachedAddressable
+		{
+			public AsyncOperationHandle Handle;
+
+			public string BundleKey;
+
+			public int LastLoadFrame;
+
+			public CachedAddressable(AsyncOperationHandle handle, string bundleKey)
+			{
+				Handle = handle;
+				BundleKey = bundleKey;
+				LastLoadFrame = Time.frameCount;
+			}
 		}
 	}
 }

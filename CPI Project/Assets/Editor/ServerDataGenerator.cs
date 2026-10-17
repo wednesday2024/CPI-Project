@@ -16,7 +16,11 @@ using UnityEngine.SceneManagement;
 public static class ServerDataGenerator
 {
     private const string OutputDirectory = "Assets/Generated/Export/ServerData/";
-    private const string ScheduledEventDatesPath = "Assets/Game/Resources/Definitions/ScheduledEventDates";
+    private static readonly string[] ReserializeAssetPaths =
+    {
+        "Assets/Game/Resources/Definitions/ScheduledEventDates",
+        "Assets/Game/World/Resources/Definitions/Scene"
+    };
 
     [MenuItem("Project/Server Data/Generate JSONs")]
     private static void GenerateFromMenu()
@@ -42,7 +46,7 @@ public static class ServerDataGenerator
         List<string> results = new List<string>();
         try
         {
-            ForceReserializeScheduledEventDates();
+            ForceReserializeServerDataAssets();
 
             for (int i = 0; i < configs.Count; i++)
             {
@@ -92,9 +96,9 @@ public static class ServerDataGenerator
         EditorUtility.DisplayDialog("Server Data JSON", "Generated " + results.Count + " JSON files in:\n" + absoluteOutputDirectory, "OK");
     }
 
-    private static void ForceReserializeScheduledEventDates()
+    private static void ForceReserializeServerDataAssets()
     {
-        string[] assetPaths = AssetDatabase.FindAssets("", new[] { ScheduledEventDatesPath })
+        string[] assetPaths = AssetDatabase.FindAssets("", ReserializeAssetPaths)
             .Select(AssetDatabase.GUIDToAssetPath)
             .Where(path => !AssetDatabase.IsValidFolder(path))
             .ToArray();

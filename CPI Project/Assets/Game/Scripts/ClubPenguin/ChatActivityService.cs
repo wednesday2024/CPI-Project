@@ -1,5 +1,4 @@
-using ClubPenguin.Avatar;
-using ClubPenguin.ClothingDesigner.Inventory;
+using ClubPenguin.ClothingDesigner;
 using ClubPenguin.Core;
 using ClubPenguin.Net;
 using ClubPenguin.Net.Domain;
@@ -187,24 +186,77 @@ namespace ClubPenguin
                 return;
             }
 
+            AddEquipmentToInventory(definitionId);
+        }
+
+        public void AddEquipmentToInventory(int definitionId)
+        {
+            addEquipmentToInventory(definitionId, true);
+        }
+
+        public void AddEquipmentFromTweaker(int definitionId)
+        {
+            addEquipmentToInventory(definitionId, false);
+        }
+
+        private void addEquipmentToInventory(int definitionId, bool notifyChat)
+        {
             Dictionary<int, TemplateDefinition> templates = Service.Get<GameData>().Get<Dictionary<int, TemplateDefinition>>();
             TemplateDefinition templateDef;
             if (templates == null || !templates.TryGetValue(definitionId, out templateDef) || templateDef == null)
             {
-                postSystemChatError();
+                reportGrantError(notifyChat, "The requested template is unavailable.");
                 return;
             }
 
-            DCustomEquipment equipment = default(DCustomEquipment);
-            equipment.DefinitionId = definitionId;
-            equipment.Name = templateDef.AssetName;
-            equipment.Parts = new DCustomEquipmentPart[0];
-            equipment.DateTimeCreated = DateTime.UtcNow.Ticks;
+            Reward reward = new Reward();
+            reward.Add(new EquipmentInstanceReward(templateDef.Id));
+            Service.Get<INetworkServicesManager>().RewardService.QA_SetReward(reward);
+            if (notifyChat)
+            {
+                postSystemChatGrantedEquipment();
+            }
+        }
 
-            CustomEquipment request = CustomEquipmentResponseAdaptor.ConvertCustomEquipmentToRequest(equipment);
+        public void AddAllEquipmentToInventory()
+        {
+            startAddingAllEquipment(true);
+        }
 
-            dispatcher.AddListener<InventoryServiceEvents.EquipmentCreated>(onEquipmentCreated);
-            Service.Get<INetworkServicesManager>().InventoryService.CreateCustomEquipment(request);
+        public void AddAllEquipmentFromTweaker()
+        {
+            startAddingAllEquipment(false);
+        }
+
+        private void startAddingAllEquipment(bool notifyChat)
+        {
+            Dictionary<int, TemplateDefinition> templates = Service.Get<GameData>().Get<Dictionary<int, TemplateDefinition>>();
+            if (templates == null || templates.Count == 0)
+            {
+                reportGrantError(notifyChat, "No templates are available.");
+                return;
+            }
+
+            Reward reward = new Reward();
+            foreach (TemplateDefinition template in templates.Values)
+            {
+                if (template != null)
+                {
+                    reward.Add(new EquipmentInstanceReward(template.Id));
+                }
+            }
+
+            if (reward.isEmpty())
+            {
+                reportGrantError(notifyChat, "No templates are available.");
+                return;
+            }
+
+            Service.Get<INetworkServicesManager>().RewardService.QA_SetReward(reward);
+            if (notifyChat)
+            {
+                postSystemChatGrantedEquipment();
+            }
         }
 
         private void handleAddTube(string[] parts)
@@ -222,17 +274,32 @@ namespace ClubPenguin
                 return;
             }
 
+            AddTubeToInventory(definitionId);
+        }
+
+        public void AddTubeToInventory(int definitionId)
+        {
+            addTubeToInventory(definitionId, true);
+        }
+
+        public void AddTubeFromTweaker(int definitionId)
+        {
+            addTubeToInventory(definitionId, false);
+        }
+
+        private void addTubeToInventory(int definitionId, bool notifyChat)
+        {
             Dictionary<int, TubeDefinition> tubeDefinitions = Service.Get<GameData>().Get<Dictionary<int, TubeDefinition>>();
             if (tubeDefinitions == null)
             {
-                postSystemChatError();
+                reportGrantError(notifyChat, "Tube definitions are unavailable.");
                 return;
             }
 
             TubeDefinition tubeDef;
             if (!tubeDefinitions.TryGetValue(definitionId, out tubeDef) || tubeDef == null)
             {
-                postSystemChatError();
+                reportGrantError(notifyChat, "The requested tube is unavailable.");
                 return;
             }
 
@@ -240,33 +307,63 @@ namespace ClubPenguin
             reward.Add(new TubeReward(definitionId));
             Service.Get<INetworkServicesManager>().RewardService.QA_SetReward(reward);
 
-            postSystemChatGrantedTube();
+            if (notifyChat)
+            {
+                postSystemChatGrantedTube();
+            }
         }
 
-        private bool onEquipmentCreated(InventoryServiceEvents.EquipmentCreated evt)
+        public void AddAllTubesToInventory()
         {
-            dispatcher.RemoveListener<InventoryServiceEvents.EquipmentCreated>(onEquipmentCreated);
+            addAllTubesToInventory(true);
+        }
 
-            long equipmentId = evt.EquipmentId;
+        public void AddAllTubesFromTweaker()
+        {
+            addAllTubesToInventory(false);
+        }
 
-            DataEntityHandle localPlayerHandle = dataEntityCollection.LocalPlayerHandle;
-
-            InventoryData inventoryData;
-            if (dataEntityCollection.TryGetComponent(localPlayerHandle, out inventoryData) && inventoryData.Inventory != null)
+        private void addAllTubesToInventory(bool notifyChat)
+        {
+            Dictionary<int, TubeDefinition> tubeDefinitions = Service.Get<GameData>().Get<Dictionary<int, TubeDefinition>>();
+            if (tubeDefinitions == null)
             {
-                DCustomEquipment createdEquipment = default(DCustomEquipment);
-                createdEquipment.Id = equipmentId;
-                createdEquipment.DateTimeCreated = DateTime.UtcNow.Ticks;
-
-                InventoryIconModel<DCustomEquipment> iconModel = new InventoryIconModel<DCustomEquipment>(equipmentId, createdEquipment, false, true);
-                if (!inventoryData.Inventory.ContainsKey(equipmentId))
-                {
-                    inventoryData.Inventory.Add(equipmentId, iconModel);
-                }
+                reportGrantError(notifyChat, "Tube definitions are unavailable.");
+                return;
             }
 
-            postSystemChatGrantedEquipment();
-            return false;
+            Reward reward = new Reward();
+            bool hasTubeReward = false;
+            foreach (TubeDefinition tube in tubeDefinitions.Values)
+            {
+                if (tube != null)
+                {
+                    reward.Add(new TubeReward(tube.Id));
+                    hasTubeReward = true;
+                }
+            }
+            if (!hasTubeReward)
+            {
+                reportGrantError(notifyChat, "No tubes are available.");
+                return;
+            }
+            Service.Get<INetworkServicesManager>().RewardService.QA_SetReward(reward);
+            if (notifyChat)
+            {
+                postSystemChatGrantedTube();
+            }
+        }
+
+        private void reportGrantError(bool notifyChat, string message)
+        {
+            if (notifyChat)
+            {
+                postSystemChatError();
+            }
+            else
+            {
+                Debug.LogError(message);
+            }
         }
 
         private void onTimeOutComplete()

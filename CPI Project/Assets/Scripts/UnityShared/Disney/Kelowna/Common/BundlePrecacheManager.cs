@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Disney.Kelowna.Common
 {
@@ -153,12 +154,41 @@ namespace Disney.Kelowna.Common
 
 		private IEnumerator downloadBundle(ContentManifest.BundleEntry bundleEntry)
 		{
-			ContentManifest.AssetEntry entry = new ContentManifest.AssetEntry(bundleEntry.Key, "www-bundle", "unity3d");
+			List<string> addresses = new List<string>();
+			foreach (ContentManifest.AssetEntry assetEntry in manifest.AssetEntryMap.Values)
+			{
+				if (assetEntry.BundleKey == bundleEntry.Key)
+				{
+					addresses.Add(assetEntry.AssetPath.ToLowerInvariant());
+				}
+			}
 			numCurrentDownloads++;
-			AssetRequest<AssetBundle> assetRequest = Content.DeviceManager.LoadAsync<AssetBundle>("www-bundle", ref entry);
-			yield return assetRequest;
-			assetRequest.Asset.Unload(true);
-			numCurrentDownloads--;
+			try
+			{
+				if (addresses.Count > 0)
+				{
+					var download = Addressables.DownloadDependenciesAsync(addresses, Addressables.MergeMode.Union);
+					try
+					{
+						yield return download;
+						if (download.Status != UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+						{
+							throw download.OperationException ?? new InvalidOperationException("Addressable dependencies failed to download for bundle: " + bundleEntry.Key);
+						}
+					}
+					finally
+					{
+						if (download.IsValid())
+						{
+							Addressables.Release(download);
+						}
+					}
+				}
+			}
+			finally
+			{
+				numCurrentDownloads--;
+			}
 		}
 
 		private static int compareBundlesByPriority(ContentManifest.BundleEntry bundle1, ContentManifest.BundleEntry bundle2)

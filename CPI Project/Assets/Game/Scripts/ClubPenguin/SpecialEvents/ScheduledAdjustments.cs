@@ -324,6 +324,11 @@ namespace ClubPenguin.SpecialEvents
 			ScheduledSwapMaterialData[] swapMaterialData = SwapMaterialData;
 			foreach (ScheduledSwapMaterialData scheduledSwapMaterialData in swapMaterialData)
 			{
+				if (scheduledSwapMaterialData == null || scheduledSwapMaterialData.SwapTarget == null)
+				{
+					Log.LogError(this, string.Format("Error: {0} has a Swap Material data field with a null target", base.gameObject.GetPath()));
+					continue;
+				}
 				Renderer component = scheduledSwapMaterialData.SwapTarget.GetComponent<Renderer>();
 				if (component != null)
 				{

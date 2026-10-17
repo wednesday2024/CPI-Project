@@ -134,7 +134,6 @@ namespace Disney.Kelowna.Common
 		{
 			deviceManager.Mount(new ResourceDevice(deviceManager));
 			deviceManager.Mount(new BundleDevice(deviceManager, bundleManager));
-			deviceManager.Mount(new StreamingAssetBundleDevice(deviceManager));
 			deviceManager.Mount(new AssetDatabaseDevice(deviceManager));
 			wwwBundleDevice = new WwwBundleDevice(deviceManager, baseUri);
 			deviceManager.Mount(wwwBundleDevice);
@@ -227,6 +226,41 @@ namespace Disney.Kelowna.Common
 			return false;
 		}
 
+		internal static bool RetainAddressableAsset(string key)
+		{
+			Content content = Service.Get<Content>();
+			ContentManifest.AssetEntry entry = content.getAssetEntry(key.ToLowerInvariant());
+			if (isAddressableEntry(entry))
+			{
+				content.bundleManager.RetainAddressable(entry.Key);
+				return true;
+			}
+			return false;
+		}
+
+		internal static bool ReleaseAddressableAsset(string key)
+		{
+			Content content = Service.Get<Content>();
+			ContentManifest.AssetEntry entry = content.getAssetEntry(key.ToLowerInvariant());
+			if (!isAddressableEntry(entry))
+			{
+				return false;
+			}
+			content.bundleManager.ReleaseAddressableReference(entry.Key);
+			return true;
+		}
+
+		private static bool isAddressableEntry(ContentManifest.AssetEntry entry)
+		{
+			string deviceType = entry.DeviceList;
+			int separator = deviceType.IndexOf(':');
+			if (separator >= 0)
+			{
+				deviceType = deviceType.Substring(0, separator);
+			}
+			return string.Equals(deviceType, BundleDevice.DEVICE_TYPE, StringComparison.OrdinalIgnoreCase);
+		}
+
 		public static bool ContainsKey(AssetContentKey key, params string[] args)
 		{
 			string key2 = key.Expand(args);
@@ -264,13 +298,8 @@ namespace Disney.Kelowna.Common
 			ContentManifest.AssetEntry assetEntry = content.getAssetEntry(assetKey.ToLower());
 			if (!string.IsNullOrEmpty(assetEntry.BundleKey))
 			{
-				BundleMount mount;
-				if (content.bundleManager.TryGetBundle(assetEntry.BundleKey, out mount))
-				{
-					mount.IsPinned = isPinned;
-					return true;
-				}
-				Log.LogErrorFormatted(typeof(Content), "Tried to {2} bundle '{0}' for key '{1}', but bundle was not mounted in BundleManager", assetEntry.BundleKey, assetKey, isPinned ? "pin" : "unpin");
+				content.bundleManager.SetAddressableBundlePinned(assetEntry.BundleKey, isPinned);
+				return true;
 			}
 			return false;
 		}
@@ -452,10 +481,9 @@ namespace Disney.Kelowna.Common
 			TAsset indexedAsset = getIndexedAsset<TAsset>(key);
 			if (indexedAsset != null)
 			{
-				string bundleKey = assetEntry.BundleKey;
-				if (!string.IsNullOrEmpty(bundleKey) && bundleManager.IsMounted(assetEntry.BundleKey))
+				if (!bundleManager.ReleaseAddressable(assetEntry.Key))
 				{
-					bundleManager.UnmountBundle(bundleKey, unloadAllObjects);
+					return false;
 				}
 				assetIndex.Remove(assetEntry.Key);
 				return true;

@@ -78,6 +78,11 @@ namespace ClubPenguin.UI
 
         private IEnumerator loadSprite(TypedAssetContentKey<Sprite> key, Image image)
         {
+            if (image == null)
+            {
+                Debug.LogWarning("DisneyStoreFranchise cannot load sprite '" + key.Key + "' because its target Image is missing.", this);
+                yield break;
+            }
             AssetRequest<Sprite> request = null;
             try
             {
@@ -90,10 +95,17 @@ namespace ClubPenguin.UI
             if (request != null)
             {
                 yield return request;
+                if (image == null)
+                {
+                    yield break;
+                }
                 image.sprite = request.Asset;
             }
             yield return null;
-            image.color = Color.white;
+            if (image != null)
+            {
+                image.color = Color.white;
+            }
         }
 
         private void createStoreItems()

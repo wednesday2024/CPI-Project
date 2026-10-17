@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 114883929685339978}
   - component: {fileID: 114981905851111701}
   - component: {fileID: 114518516538717096}
+  - component: {fileID: 8461855961345570881}
   m_Layer: 0
   m_Name: PlayRail
   m_TagString: Untagged
@@ -173,7 +174,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &114177397351618112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,24 @@ MonoBehaviour:
   Duration: 1
   DampenMovingTarget: 0
   DoubleDampenMovingTargetAim: 0
+--- !u!114 &8461855961345570881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092427105849659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9bc98e835c101b9bc14e06b190ea7cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dirty: 0
+  MaxYaw: 15
+  MaxPitch: 15
+  TouchSensitivity: 2
+  GamepadSensitivity: 2
+  GamepadStickDeadzone: 0.15
 --- !u!1 &1179634054483142
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +527,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &114078736025668317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,7 +1141,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &114313880219391062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,7 +1788,7 @@ MonoBehaviour:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
 --- !u!114 &114802308064615645
 MonoBehaviour:
   m_ObjectHideFlags: 0

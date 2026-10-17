@@ -14,8 +14,6 @@ namespace ClubPenguin.UI
 {
 	public class ExchangeScreenControllerV2 : MonoBehaviour, IBaseNetworkErrorHandler
 	{
-		private const string DISCORD_MARKETPLACE_NAME = "Exchange";
-
 		private enum ExchangeScreenState
 		{
 			Idle,
@@ -79,8 +77,6 @@ namespace ClubPenguin.UI
 
 		private Animator animator;
 
-		private bool marketplaceStateDispatched;
-
 		public void Awake()
 		{
 			animator = GetComponent<Animator>();
@@ -90,7 +86,6 @@ namespace ClubPenguin.UI
 
 		public void Start()
 		{
-			dispatchMarketplaceOpened();
 			rewardService = Service.Get<INetworkServicesManager>().RewardService;
 			toggleExchangeAnimParticles(false);
 			ButtonParticles.Stop();
@@ -103,7 +98,6 @@ namespace ClubPenguin.UI
 
 		public void OnDestroy()
 		{
-			dispatchMarketplaceClosed();
 			Inventory.ItemsCreated -= onInventoryItemsCreated;
 			Service.Get<EventDispatcher>().DispatchEvent(new AwayFromKeyboardEvent(AwayFromKeyboardStateType.Here));
 		}
@@ -242,28 +236,7 @@ namespace ClubPenguin.UI
 
 		private void closeExchange()
 		{
-			dispatchMarketplaceClosed();
 			animator.SetTrigger("Close");
-		}
-
-		private void dispatchMarketplaceOpened()
-		{
-			if (marketplaceStateDispatched)
-			{
-				return;
-			}
-			marketplaceStateDispatched = true;
-			Service.Get<EventDispatcher>().DispatchEvent(new MarketplaceEvents.MarketplaceOpened(DISCORD_MARKETPLACE_NAME));
-		}
-
-		private void dispatchMarketplaceClosed()
-		{
-			if (!marketplaceStateDispatched)
-			{
-				return;
-			}
-			marketplaceStateDispatched = false;
-			Service.Get<EventDispatcher>().DispatchEvent(new MarketplaceEvents.MarketplaceClosed(DISCORD_MARKETPLACE_NAME));
 		}
 
 		public void OnIntroAnimationComplete()

@@ -271,7 +271,19 @@ namespace Tweaker.UI
 			sliderView.Slider.value = (float)Convert.ChangeType(tweakable.GetValue(), typeof(float));
 			sliderView.ValueChanged += delegate(float newValue)
 			{
-				tweakable.SetValue(Convert.ChangeType(newValue, tweakable.TweakableType));
+				float valueToSet = newValue;
+				if (tweakable.HasStep)
+				{
+					float stepSize = (float)Convert.ChangeType(tweakable.Step.StepSize, typeof(float));
+					if (stepSize > 0f && !float.IsInfinity(stepSize))
+					{
+						float minValue = sliderView.Slider.minValue;
+						valueToSet = minValue + Mathf.Round((newValue - minValue) / stepSize) * stepSize;
+						valueToSet = Mathf.Clamp(valueToSet, minValue, sliderView.Slider.maxValue);
+						sliderView.Slider.value = valueToSet;
+					}
+				}
+				tweakable.SetValue(Convert.ChangeType(valueToSet, tweakable.TweakableType));
 			};
 			Action<object, object> tweakableValueChanged = delegate(object oldValue, object newValue)
 			{

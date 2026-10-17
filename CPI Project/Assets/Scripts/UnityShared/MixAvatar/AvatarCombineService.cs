@@ -51,15 +51,19 @@ namespace MixAvatar
 						yield return true;
 						int renderTextureSize = calcOffsetsAndSize(request);
 						yield return true;
-						RenderTexture atlasRenderTexture = new RenderTexture(renderTextureSize, renderTextureSize, 0, RenderTextureFormat.ARGB32)
-						{
+                        RenderTexture atlasRenderTexture = new RenderTexture(renderTextureSize, renderTextureSize, 0, RenderTextureFormat.ARGB32)
+                        {
+						#if UNITY_ANDROID || UNITY_IOS
+                            antiAliasing = 4,
+						#else
 							antiAliasing = 8,
-							isPowerOfTwo = true,
-							filterMode = FilterMode.Trilinear,
-							anisoLevel = 16,
-							useMipMap = (request.UseMipMaps == MipMapping.On)
-						};
-						yield return true;
+						#endif
+                            isPowerOfTwo = true,
+                            filterMode = FilterMode.Trilinear,
+                            anisoLevel = 16,
+                            useMipMap = (request.UseMipMaps == MipMapping.Off)
+                        };
+                        yield return true;
 						RenderTexture prevRt = RenderTexture.active;
 						RenderTexture.active = atlasRenderTexture;
 						GL.Clear(true, true, new Color32(0, 0, 0, 0));

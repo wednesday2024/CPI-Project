@@ -8,10 +8,11 @@ namespace Disney.Kelowna.Common
 	{
 		public static AssetRequest<TAsset> Load(ref ContentManifest.AssetEntry entry, AssetLoadedHandler<TAsset> handler = null)
 		{
-			ResourceRequest resourceRequest = Resources.LoadAsync(entry.Key, typeof(TAsset));
+			string resourcePath = ResourcePathResolver.Resolve(entry.Key, typeof(TAsset));
+			ResourceRequest resourceRequest = Resources.LoadAsync(resourcePath, typeof(TAsset));
 			if (resourceRequest.isDone && resourceRequest.asset == null)
 			{
-				throw new ArgumentException("Asset could not be loaded. Is the key correct? Key = " + entry.Key);
+				throw new ArgumentException("Asset could not be loaded. Is the key correct? Key = " + entry.Key + ", resolved path = " + resourcePath);
 			}
 			AsyncAssetResourceRequest<TAsset> asyncAssetResourceRequest = new AsyncAssetResourceRequest<TAsset>(entry.Key, resourceRequest);
 			if (handler != null)

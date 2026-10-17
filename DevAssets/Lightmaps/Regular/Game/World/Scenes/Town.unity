@@ -30241,16 +30241,6 @@ MonoBehaviour:
       Key: HolidayPlainMaterials/WallLampOnNOFOG
       type: UnityEngine.Material, UnityEngine
     DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/DisneyStoreLampNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/DisneyStoreLampNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
   - SwapTarget: {fileID: 1253}
     SwapMaterialKey:
       Key: HolidayPlainMaterials/TrainNOFOG
@@ -30259,21 +30249,6 @@ MonoBehaviour:
   - SwapTarget: {fileID: 1424995991023326886}
     SwapMaterialKey:
       Key: HolidayPlainMaterials/ToIglooSignNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/ArendelleWreathNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/ArendelleWreathNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/ArendelleWreathNOFOG
       type: UnityEngine.Material, UnityEngine
     DestroyTexture: 0
   - SwapTarget: {fileID: 3140}
@@ -32932,6 +32907,7 @@ MonoBehaviour:
     - target: {fileID: 20890234}
     giStatic: []
     removeStatic: []
+    disableAfterBake: []
   - name: Original with no statue
     spawn:
     - prefab: {fileID: 4558534496590923507, guid: c2dd43c5aa7ecb049b00ab9ab4f85f54,
@@ -32950,6 +32926,7 @@ MonoBehaviour:
     - target: {fileID: 20890234}
     giStatic: []
     removeStatic: []
+    disableAfterBake: []
   - name: Rainbow Migration
     spawn:
     - prefab: {fileID: 1864615175391070471, guid: 92ab244b1e55050468e2630dfc2c5cd8,
@@ -32965,6 +32942,7 @@ MonoBehaviour:
     giStatic: []
     removeStatic:
     - target: {fileID: 900832002}
+    disableAfterBake: []
   - name: Holiday Party
     spawn:
     - prefab: {fileID: 3453229135663660952, guid: 05f9c29b96fb24a4380bcd340ba374ad,
@@ -32981,6 +32959,7 @@ MonoBehaviour:
     giStatic: []
     removeStatic:
     - target: {fileID: 900832002}
+    disableAfterBake: []
 --- !u!4 &647602941
 Transform:
   m_ObjectHideFlags: 0
@@ -44010,6 +43989,8 @@ MonoBehaviour:
     DestroyTexture: 0
   DestroyData:
   - {fileID: 519}
+  - {fileID: 1340}
+  - {fileID: 872}
   SpawnData: []
   AdditiveScene: 
   DisableData: []
@@ -46530,12 +46511,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 137291752460477484, guid: 99e3bb27fe8743944b333073fd7dd816,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5058371021345129790, guid: ff78a6f74ba0607fbb6aaac3718d2d0e,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49467,12 +49442,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
-    - target: {fileID: 928819412503226494, guid: a01018b0ad10ecf4e92cde555f8494cc,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 5058371021345129790, guid: ff78a6f74ba0607fbb6aaac3718d2d0e,
-        type: 3}
     - target: {fileID: 937549169427492122, guid: a01018b0ad10ecf4e92cde555f8494cc,
         type: 3}
       propertyPath: m_StaticEditorFlags

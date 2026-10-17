@@ -19,8 +19,8 @@ namespace ClubPenguin.UI
 
 		public void StartTimer(TimeSpan countdownTime)
 		{
-			this.countdownTime = countdownTime;
-			setText(Format(countdownTime));
+			this.countdownTime = countdownTime < TimeSpan.Zero ? TimeSpan.Zero : countdownTime;
+			setText(Format(this.countdownTime));
 			StartCoroutine(runCountdown());
 		}
 

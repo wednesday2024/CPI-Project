@@ -8,9 +8,17 @@ namespace ClubPenguin.Net
 		{
 			public DonationResult DonationResult;
 
+			public int DonationAmount;
+
 			public CFCDonationPosted(DonationResult donationResult)
+				: this(donationResult, 0)
+			{
+			}
+
+			public CFCDonationPosted(DonationResult donationResult, int donationAmount)
 			{
 				DonationResult = donationResult;
+				DonationAmount = donationAmount;
 			}
 		}
 

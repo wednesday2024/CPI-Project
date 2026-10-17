@@ -31,6 +31,8 @@ public sealed class GenerateLightingEventBatch : MonoBehaviour
         public List<ObjectEntry> disable = new List<ObjectEntry>();
         public List<ObjectEntry> giStatic = new List<ObjectEntry>();
         public List<ObjectEntry> removeStatic = new List<ObjectEntry>();
+        [Tooltip("Objects to disable after this event group's lightmap bake completes.")]
+        public List<ObjectEntry> disableAfterBake = new List<ObjectEntry>();
     }
 
     public List<EventGroup> groups = new List<EventGroup>();

@@ -23,7 +23,7 @@ namespace ClubPenguin.Net
 		private void onPostCFCDonation(PostCFCDonationOperation operation, HttpResponse httpResponse)
 		{
 			DonationResult responseBody = operation.ResponseBody;
-			Service.Get<EventDispatcher>().DispatchEvent(new ScheduledEventServiceEvents.CFCDonationPosted(responseBody));
+			Service.Get<EventDispatcher>().DispatchEvent(new ScheduledEventServiceEvents.CFCDonationPosted(responseBody, operation.Coins));
 		}
 
 		public void GetCFCDonations()

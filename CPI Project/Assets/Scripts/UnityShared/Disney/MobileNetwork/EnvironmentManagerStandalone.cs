@@ -6,7 +6,7 @@ namespace Disney.MobileNetwork
 {
 	public class EnvironmentManagerStandalone : EnvironmentManager
 	{
-#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX || UNITY_WEBGL
+#if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX || UNITY_STANDALONE_LINUX || UNITY_WEBGL || UNITY_IOS
         protected override string _SKU
 		{
 			get

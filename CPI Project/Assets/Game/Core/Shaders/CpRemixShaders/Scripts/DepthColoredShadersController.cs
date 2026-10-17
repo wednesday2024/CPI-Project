@@ -136,9 +136,11 @@ namespace CpRemixShaders
                 return;
             }
 
+            bool usesEquipmentTextures = renderer.sharedMaterial.HasProperty("_Decal123OpacityTex");
             Texture mainTexture = renderer.sharedMaterial.HasProperty("_MainTex") ? renderer.sharedMaterial.mainTexture : null;
             Material material = renderer.material;
             material.shader = combinedAvatarDepthShader;
+            material.SetFloat("_UseEquipmentTextures", usesEquipmentTextures ? 1f : 0f);
             if (mainTexture != null)
                 material.mainTexture = mainTexture;
         }

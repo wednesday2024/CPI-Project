@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ namespace ClubPenguin.UI
 	public class CoinsForChangeCounter : MonoBehaviour
 	{
 		public Text CoinCountText;
+
+		public TMP_Text CoinCountTMP;
 
 		public TextMesh CoinCountTextMesh;
 
@@ -117,6 +120,11 @@ namespace ClubPenguin.UI
 			if (CoinCountText != null)
 			{
 				CoinCountText.text = count.ToString();
+				return;
+			}
+			if (CoinCountTMP != null)
+			{
+				CoinCountTMP.text = count.ToString();
 				return;
 			}
 			if (CoinCountTextMesh != null)

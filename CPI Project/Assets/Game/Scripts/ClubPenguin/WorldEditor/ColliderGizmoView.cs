@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ClubPenguin.WorldEditor
 {
-	[RequireComponent(typeof(Collider))]
+	// [RequireComponent(typeof(Collider))]
 	public class ColliderGizmoView : MonoBehaviour
 	{
 		public enum ColliderColorType

@@ -7,7 +7,6 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -60,16 +59,6 @@ namespace ClubPenguin.UI
 
         [SerializeField]
         private TMP_Text cameraPostOnText;
-
-        [Header("Discord RPC")]
-        [SerializeField]
-        private Toggle discordRpcToggle;
-
-        [SerializeField]
-        private TMP_Text discordRpcOnText;
-
-        [SerializeField]
-        private string discordRpcPlayerPrefsKey = "discord_rpc_enabled";
 
         [Header("Inactivity Service")]
         [SerializeField]
@@ -172,34 +161,10 @@ namespace ClubPenguin.UI
             }
             resolutionsMenu.onValueChanged.AddListener(onResolutionChanged);
 
-            InitDiscordRpcToggleFromPrefs();
-            RefreshDiscordRpcOnText();
             InitInactivityServiceToggleFromPrefs();
             ApplyInactivityServiceSetting(GetInactivityServiceEnabled(), false);
 
             isInitialized = true;
-        }
-
-        private void InitDiscordRpcToggleFromPrefs()
-        {
-            if (discordRpcToggle == null)
-                return;
-
-            bool enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
-            discordRpcToggle.isOn = enabled;
-        }
-
-        private void RefreshDiscordRpcOnText()
-        {
-            if (discordRpcOnText == null)
-                return;
-
-            bool enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
-
-            if (discordRpcToggle != null)
-                enabled = discordRpcToggle.isOn;
-
-            discordRpcOnText.enabled = enabled;
         }
 
         private void InitInactivityServiceToggleFromPrefs()
@@ -266,22 +231,6 @@ namespace ClubPenguin.UI
             }
         }
 
-        public void ToggleDiscordRpc()
-        {
-            bool enabled = true;
-
-            if (discordRpcToggle != null)
-                enabled = discordRpcToggle.isOn;
-            else
-                enabled = PlayerPrefs.GetInt(GetPlatformKey(discordRpcPlayerPrefsKey), 1) == 1;
-
-            PlayerPrefs.SetInt(GetPlatformKey(discordRpcPlayerPrefsKey), enabled ? 1 : 0);
-            PlayerPrefs.Save();
-
-            RefreshDiscordRpcOnText();
-            CallDiscordControllerSetEnabledGlobal(enabled);
-        }
-
         public void ToggleInactivityService()
         {
             ApplyInactivityServiceSetting(GetInactivityServiceEnabled(), true);
@@ -296,58 +245,6 @@ namespace ClubPenguin.UI
             }
 #endif
             return key;
-        }
-
-        private void CallDiscordControllerSetEnabledGlobal(bool enabled)
-        {
-            try
-            {
-                Type t = FindTypeAnywhere("DiscordController");
-                if (t == null)
-                    return;
-
-                MethodInfo mi = t.GetMethod("SetEnabledGlobal", BindingFlags.Public | BindingFlags.Static);
-                if (mi == null)
-                    return;
-
-                mi.Invoke(null, new object[] { enabled });
-            }
-            catch { }
-        }
-
-        private Type FindTypeAnywhere(string typeName)
-        {
-            try
-            {
-                foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    try
-                    {
-                        Type t = a.GetType(typeName, false);
-                        if (t != null)
-                            return t;
-                    }
-                    catch { }
-                }
-
-                foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    try
-                    {
-                        Type[] types = a.GetTypes();
-                        for (int i = 0; i < types.Length; i++)
-                        {
-                            Type t = types[i];
-                            if (t != null && t.Name == typeName)
-                                return t;
-                        }
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-
-            return null;
         }
 
         public void SetGraphicsQuality()

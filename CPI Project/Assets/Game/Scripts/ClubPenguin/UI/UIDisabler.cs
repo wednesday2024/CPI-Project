@@ -257,9 +257,13 @@ namespace ClubPenguin.UI
 
 		private void enableTray()
 		{
-			if (SceneRefs.UiTrayRoot != null && SceneRefs.UiTrayRoot.GetComponent<StateMachineContext>() != null)
+			if (SceneRefs.UiTrayRoot != null)
 			{
-				SceneRefs.UiTrayRoot.GetComponent<StateMachineContext>().SendEvent(new ExternalEvent("Root", "restoreUI"));
+				StateMachineContext stateMachineContext = SceneRefs.UiTrayRoot.GetComponent<StateMachineContext>();
+				if (stateMachineContext != null && stateMachineContext.ContainsStateMachine("Root"))
+				{
+					stateMachineContext.SendEvent(new ExternalEvent("Root", "restoreUI"));
+				}
 			}
 		}
 

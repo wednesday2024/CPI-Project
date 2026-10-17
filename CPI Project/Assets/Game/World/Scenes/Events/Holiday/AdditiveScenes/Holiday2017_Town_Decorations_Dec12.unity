@@ -235009,9 +235009,13 @@ MonoBehaviour:
   MinValue: 0
   MaxValue: 0.964
   FinalValue: 1.07
+  UsePersonalCfcDonations: 0
+  DonationProgressId: 
+  DonationCoinsToFill: 1500
   DateDefinitionKey:
     Id: 38
     type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  AdditionalDateDefinitionKeys: []
   UpdateIntervalMinutes: 1
   UpdateRandomSeconds: 15
   IncreaseEffect: {fileID: 1682209821049157, guid: 12cc46f76c8f5e448a247e20fd67f628,
@@ -235395,9 +235399,13 @@ MonoBehaviour:
   MinValue: 0
   MaxValue: 0.964
   FinalValue: 1.07
+  UsePersonalCfcDonations: 0
+  DonationProgressId: 
+  DonationCoinsToFill: 1500
   DateDefinitionKey:
     Id: 38
     type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  AdditionalDateDefinitionKeys: []
   UpdateIntervalMinutes: 1
   UpdateRandomSeconds: 15
   IncreaseEffect: {fileID: 1682209821049157, guid: 12cc46f76c8f5e448a247e20fd67f628,
@@ -238220,9 +238228,13 @@ MonoBehaviour:
   MinValue: 0
   MaxValue: 0.964
   FinalValue: 1.07
+  UsePersonalCfcDonations: 0
+  DonationProgressId: 
+  DonationCoinsToFill: 1500
   DateDefinitionKey:
     Id: 38
     type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  AdditionalDateDefinitionKeys: []
   UpdateIntervalMinutes: 1
   UpdateRandomSeconds: 15
   IncreaseEffect: {fileID: 1682209821049157, guid: 12cc46f76c8f5e448a247e20fd67f628,
@@ -238685,9 +238697,13 @@ MonoBehaviour:
   MinValue: 0
   MaxValue: 0.964
   FinalValue: 1.07
+  UsePersonalCfcDonations: 0
+  DonationProgressId: 
+  DonationCoinsToFill: 1500
   DateDefinitionKey:
     Id: 38
     type: ClubPenguin.Core.ScheduledEventDateDefinition, Core
+  AdditionalDateDefinitionKeys: []
   UpdateIntervalMinutes: 1
   UpdateRandomSeconds: 15
   IncreaseEffect: {fileID: 1682209821049157, guid: 12cc46f76c8f5e448a247e20fd67f628,
@@ -240382,7 +240398,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5293326950920590958, guid: 36abd96c325a51b059ad1aadb01b10d0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 36abd96c325a51b059ad1aadb01b10d0, type: 3}
 --- !u!1 &324997509
 GameObject:

@@ -271,14 +271,29 @@ namespace ClubPenguin.Igloo.UI
 
         protected List<KeyValuePair<DecorationDefinitionType, int>> sortInventoryList(List<KeyValuePair<DecorationDefinitionType, int>> listToSort)
         {
+            if (listToSort == null)
+            {
+                return new List<KeyValuePair<DecorationDefinitionType, int>>();
+            }
+
+            List<KeyValuePair<DecorationDefinitionType, int>> validItems = new List<KeyValuePair<DecorationDefinitionType, int>>(listToSort.Count);
+            for (int i = 0; i < listToSort.Count; i++)
+            {
+                if (listToSort[i].Key == null)
+                {
+                    continue;
+                }
+                validItems.Add(listToSort[i]);
+            }
+
             List<KeyValuePair<DecorationDefinitionType, int>> list = new List<KeyValuePair<DecorationDefinitionType, int>>();
             List<KeyValuePair<DecorationDefinitionType, int>> list2 = new List<KeyValuePair<DecorationDefinitionType, int>>();
             SortedDictionary<int, List<KeyValuePair<DecorationDefinitionType, int>>> sortedDictionary = new SortedDictionary<int, List<KeyValuePair<DecorationDefinitionType, int>>>();
             SortedDictionary<string, List<KeyValuePair<DecorationDefinitionType, int>>> sortedDictionary2 = new SortedDictionary<string, List<KeyValuePair<DecorationDefinitionType, int>>>();
             bool flag = Service.Get<CPDataEntityCollection>().IsLocalPlayerMember();
-            for (int i = 0; i < listToSort.Count; i++)
+            for (int i = 0; i < validItems.Count; i++)
             {
-                KeyValuePair<DecorationDefinitionType, int> item = listToSort[i];
+                KeyValuePair<DecorationDefinitionType, int> item = validItems[i];
                 bool flag2 = false;
                 Dictionary<int, ProgressionUtils.ParsedProgression<DecorationDefinitionType>> inventoryProgressionStatus = base.inventoryProgressionStatus;
                 DecorationDefinitionType key = item.Key;

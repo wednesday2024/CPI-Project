@@ -9436,6 +9436,8 @@ GameObject:
   - component: {fileID: 114269678062373593}
   - component: {fileID: 114096068719775250}
   - component: {fileID: 114672241512739744}
+  - component: {fileID: 114672241512739745}
+  - component: {fileID: 114672241512739746}
   m_Layer: 5
   m_Name: WorldMapZonePopup
   m_TagString: Untagged
@@ -9443,6 +9445,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114672241512739745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849604257507849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: ""
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
+--- !u!114 &114672241512739746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849604257507849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f1993f27e8ab7478249650db38b787, type: 3}
+  m_Name: ""
+  m_EditorClassIdentifier: TutorialUI::ClubPenguin.TutorialUI.TutorialTooltipTMP
+  Bubble: {fileID: 0}
+  Pointer: {fileID: 0}
+  HeaderText: {fileID: 0}
+  SubHeaderText: {fileID: 0}
+  BodyText: {fileID: 0}
+  AutoDestroy: 0
+  ScreenPadding: 50
 --- !u!224 &224422831690736761
 RectTransform:
   m_ObjectHideFlags: 0

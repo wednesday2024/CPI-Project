@@ -111,6 +111,13 @@ namespace ClubPenguin
             }
         }
 
+        [Invokable("SceneLoader.Teleport.DotsShop", Description = "Teleport to Dot's Shop (The Disney Store)")]
+        [PublicTweak]
+        public static void TeleportToDotsShop()
+        {
+            teleportToZone("DotsShop");
+        }
+
         [Invokable("SceneLoader.Teleport.Beach", Description = "Teleport to the Beach")]
         [PublicTweak]
         public static void TeleportToBeach()

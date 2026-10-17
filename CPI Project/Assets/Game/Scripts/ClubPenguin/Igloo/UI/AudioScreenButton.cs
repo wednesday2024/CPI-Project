@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.Igloo.UI
 {
@@ -20,7 +21,7 @@ namespace ClubPenguin.Igloo.UI
 			Preview
 		}
 
-		public Text SongName;
+		public TMP_Text SongName;
 
 		public Image GenreIcon;
 

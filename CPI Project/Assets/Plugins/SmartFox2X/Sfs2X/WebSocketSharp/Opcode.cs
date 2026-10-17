@@ -1,0 +1,15 @@
+#if UNITY_WEBGL
+#else
+namespace Sfs2X.WebSocketSharp
+{
+	internal enum Opcode : byte
+	{
+		Cont = 0,
+		Text = 1,
+		Binary = 2,
+		Close = 8,
+		Ping = 9,
+		Pong = 10
+	}
+}
+#endif

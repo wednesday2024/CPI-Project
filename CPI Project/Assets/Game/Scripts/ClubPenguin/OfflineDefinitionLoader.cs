@@ -347,7 +347,6 @@ namespace ClubPenguin
             if (reward.TryGetValue(out rewardable8))
             {
                 CustomEquipmentCollection value2 = offlineDatabase.Read<CustomEquipmentCollection>();
-                value2.Equipment.Clear();
                 System.Random random = new System.Random();
                 byte[] array = new byte[8];
                 foreach (CustomEquipment equipmentInstance in rewardable8.EquipmentInstances)

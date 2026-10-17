@@ -8,6 +8,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 [CustomEditor(typeof(GenerateLightingEventBatch))]
@@ -174,12 +175,44 @@ public static class GenerateLightingEventBatchRunner
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             if (BakeMenus.TryGetValue(scene.name, out var bakeMenu))
-                EditorApplication.ExecuteMenuItem(bakeMenu);
+            {
+                Action onBakeCompleted = null;
+                if (group.disableAfterBake.Count > 0)
+                {
+                    onBakeCompleted = () =>
+                    {
+                        Lightmapping.bakeCompleted -= onBakeCompleted;
+                        EditorApplication.delayCall += () => DisableObjectsAfterBake(scene, groupName, group.disableAfterBake);
+                    };
+                    Lightmapping.bakeCompleted += onBakeCompleted;
+                }
+
+                if (!EditorApplication.ExecuteMenuItem(bakeMenu))
+                {
+                    if (onBakeCompleted != null)
+                        Lightmapping.bakeCompleted -= onBakeCompleted;
+                    Debug.LogError("Could not start the lightmap bake for event group: " + groupName);
+                }
+            }
         }
         finally
         {
             EditorUtility.ClearProgressBar();
         }
+    }
+
+    static void DisableObjectsAfterBake(Scene scene, string groupName, List<GenerateLightingEventBatch.ObjectEntry> entries)
+    {
+        foreach (var entry in entries)
+        {
+            if (entry == null || entry.target == null)
+                continue;
+            Undo.RecordObject(entry.target, "Disable object after lightmap bake: " + groupName);
+            entry.target.SetActive(false);
+        }
+
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
     }
 
     static void ShowProgress(string group, string action, int step, int total)

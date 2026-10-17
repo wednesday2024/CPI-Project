@@ -102,8 +102,15 @@ namespace ClubPenguin.Game.PartyGames
 
 		private string formatTimer(TimeSpan countdownTime)
 		{
+			if (countdownTime < TimeSpan.Zero)
+			{
+				countdownTime = TimeSpan.Zero;
+			}
 			handleTimerUpdate((int)countdownTime.TotalSeconds);
-			return default(DateTime).Add(countdownTime).ToString("m:ss");
+			int totalSeconds = (int)countdownTime.TotalSeconds;
+			int minutes = totalSeconds / 60;
+			int seconds = totalSeconds % 60;
+			return string.Format("{0}:{1:00}", minutes, seconds);
 		}
 
 		private void handleTimerUpdate(int totalSeconds)
