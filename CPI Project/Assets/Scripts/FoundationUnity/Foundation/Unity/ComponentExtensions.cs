@@ -54,8 +54,18 @@ namespace Foundation.Unity
 			Renderer[] componentsInChildren = component.GetComponentsInChildren<Renderer>(true);
 			for (int i = 0; i < componentsInChildren.Length; i++)
 			{
-				cleanupMaterials(componentsInChildren[i].sharedMaterials);
-				cleanupMaterials(componentsInChildren[i].materials);
+				destroyMaterialInstances(componentsInChildren[i].materials);
+			}
+		}
+
+		private static void destroyMaterialInstances(Material[] materials)
+		{
+			for (int i = 0; i < materials.Length; i++)
+			{
+				if (materials[i] != null)
+				{
+					Object.Destroy(materials[i]);
+				}
 			}
 		}
 
