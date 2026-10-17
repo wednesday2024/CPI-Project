@@ -16,8 +16,8 @@ using UnityEngine;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyTitle("Fabric.AudioSpline.Editor")]
 [assembly: Guid("2bf2dc8d-1d42-4603-9a10-0d9d0fd143eb")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
-[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.3.0")]
+[assembly: AssemblyVersion("4.0.3.0")]
 namespace Fabric
 {
 	public class DefaultHandles

@@ -262,7 +262,8 @@ namespace HutongGames.PlayMakerEditor
 
 	    private static void ImportAddon(string GUID, bool interactive = true)
 	    {
-	        AssetDatabase.ImportPackage(AssetDatabase.GUIDToAssetPath(GUID), interactive);
+	        var packagePath = AssetDatabase.GUIDToAssetPath(GUID);
+	        UnityEditor.AssetPackage.Package.Import(packagePath, interactive);
 	    }
 
 	    private static void PhotonSetupWizard(string name, string tooltip, Texture image = null)

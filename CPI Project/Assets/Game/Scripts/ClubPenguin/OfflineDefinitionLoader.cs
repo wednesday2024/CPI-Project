@@ -347,6 +347,7 @@ namespace ClubPenguin
             if (reward.TryGetValue(out rewardable8))
             {
                 CustomEquipmentCollection value2 = offlineDatabase.Read<CustomEquipmentCollection>();
+                value2.Equipment.Clear();
                 System.Random random = new System.Random();
                 byte[] array = new byte[8];
                 foreach (CustomEquipment equipmentInstance in rewardable8.EquipmentInstances)
@@ -513,7 +514,7 @@ namespace ClubPenguin
                         {
                             continue;
                         }
-                        SceneryCollectible[] array2 = UnityEngine.Object.FindObjectsByType<SceneryCollectible>(FindObjectsSortMode.None);
+                        SceneryCollectible[] array2 = UnityEngine.Object.FindObjectsByType<SceneryCollectible>();
                         List<Collectible> list = new List<Collectible>();
                         SceneryCollectible[] array3 = array2;
                         foreach (SceneryCollectible sceneryCollectible in array3)
@@ -983,7 +984,7 @@ namespace ClubPenguin
 
         public Reward GetQuickNotificationReward()
         {
-            ActivityNotificationManager activityNotificationManager = UnityEngine.Object.FindFirstObjectByType<ActivityNotificationManager>();
+            ActivityNotificationManager activityNotificationManager = UnityEngine.Object.FindAnyObjectByType<ActivityNotificationManager>();
             if (activityNotificationManager != null)
             {
                 return activityNotificationManager.Schedule.NotificationReward.ToReward();

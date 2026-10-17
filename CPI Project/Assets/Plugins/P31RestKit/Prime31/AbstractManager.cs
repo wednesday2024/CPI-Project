@@ -42,7 +42,7 @@ namespace Prime31
         {
             if (_threadingCallbackHelper == null)
             {
-                _threadingCallbackHelper = UnityEngine.Object.FindFirstObjectByType<ThreadingCallbackHelper>();
+                _threadingCallbackHelper = UnityEngine.Object.FindAnyObjectByType<ThreadingCallbackHelper>();
 
                 if (_threadingCallbackHelper == null)
                 {
@@ -74,7 +74,7 @@ namespace Prime31
         {
             try
             {
-                MonoBehaviour x = UnityEngine.Object.FindFirstObjectByType(type) as MonoBehaviour;
+                MonoBehaviour x = UnityEngine.Object.FindAnyObjectByType(type) as MonoBehaviour;
 
                 if (x == null)
                 {

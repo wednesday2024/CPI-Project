@@ -152,7 +152,7 @@ namespace ClubPenguin
             {
                 blobShadowCaster = component.GameObject.GetComponent<BlobShadowCaster>();
             }
-            groupCulling = UnityEngine.Object.FindFirstObjectByType<GroupCulling>();
+            groupCulling = UnityEngine.Object.FindAnyObjectByType<GroupCulling>();
             if (groupCulling != null)
                 groupCulling.enabled = false;
 
@@ -390,9 +390,7 @@ namespace ClubPenguin
         {
             Transform transform = Service.Get<GameObject>().transform.Find("FreeCameraTarget");
             if (transform != null)
-            {
                 UnityEngine.Object.Destroy(transform.gameObject);
-            }
         }
 
         [Invokable("FreeCamera.ShowPlayer", Description = "Shows the local player while in free camera mode.")]

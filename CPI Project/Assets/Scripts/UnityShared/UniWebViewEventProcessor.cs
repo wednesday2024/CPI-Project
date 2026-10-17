@@ -18,7 +18,7 @@ public class UniWebViewEventProcessor : MonoBehaviour
 		{
 			if (!_instance)
 			{
-				_instance = UnityEngine.Object.FindFirstObjectByType<UniWebViewEventProcessor>();
+				_instance = UnityEngine.Object.FindAnyObjectByType<UniWebViewEventProcessor>();
 				if (!_instance)
 				{
 					GameObject gameObject = new GameObject("UniWebViewEventProcessor");
