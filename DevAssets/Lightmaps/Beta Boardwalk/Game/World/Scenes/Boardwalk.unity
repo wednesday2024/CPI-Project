@@ -56047,7 +56047,7 @@ Transform:
   - {fileID: 1460733020}
   - {fileID: 4561}
   - {fileID: 4381}
-  - {fileID: 1988689970}
+  - {fileID: 1745669050}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
 --- !u!4 &6899
@@ -174564,6 +174564,7 @@ MonoBehaviour:
     giStatic: []
     removeStatic:
     - target: {fileID: 34087275}
+    disableAfterBake: []
   - name: Beta
     spawn:
     - prefab: {fileID: 4096855722381343386, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
@@ -174617,6 +174618,7 @@ MonoBehaviour:
     - target: {fileID: 79809840}
     removeStatic:
     - target: {fileID: 34087275}
+    disableAfterBake: []
   - name: Temp Blizzard Tease
     spawn: []
     delete:
@@ -174666,6 +174668,7 @@ MonoBehaviour:
     - target: {fileID: 9462257}
     - target: {fileID: 9462256}
     removeStatic: []
+    disableAfterBake: []
   - name: Halloween LeadUp
     spawn: []
     delete:
@@ -174697,6 +174700,8 @@ MonoBehaviour:
     - target: {fileID: 6430132219971682293}
     - target: {fileID: 6430132219971682294}
     removeStatic: []
+    disableAfterBake:
+    - target: {fileID: 1460733023}
   - name: Cars 3
     spawn:
     - prefab: {fileID: 5981748024529565134, guid: 87fe69cfa8e26cf4686c802dcaea7f2e,
@@ -174712,6 +174717,7 @@ MonoBehaviour:
     giStatic: []
     removeStatic:
     - target: {fileID: 34087275}
+    disableAfterBake: []
   - name: Descendants
     spawn:
     - prefab: {fileID: 8982063178893049606, guid: 2eaae7a418d99c9478e8fdb04442ddff,
@@ -174727,6 +174733,7 @@ MonoBehaviour:
     giStatic: []
     removeStatic:
     - target: {fileID: 34087275}
+    disableAfterBake: []
 --- !u!4 &162800472
 Transform:
   m_ObjectHideFlags: 0
@@ -177785,11 +177792,6 @@ MonoBehaviour:
       Key: HolidayPlainMaterials/BoardwalkShimmerAtlasNOFOG
       type: UnityEngine.Material, UnityEngine
     DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/PartySuppliesSignNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
   - SwapTarget: {fileID: 1460733021}
     SwapMaterialKey:
       Key: HolidayPlainMaterials/PartySuppliesSignNOFOG
@@ -177866,11 +177868,6 @@ MonoBehaviour:
       type: UnityEngine.Material, UnityEngine
     DestroyTexture: 0
   - SwapTarget: {fileID: 1460733022}
-    SwapMaterialKey:
-      Key: HolidayPlainMaterials/PartySuppliesSignNOFOG
-      type: UnityEngine.Material, UnityEngine
-    DestroyTexture: 0
-  - SwapTarget: {fileID: 0}
     SwapMaterialKey:
       Key: HolidayPlainMaterials/PartySuppliesSignNOFOG
       type: UnityEngine.Material, UnityEngine
@@ -186191,6 +186188,80 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 12115}
   m_SourcePrefab: {fileID: 100100000, guid: 1507a0a2727d1a443bf4b695ac769eb1, type: 3}
+--- !u!1001 &1745669049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6894}
+    m_Modifications:
+    - target: {fileID: 4096855722381343386, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_Name
+      value: DisneyStoreBETA
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.313
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e857e74f68783f7b9005c1e6e2e1cbd, type: 3}
+--- !u!4 &1745669050 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1745669049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1774752592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187714,80 +187785,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ebbcce541c7e9b4d8bcfbde448e3d68, type: 3}
---- !u!1001 &1988689969
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6894}
-    m_Modifications:
-    - target: {fileID: 4096855722381343386, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_Name
-      value: DisneyStoreBETA
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.313
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e857e74f68783f7b9005c1e6e2e1cbd, type: 3}
---- !u!4 &1988689970 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6977523951109311409, guid: 4e857e74f68783f7b9005c1e6e2e1cbd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1988689969}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2010271563
 PrefabInstance:
   m_ObjectHideFlags: 0
