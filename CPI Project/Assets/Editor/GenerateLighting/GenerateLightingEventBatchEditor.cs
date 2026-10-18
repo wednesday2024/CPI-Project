@@ -182,7 +182,7 @@ public static class GenerateLightingEventBatchRunner
                     onBakeCompleted = () =>
                     {
                         Lightmapping.bakeCompleted -= onBakeCompleted;
-                        EditorApplication.delayCall += () => DisableObjectsAfterBake(scene, groupName, group.disableAfterBake);
+                        EditorApplication.delayCall += () => DisableObjectsAfterBake(scenePath, groupName);
                     };
                     Lightmapping.bakeCompleted += onBakeCompleted;
                 }
@@ -201,18 +201,48 @@ public static class GenerateLightingEventBatchRunner
         }
     }
 
-    static void DisableObjectsAfterBake(Scene scene, string groupName, List<GenerateLightingEventBatch.ObjectEntry> entries)
+    static void DisableObjectsAfterBake(string scenePath, string groupName)
     {
-        foreach (var entry in entries)
+        var scene = SceneManager.GetSceneByPath(scenePath);
+        if (!scene.IsValid() || !scene.isLoaded)
+        {
+            Debug.LogError("Could not find the loaded scene after lightmap bake: " + scenePath);
+            return;
+        }
+
+        var batch = Resources.FindObjectsOfTypeAll<GenerateLightingEventBatch>()
+            .FirstOrDefault(x => x.gameObject.scene == scene);
+        var group = batch == null
+            ? null
+            : batch.groups.FirstOrDefault(x => x != null && x.name != null && x.name.Trim() == groupName);
+        if (group == null)
+        {
+            Debug.LogError("Could not find event group after lightmap bake: " + groupName);
+            return;
+        }
+
+        var disabledAnyObjects = false;
+        foreach (var entry in group.disableAfterBake)
         {
             if (entry == null || entry.target == null)
                 continue;
             Undo.RecordObject(entry.target, "Disable object after lightmap bake: " + groupName);
             entry.target.SetActive(false);
+            disabledAnyObjects = true;
+            EditorSceneManager.MarkSceneDirty(scene);
+            if (!EditorSceneManager.SaveScene(scene))
+            {
+                Debug.LogError("Could not save scene after disabling object '" + entry.target.name + "' following lightmap bake: " + scenePath);
+                return;
+            }
         }
 
-        EditorSceneManager.MarkSceneDirty(scene);
-        EditorSceneManager.SaveScene(scene);
+        if (disabledAnyObjects)
+        {
+            var reloadedScene = EditorSceneManager.OpenScene(scenePath);
+            if (!reloadedScene.IsValid() || !reloadedScene.isLoaded)
+                Debug.LogError("Could not reload scene after disabling objects following lightmap bake: " + scenePath);
+        }
     }
 
     static void ShowProgress(string group, string action, int step, int total)
