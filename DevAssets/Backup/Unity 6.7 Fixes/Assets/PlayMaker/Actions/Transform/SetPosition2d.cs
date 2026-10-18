@@ -115,7 +115,6 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				go.transform.localPosition = position;
 			}
-
 			Physics.SyncTransforms();
 		}
 

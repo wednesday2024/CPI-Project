@@ -19,7 +19,7 @@ namespace HutongGames.PlayMakerEditor
             DefinesHelper.AddSymbolToAllTargets("PLAYMAKER");
 
             DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_9");
-            DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_9_11");
+            DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_9_12");
             DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_8_OR_NEWER");
             DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_8_5_OR_NEWER");
             DefinesHelper.AddSymbolToAllTargets("PLAYMAKER_1_9_OR_NEWER");
@@ -42,6 +42,7 @@ namespace HutongGames.PlayMakerEditor
             DefinesHelper.RemoveSymbolFromAllTargets("PLAYMAKER_1_9_8");
             DefinesHelper.RemoveSymbolFromAllTargets("PLAYMAKER_1_9_9");
             DefinesHelper.RemoveSymbolFromAllTargets("PLAYMAKER_1_9_10");
+            DefinesHelper.RemoveSymbolFromAllTargets("PLAYMAKER_1_9_11");
 
             UpdateTextMeshProDefines();
             UpdatePipelineDefines();
