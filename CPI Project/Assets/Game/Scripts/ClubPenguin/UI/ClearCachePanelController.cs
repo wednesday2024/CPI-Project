@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace ClubPenguin.UI
 {
-	public class ClearCachePanelController : MonoBehaviour
+	public partial class ClearCachePanelController : MonoBehaviour
 	{
 		public Button ClearCacheButton;
 
@@ -36,6 +36,7 @@ namespace ClubPenguin.UI
 			DoneText.SetActive(false);
 			clearImageCache();
 			clearContentCache();
+			clearLocalCaches();
 			CoroutineRunner.Start(waitForAnimationPreloader(), this, "waitForAnimationPreloader");
 		}
 
@@ -72,7 +73,10 @@ namespace ClubPenguin.UI
 
 		private void clearContentCache()
 		{
-			Caching.ClearCache();
+			if (!Caching.ClearCache())
+			{
+				Debug.LogError("Unable to clear the Unity content cache.");
+			}
 		}
 	}
 }
@@ -87,7 +91,7 @@ using UnityEngine.UI;
 
 namespace ClubPenguin.UI
 {
-	public class ClearCachePanelController : MonoBehaviour
+	public partial class ClearCachePanelController : MonoBehaviour
 	{
 		public Button ClearCacheButton;
 
@@ -165,7 +169,7 @@ using UnityEngine.UI;
 
 namespace ClubPenguin.UI
 {
-    public class ClearCachePanelController : MonoBehaviour
+    public partial class ClearCachePanelController : MonoBehaviour
     {
         public Button ClearCacheButton;
 
@@ -192,6 +196,7 @@ namespace ClubPenguin.UI
             setActiveSafe(DoneText, false);
             clearImageCache();
             clearContentCache();
+            clearLocalCaches();
             CoroutineRunner.Start(waitForAnimationPreloader(), this, "waitForAnimationPreloader");
         }
 
@@ -256,8 +261,122 @@ namespace ClubPenguin.UI
 
         private void clearContentCache()
         {
-            Caching.ClearCache();
+            if (!Caching.ClearCache())
+            {
+                Debug.LogError("Unable to clear the Unity content cache.");
+            }
         }
     }
+}
+#endif
+
+#if !UNITY_WEBGL
+namespace ClubPenguin.UI
+{
+	public partial class ClearCachePanelController
+	{
+		private const string APP_DATA_FILE_NAME = "cp.AppData.dat";
+		private const string APP_DATA_PLAYER_PREFS_KEY = "cp.AppData";
+
+		private static void clearLocalCaches()
+		{
+			string persistentDataPath = UnityEngine.Application.persistentDataPath;
+			deleteDirectory(System.IO.Path.Combine(persistentDataPath, "KeyValueDatabase"));
+			deleteFile(System.IO.Path.Combine(persistentDataPath, APP_DATA_FILE_NAME));
+			clearAppDataPlayerPrefs();
+			clearDirectoryContents(UnityEngine.Application.temporaryCachePath);
+			runSafely("HTTP disk cache", HTTP.DiskCache.ClearPersistentCache);
+		}
+
+		private static void clearAppDataPlayerPrefs()
+		{
+			try
+			{
+				UnityEngine.PlayerPrefs.DeleteKey(APP_DATA_PLAYER_PREFS_KEY);
+				UnityEngine.PlayerPrefs.Save();
+			}
+			catch (System.Exception exception)
+			{
+				UnityEngine.Debug.LogError("Unable to clear app-data PlayerPrefs: " + exception);
+			}
+		}
+
+		private static void deleteDirectory(string path)
+		{
+			if (!System.IO.Directory.Exists(path))
+			{
+				return;
+			}
+
+			try
+			{
+				System.IO.Directory.Delete(path, true);
+			}
+			catch (System.Exception exception)
+			{
+				UnityEngine.Debug.LogError("Unable to clear cache directory " + path + ": " + exception);
+			}
+		}
+
+		private static void deleteFile(string path)
+		{
+			if (!System.IO.File.Exists(path))
+			{
+				return;
+			}
+
+			try
+			{
+				System.IO.File.Delete(path);
+			}
+			catch (System.Exception exception)
+			{
+				UnityEngine.Debug.LogError("Unable to clear cache file " + path + ": " + exception);
+			}
+		}
+
+		private static void clearDirectoryContents(string path)
+		{
+			if (string.IsNullOrEmpty(path) || !System.IO.Directory.Exists(path))
+			{
+				return;
+			}
+
+			try
+			{
+				foreach (string file in System.IO.Directory.GetFiles(path))
+				{
+					deleteFile(file);
+				}
+				foreach (string directory in System.IO.Directory.GetDirectories(path))
+				{
+					try
+					{
+						System.IO.Directory.Delete(directory, true);
+					}
+					catch (System.Exception exception)
+					{
+						UnityEngine.Debug.LogError("Unable to clear cache directory " + directory + ": " + exception);
+					}
+				}
+			}
+			catch (System.Exception exception)
+			{
+				UnityEngine.Debug.LogError("Unable to enumerate cache directory " + path + ": " + exception);
+			}
+		}
+
+		private static void runSafely(string cacheName, System.Action clearCache)
+		{
+			try
+			{
+				clearCache();
+			}
+			catch (System.Exception exception)
+			{
+				UnityEngine.Debug.LogError("Unable to clear " + cacheName + ": " + exception);
+			}
+		}
+	}
 }
 #endif

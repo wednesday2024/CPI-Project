@@ -2024,8 +2024,15 @@ public class GUIDReplacer : EditorWindow
             AssetDatabase.Refresh();
         }
 
-        ReplaceAudioMixerReferences();
-        ReplaceShaderReferencesInMaterials();
+        if (selectedTab == 9)
+        {
+            ReplaceAudioMixerReferences();
+        }
+
+        if (selectedTab == 10)
+        {
+            ReplaceShaderReferencesInMaterials();
+        }
     }
 
     private void ReplaceShaderReferencesInMaterials()

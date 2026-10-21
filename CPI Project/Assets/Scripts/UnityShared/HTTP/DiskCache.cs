@@ -29,11 +29,39 @@ namespace HTTP
 
 		private void Awake()
 		{
-			cachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "uwcache");
+			cachePath = getCachePath();
 			if (!Directory.Exists(cachePath))
 			{
 				Directory.CreateDirectory(cachePath);
 			}
+		}
+
+		public static void ClearPersistentCache()
+		{
+			string path = getCachePath();
+			if (!Directory.Exists(path))
+			{
+				return;
+			}
+
+			foreach (string file in Directory.GetFiles(path))
+			{
+				File.Delete(file);
+			}
+			foreach (string directory in Directory.GetDirectories(path))
+			{
+				Directory.Delete(directory, true);
+			}
+		}
+
+		private static string getCachePath()
+		{
+			string localApplicationDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			if (string.IsNullOrEmpty(localApplicationDataPath))
+			{
+				throw new InvalidOperationException("The local application data path is unavailable.");
+			}
+			return Path.Combine(localApplicationDataPath, "uwcache");
 		}
 
 		public DiskCacheOperation Fetch(Request request)
