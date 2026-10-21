@@ -3,6 +3,7 @@ using ClubPenguin.Analytics;
 using ClubPenguin.Consumable;
 using ClubPenguin.Core;
 using ClubPenguin.Core.StaticGameData;
+using ClubPenguin.DecorationInventory;
 using ClubPenguin.Net;
 using ClubPenguin.Net.Domain;
 using ClubPenguin.NPC;
@@ -53,6 +54,14 @@ namespace ClubPenguin.Progression
 
 		private Dictionary<string, long> myMascotXP;
 
+		private HashSet<int> equipmentInstanceDefinitionIds;
+
+		private bool equipmentInventoryRequested;
+
+		private bool equipmentInventoryLoaded;
+
+		private bool playerAssetsReceived;
+
 		private int maxUnlockLevel;
 
 		public ShowRewardPopup PendingLevelUpPopup
@@ -96,6 +105,7 @@ namespace ClubPenguin.Progression
 			rewardItems = new Dictionary<ProgressionUnlockCategory, HashSet<string>>();
 			rewardDefinitions = new Dictionary<ProgressionUnlockCategory, HashSet<StaticGameDataDefinition>>();
 			rewardCounts = new Dictionary<ProgressionUnlockCategory, int>();
+			equipmentInstanceDefinitionIds = new HashSet<int>();
 			playerAssetsFieldInfo = typeof(PlayerAssets).GetFields();
 			addListeners();
 		}
@@ -427,6 +437,8 @@ namespace ClubPenguin.Progression
 			Service.Get<EventDispatcher>().AddListener<RewardServiceEvents.MyRewardEarned>(onMyRewardEarned);
 			Service.Get<EventDispatcher>().AddListener<RewardServiceEvents.ClaimedReward>(onClaimedReward);
 			Service.Get<EventDispatcher>().AddListener<SessionEvents.SessionEndedEvent>(onSessionEnded);
+			Service.Get<EventDispatcher>().AddListener<InventoryServiceEvents.InventoryLoaded>(onEquipmentInventoryLoaded);
+			Service.Get<EventDispatcher>().AddListener<QuestServiceEvents.QuestStatesRecieved>(onQuestStatesReceived);
 		}
 
 		private bool onSessionEnded(SessionEvents.SessionEndedEvent evt)
@@ -435,11 +447,16 @@ namespace ClubPenguin.Progression
 			rewardItems.Clear();
 			rewardCounts.Clear();
 			rewardDefinitions.Clear();
+			equipmentInstanceDefinitionIds.Clear();
+			equipmentInventoryRequested = false;
+			equipmentInventoryLoaded = false;
+			playerAssetsReceived = false;
 			return false;
 		}
 
 		private bool onMyRewardAssetsReceived(RewardServiceEvents.MyAssetsReceived evt)
 		{
+			playerAssetsReceived = true;
 			if (evt.Assets.mascotXP != null)
 			{
 				foreach (KeyValuePair<string, long> item in evt.Assets.mascotXP)
@@ -448,7 +465,71 @@ namespace ClubPenguin.Progression
 				}
 			}
 			addRewardItems(evt.Assets);
+			if (equipmentInventoryLoaded)
+			{
+				grantEquipmentInstancesThroughLevel(Level);
+			}
+			else if (!equipmentInventoryRequested)
+			{
+				equipmentInventoryRequested = true;
+				Service.Get<INetworkServicesManager>().InventoryService.GetEquipmentInventory();
+			}
 			return false;
+		}
+
+		private bool onQuestStatesReceived(QuestServiceEvents.QuestStatesRecieved evt)
+		{
+			if (!Service.IsSet<QuestService>() || !Service.IsSet<DecorationInventoryService>())
+			{
+				return false;
+			}
+			QuestService questService = Service.Get<QuestService>();
+			DecorationInventoryService decorationInventoryService = Service.Get<DecorationInventoryService>();
+			for (int i = 0; i < evt.QuestStates.Count; i++)
+			{
+				QuestState questState = evt.QuestStates[i];
+				if (questState.timesCompleted <= 0 && questState.status != QuestStatus.COMPLETED)
+				{
+					continue;
+				}
+				QuestDefinition questDefinition;
+				if (questService.knownQuests.TryGetValue(questState.questId, out questDefinition) && questDefinition.CompleteReward != null)
+				{
+					decorationInventoryService.EnsureQuestCompletionReward(questState.questId, questDefinition.CompleteReward.ToReward());
+				}
+			}
+			return false;
+		}
+
+		private bool onEquipmentInventoryLoaded(InventoryServiceEvents.InventoryLoaded evt)
+		{
+			if (!evt.Success)
+			{
+				equipmentInventoryRequested = false;
+				return false;
+			}
+			equipmentInventoryRequested = true;
+			equipmentInventoryLoaded = true;
+			if (evt.Inventory != null)
+			{
+				for (int i = 0; i < evt.Inventory.Count; i++)
+				{
+					equipmentInstanceDefinitionIds.Add(evt.Inventory[i].definitionId);
+				}
+			}
+			if (playerAssetsReceived)
+			{
+				grantEquipmentInstancesThroughLevel(Level);
+			}
+			return false;
+		}
+
+		private void grantEquipmentInstancesThroughLevel(int level)
+		{
+			for (int i = 0; i <= level && i < unlockDefinitions.Length; i++)
+			{
+				grantEquipmentInstancesForLevel(i);
+			}
 		}
 
 		private bool onRewardsEarned(RewardServiceEvents.RewardsEarned evt)
@@ -685,7 +766,7 @@ namespace ClubPenguin.Progression
 			for (int i = 0; i < unlockDef.Definitions.Length; i++)
 			{
 				TemplateDefinition templateDef = unlockDef.Definitions[i] as TemplateDefinition;
-				if (templateDef != null)
+				if (templateDef != null && equipmentInstanceDefinitionIds.Add(templateDef.Id))
 				{
 					CustomEquipment request = default(CustomEquipment);
 					request.definitionId = templateDef.Id;

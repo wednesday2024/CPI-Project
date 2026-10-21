@@ -16,7 +16,7 @@ public class GUIDReplacer : EditorWindow
 
     private List<GuidPair> guidPairs = new List<GuidPair>();
     private int selectedTab = 0;
-    private string[] tabs = new string[] { "Sprite", "Texture", "Audio", "Material", "Animation", "Mesh", "Prefab", "MonoBehaviour", "Font", "Audio Mixer", "Sprite Restorer" };
+    private string[] tabs = new string[] { "Sprite", "Texture", "Audio", "Material", "Animation", "Mesh", "Prefab", "MonoBehaviour", "Font", "Audio Mixer", "Shader", "Sprite Restorer" };
 
     private List<AssetPair>[] assetPairs;
     private List<AssetPair> animationClipPairs = new List<AssetPair>();
@@ -34,13 +34,13 @@ public class GUIDReplacer : EditorWindow
     private Dictionary<string, Sprite> originalSprites = new Dictionary<string, Sprite>();
     private Dictionary<string, Sprite> newSprites = new Dictionary<string, Sprite>();
 
-    private string[] ignoreFolders = new string[] { "meshes", "fbx", "sourceassets", "mesh", "models", "costumes", "costumefbxs", "model" };
+    private string[] ignoreFolders = new string[] { "meshes", "fbx", "mesh", "models", "costumes", "costumefbxs", "model" };
 
     private static readonly string Manual =
         "There is a duplicate button for assets that has multiple duplications. " +
         "Once you get the amount of stuff that you want (can be multiple of assets), press replace. It will run. " +
         "After it finishes, press File -> Save project. \n" +
-        "Check for replacing errors in the console to make sure it didn't fail because of a missing script. " +
+        "Review any error dialogs to make sure replacement did not fail because of a missing script. " +
         "If that is the case, manually fix that prefab and then rerun the replacement task and once it finishes, you can press the \"delete find assets\" button. " +
         "Be careful with the texture tab replacing though, sometimes that can be a hit or miss with materials. \n" +
         "Be careful with the Sprites and Sprites Restorer tab. Sometimes it forgets or leaves out replacements inside of Animation Clips. \n" +
@@ -125,7 +125,7 @@ public class GUIDReplacer : EditorWindow
         {
             DrawAudioMixerTab();
         }
-        else if (selectedTab == 10)
+        else if (selectedTab == 11)
         {
             DrawSpriteRestorerTab();
         }
@@ -136,7 +136,7 @@ public class GUIDReplacer : EditorWindow
 
         GUILayout.Space(20);
 
-        if (selectedTab != 10 && GUILayout.Button("Start Replacement", GUILayout.Height(30)))
+        if (selectedTab != 11 && GUILayout.Button("Start Replacement", GUILayout.Height(30)))
         {
             if (EditorUtility.DisplayDialog("Confirm Replacement",
                 "Are you sure you want to perform the replacement? This operation will modify files.\n\nNote: Sprite references may not resolve if not imported properly.",
@@ -273,7 +273,6 @@ public class GUIDReplacer : EditorWindow
         if (updated)
         {
             File.WriteAllText(animFilePath, content, Encoding.UTF8);
-            Debug.Log($"YAML GUID replacement in {animFilePath}");
         }
     }
 
@@ -310,12 +309,10 @@ public class GUIDReplacer : EditorWindow
             {
                 File.WriteAllText(filePath, content, Encoding.UTF8);
                 modified++;
-                Debug.Log($"YAML GUID replacement in {filePath}");
             }
         }
         if (modified > 0)
             AssetDatabase.Refresh();
-        Debug.Log($"YAML anim GUID replacement: {modified} files modified.");
     }
 
     private void ReplaceSpriteReferencesUsingGuids()
@@ -411,7 +408,6 @@ public class GUIDReplacer : EditorWindow
                 {
                     File.WriteAllText(filePath, content, Encoding.UTF8);
                     modifiedFiles++;
-                    Debug.Log($"Replaced sprite references in {assetPath}");
                 }
             }
 
@@ -572,7 +568,7 @@ public class GUIDReplacer : EditorWindow
 
             if (importer == null)
             {
-                Debug.LogWarning($"Failed to get TextureImporter for {texturePath}");
+                EditorUtility.DisplayDialog("Texture Import Error", $"Failed to get TextureImporter for {texturePath}.", "OK");
                 continue;
             }
 
@@ -582,7 +578,7 @@ public class GUIDReplacer : EditorWindow
 
             if (dataProvider == null)
             {
-                Debug.LogError($"Failed to get sprite data provider for {texturePath}");
+                EditorUtility.DisplayDialog("Sprite Data Error", $"Failed to get sprite data provider for {texturePath}.", "OK");
                 continue;
             }
 
@@ -794,7 +790,6 @@ public class GUIDReplacer : EditorWindow
                                             {
                                                 keyframes[k].value = replaceSprite;
                                                 curveModified = true;
-                                                Debug.Log($"Direct sprite replacement in {assetPath}");
                                                 continue;
                                             }
 
@@ -803,7 +798,6 @@ public class GUIDReplacer : EditorWindow
                                             {
                                                 keyframes[k].value = replaceSprite;
                                                 curveModified = true;
-                                                Debug.Log($"Texture/name match replacement in {assetPath}");
                                             }
                                         }
                                     }
@@ -817,7 +811,6 @@ public class GUIDReplacer : EditorWindow
                                         {
                                             keyframes[k].value = restoredSprite;
                                             curveModified = true;
-                                            Debug.Log($"Restored sprite match in {assetPath}");
                                         }
                                     }
                                 }
@@ -847,7 +840,6 @@ public class GUIDReplacer : EditorWindow
                                     {
                                         spriteProperty.objectReferenceValue = replaceSprite;
                                         clipModified = true;
-                                        Debug.Log($"Direct legacy sprite replacement in {assetPath}");
                                         continue;
                                     }
 
@@ -856,7 +848,6 @@ public class GUIDReplacer : EditorWindow
                                     {
                                         spriteProperty.objectReferenceValue = replaceSprite;
                                         clipModified = true;
-                                        Debug.Log($"Texture/name legacy replacement in {assetPath}");
                                     }
                                 }
                             }
@@ -955,7 +946,6 @@ public class GUIDReplacer : EditorWindow
                 {
                     EditorUtility.SetDirty(clip);
                     animClipModified++;
-                    Debug.Log($"Animation clip sprite replacement via AnimationUtility in {animAssetPath}");
                 }
             }
 
@@ -998,6 +988,7 @@ public class GUIDReplacer : EditorWindow
     private void DeleteOldSpriteAssets()
     {
         int deletedCount = 0;
+        List<string> failedPaths = new List<string>();
         foreach (var path in foundAssetPaths)
         {
             if (AssetDatabase.DeleteAsset(path))
@@ -1006,7 +997,7 @@ public class GUIDReplacer : EditorWindow
             }
             else
             {
-                Debug.LogWarning($"Failed to delete asset: {path}");
+                failedPaths.Add(path);
             }
         }
 
@@ -1016,6 +1007,13 @@ public class GUIDReplacer : EditorWindow
         newSprites.Clear();
         assetPairs[0].Clear();
         EditorUtility.DisplayDialog("Done", $"Deleted {deletedCount} old sprite assets.", "OK");
+        DisplayDeleteFailures(failedPaths);
+    }
+
+    private static void DisplayDeleteFailures(List<string> failedPaths)
+    {
+        if (failedPaths.Count > 0)
+            EditorUtility.DisplayDialog("Delete Failed", $"Failed to delete {failedPaths.Count} asset(s):\n{string.Join("\n", failedPaths)}", "OK");
     }
 
     private void DrawNormalTab(int tabIndex)
@@ -1037,6 +1035,7 @@ public class GUIDReplacer : EditorWindow
                     $"Delete all 'Find' assets from the list? This cannot be undone.",
                     "Yes", "No"))
                 {
+                    List<string> failedPaths = new List<string>();
                     foreach (var pair in currentList)
                     {
                         if (pair.findAsset != null)
@@ -1044,14 +1043,13 @@ public class GUIDReplacer : EditorWindow
                             string assetPath = AssetDatabase.GetAssetPath(pair.findAsset);
                             if (!string.IsNullOrEmpty(assetPath))
                             {
-                                if (AssetDatabase.DeleteAsset(assetPath))
-                                    Debug.Log($"Deleted asset: {assetPath}");
-                                else
-                                    Debug.LogWarning($"Failed to delete asset: {assetPath}");
+                                if (!AssetDatabase.DeleteAsset(assetPath))
+                                    failedPaths.Add(assetPath);
                             }
                         }
                     }
                     AssetDatabase.Refresh();
+                    DisplayDeleteFailures(failedPaths);
                 }
             }
             EditorGUILayout.EndHorizontal();
@@ -1120,6 +1118,7 @@ public class GUIDReplacer : EditorWindow
                     $"Delete all 'Find' assets from the list? This cannot be undone.",
                     "Yes", "No"))
                 {
+                    List<string> failedPaths = new List<string>();
                     foreach (var pair in list)
                     {
                         if (pair.findAsset != null)
@@ -1127,14 +1126,13 @@ public class GUIDReplacer : EditorWindow
                             string assetPath = AssetDatabase.GetAssetPath(pair.findAsset);
                             if (!string.IsNullOrEmpty(assetPath))
                             {
-                                if (AssetDatabase.DeleteAsset(assetPath))
-                                    Debug.Log($"Deleted asset: {assetPath}");
-                                else
-                                    Debug.LogWarning($"Failed to delete asset: {assetPath}");
+                                if (!AssetDatabase.DeleteAsset(assetPath))
+                                    failedPaths.Add(assetPath);
                             }
                         }
                     }
                     AssetDatabase.Refresh();
+                    DisplayDeleteFailures(failedPaths);
                 }
             }
             EditorGUILayout.EndHorizontal();
@@ -1199,6 +1197,7 @@ public class GUIDReplacer : EditorWindow
                     "Delete all 'Find' Audio Mixer assets from the list? This cannot be undone.",
                     "Yes", "No"))
                 {
+                    List<string> failedPaths = new List<string>();
                     foreach (var pair in audioMixerPairs)
                     {
                         if (pair.findAsset != null)
@@ -1206,14 +1205,13 @@ public class GUIDReplacer : EditorWindow
                             string assetPath = AssetDatabase.GetAssetPath(pair.findAsset);
                             if (!string.IsNullOrEmpty(assetPath))
                             {
-                                if (AssetDatabase.DeleteAsset(assetPath))
-                                    Debug.Log($"Deleted asset: {assetPath}");
-                                else
-                                    Debug.LogWarning($"Failed to delete asset: {assetPath}");
+                                if (!AssetDatabase.DeleteAsset(assetPath))
+                                    failedPaths.Add(assetPath);
                             }
                         }
                     }
                     AssetDatabase.Refresh();
+                    DisplayDeleteFailures(failedPaths);
                 }
             }
             EditorGUILayout.EndHorizontal();
@@ -1366,12 +1364,9 @@ public class GUIDReplacer : EditorWindow
             });
         }
 
-        int matchedCount = audioMixerGroupMappings.Count(m => m.replaceGroup != null || m.isMixerSelf);
-        int unmatchedCount = audioMixerGroupMappings.Count(m => m.replaceGroup == null && !m.isMixerSelf);
-        Debug.Log($"Audio Mixer group mapping: {matchedCount} matched, {unmatchedCount} unmatched.");
     }
 
-    private void ReplaceAudioMixerReferences(ref int modifiedFiles, ref string log)
+    private void ReplaceAudioMixerReferences()
     {
         if (audioMixerPairs.Count == 0) return;
 
@@ -1407,7 +1402,6 @@ public class GUIDReplacer : EditorWindow
 
         if (mixerGuidMap.Count == 0)
         {
-            Debug.Log("Audio Mixer: No GUID replacements to perform.");
             return;
         }
 
@@ -1480,14 +1474,10 @@ public class GUIDReplacer : EditorWindow
             if (fileModified)
             {
                 File.WriteAllText(filePath, content, Encoding.UTF8);
-                modifiedFiles++;
-                log += $"[Audio Mixer] Replaced references in {assetPath}\n";
-                Debug.Log($"[Audio Mixer] Replaced references in {assetPath}");
             }
         }
 
         EditorUtility.ClearProgressBar();
-        Debug.Log($"[Audio Mixer] Replacement complete. GUID pairs: {mixerGuidMap.Count}, FileID pairs: {fileIdMap.Count}");
     }
 
     private System.Type GetAssetType(int index)
@@ -1503,6 +1493,7 @@ public class GUIDReplacer : EditorWindow
             case 6: return typeof(GameObject);
             case 7: return typeof(ScriptableObject);
             case 8: return typeof(Font);
+            case 10: return typeof(Shader);
             default: return typeof(Object);
         }
     }
@@ -1511,9 +1502,6 @@ public class GUIDReplacer : EditorWindow
     {
         string[] files = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories);
         List<string> targetExtensions = new List<string> { ".asset", ".prefab", ".unity", ".mat", ".anim", ".controller", ".overrideController" };
-        int modifiedFiles = 0;
-        string log = "";
-
         try
         {
             for (int i = 0; i < files.Length; i++)
@@ -1522,7 +1510,6 @@ public class GUIDReplacer : EditorWindow
 
                 if (EditorUtility.DisplayCancelableProgressBar("Replacing...", Path.GetFileName(filePath), (float)i / files.Length))
                 {
-                    log += "Operation canceled by user.\n";
                     break;
                 }
 
@@ -1556,7 +1543,6 @@ public class GUIDReplacer : EditorWindow
                             {
                                 content = content.Replace(pair.findGuid, pair.replaceGuid);
                                 fileModified = true;
-                                log += $"Replaced GUID in {assetPath}\n";
                             }
                         }
                     }
@@ -1588,7 +1574,6 @@ public class GUIDReplacer : EditorWindow
                                 {
                                     content = content.Replace(pair.findGuid, pair.replaceGuid);
                                     fsmModified = true;
-                                    log += $"[PlayMakerFSM] Replaced GUID in {assetPath}\n";
                                 }
                             }
                         }
@@ -1603,7 +1588,6 @@ public class GUIDReplacer : EditorWindow
                                 {
                                     content = content.Replace(findGuid, replaceGuid);
                                     fsmModified = true;
-                                    log += $"[PlayMakerFSM] Replaced asset GUID ({findGuid} -> {replaceGuid}) in {assetPath}\n";
                                 }
                             }
                         }
@@ -1618,7 +1602,6 @@ public class GUIDReplacer : EditorWindow
                         if (fsmModified)
                         {
                             File.WriteAllText(filePath, content, Encoding.UTF8);
-                            modifiedFiles++;
                         }
                     }
                 }
@@ -1627,7 +1610,7 @@ public class GUIDReplacer : EditorWindow
                 {
                     if (!File.Exists(assetPath))
                     {
-                        Debug.LogWarning("Scene file does not exist: " + assetPath);
+                        EditorUtility.DisplayDialog("Scene Replacement Error", $"Scene file does not exist: {assetPath}", "OK");
                         continue;
                     }
                     try
@@ -1704,15 +1687,13 @@ public class GUIDReplacer : EditorWindow
                         {
                             UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene);
                             fileModified = true;
-                            log += $"Replaced object references in scene {assetPath}\n";
-                            modifiedFiles++;
                         }
 
                         UnityEditor.SceneManagement.EditorSceneManager.CloseScene(scene, true);
                     }
                     catch (System.Exception ex)
                     {
-                        Debug.LogWarning($"Skipping scene {assetPath} due to error: {ex.Message}");
+                        EditorUtility.DisplayDialog("Scene Replacement Error", $"Failed to process scene {assetPath}: {ex.Message}", "OK");
                     }
                     continue;
                 }
@@ -1744,7 +1725,6 @@ public class GUIDReplacer : EditorWindow
                                             {
                                                 keyframes[k].value = replaceSprite;
                                                 curveModified = true;
-                                                log += $"Direct sprite replacement in {assetPath} at {binding.path}\n";
                                                 continue;
                                             }
 
@@ -1753,7 +1733,6 @@ public class GUIDReplacer : EditorWindow
                                             {
                                                 keyframes[k].value = replaceSprite;
                                                 curveModified = true;
-                                                log += $"Texture/name match replacement in {assetPath}\n";
                                             }
                                         }
                                     }
@@ -1767,7 +1746,6 @@ public class GUIDReplacer : EditorWindow
                                         {
                                             keyframes[k].value = restoredSprite;
                                             curveModified = true;
-                                            log += $"Restored sprite match in {assetPath}\n";
                                         }
                                     }
                                 }
@@ -1797,7 +1775,6 @@ public class GUIDReplacer : EditorWindow
                                     {
                                         spriteProperty.objectReferenceValue = replaceSprite;
                                         clipModified = true;
-                                        log += $"Direct legacy sprite replacement in {assetPath}\n";
                                         continue;
                                     }
 
@@ -1806,7 +1783,6 @@ public class GUIDReplacer : EditorWindow
                                     {
                                         spriteProperty.objectReferenceValue = replaceSprite;
                                         clipModified = true;
-                                        log += $"Texture/name legacy replacement in {assetPath}\n";
                                     }
                                 }
                             }
@@ -1846,7 +1822,6 @@ public class GUIDReplacer : EditorWindow
                     {
                         EditorUtility.SetDirty(controller);
                         fileModified = true;
-                        log += $"Modified animator controller references in {assetPath}\n";
                     }
                 }
                 else if (mainAsset is AnimatorOverrideController overrideController)
@@ -1891,7 +1866,6 @@ public class GUIDReplacer : EditorWindow
                         overrideController.ApplyOverrides(overrides);
                         EditorUtility.SetDirty(overrideController);
                         fileModified = true;
-                        log += $"Modified animator override controller references in {assetPath}\n";
                     }
                 }
                 else if (mainAsset is Material mat)
@@ -1912,7 +1886,6 @@ public class GUIDReplacer : EditorWindow
                                 {
                                     mat.SetTexture(propertyName, (Texture)pair.replaceAsset);
                                     matModified = true;
-                                    log += $"Replaced texture in material {assetPath} property '{propertyName}'\n";
                                 }
                             }
                         }
@@ -2013,7 +1986,6 @@ public class GUIDReplacer : EditorWindow
                     if (objectModified)
                     {
                         fileModified = true;
-                        log += $"Replaced object references in {assetPath}\n";
                     }
 
                     if (Path.GetExtension(filePath).ToLower() == ".anim")
@@ -2042,10 +2014,8 @@ public class GUIDReplacer : EditorWindow
                     }
                 }
 
-                if (fileModified)
-                    modifiedFiles++;
-
             }
+
         }
         finally
         {
@@ -2054,10 +2024,67 @@ public class GUIDReplacer : EditorWindow
             AssetDatabase.Refresh();
         }
 
-        ReplaceAudioMixerReferences(ref modifiedFiles, ref log);
+        ReplaceAudioMixerReferences();
+        ReplaceShaderReferencesInMaterials();
+    }
 
-        log += $"Done. Modified {modifiedFiles} files.\n";
-        Debug.Log(log);
+    private void ReplaceShaderReferencesInMaterials()
+    {
+        List<AssetPair> shaderPairs = assetPairs[10]
+            .Where(pair => pair.findAsset is Shader &&
+                           pair.replaceAsset is Shader &&
+                           pair.findAsset != pair.replaceAsset)
+            .ToList();
+
+        if (shaderPairs.Count == 0)
+        {
+            EditorUtility.DisplayDialog("Shader Replacement", "No valid Shader replacement pairs were configured.", "OK");
+            return;
+        }
+
+        string[] materialGuids = AssetDatabase.FindAssets("t:Material", new[] { "Assets" });
+        HashSet<int> processedMaterials = new HashSet<int>();
+        foreach (string materialGuid in materialGuids)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(materialGuid);
+            foreach (Material material in AssetDatabase.LoadAllAssetsAtPath(assetPath).OfType<Material>())
+            {
+                if (!processedMaterials.Add(material.GetInstanceID()))
+                    continue;
+
+                bool materialModified = false;
+                foreach (AssetPair pair in shaderPairs)
+                {
+                    if (ShadersMatch(material.shader, (Shader)pair.findAsset))
+                    {
+                        material.shader = (Shader)pair.replaceAsset;
+                        materialModified = true;
+                    }
+                }
+
+                if (materialModified)
+                    EditorUtility.SetDirty(material);
+            }
+        }
+
+        AssetDatabase.SaveAssets();
+    }
+
+    private static bool ShadersMatch(Shader materialShader, Shader findShader)
+    {
+        if (materialShader == null || findShader == null)
+            return false;
+        if (materialShader == findShader)
+            return true;
+
+        bool hasMaterialIdentity = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(
+            materialShader, out string materialGuid, out long materialFileId);
+        bool hasFindIdentity = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(
+            findShader, out string findGuid, out long findFileId);
+        if (hasMaterialIdentity && hasFindIdentity)
+            return materialGuid == findGuid && materialFileId == findFileId;
+
+        return string.Equals(materialShader.name, findShader.name, System.StringComparison.Ordinal);
     }
 
     private class GuidPair

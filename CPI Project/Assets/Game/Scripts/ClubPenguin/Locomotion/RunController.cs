@@ -617,7 +617,8 @@ public override void Steer(Vector2 steerInput)
 				{
 					mutableData.SprintParams.speedMult = mutableData.SprintParams.TurnSpeedMult;
 				}
-				vector2 = desiredFacing * mutableData.SprintParams.Speed * mutableData.SprintParams.speedMult;
+				float sprintInputMagnitude = Mathf.Clamp(desiredFacing.magnitude, mutableData.JogParams.MinSteerMag, 1f);
+				vector2 = desiredFacing.normalized * mutableData.SprintParams.Speed * mutableData.SprintParams.speedMult * sprintInputMagnitude;
 				TurnToDesiredFacing(mutableData.SprintParams.TurnSmoothing, mutableData.SprintParams.MaxTurnDegreesPerSec);
 			}
 			else if (isStopping)

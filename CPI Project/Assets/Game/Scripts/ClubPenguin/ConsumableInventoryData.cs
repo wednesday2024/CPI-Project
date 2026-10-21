@@ -55,6 +55,10 @@ namespace ClubPenguin
 
 		public void AddConsumable(string consumableType, int consumableCount)
 		{
+			if (consumableInventory.inventoryMap == null)
+			{
+				consumableInventory.inventoryMap = new Dictionary<string, InventoryItemStock>();
+			}
 			if (!consumableInventory.inventoryMap.ContainsKey(consumableType))
 			{
 				consumableInventory.inventoryMap[consumableType] = new InventoryItemStock();

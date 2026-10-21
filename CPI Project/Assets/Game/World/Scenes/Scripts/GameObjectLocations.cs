@@ -1,5 +1,4 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -10,8 +9,10 @@ public class GameObjectLocations : MonoBehaviour
 	// Enable for baking and disable for runtime
 	public GameObject Lighting;
 	// Lightmap baking skybox
+#if UNITY_EDITOR
     public Material LightmappingSkybox;
 	public Material PiratePartySkyboxForBakingLightmaps;
+#endif
 	// Set these to static
 	public GameObject BoxDimensionDecorations;
 	public GameObject EventPirateParty2018_Beach_Prefab;

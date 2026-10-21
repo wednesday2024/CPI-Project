@@ -17,19 +17,14 @@ public static class CreateAssetBundles
     private static void BuildAllAddressables()
     {
         string platform = GetPlatformName(EditorUserBuildSettings.activeBuildTarget);
-        string outputDirectory = "Assets/StreamingAssets/assetbundles/generated/" + platform;
+        string outputDirectory = Path.Combine(Application.dataPath, "StreamingAssets", "assetbundles", "generated", platform);
         EnsureDirectoryIsEmpty(outputDirectory);
         ModifyClientInfoAsset(platform);
         ModifyTextFile(platform);
 
         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.GetSettings(true);
-        ClearCdnAssetBundleNames();
-        ConvertLegacyBundleAssignments(settings);
         ConfigureLocalGroups(settings, new List<AddressableAssetGroup>(settings.groups), platform);
-        AssetDatabase.SaveAssets();
-
-        int legacyBuilderIndex = GetLegacyBundleBuilderIndex(settings);
-        settings.ActivePlayerDataBuilderIndex = legacyBuilderIndex;
+        settings.ActivePlayerDataBuilderIndex = GetAddressableBundleNameBuilderIndex(settings);
         AssetDatabase.SaveAssets();
 
         AddressablesPlayerBuildResult result;
@@ -38,117 +33,48 @@ public static class CreateAssetBundles
         {
             throw new InvalidOperationException(result.Error);
         }
+        List<string> expectedBundlePaths = GetExpectedBundlePaths(settings, outputDirectory);
+        List<string> missingBundlePaths = new List<string>();
+        foreach (string bundlePath in expectedBundlePaths)
+        {
+            if (!File.Exists(bundlePath))
+            {
+                missingBundlePaths.Add(bundlePath);
+            }
+        }
+        if (missingBundlePaths.Count > 0)
+        {
+            throw new InvalidOperationException("Addressables build did not generate the expected bundles:\n" + string.Join("\n", missingBundlePaths.ToArray()));
+        }
         CleanupPlatformBundles(outputDirectory, platform);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
 
-    private static void ClearCdnAssetBundleNames()
-    {
-        foreach (string bundleName in AssetDatabase.GetAllAssetBundleNames())
-        {
-            if (!bundleName.StartsWith("CDN/", StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            foreach (string assetPath in AssetDatabase.GetAssetPathsFromAssetBundle(bundleName))
-            {
-                AssetImporter importer = AssetImporter.GetAtPath(assetPath);
-                if (importer != null)
-                {
-                    importer.assetBundleName = string.Empty;
-                    AssetDatabase.WriteImportSettingsIfDirty(assetPath);
-                }
-            }
-        }
-    }
-
-    private static int GetLegacyBundleBuilderIndex(AddressableAssetSettings settings)
+    private static int GetAddressableBundleNameBuilderIndex(AddressableAssetSettings settings)
     {
         for (int i = 0; i < settings.DataBuilders.Count; i++)
         {
-            if (settings.DataBuilders[i] is LegacyAddressableBundleBuilder)
+            if (settings.DataBuilders[i] is AddressableBundleNameBuilder)
             {
                 return i;
             }
         }
 
-        LegacyAddressableBundleBuilder builder = ScriptableObject.CreateInstance<LegacyAddressableBundleBuilder>();
-        builder.name = nameof(LegacyAddressableBundleBuilder);
+        AddressableBundleNameBuilder builder = ScriptableObject.CreateInstance<AddressableBundleNameBuilder>();
+        builder.name = nameof(AddressableBundleNameBuilder);
         AssetDatabase.AddObjectToAsset(builder, settings);
         if (!settings.AddDataBuilder(builder, false))
         {
-            throw new InvalidOperationException("Failed to add the legacy Addressables bundle builder.");
+            throw new InvalidOperationException("Failed to add the Addressables bundle name builder.");
         }
         AssetDatabase.SaveAssets();
         return settings.DataBuilders.Count - 1;
     }
 
-    private static void ConvertLegacyBundleAssignments(AddressableAssetSettings settings)
+    private static List<string> GetExpectedBundlePaths(AddressableAssetSettings settings, string outputDirectory)
     {
-        string[] bundleNames = AssetDatabase.GetAllAssetBundleNames();
-        foreach (string bundleName in bundleNames)
-        {
-            if (bundleName.StartsWith("CDN/", StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
-
-            AddressableAssetGroup group = settings.FindGroup(bundleName);
-            if (group == null)
-            {
-                group = settings.CreateGroup(bundleName, false, false, false, null, typeof(ContentUpdateGroupSchema), typeof(BundledAssetGroupSchema));
-            }
-
-            BundledAssetGroupSchema schema = group.GetSchema<BundledAssetGroupSchema>();
-            schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogether;
-            schema.BundleNaming = BundledAssetGroupSchema.BundleNamingStyle.AppendHash;
-
-            string[] assetPaths = AssetDatabase.GetAssetPathsFromAssetBundle(bundleName);
-            foreach (string assetPath in assetPaths)
-            {
-                string guid = AssetDatabase.AssetPathToGUID(assetPath);
-                AddressableAssetEntry entry = settings.CreateOrMoveEntry(guid, group);
-                entry.address = GetAddress(assetPath);
-                entry.SetLabel(bundleName, true, true);
-
-                AssetImporter importer = AssetImporter.GetAtPath(assetPath);
-                if (importer != null && !string.IsNullOrEmpty(importer.assetBundleName))
-                {
-                    importer.SetAssetBundleNameAndVariant(string.Empty, string.Empty);
-                    AssetDatabase.WriteImportSettingsIfDirty(assetPath);
-                }
-            }
-        }
-        MergeGroupsWithMatchingBundleLabels(settings);
-        RemoveEmptyLegacyGroups(settings);
-    }
-
-    private static void RemoveEmptyLegacyGroups(AddressableAssetSettings settings)
-    {
-        List<AddressableAssetGroup> emptyLegacyGroups = new List<AddressableAssetGroup>();
-        foreach (AddressableAssetGroup group in settings.groups)
-        {
-            if (group != null &&
-                !IsCdnGroup(group) &&
-                group.Name.IndexOf(".sa.unity3d.txt", StringComparison.OrdinalIgnoreCase) >= 0 &&
-                group.entries.Count == 0)
-            {
-                emptyLegacyGroups.Add(group);
-            }
-        }
-
-        foreach (AddressableAssetGroup group in emptyLegacyGroups)
-        {
-            settings.RemoveGroup(group);
-        }
-    }
-
-    private static void MergeGroupsWithMatchingBundleLabels(AddressableAssetSettings settings)
-    {
-        Dictionary<string, AddressableAssetGroup> groupsByBundleLabel = new Dictionary<string, AddressableAssetGroup>(StringComparer.OrdinalIgnoreCase);
-        List<AddressableAssetGroup> groupsToRemove = new List<AddressableAssetGroup>();
+        List<string> bundlePaths = new List<string>();
         foreach (AddressableAssetGroup group in settings.groups)
         {
             if (group == null || IsCdnGroup(group))
@@ -156,50 +82,32 @@ public static class CreateAssetBundles
                 continue;
             }
 
-            foreach (AddressableAssetEntry entry in new List<AddressableAssetEntry>(group.entries))
+            BundledAssetGroupSchema schema = group.GetSchema<BundledAssetGroupSchema>();
+            if (schema == null || !schema.IncludeInBuild)
             {
-                string bundleLabel = GetLegacyBundleLabel(entry);
-                if (bundleLabel == null)
-                {
-                    continue;
-                }
-
-                AddressableAssetGroup canonicalGroup;
-                if (!groupsByBundleLabel.TryGetValue(bundleLabel, out canonicalGroup))
-                {
-                    groupsByBundleLabel.Add(bundleLabel, group);
-                    continue;
-                }
-                if (canonicalGroup == group)
-                {
-                    continue;
-                }
-
-                settings.CreateOrMoveEntry(entry.guid, canonicalGroup);
-                if (!groupsToRemove.Contains(group))
-                {
-                    groupsToRemove.Add(group);
-                }
+                continue;
             }
 
-        }
-
-        foreach (AddressableAssetGroup group in groupsToRemove)
-        {
-            if (group.entries.Count == 0)
+            string bundleName = GetAddressableBundleName(group);
+            if (!string.IsNullOrEmpty(bundleName))
             {
-                settings.RemoveGroup(group);
+                bundlePaths.Add(Path.Combine(outputDirectory, bundleName.Replace('/', Path.DirectorySeparatorChar)));
             }
         }
+        return bundlePaths;
     }
 
-    private static string GetLegacyBundleLabel(AddressableAssetEntry entry)
+    internal static string GetAddressableBundleName(AddressableAssetGroup group)
     {
-        foreach (string label in entry.labels)
+        foreach (AddressableAssetEntry entry in group.entries)
         {
-            if (label.EndsWith(".sa.unity3d.txt", StringComparison.OrdinalIgnoreCase))
+            foreach (string label in entry.labels)
             {
-                return label;
+                const string legacySuffix = ".sa.unity3d.txt";
+                if (label.EndsWith(legacySuffix, StringComparison.OrdinalIgnoreCase))
+                {
+                    return label.Substring(0, label.Length - ".txt".Length);
+                }
             }
         }
         return null;
@@ -229,6 +137,8 @@ public static class CreateAssetBundles
             {
                 continue;
             }
+            schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogether;
+            schema.BundleNaming = BundledAssetGroupSchema.BundleNamingStyle.AppendHash;
             schema.Compression = compression;
             schema.BuildPath.SetVariableByName(settings, AddressableAssetSettings.kLocalBuildPath);
             schema.LoadPath.SetVariableByName(settings, AddressableAssetSettings.kLocalLoadPath);
@@ -237,16 +147,6 @@ public static class CreateAssetBundles
         settings.profileSettings.SetValue(settings.activeProfileId, AddressableAssetSettings.kLocalBuildPath, buildPath);
         settings.profileSettings.SetValue(settings.activeProfileId, AddressableAssetSettings.kLocalLoadPath, loadPath);
         settings.SetDirty(AddressableAssetSettings.ModificationEvent.ProfileModified, settings, true, true);
-    }
-
-    private static string GetAddress(string assetPath)
-    {
-        const string assetsPrefix = "Assets/";
-        if (!assetPath.StartsWith(assetsPrefix, StringComparison.OrdinalIgnoreCase))
-        {
-            throw new InvalidOperationException("Addressable asset path is outside the Assets folder: " + assetPath);
-        }
-        return ("assets/" + assetPath.Substring(assetsPrefix.Length)).ToLowerInvariant();
     }
 
     private static string GetPlatformName(BuildTarget target)
@@ -433,31 +333,10 @@ public static class CreateAssetBundles
         {
             return;
         }
-        List<string> unwantedPlatforms = new List<string>();
-        foreach (string platform in knownPlatforms)
-        {
-            if (!string.Equals(platform, currentPlatform, StringComparison.OrdinalIgnoreCase))
-            {
-                unwantedPlatforms.Add(platform);
-            }
-        }
         foreach (string file in Directory.GetFiles(rootPath, "*", SearchOption.AllDirectories))
         {
             string fileName = Path.GetFileName(file).ToLowerInvariant();
-            bool shouldDelete = fileName.EndsWith(".manifest", StringComparison.Ordinal) ||
-                                IsHashedAddressablesBundle(fileName);
-            if (!shouldDelete)
-            {
-                foreach (string platform in unwantedPlatforms)
-                {
-                    if (fileName.Contains(platform))
-                    {
-                        shouldDelete = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldDelete)
+            if (fileName.EndsWith(".manifest", StringComparison.Ordinal))
             {
                 string metaFile = file + ".meta";
                 if (File.Exists(metaFile))
@@ -469,51 +348,23 @@ public static class CreateAssetBundles
         }
     }
 
-    private static bool IsHashedAddressablesBundle(string fileName)
-    {
-        const string marker = "_assets_all_";
-        int markerIndex = fileName.LastIndexOf(marker, StringComparison.Ordinal);
-        if (markerIndex < 0 || !fileName.EndsWith(".bundle", StringComparison.Ordinal))
-        {
-            return false;
-        }
-
-        string hash = fileName.Substring(markerIndex + marker.Length, fileName.Length - markerIndex - marker.Length - ".bundle".Length);
-        if (hash.Length != 32)
-        {
-            return false;
-        }
-        foreach (char character in hash)
-        {
-            if (!Uri.IsHexDigit(character))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 }
 
-public sealed class LegacyAddressableBundleBuilder : BuildScriptPackedMode
+public sealed class AddressableBundleNameBuilder : BuildScriptPackedMode
 {
     public override string Name
     {
-        get { return nameof(LegacyAddressableBundleBuilder); }
+        get { return nameof(AddressableBundleNameBuilder); }
     }
 
     protected override string ConstructAssetBundleName(AddressableAssetGroup assetGroup, BundledAssetGroupSchema schema, BundleDetails info, string assetBundleName)
     {
         if (assetGroup != null)
         {
-            foreach (AddressableAssetEntry entry in assetGroup.entries)
+            string bundleName = CreateAssetBundles.GetAddressableBundleName(assetGroup);
+            if (!string.IsNullOrEmpty(bundleName))
             {
-                foreach (string label in entry.labels)
-                {
-                    if (label.EndsWith(".sa.unity3d.txt", StringComparison.OrdinalIgnoreCase))
-                    {
-                        return label.Substring(0, label.Length - ".txt".Length);
-                    }
-                }
+                return bundleName;
             }
         }
 

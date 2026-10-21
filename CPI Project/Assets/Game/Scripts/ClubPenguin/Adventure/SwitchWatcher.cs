@@ -1,6 +1,7 @@
 using ClubPenguin.Core;
 using ClubPenguin.Switches;
 using ClubPenguin.Task;
+using Disney.MobileNetwork;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace ClubPenguin.Adventure
 
 		private HashSet<Switch> counted;
 
+		private bool listeningForMascotInteraction;
+
 		public override object GetExportParameters()
 		{
 			return ExportedSwitch.Create(GameObject.Find(SwitchName).GetComponent<Switch>());
@@ -32,6 +35,12 @@ namespace ClubPenguin.Adventure
 		public override void OnActivate()
 		{
 			base.OnActivate();
+			if (Service.Get<ClubPenguin.GameSettings>().OfflineMode && isMascotSwitchName(SwitchName))
+			{
+				base.dispatcher.AddListener<QuestEvents.OnMascotInteract>(onMascotInteract);
+				listeningForMascotInteraction = true;
+				return;
+			}
 			GameObject gameObject = GameObject.Find(SwitchName);
 			if (gameObject == null)
 			{
@@ -58,6 +67,11 @@ namespace ClubPenguin.Adventure
 		public override void OnDeactivate()
 		{
 			base.OnDeactivate();
+			if (listeningForMascotInteraction)
+			{
+				base.dispatcher.RemoveListener<QuestEvents.OnMascotInteract>(onMascotInteract);
+				listeningForMascotInteraction = false;
+			}
 			if (parts != null)
 			{
 				for (int i = 0; i < parts.Count; i++)
@@ -74,6 +88,20 @@ namespace ClubPenguin.Adventure
 			{
 				base.dispatcher.RemoveListener<SwitchEvents.SwitchChange>(onSwitchChange);
 			}
+		}
+
+		private bool onMascotInteract(QuestEvents.OnMascotInteract evt)
+		{
+			if (evt.Mascot != null && string.Equals(SwitchName, "Talk" + evt.Mascot.Name, StringComparison.OrdinalIgnoreCase))
+			{
+				taskIncrement();
+			}
+			return false;
+		}
+
+		private bool isMascotSwitchName(string switchName)
+		{
+			return !string.IsNullOrEmpty(switchName) && switchName.StartsWith("Talk", StringComparison.OrdinalIgnoreCase);
 		}
 
 		private bool onSwitchChange(SwitchEvents.SwitchChange evt)

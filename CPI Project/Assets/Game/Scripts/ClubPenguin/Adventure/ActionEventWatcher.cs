@@ -15,8 +15,6 @@ namespace ClubPenguin.Adventure
 		[Tooltip("The collection of events to trigger this watcher off of, only those with corresponding network events are supported")]
 		public InputEvents.Actions[] Actions;
 
-		private HashSet<InputEvents.Actions> actionsSet;
-
 		private LocomotionEventBroadcaster locomotionBroadcaster;
 
 		public override object GetExportParameters()
@@ -65,7 +63,6 @@ namespace ClubPenguin.Adventure
 		public override void OnActivate()
 		{
 			base.OnActivate();
-			actionsSet = new HashSet<InputEvents.Actions>(Actions);
 			locomotionBroadcaster = SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<LocomotionEventBroadcaster>();
 			if (locomotionBroadcaster != null)
 			{
@@ -84,6 +81,14 @@ namespace ClubPenguin.Adventure
 		}
 
 		private void onLocomotionAction(LocomotionController.LocomotionAction action, object userData = null)
+		{
+			if (MatchesAction(action))
+			{
+				taskIncrement();
+			}
+		}
+
+		public bool MatchesAction(LocomotionController.LocomotionAction action)
 		{
 			InputEvents.Actions action2;
 			switch (action)
@@ -106,16 +111,13 @@ namespace ClubPenguin.Adventure
 			case LocomotionController.LocomotionAction.Action3:
 				action2 = InputEvents.Actions.Action3;
 				break;
-		case LocomotionController.LocomotionAction.LaunchThrow:
+			case LocomotionController.LocomotionAction.LaunchThrow:
 				action2 = InputEvents.Actions.Snowball;
 				break;
 			default:
-				return;
+				return false;
 			}
-			if (actionsSet.Contains(action2))
-			{
-				taskIncrement();
-			}
+			return Actions != null && Array.IndexOf(Actions, action2) >= 0;
 		}
 	}
 }

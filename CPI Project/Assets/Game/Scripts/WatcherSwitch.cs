@@ -1,3 +1,4 @@
+using ClubPenguin.Adventure;
 using ClubPenguin.Core;
 using ClubPenguin.Locomotion;
 using Disney.LaunchPadFramework;
@@ -14,10 +15,31 @@ public class WatcherSwitch : Switch
 
 	private EventDispatcher dispatcher;
 
+	private LocomotionEventBroadcaster locomotionBroadcaster;
+
+	private readonly List<Switch> watchedSwitches = new List<Switch>();
+
 	private void Start()
 	{
 		dispatcher = Service.Get<EventDispatcher>();
 		dispatcher.AddListener<ClubPenguin.ActionSequencerEvents.ActionSequenceStarted>(onActionSequenceStarted);
+		addSwitchListeners(enableWatchers);
+		addSwitchListeners(disableWatchers);
+		if (hasWatcherType(enableWatchers, "action") || hasWatcherType(disableWatchers, "action"))
+		{
+			if (ClubPenguin.SceneRefs.ZoneLocalPlayerManager != null && ClubPenguin.SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject != null)
+			{
+				locomotionBroadcaster = ClubPenguin.SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<LocomotionEventBroadcaster>();
+			}
+			if (locomotionBroadcaster != null)
+			{
+				locomotionBroadcaster.OnDoActionEvent += onDoAction;
+			}
+			else
+			{
+				Log.LogWarning(this, "Action watchers require a local player's LocomotionEventBroadcaster.");
+			}
+		}
 	}
 
 	private void OnDestroy()
@@ -25,6 +47,17 @@ public class WatcherSwitch : Switch
 		if (dispatcher != null)
 		{
 			dispatcher.RemoveListener<ClubPenguin.ActionSequencerEvents.ActionSequenceStarted>(onActionSequenceStarted);
+		}
+		if (locomotionBroadcaster != null)
+		{
+			locomotionBroadcaster.OnDoActionEvent -= onDoAction;
+		}
+		for (int i = 0; i < watchedSwitches.Count; i++)
+		{
+			if (watchedSwitches[i] != null)
+			{
+				watchedSwitches[i].StateChanged -= onSwitchStateChanged;
+			}
 		}
 	}
 
@@ -37,6 +70,100 @@ public class WatcherSwitch : Switch
 		if (matchesWatcher(disableWatchers, evt.actionGameObject))
 		{
 			Change(false);
+		}
+		return false;
+	}
+
+	private void addSwitchListeners(List<TaskWatcher> watcherDefinitions)
+	{
+		for (int i = 0; i < watcherDefinitions.Count; i++)
+		{
+			SwitchWatcher watcherDefinition = watcherDefinitions[i] as SwitchWatcher;
+			if (watcherDefinition == null)
+			{
+				continue;
+			}
+			GameObject switchObject = GameObject.Find(watcherDefinition.SwitchName);
+			Switch watchedSwitch = (switchObject != null) ? switchObject.GetComponent<Switch>() : null;
+			if (watchedSwitch == null)
+			{
+				Log.LogWarningFormatted(this, "Unable to find switch {0} for WatcherSwitch {1}", watcherDefinition.SwitchName, base.name);
+				continue;
+			}
+			if (!watchedSwitches.Contains(watchedSwitch))
+			{
+				watchedSwitch.StateChanged += onSwitchStateChanged;
+				watchedSwitches.Add(watchedSwitch);
+			}
+		}
+	}
+
+	private void onSwitchStateChanged(Switch watchedSwitch, bool value)
+	{
+		if (!value)
+		{
+			return;
+		}
+		if (matchesSwitch(enableWatchers, watchedSwitch))
+		{
+			Change(true);
+		}
+		if (matchesSwitch(disableWatchers, watchedSwitch))
+		{
+			Change(false);
+		}
+	}
+
+	private void onDoAction(LocomotionController.LocomotionAction action, object userData = null)
+	{
+		if (matchesAction(enableWatchers, action))
+		{
+			Change(true);
+		}
+		if (matchesAction(disableWatchers, action))
+		{
+			Change(false);
+		}
+	}
+
+	private bool hasWatcherType(List<TaskWatcher> watcherDefinitions, string watcherType)
+	{
+		for (int i = 0; i < watcherDefinitions.Count; i++)
+		{
+			if (watcherDefinitions[i] != null && watcherDefinitions[i].GetWatcherType() == watcherType)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private bool matchesSwitch(List<TaskWatcher> watcherDefinitions, Switch watchedSwitch)
+	{
+		if (watchedSwitch == null)
+		{
+			return false;
+		}
+		for (int i = 0; i < watcherDefinitions.Count; i++)
+		{
+			SwitchWatcher watcherDefinition = watcherDefinitions[i] as SwitchWatcher;
+			if (watcherDefinition != null && string.Equals(watcherDefinition.SwitchName, watchedSwitch.name, StringComparison.Ordinal))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private bool matchesAction(List<TaskWatcher> watcherDefinitions, LocomotionController.LocomotionAction action)
+	{
+		for (int i = 0; i < watcherDefinitions.Count; i++)
+		{
+			ActionEventWatcher watcherDefinition = watcherDefinitions[i] as ActionEventWatcher;
+			if (watcherDefinition != null && watcherDefinition.MatchesAction(action))
+			{
+				return true;
+			}
 		}
 		return false;
 	}
