@@ -69,6 +69,14 @@ namespace ClubPenguin.DecorationInventory
 
 		private Dictionary<int, StructureDefinition> structureDefinitions;
 
+		private Dictionary<int, int> pendingDecorationRewards = new Dictionary<int, int>();
+
+		private Dictionary<int, int> pendingStructureRewards = new Dictionary<int, int>();
+
+		private HashSet<string> reconciledQuestCompletionRewards = new HashSet<string>();
+
+		private bool decorationInventoryLoadRequested;
+
 		public event Action<DecorationType> onInventoryLoaded;
 
 		public event System.Action InventoryUpdated;
@@ -83,6 +91,7 @@ namespace ClubPenguin.DecorationInventory
 			cPDataEntityCollection.Whenever<SceneLayoutData>("ActiveSceneData", onSceneLayoutLoaded, onSceneLayoutUnLoaded);
 			Service.Get<EventDispatcher>().AddListener<IglooServiceEvents.DecorationsLoaded>(onIglooServiceEventsDecorationsLoaded);
 			Service.Get<EventDispatcher>().AddListener<IglooServiceEvents.DecorationUpdated>(onDecorationUpdated);
+			Service.Get<EventDispatcher>().AddListener<RewardServiceEvents.MyRewardEarned>(onMyRewardEarned);
 		}
 
 		public int GetTotalInventoryCountForDecoration(int decorationId)
@@ -240,11 +249,160 @@ namespace ClubPenguin.DecorationInventory
 			return false;
 		}
 
+		private bool onMyRewardEarned(RewardServiceEvents.MyRewardEarned evt)
+		{
+			if (evt.Source == RewardSource.QUEST_COMPLETED)
+			{
+				EnsureQuestCompletionReward(evt.SourceId, evt.Reward);
+				return false;
+			}
+			DecorationInstanceReward decorationReward;
+			if (evt.Reward.TryGetValue(out decorationReward))
+			{
+				foreach (KeyValuePair<int, int> decoration in decorationReward.Decorations)
+				{
+					addDecorationReward(decoration.Key, decoration.Value);
+				}
+			}
+			StructureInstanceReward structureReward;
+			if (evt.Reward.TryGetValue(out structureReward))
+			{
+				foreach (KeyValuePair<int, int> structure in structureReward.Decorations)
+				{
+					addStructureReward(structure.Key, structure.Value);
+				}
+			}
+			if ((pendingDecorationRewards.Count > 0 || pendingStructureRewards.Count > 0) && !decorationInventoryLoadRequested)
+			{
+				decorationInventoryLoadRequested = true;
+				Service.Get<INetworkServicesManager>().IglooService.GetDecorations();
+			}
+			return false;
+		}
+
+		public void EnsureQuestCompletionReward(string questId, Reward reward)
+		{
+			if (!reconciledQuestCompletionRewards.Add(questId))
+			{
+				return;
+			}
+			DecorationInstanceReward decorationReward;
+			if (reward.TryGetValue(out decorationReward))
+			{
+				foreach (KeyValuePair<int, int> decoration in decorationReward.Decorations)
+				{
+					ensureDecorationReward(decoration.Key, decoration.Value);
+				}
+			}
+			StructureInstanceReward structureReward;
+			if (reward.TryGetValue(out structureReward))
+			{
+				foreach (KeyValuePair<int, int> structure in structureReward.Decorations)
+				{
+					ensureStructureReward(structure.Key, structure.Value);
+				}
+			}
+			if ((pendingDecorationRewards.Count > 0 || pendingStructureRewards.Count > 0) && !decorationInventoryLoadRequested)
+			{
+				decorationInventoryLoadRequested = true;
+				Service.Get<INetworkServicesManager>().IglooService.GetDecorations();
+			}
+		}
+
+		private void addDecorationReward(int definitionId, int count)
+		{
+			if (decorationInventory != null)
+			{
+				decorationInventory.AddDecoration(definitionId, count);
+				this.InventoryUpdated.InvokeSafe();
+				return;
+			}
+			addPendingReward(pendingDecorationRewards, definitionId, count);
+		}
+
+		private void addStructureReward(int definitionId, int count)
+		{
+			if (structureInventory != null)
+			{
+				structureInventory.AddStructure(definitionId, count);
+				this.InventoryUpdated.InvokeSafe();
+				return;
+			}
+			addPendingReward(pendingStructureRewards, definitionId, count);
+		}
+
+		private void ensureDecorationReward(int definitionId, int count)
+		{
+			ensureReward(pendingDecorationRewards, decorationInventory == null ? null : decorationInventory.Decorations, definitionId, count, addDecorationReward);
+		}
+
+		private void ensureStructureReward(int definitionId, int count)
+		{
+			ensureReward(pendingStructureRewards, structureInventory == null ? null : structureInventory.Structures, definitionId, count, addStructureReward);
+		}
+
+		private void ensureReward(Dictionary<int, int> pendingRewards, Dictionary<int, int> inventory, int definitionId, int count, Action<int, int> addReward)
+		{
+			if (inventory == null)
+			{
+				int pendingCount;
+				pendingRewards.TryGetValue(definitionId, out pendingCount);
+				pendingRewards[definitionId] = Math.Max(pendingCount, count);
+				return;
+			}
+			int currentCount;
+			inventory.TryGetValue(definitionId, out currentCount);
+			if (currentCount < count)
+			{
+				addReward(definitionId, count - currentCount);
+			}
+		}
+
+		private void addPendingReward(Dictionary<int, int> pendingRewards, int definitionId, int count)
+		{
+			if (pendingRewards.ContainsKey(definitionId))
+			{
+				pendingRewards[definitionId] += count;
+			}
+			else
+			{
+				pendingRewards[definitionId] = count;
+			}
+		}
+
+		private void applyPendingRewards()
+		{
+			applyPendingRewards(pendingDecorationRewards, decorationInventory == null ? null : decorationInventory.Decorations, addDecorationReward);
+			applyPendingRewards(pendingStructureRewards, structureInventory == null ? null : structureInventory.Structures, addStructureReward);
+		}
+
+		private void applyPendingRewards(Dictionary<int, int> pendingRewards, Dictionary<int, int> inventory, Action<int, int> addReward)
+		{
+			if (inventory == null)
+			{
+				return;
+			}
+			foreach (KeyValuePair<int, int> reward in pendingRewards)
+			{
+				int currentCount;
+				inventory.TryGetValue(reward.Key, out currentCount);
+				if (currentCount < reward.Value)
+				{
+					addReward(reward.Key, reward.Value - currentCount);
+				}
+			}
+			pendingRewards.Clear();
+		}
+
 		private void onDecorationsUnLoaded(DecorationInventoryData data)
 		{
 			decorationInventory.OnDecorationsChanged -= onDecorationsChanged;
 			decorationInventory = null;
 			cachedCalculatedDecorationInventory = null;
+			pendingDecorationRewards.Clear();
+			pendingStructureRewards.Clear();
+			reconciledQuestCompletionRewards.Clear();
+			decorationInventoryLoadRequested = false;
 		}
 
 		private void onDecorationsChanged(Dictionary<int, int> data)
@@ -292,6 +450,7 @@ namespace ClubPenguin.DecorationInventory
 
 		private bool onIglooServiceEventsDecorationsLoaded(IglooServiceEvents.DecorationsLoaded evt)
 		{
+			decorationInventoryLoadRequested = false;
 			CPDataEntityCollection cPDataEntityCollection = Service.Get<CPDataEntityCollection>();
 			int count = evt.DecorationInventory.items.Count;
 			DecorationInventoryData component;
@@ -309,6 +468,7 @@ namespace ClubPenguin.DecorationInventory
 				}
 			}
 			component.Decorations = dictionary;
+			applyPendingRewards();
 			StructureInventoryData component2;
 			if (!cPDataEntityCollection.TryGetComponent(cPDataEntityCollection.LocalPlayerHandle, out component2))
 			{
@@ -324,6 +484,7 @@ namespace ClubPenguin.DecorationInventory
 				}
 			}
 			component2.Structures = dictionary2;
+			applyPendingRewards();
 			return false;
 		}
 

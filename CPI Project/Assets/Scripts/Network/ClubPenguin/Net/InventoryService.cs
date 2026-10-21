@@ -55,12 +55,12 @@ namespace ClubPenguin.Net
 		private void inventoryLoaded(GetInventoryOperation operation, HttpResponse httpResponse)
 		{
 			List<CustomEquipment> customEquipmentResponses = operation.CustomEquipmentResponses ?? new List<CustomEquipment>();
-			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(customEquipmentResponses));
+			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(customEquipmentResponses, true));
 		}
 
 		private void inventoryLoadFailed(GetInventoryOperation operation, HttpResponse httpResponse)
 		{
-			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(new List<CustomEquipment>()));
+			Service.Get<EventDispatcher>().DispatchEvent(new InventoryServiceEvents.InventoryLoaded(new List<CustomEquipment>(), false));
 		}
 
 		private void equipmentDeleted(DeleteCustomEquipmentOperation operation, HttpResponse httpResponse)

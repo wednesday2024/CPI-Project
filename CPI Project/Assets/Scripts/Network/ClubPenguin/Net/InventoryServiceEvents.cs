@@ -19,9 +19,12 @@ namespace ClubPenguin.Net
 		{
 			public readonly List<CustomEquipment> Inventory;
 
-			public InventoryLoaded(List<CustomEquipment> inventory)
+			public readonly bool Success;
+
+			public InventoryLoaded(List<CustomEquipment> inventory, bool success)
 			{
 				Inventory = inventory;
+				Success = success;
 			}
 		}
 
