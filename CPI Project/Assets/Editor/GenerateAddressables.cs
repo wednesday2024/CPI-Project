@@ -11,7 +11,7 @@ using UnityEngine.Build.Pipeline;
 using UnityEngine;
 using Disney.Kelowna.Common;
 
-public static class CreateAssetBundles
+public static class GenerateAddressables
 {
     [MenuItem("Project/AssetBundles/Generated/Generate client side AssetBundles")]
     private static void BuildAllAddressables()
@@ -361,7 +361,7 @@ public sealed class AddressableBundleNameBuilder : BuildScriptPackedMode
     {
         if (assetGroup != null)
         {
-            string bundleName = CreateAssetBundles.GetAddressableBundleName(assetGroup);
+            string bundleName = GenerateAddressables.GetAddressableBundleName(assetGroup);
             if (!string.IsNullOrEmpty(bundleName))
             {
                 return bundleName;
