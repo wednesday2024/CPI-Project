@@ -1,4 +1,3 @@
-
 Shader "CpRemix/Combined Avatar Depth"
 {
     Properties
@@ -82,6 +81,7 @@ Shader "CpRemix/Combined Avatar Depth"
             sampler2D _Decal6Tex;
             sampler2D _BodyColorsMaskTex;
             sampler2D _DetailAndMatcapMaskAndEmissive;
+            sampler2D _SurfaceReflectionsRGB;
 
             float4 _Decal1Color;
             float4 _Decal2Color;
@@ -235,7 +235,7 @@ Shader "CpRemix/Combined Avatar Depth"
             float4 frag(v2f i) : SV_Target
             {
                 float4 main = tex2D(_MainTex, i.uvMain);
-                float4 surf = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvSurface);
+                float4 surf = tex2D(_SurfaceReflectionsRGB, i.uvSurface);
                 float4 bodyDetail = tex2D(_DetailAndMatcapMaskAndEmissive, i.uvMain);
                 float4 bodyMask = tex2D(_BodyColorsMaskTex, i.uvMain);
                 float4 bodyDiff = tex2D(_Diffuse, i.uvMain);
@@ -319,7 +319,7 @@ Shader "CpRemix/Combined Avatar Depth"
                 float3 rawColor = sourceColor * i.lighting * rawBlend;
                 float3 combined = rawColor + litColor;
 
-                float surfRed = surf.x;
+                float surfRed = (_UseEquipmentTextures > 0.5) ? 0.0 : surf.x;
 
                 float4 result;
                 result.x = mad(combined.x, i.depthColor.x, surfRed * i.reflection.x);
