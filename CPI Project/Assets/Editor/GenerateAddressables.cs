@@ -23,6 +23,7 @@ public static class GenerateAddressables
         ModifyTextFile(platform);
 
         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.GetSettings(true);
+        NormalizePathBasedAddresses(settings);
         ConfigureLocalGroups(settings, new List<AddressableAssetGroup>(settings.groups), platform);
         settings.ActivePlayerDataBuilderIndex = GetAddressableBundleNameBuilderIndex(settings);
         AssetDatabase.SaveAssets();
@@ -47,6 +48,7 @@ public static class GenerateAddressables
             throw new InvalidOperationException("Addressables build did not generate the expected bundles:\n" + string.Join("\n", missingBundlePaths.ToArray()));
         }
         CleanupPlatformBundles(outputDirectory, platform);
+        CleanupPlatformAddressableData(platform);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
@@ -147,6 +149,25 @@ public static class GenerateAddressables
         settings.profileSettings.SetValue(settings.activeProfileId, AddressableAssetSettings.kLocalBuildPath, buildPath);
         settings.profileSettings.SetValue(settings.activeProfileId, AddressableAssetSettings.kLocalLoadPath, loadPath);
         settings.SetDirty(AddressableAssetSettings.ModificationEvent.ProfileModified, settings, true, true);
+    }
+
+    private static void NormalizePathBasedAddresses(AddressableAssetSettings settings)
+    {
+        foreach (AddressableAssetGroup group in settings.groups)
+        {
+            if (group == null)
+            {
+                continue;
+            }
+
+            foreach (AddressableAssetEntry entry in group.entries)
+            {
+                if (string.Equals(entry.address, entry.AssetPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    entry.address = entry.AssetPath.ToLowerInvariant();
+                }
+            }
+        }
     }
 
     private static string GetPlatformName(BuildTarget target)
@@ -344,6 +365,51 @@ public static class GenerateAddressables
                     File.Delete(metaFile);
                 }
                 File.Delete(file);
+            }
+        }
+    }
+
+    private static void CleanupPlatformAddressableData(string currentPlatform)
+    {
+        string[] knownPlatformFolders =
+        {
+            "Android",
+            "Linux",
+            "Windows"
+        };
+        string currentPlatformFolder = null;
+        switch (currentPlatform)
+        {
+            case "android":
+                currentPlatformFolder = "Android";
+                break;
+            case "standalonelinux64":
+                currentPlatformFolder = "Linux";
+                break;
+            case "standalonewindows64":
+                currentPlatformFolder = "Windows";
+                break;
+        }
+
+        string addressableDataDirectory = Path.Combine(Application.dataPath, "AddressableAssetsData");
+        foreach (string platformFolder in knownPlatformFolders)
+        {
+            if (string.Equals(platformFolder, currentPlatformFolder, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            string platformDirectory = Path.Combine(addressableDataDirectory, platformFolder);
+            if (!Directory.Exists(platformDirectory))
+            {
+                continue;
+            }
+
+            Directory.Delete(platformDirectory, true);
+            string platformMeta = platformDirectory + ".meta";
+            if (File.Exists(platformMeta))
+            {
+                File.Delete(platformMeta);
             }
         }
     }

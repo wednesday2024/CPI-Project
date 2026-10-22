@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2413737963824901732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AddressableBundleNameBuilder
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::AddressableBundleNameBuilder
+  instanceProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider
+  sceneProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.SceneProvider
 --- !u!114 &-728209351709858046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +51,7 @@ MonoBehaviour:
   m_DefaultGroup: 59e6ed107417d014ea52a5db731f9464
   m_currentHash:
     serializedVersion: 2
-    Hash: 9324773890ee31d6dc4432c97bd750a1
+    Hash: 00000000000000000000000000000000
   m_DisableWriteTypeTree: 0
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
@@ -322,4 +340,59 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9dd7367bf171bb4fa1a224c38013d77, type: 2}
   - {fileID: 11400000, guid: 39a38cbe48007984daadbd7b152c975d, type: 2}
   - {fileID: 11400000, guid: c60d9884fb6fe4e4c9a90caae922cfc4, type: 2}
+  - {fileID: 2595224634973750717}
   m_ActiveProfileId: 4adfe6c985e379e4b857bb5bb904483c
+--- !u!114 &600421557443319741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AddressableBundleNameBuilder
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::AddressableBundleNameBuilder
+  instanceProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider
+  sceneProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.SceneProvider
+--- !u!114 &2595224634973750717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AddressableBundleNameBuilder
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::AddressableBundleNameBuilder
+  instanceProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider
+  sceneProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.SceneProvider
+--- !u!114 &3235233785360948182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AddressableBundleNameBuilder
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::AddressableBundleNameBuilder
+  instanceProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider
+  sceneProviderType:
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.SceneProvider
