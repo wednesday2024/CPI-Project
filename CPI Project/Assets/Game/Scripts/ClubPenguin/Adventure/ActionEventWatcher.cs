@@ -2,6 +2,7 @@ using ClubPenguin.Core;
 using ClubPenguin.Locomotion;
 using ClubPenguin.Net.Domain;
 using Disney.LaunchPadFramework;
+using Disney.MobileNetwork;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,15 @@ namespace ClubPenguin.Adventure
 
 		private LocomotionEventBroadcaster locomotionBroadcaster;
 
+		private int lastSwimBoostFrame = -1;
+
 		public override object GetExportParameters()
 		{
+			if (isOfflineSwimBoostActionConfigured())
+			{
+				return new List<LocomotionAction> { LocomotionAction.Torpedo };
+			}
+
 			List<LocomotionAction> list = new List<LocomotionAction>();
 			InputEvents.Actions[] actions = Actions;
 			foreach (InputEvents.Actions actions2 in actions)
@@ -63,6 +71,10 @@ namespace ClubPenguin.Adventure
 		public override void OnActivate()
 		{
 			base.OnActivate();
+			if (locomotionBroadcaster != null)
+			{
+				locomotionBroadcaster.OnDoActionEvent -= onLocomotionAction;
+			}
 			locomotionBroadcaster = SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<LocomotionEventBroadcaster>();
 			if (locomotionBroadcaster != null)
 			{
@@ -78,10 +90,19 @@ namespace ClubPenguin.Adventure
 				locomotionBroadcaster.OnDoActionEvent -= onLocomotionAction;
 				locomotionBroadcaster = null;
 			}
+			lastSwimBoostFrame = -1;
 		}
 
 		private void onLocomotionAction(LocomotionController.LocomotionAction action, object userData = null)
 		{
+			if (action == LocomotionController.LocomotionAction.Torpedo && isOfflineSwimBoostActionConfigured())
+			{
+				if (lastSwimBoostFrame == Time.frameCount)
+				{
+					return;
+				}
+				lastSwimBoostFrame = Time.frameCount;
+			}
 			if (MatchesAction(action))
 			{
 				taskIncrement();
@@ -90,6 +111,11 @@ namespace ClubPenguin.Adventure
 
 		public bool MatchesAction(LocomotionController.LocomotionAction action)
 		{
+			if (isOfflineSwimBoostActionConfigured())
+			{
+				return action == LocomotionController.LocomotionAction.Torpedo;
+			}
+
 			InputEvents.Actions action2;
 			switch (action)
 			{
@@ -118,6 +144,11 @@ namespace ClubPenguin.Adventure
 				return false;
 			}
 			return Actions != null && Array.IndexOf(Actions, action2) >= 0;
+		}
+
+		private bool isOfflineSwimBoostActionConfigured()
+		{
+			return Service.Get<ClubPenguin.GameSettings>().OfflineMode && Actions != null && Array.IndexOf(Actions, InputEvents.Actions.Action3) >= 0;
 		}
 	}
 }
