@@ -30,7 +30,8 @@ namespace ClubPenguin.UI
 			CPDataEntityCollection cPDataEntityCollection = Service.Get<CPDataEntityCollection>();
 			DataEntityHandle entityByType = cPDataEntityCollection.GetEntityByType<ControlsScreenData>();
 			controlsScreenData = cPDataEntityCollection.GetComponent<ControlsScreenData>(entityByType);
-			interactInWorldIconController.SetEnabled(controlsScreenData.IsControlsScreenActive);
+			isControlsScreenActive = controlsScreenData.IsControlsScreenActive;
+			interactInWorldIconController.SetEnabled(isControlsScreenActive);
 			controlsScreenData.OnControlsScreenActiveChanged += onControlsScreenActiveChanged;
 			eventChannel = new EventChannel(Service.Get<EventDispatcher>());
 			eventChannel.AddListener<ActionSequencerEvents.ActionSequenceStarted>(onActionSequenceStarted);
