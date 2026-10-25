@@ -16,8 +16,8 @@ using UnityEngine;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyTitle("Fabric.AudioSpline.Editor")]
 [assembly: Guid("2bf2dc8d-1d42-4603-9a10-0d9d0fd143eb")]
-[assembly: AssemblyFileVersion("4.0.3.0")]
-[assembly: AssemblyVersion("4.0.3.0")]
+[assembly: AssemblyFileVersion("4.0.1.0")]
+[assembly: AssemblyVersion("4.0.1.0")]
 namespace Fabric
 {
 	public class DefaultHandles
@@ -157,7 +157,7 @@ namespace Fabric
 				Handles.Label(vector, _audioSpline._CRSpline.pts[i].name);
 				float handleSize = HandleUtility.GetHandleSize(vector);
 				int controlID = GUIUtility.GetControlID(hashCode, FocusType.Passive);
-				bool flag = Event.current.type == EventType.Used;
+				bool flag = UnityEngine.Event.current.type == EventType.Used;
 				Handles.CapFunction val = Handles.SphereHandleCap;
 				if (i == 0 || i == _audioSpline._CRSpline.pts.Length - 1)
 				{
@@ -169,7 +169,7 @@ namespace Fabric
 					vector = Handles.PositionHandle(vector, Quaternion.identity);
 				}
 				int controlID2 = GUIUtility.GetControlID(hashCode, FocusType.Passive);
-				bool flag2 = !flag && Event.current.type == EventType.Used;
+				bool flag2 = !flag && UnityEngine.Event.current.type == EventType.Used;
 				if ((controlID < GUIUtility.hotControl && GUIUtility.hotControl < controlID2) || flag2)
 				{
 					curPointIndex = i;

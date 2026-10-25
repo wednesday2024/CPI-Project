@@ -36,6 +36,14 @@ namespace Disney.Kelowna.Common
 
 		private static string GetOrientationFolder()
 		{
+#if UNITY_ANDROID || UNITY_IOS
+			if (Application.platform == RuntimePlatform.WindowsEditor ||
+				Application.platform == RuntimePlatform.OSXEditor ||
+				Application.platform == RuntimePlatform.LinuxEditor)
+			{
+				return "resources_portrait";
+			}
+#endif
 			switch (Application.platform)
 			{
 			case RuntimePlatform.Android:

@@ -49,6 +49,7 @@ namespace ClubPenguin.Core
 		{
 			None = -1,
 			Jump,
+			Sprint,
 			Interact,
 			Snowball,
 			Action1,

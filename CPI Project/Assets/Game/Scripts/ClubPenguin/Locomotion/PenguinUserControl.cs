@@ -102,6 +102,13 @@ namespace ClubPenguin.Locomotion
 					}
 					currentController.DoAction(LocomotionController.LocomotionAction.Jump);
 					break;
+				case InputEvents.Actions.Sprint:
+					if (SceneRefs.ActionSequencer != null)
+					{
+						SceneRefs.ActionSequencer.UserInputReceived();
+					}
+					currentController.DoAction(LocomotionController.LocomotionAction.Sprint);
+					break;
 				case InputEvents.Actions.Torpedo:
 					if (SceneRefs.ActionSequencer != null)
 					{

@@ -24,9 +24,16 @@ namespace ClubPenguin.Input
 		[SerializeField]
 		private InputMappedButton btnCancel = null;
 
+		[SerializeField]
+		private InputMappedButton btnSprint = null;
+
 		private bool walkModifier;
 
 		private bool sprintModifier;
+
+		private bool runActionSprintModifier;
+
+		private bool isTubeEnabled;
 
 		private RunController runController;
 
@@ -36,18 +43,22 @@ namespace ClubPenguin.Input
 		{
 			locomotionEventBroadcaster = localPlayer.GetComponent<LocomotionEventBroadcaster>();
 			runController = localPlayer.GetComponent<RunController>();
+			isTubeEnabled = LocomotionHelper.IsCurrentControllerOfType<SlideController>(localPlayer);
+			runActionSprintModifier = runController != null && runController.IsRunActionSprintModifier;
 			base.identifiedLocalPlayer(localPlayer);
 		}
 
 		protected override void OnEnable()
 		{
 			locomotionEventBroadcaster.OnControllerChangedEvent += onControllerChanged;
+			eventDispatcher.AddListener<InputEvents.ActionEvent>(onAction);
 			base.OnEnable();
 		}
 
 		protected override void OnDisable()
 		{
 			locomotionEventBroadcaster.OnControllerChangedEvent -= onControllerChanged;
+			eventDispatcher.RemoveListener<InputEvents.ActionEvent>(onAction);
 			base.OnDisable();
 		}
 
@@ -59,8 +70,10 @@ namespace ClubPenguin.Input
 			handleButtonInput(btnAction2, inputResult.Action2);
 			handleButtonInput(btnAction3, inputResult.Action3);
 			handleButtonInput(btnCancel, inputResult.Cancel);
+			handleButtonInput(btnSprint, inputResult.SprintModifier);
 			walkModifier = inputResult.WalkModifier.IsHeld;
 			sprintModifier = inputResult.SprintModifier.IsHeld;
+			setSprintButtonState(sprintModifier || runActionSprintModifier);
 			if (runController != null && runController.enabled)
 			{
 				runController.SetSprintModifier(sprintModifier);
@@ -79,13 +92,43 @@ namespace ClubPenguin.Input
 			handleButtonInput(btnAction2);
 			handleButtonInput(btnAction3);
 			handleButtonInput(btnCancel);
+			handleButtonInput(btnSprint);
 			walkModifier = false;
 			sprintModifier = false;
+			runActionSprintModifier = runController != null && runController.IsRunActionSprintModifier;
+			setSprintButtonState(runActionSprintModifier);
 			if (runController != null && runController.enabled)
 			{
 				runController.Behaviour.SetStyle(PlayerLocoStyle.Style.Run);
 				runController.SetSprintModifier(false);
 			}
+		}
+
+		private void setSprintButtonState(bool isSprinting)
+		{
+			if (btnSprint != null)
+			{
+				TrayInputButton trayInputButton = btnSprint.GetComponentInParent<TrayInputButton>();
+				if (trayInputButton != null && !trayInputButton.IsLocked)
+				{
+					TrayInputButton.ButtonState buttonState = isTubeEnabled
+						? TrayInputButton.ButtonState.Disabled
+						: (isSprinting ? TrayInputButton.ButtonState.Highlighted : TrayInputButton.ButtonState.Default);
+					trayInputButton.SetState(buttonState);
+				}
+			}
+		}
+
+		private bool onAction(InputEvents.ActionEvent evt)
+		{
+#if UNITY_IOS || UNITY_ANDROID
+			if (evt.Action == InputEvents.Actions.Sprint)
+			{
+				runActionSprintModifier = !runActionSprintModifier;
+				setSprintButtonState(sprintModifier || runActionSprintModifier);
+			}
+#endif
+			return false;
 		}
 
 		private void handleButtonInput(InputMappedButton button, ButtonInputResult buttonInput = null)
@@ -107,6 +150,12 @@ namespace ClubPenguin.Input
 
 		private void onControllerChanged(LocomotionController newController)
 		{
+			isTubeEnabled = newController is SlideController;
+			if (newController == runController)
+			{
+				runActionSprintModifier = runController.IsRunActionSprintModifier;
+			}
+			setSprintButtonState(sprintModifier || runActionSprintModifier);
 			if (runController != null && runController.enabled)
 			{
 				runController.Behaviour.SetStyle(walkModifier ? PlayerLocoStyle.Style.Walk : PlayerLocoStyle.Style.Run);

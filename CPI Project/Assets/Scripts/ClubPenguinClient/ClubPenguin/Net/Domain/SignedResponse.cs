@@ -14,6 +14,8 @@ namespace ClubPenguin.Net.Domain
 
 		public string swid;
 
+		public PlayerAssets assets;
+
 		private JsonData _rawJson;
 
 		[NonSerialized]

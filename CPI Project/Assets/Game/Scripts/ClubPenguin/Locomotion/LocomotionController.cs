@@ -11,6 +11,7 @@ namespace ClubPenguin.Locomotion
 		public enum LocomotionAction
 		{
 			Jump,
+			Sprint,
 			Torpedo,
 			SlideTrick,
 			ChargeThrow,
@@ -175,6 +176,13 @@ namespace ClubPenguin.Locomotion
 				}
 				break;
 			}
+			 case LocomotionAction.Sprint:
+                    RunController runController = GetComponent<RunController>();
+					if (runController != null)
+					{
+						runController.toggleSprint();
+					}
+                    break;
 			}
 		}
 

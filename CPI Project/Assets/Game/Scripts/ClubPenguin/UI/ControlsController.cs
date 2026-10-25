@@ -286,6 +286,14 @@ namespace ClubPenguin.UI
 
 		private void setButtonToDefault(int buttonIndex)
 		{
+			if (trayInputButtonGroup == null
+				|| trayInputButtonGroup.Buttons == null
+				|| buttonIndex < 0
+				|| buttonIndex >= trayInputButtonGroup.Buttons.Length)
+			{
+				Log.LogErrorFormatted(this, "Cannot reset control button {0}; the current button group has {1} buttons", buttonIndex, trayInputButtonGroup?.Buttons?.Length ?? 0);
+				return;
+			}
 			trayInputButtonGroup.Buttons[buttonIndex].SetState(trayInputButtonGroup.Buttons[buttonIndex].DefaultState);
 		}
 
@@ -305,7 +313,12 @@ namespace ClubPenguin.UI
 
 		private bool shouldUseButtonOverrides(InputButtonGroupDefinition groupDefinition)
 		{
-			if (currentGroupDefinition != null && currentGroupDefinition.TemplateContentKey.Key == groupDefinition.TemplateContentKey.Key)
+			if (currentGroupDefinition != null &&
+				trayInputButtonGroup != null &&
+				trayInputButtonGroup.Buttons != null &&
+				trayInputButtonGroup.Buttons.Length == groupDefinition.InputButtonDefinitions.Length &&
+				currentGroupDefinition.TemplateContentKey.Key == groupDefinition.TemplateContentKey.Key &&
+				currentGroupDefinition.InputButtonDefinitions.Length == groupDefinition.InputButtonDefinitions.Length)
 			{
 				for (int i = 0; i < groupDefinition.InputButtonDefinitions.Length; i++)
 				{

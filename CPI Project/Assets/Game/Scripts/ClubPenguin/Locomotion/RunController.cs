@@ -104,6 +104,8 @@ namespace ClubPenguin.Locomotion
 
 		private bool sprintModifier;
 
+		private bool runActionSprintModifier;
+
 		private bool isLanding = false;
 
 		private bool isJogging = false;
@@ -219,6 +221,9 @@ namespace ClubPenguin.Locomotion
 			desiredFacing = base.transform.forward;
 			curLocoMode = LocoMode.Idle;
 			wsSteerDir = Vector3.zero;
+			#if UNITY_IOS || UNITY_ANDROID
+			runActionSprintModifier = false;
+			#endif
 			jumpRequest.Reset();
 			snapToDesiredFacing = false;
 			curStateInfo = (animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0));
@@ -228,10 +233,32 @@ namespace ClubPenguin.Locomotion
 			mutableData.JogParams.ElapsedJogTime = 0f;
 		}
 
-				public void SetSprintModifier(bool isHeld)
+		public void SetSprintModifier(bool isHeld)
 		{
 			sprintModifier = isHeld;
 		}
+
+		public void SetRunActionSprintModifier(bool isHeld)
+		{
+			runActionSprintModifier = isHeld;
+		}
+
+		public bool IsRunActionSprintModifier
+		{
+			get
+			{
+				return runActionSprintModifier;
+			}
+		}
+
+		private bool IsSprintRequested
+{
+	get { return sprintModifier || runActionSprintModifier; }
+}
+public void toggleSprint()
+{
+	runActionSprintModifier = !runActionSprintModifier;
+}
 
 public override void Steer(Vector2 steerInput)
 		{
@@ -308,6 +335,9 @@ public override void Steer(Vector2 steerInput)
 					base.Broadcaster.BroadcastOnDoAction(action, userData);
 				}
 				break;
+case LocomotionAction.Sprint:
+    toggleSprint();
+    break;
 			}
 		}
 
@@ -347,10 +377,17 @@ public override void Steer(Vector2 steerInput)
 				{
 					curLocoMode = LocoMode.Walk;
 				}
+				#if UNITY_IOS || UNITY_ANDROID
+				else if (IsSprintRequested)
+				{
+					curLocoMode = LocoMode.Sprint;
+				}
+				#else
 				else if (sprintModifier)
 				{
 					curLocoMode = LocoMode.Sprint;
 				}
+				#endif
 				else if (isWalking || (isLanding && curLocoMode == LocoMode.Walk))
 				{
 					float num = mutableData.JogParams.MinSteerMag * mutableData.JogParams.MinSteerMag;

@@ -225,10 +225,22 @@ namespace ClubPenguin.Net
 			RewardedUserCollection rewardedUserCollection = signedResponse.Data.toRewardedUserCollection();
 			if (rewardedUserCollection.rewards.ContainsKey(clubPenguinClient.PlayerSessionId))
 			{
-				APICall<AddRewardOperation> aPICall = clubPenguinClient.RewardApi.AddReward(signedResponse);
-				aPICall.OnResponse += onAssetsSet;
-				aPICall.OnError += handleCPResponseError;
-				aPICall.Execute();
+				if (signedResponse.assets != null)
+				{
+					ClubPenguin.Net.Offline.PlayerAssets storedAssets =
+						Service.Get<OfflineDatabase>().Read<ClubPenguin.Net.Offline.PlayerAssets>();
+					storedAssets.Assets.coins = signedResponse.assets.coins;
+					Service.Get<OfflineDatabase>().Write(storedAssets);
+					Service.Get<EventDispatcher>().DispatchEvent(
+						new RewardServiceEvents.MyAssetsReceived(storedAssets.Assets));
+				}
+				else
+				{
+					APICall<AddRewardOperation> aPICall = clubPenguinClient.RewardApi.AddReward(signedResponse);
+					aPICall.OnResponse += onAssetsSet;
+					aPICall.OnError += handleCPResponseError;
+					aPICall.Execute();
+				}
 			}
 			Service.Get<EventDispatcher>().DispatchEvent(new RewardServiceEvents.RewardsEarned(rewardedUserCollection));
 		}

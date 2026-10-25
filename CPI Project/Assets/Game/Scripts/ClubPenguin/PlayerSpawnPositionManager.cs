@@ -246,6 +246,12 @@ namespace ClubPenguin
 					localPlayerSpawnPostion = vector;
 					base.transform.SetPositionAndRotation(vector, rotation);
 					Physics.SyncTransforms();
+					sendNetworkMessage(new LocomotionActionEvent
+					{
+						Type = LocomotionAction.Move,
+						Position = vector,
+						Direction = Vector3.zero
+					});
 					if (actionOnSpawned != null && (actionOnSpawned.Action != 0 || actionOnSpawned.Reward != null))
 					{
 						eventDispatcher.AddListener<HudEvents.HudInitComplete>(onHudInitCompleted);
@@ -439,10 +445,7 @@ namespace ClubPenguin
 
 		private void sendNetworkMessage(LocomotionActionEvent action)
 		{
-			if (GetComponent<LocomotionBroadcaster>() != null)
-			{
-				Service.Get<INetworkServicesManager>().PlayerActionService.LocomotionAction(action);
-			}
+			Service.Get<INetworkServicesManager>().PlayerActionService.LocomotionAction(action);
 		}
 	}
 }

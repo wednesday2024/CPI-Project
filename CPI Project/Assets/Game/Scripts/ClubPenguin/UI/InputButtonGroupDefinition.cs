@@ -14,30 +14,43 @@ namespace ClubPenguin.UI
 		public TrayInputButtonGroup Create(TrayInputButtonGroup trayInputButtonGroupAsset, Transform parent)
 		{
 			TrayInputButtonGroup trayInputButtonGroup = Object.Instantiate(trayInputButtonGroupAsset, parent);
-			if (trayInputButtonGroup.Buttons.Length != InputButtonDefinitions.Length)
-			{
-				Log.LogError(this, "Number of button containers does not match the number of button definitions");
-			}
-			else
+
+			try
 			{
 				for (int i = 0; i < InputButtonDefinitions.Length; i++)
 				{
-					trayInputButtonGroup.Buttons[i].Index = i;
-					if (InputButtonDefinitions[i] != null)
+					try
 					{
-						InputButtonDefinitions[i].SetUpButton(trayInputButtonGroup.Buttons[i]);
-						if (ButtonStateOverrides != null && ButtonStateOverrides.Length > i && ButtonStateOverrides[i] != TrayInputButton.ButtonState.None)
+						trayInputButtonGroup.Buttons[i].Index = i;
+
+						if (InputButtonDefinitions[i] != null)
 						{
-							trayInputButtonGroup.Buttons[i].InitializeView(ButtonStateOverrides[i]);
+							InputButtonDefinitions[i].SetUpButton(trayInputButtonGroup.Buttons[i]);
+
+							if (ButtonStateOverrides != null &&
+								ButtonStateOverrides.Length > i &&
+								ButtonStateOverrides[i] != TrayInputButton.ButtonState.None)
+							{
+								trayInputButtonGroup.Buttons[i].InitializeView(ButtonStateOverrides[i]);
+							}
+						}
+						else
+						{
+							trayInputButtonGroup.Buttons[i].InitializeView(TrayInputButton.ButtonState.Disabled);
+							trayInputButtonGroup.Buttons[i].gameObject.SetActive(false);
 						}
 					}
-					else
+					catch (System.Exception)
 					{
-						trayInputButtonGroup.Buttons[i].InitializeView(TrayInputButton.ButtonState.Disabled);
-						trayInputButtonGroup.Buttons[i].gameObject.SetActive(false);
+						// Let it slide
 					}
 				}
 			}
+			catch (System.Exception)
+			{
+				// Let it slide
+			}
+
 			return trayInputButtonGroup;
 		}
 	}

@@ -12,6 +12,8 @@ public static class DisneyFastPlay
 
     private const int TargetWidth = 1920;
     private const int TargetHeight = 1080;
+    private const int MobileTargetWidth = 480;
+    private const int MobileTargetHeight = 800;
 
     private static object previousPlayModeBehavior;
 
@@ -106,9 +108,15 @@ public static class DisneyFastPlay
         Type gameViewType =
             gameView.GetType();
 
-        SelectFullHD(
+        bool isMobileBuildTarget =
+            EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android ||
+            EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS;
+
+        SelectResolution(
             gameView,
-            gameViewType
+            gameViewType,
+            isMobileBuildTarget ? MobileTargetWidth : TargetWidth,
+            isMobileBuildTarget ? MobileTargetHeight : TargetHeight
         );
 
         PropertyInfo vSyncEnabled =
@@ -153,9 +161,11 @@ public static class DisneyFastPlay
         gameView.Repaint();
     }
 
-    private static void SelectFullHD(
+    private static void SelectResolution(
         EditorWindow gameView,
-        Type gameViewType)
+        Type gameViewType,
+        int targetWidth,
+        int targetHeight)
     {
         Type gameViewSizesType =
             typeof(Editor).Assembly.GetType(
@@ -334,8 +344,8 @@ public static class DisneyFastPlay
             int height =
                 (int)heightProperty.GetValue(size);
 
-            if (width == TargetWidth &&
-                height == TargetHeight)
+            if (width == targetWidth &&
+                height == targetHeight)
             {
                 selectedSizeIndex.SetValue(
                     gameView,
@@ -361,7 +371,7 @@ public static class DisneyFastPlay
             ) as string[];
 
         Debug.LogWarning(
-            $"Disney Fast Play could not find a {TargetWidth}x{TargetHeight} size in group {currentGroupTypeValue}. Available: " +
+            $"Disney Fast Play could not find a {targetWidth}x{targetHeight} size in group {currentGroupTypeValue}. Available: " +
             (displayTexts != null
                 ? string.Join(", ", displayTexts)
                 : "unknown")

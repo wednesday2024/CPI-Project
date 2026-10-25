@@ -37,6 +37,9 @@ namespace ClubPenguin
 		[Header("Camera Settings")]
 		public float ZoomOffset;
 
+		[Tooltip("Offsets the camera's horizontal aim point in world units. Positive values move the item left in the camera view.")]
+		public float CameraHorizontalOffset;
+
 		[Header("The Default Rotation for Mannequin on Y axis")]
 		public float RotationYOffset;
 
