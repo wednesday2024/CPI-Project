@@ -4,11 +4,19 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace ClubPenguin
 {
 	public class CustomGraphicsService
 	{
+		public const string RenderScalePlayerPrefsKey = "cp.RenderScale";
+		private const float DefaultRenderScale = 1f;
+		private const float MinimumRenderScale = 0.1f;
+		private const float MaximumRenderScale = 3f;
+		private const float RenderScaleStep = 0.1f;
+
 		public int AntiAliasSamplesMedium = 8;
 
 		public int AntiAliasSamplesHigh = 8;
@@ -165,6 +173,55 @@ namespace ClubPenguin
 			{
 				SetAspectRatio(1.77777779f);
 			}
+			ApplyRenderScale(PlayerPrefs.GetFloat(RenderScalePlayerPrefsKey, DefaultRenderScale), false);
+		}
+
+		public float RenderScale
+		{
+			get { return PlayerPrefs.GetFloat(RenderScalePlayerPrefsKey, DefaultRenderScale); }
+		}
+
+		public static float[] GetRenderScaleOptions()
+		{
+			int optionCount = Mathf.RoundToInt((MaximumRenderScale - MinimumRenderScale) / RenderScaleStep) + 1;
+			float[] options = new float[optionCount];
+			for (int i = 0; i < optionCount; i++)
+			{
+				options[i] = MinimumRenderScale + i * RenderScaleStep;
+			}
+			return options;
+		}
+
+		public void SetRenderScale(float scale)
+		{
+			ApplyRenderScale(scale, true);
+		}
+
+		private static void ApplyRenderScale(float scale, bool save)
+		{
+			float nearestScale = DefaultRenderScale;
+			float nearestDistance = float.MaxValue;
+			float[] renderScaleOptions = GetRenderScaleOptions();
+			for (int i = 0; i < renderScaleOptions.Length; i++)
+			{
+				float distance = Mathf.Abs(renderScaleOptions[i] - scale);
+				if (distance < nearestDistance)
+				{
+					nearestDistance = distance;
+					nearestScale = renderScaleOptions[i];
+				}
+			}
+
+			UniversalRenderPipelineAsset renderPipeline = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
+			if (renderPipeline != null)
+			{
+				renderPipeline.renderScale = nearestScale;
+			}
+			if (save)
+			{
+				PlayerPrefs.SetFloat(RenderScalePlayerPrefsKey, nearestScale);
+				PlayerPrefs.Save();
+			}
 		}
 
 		private void getDefaultGraphicsValues(string qualityName, out QualityLevel graphicsLevel, out QualityLevel lodPenguinQualityLevel, out int antiAlias, out bool cameraPost)
@@ -250,6 +307,7 @@ namespace ClubPenguin
 				return;
 			}
 			QualitySettings.SetQualityLevel(num, true);
+			ApplyRenderScale(PlayerPrefs.GetFloat(RenderScalePlayerPrefsKey, DefaultRenderScale), false);
 			QualityConditionalTier.SetValue(qualityName);
 		}
 
@@ -261,6 +319,11 @@ namespace ClubPenguin
 #endif
 			int antiAliasing = Mathf.Clamp(samples, 0, maxAntiAliasing);
 			QualitySettings.antiAliasing = antiAliasing;
+			UniversalRenderPipelineAsset renderPipeline = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
+			if (renderPipeline != null)
+			{
+				renderPipeline.msaaSampleCount = (antiAliasing > 0) ? antiAliasing : 1;
+			}
 			AntiAliasLevel.SetValue(antiAliasing);
 		}
 

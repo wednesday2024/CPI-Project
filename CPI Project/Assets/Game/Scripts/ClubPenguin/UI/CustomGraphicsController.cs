@@ -55,6 +55,9 @@ namespace ClubPenguin.UI
         private Dropdown resolutionsMenu;
 
         [SerializeField]
+        private Dropdown renderScaleMenu;
+
+        [SerializeField]
         private TMP_Text antiAliasOnText;
 
         [SerializeField]
@@ -161,10 +164,41 @@ namespace ClubPenguin.UI
             }
             resolutionsMenu.onValueChanged.AddListener(onResolutionChanged);
 
+            InitRenderScaleMenu();
+
             InitInactivityServiceToggleFromPrefs();
             ApplyInactivityServiceSetting(GetInactivityServiceEnabled(), false);
 
             isInitialized = true;
+        }
+
+        private void InitRenderScaleMenu()
+        {
+            if (renderScaleMenu == null)
+                return;
+
+            renderScaleMenu.ClearOptions();
+            float[] scales = CustomGraphicsService.GetRenderScaleOptions();
+            List<string> options = new List<string>();
+            int selectedIndex = 0;
+            float currentScale = customGraphicsService.RenderScale;
+            for (int i = 0; i < scales.Length; i++)
+            {
+                options.Add(Mathf.RoundToInt(scales[i] * 100f) + "%");
+                if (Mathf.Approximately(scales[i], currentScale))
+                    selectedIndex = i;
+            }
+            renderScaleMenu.AddOptions(options);
+            renderScaleMenu.value = selectedIndex;
+            renderScaleMenu.RefreshShownValue();
+            renderScaleMenu.onValueChanged.AddListener(OnRenderScaleChanged);
+        }
+
+        private void OnRenderScaleChanged(int value)
+        {
+            float[] scales = CustomGraphicsService.GetRenderScaleOptions();
+            if (value >= 0 && value < scales.Length)
+                customGraphicsService.SetRenderScale(scales[value]);
         }
 
         private void InitInactivityServiceToggleFromPrefs()
