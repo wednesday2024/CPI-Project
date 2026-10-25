@@ -103,12 +103,10 @@ MonoBehaviour:
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetSettings
   m_DefaultGroup: 59e6ed107417d014ea52a5db731f9464
-  m_currentHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
   m_DisableWriteTypeTree: 0
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
+  m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
@@ -123,9 +121,13 @@ MonoBehaviour:
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
   m_EnableJsonCatalog: 0
+  m_CatalogProviderType:
+    m_AssemblyName: Unity.Addressables
+    m_ClassName: UnityEngine.AddressableAssets.ResourceProviders.BinaryCatalogProvider
   m_NonRecursiveBuilding: 1
   m_AllowNestedBundleFolders: 1
   m_CCDEnabled: 0
+  m_ContentDirectoryGroupTemplateCreated: 0
   m_maxConcurrentWebRequests: 3
   m_UseUWRForLocalBundles: 0
   m_BundleTimeout: 0
@@ -135,7 +137,7 @@ MonoBehaviour:
   m_SharedBundleSettingsCustomGroupIndex: 47
   m_simulatedLoadDelay: 0.1
   m_ContiguousBundles: 1
-  m_StripUnityVersionFromBundleBuild: 0
+  mStripUnityVersion: 0
   m_DisableVisibleSubAssetRepresentations: 0
   m_BuiltInBundleNaming: 2
   mBuiltInBundleCustomNaming: CPI Project
@@ -394,8 +396,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9dd7367bf171bb4fa1a224c38013d77, type: 2}
   - {fileID: 11400000, guid: 39a38cbe48007984daadbd7b152c975d, type: 2}
   - {fileID: 11400000, guid: c60d9884fb6fe4e4c9a90caae922cfc4, type: 2}
-  - {fileID: -6532808248379211999}
   m_ActiveProfileId: 4adfe6c985e379e4b857bb5bb904483c
+  m_ContentDirectoryCatalogNameMigrated: 0
+  m_CatalogFormatMigrated: 1
+  m_CrcCachedBundleFlagMigrated: 1
 --- !u!114 &600421557443319741
 MonoBehaviour:
   m_ObjectHideFlags: 0
