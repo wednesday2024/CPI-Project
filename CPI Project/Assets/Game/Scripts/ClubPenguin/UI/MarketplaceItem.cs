@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -20,13 +21,13 @@ namespace ClubPenguin.UI
 
 		public DiscountableItemPriceTag PriceTag;
 
-		public Text ItemNameText;
+		public TMP_Text ItemNameText;
 
 		public GameObject OutOfStockImage;
 
 		public GameObject LevelIcon;
 
-		public Text LevelIconText;
+		public TMP_Text LevelIconText;
 
 		public GameObject MemberTag;
 

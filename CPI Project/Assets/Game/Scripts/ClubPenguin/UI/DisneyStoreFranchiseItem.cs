@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -31,7 +32,7 @@ namespace ClubPenguin.UI
 
 		private const int TAG_INDEX_IGLOO = 2;
 
-		public Text TitleText;
+		public TMP_Text TitleText;
 
 		public DiscountableItemPriceTag PriceTag;
 
