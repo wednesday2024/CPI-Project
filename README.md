@@ -54,7 +54,7 @@
 >     - Added 30 new Penguin colors.
 >     - Unlock the ```Valentine's Day chair``` at level 8. The ID for the chair is 278 and it will sell at the Igloo furniture shop for 40 coins.
 >     - And most importantly, the game is no longer in the original 32-bit state! This recreation is in a 64-bit state.
->     - Version 1.13.5
+>     - Version 1.14.0
 >     - Changed the default 3 igloo save slots to 10 (10 is the max, higher than 10 causes data corruption and errors).
 >     - Changed the default 130 max igloo furniture limit to 800.
 >     - Support for DirectX 12 and Vulkan.
