@@ -90,6 +90,18 @@ MonoBehaviour:
   sceneProviderType:
     m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.SceneProvider
+--- !u!114 &-341547501827037409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: AddressableBundleNameBuilder
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::AddressableBundleNameBuilder
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +408,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c9dd7367bf171bb4fa1a224c38013d77, type: 2}
   - {fileID: 11400000, guid: 39a38cbe48007984daadbd7b152c975d, type: 2}
   - {fileID: 11400000, guid: c60d9884fb6fe4e4c9a90caae922cfc4, type: 2}
+  - {fileID: -341547501827037409}
   m_ActiveProfileId: 4adfe6c985e379e4b857bb5bb904483c
   m_ContentDirectoryCatalogNameMigrated: 0
   m_CatalogFormatMigrated: 1
