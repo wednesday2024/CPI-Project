@@ -50,6 +50,7 @@ namespace ClubPenguin.Net.Locomotion
 			locomotionTracker = GetComponent<LocomotionTracker>();
 			locomotionEventBroadcaster = GetComponent<LocomotionEventBroadcaster>();
 			locomotionEventBroadcaster.OnDoActionEvent += sendDoActionEvent;
+			locomotionEventBroadcaster.OnSprintStateChangedEvent += sendSprintStateChangedEvent;
 			locomotionEventBroadcaster.OnLocomotionStateChangedEvent += sendLocomotionStateChangedEvent;
 			locomotionEventBroadcaster.OnInteractionStartedEvent += filterSendInteractionEvent;
 			locomotionEventBroadcaster.OnSteerDirectionEvent += onSteerDirectionChanged;
@@ -66,6 +67,7 @@ namespace ClubPenguin.Net.Locomotion
 		private void OnDestroy()
 		{
 			locomotionEventBroadcaster.OnDoActionEvent -= sendDoActionEvent;
+			locomotionEventBroadcaster.OnSprintStateChangedEvent -= sendSprintStateChangedEvent;
 			locomotionEventBroadcaster.OnLocomotionStateChangedEvent -= sendLocomotionStateChangedEvent;
 			locomotionEventBroadcaster.OnInteractionStartedEvent -= filterSendInteractionEvent;
 			locomotionEventBroadcaster.OnSteerDirectionEvent -= onSteerDirectionChanged;
@@ -144,6 +146,14 @@ namespace ClubPenguin.Net.Locomotion
 			case LocomotionController.LocomotionAction.Action3:
 				setLocomotionActionEvent(LocomotionAction.Action3);
 				break;
+			}
+		}
+
+		private void sendSprintStateChangedEvent(bool isSprinting)
+		{
+			if (broadcastingDisabledEvents == 0)
+			{
+				networkService.PlayerStateService.SetLocomotionState(isSprinting ? LocomotionState.Sprinting : LocomotionState.Default);
 			}
 		}
 

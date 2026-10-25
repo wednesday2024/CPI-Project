@@ -14,6 +14,7 @@ namespace ClubPenguin.Net.Domain
 		Action3,
 		CancelThrow,
 		SnapToPosition,
-		Rotate
+		Rotate,
+		Sprint
 	}
 }

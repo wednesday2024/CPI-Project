@@ -83,6 +83,8 @@ namespace ClubPenguin.Net.Locomotion
 
 		private bool pendingRun;
 
+		private bool pendingSprint;
+
 		public event Action<LocomotionActionEvent> OnTriggerActionEvent;
 
 		public void EnableReceiving(bool enabled = true)
@@ -194,6 +196,21 @@ namespace ClubPenguin.Net.Locomotion
 		{
 			switch (state)
 			{
+			case LocomotionState.Sprinting:
+				if (receivingEnabled)
+				{
+					locomotionTracker.SetCurrentController<RunController>();
+					RunController sprintController = locomotionTracker.GetCurrentController() as RunController;
+					if (sprintController != null)
+					{
+						sprintController.ApplyNetworkSprintState(true);
+					}
+					break;
+				}
+				pendingSlide = false;
+				pendingRun = true;
+				pendingSprint = true;
+				break;
 			case LocomotionState.Slide:
 				if (receivingEnabled)
 				{
@@ -202,6 +219,7 @@ namespace ClubPenguin.Net.Locomotion
 				}
 				pendingSlide = true;
 				pendingRun = false;
+				pendingSprint = false;
 				break;
 			case LocomotionState.Racing:
 				if (receivingEnabled)
@@ -223,20 +241,28 @@ namespace ClubPenguin.Net.Locomotion
 				{
 					pendingSlide = true;
 					pendingRun = false;
+					pendingSprint = false;
 				}
 				break;
 			case LocomotionState.Default:
 				if (receivingEnabled)
 				{
 					locomotionTracker.SetCurrentController<RunController>();
+					RunController runController = locomotionTracker.GetCurrentController() as RunController;
+					if (runController != null)
+					{
+						runController.ApplyNetworkSprintState(false);
+					}
 					break;
 				}
 				pendingSlide = false;
 				pendingRun = true;
+				pendingSprint = false;
 				break;
 			default:
 				pendingSlide = false;
 				pendingRun = false;
+				pendingSprint = false;
 				break;
 			}
 		}
@@ -470,6 +496,12 @@ namespace ClubPenguin.Net.Locomotion
 			LocomotionController currentController = locomotionTracker.GetCurrentController();
 			switch (targetEvent.Type)
 			{
+			case LocomotionAction.Sprint:
+				if (!playerDataHandle.IsLocalPlayer && currentController is RunController networkRunController)
+				{
+					networkRunController.ToggleNetworkSprintState();
+				}
+				break;
 			case LocomotionAction.Torpedo:
 				lastJumpPosition = targetEvent.Position;
 				if (currentController != null)
@@ -528,7 +560,13 @@ namespace ClubPenguin.Net.Locomotion
 			if (pendingRun)
 			{
 				locomotionTracker.SetCurrentController<RunController>();
+				RunController runController = locomotionTracker.GetCurrentController() as RunController;
+				if (runController != null)
+				{
+					runController.ApplyNetworkSprintState(pendingSprint);
+				}
 				pendingRun = false;
+				pendingSprint = false;
 			}
 			if (pendingSlide)
 			{

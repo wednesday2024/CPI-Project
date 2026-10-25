@@ -9,6 +9,7 @@ namespace ClubPenguin.Net.Domain
 		GenericState3,
 		Sitting,
 		Zipline,
-		Racing
+		Racing,
+		Sprinting
 	}
 }

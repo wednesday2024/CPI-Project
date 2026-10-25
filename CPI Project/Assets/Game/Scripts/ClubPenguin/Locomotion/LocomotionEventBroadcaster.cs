@@ -15,6 +15,8 @@ namespace ClubPenguin.Locomotion
 
 		public delegate void DoActionHandler(LocomotionController.LocomotionAction action, object userData = null);
 
+		public delegate void SprintStateHandler(bool isSprinting);
+
 		public delegate void InteractionPreStartedHandler(GameObject trigger);
 
 		public delegate void InteractionStartedHandler(GameObject trigger);
@@ -39,6 +41,8 @@ namespace ClubPenguin.Locomotion
 
 		public event DoActionHandler OnDoActionEvent;
 
+		public event SprintStateHandler OnSprintStateChangedEvent;
+
 		public event InteractionPreStartedHandler OnInteractionPreStartedEvent;
 
 		public event InteractionStartedHandler OnInteractionStartedEvent;
@@ -60,6 +64,7 @@ namespace ClubPenguin.Locomotion
 			this.OnSteerRotationDirectionEvent = null;
 			this.OnSteerRotationFlushEvent = null;
 			this.OnDoActionEvent = null;
+			this.OnSprintStateChangedEvent = null;
 			this.OnInteractionPreStartedEvent = null;
 			this.OnInteractionStartedEvent = null;
 			this.OnControllerChangedEvent = null;
@@ -106,6 +111,14 @@ namespace ClubPenguin.Locomotion
 			if (this.OnDoActionEvent != null)
 			{
 				this.OnDoActionEvent(action, userData);
+			}
+		}
+
+		public void BroadcastSprintStateChanged(bool isSprinting)
+		{
+			if (this.OnSprintStateChangedEvent != null)
+			{
+				this.OnSprintStateChangedEvent(isSprinting);
 			}
 		}
 

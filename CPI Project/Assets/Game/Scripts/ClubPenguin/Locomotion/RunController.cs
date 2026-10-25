@@ -106,6 +106,8 @@ namespace ClubPenguin.Locomotion
 
 		private bool runActionSprintModifier;
 
+		private bool lastBroadcastSprintState;
+
 		private bool isLanding = false;
 
 		private bool isJogging = false;
@@ -236,11 +238,13 @@ namespace ClubPenguin.Locomotion
 		public void SetSprintModifier(bool isHeld)
 		{
 			sprintModifier = isHeld;
+			broadcastSprintStateIfChanged();
 		}
 
 		public void SetRunActionSprintModifier(bool isHeld)
 		{
 			runActionSprintModifier = isHeld;
+			broadcastSprintStateIfChanged();
 		}
 
 		public bool IsRunActionSprintModifier
@@ -258,6 +262,29 @@ namespace ClubPenguin.Locomotion
 public void toggleSprint()
 {
 	runActionSprintModifier = !runActionSprintModifier;
+	broadcastSprintStateIfChanged();
+}
+
+public void ApplyNetworkSprintState(bool isSprinting)
+{
+	sprintModifier = isSprinting;
+	runActionSprintModifier = isSprinting;
+}
+
+public void ToggleNetworkSprintState()
+{
+	ApplyNetworkSprintState(!(sprintModifier || runActionSprintModifier));
+}
+
+private void broadcastSprintStateIfChanged()
+{
+	bool isSprinting = IsSprintRequested;
+	if (lastBroadcastSprintState == isSprinting)
+	{
+		return;
+	}
+	lastBroadcastSprintState = isSprinting;
+	base.Broadcaster.BroadcastSprintStateChanged(isSprinting);
 }
 
 public override void Steer(Vector2 steerInput)
