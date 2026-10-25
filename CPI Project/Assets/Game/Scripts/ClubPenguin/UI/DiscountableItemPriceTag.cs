@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -11,11 +11,11 @@ namespace ClubPenguin.UI
 
 		public GameObjectSelector PriceTagSelector;
 
-		public Text CostText;
+		public TMP_Text CostText;
 
-		public Text CostTextSaleOld;
+		public TMP_Text CostTextSaleOld;
 
-		public Text CostTExtSaleNew;
+		public TMP_Text CostTExtSaleNew;
 
 		public void setItem<T>(T definition, int itemDefaultCost, MarketPlaceUtils.IsItemInSaleDelegate<T> isItemInSale)
 		{
