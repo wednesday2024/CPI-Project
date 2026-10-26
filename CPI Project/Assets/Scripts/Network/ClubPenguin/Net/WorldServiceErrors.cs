@@ -24,6 +24,16 @@ namespace ClubPenguin.Net
 			}
 		}
 
+		public struct ServerRestartingEvent
+		{
+			public readonly string Message;
+
+			public ServerRestartingEvent(string message)
+			{
+				Message = message;
+			}
+		}
+
 		[StructLayout(LayoutKind.Sequential, Size = 1)]
 		public struct RoomNotFoundEvent
 		{

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 224459517284102791}
   - component: {fileID: 95172110537194714}
   - component: {fileID: 114694471895082816}
+  - component: {fileID: 114694471895082817}
   m_Layer: 0
   m_Name: PopupTemplate
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MonoBehaviour:
   FullScreenButton: {fileID: 114851171601824724}
   Panel: {fileID: 224725143523140551}
   ShowCloseButton: 0
+--- !u!114 &114694471895082817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128982504752419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Audio::ClubPenguin.Audio.AnimToFabricEvents
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!1 &1217602917900373
 GameObject:
   m_ObjectHideFlags: 0

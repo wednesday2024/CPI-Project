@@ -89,13 +89,16 @@ public static class TweakableClassListGenerator
 		MemberInfo[] members = type.GetMembers(flags);
 		foreach (MemberInfo member in members)
 		{
-			if (member.MemberType != MemberTypes.Field && member.MemberType != MemberTypes.Property)
-			{
-				continue;
-			}
+			bool isPublicTweakable =
+				(member.MemberType == MemberTypes.Field || member.MemberType == MemberTypes.Property) &&
+				member.GetCustomAttribute<TweakableAttribute>(false) != null &&
+				member.GetCustomAttribute<PublicTweak>(false) != null;
+			bool isPublicInvokable =
+				member.MemberType == MemberTypes.Method &&
+				member.GetCustomAttribute<InvokableAttribute>(false) != null &&
+				member.GetCustomAttribute<PublicTweak>(false) != null;
 
-			if (member.GetCustomAttribute<TweakableAttribute>(false) != null &&
-				member.GetCustomAttribute<PublicTweak>(false) != null)
+			if (isPublicTweakable || isPublicInvokable)
 			{
 				return true;
 			}

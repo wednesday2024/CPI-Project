@@ -15,6 +15,7 @@ namespace ClubPenguin.Net
 		{
 			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.CONNECTION_LOST, onConnectionLost);
 			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.NETWORK_ERROR, onNetworkError);
+			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.SERVER_RESTARTING, onServerRestarting);
 			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.ROOM_USER_ADDED, onUserAdded);
 			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.ROOM_USER_REMOVED, onUserRemoved);
 			clubPenguinClient.GameServer.AddEventListener(GameServerEvent.SERVER_ITEM_ADDED, onServerItemAdded);
@@ -27,6 +28,7 @@ namespace ClubPenguin.Net
 		{
 			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.CONNECTION_LOST, onConnectionLost);
 			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.NETWORK_ERROR, onNetworkError);
+			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.SERVER_RESTARTING, onServerRestarting);
 			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.ROOM_USER_ADDED, onUserAdded);
 			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.ROOM_USER_REMOVED, onUserRemoved);
 			clubPenguinClient.GameServer.RemoveEventListener(GameServerEvent.SERVER_ITEM_ADDED, onServerItemAdded);
@@ -45,6 +47,11 @@ namespace ClubPenguin.Net
 		{
 			string errorMessage = (string)data;
 			Service.Get<EventDispatcher>().DispatchEvent(new WorldServiceErrors.WorldNetworkErrorEvent(errorMessage));
+		}
+
+		private void onServerRestarting(GameServerEvent evt, object data)
+		{
+			Service.Get<EventDispatcher>().DispatchEvent(new WorldServiceErrors.ServerRestartingEvent(data as string));
 		}
 
 		private void onUserAdded(GameServerEvent evt, object data)

@@ -11,6 +11,8 @@ namespace ClubPenguin.Net.Client.Smartfox
 		CHAT_ACTIVITY_CANCEL,
 		[SmartfoxCommands("chat.msg")]
 		CHAT,
+		[SmartfoxCommands("server.restarting")]
+		SERVER_RESTARTING,
 		[SmartfoxCommands("time.get")]
 		GET_SERVER_TIME,
 		[SmartfoxCommands("time.error")]

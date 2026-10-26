@@ -380,6 +380,10 @@ namespace ClubPenguin.Net.Client
                             gameServerEvent = GameServerEvent.CHAT_MESSAGE_RECEIVED;
                             data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetUtfString("msg"));
                             break;
+                        case SmartfoxCommand.SERVER_RESTARTING:
+                            gameServerEvent = GameServerEvent.SERVER_RESTARTING;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            break;
                         case SmartfoxCommand.GET_SERVER_TIME:
                             timeStampRecieved(iSFSObject.GetLong("ct"), iSFSObject.GetLong("st"));
                             break;
@@ -1399,6 +1403,10 @@ namespace ClubPenguin.Net.Client
                             
                             gameServerEvent = GameServerEvent.CHAT_MESSAGE_RECEIVED;
                             data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetUtfString("msg"));
+                            break;
+                        case SmartfoxCommand.SERVER_RESTARTING:
+                            gameServerEvent = GameServerEvent.SERVER_RESTARTING;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
                             break;
                         case SmartfoxCommand.GET_SERVER_TIME:
                             timeStampRecieved(iSFSObject.GetLong("ct"), iSFSObject.GetLong("st"));

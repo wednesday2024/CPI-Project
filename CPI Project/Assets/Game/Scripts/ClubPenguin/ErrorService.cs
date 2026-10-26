@@ -6,9 +6,11 @@ using ClubPenguin.UI;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using Disney.Mix.SDK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tweaker.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,6 +55,99 @@ namespace ClubPenguin
 		public const string WORLD_DISCONNECTED_ERROR_TOKEN = "GlobalUI.ErrorMessages.WorldDisconnected";
 
 		public const string WORLD_NETWORK_ERROR_TOKEN = "GlobalUI.ErrorMessages.WorldNetworkError";
+
+		public const string SERVER_RESTARTING_TITLE_TOKEN = "GlobalUI.ErrorMessages.ServerRestarting.Title";
+
+		public const string SERVER_RESTARTING_TOKEN = "GlobalUI.ErrorMessages.ServerRestarting";
+
+		[Invokable("Administrator.Tests.Prompts.ServerRestarting", Description = "Preview the server restarting prompt.")]
+		[PublicTweak]
+		public static void PreviewServerRestartingPrompt()
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			if (!service.showingError)
+			{
+				service.showErrorPrompt(SERVER_RESTARTING_TITLE_TOKEN, SERVER_RESTARTING_TOKEN);
+			}
+		}
+
+		[Invokable("Administrator.Tests.Prompts.ConnectionLost", Description = "Preview the connection lost prompt.")]
+		[PublicTweak]
+		public static void PreviewConnectionLostPrompt()
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			service.showPromptPreview(
+				"GlobalUI.ErrorMessages.NetworkError.Title",
+				"GlobalUI.ErrorMessages.WorldDisconnected",
+				service.NetworkErrorIconContentKey);
+		}
+
+		[Invokable("Administrator.Tests.Prompts.WorldNetworkError", Description = "Preview the world network error prompt.")]
+		[PublicTweak]
+		public static void PreviewWorldNetworkErrorPrompt()
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			service.showPromptPreview(
+				"GlobalUI.ErrorMessages.NetworkError.Title",
+				"GlobalUI.ErrorMessages.WorldNetworkError",
+				service.NetworkErrorIconContentKey);
+		}
+
+		[Invokable("Administrator.Tests.Prompts.RoomJoinError", Description = "Preview the room join error prompt.")]
+		[PublicTweak]
+		public static void PreviewRoomJoinErrorPrompt()
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			service.showPromptPreview(
+				"GlobalUI.ErrorMessages.NetworkError.Title",
+				"GlobalUI.ErrorMessages.RoomJoinError",
+				service.NetworkErrorIconContentKey);
+		}
+
+		[Invokable("Administrator.Tests.Prompts.SessionLost", Description = "Preview the session lost prompt.")]
+		[PublicTweak]
+		public static void PreviewSessionLostPrompt()
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			service.showPromptPreview(
+				"GlobalUI.ErrorMessages.SessionLostError.Title",
+				"GlobalUI.ErrorMessages.SessionLostError",
+				service.SessionLostIconContentKey);
+		}
+
+		[Invokable("Administrator.Tests.Prompts.AccountBanned", Description = "Preview the account banned prompt without logging out.")]
+		[PublicTweak]
+		public static void PreviewAccountBannedPrompt()
+		{
+			Service.Get<ErrorService>().showAccountBannedPreview();
+		}
+
+		[Invokable("Administrator.Tests.Prompts.CustomError", Description = "Preview an error prompt using localization title and message tokens.")]
+		[PublicTweak]
+		public static void PreviewCustomErrorPrompt(string titleToken, string messageToken)
+		{
+			ErrorService service = Service.Get<ErrorService>();
+			if (!service.showingError)
+			{
+				service.showErrorPrompt(titleToken, messageToken);
+			}
+		}
+
+		[Invokable("Developers.Tests.Quests.NoteTemplate", Description = "Load and open the quest note popup template.")]
+		[PublicTweak]
+		public static void LoadQuestNoteTemplate()
+		{
+			const string resourcePath = "Quests/Prefabs/PopupTemplate";
+			GameObject prefab = Resources.Load<GameObject>(resourcePath);
+			if (prefab == null)
+			{
+				Debug.LogError("Could not load quest note template from Resources/" + resourcePath);
+				return;
+			}
+
+			GameObject popup = UnityEngine.Object.Instantiate(prefab);
+			Service.Get<EventDispatcher>().DispatchEvent(new PopupEvents.ShowPopup(popup, true, true));
+		}
 
 		public const string ROOM_JOIN_ERROR_TOKEN = "GlobalUI.ErrorMessages.RoomJoinError";
 
@@ -143,6 +238,7 @@ namespace ClubPenguin
 			eventDispatcher.AddListener<SessionErrorEvents.RegistrationConfigError>(onRegistrationConfigError);
 			eventDispatcher.AddListener<WorldServiceErrors.WorldDisconnectedEvent>(onWorldDisconnected);
 			eventDispatcher.AddListener<WorldServiceErrors.WorldNetworkErrorEvent>(onWorldNetworkError);
+			eventDispatcher.AddListener<WorldServiceErrors.ServerRestartingEvent>(onServerRestarting);
 			eventDispatcher.AddListener<NetworkErrors.NoConnectionError>(onNoConnectionError);
 			eventDispatcher.AddListener<NetworkErrors.GeneralError>(onGeneralNetworkError);
 			Service.Get<EventDispatcher>().AddListener<LoadingController.TimeoutEvent>(onLoadingScreenTimeout);
@@ -300,6 +396,41 @@ namespace ClubPenguin
 			showIconPrompt(errorData, iconContentKey);
 		}
 
+		private void showPromptPreview(string titleToken, string messageToken, SpriteContentKey iconContentKey)
+		{
+			if (showingError)
+			{
+				return;
+			}
+			showIconErrorPrompt(new ErrorData(titleToken, messageToken), iconContentKey);
+		}
+
+		private void showAccountBannedPreview()
+		{
+			if (showingError)
+			{
+				return;
+			}
+
+			showingError = true;
+			PromptDefinition promptDefinition = promptManager.GetPromptDefinition("ModerationCriticalPrompt");
+			PromptLoaderCMD promptLoader = new PromptLoaderCMD(this, promptDefinition, delegate(PromptLoaderCMD loader)
+			{
+				CPDataEntityCollection entities = Service.Get<CPDataEntityCollection>();
+				if (entities.TryGetComponent(entities.LocalPlayerHandle, out DisplayNameData displayName))
+				{
+					loader.PromptData.SetText(DPrompt.PROMPT_TEXT_TITLE, displayName.DisplayName, true);
+				}
+				else
+				{
+					loader.PromptData.SetText(DPrompt.PROMPT_TEXT_TITLE, "GlobalUI.ErrorMessages.AccountBanned.Title");
+				}
+				SessionErrorEvents.AccountBannedPromptSetup(loader.PromptData, AlertType.Unknown, null);
+				promptManager.ShowPrompt(loader.PromptData, clearShowingError, loader.Prefab);
+			});
+			promptLoader.Execute();
+		}
+
 		private void showIconPrompt(ErrorData errorData, SpriteContentKey iconContentKey)
 		{
 			DPrompt data = new DPrompt(errorData.TitleToken, errorData.MessageToken, errorData.Buttons, iconSprites[iconContentKey.Key]);
@@ -378,6 +509,15 @@ namespace ClubPenguin
 			clearData();
 			gameStateController.GoOffline();
 			showNetworkErrorPrompt("GlobalUI.ErrorMessages.NetworkError.Title", "GlobalUI.ErrorMessages.WorldNetworkError");
+			return false;
+		}
+
+		private bool onServerRestarting(WorldServiceErrors.ServerRestartingEvent evt)
+		{
+			if (!showingError)
+			{
+				showErrorPrompt(SERVER_RESTARTING_TITLE_TOKEN, string.IsNullOrEmpty(evt.Message) ? SERVER_RESTARTING_TOKEN : evt.Message);
+			}
 			return false;
 		}
 
