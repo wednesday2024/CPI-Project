@@ -384,6 +384,10 @@ namespace ClubPenguin.Net.Client
                             gameServerEvent = GameServerEvent.SERVER_RESTARTING;
                             data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
                             break;
+                        case SmartfoxCommand.SERVER_ALERT:
+                            gameServerEvent = GameServerEvent.SERVER_ALERT;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            break;
                         case SmartfoxCommand.GET_SERVER_TIME:
                             timeStampRecieved(iSFSObject.GetLong("ct"), iSFSObject.GetLong("st"));
                             break;
@@ -1406,6 +1410,10 @@ namespace ClubPenguin.Net.Client
                             break;
                         case SmartfoxCommand.SERVER_RESTARTING:
                             gameServerEvent = GameServerEvent.SERVER_RESTARTING;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            break;
+                        case SmartfoxCommand.SERVER_ALERT:
+                            gameServerEvent = GameServerEvent.SERVER_ALERT;
                             data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
                             break;
                         case SmartfoxCommand.GET_SERVER_TIME:

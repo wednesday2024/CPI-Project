@@ -325,6 +325,10 @@ namespace ClubPenguin
 
 		private bool chatMessageReceived(ChatServiceEvents.ChatMessageReceived evt)
 		{
+			if (ChatMessageSender.IsHiddenAdminCommand(evt.Message))
+			{
+				return false;
+			}
 			if (dataEntityCollection.LocalPlayerSessionId == evt.SessionId)
 			{
 				int chatAwaitingModerationBlockDataListIndex = getChatAwaitingModerationBlockDataListIndex(evt.SessionId);
@@ -365,6 +369,10 @@ namespace ClubPenguin
 
 		private bool onSendChatMessage(ChatMessageSender.SendChatMessage evt)
 		{
+			if (ChatMessageSender.IsHiddenAdminCommand(evt.Message))
+			{
+				return false;
+			}
 			addChatMessage(dataEntityCollection.LocalPlayerSessionId, evt.Message, dataEntityCollection.LocalPlayerHandle, false, true);
 			jumpToNewMessage();
 			return false;

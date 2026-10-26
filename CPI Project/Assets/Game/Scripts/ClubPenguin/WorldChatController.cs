@@ -150,6 +150,10 @@ namespace ClubPenguin
 
 		private bool onSendChatMessage(ChatMessageSender.SendChatMessage evt)
 		{
+			if (ChatMessageSender.IsHiddenAdminCommand(evt.Message))
+			{
+				return false;
+			}
 			showChatMessage(base.localSessionId, evt.Message, (!(evt.SizzleClip == null)) ? evt.SizzleClip.Id : 0, true, evt.IsChatPhrase);
 			return false;
 		}
@@ -188,6 +192,10 @@ namespace ClubPenguin
 
 		private bool onChatMessageReceived(ChatServiceEvents.ChatMessageReceived evt)
 		{
+			if (ChatMessageSender.IsHiddenAdminCommand(evt.Message))
+			{
+				return false;
+			}
 			if (evt.SessionId == base.localSessionId || !ignoreRemoteChat)
 			{
 				showChatMessage(evt.SessionId, evt.Message, evt.SizzleClipID);

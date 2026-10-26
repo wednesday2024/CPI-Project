@@ -3,6 +3,7 @@ using ClubPenguin.UI;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using System;
 using UnityEngine;
 
 namespace ClubPenguin
@@ -10,6 +11,18 @@ namespace ClubPenguin
     public class ChatMessageSender : MonoBehaviour
     {
         public const string LOCAL_ONLY_PREFIX = "\u200B";
+
+        public static bool IsHiddenAdminCommand(string message)
+        {
+            return IsCommand(message, ":admin-alert") || IsCommand(message, ":admin-swre-restart");
+        }
+
+        private static bool IsCommand(string message, string command)
+        {
+            return !string.IsNullOrEmpty(message)
+                && message.StartsWith(command, StringComparison.OrdinalIgnoreCase)
+                && (message.Length == command.Length || char.IsWhiteSpace(message[command.Length]));
+        }
 
         public struct SendChatMessage
         {

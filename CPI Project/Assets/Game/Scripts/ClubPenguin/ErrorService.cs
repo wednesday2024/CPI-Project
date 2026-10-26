@@ -60,6 +60,8 @@ namespace ClubPenguin
 
 		public const string SERVER_RESTARTING_TOKEN = "GlobalUI.ErrorMessages.ServerRestarting";
 
+		public const string SERVER_ALERT_TITLE_TOKEN = "GlobalUI.ErrorMessages.ServerAlert.Title";
+
 		[Invokable("Administrator.Tests.Prompts.ServerRestarting", Description = "Preview the server restarting prompt.")]
 		[PublicTweak]
 		public static void PreviewServerRestartingPrompt()
@@ -239,6 +241,7 @@ namespace ClubPenguin
 			eventDispatcher.AddListener<WorldServiceErrors.WorldDisconnectedEvent>(onWorldDisconnected);
 			eventDispatcher.AddListener<WorldServiceErrors.WorldNetworkErrorEvent>(onWorldNetworkError);
 			eventDispatcher.AddListener<WorldServiceErrors.ServerRestartingEvent>(onServerRestarting);
+			eventDispatcher.AddListener<WorldServiceErrors.ServerAlertEvent>(onServerAlert);
 			eventDispatcher.AddListener<NetworkErrors.NoConnectionError>(onNoConnectionError);
 			eventDispatcher.AddListener<NetworkErrors.GeneralError>(onGeneralNetworkError);
 			Service.Get<EventDispatcher>().AddListener<LoadingController.TimeoutEvent>(onLoadingScreenTimeout);
@@ -517,6 +520,18 @@ namespace ClubPenguin
 			if (!showingError)
 			{
 				showErrorPrompt(SERVER_RESTARTING_TITLE_TOKEN, string.IsNullOrEmpty(evt.Message) ? SERVER_RESTARTING_TOKEN : evt.Message);
+			}
+			return false;
+		}
+
+		private bool onServerAlert(WorldServiceErrors.ServerAlertEvent evt)
+		{
+			if (!showingError && !string.IsNullOrWhiteSpace(evt.Message))
+			{
+				DPrompt prompt = new DPrompt(SERVER_ALERT_TITLE_TOKEN, string.Empty, DPrompt.ButtonFlags.OK);
+				prompt.SetText(DPrompt.PROMPT_TEXT_BODY, evt.Message, true);
+				showingError = true;
+				promptManager.ShowPrompt(prompt, clearShowingError, promptManager.ErrorPrefab);
 			}
 			return false;
 		}

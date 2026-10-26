@@ -13,6 +13,8 @@ namespace ClubPenguin.Net.Client.Smartfox
 		CHAT,
 		[SmartfoxCommands("server.restarting")]
 		SERVER_RESTARTING,
+		[SmartfoxCommands("server.alert")]
+		SERVER_ALERT,
 		[SmartfoxCommands("time.get")]
 		GET_SERVER_TIME,
 		[SmartfoxCommands("time.error")]
