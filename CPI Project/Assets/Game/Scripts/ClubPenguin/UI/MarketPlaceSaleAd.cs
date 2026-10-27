@@ -6,15 +6,15 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
 	public class MarketPlaceSaleAd : MonoBehaviour
 	{
-		public Text TimeRemainingText;
+		public TMP_Text TimeRemainingText;
 
-		public Text SalePercentageText;
+		public TMP_Text SalePercentageText;
 
 		private CellPhoneSaleActivityDefinition saleData;
 
