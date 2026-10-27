@@ -25,7 +25,8 @@ namespace ClubPenguin.UI
 			MembershipInfo,
 			AllAccessEventMembershipInfo,
 			CustomGraphics,
-			AllControls
+			AllControls,
+			Changelog
 		}
 
 		private SettingsTweener settingsTweener;
@@ -93,6 +94,10 @@ namespace ClubPenguin.UI
 				break;
 			case SettingsStates.AllControls:
 				Service.Get<ICPSwrveService>().Action("view.settings", "settings_controls");
+				settingsTweener.Open();
+				break;
+			case SettingsStates.Changelog:
+				Service.Get<ICPSwrveService>().Action("view.settings", "settings_changelog");
 				settingsTweener.Open();
 				break;
 			case SettingsStates.Transition:

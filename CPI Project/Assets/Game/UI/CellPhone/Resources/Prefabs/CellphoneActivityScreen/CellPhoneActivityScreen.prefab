@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffb93311ce390d1cf3245d49bc926ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  token: Cellphone.CPNewsTitle
+  token: Cellphone.CPChanges
   doNotLocalize: 0
   stripVisibleNewline: 1
   platform: 0
@@ -1046,7 +1046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &224979525026683782
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2590,7 +2590,7 @@ MonoBehaviour:
   Priority: 0
   IgnoreText: 0
   VoiceOnly: 0
-  CustomToken: Cellphone.CPNewsTitle
+  CustomToken: Settings.Changelog.Title
   ReferenceToken: {fileID: 0}
   ReferenceRect: {fileID: 224205424745875163}
   DontRender: 0
@@ -3055,7 +3055,6 @@ GameObject:
   - component: {fileID: 114972157390281520}
   - component: {fileID: 225562305139516696}
   - component: {fileID: 114622510292267056}
-  - component: {fileID: 114324480751709232}
   m_Layer: 5
   m_Name: NewsButton
   m_TagString: Untagged
@@ -3132,9 +3131,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Behaviour: 1
-  BehaviourParam: Prefabs/NewsFeedScreen
+  BehaviourParam: Prefabs/ChangelogScreen
   LoadingScreenOverride: LoadingScreenPrefabs/CellPhoneLoadScreen
-  AppName: cp_news
+  AppName: changelog
   AppletSceneSystemMemoryThreshold: 0
 --- !u!225 &225562305139516696
 CanvasGroup:
@@ -3168,18 +3167,6 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &114324480751709232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628949423734398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f8c4da2225733f1d1b2fc4981c8b27c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1634415251037500
 GameObject:
   m_ObjectHideFlags: 0
