@@ -18,7 +18,7 @@ namespace ClubPenguin.UI
 			}
 			else
 			{
-				GetComponent<TextMeshProUGUI>().text = "v1.14.0";
+				GetComponent<TextMeshProUGUI>().text = "v1.14.1";
 			}
 		}
 	}
