@@ -43,7 +43,6 @@ public class ChangelogEditorWindow : EditorWindow
             try
             {
                 string json = File.ReadAllText(OutputPath);
-                // Parse the JSON manually since it's a dictionary format
                 int braceIndex = json.IndexOf('{');
                 if (braceIndex >= 0)
                 {
@@ -72,8 +71,7 @@ public class ChangelogEditorWindow : EditorWindow
                         });
                     }
                     
-                    // Sort entries by date ascending (oldest first)
-                    data.entries.Sort((a, b) => CompareDates(a.date, b.date));
+                    data.entries.Sort((a, b) => CompareDates(b.date, a.date));
                 }
             }
             catch (Exception e)
@@ -145,7 +143,7 @@ public class ChangelogEditorWindow : EditorWindow
 
         if (GUILayout.Button("Add Entry"))
         {
-            data.entries.Add(new Entry());
+            data.entries.Insert(0, new Entry());
         }
 
         if (GUILayout.Button("Reload from JSON"))
@@ -164,15 +162,14 @@ public class ChangelogEditorWindow : EditorWindow
             EditorUtility.DisplayProgressBar("Generating Changelog", "Preparing entries", 0f);
             System.Text.StringBuilder output = new System.Text.StringBuilder();
             output.AppendLine("{");
-            // Output in ascending order (oldest first)
-            for (int i = 0; i < data.entries.Count; i++)
+            for (int i = data.entries.Count - 1; i >= 0; i--)
             {
-                EditorUtility.DisplayProgressBar("Generating Changelog", "Processing entry " + (i + 1), data.entries.Count == 0 ? 1f : (float)i / data.entries.Count);
+                EditorUtility.DisplayProgressBar("Generating Changelog", "Processing entry " + (data.entries.Count - i), data.entries.Count == 0 ? 1f : (float)(data.entries.Count - i) / data.entries.Count);
                 Entry entry = data.entries[i];
                 string date = ParseDate(entry.date).ToString("MMMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
                 output.Append("  ").Append(SerializeString(date));
                 output.Append(": ").Append(SerializeString(entry.notes ?? string.Empty));
-                if (i < data.entries.Count - 1)
+                if (i > 0)
                     output.Append(',');
                 output.AppendLine();
             }
