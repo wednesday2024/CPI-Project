@@ -25,10 +25,10 @@ public class ChangelogEditorWindow : EditorWindow
     private Vector2 scroll;
     private Dictionary<int, Vector2> notesScrollPositions = new Dictionary<int, Vector2>();
 
-    [MenuItem("Project/Tools/Changelog Editor")]
+    [MenuItem("Project/Island Changes Editor")]
     private static void Open()
     {
-        GetWindow<ChangelogEditorWindow>("Changelog");
+        GetWindow<ChangelogEditorWindow>("Island Changes Editor");
     }
 
     private void OnEnable()
