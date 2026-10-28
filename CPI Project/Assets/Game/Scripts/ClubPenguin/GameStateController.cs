@@ -474,19 +474,24 @@ namespace ClubPenguin
 		{
 			if (!base.gameObject.IsDestroyed())
 			{
-				GameObject gameObject = UnityEngine.Object.Instantiate(asset);
+				string currentScene = Service.Get<SceneTransitionService>().CurrentScene;
+				bool showInCameraSpacePopup = currentScene == "Settings" && ClubPenguin.Core.SceneRefs.IsSet<CameraSpacePopupManager>();
+				GameObject topCanvas = GameObject.Find("TopCanvas");
+				bool showInTopPopup = !showInCameraSpacePopup && topCanvas != null;
+				GameObject settingsPopupCanvas = currentScene == "Settings" ? GameObject.Find("SettingsPopupCanvas") : null;
+				Transform popupParent = showInCameraSpacePopup ? ClubPenguin.Core.SceneRefs.Get<CameraSpacePopupManager>().transform : showInTopPopup ? topCanvas.transform : SceneRefs.PopupManager != null ? SceneRefs.PopupManager.transform : settingsPopupCanvas != null ? settingsPopupCanvas.transform : null;
+				GameObject gameObject = popupParent != null ? UnityEngine.Object.Instantiate(asset, popupParent, false) : UnityEngine.Object.Instantiate(asset);
 				gameObject.GetComponent<SEDFSMStartEventSource>().StartEvent = accountSystemStartEvent;
 				if (accountSystemFromFTUE)
 				{
 					LayoutMappings component = gameObject.GetComponent<LayoutMappings>();
 					component.SetLayoutType("OneIdFullscreen", "center");
 				}
-				string currentScene = Service.Get<SceneTransitionService>().CurrentScene;
-				if (currentScene == "Settings" && ClubPenguin.Core.SceneRefs.IsSet<CameraSpacePopupManager>())
+				if (showInCameraSpacePopup)
 				{
 					eventDispatcher.DispatchEvent(new PopupEvents.ShowCameraSpacePopup(gameObject));
 				}
-				else if ((bool)GameObject.Find("TopCanvas"))
+				else if (topCanvas != null)
 				{
 					eventDispatcher.DispatchEvent(new PopupEvents.ShowTopPopup(gameObject));
 				}
