@@ -4,6 +4,7 @@ using Disney.MobileNetwork;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -17,7 +18,7 @@ namespace ClubPenguin.UI
 
 		public GameObject BackButton;
 
-		public Text TitleText;
+		public TMP_Text TitleText;
 
 		private MainNavData mainNavData;
 
