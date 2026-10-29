@@ -6,20 +6,21 @@ namespace ClubPenguin.CellPhone
 {
 	public class CellPhoneActivityScreenLocationWidget : AbstractCellPhoneActivityScreenMemberLockableWidget
 	{
-		private CellPhoneLocationActivityDefinition widgetData;
+		[System.NonSerialized]
+		private CellPhoneLocationActivityDefinition locationWidgetData;
 
 		protected override void setWidgetData(CellPhoneActivityDefinition widgetData)
 		{
 			CellPhoneLocationActivityDefinition x = widgetData as CellPhoneLocationActivityDefinition;
 			if (x != null)
 			{
-				this.widgetData = x;
+				this.locationWidgetData = x;
 			}
 		}
 
 		protected override void onGoButtonClicked()
 		{
-			if (widgetData != null)
+			if (locationWidgetData != null)
 			{
 				goToLocationInZone();
 			}
@@ -32,24 +33,24 @@ namespace ClubPenguin.CellPhone
 			{
 				SpawnedAction spawnedAction = new SpawnedAction();
 				spawnedAction.Action = SpawnedAction.SPAWNED_ACTION.None;
-				component.SpawnPlayer(new SpawnPlayerParams.SpawnPlayerParamsBuilder(widgetData.LocationInZone).SceneName(widgetData.Scene.SceneName).SpawnedAction(spawnedAction).Build());
-				if (Service.Get<SceneTransitionService>().CurrentScene == widgetData.Scene.SceneName)
+				component.SpawnPlayer(new SpawnPlayerParams.SpawnPlayerParamsBuilder(locationWidgetData.LocationInZone).SceneName(locationWidgetData.Scene.SceneName).SpawnedAction(spawnedAction).Build());
+				if (Service.Get<SceneTransitionService>().CurrentScene == locationWidgetData.Scene.SceneName)
 				{
 					Service.Get<EventDispatcher>().DispatchEvent(default(CellPhoneEvents.CellPhoneClosed));
 				}
 			}
 			saveWidgetAsAccessed();
-			logGoThereBI((widgetData as CellPhoneFeatureActivityDefinition != null) ? "boost" : "event", widgetData.name);
+			logGoThereBI((locationWidgetData as CellPhoneFeatureActivityDefinition != null) ? "boost" : "event", locationWidgetData.name);
 		}
 
 		private void saveWidgetAsAccessed()
 		{
-			if (widgetData.IsHiddenAfterAccessed)
+			if (locationWidgetData.IsHiddenAfterAccessed)
 			{
 				CellPhoneActivityScreenDefinition.AccessedWidgets accessedWidgets = CellPhoneActivityScreenDefinition.AccessedWidgets.GetAccessedWidgets();
-				if (!accessedWidgets.Widgets.Contains(widgetData.name))
+				if (!accessedWidgets.Widgets.Contains(locationWidgetData.name))
 				{
-					accessedWidgets.Widgets.Add(widgetData.name);
+					accessedWidgets.Widgets.Add(locationWidgetData.name);
 					CellPhoneActivityScreenDefinition.AccessedWidgets.SaveAccessedWidgets(accessedWidgets);
 				}
 			}

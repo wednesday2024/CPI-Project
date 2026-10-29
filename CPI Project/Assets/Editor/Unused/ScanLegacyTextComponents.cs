@@ -11,6 +11,11 @@ public class ScanLegacyTextComponents : EditorWindow
 {
     private Vector2 scroll;
     private static List<Result> results = new List<Result>();
+    private static bool searchScripts = true;
+    private static bool searchPrefabs = true;
+    private static bool searchScenes = true;
+    private static bool searchAssets = true;
+    private static bool isScanning = false;
 
     public class Result
     {
@@ -29,13 +34,21 @@ public class ScanLegacyTextComponents : EditorWindow
     };
 
     [MenuItem("Project/Temp/Scan All Assets for Legacy Text")]
-    public static void Scan()
+    public static void OpenWindow()
+    {
+        GetWindow<ScanLegacyTextComponents>("Legacy Text Results");
+    }
+
+    private static void PerformScan()
     {
         results.Clear();
 
         var files = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories)
             .Where(f =>
-                (f.EndsWith(".cs") || f.EndsWith(".unity") || f.EndsWith(".prefab") || f.EndsWith(".asset")) &&
+                ((searchScripts && f.EndsWith(".cs")) ||
+                 (searchScenes && f.EndsWith(".unity")) ||
+                 (searchPrefabs && f.EndsWith(".prefab")) ||
+                 (searchAssets && f.EndsWith(".asset"))) &&
                 !IsIgnored(f)
             )
             .ToArray();
@@ -86,8 +99,7 @@ public class ScanLegacyTextComponents : EditorWindow
         }
 
         EditorUtility.ClearProgressBar();
-
-        GetWindow<ScanLegacyTextComponents>("Legacy Text Results");
+        isScanning = false;
     }
 
     static bool IsIgnored(string path)
@@ -108,18 +120,43 @@ public class ScanLegacyTextComponents : EditorWindow
 
         EditorGUILayout.LabelField($"Results: {results.Count}", EditorStyles.boldLabel);
 
-        if (GUILayout.Button("Rescan", GUILayout.Width(100)))
+        if (isScanning)
         {
-            Scan();
+            GUI.enabled = false;
+            GUILayout.Button("Scanning...", GUILayout.Width(100));
+            GUI.enabled = true;
+        }
+        else
+        {
+            if (GUILayout.Button("Scan", GUILayout.Width(100)))
+            {
+                isScanning = true;
+                PerformScan();
+            }
         }
 
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
 
-        if (results.Count == 0)
+        EditorGUILayout.LabelField("Search Options:", EditorStyles.boldLabel);
+        searchScripts = EditorGUILayout.Toggle(" Scripts (.cs)", searchScripts);
+        searchPrefabs = EditorGUILayout.Toggle(" Prefabs (.prefab)", searchPrefabs);
+        searchScenes = EditorGUILayout.Toggle(" Unity Scenes (.unity)", searchScenes);
+        searchAssets = EditorGUILayout.Toggle(" Assets (.asset)", searchAssets);
+        EditorGUIUtility.labelWidth = 0;
+
+        EditorGUILayout.Space();
+
+        if (results.Count == 0 && !isScanning)
         {
             EditorGUILayout.HelpBox("No matches found.", MessageType.Info);
+            return;
+        }
+
+        if (isScanning)
+        {
+            EditorGUILayout.HelpBox("Scanning in progress...", MessageType.Info);
             return;
         }
 

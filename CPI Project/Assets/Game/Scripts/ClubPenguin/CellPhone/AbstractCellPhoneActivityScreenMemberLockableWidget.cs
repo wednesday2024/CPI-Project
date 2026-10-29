@@ -8,8 +8,10 @@ namespace ClubPenguin.CellPhone
 	{
 		public GameObject MemberLockedPanel;
 
+		[System.NonSerialized]
 		private CellPhoneActivityDefinition widgetData;
 
+		[System.NonSerialized]
 		private bool isMemberLocked;
 
 		public void SetWidgetData(CellPhoneActivityDefinition widgetData)
