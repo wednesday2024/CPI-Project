@@ -5,7 +5,7 @@ using ClubPenguin.Task;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -22,7 +22,7 @@ namespace ClubPenguin.UI
 
 		private const int CHECKMARK_SPRITE_ON_INDEX = 1;
 
-		public Text CoinRewardText;
+		public TMP_Text CoinRewardText;
 
 		public GameObjectSelector[] CompletionCheckMarks;
 
