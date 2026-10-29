@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -47,7 +48,7 @@ namespace ClubPenguin.UI
 
 		public Image TextImage;
 
-		public Text CountText;
+		public TMP_Text CountText;
 
 		public ParticleSystem CollectibleParticles;
 
