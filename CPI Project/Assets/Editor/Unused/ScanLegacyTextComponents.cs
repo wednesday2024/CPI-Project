@@ -6,6 +6,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ScanLegacyTextComponents : EditorWindow
 {
@@ -24,14 +25,7 @@ public class ScanLegacyTextComponents : EditorWindow
         public string content;
     }
 
-    static readonly string[] patterns = new string[]
-    {
-        @"\bGUIText\b",
-        @"\bTextMesh\b(?!Pro)",
-        @"\bUnityEngine\.UI\.Text\b",
-        @"\bText\s+[a-zA-Z0-9_]+\b",
-        @"GetComponent\s*<\s*Text\s*>"
-    };
+
 
     [MenuItem("Project/Temp/Scan All Assets for Legacy Text")]
     public static void OpenWindow()
@@ -65,41 +59,108 @@ public class ScanLegacyTextComponents : EditorWindow
                 break;
             }
 
-            string[] lines;
+            string assetPath = file.Replace(Application.dataPath, "Assets");
 
-            try
+            if (file.EndsWith(".cs"))
             {
-                lines = File.ReadAllLines(file);
+                ScanScriptFile(file, assetPath);
             }
-            catch
+            else if (file.EndsWith(".prefab") || file.EndsWith(".unity") || file.EndsWith(".asset"))
             {
-                continue;
-            }
-
-            bool foundInFile = false;
-
-            for (int line = 0; line < lines.Length && !foundInFile; line++)
-            {
-                foreach (var pattern in patterns)
-                {
-                    if (Regex.IsMatch(lines[line], pattern))
-                    {
-                        results.Add(new Result
-                        {
-                            path = file.Replace(Application.dataPath, "Assets"),
-                            line = line + 1,
-                            content = lines[line].Trim()
-                        });
-
-                        foundInFile = true;
-                        break;
-                    }
-                }
+                ScanUnityAsset(file, assetPath);
             }
         }
 
         EditorUtility.ClearProgressBar();
         isScanning = false;
+    }
+
+    private static void ScanScriptFile(string file, string assetPath)
+    {
+        string[] lines;
+        try
+        {
+            lines = File.ReadAllLines(file);
+        }
+        catch
+        {
+            return;
+        }
+
+        string[] patterns = new string[]
+        {
+            @"\bTextMesh\b(?!Pro)",
+            @"\bUnityEngine\.UI\.Text\b",
+            @"\bText\s+[a-zA-Z0-9_]+\b",
+            @"GetComponent\s*<\s*Text\s*>"
+        };
+
+        for (int line = 0; line < lines.Length; line++)
+        {
+            foreach (var pattern in patterns)
+            {
+                if (Regex.IsMatch(lines[line], pattern))
+                {
+                    results.Add(new Result
+                    {
+                        path = assetPath,
+                        line = line + 1,
+                        content = lines[line].Trim()
+                    });
+
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void ScanUnityAsset(string file, string assetPath)
+    {
+        Object obj = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+        if (obj == null)
+        {
+            return;
+        }
+
+        GameObject gameObject = obj as GameObject;
+        if (gameObject != null)
+        {
+            bool hasLegacyText = CheckGameObjectForLegacyText(gameObject);
+            if (hasLegacyText)
+            {
+                results.Add(new Result
+                {
+                    path = assetPath,
+                    line = 0,
+                    content = "Contains legacy text components"
+                });
+            }
+        }
+    }
+
+    private static bool CheckGameObjectForLegacyText(GameObject gameObject)
+    {
+        TextMesh textMesh = gameObject.GetComponent<TextMesh>();
+        if (textMesh != null)
+        {
+            return true;
+        }
+
+        Text uiText = gameObject.GetComponent<Text>();
+        if (uiText != null)
+        {
+            return true;
+        }
+
+        foreach (Transform child in gameObject.transform)
+        {
+            if (CheckGameObjectForLegacyText(child.gameObject))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     static bool IsIgnored(string path)
