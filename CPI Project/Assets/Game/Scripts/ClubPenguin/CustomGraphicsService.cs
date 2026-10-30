@@ -17,7 +17,7 @@ namespace ClubPenguin
 		private const float MaximumRenderScale = 3f;
 		private const float RenderScaleStep = 0.1f;
 
-		public int AntiAliasSamplesLow = 0;
+		public int AntiAliasSamplesLow = 2;
 
 		public int AntiAliasSamplesMedium = 4;
 
@@ -166,7 +166,8 @@ namespace ClubPenguin
 			gameSettings.RegisterSetting(LodPenguinQualityLevel, true);
 			gameSettings.RegisterSetting(AntiAliasLevel, true);
 			gameSettings.RegisterSetting(CameraPostEnabled, true);
-			SetAntialiasing(AntiAliasLevel);
+			int savedAntiAlias = AntiAliasLevel;
+			SetAntialiasing((savedAntiAlias > 0) ? antiAlias : 0);
 			SetCameraPostEffects(CameraPostEnabled);
 			SetLodPenguinQualityLevel(LodPenguinQualityLevel);
 			SetFullscreen(Screen.fullScreen);
@@ -319,7 +320,7 @@ namespace ClubPenguin
 #if UNITY_ANDROID || UNITY_IOS
 			requiredAntiAliasing = 4;
 #endif
-			int antiAliasing = (samples > 0) ? requiredAntiAliasing : 0;
+			int antiAliasing = (samples <= 0) ? 0 : ((samples == AntiAliasSamplesLow) ? AntiAliasSamplesLow : requiredAntiAliasing);
 			QualitySettings.antiAliasing = antiAliasing;
 			UniversalRenderPipelineAsset renderPipeline = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
 			if (renderPipeline != null)

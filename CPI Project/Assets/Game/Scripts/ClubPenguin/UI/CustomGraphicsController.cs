@@ -319,11 +319,12 @@ namespace ClubPenguin.UI
             }
             else if (graphicsQualityToggleLow.isOn)
             {
-                antiAliasingToggle.isOn = false;
+                antiAliasingToggle.isOn = true;
                 cameraPostToggle.isOn = false;
                 lodPenguinQualityToggleLow.isOn = true;
                 text += "Low";
-                SetTogglesInteractable(false, antiAliasingToggle, cameraPostToggle);
+                SetTogglesInteractable(true, antiAliasingToggle);
+                SetTogglesInteractable(false, cameraPostToggle);
                 SetPenguinTogglesInteractable(false, lodPenguinQualityToggleHigh, lodPenguinQualityToggleMedium);
             }
             if (isInitialized)
