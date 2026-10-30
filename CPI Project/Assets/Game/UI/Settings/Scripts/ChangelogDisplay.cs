@@ -9,6 +9,16 @@ using UnityEngine.UI;
 
 public class ChangelogDisplay : MonoBehaviour
 {
+    public static string GetLatestEntryId()
+    {
+        TextAsset json = Resources.Load<TextAsset>("Changelog/Changelog");
+        if (json == null)
+            return string.Empty;
+
+        List<KeyValuePair<string, string>> entries = ParseEntries(json.text);
+        return entries.Count > 0 ? entries[entries.Count - 1].Key : string.Empty;
+    }
+
     private sealed class ScaledText
     {
         public TMP_Text Text;

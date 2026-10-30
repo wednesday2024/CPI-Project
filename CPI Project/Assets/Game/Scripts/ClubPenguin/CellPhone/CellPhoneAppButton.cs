@@ -1,6 +1,7 @@
 using ClubPenguin.Analytics;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
+using System;
 using UnityEngine;
 
 namespace ClubPenguin.CellPhone
@@ -17,12 +18,18 @@ namespace ClubPenguin.CellPhone
 
 		public int AppletSceneSystemMemoryThreshold = -1;
 
+		public event System.Action Pressed;
+
 		private void Start()
 		{
 		}
 
 		public void OnButtonPressed()
 		{
+			if (Pressed != null)
+			{
+				Pressed();
+			}
 			logAppOpenBi();
 			Service.Get<EventDispatcher>().DispatchEvent(new CellPhoneEvents.ChangeCellPhoneScreen(Behaviour, BehaviourParam, AppName, LoadingScreenOverride, AppletSceneSystemMemoryThreshold));
 		}
@@ -33,3 +40,4 @@ namespace ClubPenguin.CellPhone
 		}
 	}
 }
+

@@ -38,6 +38,12 @@ namespace ClubPenguin.CellPhone
 
 		private CPDataEntityCollection dataEntityCollection;
 
+		private GameObject changelogBreadcrumbContainer;
+
+		private CellPhoneAppButton changelogButton;
+
+		private const string CHANGELOG_LAST_SEEN_PREF = "IslandChangesLastSeen";
+
 		private void Start()
 		{
 			dispatcher = Service.Get<EventDispatcher>();
@@ -51,6 +57,7 @@ namespace ClubPenguin.CellPhone
 			});
 			CoroutineRunner.Start(updateTimer.Start(), this, "");
 			updateTime();
+			setupChangelogBreadcrumb();
 			loadActivityScreenDefinition();
 			checkNewsFeed();
 		}
@@ -107,8 +114,68 @@ namespace ClubPenguin.CellPhone
 
 		private void OnDestroy()
 		{
+			if (changelogButton != null)
+			{
+				changelogButton.Pressed -= onChangelogButtonPressed;
+			}
 			dispatcher.RemoveListener<TaskEvents.TaskRewardClaimed>(onTaskRewardClaimed);
 			dataEntityCollection.EventDispatcher.RemoveListener<DataEntityEvents.ComponentAddedEvent<NewPostData>>(onNewPostDataAdded);
+		}
+
+		private void setupChangelogBreadcrumb()
+		{
+			Transform newsButton = null;
+			Transform[] children = GetComponentsInChildren<Transform>(true);
+			for (int i = 0; i < children.Length; i++)
+			{
+				if (children[i].name == "NewsButton")
+				{
+					newsButton = children[i];
+					break;
+				}
+			}
+			if (newsButton == null)
+			{
+				return;
+			}
+			Transform breadcrumb = newsButton.Find("BreadcrumbContainer");
+			changelogBreadcrumbContainer = breadcrumb != null ? breadcrumb.gameObject : null;
+			changelogButton = newsButton.GetComponent<CellPhoneAppButton>();
+			if (changelogButton != null)
+			{
+				changelogButton.Pressed += onChangelogButtonPressed;
+			}
+			string latestEntry = ChangelogDisplay.GetLatestEntryId();
+			string lastSeenEntry = PlayerPrefs.GetString(GetPlatformKey(CHANGELOG_LAST_SEEN_PREF), string.Empty);
+			if (changelogBreadcrumbContainer != null)
+			{
+				changelogBreadcrumbContainer.SetActive(!string.IsNullOrEmpty(latestEntry) && latestEntry != lastSeenEntry);
+			}
+		}
+
+		private void onChangelogButtonPressed()
+		{
+			string latestEntry = ChangelogDisplay.GetLatestEntryId();
+			if (!string.IsNullOrEmpty(latestEntry))
+			{
+				PlayerPrefs.SetString(GetPlatformKey(CHANGELOG_LAST_SEEN_PREF), latestEntry);
+				PlayerPrefs.Save();
+			}
+			if (changelogBreadcrumbContainer != null)
+			{
+				changelogBreadcrumbContainer.SetActive(false);
+			}
+		}
+
+		private static string GetPlatformKey(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 
 		public void OnCloseButtonPressed(ButtonClickListener.ClickType clickType)
