@@ -67,6 +67,15 @@ namespace ClubPenguin.UI
 			}
 		}
 
+		private class DisneyStoreThemeRewardGroup
+		{
+			public List<T> Items = new List<T>();
+
+			public ItemGroup.LockedState State;
+
+			public RewardThemeDefinition ThemeDefinition;
+		}
+
 		public RectTransform ScrollContentParentTransform;
 
 		public ProgressionUnlockCategory UnlockCategory;
@@ -365,6 +374,8 @@ namespace ClubPenguin.UI
 			Dictionary<int, DisneyStoreFranchiseDefinition> dictionary = Service.Get<GameData>().Get<Dictionary<int, DisneyStoreFranchiseDefinition>>();
 			Dictionary<int, DisneyStoreFranchiseDefinition>.Enumerator enumerator = dictionary.GetEnumerator();
 			bool isMember = isLocalPlayerMember();
+			bool combineThemeGroups = typeof(T) == typeof(DecalDefinition) || typeof(T) == typeof(FabricDefinition);
+			List<DisneyStoreThemeRewardGroup> themeRewardGroups = new List<DisneyStoreThemeRewardGroup>();
 			while (enumerator.MoveNext())
 			{
 				DisneyStoreFranchiseDefinition value = enumerator.Current.Value;
@@ -375,7 +386,39 @@ namespace ClubPenguin.UI
 					{
 						if (DisneyStoreUtils.IsItemOwned(disneyStoreItemData))
 						{
-							parseRewardDefinition(getRewards(value.Items[i].Reward), isMember, new SpriteContentKey("Images/ProgressionIcons/Quests_ProgressionLock_Membership"), value.Items[i].ThemeDefinition);
+							T[] rewards = filterDefinitions(getRewards(value.Items[i].Reward));
+							RewardThemeDefinition themeDefinition = value.Items[i].ThemeDefinition;
+							string themeName = getLocalizedThemeName(themeDefinition);
+							if (!combineThemeGroups || string.IsNullOrEmpty(themeName) || rewards == null || rewards.Length == 0)
+							{
+								parseRewardDefinition(rewards, isMember, new SpriteContentKey("Images/ProgressionIcons/Quests_ProgressionLock_Membership"), themeDefinition);
+								continue;
+							}
+							ItemGroup.LockedState state = getRewardLockedState(rewards, isMember);
+							string groupKey = themeName.Trim().ToUpperInvariant() + "|" + state.ToString();
+							DisneyStoreThemeRewardGroup group = null;
+							for (int groupIndex = 0; groupIndex < themeRewardGroups.Count; groupIndex++)
+							{
+								if (themeRewardGroups[groupIndex].ThemeDefinition != null && getLocalizedThemeName(themeRewardGroups[groupIndex].ThemeDefinition).Trim().ToUpperInvariant() + "|" + themeRewardGroups[groupIndex].State.ToString() == groupKey)
+								{
+									group = themeRewardGroups[groupIndex];
+									break;
+								}
+							}
+							if (group == null)
+							{
+								group = new DisneyStoreThemeRewardGroup();
+								group.State = state;
+								group.ThemeDefinition = themeDefinition;
+								themeRewardGroups.Add(group);
+							}
+							for (int rewardIndex = 0; rewardIndex < rewards.Length; rewardIndex++)
+							{
+								if (!group.Items.Contains(rewards[rewardIndex]))
+								{
+									group.Items.Add(rewards[rewardIndex]);
+								}
+							}
 						}
 					}
 					else
@@ -384,6 +427,23 @@ namespace ClubPenguin.UI
 					}
 				}
 			}
+			for (int groupIndex = 0; groupIndex < themeRewardGroups.Count; groupIndex++)
+			{
+				DisneyStoreThemeRewardGroup group = themeRewardGroups[groupIndex];
+				T[] groupedRewards = group.Items.ToArray();
+				addItems(groupedRewards, group.State, -1, new SpriteContentKey("Images/ProgressionIcons/Quests_ProgressionLock_Membership"), group.ThemeDefinition);
+				removeUnlocksFromRewardSet(groupedRewards);
+			}
+		}
+
+		private string getLocalizedThemeName(RewardThemeDefinition themeDefinition)
+		{
+			if (themeDefinition == null)
+			{
+				return null;
+			}
+			string themeToken = !string.IsNullOrEmpty(themeDefinition.ShortThemeToken) ? themeDefinition.ShortThemeToken : themeDefinition.LongThemeToken;
+			return string.IsNullOrEmpty(themeToken) ? null : localizer.GetTokenTranslation(themeToken);
 		}
 
 		protected void parseClaimableRewards()
@@ -417,23 +477,28 @@ namespace ClubPenguin.UI
 			{
 				return;
 			}
-			bool flag = false;
-			bool flag2 = false;
-			for (int i = 0; i < array.Length; i++)
+			ItemGroup.LockedState lockedState = getRewardLockedState(array, isMember);
+			addItems(array, lockedState, -1, mascotIconContentKey, themeDefinition);
+			removeUnlocksFromRewardSet(array);
+		}
+
+		private ItemGroup.LockedState getRewardLockedState(T[] rewards, bool isMember)
+		{
+			bool isProgressionLocked = false;
+			bool isMemberLocked = false;
+			for (int i = 0; i < rewards.Length; i++)
 			{
-				if (!progressionService.IsUnlocked(array[i], UnlockCategory))
+				if (!progressionService.IsUnlocked(rewards[i], UnlockCategory))
 				{
-					flag = true;
+					isProgressionLocked = true;
 				}
-				if (!isMember && array[i].IsMemberOnly)
+				if (!isMember && rewards[i].IsMemberOnly)
 				{
-					flag2 = true;
+					isMemberLocked = true;
 					break;
 				}
 			}
-			ItemGroup.LockedState lockedState = flag2 ? ItemGroup.LockedState.MemberLocked : (flag ? ItemGroup.LockedState.MascotLocked : ItemGroup.LockedState.Unlocked);
-			addItems(array, lockedState, -1, mascotIconContentKey, themeDefinition);
-			removeUnlocksFromRewardSet(array);
+			return isMemberLocked ? ItemGroup.LockedState.MemberLocked : (isProgressionLocked ? ItemGroup.LockedState.MascotLocked : ItemGroup.LockedState.Unlocked);
 		}
 
 		private void removeUnlocksFromRewardSet(T[] unlocks)
