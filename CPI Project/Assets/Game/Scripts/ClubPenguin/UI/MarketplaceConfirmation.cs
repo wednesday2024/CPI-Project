@@ -12,6 +12,7 @@ using Disney.MobileNetwork;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -37,13 +38,13 @@ namespace ClubPenguin.UI
 
 		public RawImage IconImage;
 
-		public Text TitleText;
+		public TMP_Text TitleText;
 
-		public Text DescriptionText;
+		public TMP_Text DescriptionText;
 
-		public Text CostText;
+		public TMP_Text CostText;
 
-		public Text CountText;
+		public TMP_Text CountText;
 
 		public GameObject PurchasePanel;
 
@@ -57,7 +58,7 @@ namespace ClubPenguin.UI
 
 		public GameObject SalePanel;
 
-		public Text SaleText;
+		public TMP_Text SaleText;
 
 		protected PropDefinition prop;
 
