@@ -17,7 +17,9 @@ namespace ClubPenguin
 		private const float MaximumRenderScale = 3f;
 		private const float RenderScaleStep = 0.1f;
 
-		public int AntiAliasSamplesMedium = 8;
+		public int AntiAliasSamplesLow = 0;
+
+		public int AntiAliasSamplesMedium = 4;
 
 		public int AntiAliasSamplesHigh = 8;
 
@@ -231,7 +233,7 @@ namespace ClubPenguin
 				switch (graphicsLevel)
 				{
 				case QualityLevel.Low:
-                    antiAlias = AntiAliasSamplesHigh;
+                    antiAlias = AntiAliasSamplesLow;
                     cameraPost = false;
 					break;
 				case QualityLevel.Medium:
@@ -275,7 +277,7 @@ namespace ClubPenguin
 					SetCameraPostEffects(false);
 					break;
 				case QualityLevel.Low:
-                        SetAntialiasing(AntiAliasSamplesHigh);
+                        SetAntialiasing(AntiAliasSamplesLow);
                         SetCameraPostEffects(false);
 					break;
 				}
@@ -313,11 +315,11 @@ namespace ClubPenguin
 
 		public void SetAntialiasing(int samples)
 		{
-			int maxAntiAliasing = 8;
+			int requiredAntiAliasing = 8;
 #if UNITY_ANDROID || UNITY_IOS
-			maxAntiAliasing = 4;
+			requiredAntiAliasing = 4;
 #endif
-			int antiAliasing = Mathf.Clamp(samples, 0, maxAntiAliasing);
+			int antiAliasing = (samples > 0) ? requiredAntiAliasing : 0;
 			QualitySettings.antiAliasing = antiAliasing;
 			UniversalRenderPipelineAsset renderPipeline = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
 			if (renderPipeline != null)

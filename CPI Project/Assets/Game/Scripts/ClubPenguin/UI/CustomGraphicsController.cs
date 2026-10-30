@@ -313,7 +313,7 @@ namespace ClubPenguin.UI
                 lodPenguinQualityToggleMedium.isOn = true;
                 text += "Medium";
                 SetTogglesInteractable(true, antiAliasingToggle);
-                SetTogglesInteractable(false, cameraPostToggle);
+                SetTogglesInteractable(true, cameraPostToggle);
                 SetPenguinTogglesInteractable(true, lodPenguinQualityToggleMedium);
                 SetPenguinTogglesInteractable(false, lodPenguinQualityToggleHigh);
             }
