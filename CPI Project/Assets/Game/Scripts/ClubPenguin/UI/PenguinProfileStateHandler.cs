@@ -33,16 +33,16 @@ namespace ClubPenguin.UI
 			switch ((PenguinProfileState)Enum.Parse(typeof(PenguinProfileState), newStateString))
 			{
 			case PenguinProfileState.Profile:
-				ProfileButton.GetComponent<TintToggleGroupButton>().OnClick();
-				ProfileButton.GetComponent<TintToggleGroupButton_Text>().OnClick();
+				ProfileButton.GetComponent<TintToggleGroupButton_TMP>().OnClick();
+				ProfileButton.GetComponent<TintToggleGroupButton_Text_TMP>().OnClick();
 				break;
 			case PenguinProfileState.Colour:
-				ColourButton.GetComponent<TintToggleGroupButton>().OnClick();
-				ColourButton.GetComponent<TintToggleGroupButton_Text>().OnClick();
+				ColourButton.GetComponent<TintToggleGroupButton_TMP>().OnClick();
+				ColourButton.GetComponent<TintToggleGroupButton_Text_TMP>().OnClick();
 				break;
 			case PenguinProfileState.Progress:
-				ProgressButton.GetComponent<TintToggleGroupButton>().OnClick();
-				ProgressButton.GetComponent<TintToggleGroupButton_Text>().OnClick();
+				ProgressButton.GetComponent<TintToggleGroupButton_TMP>().OnClick();
+				ProgressButton.GetComponent<TintToggleGroupButton_Text_TMP>().OnClick();
 				break;
 			}
 		}

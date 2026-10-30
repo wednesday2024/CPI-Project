@@ -78,8 +78,8 @@ GameObject:
   - component: {fileID: 222353379949442630}
   - component: {fileID: 114134072353924152}
   - component: {fileID: 114363946261326325}
-  - component: {fileID: 114010555405876572}
-  - component: {fileID: 114747502553683224}
+  - component: {fileID: 9161821745868744773}
+  - component: {fileID: 7790135580930313766}
   - component: {fileID: 114976870346293433}
   - component: {fileID: 114702326336144225}
   - component: {fileID: 114706198902328627}
@@ -211,7 +211,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &114010555405876572
+--- !u!114 &9161821745868744773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,18 +220,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234988388579895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972a779c0d4c0e9372e6ba2a79446238, type: 3}
+  m_Script: {fileID: 11500000, guid: c702d7c97a284c43a7ed43c587d82eb6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_TMP
   OnTint: {r: 0, g: 0.37254903, b: 0.7921569, a: 1}
   OffTint: {r: 0.42352942, g: 0.5686275, b: 1, a: 1}
   image: {fileID: 114134072353924152}
   button: {fileID: 114363946261326325}
   affectText: 0
-  text: {fileID: 0}
+  text: {fileID: 5753080022513924829}
   textOnTint: {r: 0, g: 0, b: 0, a: 0}
   textOffTint: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114747502553683224
+--- !u!114 &7790135580930313766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,12 +240,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234988388579895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa96c557f1e6240283f5863c63d9e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d5ec00fa0614a8b9aa670e8ed21ac5f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_Text_TMP
   OnTint: {r: 1, g: 1, b: 1, a: 1}
   OffTint: {r: 0.827451, g: 0.87058824, b: 1, a: 1}
-  text: {fileID: 0}
+  text: {fileID: 5753080022513924829}
   button: {fileID: 114363946261326325}
 --- !u!114 &114976870346293433
 MonoBehaviour:
@@ -858,8 +858,8 @@ GameObject:
   - component: {fileID: 222288243970068443}
   - component: {fileID: 114258612708847916}
   - component: {fileID: 114682349316820462}
-  - component: {fileID: 114250675375607982}
-  - component: {fileID: 114330612060847607}
+  - component: {fileID: 3837192238619242766}
+  - component: {fileID: 6513370879676153960}
   - component: {fileID: 114994641349593133}
   - component: {fileID: 114258415931656889}
   - component: {fileID: 114140171484830500}
@@ -991,7 +991,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
---- !u!114 &114250675375607982
+--- !u!114 &3837192238619242766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1000,18 +1000,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1351985136085919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972a779c0d4c0e9372e6ba2a79446238, type: 3}
+  m_Script: {fileID: 11500000, guid: c702d7c97a284c43a7ed43c587d82eb6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_TMP
   OnTint: {r: 0, g: 0.37254903, b: 0.7921569, a: 1}
   OffTint: {r: 0.42352942, g: 0.5686275, b: 1, a: 1}
   image: {fileID: 114258612708847916}
   button: {fileID: 114682349316820462}
   affectText: 0
-  text: {fileID: 0}
+  text: {fileID: 1381767400291319579}
   textOnTint: {r: 0, g: 0, b: 0, a: 0}
   textOffTint: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114330612060847607
+--- !u!114 &6513370879676153960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1020,12 +1020,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1351985136085919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa96c557f1e6240283f5863c63d9e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d5ec00fa0614a8b9aa670e8ed21ac5f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_Text_TMP
   OnTint: {r: 1, g: 1, b: 1, a: 1}
   OffTint: {r: 0.827451, g: 0.87058824, b: 1, a: 1}
-  text: {fileID: 0}
+  text: {fileID: 1381767400291319579}
   button: {fileID: 114682349316820462}
 --- !u!114 &114994641349593133
 MonoBehaviour:
@@ -1217,8 +1217,8 @@ GameObject:
   - component: {fileID: 222524531398538306}
   - component: {fileID: 114628341391897195}
   - component: {fileID: 114390156188251652}
-  - component: {fileID: 114367055031753885}
-  - component: {fileID: 114326458137848986}
+  - component: {fileID: 8295132052725638283}
+  - component: {fileID: 8941393915427983950}
   - component: {fileID: 114757057609669811}
   - component: {fileID: 114304541602868709}
   - component: {fileID: 114768046562292780}
@@ -1349,7 +1349,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
---- !u!114 &114367055031753885
+--- !u!114 &8295132052725638283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1358,18 +1358,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1401600501343729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972a779c0d4c0e9372e6ba2a79446238, type: 3}
+  m_Script: {fileID: 11500000, guid: c702d7c97a284c43a7ed43c587d82eb6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_TMP
   OnTint: {r: 0, g: 0.37254903, b: 0.7921569, a: 1}
   OffTint: {r: 0.42352942, g: 0.5686275, b: 1, a: 1}
   image: {fileID: 114628341391897195}
   button: {fileID: 114390156188251652}
   affectText: 0
-  text: {fileID: 0}
+  text: {fileID: 1580945427711994943}
   textOnTint: {r: 0, g: 0, b: 0, a: 0}
   textOffTint: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &114326458137848986
+--- !u!114 &8941393915427983950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1378,12 +1378,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1401600501343729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa96c557f1e6240283f5863c63d9e12, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d5ec00fa0614a8b9aa670e8ed21ac5f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: ReMix-Game::ClubPenguin.Gui.TintToggleGroupButton_Text_TMP
   OnTint: {r: 1, g: 1, b: 1, a: 1}
   OffTint: {r: 0.827451, g: 0.87058824, b: 1, a: 1}
-  text: {fileID: 0}
+  text: {fileID: 1580945427711994943}
   button: {fileID: 114390156188251652}
 --- !u!114 &114757057609669811
 MonoBehaviour:
