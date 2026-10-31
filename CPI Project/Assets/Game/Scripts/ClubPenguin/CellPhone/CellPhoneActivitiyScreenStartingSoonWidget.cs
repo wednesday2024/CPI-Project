@@ -6,13 +6,13 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.CellPhone
 {
 	public class CellPhoneActivitiyScreenStartingSoonWidget : AbstractCellPhoneActivityScreenMemberLockableWidget
 	{
-		public Text TimeRemainingText;
+		public TMP_Text TimeRemainingText;
 
 		private CellPhoneRecurringLocationActivityDefinition widgetData;
 
