@@ -3,6 +3,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using Disney.Kelowna.Common;
+using ClubPenguin.Core;
 
 public class AnnualEventsController3000 : MonoBehaviour
 {
@@ -377,6 +378,21 @@ public class AnnualEventsController3000 : MonoBehaviour
             }
             SaveOverrideState();
         }
+
+        int forcedEventId = -1;
+        if (overrideMode == OverrideMode.ForceEvent && events != null)
+        {
+            foreach (var eventInfo in events)
+            {
+                int eventId;
+                if (eventInfo != null && (BuildEventKey(eventInfo) == forcedEventKey || eventInfo.eventID == forcedEventKey || eventInfo.eventName == forcedEventKey) && int.TryParse(eventInfo.eventID, out eventId))
+                {
+                    forcedEventId = eventId;
+                    break;
+                }
+            }
+        }
+        LocalizedEventDateText.SetForcedEventId(forcedEventId);
 
         foreach (var eventInfo in events)
         {

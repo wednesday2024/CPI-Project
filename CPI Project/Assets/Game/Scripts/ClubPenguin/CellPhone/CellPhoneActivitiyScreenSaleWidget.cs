@@ -9,6 +9,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.CellPhone
 {
@@ -18,9 +19,9 @@ namespace ClubPenguin.CellPhone
 
 		public const string SALE_PERCENT_TOKEN = "GoGuide.ShopSale.Discount";
 
-		public Text TimeRemainingText;
+		public TMP_Text TimeRemainingText;
 
-		public Text SalePercentageText;
+		public TMP_Text SalePercentageText;
 
 		private CellPhoneSaleActivityDefinition saleData;
 
