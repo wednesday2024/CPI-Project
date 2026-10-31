@@ -11,27 +11,28 @@ using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class DailyChallengesListItem : MonoBehaviour
 {
 	public Image MascotImage;
 
-	public Text ChallengeTitle;
+	public TMP_Text ChallengeTitle;
 
-	public Text ChallengeText;
+	public TMP_Text ChallengeText;
 
-	public Text CoinsText;
+	public TMP_Text CoinsText;
 
 	public Image XPImage;
 
-	public Text XPText;
+	public TMP_Text XPText;
 
 	public GameObject MaxLevelIcon;
 
-	public Text ProgressText;
+	public TMP_Text ProgressText;
 
-	public Text QuantityText;
+	public TMP_Text QuantityText;
 
 	public Image BackgroundBorder;
 
@@ -55,7 +56,7 @@ public class DailyChallengesListItem : MonoBehaviour
 
 	public GameObject[] ProgressionOverlay;
 
-	public Text ProgressionText;
+	public TMP_Text ProgressionText;
 
 	public GameObject[] QuestOverlay;
 
