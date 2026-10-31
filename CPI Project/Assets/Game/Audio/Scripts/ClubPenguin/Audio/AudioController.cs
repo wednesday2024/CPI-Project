@@ -43,25 +43,27 @@ namespace ClubPenguin.Audio
 
 		public void SetSFXVolume(float sfxVolume, bool cache = true)
 		{
-			AMB.Volume = sfxVolume;
-			SFX.Volume = sfxVolume;
-			DIA.Volume = sfxVolume;
+            float volume = Mathf.Clamp(sfxVolume, 0f, 2f);
+            AMB.Volume = volume;
+			SFX.Volume = volume;
+			DIA.Volume = volume;
 			if (cache)
 			{
-				cachedSFXVolume = sfxVolume;
+				cachedSFXVolume = volume;
 			}
 		}
 
 		public void SetMusicVolume(float musicVolume)
 		{
-			Music.Volume = musicVolume;
+            float volume = Mathf.Clamp(musicVolume, 0f, 2f);
+            Music.Volume = volume;
 			if (isOtherAudioPlaying())
 			{
 				Music.Volume = 0f;
 				return;
 			}
-			Music.Volume = musicVolume;
-			cachedMusicVolume = musicVolume;
+			Music.Volume = volume;
+			cachedMusicVolume = volume;
 		}
 
 		private IEnumerator otherAudioCheck()
