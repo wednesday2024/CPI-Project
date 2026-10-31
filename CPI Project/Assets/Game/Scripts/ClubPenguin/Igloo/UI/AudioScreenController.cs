@@ -4,6 +4,7 @@ using ClubPenguin.Rewards;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ClubPenguin.Igloo.UI
@@ -32,6 +33,7 @@ namespace ClubPenguin.Igloo.UI
 			{
 				list.Add(new KeyValuePair<MusicTrackDefinition, int>(progressionList[i].Definition, 1));
 			}
+			list.Sort((a, b) => a.Key.MusicGenre.Id.CompareTo(b.Key.MusicGenre.Id));
 			return list;
 		}
 
