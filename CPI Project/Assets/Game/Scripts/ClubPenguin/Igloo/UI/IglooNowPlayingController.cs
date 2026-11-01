@@ -8,6 +8,7 @@ using Disney.MobileNetwork;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.Igloo.UI
 {
@@ -19,7 +20,7 @@ namespace ClubPenguin.Igloo.UI
 
 		public Image Icon;
 
-		public Text SongName;
+		public TMP_Text SongName;
 
 		public Image GenreIconBackgroundToTint;
 
