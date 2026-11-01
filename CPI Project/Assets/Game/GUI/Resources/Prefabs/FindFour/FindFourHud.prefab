@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 95074271910742435}
   - component: {fileID: 114190879931459136}
   - component: {fileID: 114068655977128595}
+  - component: {fileID: 114551999025716382}
   m_Layer: 5
   m_Name: FindFourHud
   m_TagString: Untagged
@@ -113,6 +114,20 @@ MonoBehaviour:
   GameInstructionSFXTrigger: SFX/AO/InkOrSwim/GameMenuAppears
   YourTurnSFXTrigger: SFX/AO/FossilFour/YourTurn
   OpponentTurnSFXTrigger: SFX/AO/FossilFour/TheirTurn
+--- !u!114 &114551999025716382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143989305724280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!114 &114068655977128595
 MonoBehaviour:
   m_ObjectHideFlags: 0

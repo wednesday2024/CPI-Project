@@ -1803,6 +1803,7 @@ GameObject:
   - component: {fileID: 114905854528892657}
   - component: {fileID: 95307222892923721}
   - component: {fileID: 114587636108856012}
+  - component: {fileID: 114551999025716384}
   m_Layer: 5
   m_Name: ScavengerHuntHud
   m_TagString: Untagged
@@ -1871,6 +1872,20 @@ MonoBehaviour:
   ClockAnimator: {fileID: 95840324414465930}
   FinderBlinkGameObject: {fileID: 1634329099113941}
   FinderBlinkImage: {fileID: 114592278589151998}
+--- !u!114 &114551999025716384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874283090355051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5d4a1f4f8870ce25d22d1e59c8868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mute: 0
+  OverrideSoundSource: {fileID: 0}
 --- !u!114 &114905854528892657
 MonoBehaviour:
   m_ObjectHideFlags: 0
