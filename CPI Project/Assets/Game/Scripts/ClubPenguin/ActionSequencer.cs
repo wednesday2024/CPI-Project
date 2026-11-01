@@ -278,10 +278,10 @@ namespace ClubPenguin
             if (abort)
                 abortSequence(state);
             else if (state.Actions.Count == 0)
-                CompleteAndRemoveSequence(state);
+                CompleteAndRemoveSequence(state, true);
         }
 
-        private void CompleteAndRemoveSequence(State state)
+        private void CompleteAndRemoveSequence(State state, bool wasSuccessful)
         {
             SafeRemoveInteractor(state);
             sequencerDict.Remove(state.OwnerInstanceId);
@@ -289,7 +289,7 @@ namespace ClubPenguin
 
             try
             {
-                sequenceCompleted(state);
+                sequenceCompleted(state, wasSuccessful);
             }
             catch (Exception ex)
             {
@@ -343,7 +343,7 @@ namespace ClubPenguin
 
             state.Actions.Clear();
 
-            CompleteAndRemoveSequence(state);
+            CompleteAndRemoveSequence(state, false);
         }
 
         private void destroyAllActions(State state)
@@ -356,7 +356,7 @@ namespace ClubPenguin
             state.Actions.Clear();
         }
 
-        private void sequenceCompleted(State state)
+        private void sequenceCompleted(State state, bool wasSuccessful)
         {
             if (state == null)
                 return;
@@ -378,7 +378,7 @@ namespace ClubPenguin
             if (state.Owner != null && state.Owner.CompareTag("Player"))
             {
                 Service.Get<EventDispatcher>().DispatchEvent(
-                    default(ActionSequencerEvents.ActionSequenceCompleted)
+                    new ActionSequencerEvents.ActionSequenceCompleted(state.Trigger, wasSuccessful)
                 );
             }
 

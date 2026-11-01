@@ -1,4 +1,5 @@
 using ClubPenguin.Core;
+using ClubPenguin.Actions;
 using ClubPenguin.Switches;
 using ClubPenguin.Task;
 using Disney.MobileNetwork;
@@ -21,6 +22,12 @@ namespace ClubPenguin.Adventure
 		private HashSet<Switch> counted;
 
 		private bool listeningForMascotInteraction;
+
+		private bool listeningForLaunchCompletion;
+
+		private bool launchTaskIncremented;
+
+		private Dictionary<GameObject, Switch> launchSwitches;
 
 		public override object GetExportParameters()
 		{
@@ -49,6 +56,10 @@ namespace ClubPenguin.Adventure
 			}
 			owner = gameObject.transform;
 			parts = getCountedParts(gameObject);
+			if (parts == null && Service.Get<ClubPenguin.GameSettings>().OfflineMode && string.IsNullOrEmpty(CriteriaSwitchName))
+			{
+				parts = getLatchedParts(gameObject);
+			}
 			if (parts != null)
 			{
 				counted = new HashSet<Switch>();
@@ -56,7 +67,15 @@ namespace ClubPenguin.Adventure
 				{
 					parts[i].StateChanged += onPartChanged;
 				}
-				recount();
+				listeningForLaunchCompletion = Service.Get<ClubPenguin.GameSettings>().OfflineMode && tryMapLaunchSequences(parts);
+				if (listeningForLaunchCompletion)
+				{
+					base.dispatcher.AddListener<ActionSequencerEvents.ActionSequenceCompleted>(onActionSequenceCompleted);
+				}
+				else
+				{
+					recount();
+				}
 			}
 			else
 			{
@@ -71,6 +90,12 @@ namespace ClubPenguin.Adventure
 			{
 				base.dispatcher.RemoveListener<QuestEvents.OnMascotInteract>(onMascotInteract);
 				listeningForMascotInteraction = false;
+			}
+			if (listeningForLaunchCompletion)
+			{
+				base.dispatcher.RemoveListener<ActionSequencerEvents.ActionSequenceCompleted>(onActionSequenceCompleted);
+				listeningForLaunchCompletion = false;
+				launchSwitches = null;
 			}
 			if (parts != null)
 			{
@@ -115,10 +140,25 @@ namespace ClubPenguin.Adventure
 
 		private void onPartChanged(Switch part, bool value)
 		{
-			if (value)
+			if (value && !listeningForLaunchCompletion)
 			{
 				recount();
 			}
+		}
+
+		private bool onActionSequenceCompleted(ActionSequencerEvents.ActionSequenceCompleted evt)
+		{
+			Switch launchedSwitch;
+			if (evt.wasSuccessful && evt.actionGameObject != null && launchSwitches != null && launchSwitches.TryGetValue(evt.actionGameObject, out launchedSwitch))
+			{
+				counted.Add(launchedSwitch);
+				if (!launchTaskIncremented && counted.Count == parts.Count)
+				{
+					launchTaskIncremented = true;
+					taskIncrement();
+				}
+			}
+			return false;
 		}
 
 		// The volumes to count one by one, or null to count the group as a whole
@@ -141,6 +181,63 @@ namespace ClubPenguin.Adventure
 			List<Switch> list = new List<Switch>();
 			collectParts(root.transform, list);
 			return (list.Count > 0) ? list : null;
+		}
+
+		private List<Switch> getLatchedParts(GameObject root)
+		{
+			Switch rootSwitch = root.GetComponent<Switch>();
+			if (rootSwitch == null || !sticksOn(rootSwitch))
+			{
+				return null;
+			}
+			List<Switch> list = new List<Switch>();
+			collectParts(root.transform, list);
+			return (list.Count > 0) ? list : null;
+		}
+
+		private bool tryMapLaunchSequences(List<Switch> watchedParts)
+		{
+			WaitForPenguinOutOfAirAction[] launchActions = UnityEngine.Object.FindObjectsOfType<WaitForPenguinOutOfAirAction>();
+			Dictionary<GameObject, Switch> mappings = new Dictionary<GameObject, Switch>();
+			HashSet<Switch> mappedParts = new HashSet<Switch>();
+			for (int i = 0; i < launchActions.Length; i++)
+			{
+				WaitForPenguinOutOfAirAction launchAction = launchActions[i];
+				if (launchAction == null)
+				{
+					continue;
+				}
+				for (int j = 0; j < watchedParts.Count; j++)
+				{
+					Switch watchedPart = watchedParts[j];
+					if (watchedPart == null || !isInsideSwitchCollider(watchedPart, launchAction.transform.position))
+					{
+						continue;
+					}
+					mappings[launchAction.gameObject] = watchedPart;
+					mappedParts.Add(watchedPart);
+					break;
+				}
+			}
+			if (mappedParts.Count != watchedParts.Count)
+			{
+				return false;
+			}
+			launchSwitches = mappings;
+			return true;
+		}
+
+		private bool isInsideSwitchCollider(Switch watchedSwitch, Vector3 position)
+		{
+			Collider[] colliders = watchedSwitch.GetComponents<Collider>();
+			for (int i = 0; i < colliders.Length; i++)
+			{
+				if (colliders[i] != null && colliders[i].bounds.Contains(position))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 		// Once this one is on, can it ever go off again

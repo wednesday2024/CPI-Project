@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace ClubPenguin
@@ -15,9 +14,16 @@ namespace ClubPenguin
 			}
 		}
 
-		[StructLayout(LayoutKind.Sequential, Size = 1)]
 		public struct ActionSequenceCompleted
 		{
+			public GameObject actionGameObject;
+			public bool wasSuccessful;
+
+			public ActionSequenceCompleted(GameObject go, bool wasSuccessful)
+			{
+				actionGameObject = go;
+				this.wasSuccessful = wasSuccessful;
+			}
 		}
 	}
 }
