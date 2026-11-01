@@ -34,6 +34,7 @@
  - To launch the game in the Unity editor:
    - Open `Assets/Game/Core/Scenes/Boot.unity`
   - Hit the Play button.
+  - Or click the "Disney Fast Play" menu item under "Project" from any scene.
  - **Join our Discord for support, chatting, or for future updates:** [join here](https://discord.gg/jkWbd3uqTS)
 
 > [!IMPORTANT]  
