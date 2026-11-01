@@ -89,7 +89,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -246,12 +246,12 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 11.6
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -514,7 +514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &224869247962131199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ RectTransform:
   m_AnchorMin: {x: 0.80712503, y: 0.76944447}
   m_AnchorMax: {x: 0.9547656, y: 0.9999999}
   m_AnchoredPosition: {x: 5.8, y: -7.5}
-  m_SizeDelta: {x: 21.000015, y: 0}
+  m_SizeDelta: {x: 21.000015, y: 29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222767544456080468
 CanvasRenderer:
@@ -727,10 +727,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 224869247962131199}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 10.500008, y: -12}
+  m_SizeDelta: {x: 21.000015, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222745005341142837
 CanvasRenderer:
