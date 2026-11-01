@@ -4,6 +4,7 @@ using DevonLocalization.Core;
 using Disney.MobileNetwork;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ namespace ClubPenguin.UI
 
 		public SpriteSelector TrayIconImageSelector;
 
-		public Text PurchasedActionText;
+		public TMP_Text PurchasedActionText;
 
 		protected RewardCategory[] TrayIconImageSelectorCategoryIndexes = new RewardCategory[4]
 		{
