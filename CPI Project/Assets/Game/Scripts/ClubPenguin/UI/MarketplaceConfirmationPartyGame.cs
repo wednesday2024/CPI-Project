@@ -5,7 +5,7 @@ using DevonLocalization.Core;
 using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -15,7 +15,7 @@ namespace ClubPenguin.UI
 
 		private const string NUMBER_OF_PLAYERS_SINGLE_TOKEN = "Activity.Games.NumberPlayers";
 
-		public Text NumberOfPlayersText;
+		public TMP_Text NumberOfPlayersText;
 
 		private ManifestContentKey launchersManifestContentKey = new ManifestContentKey("PartyGames/PartyGameLaunchers.Manifest");
 
