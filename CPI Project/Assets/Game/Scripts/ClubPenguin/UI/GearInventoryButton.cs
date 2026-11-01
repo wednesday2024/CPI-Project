@@ -9,6 +9,7 @@ using Disney.Kelowna.Common.SEDFSM;
 using Disney.MobileNetwork;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -18,7 +19,7 @@ namespace ClubPenguin.UI
 
 		public Button SelectButton;
 
-		public Text Title;
+		public TMP_Text Title;
 
 		public NotificationBreadcrumb breadcrumb;
 
