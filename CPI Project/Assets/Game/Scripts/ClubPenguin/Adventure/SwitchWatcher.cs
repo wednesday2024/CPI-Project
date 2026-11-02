@@ -185,6 +185,11 @@ namespace ClubPenguin.Adventure
 
 		private List<Switch> getLatchedParts(GameObject root)
 		{
+			ClubPenguin.Task.Task self = base.task as ClubPenguin.Task.Task;
+			if (self == null || self.Goal <= 1)
+			{
+				return null;
+			}
 			Switch rootSwitch = root.GetComponent<Switch>();
 			if (rootSwitch == null || !sticksOn(rootSwitch))
 			{
