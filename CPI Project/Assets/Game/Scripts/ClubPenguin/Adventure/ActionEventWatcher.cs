@@ -1,6 +1,7 @@
 using ClubPenguin.Core;
 using ClubPenguin.Locomotion;
 using ClubPenguin.Net.Domain;
+using ClubPenguin.Props;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using System;
@@ -103,10 +104,29 @@ namespace ClubPenguin.Adventure
 				}
 				lastSwimBoostFrame = Time.frameCount;
 			}
-			if (MatchesAction(action))
+			if (MatchesAction(action) || matchesOfflineDurableGearAction(action))
 			{
 				taskIncrement();
 			}
+		}
+
+		private bool matchesOfflineDurableGearAction(LocomotionController.LocomotionAction action)
+		{
+			if (action != LocomotionController.LocomotionAction.Action3 ||
+				!Service.Get<ClubPenguin.GameSettings>().OfflineMode ||
+				Actions == null ||
+				Array.IndexOf(Actions, InputEvents.Actions.Action2) < 0 ||
+				SceneRefs.ZoneLocalPlayerManager == null ||
+				SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject == null)
+			{
+				return false;
+			}
+
+			PropUser propUser = SceneRefs.ZoneLocalPlayerManager.LocalPlayerGameObject.GetComponent<PropUser>();
+			return propUser != null &&
+				propUser.Prop != null &&
+				propUser.Prop.PropDef != null &&
+				propUser.Prop.PropDef.PropType == PropDefinition.PropTypes.Durable;
 		}
 
 		public bool MatchesAction(LocomotionController.LocomotionAction action)
