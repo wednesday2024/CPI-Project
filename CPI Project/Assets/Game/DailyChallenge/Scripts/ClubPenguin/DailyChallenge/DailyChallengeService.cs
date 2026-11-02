@@ -20,6 +20,8 @@ namespace ClubPenguin.DailyChallenge
 
         private TaskService taskService;
 
+        private readonly bool offlineMode;
+
         private List<ScriptableObject> loadedDailies = new List<ScriptableObject>();
 
         private DatedManifestMap datedManifestMap;
@@ -50,7 +52,7 @@ namespace ClubPenguin.DailyChallenge
             }
         }
 
-        public DailyChallengeService(DatedManifestMap datedManifestMap)
+        public DailyChallengeService(DatedManifestMap datedManifestMap, bool offlineMode)
         {
             dispatcher = Service.Get<EventDispatcher>();
             dispatcher.AddListener<TaskNetworkServiceEvents.TaskCounterChanged>(onTaskCounterChanged);
@@ -61,6 +63,7 @@ namespace ClubPenguin.DailyChallenge
             taskService = Service.Get<TaskService>();
             serverTaskProgress = new TaskProgressList();
             this.datedManifestMap = datedManifestMap;
+            this.offlineMode = offlineMode;
         }
 
         public static string GetDateManifestMapPath()
@@ -126,14 +129,60 @@ namespace ClubPenguin.DailyChallenge
 
         private const int DAILY_CHALLENGE_TOTAL = 6;
 
+        private const int DAILY_CHALLENGE_MASCOT_LIMIT = 2;
+
         private bool isExcludedGroup(TaskDefinition.TaskGroup group)
         {
             return group == TaskDefinition.TaskGroup.Teamwork || group == TaskDefinition.TaskGroup.Community;
         }
 
+        private bool exceedsMascotTaskLimit(IEnumerable<string> taskNames)
+        {
+            Dictionary<string, int> mascotTaskCounts = new Dictionary<string, int>();
+            foreach (string taskName in taskNames)
+            {
+                string mascotName = taskService.GetSubGroupByTaskName(taskName);
+                int taskCount;
+                mascotTaskCounts.TryGetValue(mascotName, out taskCount);
+                taskCount++;
+                if (taskCount > DAILY_CHALLENGE_MASCOT_LIMIT)
+                {
+                    return true;
+                }
+                mascotTaskCounts[mascotName] = taskCount;
+            }
+            return false;
+        }
+
+        private bool tryAddTask(string taskName, List<string> taskNames, HashSet<string> usedTaskNames, Dictionary<string, int> mascotTaskCounts, bool enforceMascotLimit)
+        {
+            if (usedTaskNames.Contains(taskName))
+            {
+                return false;
+            }
+            if (!enforceMascotLimit)
+            {
+                taskNames.Add(taskName);
+                usedTaskNames.Add(taskName);
+                return true;
+            }
+            string mascotName = taskService.GetSubGroupByTaskName(taskName);
+            int taskCount;
+            mascotTaskCounts.TryGetValue(mascotName, out taskCount);
+            if (taskCount >= DAILY_CHALLENGE_MASCOT_LIMIT)
+            {
+                return false;
+            }
+            taskNames.Add(taskName);
+            usedTaskNames.Add(taskName);
+            mascotTaskCounts[mascotName] = taskCount + 1;
+            return true;
+        }
+
         private void setupTasks()
         {
             int targetCount = DAILY_CHALLENGE_TOTAL;
+            bool enforceMascotLimit = offlineMode;
             string currentDateString = DateTime.UtcNow.ToString("yyyy-MM-dd");
             string storedDateString = PlayerPrefs.GetString(PREFS_LAST_ASSIGNED_DATE_KEY, string.Empty);
             string storedActiveTasks = PlayerPrefs.GetString(PREFS_ACTIVE_TASKS_KEY, string.Empty);
@@ -141,7 +190,7 @@ namespace ClubPenguin.DailyChallenge
             if (storedDateString == currentDateString && !string.IsNullOrEmpty(storedActiveTasks))
             {
                 string[] activeTaskArray = storedActiveTasks.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                if (activeTaskArray.Length == targetCount)
+                if (activeTaskArray.Length == targetCount && (!enforceMascotLimit || !exceedsMascotTaskLimit(activeTaskArray)))
                 {
                     NumberOfUpdates = activeTaskArray.Length;
                     taskService.LoadTasks(activeTaskArray);
@@ -154,6 +203,7 @@ namespace ClubPenguin.DailyChallenge
 
             List<string> finalTaskNames = new List<string>();
             HashSet<string> usedTaskNames = new HashSet<string>();
+            Dictionary<string, int> mascotTaskCounts = new Dictionary<string, int>();
 
             for (int i = 0; i < loadedDailies.Count; i++)
             {
@@ -172,8 +222,7 @@ namespace ClubPenguin.DailyChallenge
 
                 if (taskName == CLOTHING_CATALOG_TASK_NAME)
                 {
-                    finalTaskNames.Add(taskName);
-                    usedTaskNames.Add(taskName);
+                    tryAddTask(taskName, finalTaskNames, usedTaskNames, mascotTaskCounts, enforceMascotLimit);
                     continue;
                 }
 
@@ -183,8 +232,7 @@ namespace ClubPenguin.DailyChallenge
                     continue;
                 }
 
-                finalTaskNames.Add(taskName);
-                usedTaskNames.Add(taskName);
+                tryAddTask(taskName, finalTaskNames, usedTaskNames, mascotTaskCounts, enforceMascotLimit);
             }
 
             if (finalTaskNames.Count < targetCount)
@@ -199,7 +247,7 @@ namespace ClubPenguin.DailyChallenge
 
                 List<string> candidates = taskService.GetTaskNamesByGroup(TaskDefinition.TaskGroup.Individual, exclusionSet, int.MaxValue);
 
-                if (candidates.Count < shortfall)
+                if (candidates.Count < shortfall || enforceMascotLimit)
                 {
                     List<string> fallbackCandidates = taskService.GetTaskNamesByGroup(TaskDefinition.TaskGroup.Individual, usedTaskNames, int.MaxValue);
                     List<string> additionalCandidates = new List<string>();
@@ -211,7 +259,7 @@ namespace ClubPenguin.DailyChallenge
                         }
                     }
                     shuffleList(additionalCandidates);
-                    for (int i = 0; i < additionalCandidates.Count && candidates.Count < shortfall; i++)
+                    for (int i = 0; i < additionalCandidates.Count && (enforceMascotLimit || candidates.Count < shortfall); i++)
                     {
                         candidates.Add(additionalCandidates[i]);
                     }
@@ -219,10 +267,9 @@ namespace ClubPenguin.DailyChallenge
 
                 shuffleList(candidates);
 
-                for (int i = 0; i < shortfall && i < candidates.Count; i++)
+                for (int i = 0; i < candidates.Count && finalTaskNames.Count < targetCount; i++)
                 {
-                    finalTaskNames.Add(candidates[i]);
-                    usedTaskNames.Add(candidates[i]);
+                    tryAddTask(candidates[i], finalTaskNames, usedTaskNames, mascotTaskCounts, enforceMascotLimit);
                 }
             }
 

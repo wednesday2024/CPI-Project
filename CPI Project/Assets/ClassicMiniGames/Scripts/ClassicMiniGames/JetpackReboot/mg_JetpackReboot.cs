@@ -2,7 +2,9 @@ using DevonLocalization.Core;
 using Disney.MobileNetwork;
 using DisneyMobile.CoreUnitySystems;
 using MinigameFramework;
+using System;
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
 
 namespace JetpackReboot
@@ -96,6 +98,7 @@ namespace JetpackReboot
 
 		private IEnumerator Start()
 		{
+			mg_jr_PlayerPrefsKey.InitializeForCurrentPlayer();
 			PlayerStats = m_playerStatPersitenceStrat.LoadOrCreate();
 			GoalManager = base.gameObject.AddComponent<mg_jr_GoalManager>();
 			SetMainCamera("mg_jr_MainCamera");
@@ -177,6 +180,176 @@ namespace JetpackReboot
 		{
 			SaveState();
 			base.OnQuit();
+		}
+	}
+
+	internal static class mg_jr_PlayerPrefsKey
+	{
+		private static string playerScope;
+
+		public static void InitializeForCurrentPlayer()
+		{
+			playerScope = null;
+			Type rememberMeType = findType("ClubPenguin.RememberMeService");
+			if (rememberMeType == null)
+			{
+				return;
+			}
+			MethodInfo isSetMethod = typeof(Service).GetMethod("IsSet").MakeGenericMethod(rememberMeType);
+			if (!(bool)isSetMethod.Invoke(null, null))
+			{
+				return;
+			}
+			MethodInfo getMethod = typeof(Service).GetMethod("Get").MakeGenericMethod(rememberMeType);
+			object rememberMeService = getMethod.Invoke(null, null);
+			PropertyInfo usernameProperty = rememberMeType.GetProperty("CurrentUsername");
+			string username = (usernameProperty != null) ? usernameProperty.GetValue(rememberMeService, null) as string : null;
+			if (!string.IsNullOrEmpty(username))
+			{
+				playerScope = HashUsername(username);
+				MigrateLegacyData();
+			}
+		}
+
+		public static string Get(string key)
+		{
+			return string.IsNullOrEmpty(playerScope) ? key : "mg_jr_" + playerScope + "_" + key;
+		}
+
+		private static string GetPlayerPrefsKey(string key)
+		{
+			string scopedKey = Get(key);
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + scopedKey;
+			}
+#endif
+			return scopedKey;
+		}
+
+		private static Type findType(string fullName)
+		{
+			Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+			for (int i = 0; i < assemblies.Length; i++)
+			{
+				Type type = assemblies[i].GetType(fullName, false);
+				if (type != null)
+				{
+					return type;
+				}
+			}
+			return null;
+		}
+
+		private static string HashUsername(string username)
+		{
+			using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+			{
+				byte[] hash = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(username.ToLowerInvariant()));
+				return BitConverter.ToString(hash).Replace("-", string.Empty);
+			}
+		}
+
+		private static void MigrateLegacyData()
+		{
+			const string migrationKey = "mg_jr_PlayerScopedMigration_v2";
+			string scopedMigrationKey = Get(migrationKey);
+			if (PlayerPrefs.HasKey(scopedMigrationKey))
+			{
+				return;
+			}
+
+			CopyMaxInt("mg_jr_BestDistance");
+			CopyMaxInt("mg_jr_MostCoins");
+			for (int goalType = 0; goalType < (int)mg_jr_Goal.GoalType.MAX; goalType++)
+			{
+				for (int duration = 0; duration < (int)mg_jr_Goal.GoalDuration.MAX; duration++)
+				{
+					string goalName = ((mg_jr_Goal.GoalType)goalType).ToString() + "_" + ((mg_jr_Goal.GoalDuration)duration).ToString();
+					MigrateGoalProgress(goalName, "mg_jr_");
+					MigrateGoalProgress(goalName, string.Empty);
+				}
+			}
+			for (int activeGoal = 0; activeGoal < mg_jr_GoalManager.MAX_ACTIVE_GOALS; activeGoal++)
+			{
+				string key = "activeGoal_number_" + activeGoal + "_";
+				CopyInt("mg_jr_" + key + "duration", key + "duration");
+				CopyInt("mg_jr_" + key + "progress", key + "progress");
+				CopyInt(key + "duration", key + "duration");
+				CopyInt(key + "progress", key + "progress");
+			}
+
+			PlayerPrefs.SetInt(scopedMigrationKey, 1);
+		}
+
+		private static void CopyInt(string legacyKeyName, string scopedKeyName)
+		{
+			string legacyKey = GetLegacy(legacyKeyName);
+			string scopedKey = GetPlayerPrefsKey(scopedKeyName);
+			if (PlayerPrefs.HasKey(legacyKey) && !PlayerPrefs.HasKey(scopedKey))
+			{
+				PlayerPrefs.SetInt(scopedKey, PlayerPrefs.GetInt(legacyKey));
+			}
+		}
+
+		private static void CopyMaxInt(string key)
+		{
+			string legacyKey = GetLegacy(key);
+			string scopedKey = GetPlayerPrefsKey(key);
+			if (PlayerPrefs.HasKey(legacyKey) && (!PlayerPrefs.HasKey(scopedKey) || PlayerPrefs.GetInt(legacyKey) > PlayerPrefs.GetInt(scopedKey)))
+			{
+				PlayerPrefs.SetInt(scopedKey, PlayerPrefs.GetInt(legacyKey));
+			}
+		}
+
+		private static void MigrateGoalProgress(string goalName, string legacyPrefix)
+		{
+			string legacyLevelKey = GetLegacy(legacyPrefix + goalName + "_level");
+			string scopedLevelKey = GetPlayerPrefsKey(goalName + "_level");
+			string legacyProgressKey = GetLegacy(legacyPrefix + goalName + "_progress");
+			string scopedProgressKey = GetPlayerPrefsKey(goalName + "_progress");
+			bool hasLegacyLevel = PlayerPrefs.HasKey(legacyLevelKey);
+			bool hasLegacyProgress = PlayerPrefs.HasKey(legacyProgressKey);
+			if (!hasLegacyLevel)
+			{
+				if (hasLegacyProgress && (!PlayerPrefs.HasKey(scopedProgressKey) ||
+					PlayerPrefs.GetFloat(legacyProgressKey) > PlayerPrefs.GetFloat(scopedProgressKey)))
+				{
+					PlayerPrefs.SetFloat(scopedProgressKey, PlayerPrefs.GetFloat(legacyProgressKey));
+				}
+				return;
+			}
+
+			int legacyLevel = PlayerPrefs.GetInt(legacyLevelKey);
+			if (!PlayerPrefs.HasKey(scopedLevelKey) || legacyLevel > PlayerPrefs.GetInt(scopedLevelKey))
+			{
+				PlayerPrefs.SetInt(scopedLevelKey, legacyLevel);
+				if (hasLegacyProgress)
+				{
+					PlayerPrefs.SetFloat(scopedProgressKey, PlayerPrefs.GetFloat(legacyProgressKey));
+				}
+				else
+				{
+					PlayerPrefs.SetFloat(scopedProgressKey, 0f);
+				}
+			}
+			else if (legacyLevel == PlayerPrefs.GetInt(scopedLevelKey) && hasLegacyProgress &&
+				(!PlayerPrefs.HasKey(scopedProgressKey) || PlayerPrefs.GetFloat(legacyProgressKey) > PlayerPrefs.GetFloat(scopedProgressKey)))
+			{
+				PlayerPrefs.SetFloat(scopedProgressKey, PlayerPrefs.GetFloat(legacyProgressKey));
+			}
+		}
+
+		private static string GetLegacy(string key)
+		{
+#if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+			if (Application.isEditor)
+			{
+				return "Editor_" + key;
+			}
+#endif
+			return key;
 		}
 	}
 }

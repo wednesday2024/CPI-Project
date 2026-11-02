@@ -33,7 +33,7 @@ namespace ClubPenguin
 			string dailyChallengesScheduleManifestPath = DailyChallengeService.GetDateManifestMapPath();
 			AssetRequest<DatedManifestMap> scheduleAssetRequest = Content.LoadAsync<DatedManifestMap>(dailyChallengesScheduleManifestPath);
 			yield return scheduleAssetRequest;
-			Service.Set(new DailyChallengeService(scheduleAssetRequest.Asset));
+			Service.Set(new DailyChallengeService(scheduleAssetRequest.Asset, Service.Get<GameSettings>().OfflineMode));
 			// Second, so saved progress loads before any watcher counts
 			Service.Set(new TaskWatcherService());
 		}

@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using NUnit.Framework;
 
 namespace JetpackReboot
 {
@@ -18,32 +18,33 @@ namespace JetpackReboot
 			Assert.AreEqual(activeGoals.Count, 3, "Goal manager has unexpected number of active goals");
 			for (int i = 0; i < activeGoals.Count; i++)
 			{
-				PlayerPrefs.SetInt(GetPlatformKey("mg_jr_activeGoal_number_" + i + "_duration"), (int)activeGoals[i].Duration);
-				PlayerPrefs.SetInt(GetPlatformKey("mg_jr_activeGoal_number_" + i + "_progress"), (int)activeGoals[i].Type);
+				PlayerPrefs.SetInt(GetKey("activeGoal_number_" + i + "_duration"), (int)activeGoals[i].Duration);
+				PlayerPrefs.SetInt(GetKey("activeGoal_number_" + i + "_progress"), (int)activeGoals[i].Type);
 			}
 		}
 
 		public mg_jr_Goal.GoalType LoadGoalType(int _index)
 		{
 			Assert.IsTrue(_index >= 0 && _index < 3, "index out of range");
-			return (mg_jr_Goal.GoalType)PlayerPrefs.GetInt(GetPlatformKey("mg_jr_activeGoal_number_" + _index + "_progress"));
+			return (mg_jr_Goal.GoalType)PlayerPrefs.GetInt(GetKey("activeGoal_number_" + _index + "_progress"));
 		}
 
 		public mg_jr_Goal.GoalDuration LoadGoalDuration(int _index)
 		{
 			Assert.IsTrue(_index >= 0 && _index < 3, "index out of range");
-			return (mg_jr_Goal.GoalDuration)PlayerPrefs.GetInt(GetPlatformKey("mg_jr_activeGoal_number_" + _index + "_duration"));
+			return (mg_jr_Goal.GoalDuration)PlayerPrefs.GetInt(GetKey("activeGoal_number_" + _index + "_duration"));
 		}
 
-		private static string GetPlatformKey(string key)
+		private static string GetKey(string key)
 		{
+			string scopedKey = mg_jr_PlayerPrefsKey.Get(key);
 #if UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
-			if (UnityEngine.Application.isEditor)
+			if (Application.isEditor)
 			{
-				return "Editor_" + key;
+				return "Editor_" + scopedKey;
 			}
 #endif
-			return key;
+			return scopedKey;
 		}
 	}
 }
