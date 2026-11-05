@@ -1,5 +1,4 @@
 using LitJson;
-using Prime31;
 using System;
 using System.Collections.Generic;
 
@@ -110,7 +109,7 @@ public class PurchaseInfo
 			DateTime result;
 			if (jsonData.Contains("Ordered") && DateTime.TryParse((string)jsonData["Ordered"], out result))
 			{
-				purchaseTime = result.toEpochTime();
+				purchaseTime = Convert.ToInt64((result - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);
 			}
 			purchaseState = PurchaseState.Purchased;
 			originalJson = jsonData.ToJson();
