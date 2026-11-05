@@ -5,7 +5,7 @@
 > - **Unity 6000.3.28f1 LTS**
 
  ## **Builds can be found here:**
- - [Builds](https://opencpisland.github.io/)
+ - [Builds](https://opencpisland.com/)
 
 > [!CAUTION]
 > ## **How do I clone the repo?**
