@@ -26,9 +26,9 @@ namespace ClubPenguin.UI
 
 		public void OnClick()
 		{
+			DisneyStoreAudioUtils.PlaySelect();
 			if (definition != null)
 			{
-				DisneyStoreAudioUtils.PlaySelect(base.gameObject);
 				if (storeController != null)
 				{
 					storeController.ShowFranchise(definition);

@@ -63,13 +63,13 @@ namespace ClubPenguin.UI
 
 		public void OnBackClicked()
 		{
-			DisneyStoreAudioUtils.PlayClose(base.gameObject);
+			DisneyStoreAudioUtils.PlayClose();
 			ShowHome();
 		}
 
 		public void OnCloseClicked()
 		{
-			DisneyStoreAudioUtils.PlayClose(base.gameObject);
+			DisneyStoreAudioUtils.PlayClose();
 			Service.Get<EventDispatcher>().DispatchEvent(new MarketplaceEvents.MarketplaceClosed("DisneyStore"));
 			Object.Destroy(base.gameObject);
 		}

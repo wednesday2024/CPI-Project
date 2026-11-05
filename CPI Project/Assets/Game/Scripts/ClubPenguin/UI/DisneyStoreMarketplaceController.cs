@@ -32,7 +32,7 @@ namespace ClubPenguin.UI
 
 		public void OnCloseClicked()
 		{
-			DisneyStoreAudioUtils.PlayClose(base.gameObject);
+			DisneyStoreAudioUtils.PlayClose();
 			dispatchMarketplaceClosed();
 			Object.Destroy(base.gameObject);
 		}

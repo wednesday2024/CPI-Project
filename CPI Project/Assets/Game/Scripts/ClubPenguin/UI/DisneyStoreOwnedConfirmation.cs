@@ -20,7 +20,7 @@ namespace ClubPenguin.UI
 
 		public void OnOkayClicked()
 		{
-			DisneyStoreAudioUtils.PlayClose(base.gameObject);
+			DisneyStoreAudioUtils.PlayClose();
 			storeFranchise.HideConfirmation();
 		}
 	}

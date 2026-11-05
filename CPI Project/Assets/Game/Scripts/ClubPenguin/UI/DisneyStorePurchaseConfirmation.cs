@@ -113,7 +113,7 @@ namespace ClubPenguin.UI
 
 		public void OnKeepShoppingClicked()
 		{
-			DisneyStoreAudioUtils.PlayClose(base.gameObject);
+			DisneyStoreAudioUtils.PlayClose();
 			switch (currentState)
 			{
 			case ConfirmationState.Complete:

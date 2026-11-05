@@ -19,7 +19,7 @@ namespace ClubPenguin.UI
 
 		public void OnItemClicked()
 		{
-			DisneyStoreAudioUtils.PlaySelect(base.gameObject);
+			DisneyStoreAudioUtils.PlaySelect();
 			storeController.ShowFranchise(franchiseDef);
 			logFranchiseClicked();
 		}

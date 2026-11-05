@@ -8,14 +8,14 @@ namespace ClubPenguin.UI
 
 		private const string CLOSE_AUDIO = "SFX/UI/MainTray/ButtonClose";
 
-		internal static void PlaySelect(GameObject soundSource)
+		internal static void PlaySelect()
 		{
-			SoundUtils.PlayAudioEvent(SELECT_AUDIO, soundSource);
+			SoundUtils.PlayAudioEvent(SELECT_AUDIO);
 		}
 
-		internal static void PlayClose(GameObject soundSource)
+		internal static void PlayClose()
 		{
-			SoundUtils.PlayAudioEvent(CLOSE_AUDIO, soundSource);
+			SoundUtils.PlayAudioEvent(CLOSE_AUDIO);
 		}
 	}
 }
