@@ -1181,10 +1181,6 @@ namespace Fabric
 	[CustomEditor(typeof(ProxyComponent))]
 	public class ProxyComponentEditor : Editor
 	{
-		private static int maxHeight = 10;
-
-		private static int maxWidth = 200;
-
 		[MenuItem("Fabric/Components/ProxyComponent")]
 		private static void About()
 		{
@@ -3306,8 +3302,6 @@ namespace Fabric
 	public class CustomCurvesEditorWindow : EditorWindow
 	{
 		private Vector2 scrollPosition = default(Vector2);
-
-		private string text = "";
 
 		private string globalCustomCurvesName = "";
 
@@ -9730,8 +9724,6 @@ namespace Fabric
 
 			private float samplePixelAlpha = 1.333333f;
 
-			private int samplesPerPixel = 660;
-
 			private WaveformPoint[] cachedPoints = new WaveformPoint[0];
 
 			public ChannelWaveform(float[] data)
@@ -10335,8 +10327,9 @@ namespace Fabric
 
 		private int selectedItem = -1;
 
-		public event OnEventHandler EventNotification;
 		#pragma warning disable CS0067
+		public event OnEventHandler EventNotification;
+		#pragma warning restore CS0067
 
 		public void Setup(string[] list)
 		{
