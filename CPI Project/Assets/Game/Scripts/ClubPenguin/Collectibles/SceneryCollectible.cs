@@ -411,8 +411,11 @@ namespace ClubPenguin.Collectibles
 
         private void hide()
         {
+            if (!rigidBody.isKinematic)
+            {
+                rigidBody.linearVelocity = Vector3.zero;
+            }
             changeState(SceneryState.INVISIBLE);
-            rigidBody.linearVelocity = Vector3.zero;
             base.gameObject.transform.position = originalPos;
             setVisibleSpecialObjects(false);
         }
