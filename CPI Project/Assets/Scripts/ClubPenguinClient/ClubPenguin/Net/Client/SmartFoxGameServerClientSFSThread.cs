@@ -7,17 +7,17 @@ using ClubPenguin.Net.Domain;
 using ClubPenguin.Net.Utils;
 using Disney.LaunchPadFramework;
 using LitJson;
-using Sfs2X;
-using Sfs2X.Core;
-using Sfs2X.Entities;
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
-using Sfs2X.Logging;
-using Sfs2X.Util;
+using Sfs3.Client;
+using Sfs3.Client.Core;
+using Sfs3.Client.Entities;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
+using Sfs3.Client.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -52,21 +52,7 @@ namespace ClubPenguin.Net.Client
             mt = smartFoxGameServerClientShared;
         }
 
-        public void onConnectionRetry(BaseEvent evt)
-        {
-        }
-
-        public void onConnectionResume(BaseEvent evt)
-        {
-        }
-
-        public void onSocketError(BaseEvent evt)
-        {
-            string data = (string)evt.Params["errorMessage"];
-            mt.triggerEvent(GameServerEvent.NETWORK_ERROR, data);
-        }
-
-        public void onUserVariableUpdate(BaseEvent evt)
+        public void onUserVariableUpdate(ApiEvent evt)
         {
             UnityEngine.Debug.Log("UserVariableUpdate as been fired");
             User user = (User)evt.Params["user"];
@@ -83,7 +69,7 @@ namespace ClubPenguin.Net.Client
             {
                 PrototypeState prototypeState = default(PrototypeState);
                 prototypeState.id = getSessionId(user);
-                prototypeState.data = JsonMapper.ToObject(user.GetVariable(SocketUserVars.PROTOTYPE.GetKey()).GetStringValue());
+                prototypeState.data = JsonMapper.ToObject(user.GetVariable(SocketUserVars.PROTOTYPE.GetKey()).StringValue);
                 mt.triggerEvent(GameServerEvent.PROTOTYPE_STATE, prototypeState);
             }
             if (changedVars == null || changedVars.Contains(SocketUserVars.EQUIPPED_OBJECT.GetKey()))
@@ -103,14 +89,14 @@ namespace ClubPenguin.Net.Client
                 }
                 else
                 {
-                    EquippedObject equippedObject = EquippedObject.FromSFSData(variable.GetSFSObjectValue());
+                    EquippedObject equippedObject = EquippedObject.FromSFSData(variable.SFSObjectValue);
                     if (variable2 != null)
                     {
                         PlayerHeldItem playerHeldItem = new PlayerHeldItem();
                         playerHeldItem.Id = new CPMMOItemId(getSessionId(user), CPMMOItemId.CPMMOItemParent.PLAYER);
                         playerHeldItem.CreatorId = playerHeldItem.Id.Id;
                         playerHeldItem.Type = equippedObject.EquippedObjectId;
-                        playerHeldItem.Properties = variable2.GetStringValue();
+                        playerHeldItem.Properties = variable2.StringValue;
                         mt.triggerEvent(GameServerEvent.SERVER_ITEM_ADDED, playerHeldItem);
                     }
                     else if (!flag || (flag && equippedObject.isPartyGame()))
@@ -145,8 +131,8 @@ namespace ClubPenguin.Net.Client
                     PlayerHeldItem playerHeldItem = new PlayerHeldItem();
                     playerHeldItem.Id = new CPMMOItemId(getSessionId(user), CPMMOItemId.CPMMOItemParent.PLAYER);
                     playerHeldItem.CreatorId = playerHeldItem.Id.Id;
-                    playerHeldItem.Type = EquippedObject.FromSFSData(variable3.GetSFSObjectValue()).EquippedObjectId;
-                    playerHeldItem.Properties = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT_PROPERTIES.GetKey()).GetStringValue();
+                    playerHeldItem.Type = EquippedObject.FromSFSData(variable3.SFSObjectValue).EquippedObjectId;
+                    playerHeldItem.Properties = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT_PROPERTIES.GetKey()).StringValue;
                     mt.triggerEvent(GameServerEvent.SERVER_ITEM_CHANGED, playerHeldItem);
                 }
             }
@@ -155,19 +141,19 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable4 = user.GetVariable(SocketUserVars.LOCOMOTION_STATE.GetKey());
                 PlayerLocomotionStateEvent playerLocomotionStateEvent = default(PlayerLocomotionStateEvent);
                 playerLocomotionStateEvent.SessionId = getSessionId(user);
-                if (variable4 == null || variable4.IsNull())
+                if (variable4 == null || variable4.IsNull)
                 {
                     playerLocomotionStateEvent.State = LocomotionState.Default;
                 }
                 else
                 {
-                    playerLocomotionStateEvent.State = (LocomotionState)variable4.GetIntValue();
+                    playerLocomotionStateEvent.State = (LocomotionState)variable4.IntValue.Value;
                 }
                 mt.triggerEvent(GameServerEvent.USER_LOCO_STATE_CHANGED, playerLocomotionStateEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.OUTFIT.GetKey())) && user.ContainsVariable(SocketUserVars.OUTFIT.GetKey()))
             {
-                PlayerOutfitDetails playerOutfitDetails = mt.JsonService.Deserialize<PlayerOutfitDetails>(user.GetVariable(SocketUserVars.OUTFIT.GetKey()).GetStringValue());
+                PlayerOutfitDetails playerOutfitDetails = mt.JsonService.Deserialize<PlayerOutfitDetails>(user.GetVariable(SocketUserVars.OUTFIT.GetKey()).StringValue);
                 playerOutfitDetails.sessionId = getSessionId(user);
                 mt.triggerEvent(GameServerEvent.USER_OUTFIT_CHANGED, playerOutfitDetails);
             }
@@ -176,7 +162,7 @@ namespace ClubPenguin.Net.Client
                 ProfileEvent profileEvent = default(ProfileEvent);
                 profileEvent.SessionId = getSessionId(user);
                 profileEvent.Profile = new Profile();
-                profileEvent.Profile.colour = user.GetVariable(SocketUserVars.PROFILE.GetKey()).GetIntValue();
+                profileEvent.Profile.colour = user.GetVariable(SocketUserVars.PROFILE.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.USER_PROFILE_CHANGED, profileEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.AIR_BUBBLE.GetKey())))
@@ -184,13 +170,13 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable5 = user.GetVariable(SocketUserVars.AIR_BUBBLE.GetKey());
                 PlayerAirBubbleEvent playerAirBubbleEvent = default(PlayerAirBubbleEvent);
                 playerAirBubbleEvent.SessionId = getSessionId(user);
-                if (variable5 == null || variable5.IsNull())
+                if (variable5 == null || variable5.IsNull)
                 {
                     playerAirBubbleEvent.AirBubble = new AirBubble();
                 }
                 else
                 {
-                    playerAirBubbleEvent.AirBubble = AirBubble.FromSFSData(variable5.GetSFSObjectValue());
+                    playerAirBubbleEvent.AirBubble = AirBubble.FromSFSData(variable5.SFSObjectValue);
                 }
                 mt.triggerEvent(GameServerEvent.AIR_BUBBLE_UPDATE, playerAirBubbleEvent);
             }
@@ -199,9 +185,9 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable4 = user.GetVariable(SocketUserVars.ON_QUEST.GetKey());
                 OnQuestState onQuestState = default(OnQuestState);
                 onQuestState.SessionId = getSessionId(user);
-                if (variable4 != null && !variable4.IsNull())
+                if (variable4 != null && !variable4.IsNull)
                 {
-                    onQuestState.MascotName = variable4.GetStringValue();
+                    onQuestState.MascotName = variable4.StringValue;
                 }
                 mt.triggerEvent(GameServerEvent.ON_QUEST, onQuestState);
             }
@@ -209,14 +195,14 @@ namespace ClubPenguin.Net.Client
             {
                 SelectedTubeEvent selectedTubeEvent = default(SelectedTubeEvent);
                 selectedTubeEvent.SessionId = getSessionId(user);
-                selectedTubeEvent.TubeId = user.GetVariable(SocketUserVars.SELECTED_TUBE.GetKey()).GetIntValue();
+                selectedTubeEvent.TubeId = user.GetVariable(SocketUserVars.SELECTED_TUBE.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.SELECTED_TUBE_CHANGED, selectedTubeEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey())) && user.ContainsVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()))
             {
                 TemporaryHeadStatusEvent temporaryHeadStatusEvent = default(TemporaryHeadStatusEvent);
                 temporaryHeadStatusEvent.SessionId = getSessionId(user);
-                temporaryHeadStatusEvent.Type = user.GetVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()).GetIntValue();
+                temporaryHeadStatusEvent.Type = user.GetVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.TEMPORARY_HEAD_STATUS_CHANGED, temporaryHeadStatusEvent);
             }
             if (flag || (changedVars != null && !changedVars.Contains(SocketUserVars.AWAY_FROM_KEYBOARD.GetKey())))
@@ -224,44 +210,40 @@ namespace ClubPenguin.Net.Client
                 return;
             }
             UserVariable variable6 = user.GetVariable(SocketUserVars.AWAY_FROM_KEYBOARD.GetKey());
-            if (variable6 == null || variable6.IsNull())
+            if (variable6 == null || variable6.IsNull)
             {
                 EquippedObject equippedObject2 = null;
                 UserVariable variable7 = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT.GetKey());
                 if (variable7 != null)
                 {
-                    equippedObject2 = EquippedObject.FromSFSData(variable7.GetSFSObjectValue());
+                    equippedObject2 = EquippedObject.FromSFSData(variable7.SFSObjectValue);
                 }
                 mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), 0, equippedObject2));
             }
             else
             {
-                mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), variable6.GetIntValue(), null));
+                mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), variable6.IntValue.Value, null));
             }
         }
 
         internal void TriggerBinaryStateEvent(UserVariable state, long sessionId, GameServerEvent gameServerEvent)
         {
-            if (state == null || state.IsNull())
+            if (state == null || state.IsNull)
             {
                 mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, false));
             }
             else
             {
-                mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, state.GetBoolValue()));
+                mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, state.BoolValue.Value));
             }
         }
 
         internal void AddListeners(SmartFox smartFox)
         {
-            smartFox.AddEventListener(SFSEvent.SOCKET_ERROR, onSocketError);
             smartFox.AddEventListener(SFSEvent.CONNECTION, onConnection);
             smartFox.AddEventListener(SFSEvent.CONNECTION_LOST, onConnectionLost);
-            smartFox.AddEventListener(SFSEvent.CRYPTO_INIT, onCryptoInit);
-            smartFox.AddEventListener(SFSEvent.CONNECTION_RETRY, onConnectionRetry);
-            smartFox.AddEventListener(SFSEvent.CONNECTION_RESUME, onConnectionResume);
             smartFox.AddEventListener(SFSEvent.LOGIN, onLogin);
-            smartFox.AddEventListener(SFSEvent.UDP_INIT, onUdpInit);
+            smartFox.AddEventListener(SFSEvent.UDP_CONNECTION, onUdpConnection);
             smartFox.AddEventListener(SFSEvent.LOGIN_ERROR, onLoginError);
             smartFox.AddEventListener(SFSEvent.LOGOUT, onLogout);
             smartFox.AddEventListener(SFSEvent.ROOM_CREATION_ERROR, onRoomCreationError);
@@ -271,29 +253,14 @@ namespace ClubPenguin.Net.Client
             smartFox.AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, onUserVariableUpdate);
             smartFox.AddEventListener(SFSEvent.PROXIMITY_LIST_UPDATE, onProximityListUpdate);
             smartFox.AddEventListener(SFSEvent.MMOITEM_VARIABLES_UPDATE, onServerObjectUpdate);
-            smartFox.AddEventListener(SFSEvent.PING_PONG, onPingPong);
-            if (smartFox.Debug)
-            {
-                smartFox.AddLogListener(LogLevel.DEBUG, onDebugMessage);
-                smartFox.AddLogListener(LogLevel.INFO, onInfoMessage);
-                smartFox.AddLogListener(LogLevel.WARN, onWarnMessage);
-                smartFox.AddLogListener(LogLevel.ERROR, onErrorMessage);
-            }
         }
 
         internal void RemoveListeners(SmartFox smartFox)
         {
             smartFox.RemoveAllEventListeners();
-            if (smartFox.Debug)
-            {
-                smartFox.RemoveLogListener(LogLevel.DEBUG, onDebugMessage);
-                smartFox.RemoveLogListener(LogLevel.INFO, onInfoMessage);
-                smartFox.RemoveLogListener(LogLevel.WARN, onWarnMessage);
-                smartFox.RemoveLogListener(LogLevel.ERROR, onErrorMessage);
-            }
         }
 
-        public void onProximityListUpdate(BaseEvent evt)
+        public void onProximityListUpdate(ApiEvent evt)
         {
             RoomMember roomMember;
             foreach (User item in (List<User>)evt.Params["addedUsers"])
@@ -317,7 +284,6 @@ namespace ClubPenguin.Net.Client
                 roomMember.Id = getSessionId(item2);
                 roomMember.Name = item2.Name;
                 mt.triggerEvent(GameServerEvent.ROOM_USER_REMOVED, roomMember);
-                item2.UserManager.RemoveUser(item2);
             }
             foreach (IMMOItem item3 in (List<IMMOItem>)evt.Params["addedItems"])
             {
@@ -334,24 +300,18 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onServerObjectUpdate(BaseEvent evt)
+        public void onServerObjectUpdate(ApiEvent evt)
         {
             IMMOItem sfsItem = (IMMOItem)evt.Params["mmoItem"];
             CPMMOItem data = ItemFactory.Create(sfsItem, getSessionId);
             mt.triggerEvent(GameServerEvent.SERVER_ITEM_CHANGED, data);
         }
 
-        public void onPingPong(BaseEvent evt)
-        {
-            int milliseconds = (int)evt.Params["lagValue"];
-            mt.ClubPenguinClient.logGameServerPing(milliseconds);
-        }
-
-        public void onExtensionResponse(BaseEvent evt)
+        public void onExtensionResponse(ApiEvent evt)
         {
             try
             {
-                ISFSObject iSFSObject = (ISFSObject)evt.Params["params"];
+                ISFSObject iSFSObject = (ISFSObject)evt.Params["extParams"];
                 if (mt.SmartFoxEncryptor != null)
                 {
                     mt.SmartFoxEncryptor.DecryptParameters(iSFSObject);
@@ -378,24 +338,24 @@ namespace ClubPenguin.Net.Client
                             break;
                         case SmartfoxCommand.CHAT:
                             gameServerEvent = GameServerEvent.CHAT_MESSAGE_RECEIVED;
-                            data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetUtfString("msg"));
+                            data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetString("msg"));
                             break;
                         case SmartfoxCommand.SERVER_RESTARTING:
                             gameServerEvent = GameServerEvent.SERVER_RESTARTING;
-                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetString("message") : null;
                             break;
                         case SmartfoxCommand.SERVER_ALERT:
                             gameServerEvent = GameServerEvent.SERVER_ALERT;
-                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetString("message") : null;
                             break;
                         case SmartfoxCommand.GET_SERVER_TIME:
-                            timeStampRecieved(iSFSObject.GetLong("ct"), iSFSObject.GetLong("st"));
+                            timeStampRecieved(iSFSObject.GetLong("ct").Value, iSFSObject.GetLong("st").Value);
                             break;
                         case SmartfoxCommand.SERVER_TIME_ERROR:
                             fetchServerTimestamp(false);
                             break;
                         case SmartfoxCommand.GET_ROOM_ENCRYPTION_KEY:
-                            encryptionKeyReceived(iSFSObject.GetUtfString("ek"));
+                            encryptionKeyReceived(iSFSObject.GetString("ek"));
                             break;
                         case SmartfoxCommand.ENCRYPTION_KEY_ERROR:
                             Log.LogError(this, "Failed to get room encryption key.");
@@ -412,13 +372,13 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.PROTOTYPE_ACTION;
                                 PrototypeAction prototypeAction = default(PrototypeAction);
                                 prototypeAction.userid = getSessionId(userId);
-                                prototypeAction.data = JsonMapper.ToObject(iSFSObject.GetUtfString("data"));
+                                prototypeAction.data = JsonMapper.ToObject(iSFSObject.GetString("data"));
                                 data = prototypeAction;
                                 break;
                             }
                         case SmartfoxCommand.SERVER_OBJECTIVE_COMPLETED:
                             gameServerEvent = GameServerEvent.QUEST_OBJECTIVES_UPDATED;
-                            data = mt.JsonService.Deserialize<SignedResponse<QuestObjectives>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<QuestObjectives>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.SERVER_QUEST_ERROR:
                             gameServerEvent = GameServerEvent.QUEST_ERROR;
@@ -433,7 +393,7 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.CONSUMABLE_USED;
                                 ConsumableEvent consumableEvent = default(ConsumableEvent);
                                 consumableEvent.SessionId = getSessionId(userId);
-                                consumableEvent.Type = iSFSObject.GetUtfString("type");
+                                consumableEvent.Type = iSFSObject.GetString("type");
                                 data = consumableEvent;
                                 break;
                             }
@@ -441,8 +401,8 @@ namespace ClubPenguin.Net.Client
                             {
                                 gameServerEvent = GameServerEvent.CONSUMABLE_REUSE_FAILED;
                                 ConsumableUseFailureEvent consumableUseFailureEvent = default(ConsumableUseFailureEvent);
-                                consumableUseFailureEvent.Type = iSFSObject.GetUtfString("type");
-                                consumableUseFailureEvent.Properties = JsonMapper.ToObject(iSFSObject.GetUtfString("prop"));
+                                consumableUseFailureEvent.Type = iSFSObject.GetString("type");
+                                consumableUseFailureEvent.Properties = JsonMapper.ToObject(iSFSObject.GetString("prop"));
                                 data = consumableUseFailureEvent;
                                 break;
                             }
@@ -452,54 +412,54 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.CONSUMABLE_MMO_DEPLOYED;
                                 ConsumableMMODeployedEvent consumableMMODeployedEvent = default(ConsumableMMODeployedEvent);
                                 consumableMMODeployedEvent.SessionId = getSessionId(iSFSObject.GetInt("ownerId"));
-                                consumableMMODeployedEvent.ExperienceId = iSFSObject.GetInt("senderId");
+                                consumableMMODeployedEvent.ExperienceId = iSFSObject.GetInt("senderId").Value;
                                 data = consumableMMODeployedEvent;
                             }
                             break;
                         case SmartfoxCommand.SET_CONSUMABLE_PARTIAL_COUNT:
                             gameServerEvent = GameServerEvent.COMSUMBLE_PARTIAL_COUNT_SET;
-                            data = mt.JsonService.Deserialize<SignedResponse<UsedConsumable>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<UsedConsumable>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.RECEIVED_REWARDS:
                             gameServerEvent = GameServerEvent.RECEIVED_REWARDS;
-                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.RECEIVED_REWARDS_DELAYED:
                             gameServerEvent = GameServerEvent.RECEIVED_REWARDS_DELAYED;
-                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.RECEIVED_ROOOM_REWARDS:
                             gameServerEvent = GameServerEvent.RECEIVED_ROOOM_REWARDS;
-                            data = mt.JsonService.Deserialize<SignedResponse<InRoomRewards>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<InRoomRewards>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.PROGRESSION_LEVELUP:
                             {
                                 gameServerEvent = GameServerEvent.LEVELUP;
                                 UserLevelUpEvent userLevelUpEvent = default(UserLevelUpEvent);
                                 userLevelUpEvent.SessionId = getSessionId(userId);
-                                userLevelUpEvent.Level = iSFSObject.GetInt("level");
+                                userLevelUpEvent.Level = iSFSObject.GetInt("level").Value;
                                 data = userLevelUpEvent;
                                 break;
                             }
                         case SmartfoxCommand.ROOM_TRANSIENT_DATA:
-                            mt.LastRoomTransientData = mt.JsonService.Deserialize<SignedResponse<TransientData>>(iSFSObject.GetUtfString("d"));
+                            mt.LastRoomTransientData = mt.JsonService.Deserialize<SignedResponse<TransientData>>(iSFSObject.GetString("d"));
                             break;
                         case SmartfoxCommand.TASK_COUNT:
                             {
                                 gameServerEvent = GameServerEvent.TASK_COUNT_UPDATED;
                                 TaskProgress taskProgress = default(TaskProgress);
-                                taskProgress.taskId = iSFSObject.GetUtfString("t");
-                                taskProgress.counter = iSFSObject.GetInt("c");
+                                taskProgress.taskId = iSFSObject.GetString("t");
+                                taskProgress.counter = iSFSObject.GetInt("c").Value;
                                 data = taskProgress;
                                 break;
                             }
                         case SmartfoxCommand.TASK_PROGRESS:
                             gameServerEvent = GameServerEvent.TASK_PROGRESS_UPDATED;
-                            data = mt.JsonService.Deserialize<SignedResponse<TaskProgress>>(iSFSObject.GetUtfString("d"));
+                            data = mt.JsonService.Deserialize<SignedResponse<TaskProgress>>(iSFSObject.GetString("d"));
                             break;
                         case SmartfoxCommand.GET_SIGNED_STATE:
                             gameServerEvent = GameServerEvent.STATE_SIGNED;
-                            data = mt.JsonService.Deserialize<SignedResponse<InWorldState>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<InWorldState>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.GET_PLAYER_LOCATION:
                             gameServerEvent = GameServerEvent.PLAYER_LOCATION_RECEIVED;
@@ -526,11 +486,11 @@ namespace ClubPenguin.Net.Client
                             break;
                         case SmartfoxCommand.IGLOO_UPDATED:
                             gameServerEvent = GameServerEvent.IGLOO_UPDATED;
-                            data = iSFSObject.GetUtfString("igloo_id");
+                            data = iSFSObject.GetString("igloo_id");
                             break;
                         case SmartfoxCommand.FORCE_LEAVE:
                             gameServerEvent = GameServerEvent.FORCE_LEAVE;
-                            data = mt.JsonService.Deserialize<ZoneId>(iSFSObject.GetUtfString("zone_id"));
+                            data = mt.JsonService.Deserialize<ZoneId>(iSFSObject.GetString("zone_id"));
                             break;
                     }
                     if (gameServerEvent.HasValue)
@@ -587,14 +547,8 @@ namespace ClubPenguin.Net.Client
 
                 if (!rsaParams.HasValue)
                 {
-#if UNITY_WEBGL
-                    UnityEngine.Debug.LogWarning("[WebGL] RSA parameters not available. Proceeding without encryption.");
-                    roomJoinCompleted();
+                    failRoomJoin("RSA parameters are not available; cannot fetch the room encryption key.");
                     return;
-#else
-            UnityEngine.Debug.LogError("RSA parameters not available, cannot fetch encryption key");
-            return;
-#endif
                 }
 
                 RSAParameters value = rsaParams.Value;
@@ -615,10 +569,18 @@ namespace ClubPenguin.Net.Client
                 UnityEngine.Debug.LogError($"[WebGL] Error in fetchEncryptionKey: {ex.Message}");
                 Log.LogException(this, ex);
 
-#if UNITY_WEBGL
-                roomJoinCompleted();
-#endif
+                failRoomJoin("Failed to fetch the room encryption key: " + ex.Message);
             }
+        }
+
+        private void failRoomJoin(string errorMessage)
+        {
+            Log.LogNetworkError(this, errorMessage);
+            RoomJoinError roomJoinError = default(RoomJoinError);
+            roomJoinError.roomName = mt.JoinRoomDataRoom;
+            roomJoinError.errorMessage = errorMessage;
+            mt.teardown();
+            mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
         public void encryptionKeyReceived(string encodedEncryptedEncryptionKey)
@@ -641,7 +603,7 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onConnection(BaseEvent evt)
+        public void onConnection(ApiEvent evt)
         {
             UnityEngine.Debug.Log("Created SFS instance: " + mt.smartFox.GetHashCode());
 #if !UNITY_WEBGL
@@ -652,22 +614,12 @@ namespace ClubPenguin.Net.Client
             }
             if (flag)
             {
-
-                if (mt.UseEncryption)
-                {
-                    mt.TriggerInitCrypto = true;
-                }
-                else
-                {
-                    mt.login();
-                }
+                mt.login();
                 return;
             }
 #else
-            Debug.Log("if OnConnect gets tampet");
             if ((bool)evt.Params["success"])
             {
-                Debug.Log("Attempting Login");
                 mt.login();
                 return;
             }
@@ -712,55 +664,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        public void onCryptoInit(BaseEvent evt)
-        {
-            bool flag = false;
-            if (evt.Params != null && evt.Params.ContainsKey("success"))
-            {
-                flag = (bool)evt.Params["success"];
-            }
-
-            if (flag)
-            {
-                mt.login();
-                return;
-            }
-
-            string text = null;
-            if (evt.Params != null)
-            {
-                object value;
-                if (evt.Params.TryGetValue("errorMessage", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("message", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("reason", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("errorCode", out value) && value != null)
-                {
-                    text = "Error code: " + value.ToString();
-                }
-            }
-            if (string.IsNullOrEmpty(text))
-            {
-                text = "Unknown crypto init error";
-            }
-
-            Log.LogNetworkErrorFormatted(this, "Failed to initialize encryption libraries. Error: {0}", text);
-            RoomJoinError roomJoinError = default(RoomJoinError);
-            roomJoinError.roomName = mt.JoinRoomDataRoom;
-            roomJoinError.errorMessage = text;
-            mt.teardown();
-            mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
-        }
-
-        public void onLogin(BaseEvent evt)
+        public void onLogin(ApiEvent evt)
         {
             User user = (User)evt.Params["user"];
             mt.ClubPenguinClient.PlayerSessionId = mt.JoinRoomDataSessionId;
@@ -768,7 +672,7 @@ namespace ClubPenguin.Net.Client
             mt.onLogin();
         }
 
-        public void onLoginError(BaseEvent evt)
+        public void onLoginError(ApiEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             Log.LogNetworkErrorFormatted(this, "Login Failed. Error: {0}", text);
@@ -779,7 +683,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        public void onRoomCreationError(BaseEvent evt)
+        public void onRoomCreationError(ApiEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             string text = (string)evt.Params["errorMessage"];
@@ -795,7 +699,7 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onRoomJoin(BaseEvent evt)
+        public void onRoomJoin(ApiEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             if (RoomIdentifier.EqualsIgnoreInstanceId(room.Name, mt.JoinRoomDataRoom))
@@ -803,19 +707,16 @@ namespace ClubPenguin.Net.Client
                 mt.ClientRoomName = mt.JoinRoomDataRoom;
                 if (SmartFoxGameServerClient.EnableUDP)
                 {
-                    mt.initUDP();
+                    mt.connectUdp();
                 }
                 else
                 {
-                    UnityEngine.Debug.Log("Initializing fake time server");
-                    mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                    UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                    fetchEncryptionKey();
+                    fetchServerTimestamp(true);
                 }
             }
         }
 
-        public void onRoomJoinError(BaseEvent evt)
+        public void onRoomJoinError(ApiEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             short num = (short)evt.Params["errorCode"];
@@ -839,40 +740,22 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onUdpInit(BaseEvent evt)
+        public void onUdpConnection(ApiEvent evt)
         {
             bool flag = (bool)evt.Params["success"];
             string text = (string)evt.Params["errorMessage"];
             if (flag)
             {
-                UnityEngine.Debug.Log("Initializing fake time server");
-                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                fetchEncryptionKey();
+                fetchServerTimestamp(true);
                 return;
             }
             ConfigData smartFoxConfiguration = mt.smartFoxConfiguration;
-            Log.LogNetworkErrorFormatted(this, "Failed to initialize UDP connection on {0}:{1}. Error: {2}", smartFoxConfiguration.UdpHost, smartFoxConfiguration.UdpPort, text);
-            if (SmartFoxGameServerClient.AbortOnUDPError)
-            {
-                RoomJoinError roomJoinError = default(RoomJoinError);
-                roomJoinError.roomName = mt.JoinRoomDataRoom;
-                roomJoinError.errorMessage = text;
-                mt.teardown();
-                mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Initializing fake time server");
-                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                fetchEncryptionKey();
-            }
+            failRoomJoin(string.Format("Failed to initialize UDP connection on {0}:{1}. Error: {2}", smartFoxConfiguration.Host, smartFoxConfiguration.UdpPort, text));
         }
 
-        public void onConnectionLost(BaseEvent evt)
+        public void onConnectionLost(ApiEvent evt)
         {
-            string text = (string)evt.Params["reason"];
+            string text = (string)evt.Params["disconnectionReason"];
             if (mt.WasTornDownImmediately)
             {
                 return;
@@ -897,7 +780,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onLogout(BaseEvent evt)
+        public void onLogout(ApiEvent evt)
         {
             mt.ClientRoomName = null;
             if (mt.isConnected && !mt.WasTornDownImmediately)
@@ -911,37 +794,13 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onDebugMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onInfoMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onWarnMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onErrorMessage(BaseEvent evt)
-        {
-            if (!mt.WasTornDownImmediately)
-            {
-                string text = (string)evt.Params["message"];
-                Log.LogNetworkErrorFormatted(this, "[SFS ERROR] {0}", text);
-            }
-        }
-
         public LocomotionActionEvent locomotionActionEventFromProps(int playerId, ISFSObject props)
         {
             LocomotionActionEvent result = default(LocomotionActionEvent);
             result.SessionId = getSessionId(playerId);
             result.Type = (LocomotionAction)props.GetByte("a");
             result.Position = SmartFoxGameServerClientShared.deserializeVec3(props, "p");
-            result.Timestamp = props.GetLong("t");
+            result.Timestamp = props.GetLong("t").Value;
             if (props.ContainsKey("d"))
             {
                 result.Direction = SmartFoxGameServerClientShared.deserializeVec3(props, "d");
@@ -952,14 +811,14 @@ namespace ClubPenguin.Net.Client
             }
             if (props.ContainsKey("o"))
             {
-                result.Object = mt.JsonService.Deserialize<ActionedObject>(props.GetUtfString("o"));
+                result.Object = mt.JsonService.Deserialize<ActionedObject>(props.GetString("o"));
             }
             return result;
         }
 
         public long getSessionId(User user)
         {
-            return long.Parse(user.GetVariable(SocketUserVars.SESSION_ID.GetKey()).GetStringValue());
+            return long.Parse(user.GetVariable(SocketUserVars.SESSION_ID.GetKey()).StringValue);
         }
 
         public long getSessionId(int? userId)
@@ -979,42 +838,42 @@ namespace ClubPenguin.Net.Client
         public PartyGameStartEvent partyGameStartEventFromProps(ISFSObject props)
         {
             PartyGameStartEvent result = default(PartyGameStartEvent);
-            result.owner = props.GetLong("owner");
-            result.sessionId = props.GetInt("id");
-            result.templateId = props.GetInt("template");
-            result.players = props.GetLongArray("players");
+            result.owner = props.GetLong("owner").Value;
+            result.sessionId = props.GetInt("id").Value;
+            result.templateId = props.GetInt("template").Value;
+            result.players = props.GetLongArray("players").ToArray();
             return result;
         }
 
         public PartyGameStartEventV2 partyGameStartEventV2FromProps(ISFSObject props)
         {
             PartyGameStartEventV2 result = default(PartyGameStartEventV2);
-            result.sessionId = props.GetInt("id");
-            result.templateId = props.GetInt("template");
-            result.playerData = props.GetUtfString("players");
+            result.sessionId = props.GetInt("id").Value;
+            result.templateId = props.GetInt("template").Value;
+            result.playerData = props.GetString("players");
             return result;
         }
 
         public PartyGameEndEvent partyGameEndEventFromProps(ISFSObject props)
         {
             PartyGameEndEvent result = default(PartyGameEndEvent);
-            List<PartyGameEndPlayerResult> list = mt.JsonService.Deserialize<List<PartyGameEndPlayerResult>>(props.GetUtfString("results"));
+            List<PartyGameEndPlayerResult> list = mt.JsonService.Deserialize<List<PartyGameEndPlayerResult>>(props.GetString("results"));
             Dictionary<long, int> dictionary = new Dictionary<long, int>();
             for (int i = 0; i < list.Count; i++)
             {
                 dictionary.Add(list[i].PlayerSessionId, list[i].Placement);
             }
             result.playerSessionIdToPlacement = dictionary;
-            result.sessionId = props.GetInt("id");
+            result.sessionId = props.GetInt("id").Value;
             return result;
         }
 
         public PartyGameMessageEvent partyGameMessageEventFromProps(ISFSObject props)
         {
             PartyGameMessageEvent result = default(PartyGameMessageEvent);
-            result.sessionId = props.GetInt("id");
-            result.type = props.GetInt("type");
-            result.message = props.GetUtfString("message");
+            result.sessionId = props.GetInt("id").Value;
+            result.type = props.GetInt("type").Value;
+            result.message = props.GetString("message");
             return result;
         }
     }
@@ -1028,17 +887,17 @@ using ClubPenguin.Net.Domain;
 using ClubPenguin.Net.Utils;
 using Disney.LaunchPadFramework;
 using LitJson;
-using Sfs2X;
-using Sfs2X.Core;
-using Sfs2X.Entities;
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
-using Sfs2X.Logging;
-using Sfs2X.Util;
+using Sfs3.Client;
+using Sfs3.Client.Core;
+using Sfs3.Client.Entities;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
+using Sfs3.Client.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -1073,21 +932,7 @@ namespace ClubPenguin.Net.Client
             mt = smartFoxGameServerClientShared;
         }
 
-        public void onConnectionRetry(BaseEvent evt)
-        {
-        }
-
-        public void onConnectionResume(BaseEvent evt)
-        {
-        }
-
-        public void onSocketError(BaseEvent evt)
-        {
-            string data = (string)evt.Params["errorMessage"];
-            mt.triggerEvent(GameServerEvent.NETWORK_ERROR, data);
-        }
-
-        public void onUserVariableUpdate(BaseEvent evt)
+        public void onUserVariableUpdate(ApiEvent evt)
         {
             UnityEngine.Debug.Log("UserVariableUpdate as been fired");
             User user = (User)evt.Params["user"];
@@ -1104,7 +949,7 @@ namespace ClubPenguin.Net.Client
             {
                 PrototypeState prototypeState = default(PrototypeState);
                 prototypeState.id = getSessionId(user);
-                prototypeState.data = JsonMapper.ToObject(user.GetVariable(SocketUserVars.PROTOTYPE.GetKey()).GetStringValue());
+                prototypeState.data = JsonMapper.ToObject(user.GetVariable(SocketUserVars.PROTOTYPE.GetKey()).StringValue);
                 mt.triggerEvent(GameServerEvent.PROTOTYPE_STATE, prototypeState);
             }
             if (changedVars == null || changedVars.Contains(SocketUserVars.EQUIPPED_OBJECT.GetKey()))
@@ -1124,14 +969,14 @@ namespace ClubPenguin.Net.Client
                 }
                 else
                 {
-                    EquippedObject equippedObject = EquippedObject.FromSFSData(variable.GetSFSObjectValue());
+                    EquippedObject equippedObject = EquippedObject.FromSFSData(variable.SFSObjectValue);
                     if (variable2 != null)
                     {
                         PlayerHeldItem playerHeldItem = new PlayerHeldItem();
                         playerHeldItem.Id = new CPMMOItemId(getSessionId(user), CPMMOItemId.CPMMOItemParent.PLAYER);
                         playerHeldItem.CreatorId = playerHeldItem.Id.Id;
                         playerHeldItem.Type = equippedObject.EquippedObjectId;
-                        playerHeldItem.Properties = variable2.GetStringValue();
+                        playerHeldItem.Properties = variable2.StringValue;
                         mt.triggerEvent(GameServerEvent.SERVER_ITEM_ADDED, playerHeldItem);
                     }
                     else if (!flag || (flag && equippedObject.isPartyGame()))
@@ -1166,8 +1011,8 @@ namespace ClubPenguin.Net.Client
                     PlayerHeldItem playerHeldItem = new PlayerHeldItem();
                     playerHeldItem.Id = new CPMMOItemId(getSessionId(user), CPMMOItemId.CPMMOItemParent.PLAYER);
                     playerHeldItem.CreatorId = playerHeldItem.Id.Id;
-                    playerHeldItem.Type = EquippedObject.FromSFSData(variable3.GetSFSObjectValue()).EquippedObjectId;
-                    playerHeldItem.Properties = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT_PROPERTIES.GetKey()).GetStringValue();
+                    playerHeldItem.Type = EquippedObject.FromSFSData(variable3.SFSObjectValue).EquippedObjectId;
+                    playerHeldItem.Properties = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT_PROPERTIES.GetKey()).StringValue;
                     mt.triggerEvent(GameServerEvent.SERVER_ITEM_CHANGED, playerHeldItem);
                 }
             }
@@ -1176,19 +1021,19 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable4 = user.GetVariable(SocketUserVars.LOCOMOTION_STATE.GetKey());
                 PlayerLocomotionStateEvent playerLocomotionStateEvent = default(PlayerLocomotionStateEvent);
                 playerLocomotionStateEvent.SessionId = getSessionId(user);
-                if (variable4 == null || variable4.IsNull())
+                if (variable4 == null || variable4.IsNull)
                 {
                     playerLocomotionStateEvent.State = LocomotionState.Default;
                 }
                 else
                 {
-                    playerLocomotionStateEvent.State = (LocomotionState)variable4.GetIntValue();
+                    playerLocomotionStateEvent.State = (LocomotionState)variable4.IntValue.Value;
                 }
                 mt.triggerEvent(GameServerEvent.USER_LOCO_STATE_CHANGED, playerLocomotionStateEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.OUTFIT.GetKey())) && user.ContainsVariable(SocketUserVars.OUTFIT.GetKey()))
             {
-                PlayerOutfitDetails playerOutfitDetails = mt.JsonService.Deserialize<PlayerOutfitDetails>(user.GetVariable(SocketUserVars.OUTFIT.GetKey()).GetStringValue());
+                PlayerOutfitDetails playerOutfitDetails = mt.JsonService.Deserialize<PlayerOutfitDetails>(user.GetVariable(SocketUserVars.OUTFIT.GetKey()).StringValue);
                 playerOutfitDetails.sessionId = getSessionId(user);
                 mt.triggerEvent(GameServerEvent.USER_OUTFIT_CHANGED, playerOutfitDetails);
             }
@@ -1197,7 +1042,7 @@ namespace ClubPenguin.Net.Client
                 ProfileEvent profileEvent = default(ProfileEvent);
                 profileEvent.SessionId = getSessionId(user);
                 profileEvent.Profile = new Profile();
-                profileEvent.Profile.colour = user.GetVariable(SocketUserVars.PROFILE.GetKey()).GetIntValue();
+                profileEvent.Profile.colour = user.GetVariable(SocketUserVars.PROFILE.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.USER_PROFILE_CHANGED, profileEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.AIR_BUBBLE.GetKey())))
@@ -1205,13 +1050,13 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable5 = user.GetVariable(SocketUserVars.AIR_BUBBLE.GetKey());
                 PlayerAirBubbleEvent playerAirBubbleEvent = default(PlayerAirBubbleEvent);
                 playerAirBubbleEvent.SessionId = getSessionId(user);
-                if (variable5 == null || variable5.IsNull())
+                if (variable5 == null || variable5.IsNull)
                 {
                     playerAirBubbleEvent.AirBubble = new AirBubble();
                 }
                 else
                 {
-                    playerAirBubbleEvent.AirBubble = AirBubble.FromSFSData(variable5.GetSFSObjectValue());
+                    playerAirBubbleEvent.AirBubble = AirBubble.FromSFSData(variable5.SFSObjectValue);
                 }
                 mt.triggerEvent(GameServerEvent.AIR_BUBBLE_UPDATE, playerAirBubbleEvent);
             }
@@ -1220,9 +1065,9 @@ namespace ClubPenguin.Net.Client
                 UserVariable variable4 = user.GetVariable(SocketUserVars.ON_QUEST.GetKey());
                 OnQuestState onQuestState = default(OnQuestState);
                 onQuestState.SessionId = getSessionId(user);
-                if (variable4 != null && !variable4.IsNull())
+                if (variable4 != null && !variable4.IsNull)
                 {
-                    onQuestState.MascotName = variable4.GetStringValue();
+                    onQuestState.MascotName = variable4.StringValue;
                 }
                 mt.triggerEvent(GameServerEvent.ON_QUEST, onQuestState);
             }
@@ -1230,14 +1075,14 @@ namespace ClubPenguin.Net.Client
             {
                 SelectedTubeEvent selectedTubeEvent = default(SelectedTubeEvent);
                 selectedTubeEvent.SessionId = getSessionId(user);
-                selectedTubeEvent.TubeId = user.GetVariable(SocketUserVars.SELECTED_TUBE.GetKey()).GetIntValue();
+                selectedTubeEvent.TubeId = user.GetVariable(SocketUserVars.SELECTED_TUBE.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.SELECTED_TUBE_CHANGED, selectedTubeEvent);
             }
             if (!flag && (changedVars == null || changedVars.Contains(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey())) && user.ContainsVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()))
             {
                 TemporaryHeadStatusEvent temporaryHeadStatusEvent = default(TemporaryHeadStatusEvent);
                 temporaryHeadStatusEvent.SessionId = getSessionId(user);
-                temporaryHeadStatusEvent.Type = user.GetVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()).GetIntValue();
+                temporaryHeadStatusEvent.Type = user.GetVariable(SocketUserVars.TEMPORARY_HEAD_STATUS.GetKey()).IntValue.Value;
                 mt.triggerEvent(GameServerEvent.TEMPORARY_HEAD_STATUS_CHANGED, temporaryHeadStatusEvent);
             }
             if (flag || (changedVars != null && !changedVars.Contains(SocketUserVars.AWAY_FROM_KEYBOARD.GetKey())))
@@ -1245,44 +1090,40 @@ namespace ClubPenguin.Net.Client
                 return;
             }
             UserVariable variable6 = user.GetVariable(SocketUserVars.AWAY_FROM_KEYBOARD.GetKey());
-            if (variable6 == null || variable6.IsNull())
+            if (variable6 == null || variable6.IsNull)
             {
                 EquippedObject equippedObject2 = null;
                 UserVariable variable7 = user.GetVariable(SocketUserVars.EQUIPPED_OBJECT.GetKey());
                 if (variable7 != null)
                 {
-                    equippedObject2 = EquippedObject.FromSFSData(variable7.GetSFSObjectValue());
+                    equippedObject2 = EquippedObject.FromSFSData(variable7.SFSObjectValue);
                 }
                 mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), 0, equippedObject2));
             }
             else
             {
-                mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), variable6.GetIntValue(), null));
+                mt.triggerEvent(GameServerEvent.AWAY_FROM_KEYBOARD_STATE_CHANGED, new AFKEvent(getSessionId(user), variable6.IntValue.Value, null));
             }
         }
 
         internal void TriggerBinaryStateEvent(UserVariable state, long sessionId, GameServerEvent gameServerEvent)
         {
-            if (state == null || state.IsNull())
+            if (state == null || state.IsNull)
             {
                 mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, false));
             }
             else
             {
-                mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, state.GetBoolValue()));
+                mt.triggerEvent(gameServerEvent, new BinaryState(sessionId, state.BoolValue.Value));
             }
         }
 
         internal void AddListeners(SmartFox smartFox)
         {
-            smartFox.AddEventListener(SFSEvent.SOCKET_ERROR, onSocketError);
             smartFox.AddEventListener(SFSEvent.CONNECTION, onConnection);
             smartFox.AddEventListener(SFSEvent.CONNECTION_LOST, onConnectionLost);
-            smartFox.AddEventListener(SFSEvent.CRYPTO_INIT, onCryptoInit);
-            smartFox.AddEventListener(SFSEvent.CONNECTION_RETRY, onConnectionRetry);
-            smartFox.AddEventListener(SFSEvent.CONNECTION_RESUME, onConnectionResume);
             smartFox.AddEventListener(SFSEvent.LOGIN, onLogin);
-            smartFox.AddEventListener(SFSEvent.UDP_INIT, onUdpInit);
+            smartFox.AddEventListener(SFSEvent.UDP_CONNECTION, onUdpConnection);
             smartFox.AddEventListener(SFSEvent.LOGIN_ERROR, onLoginError);
             smartFox.AddEventListener(SFSEvent.LOGOUT, onLogout);
             smartFox.AddEventListener(SFSEvent.ROOM_CREATION_ERROR, onRoomCreationError);
@@ -1292,29 +1133,14 @@ namespace ClubPenguin.Net.Client
             smartFox.AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, onUserVariableUpdate);
             smartFox.AddEventListener(SFSEvent.PROXIMITY_LIST_UPDATE, onProximityListUpdate);
             smartFox.AddEventListener(SFSEvent.MMOITEM_VARIABLES_UPDATE, onServerObjectUpdate);
-            smartFox.AddEventListener(SFSEvent.PING_PONG, onPingPong);
-            if (smartFox.Debug)
-            {
-                smartFox.AddLogListener(LogLevel.DEBUG, onDebugMessage);
-                smartFox.AddLogListener(LogLevel.INFO, onInfoMessage);
-                smartFox.AddLogListener(LogLevel.WARN, onWarnMessage);
-                smartFox.AddLogListener(LogLevel.ERROR, onErrorMessage);
-            }
         }
 
         internal void RemoveListeners(SmartFox smartFox)
         {
             smartFox.RemoveAllEventListeners();
-            if (smartFox.Debug)
-            {
-                smartFox.RemoveLogListener(LogLevel.DEBUG, onDebugMessage);
-                smartFox.RemoveLogListener(LogLevel.INFO, onInfoMessage);
-                smartFox.RemoveLogListener(LogLevel.WARN, onWarnMessage);
-                smartFox.RemoveLogListener(LogLevel.ERROR, onErrorMessage);
-            }
         }
 
-        public void onProximityListUpdate(BaseEvent evt)
+        public void onProximityListUpdate(ApiEvent evt)
         {
             RoomMember roomMember;
             foreach (User item in (List<User>)evt.Params["addedUsers"])
@@ -1338,7 +1164,7 @@ namespace ClubPenguin.Net.Client
                 roomMember.Id = getSessionId(item2);
                 roomMember.Name = item2.Name;
                 mt.triggerEvent(GameServerEvent.ROOM_USER_REMOVED, roomMember);
-                item2.UserManager.RemoveUser(item2);
+
             }
             foreach (IMMOItem item3 in (List<IMMOItem>)evt.Params["addedItems"])
             {
@@ -1355,30 +1181,18 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onServerObjectUpdate(BaseEvent evt)
+        public void onServerObjectUpdate(ApiEvent evt)
         {
             IMMOItem sfsItem = (IMMOItem)evt.Params["mmoItem"];
             CPMMOItem data = ItemFactory.Create(sfsItem, getSessionId);
             mt.triggerEvent(GameServerEvent.SERVER_ITEM_CHANGED, data);
         }
 
-        public void onPingPong(BaseEvent evt)
-        {
-            
-            
-            
-            int milliseconds = (int)evt.Params["lagValue"];
-            if (mt.EnableLagMonitorLogging)
-            {
-                mt.ClubPenguinClient.logGameServerPing(milliseconds);
-            }
-        }
-
-        public void onExtensionResponse(BaseEvent evt)
+        public void onExtensionResponse(ApiEvent evt)
         {
             try
             {
-                ISFSObject iSFSObject = (ISFSObject)evt.Params["params"];
+                ISFSObject iSFSObject = (ISFSObject)evt.Params["extParams"];
                 if (mt.SmartFoxEncryptor != null)
                 {
                     mt.SmartFoxEncryptor.DecryptParameters(iSFSObject);
@@ -1406,24 +1220,24 @@ namespace ClubPenguin.Net.Client
                         case SmartfoxCommand.CHAT:
                             
                             gameServerEvent = GameServerEvent.CHAT_MESSAGE_RECEIVED;
-                            data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetUtfString("msg"));
+                            data = mt.JsonService.Deserialize<ReceivedChatMessage>(iSFSObject.GetString("msg"));
                             break;
                         case SmartfoxCommand.SERVER_RESTARTING:
                             gameServerEvent = GameServerEvent.SERVER_RESTARTING;
-                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetString("message") : null;
                             break;
                         case SmartfoxCommand.SERVER_ALERT:
                             gameServerEvent = GameServerEvent.SERVER_ALERT;
-                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetUtfString("message") : null;
+                            data = iSFSObject.ContainsKey("message") ? iSFSObject.GetString("message") : null;
                             break;
                         case SmartfoxCommand.GET_SERVER_TIME:
-                            timeStampRecieved(iSFSObject.GetLong("ct"), iSFSObject.GetLong("st"));
+                            timeStampRecieved(iSFSObject.GetLong("ct").Value, iSFSObject.GetLong("st").Value);
                             break;
                         case SmartfoxCommand.SERVER_TIME_ERROR:
                             fetchServerTimestamp(false);
                             break;
                         case SmartfoxCommand.GET_ROOM_ENCRYPTION_KEY:
-                            encryptionKeyReceived(iSFSObject.GetUtfString("ek"));
+                            encryptionKeyReceived(iSFSObject.GetString("ek"));
                             break;
                         case SmartfoxCommand.ENCRYPTION_KEY_ERROR:
                             Log.LogError(this, "Failed to get room encryption key.");
@@ -1440,13 +1254,13 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.PROTOTYPE_ACTION;
                                 PrototypeAction prototypeAction = default(PrototypeAction);
                                 prototypeAction.userid = getSessionId(userId);
-                                prototypeAction.data = JsonMapper.ToObject(iSFSObject.GetUtfString("data"));
+                                prototypeAction.data = JsonMapper.ToObject(iSFSObject.GetString("data"));
                                 data = prototypeAction;
                                 break;
                             }
                         case SmartfoxCommand.SERVER_OBJECTIVE_COMPLETED:
                             gameServerEvent = GameServerEvent.QUEST_OBJECTIVES_UPDATED;
-                            data = mt.JsonService.Deserialize<SignedResponse<QuestObjectives>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<QuestObjectives>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.SERVER_QUEST_ERROR:
                             gameServerEvent = GameServerEvent.QUEST_ERROR;
@@ -1461,7 +1275,7 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.CONSUMABLE_USED;
                                 ConsumableEvent consumableEvent = default(ConsumableEvent);
                                 consumableEvent.SessionId = getSessionId(userId);
-                                consumableEvent.Type = iSFSObject.GetUtfString("type");
+                                consumableEvent.Type = iSFSObject.GetString("type");
                                 data = consumableEvent;
                                 break;
                             }
@@ -1469,8 +1283,8 @@ namespace ClubPenguin.Net.Client
                             {
                                 gameServerEvent = GameServerEvent.CONSUMABLE_REUSE_FAILED;
                                 ConsumableUseFailureEvent consumableUseFailureEvent = default(ConsumableUseFailureEvent);
-                                consumableUseFailureEvent.Type = iSFSObject.GetUtfString("type");
-                                consumableUseFailureEvent.Properties = JsonMapper.ToObject(iSFSObject.GetUtfString("prop"));
+                                consumableUseFailureEvent.Type = iSFSObject.GetString("type");
+                                consumableUseFailureEvent.Properties = JsonMapper.ToObject(iSFSObject.GetString("prop"));
                                 data = consumableUseFailureEvent;
                                 break;
                             }
@@ -1480,54 +1294,54 @@ namespace ClubPenguin.Net.Client
                                 gameServerEvent = GameServerEvent.CONSUMABLE_MMO_DEPLOYED;
                                 ConsumableMMODeployedEvent consumableMMODeployedEvent = default(ConsumableMMODeployedEvent);
                                 consumableMMODeployedEvent.SessionId = getSessionId(iSFSObject.GetInt("ownerId"));
-                                consumableMMODeployedEvent.ExperienceId = iSFSObject.GetInt("senderId");
+                                consumableMMODeployedEvent.ExperienceId = iSFSObject.GetInt("senderId").Value;
                                 data = consumableMMODeployedEvent;
                             }
                             break;
                         case SmartfoxCommand.SET_CONSUMABLE_PARTIAL_COUNT:
                             gameServerEvent = GameServerEvent.COMSUMBLE_PARTIAL_COUNT_SET;
-                            data = mt.JsonService.Deserialize<SignedResponse<UsedConsumable>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<UsedConsumable>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.RECEIVED_REWARDS:
                             gameServerEvent = GameServerEvent.RECEIVED_REWARDS;
-                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.RECEIVED_REWARDS_DELAYED:
                             gameServerEvent = GameServerEvent.RECEIVED_REWARDS_DELAYED;
-                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<RewardedUserCollectionJsonHelper>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.RECEIVED_ROOOM_REWARDS:
                             gameServerEvent = GameServerEvent.RECEIVED_ROOOM_REWARDS;
-                            data = mt.JsonService.Deserialize<SignedResponse<InRoomRewards>>(iSFSObject.GetUtfString("reward"));
+                            data = mt.JsonService.Deserialize<SignedResponse<InRoomRewards>>(iSFSObject.GetString("reward"));
                             break;
                         case SmartfoxCommand.PROGRESSION_LEVELUP:
                             {
                                 gameServerEvent = GameServerEvent.LEVELUP;
                                 UserLevelUpEvent userLevelUpEvent = default(UserLevelUpEvent);
                                 userLevelUpEvent.SessionId = getSessionId(userId);
-                                userLevelUpEvent.Level = iSFSObject.GetInt("level");
+                                userLevelUpEvent.Level = iSFSObject.GetInt("level").Value;
                                 data = userLevelUpEvent;
                                 break;
                             }
                         case SmartfoxCommand.ROOM_TRANSIENT_DATA:
-                            mt.LastRoomTransientData = mt.JsonService.Deserialize<SignedResponse<TransientData>>(iSFSObject.GetUtfString("d"));
+                            mt.LastRoomTransientData = mt.JsonService.Deserialize<SignedResponse<TransientData>>(iSFSObject.GetString("d"));
                             break;
                         case SmartfoxCommand.TASK_COUNT:
                             {
                                 gameServerEvent = GameServerEvent.TASK_COUNT_UPDATED;
                                 TaskProgress taskProgress = default(TaskProgress);
-                                taskProgress.taskId = iSFSObject.GetUtfString("t");
-                                taskProgress.counter = iSFSObject.GetInt("c");
+                                taskProgress.taskId = iSFSObject.GetString("t");
+                                taskProgress.counter = iSFSObject.GetInt("c").Value;
                                 data = taskProgress;
                                 break;
                             }
                         case SmartfoxCommand.TASK_PROGRESS:
                             gameServerEvent = GameServerEvent.TASK_PROGRESS_UPDATED;
-                            data = mt.JsonService.Deserialize<SignedResponse<TaskProgress>>(iSFSObject.GetUtfString("d"));
+                            data = mt.JsonService.Deserialize<SignedResponse<TaskProgress>>(iSFSObject.GetString("d"));
                             break;
                         case SmartfoxCommand.GET_SIGNED_STATE:
                             gameServerEvent = GameServerEvent.STATE_SIGNED;
-                            data = mt.JsonService.Deserialize<SignedResponse<InWorldState>>(iSFSObject.GetUtfString("data"));
+                            data = mt.JsonService.Deserialize<SignedResponse<InWorldState>>(iSFSObject.GetString("data"));
                             break;
                         case SmartfoxCommand.GET_PLAYER_LOCATION:
                             gameServerEvent = GameServerEvent.PLAYER_LOCATION_RECEIVED;
@@ -1554,11 +1368,11 @@ namespace ClubPenguin.Net.Client
                             break;
                         case SmartfoxCommand.IGLOO_UPDATED:
                             gameServerEvent = GameServerEvent.IGLOO_UPDATED;
-                            data = iSFSObject.GetUtfString("igloo_id");
+                            data = iSFSObject.GetString("igloo_id");
                             break;
                         case SmartfoxCommand.FORCE_LEAVE:
                             gameServerEvent = GameServerEvent.FORCE_LEAVE;
-                            data = mt.JsonService.Deserialize<ZoneId>(iSFSObject.GetUtfString("zone_id"));
+                            data = mt.JsonService.Deserialize<ZoneId>(iSFSObject.GetString("zone_id"));
                             break;
                     }
                     if (gameServerEvent.HasValue)
@@ -1615,8 +1429,8 @@ namespace ClubPenguin.Net.Client
 
                 if (!rsaParams.HasValue)
                 {
-					UnityEngine.Debug.LogError("RSA parameters not available, cannot fetch encryption key");
-					return;
+                    failRoomJoin("RSA parameters are not available; cannot fetch the room encryption key.");
+                    return;
                 }
 
                 RSAParameters value = rsaParams.Value;
@@ -1636,7 +1450,18 @@ namespace ClubPenguin.Net.Client
             {
                 UnityEngine.Debug.LogError($"[WebGL] Error in fetchEncryptionKey: {ex.Message}");
                 Log.LogException(this, ex);
+                failRoomJoin("Failed to fetch the room encryption key: " + ex.Message);
             }
+        }
+
+        private void failRoomJoin(string errorMessage)
+        {
+            Log.LogNetworkError(this, errorMessage);
+            RoomJoinError roomJoinError = default(RoomJoinError);
+            roomJoinError.roomName = mt.JoinRoomDataRoom;
+            roomJoinError.errorMessage = errorMessage;
+            mt.teardown();
+            mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
         public void encryptionKeyReceived(string encodedEncryptedEncryptionKey)
@@ -1659,10 +1484,9 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onConnection(BaseEvent evt)
+        public void onConnection(ApiEvent evt)
         {
             UnityEngine.Debug.Log("Created SFS instance: " + mt.smartFox.GetHashCode());
-            Debug.Log("if OnConnect gets tampet");
             if ((bool)evt.Params["success"])
             {
                 Debug.Log("Attempting Login");
@@ -1709,55 +1533,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        public void onCryptoInit(BaseEvent evt)
-        {
-            bool flag = false;
-            if (evt.Params != null && evt.Params.ContainsKey("success"))
-            {
-                flag = (bool)evt.Params["success"];
-            }
-
-            if (flag)
-            {
-                mt.login();
-                return;
-            }
-
-            string text = null;
-            if (evt.Params != null)
-            {
-                object value;
-                if (evt.Params.TryGetValue("errorMessage", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("message", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("reason", out value) && value != null)
-                {
-                    text = value.ToString();
-                }
-                else if (evt.Params.TryGetValue("errorCode", out value) && value != null)
-                {
-                    text = "Error code: " + value.ToString();
-                }
-            }
-            if (string.IsNullOrEmpty(text))
-            {
-                text = "Unknown crypto init error";
-            }
-
-            Log.LogNetworkErrorFormatted(this, "Failed to initialize encryption libraries. Error: {0}", text);
-            RoomJoinError roomJoinError = default(RoomJoinError);
-            roomJoinError.roomName = mt.JoinRoomDataRoom;
-            roomJoinError.errorMessage = text;
-            mt.teardown();
-            mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
-        }
-
-        public void onLogin(BaseEvent evt)
+        public void onLogin(ApiEvent evt)
         {
             User user = (User)evt.Params["user"];
             mt.ClubPenguinClient.PlayerSessionId = mt.JoinRoomDataSessionId;
@@ -1765,7 +1541,7 @@ namespace ClubPenguin.Net.Client
             mt.onLogin();
         }
 
-        public void onLoginError(BaseEvent evt)
+        public void onLoginError(ApiEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             Log.LogNetworkErrorFormatted(this, "Login Failed. Error: {0}", text);
@@ -1776,7 +1552,7 @@ namespace ClubPenguin.Net.Client
             mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
         }
 
-        public void onRoomCreationError(BaseEvent evt)
+        public void onRoomCreationError(ApiEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             string text = (string)evt.Params["errorMessage"];
@@ -1792,7 +1568,7 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onRoomJoin(BaseEvent evt)
+        public void onRoomJoin(ApiEvent evt)
         {
             Room room = (Room)evt.Params["room"];
             if (RoomIdentifier.EqualsIgnoreInstanceId(room.Name, mt.JoinRoomDataRoom))
@@ -1800,19 +1576,16 @@ namespace ClubPenguin.Net.Client
                 mt.ClientRoomName = mt.JoinRoomDataRoom;
                 if (SmartFoxGameServerClient.EnableUDP)
                 {
-                    mt.initUDP();
+                    mt.connectUdp();
                 }
                 else
                 {
-                    UnityEngine.Debug.Log("Initializing fake time server");
-                    mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                    UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                    fetchEncryptionKey();
+                    fetchServerTimestamp(true);
                 }
             }
         }
 
-        public void onRoomJoinError(BaseEvent evt)
+        public void onRoomJoinError(ApiEvent evt)
         {
             string text = (string)evt.Params["errorMessage"];
             short num = (short)evt.Params["errorCode"];
@@ -1836,40 +1609,22 @@ namespace ClubPenguin.Net.Client
             mt.LastRoomTransientData = null;
         }
 
-        public void onUdpInit(BaseEvent evt)
+        public void onUdpConnection(ApiEvent evt)
         {
             bool flag = (bool)evt.Params["success"];
             string text = (string)evt.Params["errorMessage"];
             if (flag)
             {
-                UnityEngine.Debug.Log("Initializing fake time server");
-                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                fetchEncryptionKey();
+                fetchServerTimestamp(true);
                 return;
             }
             ConfigData smartFoxConfiguration = mt.smartFoxConfiguration;
-            Log.LogNetworkErrorFormatted(this, "Failed to initialize UDP connection on {0}:{1}. Error: {2}", smartFoxConfiguration.UdpHost, smartFoxConfiguration.UdpPort, text);
-            if (SmartFoxGameServerClient.AbortOnUDPError)
-            {
-                RoomJoinError roomJoinError = default(RoomJoinError);
-                roomJoinError.roomName = mt.JoinRoomDataRoom;
-                roomJoinError.errorMessage = text;
-                mt.teardown();
-                mt.triggerEvent(GameServerEvent.ROOM_JOIN_ERROR, roomJoinError);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Initializing fake time server");
-                mt.SetServerTimeUpdate(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
-                UnityEngine.Debug.Log("Running fetchEncryptionKey()");
-                fetchEncryptionKey();
-            }
+            failRoomJoin(string.Format("Failed to initialize UDP connection on {0}:{1}. Error: {2}", smartFoxConfiguration.Host, smartFoxConfiguration.UdpPort, text));
         }
 
-        public void onConnectionLost(BaseEvent evt)
+        public void onConnectionLost(ApiEvent evt)
         {
-            string text = (string)evt.Params["reason"];
+            string text = (string)evt.Params["disconnectionReason"];
             if (mt.WasTornDownImmediately)
             {
                 return;
@@ -1894,7 +1649,7 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onLogout(BaseEvent evt)
+        public void onLogout(ApiEvent evt)
         {
             mt.ClientRoomName = null;
             if (mt.isConnected && !mt.WasTornDownImmediately)
@@ -1908,30 +1663,6 @@ namespace ClubPenguin.Net.Client
             }
         }
 
-        public void onDebugMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onInfoMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onWarnMessage(BaseEvent evt)
-        {
-            string text = (string)evt.Params["message"];
-        }
-
-        public void onErrorMessage(BaseEvent evt)
-        {
-            if (!mt.WasTornDownImmediately)
-            {
-                string text = (string)evt.Params["message"];
-                Log.LogNetworkErrorFormatted(this, "[SFS ERROR] {0}", text);
-            }
-        }
-
         public LocomotionActionEvent locomotionActionEventFromProps(int playerId, ISFSObject props)
         {
             
@@ -1939,7 +1670,7 @@ namespace ClubPenguin.Net.Client
             result.SessionId = getSessionId(playerId);
             result.Type = (LocomotionAction)props.GetByte("a");
             result.Position = SmartFoxGameServerClientShared.deserializeVec3(props, "p");
-            result.Timestamp = props.GetLong("t");
+            result.Timestamp = props.GetLong("t").Value;
             if (props.ContainsKey("d"))
             {
                 result.Direction = SmartFoxGameServerClientShared.deserializeVec3(props, "d");
@@ -1950,14 +1681,14 @@ namespace ClubPenguin.Net.Client
             }
             if (props.ContainsKey("o"))
             {
-                result.Object = mt.JsonService.Deserialize<ActionedObject>(props.GetUtfString("o"));
+                result.Object = mt.JsonService.Deserialize<ActionedObject>(props.GetString("o"));
             }
             return result;
         }
 
         public long getSessionId(User user)
         {
-            return long.Parse(user.GetVariable(SocketUserVars.SESSION_ID.GetKey()).GetStringValue());
+            return long.Parse(user.GetVariable(SocketUserVars.SESSION_ID.GetKey()).StringValue);
         }
 
         public long getSessionId(int? userId)
@@ -1977,42 +1708,42 @@ namespace ClubPenguin.Net.Client
         public PartyGameStartEvent partyGameStartEventFromProps(ISFSObject props)
         {
             PartyGameStartEvent result = default(PartyGameStartEvent);
-            result.owner = props.GetLong("owner");
-            result.sessionId = props.GetInt("id");
-            result.templateId = props.GetInt("template");
-            result.players = props.GetLongArray("players");
+            result.owner = props.GetLong("owner").Value;
+            result.sessionId = props.GetInt("id").Value;
+            result.templateId = props.GetInt("template").Value;
+            result.players = props.GetLongArray("players").ToArray();
             return result;
         }
 
         public PartyGameStartEventV2 partyGameStartEventV2FromProps(ISFSObject props)
         {
             PartyGameStartEventV2 result = default(PartyGameStartEventV2);
-            result.sessionId = props.GetInt("id");
-            result.templateId = props.GetInt("template");
-            result.playerData = props.GetUtfString("players");
+            result.sessionId = props.GetInt("id").Value;
+            result.templateId = props.GetInt("template").Value;
+            result.playerData = props.GetString("players");
             return result;
         }
 
         public PartyGameEndEvent partyGameEndEventFromProps(ISFSObject props)
         {
             PartyGameEndEvent result = default(PartyGameEndEvent);
-            List<PartyGameEndPlayerResult> list = mt.JsonService.Deserialize<List<PartyGameEndPlayerResult>>(props.GetUtfString("results"));
+            List<PartyGameEndPlayerResult> list = mt.JsonService.Deserialize<List<PartyGameEndPlayerResult>>(props.GetString("results"));
             Dictionary<long, int> dictionary = new Dictionary<long, int>();
             for (int i = 0; i < list.Count; i++)
             {
                 dictionary.Add(list[i].PlayerSessionId, list[i].Placement);
             }
             result.playerSessionIdToPlacement = dictionary;
-            result.sessionId = props.GetInt("id");
+            result.sessionId = props.GetInt("id").Value;
             return result;
         }
 
         public PartyGameMessageEvent partyGameMessageEventFromProps(ISFSObject props)
         {
             PartyGameMessageEvent result = default(PartyGameMessageEvent);
-            result.sessionId = props.GetInt("id");
-            result.type = props.GetInt("type");
-            result.message = props.GetUtfString("message");
+            result.sessionId = props.GetInt("id").Value;
+            result.type = props.GetInt("type").Value;
+            result.message = props.GetString("message");
             return result;
         }
     }

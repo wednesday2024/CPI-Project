@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -22,7 +22,7 @@ namespace ClubPenguin.Net.Domain
 		{
 			if (sfsItem.ContainsVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()))
 			{
-				return sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).GetStringValue();
+				return sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).StringValue;
 			}
 			return string.Empty;
 		}
@@ -36,7 +36,7 @@ namespace ClubPenguin.Net.Domain
 		{
 			if (sfsItem.ContainsVariable(SocketItemVars.ACTION_COUNT.GetKey()))
 			{
-				return sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).GetIntValue();
+				return sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).IntValue.Value;
 			}
 			return 0;
 		}
@@ -50,7 +50,7 @@ namespace ClubPenguin.Net.Domain
 		{
 			if (sfsItem.ContainsVariable(SocketItemVars.INTEGER_A.GetKey()))
 			{
-				return sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).GetIntValue();
+				return sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).IntValue.Value;
 			}
 			return 0;
 		}

@@ -1,4 +1,4 @@
-using Sfs2X.Entities.Variables;
+using Sfs3.Client.Entities.Variables;
 using System;
 
 namespace ClubPenguin.Net.Client.Smartfox

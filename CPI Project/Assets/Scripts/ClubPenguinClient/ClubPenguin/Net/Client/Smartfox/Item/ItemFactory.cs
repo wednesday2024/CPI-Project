@@ -1,6 +1,6 @@
 using ClubPenguin.Net.Domain;
 using Disney.LaunchPadFramework;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Client.Smartfox.Item
@@ -9,7 +9,7 @@ namespace ClubPenguin.Net.Client.Smartfox.Item
 	{
 		public static CPMMOItem Create(IMMOItem sfsItem, Func<int?, long> sessionIdMapper)
 		{
-			ItemCategory intValue = (ItemCategory)sfsItem.GetVariable(SocketItemVars.CATEGORY.GetKey()).GetIntValue();
+			ItemCategory intValue = (ItemCategory)sfsItem.GetVariable(SocketItemVars.CATEGORY.GetKey()).IntValue.Value;
 			CPMMOItem cPMMOItem;
 			switch (intValue)
 			{
@@ -40,7 +40,7 @@ namespace ClubPenguin.Net.Client.Smartfox.Item
 				break;
 			}
 			cPMMOItem.Id = new CPMMOItemId(sfsItem.Id, CPMMOItemId.CPMMOItemParent.WORLD);
-			cPMMOItem.CreatorId = sessionIdMapper(sfsItem.GetVariable(SocketItemVars.CREATOR.GetKey()).GetIntValue());
+			cPMMOItem.CreatorId = sessionIdMapper(sfsItem.GetVariable(SocketItemVars.CREATOR.GetKey()).IntValue.Value);
 			return cPMMOItem;
 		}
 
@@ -71,7 +71,7 @@ namespace ClubPenguin.Net.Client.Smartfox.Item
 
 		private static ConsumableItem createConsumableItem(IMMOItem sfsItem)
 		{
-			string stringValue = sfsItem.GetVariable(SocketItemVars.TEMPLATE.GetKey()).GetStringValue();
+			string stringValue = sfsItem.GetVariable(SocketItemVars.TEMPLATE.GetKey()).StringValue;
 			ConsumableItem consumableItem;
 			switch (stringValue)
 			{
@@ -86,7 +86,7 @@ namespace ClubPenguin.Net.Client.Smartfox.Item
 				Log.LogError(typeof(CPMMOItem), "Unknown consumable template: " + stringValue);
 				break;
 			}
-			consumableItem.Type = sfsItem.GetVariable(SocketItemVars.TYPE.GetKey()).GetStringValue();
+			consumableItem.Type = sfsItem.GetVariable(SocketItemVars.TYPE.GetKey()).StringValue;
 			return consumableItem;
 		}
 

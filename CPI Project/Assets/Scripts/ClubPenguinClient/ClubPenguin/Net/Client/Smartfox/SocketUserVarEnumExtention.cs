@@ -1,5 +1,5 @@
 using Disney.LaunchPadFramework;
-using Sfs2X.Entities.Variables;
+using Sfs3.Client.Entities.Variables;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

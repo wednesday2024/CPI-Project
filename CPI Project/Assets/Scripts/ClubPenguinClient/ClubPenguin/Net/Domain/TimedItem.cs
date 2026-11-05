@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -11,7 +11,7 @@ namespace ClubPenguin.Net.Domain
 
 		public TimedItem(IMMOItem sfsItem)
 		{
-			TimeToLive = (float)sfsItem.GetVariable(SocketItemVars.TIME_TO_LIVE.GetKey()).GetDoubleValue();
+			TimeToLive = (float)sfsItem.GetVariable(SocketItemVars.TIME_TO_LIVE.GetKey()).DoubleValue.Value;
 		}
 
 		public TimedItem(float timeToLive)

@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -12,7 +12,7 @@ namespace ClubPenguin.Net.Domain
 		public ActionedItem(IMMOItem sfsItem)
 			: base(sfsItem)
 		{
-			ActionCount = sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).GetIntValue();
+			ActionCount = sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).IntValue.Value;
 		}
 
 		public ActionedItem(float timeToLive, int actionCount)

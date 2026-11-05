@@ -1,5 +1,5 @@
 using Disney.Manimal.Common.Util;
-using Sfs2X.Entities.Data;
+using Sfs3.Client.Entities.Data;
 using System;
 using System.Text;
 
@@ -31,9 +31,9 @@ namespace ClubPenguin.Net.Domain
 		public static AirBubble FromSFSData(ISFSObject obj)
 		{
 			AirBubble airBubble = new AirBubble();
-			airBubble.time = obj.GetLong("t");
-			airBubble.value = obj.GetFloat("v");
-			airBubble.diveState = obj.GetInt("s");
+			airBubble.time = obj.GetLong("t").Value;
+			airBubble.value = obj.GetFloat("v").Value;
+			airBubble.diveState = obj.GetInt("s").Value;
 			return airBubble;
 		}
 

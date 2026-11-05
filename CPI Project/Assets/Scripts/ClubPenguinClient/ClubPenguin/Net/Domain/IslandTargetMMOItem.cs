@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -15,9 +15,9 @@ namespace ClubPenguin.Net.Domain
 
 		public IslandTargetMMOItem(IMMOItem sfsItem)
 		{
-			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).GetStringValue();
-			HitCapacity = sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).GetIntValue();
-			HitCount = sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).GetIntValue();
+			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).StringValue;
+			HitCapacity = sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).IntValue.Value;
+			HitCount = sfsItem.GetVariable(SocketItemVars.ACTION_COUNT.GetKey()).IntValue.Value;
 		}
 
 		public bool IsAnnihilated()

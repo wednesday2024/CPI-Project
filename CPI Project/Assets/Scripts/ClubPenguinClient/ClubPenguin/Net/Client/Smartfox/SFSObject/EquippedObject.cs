@@ -1,4 +1,4 @@
-using Sfs2X.Entities.Data;
+using Sfs3.Client.Entities.Data;
 using System;
 
 namespace ClubPenguin.Net.Client.Smartfox.SFSObject
@@ -79,17 +79,17 @@ namespace ClubPenguin.Net.Client.Smartfox.SFSObject
 		public static EquippedObject FromSFSData(ISFSObject obj, string properties = null)
 		{
 			EquippedObject equippedObject = new EquippedObject();
-			equippedObject.equippedObjectType = obj.GetUtfString("type");
-			equippedObject.EquippedObjectId = obj.GetUtfString("name");
+			equippedObject.equippedObjectType = obj.GetString("type");
+			equippedObject.EquippedObjectId = obj.GetString("name");
 			equippedObject.PropertiesJSON = properties;
 			return equippedObject;
 		}
 
 		public ISFSObject ToSFSObject()
 		{
-			ISFSObject iSFSObject = new Sfs2X.Entities.Data.SFSObject();
-			iSFSObject.PutUtfString("type", equippedObjectType);
-			iSFSObject.PutUtfString("name", EquippedObjectId);
+			ISFSObject iSFSObject = new Sfs3.Client.Entities.Data.SFSObject();
+			iSFSObject.PutString("type", equippedObjectType);
+			iSFSObject.PutString("name", EquippedObjectId);
 			return iSFSObject;
 		}
 	}

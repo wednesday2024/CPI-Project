@@ -6,11 +6,11 @@ using ClubPenguin.Net.Domain.Igloo;
 using ClubPenguin.Net.Utils;
 using Disney.Kelowna.Common;
 using Disney.LaunchPadFramework;
-using Sfs2X;
-using Sfs2X.Entities;
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
-using Sfs2X.Requests;
+using Sfs3.Client;
+using Sfs3.Client.Entities;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
+using Sfs3.Client.Requests;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,9 +28,6 @@ namespace ClubPenguin.Net.Client
 
 		[Tweakable("Session.GameServer.EnableUDP", Description = "Enable UDP events in the SFS game server")]
 		public static bool EnableUDP = false;
-
-		[Tweakable("Session.GameServer.AbortOnUDPError")]
-		public static bool AbortOnUDPError = false;
 
 		private IDictionary<GameServerEvent, GameServerEventListener> eventListeners = new Dictionary<GameServerEvent, GameServerEventListener>();
 
@@ -99,11 +96,6 @@ namespace ClubPenguin.Net.Client
 				{
 					CoroutineRunner.Start(forceTeardownAfterDelay(mt.smartFoxRef, 5), this, "forceTeardownAfterDelay");
                     mt.TriggerForceTeardownAfterDelay = false;
-				}
-				if (mt.TriggerInitCrypto)
-				{
-					mt.InitCrypto();
-					mt.TriggerInitCrypto = false;
 				}
                 long serverTime;
 				if (mt.TryGetServerTimeUpdate(out serverTime))

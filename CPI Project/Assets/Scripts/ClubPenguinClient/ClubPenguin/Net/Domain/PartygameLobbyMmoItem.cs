@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -37,7 +37,7 @@ namespace ClubPenguin.Net.Domain
 			string result = string.Empty;
 			if (sfsItem.ContainsVariable(SocketItemVars.SCORE_DATA.GetKey()))
 			{
-				result = sfsItem.GetVariable(SocketItemVars.SCORE_DATA.GetKey()).GetStringValue();
+				result = sfsItem.GetVariable(SocketItemVars.SCORE_DATA.GetKey()).StringValue;
 			}
 			return result;
 		}
@@ -52,7 +52,7 @@ namespace ClubPenguin.Net.Domain
 			long result = 0L;
 			if (sfsItem.ContainsVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()))
 			{
-				result = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).GetStringValue());
+				result = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).StringValue);
 			}
 			return result;
 		}
@@ -67,7 +67,7 @@ namespace ClubPenguin.Net.Domain
 			long result = 0L;
 			if (sfsItem.ContainsVariable(SocketItemVars.TIME_TO_LIVE.GetKey()))
 			{
-				result = sfsItem.GetVariable(SocketItemVars.TIME_TO_LIVE.GetKey()).GetIntValue();
+				result = sfsItem.GetVariable(SocketItemVars.TIME_TO_LIVE.GetKey()).IntValue.Value;
 			}
 			return result;
 		}
@@ -82,7 +82,7 @@ namespace ClubPenguin.Net.Domain
 			int result = 0;
 			if (sfsItem.ContainsVariable(SocketItemVars.INTEGER_A.GetKey()))
 			{
-				result = sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).GetIntValue();
+				result = sfsItem.GetVariable(SocketItemVars.INTEGER_A.GetKey()).IntValue.Value;
 			}
 			return result;
 		}

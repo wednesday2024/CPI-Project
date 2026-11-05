@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client;
-using Sfs2X.Entities.Data;
+using Sfs3.Client.Entities.Data;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -40,9 +40,9 @@ namespace ClubPenguin.Net.Utils
 				throw new Exception("Failed to encrypt parameter '" + parameterKey + "'. Parameter not found.");
 			}
 			SFSDataWrapper sFSDataWrapper = parameters[parameterKey];
-			if (sFSDataWrapper.Type != 8)
+			if (sFSDataWrapper.Type != (int)SFSDataType.STRING)
 			{
-				throw new Exception("Failed to encrypt parameter '" + parameterKey + "'. Parameter is not a UTF string.");
+				throw new Exception("Failed to encrypt parameter '" + parameterKey + "'. Parameter is not a string.");
 			}
 			string s = sFSDataWrapper.Data.ToString();
 			byte[] bytes = Encoding.UTF8.GetBytes(s);
@@ -56,12 +56,12 @@ namespace ClubPenguin.Net.Utils
 		{
 			if (parameters.ContainsKey(ENCRYPTED_PARAMETER))
 			{
-				string utfString = parameters.GetUtfString(ENCRYPTED_PARAMETER);
-				string utfString2 = parameters.GetUtfString(utfString);
+				string utfString = parameters.GetString(ENCRYPTED_PARAMETER);
+				string utfString2 = parameters.GetString(utfString);
 				byte[] bytes = Convert.FromBase64String(utfString2);
 				byte[] bytes2 = Decrypt(bytes);
 				string @string = Encoding.UTF8.GetString(bytes2);
-				parameters.PutUtfString(utfString, @string);
+				parameters.PutString(utfString, @string);
 			}
 		}
 

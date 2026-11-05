@@ -1,5 +1,5 @@
 using ClubPenguin.Net.Client.Smartfox;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -15,11 +15,11 @@ namespace ClubPenguin.Net.Domain
 
 		public IslandTargetGroupMMOItem(IMMOItem sfsItem)
 		{
-			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).GetStringValue();
-			Expires = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).GetStringValue());
+			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).StringValue;
+			Expires = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).StringValue);
 			if (sfsItem.ContainsVariable(SocketItemVars.TIMESTAMP.GetKey()))
 			{
-				Starts = long.Parse(sfsItem.GetVariable(SocketItemVars.TIMESTAMP.GetKey()).GetStringValue());
+				Starts = long.Parse(sfsItem.GetVariable(SocketItemVars.TIMESTAMP.GetKey()).StringValue);
 			}
 		}
 	}

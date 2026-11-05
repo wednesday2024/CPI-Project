@@ -1,6 +1,6 @@
 using ClubPenguin.Net.Client.Smartfox;
 using Disney.Manimal.Common.Util;
-using Sfs2X.Entities;
+using Sfs3.Client.Entities;
 using System;
 
 namespace ClubPenguin.Net.Domain
@@ -28,9 +28,9 @@ namespace ClubPenguin.Net.Domain
 
 		public StatefulWorldObject(IMMOItem sfsItem)
 		{
-			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).GetStringValue();
-			Timestamp = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).GetStringValue());
-			State = (ScheduledWorldObjectState)sfsItem.GetVariable(SocketItemVars.SCHEDULED_WORLD_OBJECT_STATE.GetKey()).GetIntValue();
+			Path = sfsItem.GetVariable(SocketItemVars.GAME_OBJECT_PATH.GetKey()).StringValue;
+			Timestamp = long.Parse(sfsItem.GetVariable(SocketItemVars.STATE_TIMESTAMP.GetKey()).StringValue);
+			State = (ScheduledWorldObjectState)sfsItem.GetVariable(SocketItemVars.SCHEDULED_WORLD_OBJECT_STATE.GetKey()).IntValue.Value;
 		}
 	}
 }

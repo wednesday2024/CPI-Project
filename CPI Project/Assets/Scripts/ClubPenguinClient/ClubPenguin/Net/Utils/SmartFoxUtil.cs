@@ -1,5 +1,5 @@
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
 using System;
 
 namespace ClubPenguin.Net.Utils
@@ -27,31 +27,31 @@ namespace ClubPenguin.Net.Utils
 
 		public static object GetValueFromSFSUserValue(UserVariable sfsValue, Type type)
 		{
-			if (sfsValue.IsNull())
+			if (sfsValue.IsNull)
 			{
 				return null;
 			}
 			if (type == typeof(bool))
 			{
-				return Convert.ChangeType(sfsValue.GetBoolValue(), type);
+				return sfsValue.BoolValue.Value;
 			}
 			if (type == typeof(double))
 			{
-				return Convert.ChangeType(sfsValue.GetDoubleValue(), type);
+				return sfsValue.DoubleValue.Value;
 			}
 			if (type == typeof(int))
 			{
-				return Convert.ChangeType(sfsValue.GetIntValue(), type);
+				return sfsValue.IntValue.Value;
 			}
 			if (type == typeof(string))
 			{
-				return Convert.ChangeType(sfsValue.GetStringValue(), type);
+				return sfsValue.StringValue;
 			}
 			if (type == typeof(SFSObject))
 			{
-				return Convert.ChangeType(sfsValue.GetSFSObjectValue(), type);
+				return sfsValue.SFSObjectValue;
 			}
-			return Convert.ChangeType(sfsValue.GetSFSObjectValue(), type);
+			return sfsValue.SFSObjectValue;
 		}
 	}
 }

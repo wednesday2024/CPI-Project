@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using Sfs2X;
 
 namespace ClubPenguin.Net.Client
 {

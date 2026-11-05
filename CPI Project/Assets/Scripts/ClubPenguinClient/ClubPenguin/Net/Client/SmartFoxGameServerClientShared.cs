@@ -6,18 +6,18 @@ using ClubPenguin.Net.Utils;
 using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
 using Org.BouncyCastle.Crypto.Generators;
-using Sfs2X;
-using Sfs2X.Core;
-using Sfs2X.Entities;
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
-using Sfs2X.Logging;
-using Sfs2X.Requests;
-using Sfs2X.Util;
+using Sfs3.Client;
+using Sfs3.Client.BitSwarm;
+using Sfs3.Client.Entities;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
+using Sfs3.Client.Requests;
+using Sfs3.Client.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 
 namespace ClubPenguin.Net.Client
@@ -37,8 +37,6 @@ namespace ClubPenguin.Net.Client
 		internal readonly JsonService JsonService;
 
 		internal readonly ClubPenguinClient ClubPenguinClient;
-
-		internal bool TriggerInitCrypto = false;
 
 		internal bool TriggerForceTeardownAfterDelay = false;
 
@@ -211,17 +209,6 @@ namespace ClubPenguin.Net.Client
 			}
 		}
 
-		private bool isUDPEstablished
-		{
-			get
-			{
-				lock (smartFoxLock)
-				{
-					return smartFox.UdpInited;
-				}
-			}
-		}
-
 		internal string ClientRoomName
 		{
 			get
@@ -260,16 +247,6 @@ namespace ClubPenguin.Net.Client
 				}
 			}
 			return result;
-		}
-
-		internal void InitCrypto()
-		{
-			lock (smartFoxLock)
-			{
-				if (smartFox != null)
-				{
-                }
-            }
 		}
 
 		internal void Disconnect()
@@ -388,23 +365,14 @@ namespace ClubPenguin.Net.Client
 
 		private void setup()
 		{
-			bool test = false;
 			lock (smartFoxLock)
 			{
 				if (smartFox == null)
 				{
 
-                    smartFox = new SmartFox(UseEncryption ? UseWebSocket.WSS_BIN : UseWebSocket.WS_BIN, sfsDebugLogging);
+                    smartFox = new SmartFox();
                     UnityEngine.Debug.Log("After creating SmartFox: Created SFS instance: " + smartFox.GetHashCode());
-                    SmartFoxFramePump.Register(() =>
-                    {
-                        smartFox?.ProcessEvents();
-						if (!test)
-						{
-                            UnityEngine.Debug.Log("Inside your pump: Created SFS instance: " + smartFox?.GetHashCode());
-							test = true;
-                        }
-                    });
+					SmartFoxFramePump.Register(() => smartFox?.ProcessEvents());
                     sfsThread.AddListeners(smartFox);
                 }
 			}
@@ -438,7 +406,7 @@ namespace ClubPenguin.Net.Client
 			{
 				if (lastRoomTransientData != null)
 				{
-					sFSObject.PutUtfString("transientData", JsonService.Serialize(lastRoomTransientData));
+					sFSObject.PutString("transientData", JsonService.Serialize(lastRoomTransientData));
 				}
 			}
 			send(new LoginRequest(joinRoomDataUserName, password, zone, sFSObject));
@@ -450,16 +418,16 @@ namespace ClubPenguin.Net.Client
 			{
 				lock (smartFoxLock)
 				{
-					smartFox.EnableLagMonitor(true);
+					smartFox.EnableLagMonitor(true, 1000, 10);
 				}
 			}
 		}
 
-		internal void initUDP()
+		internal void connectUdp()
 		{
 			lock (smartFoxLock)
 			{
-				smartFox.InitUDP();
+				smartFox.ConnectUdp();
 			}
 		}
 
@@ -481,11 +449,12 @@ namespace ClubPenguin.Net.Client
 				{
 					text = string.Format(text, commandParameters);
 				}
-				send(new ExtensionRequest(text, iSFSObject, currentRoom, useUDP && isUDPEstablished));
+				TransportType transportType = useUDP && SmartFoxGameServerClient.EnableUDP ? TransportType.UDP : TransportType.TCP;
+				send(new ExtensionRequest(text, iSFSObject, currentRoom, transportType));
 			}
 		}
 
-		internal void send(IRequest request)
+		internal void send(IClientRequest request)
 		{
 			lock (smartFoxLock)
 			{
@@ -497,9 +466,9 @@ namespace ClubPenguin.Net.Client
 		{
 			lock (smartFoxLock)
 			{
-				if (smartFox != null && smartFox.JoinedRooms.Count > 0)
+				if (smartFox != null && smartFox.GetJoinedRooms().Count > 0)
 				{
-					return smartFox.JoinedRooms[0];
+					return smartFox.GetJoinedRooms()[0];
 				}
 				return null;
 			}
@@ -521,12 +490,14 @@ namespace ClubPenguin.Net.Client
 				configData.Port = serverTcpPort;
                 configData.HttpsPort = serverHttpsPort;
 				configData.Zone = zone;
-				configData.Debug = sfsDebugLogging;
+				configData.NetDebugLevel = sfsDebugLogging ? NetDebugLevel.PROTOCOL : NetDebugLevel.OFF;
+				configData.UseWebSocket = true;
+				configData.UseSSL = UseEncryption;
 				if (configData.BlueBox != null)
 				{
 					configData.BlueBox.IsActive = false;
 				}
-				configData.UdpHost = serverIP;
+
 				configData.UdpPort = serverTcpPort;
                 configData.Port = UseEncryption ? serverHttpsPort : configData.HttpPort;
                 UnityEngine.Debug.Log("Before Connect: Created SFS instance: " + smartFox.GetHashCode());
@@ -556,12 +527,14 @@ namespace ClubPenguin.Net.Client
 				configData.Port = tcpPort;
 				configData.HttpsPort = httpsPort;
 				configData.Zone = zone;
-				configData.Debug = sfsDebugLogging;
+				configData.NetDebugLevel = sfsDebugLogging ? NetDebugLevel.PROTOCOL : NetDebugLevel.OFF;
+				configData.UseWebSocket = true;
+				configData.UseSSL = UseEncryption;
 				if (configData.BlueBox != null)
 				{
 					configData.BlueBox.IsActive = false;
 				}
-				configData.UdpHost = host;
+
 				configData.UdpPort = tcpPort;
                 configData.Port = UseEncryption ? httpsPort : configData.HttpPort;
                 smartFox.Connect(configData);
@@ -589,7 +562,7 @@ namespace ClubPenguin.Net.Client
 			{
 				return new SFSDataWrapper(SFSDataType.TEXT, str);
 			}
-			return new SFSDataWrapper(SFSDataType.UTF_STRING, str);
+			return new SFSDataWrapper(SFSDataType.STRING, str);
 		}
 
 		internal static SFSDataWrapper serialize(Vector3 vec)
@@ -613,13 +586,13 @@ namespace ClubPenguin.Net.Client
 
 		internal static Vector3 deserializeVec3(ISFSObject props, string key)
 		{
-			float[] floatArray = props.GetFloatArray(key);
+			float[] floatArray = props.GetFloatArray(key).ToArray();
 			return new Vector3(floatArray[0], floatArray[1], floatArray[2]);
 		}
 
 		internal static Vector2 deserializeVec2(ISFSObject props, string key)
 		{
-			float[] floatArray = props.GetFloatArray(key);
+			float[] floatArray = props.GetFloatArray(key).ToArray();
 			return new Vector2(floatArray[0], floatArray[1]);
 		}
 	}
@@ -632,18 +605,18 @@ using ClubPenguin.Net.Utils;
 using Disney.Kelowna.Common;
 using Disney.MobileNetwork;
 using Org.BouncyCastle.Crypto.Generators;
-using Sfs2X;
-using Sfs2X.Core;
-using Sfs2X.Entities;
-using Sfs2X.Entities.Data;
-using Sfs2X.Entities.Variables;
-using Sfs2X.Logging;
-using Sfs2X.Requests;
-using Sfs2X.Util;
+using Sfs3.Client;
+using Sfs3.Client.BitSwarm;
+using Sfs3.Client.Entities;
+using Sfs3.Client.Entities.Data;
+using Sfs3.Client.Entities.Variables;
+using Sfs3.Client.Requests;
+using Sfs3.Client.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -661,18 +634,11 @@ namespace ClubPenguin.Net.Client
 
 		internal readonly bool UseEncryption;
 
-		internal bool EnableLagMonitorLogging
-		{
-			get { return enableLagMonitor; }
-		}
-
 		internal SmartFoxEncryptor SmartFoxEncryptor;
 
 		internal readonly JsonService JsonService;
 
 		internal readonly ClubPenguinClient ClubPenguinClient;
-
-		internal bool TriggerInitCrypto = false;
 
 		internal bool TriggerForceTeardownAfterDelay = false;
 
@@ -846,17 +812,6 @@ namespace ClubPenguin.Net.Client
 			}
 		}
 
-		private bool isUDPEstablished
-		{
-			get
-			{
-				lock (smartFoxLock)
-				{
-					return smartFox.UdpInited;
-				}
-			}
-		}
-
 		internal string ClientRoomName
 		{
 			get
@@ -895,16 +850,6 @@ namespace ClubPenguin.Net.Client
 				}
 			}
 			return result;
-		}
-
-		internal void InitCrypto()
-		{
-			lock (smartFoxLock)
-			{
-				if (smartFox != null)
-				{
-                }
-            }
 		}
 
 		internal void Disconnect()
@@ -1086,23 +1031,14 @@ namespace ClubPenguin.Net.Client
 
         private void setup()
         {
-            bool test = false;
             lock (smartFoxLock)
             {
                 if (smartFox == null)
                 {
 
-                    smartFox = new SmartFox(UseEncryption ? UseWebSocket.WSS_BIN : UseWebSocket.WS_BIN, sfsDebugLogging);
+                    smartFox = new SmartFox();
                     UnityEngine.Debug.Log("After creating SmartFox: Created SFS instance: " + smartFox.GetHashCode());
-                    SmartFoxFramePump.Register(() =>
-                    {
-                        smartFox?.ProcessEvents();
-                        if (!test)
-                        {
-                            UnityEngine.Debug.Log("Inside your pump: Created SFS instance: " + smartFox?.GetHashCode());
-                            test = true;
-                        }
-                    });
+					SmartFoxFramePump.Register(() => smartFox?.ProcessEvents());
                     sfsThread.AddListeners(smartFox);
                 }
             }
@@ -1136,7 +1072,7 @@ namespace ClubPenguin.Net.Client
 			{
 				if (lastRoomTransientData != null)
 				{
-					sFSObject.PutUtfString("transientData", JsonService.Serialize(lastRoomTransientData));
+					sFSObject.PutString("transientData", JsonService.Serialize(lastRoomTransientData));
 				}
 			}
 			send(new LoginRequest(joinRoomDataUserName, password, zone, sFSObject));
@@ -1148,16 +1084,16 @@ namespace ClubPenguin.Net.Client
 			{
 				lock (smartFoxLock)
 				{
-					smartFox.EnableLagMonitor(true);
+					smartFox.EnableLagMonitor(true, 1000, 10);
 				}
 			}
 		}
 
-		internal void initUDP()
+		internal void connectUdp()
 		{
 			lock (smartFoxLock)
 			{
-				smartFox.InitUDP();
+				smartFox.ConnectUdp();
 			}
 		}
 
@@ -1179,11 +1115,12 @@ namespace ClubPenguin.Net.Client
 				{
 					text = string.Format(text, commandParameters);
 				}
-				send(new ExtensionRequest(text, iSFSObject, currentRoom, useUDP && isUDPEstablished));
+				TransportType transportType = useUDP && SmartFoxGameServerClient.EnableUDP ? TransportType.UDP : TransportType.TCP;
+				send(new ExtensionRequest(text, iSFSObject, currentRoom, transportType));
 			}
 		}
 
-		internal void send(IRequest request)
+		internal void send(IClientRequest request)
 		{
 			lock (smartFoxLock)
 			{
@@ -1207,9 +1144,9 @@ namespace ClubPenguin.Net.Client
 		{
 			lock (smartFoxLock)
 			{
-				if (smartFox != null && smartFox.JoinedRooms.Count > 0)
+				if (smartFox != null && smartFox.GetJoinedRooms().Count > 0)
 				{
-					return smartFox.JoinedRooms[0];
+					return smartFox.GetJoinedRooms()[0];
 				}
 				return null;
 			}
@@ -1231,12 +1168,14 @@ namespace ClubPenguin.Net.Client
 				configData.Port = serverTcpPort;
                 configData.HttpsPort = serverHttpsPort;
 				configData.Zone = zone;
-				configData.Debug = sfsDebugLogging;
+				configData.NetDebugLevel = sfsDebugLogging ? NetDebugLevel.PROTOCOL : NetDebugLevel.OFF;
+				configData.UseWebSocket = true;
+				configData.UseSSL = UseEncryption;
 				if (configData.BlueBox != null)
 				{
 					configData.BlueBox.IsActive = false;
 				}
-				configData.UdpHost = serverIP;
+
 				configData.UdpPort = serverTcpPort;
                 configData.Port = UseEncryption ? serverHttpsPort : configData.HttpPort;
                 UnityEngine.Debug.Log("Before Connect: Created SFS instance: " + smartFox.GetHashCode());
@@ -1266,12 +1205,14 @@ namespace ClubPenguin.Net.Client
 				configData.Port = tcpPort;
 				configData.HttpsPort = httpsPort;
 				configData.Zone = zone;
-				configData.Debug = sfsDebugLogging;
+				configData.NetDebugLevel = sfsDebugLogging ? NetDebugLevel.PROTOCOL : NetDebugLevel.OFF;
+				configData.UseWebSocket = true;
+				configData.UseSSL = UseEncryption;
 				if (configData.BlueBox != null)
 				{
 					configData.BlueBox.IsActive = false;
 				}
-				configData.UdpHost = host;
+
 				configData.UdpPort = tcpPort;
                 configData.Port = UseEncryption ? httpsPort : configData.HttpPort;
                 smartFox.Connect(configData);
@@ -1299,7 +1240,7 @@ namespace ClubPenguin.Net.Client
 			{
 				return new SFSDataWrapper(SFSDataType.TEXT, str);
 			}
-			return new SFSDataWrapper(SFSDataType.UTF_STRING, str);
+			return new SFSDataWrapper(SFSDataType.STRING, str);
 		}
 
 		internal static SFSDataWrapper serialize(Vector3 vec)
@@ -1323,13 +1264,13 @@ namespace ClubPenguin.Net.Client
 
 		internal static Vector3 deserializeVec3(ISFSObject props, string key)
 		{
-			float[] floatArray = props.GetFloatArray(key);
+			float[] floatArray = props.GetFloatArray(key).ToArray();
 			return new Vector3(floatArray[0], floatArray[1], floatArray[2]);
 		}
 
 		internal static Vector2 deserializeVec2(ISFSObject props, string key)
 		{
-			float[] floatArray = props.GetFloatArray(key);
+			float[] floatArray = props.GetFloatArray(key).ToArray();
 			return new Vector2(floatArray[0], floatArray[1]);
 		}
 	}
