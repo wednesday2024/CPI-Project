@@ -12,7 +12,6 @@ using UnityEngine;
 
 namespace ClubPenguin
 {
-	[RequireComponent(typeof(AvatarView))]
 	public class ZoneLocalPlayerManager : MonoBehaviour
 	{
 		public GameObject LocalPlayerGameObject;

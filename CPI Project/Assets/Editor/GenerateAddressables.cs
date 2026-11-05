@@ -415,25 +415,3 @@ public static class GenerateAddressables
     }
 
 }
-
-public sealed class AddressableBundleNameBuilder : BuildScriptPackedMode
-{
-    public override string Name
-    {
-        get { return nameof(AddressableBundleNameBuilder); }
-    }
-
-    protected override string ConstructAssetBundleName(AddressableAssetGroup assetGroup, BundledAssetGroupSchema schema, BundleDetails info, string assetBundleName)
-    {
-        if (assetGroup != null)
-        {
-            string bundleName = GenerateAddressables.GetAddressableBundleName(assetGroup);
-            if (!string.IsNullOrEmpty(bundleName))
-            {
-                return bundleName;
-            }
-        }
-
-        return base.ConstructAssetBundleName(assetGroup, schema, info, assetBundleName);
-    }
-}

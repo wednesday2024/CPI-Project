@@ -179,7 +179,9 @@ namespace ClubPenguin.Video
           bool started = false;
           bool hasError = false;
           bool skipRequested = false;
+#if UNITY_WEBGL && !UNITY_EDITOR
           bool playRequested = false;
+#endif
 
           skipButton.onClick.AddListener(delegate
           {
