@@ -50,8 +50,6 @@ public class DownloadingProgressPanelController : MonoBehaviour
 
 	public bool FullProgressCompleted = false;
 
-	private float gradualProgress = 0f;
-
 	private void OnValidate()
 	{
 	}
@@ -65,7 +63,6 @@ public class DownloadingProgressPanelController : MonoBehaviour
 			tintSelector = ProgressBarFill.GetComponentInChildren<TintSelector>();
 			milestoneProgress = progressBarFillRectTransform.rect.width / (float)tintSelector.Colors.Length;
 			progressbarWidth = progressBarFillRectTransform.rect.width;
-			gradualProgress = 0f;
 		}
 		if (Emojis != null)
 		{

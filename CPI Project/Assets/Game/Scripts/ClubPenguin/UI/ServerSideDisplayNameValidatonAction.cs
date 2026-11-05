@@ -34,8 +34,6 @@ namespace ClubPenguin.UI
 
 		private string lastInputString;
 
-		private int numSuggestionRounds = 0;
-
 		private bool isBaseValidationDone;
 
 		private int currentNumber;

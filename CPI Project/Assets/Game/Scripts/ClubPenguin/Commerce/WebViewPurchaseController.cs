@@ -26,8 +26,6 @@ namespace ClubPenguin.Commerce
 
         private const string javaScriptEnableCommFunction = "CPI.Membership.EnableWebviewEventComm";
 
-        private bool closeUserInitiated = true;
-
         private CSGConfig csgConfig;
 
         private string planId;

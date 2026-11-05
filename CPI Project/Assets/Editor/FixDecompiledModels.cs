@@ -133,7 +133,7 @@ public class FixDecompiledModels
             mesh.RecalculateTangents();
             mesh.RecalculateBounds();
         }
-        catch (System.Exception exception)
+        catch (System.Exception)
         {
             return false;
         }

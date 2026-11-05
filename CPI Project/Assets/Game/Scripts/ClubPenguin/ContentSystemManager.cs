@@ -72,7 +72,6 @@ namespace ClubPenguin
 
 		private IManifestService getManifestServiceForEnvironment()
 		{
-			Disney.Kelowna.Common.Environment.Environment environment = Disney.Kelowna.Common.Environment.Environment.PRODUCTION;
 			return new ManifestService();
 		}
 

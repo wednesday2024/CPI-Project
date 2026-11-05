@@ -524,7 +524,6 @@ namespace ClubPenguin
 				return false;
 			}
 			DecorationLayoutData data = default(DecorationLayoutData);
-			bool flag = false;
 			Vector3 zero = Vector3.zero;
 			UnityEngine.Quaternion identity = UnityEngine.Quaternion.identity;
 			Vector3 one = Vector3.one;

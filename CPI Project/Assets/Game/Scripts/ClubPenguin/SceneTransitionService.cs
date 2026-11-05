@@ -501,29 +501,19 @@ namespace ClubPenguin
 			List<SceneLoadingRequest> assetRequests = new List<SceneLoadingRequest>();
 			AssetRequest<Object> mainSceneAssetRequest = null;
 			sceneAssetKeys = new List<string>();
-			if (false)
+			if (Content.ContainsKey(sceneName))
 			{
-				foreach (string additiveScene2 in additiveScenes)
-				{
-					loadableScenes.Enqueue(additiveScene2);
-				}
+				mainSceneAssetRequest = Content.LoadAsync<Object>(sceneName);
 			}
-			else
+			foreach (string additiveScene3 in additiveScenes)
 			{
-				if (Content.ContainsKey(sceneName))
+				if (Content.ContainsKey(additiveScene3))
 				{
-					mainSceneAssetRequest = Content.LoadAsync<Object>(sceneName);
+					assetRequests.Add(new SceneLoadingRequest(additiveScene3, Content.LoadAsync<Object>(additiveScene3)));
 				}
-				foreach (string additiveScene3 in additiveScenes)
+				else
 				{
-					if (Content.ContainsKey(additiveScene3))
-					{
-						assetRequests.Add(new SceneLoadingRequest(additiveScene3, Content.LoadAsync<Object>(additiveScene3)));
-					}
-					else
-					{
-						loadableScenes.Enqueue(additiveScene3);
-					}
+					loadableScenes.Enqueue(additiveScene3);
 				}
 			}
 			if (mainSceneAssetRequest != null)

@@ -26,7 +26,6 @@ namespace ClubPenguin.Core
 			List<GroupDefinition> list = new List<GroupDefinition>();
 			foreach (GroupDefinition value in groups.Values)
 			{
-				bool flag = false;
 				if ((value.Parent != null && !string.IsNullOrEmpty(value.Parent.Key)) ? (parent != null && value.Parent.Key == parent.Key) : (parent == null || string.IsNullOrEmpty(parent.Key)))
 				{
 					bool flag2 = false;

@@ -491,7 +491,6 @@ namespace ClubPenguin
 
 		private string getCommerceErrorMsg(int errorNumber)
 		{
-			string text = "";
 			switch (errorNumber)
 			{
 			case 100:

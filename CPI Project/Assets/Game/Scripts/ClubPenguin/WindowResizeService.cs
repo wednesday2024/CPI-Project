@@ -17,8 +17,6 @@ namespace ClubPenguin
 
 		private bool isWindowResizing = false;
 
-		private float osxResizeTime = 1f;
-
 		private float winResizeTime = 0.6f;
 
 		private WaitForSecondsRealtime waitForResize;
@@ -121,8 +119,6 @@ namespace ClubPenguin
 		private int previousScreensize = Screen.width * Screen.height;
 
 		private bool isWindowResizing = false;
-
-		private float osxResizeTime = 1f;
 
 		private float winResizeTime = 0.6f;
 

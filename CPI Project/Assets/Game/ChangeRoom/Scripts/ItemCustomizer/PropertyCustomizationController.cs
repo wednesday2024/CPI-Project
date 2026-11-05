@@ -436,7 +436,6 @@ namespace ClubPenguin.ClothingDesigner.ItemCustomizer
 		{
 			float num = 50f;
 			float num2 = 2f;
-			float num3 = 0f;
 			if (fromSlider)
 			{
 				return scale * scale / num + num2;

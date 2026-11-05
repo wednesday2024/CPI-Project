@@ -6,8 +6,6 @@ namespace ClubPenguin
 {
 	public class ExpandParticlesToViewport : MonoBehaviour
 	{
-		private static int UPDATE_ON_FRAME = 3;
-
 		public float EffectDepth = 5f;
 
 		public Vector3 EffectPercentAdjustment = Vector3.one;

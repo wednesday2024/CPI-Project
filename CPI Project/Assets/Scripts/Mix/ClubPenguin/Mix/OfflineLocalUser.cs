@@ -91,6 +91,7 @@ namespace ClubPenguin.Mix
 			}
 		}
 
+#pragma warning disable 0067
 		public event EventHandler<AbstractAlertsAddedEventArgs> OnAlertsAdded;
 
 		public event EventHandler<AbstractAlertsClearedEventArgs> OnAlertsCleared;
@@ -104,6 +105,7 @@ namespace ClubPenguin.Mix
 		public event EventHandler<AbstractUnfriendedEventArgs> OnUnfriended;
 
 		public event EventHandler<AbstractUntrustedEventArgs> OnUntrusted;
+#pragma warning restore 0067
 
 		public OfflineLocalUser(string userName)
 		{

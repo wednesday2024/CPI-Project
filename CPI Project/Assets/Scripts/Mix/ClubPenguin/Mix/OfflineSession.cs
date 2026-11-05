@@ -42,6 +42,7 @@ namespace ClubPenguin.Mix
 			}
 		}
 
+#pragma warning disable 0067
 		public event EventHandler<AbstractAuthenticationLostEventArgs> OnAuthenticationLost;
 
 		public event EventHandler<AbstractGuestControllerAccessTokenChangedEventArgs> OnGuestControllerAccessTokenChanged;
@@ -49,6 +50,7 @@ namespace ClubPenguin.Mix
 		public event EventHandler<AbstractSessionPausedEventArgs> OnPaused;
 
 		public event EventHandler<AbstractSessionTerminatedEventArgs> OnTerminated;
+#pragma warning restore 0067
 
 		public OfflineSession(string userName)
 		{

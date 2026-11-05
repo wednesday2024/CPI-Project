@@ -355,7 +355,6 @@ namespace ClubPenguin.Participation
 			Competitor<GameObject> competitor = PriorityCompetition.GetCompetitor(go);
 			if (competitor != null)
 			{
-				bool flag = false;
 				try
 				{
 					PriorityCompetition.RemoveCompetitor(go);
@@ -363,7 +362,6 @@ namespace ClubPenguin.Participation
 					{
 						Internal_UpdateParticipationWhenSomethingGotRemoved(competitor, "Controller_triggerExit");
 						StopObserving(competitor);
-						flag = true;
 					}
 				}
 				catch
@@ -378,7 +376,6 @@ namespace ClubPenguin.Participation
 			Assert.IsTrue(playerGameObject == base.gameObject, "Not my player!");
 			if (playerGameObject == base.gameObject && PriorityCompetition.GetCompetitor(competitor.theObject) != null)
 			{
-				bool flag = false;
 				try
 				{
 					PriorityCompetition.RemoveCompetitor(competitor);
@@ -386,7 +383,6 @@ namespace ClubPenguin.Participation
 					{
 						Internal_UpdateParticipationWhenSomethingGotRemoved(competitor, "triggerExit");
 						StopObserving(competitor);
-						flag = true;
 					}
 				}
 				catch (Exception ex)

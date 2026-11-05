@@ -256,7 +256,7 @@ namespace ClubPenguin.Props
 				{
 				}
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 			}
 		}

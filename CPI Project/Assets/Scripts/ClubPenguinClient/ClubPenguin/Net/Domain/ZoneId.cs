@@ -32,5 +32,14 @@ namespace ClubPenguin.Net.Domain
 			}
 			return string.Equals(name, zoneId.name) && string.Equals(instanceId, zoneId.instanceId);
 		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hashCode = (name != null) ? name.GetHashCode() : 0;
+				return (hashCode * 397) ^ ((instanceId != null) ? instanceId.GetHashCode() : 0);
+			}
+		}
 	}
 }

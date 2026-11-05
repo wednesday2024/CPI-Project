@@ -17,7 +17,6 @@ namespace ClubPenguin.Performance
 
 		protected override float evaluateScore(FrameData frameData, PerformanceResponder performanceResponder, float maxNormalizedScore)
 		{
-			float num = 0f;
 			float magnitude = (Camera.main.transform.position - performanceResponder.TransformRef.position).magnitude;
 			if (magnitude <= 5f)
 			{

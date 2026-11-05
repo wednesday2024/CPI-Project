@@ -40,7 +40,6 @@ namespace ClubPenguin
 
 		private string createHash(DataEntityHandle handle, string context)
 		{
-			string text = null;
 			AvatarDetailsData component;
 			if (dataEntityCollection.TryGetComponent(handle, out component) && component.Outfit != null)
 			{
