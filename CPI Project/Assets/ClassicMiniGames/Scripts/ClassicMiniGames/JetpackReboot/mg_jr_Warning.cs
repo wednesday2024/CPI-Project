@@ -154,7 +154,6 @@ namespace JetpackReboot
 
 		private float DistanceToNearestScreenEdge()
 		{
-			float num = 0f;
 			float x;
 			float num2;
 			if (m_isThreatToRight)

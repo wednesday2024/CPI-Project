@@ -1177,7 +1177,6 @@ public class EasyJoystick : MonoBehaviour
 
     private float ComputeDeadZone()
     {
-        float num = 0f;
         float num2 = Mathf.Max(joystickTouch.magnitude, 0.1f);
         if (restrictArea)
         {

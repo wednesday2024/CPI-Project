@@ -27,7 +27,6 @@ namespace LitJson
 				IList list = new ArrayList();
 				while (true)
 				{
-					bool flag = true;
 					object obj = ReadValueSimple(reader);
 					if (obj == null && reader.Token == JsonToken.ArrayEnd)
 					{
@@ -42,7 +41,6 @@ namespace LitJson
 				IDictionary<string, object> dictionary = new Dictionary<string, object>();
 				while (true)
 				{
-					bool flag = true;
 					reader.Read();
 					if (reader.Token == JsonToken.ObjectEnd)
 					{

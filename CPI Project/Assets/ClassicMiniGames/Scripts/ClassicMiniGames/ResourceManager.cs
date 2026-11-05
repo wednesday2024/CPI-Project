@@ -280,7 +280,6 @@ public class ResourceManager : MonoBehaviour, IConfigurable
 
     private string GetAMPSAssetListInfoCallURL()
     {
-        string text = "";
         return string.Format("{0}/amps/api/listassets/{1}?deviceModel={2}&pageSize=100000", mAMPSServer, mAMPSAppID, deviceModel);
     }
 

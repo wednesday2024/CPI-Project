@@ -149,7 +149,6 @@ namespace Disney.PushNotificationUnityPlugin.Internal
 				json.Read();
 				while (true)
 				{
-					bool flag = true;
 					switch (NextToken)
 					{
 					case TOKEN.NONE:

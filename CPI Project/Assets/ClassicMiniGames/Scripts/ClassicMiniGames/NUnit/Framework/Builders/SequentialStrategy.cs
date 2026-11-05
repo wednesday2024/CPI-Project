@@ -17,7 +17,6 @@ namespace NUnit.Framework.Builders
 			List<ITestCaseData> list = new List<ITestCaseData>();
 			while (true)
 			{
-				bool flag = true;
 				bool flag2 = false;
 				object[] array = new object[base.Sources.Length];
 				for (int i = 0; i < base.Sources.Length; i++)

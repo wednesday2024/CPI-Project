@@ -374,7 +374,6 @@ public class EnvironmentManager : MonoBehaviour, IConfigurable
 
 	private static string _GetLocalTime()
 	{
-		string text = "";
 		return DateTime.UtcNow.ToString("s") + "Z";
 	}
 

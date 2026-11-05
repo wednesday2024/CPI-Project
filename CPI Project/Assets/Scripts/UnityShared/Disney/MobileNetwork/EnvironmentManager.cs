@@ -450,7 +450,6 @@ namespace Disney.MobileNetwork
 
 		private static string _GetLocalTime()
 		{
-			string text = "";
 			return DateTime.UtcNow.ToString("s") + "Z";
 		}
 

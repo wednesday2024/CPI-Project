@@ -24,8 +24,6 @@ namespace ClubPenguin.Configuration
 
 		public const string GPU_VERTICAL_SYNC = "GPU.VerticalSync.property";
 
-		public const string UNIWEBVIEW_DOWNSAMPLED = "UniWebView.Downsampled.property";
-
 		public const string SCREEN_SAFE_AREA_OFFSET = "Screen.SafeAreaOffset.property";
 	}
 }

@@ -1,6 +1,5 @@
 using ClubPenguin.Breadcrumbs;
 using ClubPenguin.CellPhone;
-using ClubPenguin.Configuration;
 using ClubPenguin.Net;
 using ClubPenguin.UI;
 using DevonLocalization.Core;
@@ -51,13 +50,12 @@ namespace ClubPenguin.Newsfeed
 			string accessToken = Service.Get<INetworkServicesManager>().PlayerStateService.GetAccessToken();
 			string javaScriptLoginFunction = "CLUB_PENGUIN.app.login('" + accessToken + "')";
 			string newsfeedUrlToken = getNewsfeedUrlToken();
-			bool isDownsampled = Service.Get<ConditionalConfiguration>().Get("UniWebView.Downsampled.property", false);
 			newsfeedController = Service.Get<NewsfeedController>();
 			newsfeedController.NewsfeedClosed += newsfeedClosed;
 			newsfeedController.NewsfeedLoaded += newsfeedLoaded;
 			newsfeedController.NewsfeedFailed += newsfeedFailed;
 			newsfeedController.NewsfeedLoginSucceeded += newsfeedLoginSucceeded;
-			newsfeedController.ShowOnPanel(newsfeedUrlToken, ScrollUp, ScrollDown, WebViewerPanel, isDownsampled, javaScriptLoginFunction);
+			newsfeedController.ShowOnPanel(newsfeedUrlToken, ScrollUp, ScrollDown, WebViewerPanel, javaScriptLoginFunction);
 		}
 
 		public void OnBackButtonPressed()

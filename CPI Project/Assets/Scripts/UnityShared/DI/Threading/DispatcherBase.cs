@@ -184,7 +184,6 @@ namespace DI.Threading
 		{
 			while (true)
 			{
-				bool flag = true;
 				Task task;
 				lock (taskListSyncRoot)
 				{

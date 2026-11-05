@@ -12,9 +12,11 @@ namespace ClubPenguin.DCE
 
 		public DecorationDefinition Definition;
 
+#pragma warning disable 0067
 		public event Action<int, int, Part, Part> PartChanged;
 
 		public event Action OutfitSet;
+#pragma warning restore 0067
 
 		public void Awake()
 		{

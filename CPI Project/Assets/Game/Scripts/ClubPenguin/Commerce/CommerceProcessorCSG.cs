@@ -34,10 +34,6 @@ namespace ClubPenguin.Commerce
 
 		private bool skuLookupPending = false;
 
-		private bool isSessionRefreshInProcess;
-
-		private WebViewPurchaseController webViewPurchaseController;
-
 		private CSGConfig csgConfig;
 
 		private PurchaseInfo currentPurchaseInfo;
@@ -47,8 +43,6 @@ namespace ClubPenguin.Commerce
 		private int currentCheckWaitTime = 5;
 
 		private bool hasShownError = false;
-
-		private string productInProcess;
 
 		private void enableListners()
 		{
@@ -139,14 +133,6 @@ namespace ClubPenguin.Commerce
 			}
 		}
 
-		private void initWebViewPurchaseController()
-		{
-			if (webViewPurchaseController == null)
-			{
-				webViewPurchaseController = new WebViewPurchaseController();
-			}
-		}
-
 		private void onLanguageChanged()
 		{
 			csgConfig.Language = LocalizationLanguage.GetCultureLanguageString(Service.Get<Localizer>().Language);
@@ -176,10 +162,9 @@ namespace ClubPenguin.Commerce
 			return false;
 		}
 
-		private void StartSession(bool isRefresh = false)
+		private void StartSession()
 		{
 			CommerceLog("StartSession");
-			isSessionRefreshInProcess = isRefresh;
 			PCSessionStartRequest pcSessionRequest = default(PCSessionStartRequest);
 			pcSessionRequest.DistributionChannelId = csgConfig.DistributionChannelId;
 			pcSessionRequest.DeviceType = csgConfig.DeviceType;
@@ -194,23 +179,12 @@ namespace ClubPenguin.Commerce
 			csgConfig.SessionSummary = session.SessionSummary;
 			if (!string.IsNullOrEmpty(csgConfig.SessionID))
 			{
-				sendBillingEnabledResponse(true);
-				setBillingSupported(true);
+				CommerceError commerceError = new CommerceError(100, "CSG checkout is unavailable without browser checkout support");
+				sendBillingEnabledResponse(false, commerceError);
+				setBillingSupported(false);
 				if (skuLookupPending)
 				{
 					GetSKUDetails();
-				}
-				if (isSessionRefreshInProcess)
-				{
-					initWebViewPurchaseController();
-					if (isPurchaseInProgress)
-					{
-						webViewPurchaseController.ReloadPurchaseFlow(csgConfig, productInProcess);
-					}
-					else
-					{
-						webViewPurchaseController.ReloadManageAccountFlow(csgConfig);
-					}
 				}
 			}
 			else
@@ -231,7 +205,7 @@ namespace ClubPenguin.Commerce
 
 		public bool onSessionExpired(IAPServiceErrors.SessionExpired sessionError)
 		{
-			StartSession(true);
+			StartSession();
 			return false;
 		}
 
@@ -377,17 +351,7 @@ namespace ClubPenguin.Commerce
 		public override void PurchaseProductFromStore(string product, string payload)
 		{
 			CommerceLog("PurchaseProductFromStore is called with product " + product);
-			if (!isPurchaseInProgress)
-			{
-				initWebViewPurchaseController();
-				webViewPurchaseController.ShowPurchaseFlow(csgConfig, product);
-				isPurchaseInProgress = true;
-				productInProcess = product;
-			}
-			else
-			{
-				CommerceLog("PurchaseProduct: Purchase already in progress, skipping");
-			}
+			sendPurchaseResponse(new CommerceError(100, "CSG checkout is unavailable without browser checkout support"));
 		}
 
 		private bool onPurchaseFailedEvent(IAPServiceErrors.PCPurchaseError error)
@@ -501,9 +465,7 @@ namespace ClubPenguin.Commerce
 
 		public override void ManageAccountInStore()
 		{
-			CommerceLog("ManageAccountInStore is called");
-			initWebViewPurchaseController();
-			webViewPurchaseController.ShowManageAccountFlow(csgConfig);
+			CommerceLog("ManageAccountInStore is unavailable without browser checkout support");
 		}
 
 		public override string GetStoreType()

@@ -19,7 +19,6 @@ namespace NUnit.Framework.Builders
 			int num = -1;
 			do
 			{
-				bool flag = true;
 				while (++num < base.Sources.Length)
 				{
 					array[num] = base.Sources[num].GetEnumerator();

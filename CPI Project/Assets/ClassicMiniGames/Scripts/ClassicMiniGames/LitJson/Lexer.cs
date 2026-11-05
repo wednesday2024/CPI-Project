@@ -805,7 +805,6 @@ namespace LitJson
 			fsm_context.Return = false;
 			while (true)
 			{
-				bool flag = true;
 				StateHandler stateHandler = fsm_handler_table[state - 1];
 				if (!stateHandler(fsm_context))
 				{

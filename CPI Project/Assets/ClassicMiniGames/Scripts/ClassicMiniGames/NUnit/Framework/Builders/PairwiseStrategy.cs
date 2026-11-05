@@ -279,7 +279,6 @@ namespace NUnit.Framework.Builders
 			{
 				while (true)
 				{
-					bool flag = true;
 					ExtendTupleSet();
 					Tuple tuple = FindTupleToCover();
 					if (tuple == null)
@@ -401,7 +400,6 @@ namespace NUnit.Framework.Builders
 				int num;
 				do
 				{
-					bool flag = true;
 					flag2 = false;
 					num = 1;
 					for (int num2 = mutableDimensions.Length; num2 > 1; num2--)

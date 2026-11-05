@@ -735,7 +735,6 @@ public static class NGUITools
         Transform transform = go.transform;
         while (true)
         {
-            bool flag = true;
             Transform parent = transform.parent;
             if (parent == null)
             {

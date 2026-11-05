@@ -281,7 +281,6 @@ public class EventDelegate
 			mMethod = null;
 			do
 			{
-				bool flag = true;
 				mMethod = type.GetMethod(mMethodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 				if (mMethod != null)
 				{

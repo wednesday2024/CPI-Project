@@ -14,14 +14,9 @@ namespace ClubPenguin.Newsfeed
     {
         private const string NEWSFEED_LOGIN_TIMESTAMP_PLAYERPREFS_KEY = "newsfeed_login_timestamp";
 
-        private JsonService jsonService;
-
         private CPDataEntityCollection dataEntityCollection;
 
         private Localizer localizer;
-
-        [SerializeField]
-        private bool waitForReadyToShow = false;
 
         private static string GetPlatformKey(string key)
         {
@@ -34,6 +29,7 @@ namespace ClubPenguin.Newsfeed
             return key;
         }
 
+#pragma warning disable 0067
         public event System.Action NewsfeedClosed;
 
         public event System.Action NewsfeedLoaded;
@@ -41,11 +37,11 @@ namespace ClubPenguin.Newsfeed
         public event System.Action NewsfeedFailed;
 
         public event System.Action NewsfeedLoginSucceeded;
+#pragma warning restore 0067
 
         private void Start()
         {
             dataEntityCollection = Service.Get<CPDataEntityCollection>();
-            jsonService = Service.Get<JsonService>();
             localizer = Service.Get<Localizer>();
             Service.Get<EventDispatcher>().AddListener<NewsfeedServiceEvents.LatestPostTime>(onLatestPostTime);
             newPostCheck();
@@ -64,7 +60,7 @@ namespace ClubPenguin.Newsfeed
             }
         }
 
-        public void ShowOnPanel(string urlToken, Button scrollUp, Button scrollDown, GameObject viewerPanel, bool isDownsampled, string javaScriptLoginFunction = "")
+        public void ShowOnPanel(string urlToken, Button scrollUp, Button scrollDown, GameObject viewerPanel, string javaScriptLoginFunction = "")
         {
         }
 

@@ -150,7 +150,6 @@ namespace SwrveUnityMiniJSON
 				json.Read();
 				while (true)
 				{
-					bool flag = true;
 					switch (NextToken)
 					{
 					case TOKEN.NONE:

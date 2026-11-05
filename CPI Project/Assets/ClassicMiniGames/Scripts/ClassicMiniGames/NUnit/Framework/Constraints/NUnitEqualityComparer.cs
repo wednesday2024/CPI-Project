@@ -197,7 +197,6 @@ namespace NUnit.Framework.Constraints
 			bool flag3;
 			while (true)
 			{
-				bool flag = true;
 				flag2 = enumerator.MoveNext();
 				flag3 = enumerator2.MoveNext();
 				if (!flag2 && !flag3)
@@ -242,7 +241,6 @@ namespace NUnit.Framework.Constraints
 			bool flag3;
 			while (true)
 			{
-				bool flag = true;
 				flag2 = enumerator.MoveNext();
 				flag3 = enumerator2.MoveNext();
 				if (!flag2 && !flag3)

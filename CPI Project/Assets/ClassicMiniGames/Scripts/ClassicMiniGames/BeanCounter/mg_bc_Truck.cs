@@ -329,7 +329,6 @@ namespace BeanCounter
 					num -= levelObject.Odds;
 				}
 			}
-			GameObject gameObject = null;
 			if (mg_bc_LevelObject == null)
 			{
 				return GetBag();

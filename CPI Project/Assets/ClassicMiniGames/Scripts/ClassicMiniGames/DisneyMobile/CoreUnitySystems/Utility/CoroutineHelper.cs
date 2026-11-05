@@ -8,7 +8,6 @@ namespace DisneyMobile.CoreUnitySystems.Utility
 		{
 			do
 			{
-				bool flag = true;
 			}
 			while (coroutineEnumerator == null || coroutineEnumerator.MoveNext());
 		}

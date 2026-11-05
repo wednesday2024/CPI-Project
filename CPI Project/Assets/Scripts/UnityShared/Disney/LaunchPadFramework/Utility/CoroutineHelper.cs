@@ -8,7 +8,6 @@ namespace Disney.LaunchPadFramework.Utility
 		{
 			do
 			{
-				bool flag = true;
 			}
 			while (coroutineEnumerator == null || coroutineEnumerator.MoveNext());
 		}

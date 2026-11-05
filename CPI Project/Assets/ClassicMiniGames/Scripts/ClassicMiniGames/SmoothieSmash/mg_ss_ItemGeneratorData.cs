@@ -101,7 +101,6 @@ namespace SmoothieSmash
 
 		public static mg_ss_EItemTypes CalculateItemType(string p_tag)
 		{
-			mg_ss_EItemTypes mg_ss_EItemTypes = mg_ss_EItemTypes.NULL;
 			switch (p_tag)
 			{
 			case "apple":

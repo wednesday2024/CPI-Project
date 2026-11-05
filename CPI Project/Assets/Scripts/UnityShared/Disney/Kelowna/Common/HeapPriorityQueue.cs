@@ -90,7 +90,6 @@ namespace Disney.Kelowna.Common
 			int num = node.QueueIndex;
 			while (true)
 			{
-				bool flag = true;
 				T val = node;
 				int num2 = 2 * num;
 				if (num2 > _numNodes)

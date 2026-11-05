@@ -126,7 +126,6 @@ namespace HTTP
 			List<byte> list = new List<byte>();
 			while (true)
 			{
-				bool flag = true;
 				int num = stream.ReadByte();
 				if (num == -1)
 				{
@@ -188,7 +187,6 @@ namespace HTTP
 				headers.Clear();
 				while (true)
 				{
-					bool flag = true;
 					string[] array2 = ReadKeyValue(inputStream);
 					if (array2 == null)
 					{
@@ -218,7 +216,6 @@ namespace HTTP
 					chunks = new List<byte[]>();
 					while (true)
 					{
-						bool flag = true;
 						string text2 = ReadLine(inputStream);
 						if (text2 == "0")
 						{
@@ -247,7 +244,6 @@ namespace HTTP
 					}
 					while (true)
 					{
-						bool flag = true;
 						string[] array2 = ReadKeyValue(inputStream);
 						if (array2 == null)
 						{

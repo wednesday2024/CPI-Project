@@ -128,8 +128,6 @@ namespace JetpackReboot
 {
 	public class mg_jr_InputManager : MonoBehaviour
 	{
-		private bool m_isMouseDown = false;
-
 		private Dictionary<int, bool> m_isWaitingForUp = new Dictionary<int, bool>();
 
 		private void Awake()
@@ -166,12 +164,10 @@ namespace JetpackReboot
 
 				if (Mouse.current.leftButton.wasPressedThisFrame)
 				{
-					m_isMouseDown = true;
 					OnTouchDown(new Vector2(mousePosition.x, mousePosition.y));
 				}
 				else if (Mouse.current.leftButton.wasReleasedThisFrame)
 				{
-					m_isMouseDown = false;
 					OnTouchUp(new Vector2(mousePosition.x, mousePosition.y));
 				}
 

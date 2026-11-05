@@ -29,7 +29,6 @@ namespace Disney.Manimal.Http.Extensions
 			byte[] array = new byte[32768];
 			while (true)
 			{
-				bool flag = true;
 				int num = input.Read(array, 0, array.Length);
 				if (num <= 0)
 				{

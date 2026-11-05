@@ -15,7 +15,6 @@ namespace JetpackReboot
 
 		public bool IsSafelyOffLeftOfScreen()
 		{
-			bool flag = false;
 			float num = base.transform.position.x + LevelDefinition.Size.x;
 			return num < Camera.main.LeftEdgeInWorld() - 1f;
 		}

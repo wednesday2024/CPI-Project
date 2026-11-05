@@ -343,7 +343,6 @@ namespace LitJson
 			}
 			while (true)
 			{
-				bool flag = true;
 				if (parser_return)
 				{
 					if (automaton_stack.Peek() == 65553)

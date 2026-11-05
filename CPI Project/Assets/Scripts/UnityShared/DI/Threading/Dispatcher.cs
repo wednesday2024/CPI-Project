@@ -246,7 +246,6 @@ namespace DI.Threading
 		{
 			while (true)
 			{
-				bool flag = true;
 				lock (taskListSyncRoot)
 				{
 					if (taskList.Count != 0)

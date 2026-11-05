@@ -1350,7 +1350,6 @@ public class UILabel : UIWidget
             NGUIText.bitmapFont = mFont;
             while (true)
             {
-                bool flag2 = true;
                 UIFont replacement = NGUIText.bitmapFont.replacement;
                 if (replacement == null)
                 {

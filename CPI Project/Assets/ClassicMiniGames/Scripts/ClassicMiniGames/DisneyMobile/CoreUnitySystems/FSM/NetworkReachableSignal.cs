@@ -30,7 +30,6 @@ namespace DisneyMobile.CoreUnitySystems.FSM
 
 		public void Update()
 		{
-			bool flag = false;
 			if (((!RequiresLAN) ? ((int)Application.internetReachability) : ((Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork) ? 1 : 0)) != 0)
 			{
 				mTimeElapsed += Time.deltaTime;

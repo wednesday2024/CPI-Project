@@ -23,13 +23,11 @@ namespace Disney.Kelowna.Common.Utils
 
 		public static bool EvaluatesTrue(DateTime dateToCompare, string schedule, out DateTime nextDate)
 		{
-			bool flag = false;
 			return cronExpressionEvaluatesTrue(schedule, dateToCompare, out nextDate);
 		}
 
 		public static bool EvaluatesTrue(DateTime dateToCompare, string schedule)
 		{
-			bool flag = false;
 			return cronExpressionEvaluatesTrue(schedule, dateToCompare);
 		}
 

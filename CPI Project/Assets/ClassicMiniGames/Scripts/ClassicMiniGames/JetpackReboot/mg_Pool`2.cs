@@ -27,7 +27,6 @@ namespace JetpackReboot
 
         public virtual T Fetch()
         {
-            T val = null;
             if (m_collection.Count == 0)
             {
                 return m_creator.Create();
@@ -42,4 +41,3 @@ namespace JetpackReboot
         }
     }
 }
-

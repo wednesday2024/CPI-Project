@@ -168,7 +168,6 @@ namespace SwrveUnity.Helpers
 
 		public static bool IsAvailableOn(RuntimePlatform platform)
 		{
-			bool flag = false;
 			return Application.platform == platform;
 		}
 	}
