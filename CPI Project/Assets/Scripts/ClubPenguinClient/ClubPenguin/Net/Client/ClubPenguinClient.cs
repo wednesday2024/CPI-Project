@@ -327,39 +327,41 @@ namespace ClubPenguin.Net.Client
 			Configuration.SetSetting("log-ERROR", true);
 			Configuration.SetSetting("log-callback", (Action<string, LogSeverity>)delegate(string message, LogSeverity severity)
 			{
+				Log.PriorityFlags priorityFlags;
 				switch (severity)
 				{
 				case LogSeverity.ERROR:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.NETWORK_ERROR;
+					priorityFlags = Log.PriorityFlags.NETWORK_ERROR;
 					break;
 				}
 				case LogSeverity.WARNING:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.WARNING;
+					priorityFlags = Log.PriorityFlags.WARNING;
 					break;
 				}
 				case LogSeverity.INFO:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.INFO;
+					priorityFlags = Log.PriorityFlags.INFO;
 					break;
 				}
 				case LogSeverity.DEBUG:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.DEBUG;
+					priorityFlags = Log.PriorityFlags.DEBUG;
 					break;
 				}
 				case LogSeverity.VERBOSE:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.TRACE;
+					priorityFlags = Log.PriorityFlags.TRACE;
 					break;
 				}
 				default:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.NONE;
+					priorityFlags = Log.PriorityFlags.NONE;
 					break;
 				}
 				}
+				Log.LogRaw(this, priorityFlags, message);
 			});
 			Configuration.SetSetting("destroy-operation-on-completion", false);
 			Configuration.SetSetting("persistent-game-object-name", "com.clubpenguin/WebApiKit");
@@ -813,39 +815,41 @@ namespace ClubPenguin.Net.Client
 			Configuration.SetSetting("log-ERROR", true);
 			Configuration.SetSetting("log-callback", (Action<string, LogSeverity>)delegate(string message, LogSeverity severity)
 			{
+				Log.PriorityFlags priorityFlags;
 				switch (severity)
 				{
 				case LogSeverity.ERROR:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.NETWORK_ERROR;
+					priorityFlags = Log.PriorityFlags.NETWORK_ERROR;
 					break;
 				}
 				case LogSeverity.WARNING:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.WARNING;
+					priorityFlags = Log.PriorityFlags.WARNING;
 					break;
 				}
 				case LogSeverity.INFO:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.INFO;
+					priorityFlags = Log.PriorityFlags.INFO;
 					break;
 				}
 				case LogSeverity.DEBUG:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.DEBUG;
+					priorityFlags = Log.PriorityFlags.DEBUG;
 					break;
 				}
 				case LogSeverity.VERBOSE:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.TRACE;
+					priorityFlags = Log.PriorityFlags.TRACE;
 					break;
 				}
 				default:
 				{
-					Log.PriorityFlags priorityFlags = Log.PriorityFlags.NONE;
+					priorityFlags = Log.PriorityFlags.NONE;
 					break;
 				}
 				}
+				Log.LogRaw(this, priorityFlags, message);
 			});
 			Configuration.SetSetting("destroy-operation-on-completion", false);
 			Configuration.SetSetting("persistent-game-object-name", "com.clubpenguin/WebApiKit");
