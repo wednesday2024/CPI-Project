@@ -28,6 +28,10 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
     private const float MaxUvOffset = 0.5f;
     private const float UvKeyPrecision = 1000000f;
     private const string DecalTextureFolder = "Assets/AssetPipeline/BundleAssets/AssetBundles/Decals";
+    private const string MickeyEarsAssetPathSegment = "/MickeyEars/";
+    private const float MickeyEarsBandHeightFraction = 0.61f;
+    private const int MickeyEarsMaxRasterSize = 2048;
+    private const int MickeyEarsSupersamplingScale = 8;
     private const string LastSaveDirectoryPreference = "CpRemixEquipmentTextureRenderer.LastSaveDirectory";
 
     private static readonly int[] OutputSizeValues = { 0, 128, 256, 512, 1024, 2048, 4096 };
@@ -2068,9 +2072,20 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
 
         int outputSize = Mathf.Clamp(Mathf.ClosestPowerOfTwo(Mathf.Max(16, requestedSize)), 16, 4096);
         Color32[] islandColors = BuildDecal123IslandColors(islandAreas);
-        decalTexture = RasterizeDecal123Texture(uv, triangles, triangleIslandIndices, islandColors, outputSize);
+        Vector3[] meshVertices = IsMickeyEarsMesh(mesh) ? mesh.vertices : null;
+        float bandHeight = meshVertices != null
+            ? mesh.bounds.min.y + (mesh.bounds.size.y * MickeyEarsBandHeightFraction)
+            : 0f;
+        decalTexture = RasterizeDecal123Texture(uv, triangles, triangleIslandIndices, islandColors, outputSize, meshVertices, bandHeight);
         decalTexture.name = BuildDecal123FileName(mesh);
         return true;
+    }
+
+    private static bool IsMickeyEarsMesh(Mesh mesh)
+    {
+        string assetPath = AssetDatabase.GetAssetPath(mesh);
+        return !string.IsNullOrEmpty(assetPath) &&
+            assetPath.IndexOf(MickeyEarsAssetPathSegment, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     private static List<int>[] BuildUvTriangleNeighbors(Vector2[] uv, int[] triangles, int triangleCount)
@@ -2147,9 +2162,13 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         return islandColors;
     }
 
-    private static Texture2D RasterizeDecal123Texture(Vector2[] uv, int[] triangles, int[] triangleIslandIndices, Color32[] islandColors, int size)
+    private static Texture2D RasterizeDecal123Texture(Vector2[] uv, int[] triangles, int[] triangleIslandIndices, Color32[] islandColors, int size, Vector3[] meshVertices, float bandHeight)
     {
-        Color32[] pixels = new Color32[size * size];
+        int supersamplingScale = meshVertices == null
+            ? 1
+            : Mathf.Min(MickeyEarsSupersamplingScale, Mathf.Max(1, MickeyEarsMaxRasterSize / size));
+        int rasterSize = size * supersamplingScale;
+        Color32[] pixels = new Color32[rasterSize * rasterSize];
         Color32 backgroundColor = new Color32(0, 0, 0, 0);
         for (int pixelIndex = 0; pixelIndex < pixels.Length; pixelIndex++)
         {
@@ -2159,20 +2178,91 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         for (int triangleIndex = 0; triangleIndex < triangleIslandIndices.Length; triangleIndex++)
         {
             int triangleBaseIndex = triangleIndex * 3;
-            Vector2 a = UvToPixelSpace(uv[triangles[triangleBaseIndex]], size);
-            Vector2 b = UvToPixelSpace(uv[triangles[triangleBaseIndex + 1]], size);
-            Vector2 c = UvToPixelSpace(uv[triangles[triangleBaseIndex + 2]], size);
-            RasterizeTriangle(pixels, size, a, b, c, islandColors[triangleIslandIndices[triangleIndex]]);
+            Vector2 a = UvToPixelSpace(uv[triangles[triangleBaseIndex]], rasterSize);
+            Vector2 b = UvToPixelSpace(uv[triangles[triangleBaseIndex + 1]], rasterSize);
+            Vector2 c = UvToPixelSpace(uv[triangles[triangleBaseIndex + 2]], rasterSize);
+            if (meshVertices != null)
+            {
+                RasterizeTriangleByHeight(
+                    pixels,
+                    rasterSize,
+                    a,
+                    b,
+                    c,
+                    meshVertices[triangles[triangleBaseIndex]].y,
+                    meshVertices[triangles[triangleBaseIndex + 1]].y,
+                    meshVertices[triangles[triangleBaseIndex + 2]].y,
+                    bandHeight,
+                    Decal123ChannelColors[0],
+                    Decal123ChannelColors[2]);
+            }
+            else
+            {
+                RasterizeTriangle(pixels, rasterSize, a, b, c, islandColors[triangleIslandIndices[triangleIndex]]);
+            }
         }
 
-        FillSmallRasterizedGaps(pixels, size, 4);
-        RemoveStrayRasterizedColors(pixels, size);
+        FillSmallRasterizedGaps(pixels, rasterSize, 4 * supersamplingScale);
+        if (meshVertices == null)
+        {
+            RemoveStrayRasterizedColors(pixels, size);
+        }
+
+        if (supersamplingScale > 1)
+        {
+            pixels = DownsampleRasterizedPixels(pixels, size, supersamplingScale);
+        }
+
         DilateRasterizedColors(pixels, size, 10);
 
         Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
         texture.SetPixels32(pixels);
         texture.Apply(false, false);
         return texture;
+    }
+
+    private static Color32[] DownsampleRasterizedPixels(Color32[] sourcePixels, int size, int scale)
+    {
+        int sourceSize = size * scale;
+        int samplesPerPixel = scale * scale;
+        Color32[] downsampledPixels = new Color32[size * size];
+
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                int red = 0;
+                int green = 0;
+                int blue = 0;
+                int alpha = 0;
+                for (int sampleY = 0; sampleY < scale; sampleY++)
+                {
+                    int rowOffset = ((y * scale + sampleY) * sourceSize) + (x * scale);
+                    for (int sampleX = 0; sampleX < scale; sampleX++)
+                    {
+                        Color32 sample = sourcePixels[rowOffset + sampleX];
+                        red += sample.r;
+                        green += sample.g;
+                        blue += sample.b;
+                        alpha += sample.a;
+                    }
+                }
+
+                int pixelIndex = (y * size) + x;
+                downsampledPixels[pixelIndex] = new Color32(
+                    (byte)((red + samplesPerPixel / 2) / samplesPerPixel),
+                    (byte)((green + samplesPerPixel / 2) / samplesPerPixel),
+                    (byte)((blue + samplesPerPixel / 2) / samplesPerPixel),
+                    (byte)((alpha + samplesPerPixel / 2) / samplesPerPixel));
+            }
+        }
+
+        return downsampledPixels;
+    }
+
+    private static void RasterizeTriangleByHeight(Color32[] pixels, int size, Vector2 a, Vector2 b, Vector2 c, float heightA, float heightB, float heightC, float splitHeight, Color32 lowerColor, Color32 upperColor)
+    {
+        RasterizeTriangle(pixels, size, a, b, c, lowerColor, upperColor, heightA, heightB, heightC, splitHeight);
     }
 
     private static void DilateRasterizedColors(Color32[] pixels, int size, int radius)
@@ -2366,8 +2456,18 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
         int count = 0;
         for (int y = centerY - 1; y <= centerY + 1; y++)
         {
+            if (y < 0 || y >= size)
+            {
+                continue;
+            }
+
             for (int x = centerX - 1; x <= centerX + 1; x++)
             {
+                if (x < 0 || x >= size)
+                {
+                    continue;
+                }
+
                 if (AreSameColor(pixels[(y * size) + x], color))
                 {
                     count++;
@@ -2391,6 +2491,11 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
 
     private static void RasterizeTriangle(Color32[] pixels, int size, Vector2 a, Vector2 b, Vector2 c, Color32 color)
     {
+        RasterizeTriangle(pixels, size, a, b, c, color, color, 0f, 0f, 0f, 0f);
+    }
+
+    private static void RasterizeTriangle(Color32[] pixels, int size, Vector2 a, Vector2 b, Vector2 c, Color32 lowerColor, Color32 upperColor, float heightA, float heightB, float heightC, float splitHeight)
+    {
         float minX = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
         float maxX = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
         float minY = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
@@ -2407,6 +2512,7 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
             return;
         }
 
+        bool splitByHeight = !lowerColor.Equals(upperColor);
         for (int y = clampedMinY; y <= clampedMaxY; y++)
         {
             for (int x = clampedMinX; x <= clampedMaxX; x++)
@@ -2422,7 +2528,15 @@ public class CpRemixEquipmentTextureRenderer : EditorWindow
                 int pixelIndex = (y * size) + x;
                 if (isInside)
                 {
-                    pixels[pixelIndex] = color;
+                    if (splitByHeight)
+                    {
+                        float interpolatedHeight = ((edge0 * heightA) + (edge1 * heightB) + (edge2 * heightC)) / signedArea;
+                        pixels[pixelIndex] = interpolatedHeight < splitHeight ? lowerColor : upperColor;
+                    }
+                    else
+                    {
+                        pixels[pixelIndex] = lowerColor;
+                    }
                 }
             }
         }
