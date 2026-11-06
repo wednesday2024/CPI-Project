@@ -457,6 +457,14 @@ namespace ClubPenguin
         }
 
         [PublicTweak]
+        [Invokable("Settings.Reset.OfflineData.DeleteAllData", Description = "WARNING: This will delete all locally saved player data. This cannot be undone! Make sure to backup your data first before proceeding!")]
+        public void DeleteAllPlayerData()
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
+
+        [PublicTweak]
         [Invokable("Settings.Localization.ChangeLanguage", Description = "Update all the tokens with a new language.")]
         public void ChangeLanguage([ArgDescription("Language")] Language language)
         {
