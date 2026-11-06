@@ -3,17 +3,17 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
 	public class PassportCodeController : MonoBehaviour
 	{
-		public Text NameText;
+		public TMP_Text NameText;
 
-		public Text AgeText;
+		public TMP_Text AgeText;
 
-		public Text LevelText;
+		public TMP_Text LevelText;
 
 		public void SetDisplayNameText(string displayName)
 		{
