@@ -9,13 +9,13 @@ using Disney.MobileNetwork;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
 	public class QuestInventoryScreen : MonoBehaviour
 	{
-		public Text AdventureNameText;
+		public TMP_Text AdventureNameText;
 
 		public Transform MascotScreenParent;
 
