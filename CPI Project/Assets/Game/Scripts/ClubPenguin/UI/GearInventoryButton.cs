@@ -82,7 +82,7 @@ namespace ClubPenguin.UI
 				else
 				{
 					ItemCountIcon.SetActive(true);
-					ItemCountIcon.GetComponentInChildren<Text>().text = itemCount.ToString();
+					ItemCountIcon.GetComponentInChildren<TMP_Text>().text = itemCount.ToString();
 				}
 			}
 			else
