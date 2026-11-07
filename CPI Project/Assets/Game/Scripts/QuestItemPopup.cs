@@ -7,7 +7,7 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class QuestItemPopup : AnimatedPopup
 {
@@ -17,7 +17,7 @@ public class QuestItemPopup : AnimatedPopup
 
 	public const string TweenDestinationName = "MainNavButton_Quest";
 
-	public Text HeaderText;
+	public TMP_Text HeaderText;
 
 	public ButtonClickListener TakeItemButton;
 
