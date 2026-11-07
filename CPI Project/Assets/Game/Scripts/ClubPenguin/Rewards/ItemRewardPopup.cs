@@ -7,7 +7,7 @@ using Disney.MobileNetwork;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.Rewards
 {
@@ -17,7 +17,7 @@ namespace ClubPenguin.Rewards
 
 		public Transform BackgroundContainer;
 
-		public Text ItemNameText;
+		public TMP_Text ItemNameText;
 
 		public RectTransform ItemPanel;
 
