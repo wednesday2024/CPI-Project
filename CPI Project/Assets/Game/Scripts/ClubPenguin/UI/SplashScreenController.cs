@@ -2,13 +2,13 @@ using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
 	public class SplashScreenController : MonoBehaviour
 	{
-		public Text MessageText;
+		public TMP_Text MessageText;
 
 		public float ShowTime = 3f;
 
