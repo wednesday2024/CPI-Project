@@ -8,6 +8,7 @@ using Disney.MobileNetwork;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -19,7 +20,7 @@ namespace ClubPenguin.UI
 
 		public GameObject ItemCountIcon;
 
-		public Text ItemCountText;
+		public TMP_Text ItemCountText;
 
 		public NotificationBreadcrumb Breadcrumb;
 
