@@ -10,6 +10,7 @@ using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.Tubes
 {
@@ -17,7 +18,7 @@ namespace ClubPenguin.Tubes
 	{
 		public Image Icon;
 
-		public Text Title;
+		public TMP_Text Title;
 
 		public Button SelectButton;
 
