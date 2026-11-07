@@ -3,13 +3,13 @@ using DevonLocalization.Core;
 using Disney.LaunchPadFramework;
 using Disney.MobileNetwork;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
 	public class QuestsDetailsPause : MonoBehaviour
 	{
-		public Text AdventureNameText;
+		public TMP_Text AdventureNameText;
 
 		private Quest questData;
 
