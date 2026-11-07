@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ClubPenguin.UI
 {
@@ -22,7 +23,7 @@ namespace ClubPenguin.UI
 		private const string ANIMATOR_EXIT = "Close";
 
 		[SerializeField]
-		private Text AvailableQuantityText;
+		private TMP_Text AvailableQuantityText;
 
 		[SerializeField]
 		private RadialProgressBar AvailableQuantityRadial;
